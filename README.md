@@ -28,6 +28,42 @@ This package comes with the following normalizers:
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
 
+### `AutoFormatNormalizer`
+
+If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
+retain the original formatting, you can use the `AutoFormatNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+JSON;
+
+/** @var Normalizer\NormalizerInterface $composedNormalizer*/
+$normalizer = new Normalizer\AutoFormatNormalizer($composedNormalizer);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now have the composed normalizer applied, 
+but also retained the original formatting (within certain limits). Before 
+applying the composer normalizer, the `AutoFormatNormalizer` will attempt 
+to detect the following:
+
+* `json_encode()` options
+* indent
+* whether a final new line exists or not
+
+After applying the composed normalizer, the `AutoFormatNormalizer` will
+
+* decode with `json_decode()` and encode again with `json_encode()`, passing in the previously detected options
+* indent with the detected indent
+* add a final new line of detected
+
 ### `CallableNormalizer`
 
 If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
