@@ -19,12 +19,48 @@ $ composer require localheinz/json-normalizer
 
 This package comes with the following normalizers:
 
+* [`Localheinz\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 * [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
 * [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
+
+### `CallableNormalizer`
+
+If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+JSON;
+
+$callable = function (string $json): string {
+    $decoded = json_decode($json);
+
+    foreach (get_object_vars($decoded) as $name => $value) {
+        if ('https://localheinz.com' !== $value) {
+            continue;
+        }
+        
+        $decoded->{$name} .= '/open-source/';
+    }
+
+    return json_encode($decoded);
+};
+
+$normalizer = new Normalizer\CallableNormalizer($callable);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now have the callable applied to it.
 
 ### `FinalNewLineNormalizer`
 
