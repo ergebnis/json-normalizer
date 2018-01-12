@@ -11,7 +11,9 @@ the LICENSE file that was distributed with this source code.
 @see https://github.com/localheinz/json-normalizer
 EOF;
 
-$config = Config\Factory::fromRuleSet(new Config\RuleSet\Php70($header));
+$config = Config\Factory::fromRuleSet(new Config\RuleSet\Php70($header), [
+    'mb_str_functions' => false,
+]);
 
 $config->getFinder()->in(__DIR__);
 
