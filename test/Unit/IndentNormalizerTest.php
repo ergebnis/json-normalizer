@@ -14,21 +14,11 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\IndentNormalizer;
-use Localheinz\Json\Normalizer\NormalizerInterface;
 use Localheinz\Json\Printer\PrinterInterface;
-use Localheinz\Test\Util\Helper;
-use PHPUnit\Framework;
 use Prophecy\Argument;
 
-final class IndentNormalizerTest extends Framework\TestCase
+final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
-    use Helper;
-
-    public function testImplementsNormalizerInterface()
-    {
-        $this->assertClassImplementsInterface(NormalizerInterface::class, IndentNormalizer::class);
-    }
-
     /**
      * @dataProvider providerInvalidIndent
      *
@@ -60,26 +50,6 @@ final class IndentNormalizerTest extends Framework\TestCase
                 $value,
             ];
         }
-    }
-
-    public function testNormalizeRejectsInvalidJson()
-    {
-        $indent = '  ';
-
-        $json = $this->faker()->realText();
-
-        $normalizer = new IndentNormalizer(
-            $indent,
-            $this->prophesize(PrinterInterface::class)->reveal()
-        );
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid JSON.',
-            $json
-        ));
-
-        $normalizer->normalize($json);
     }
 
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent()
