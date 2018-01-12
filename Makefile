@@ -17,7 +17,7 @@ cs: composer
 	vendor/bin/php-cs-fixer fix --config=.php_cs --diff --verbose
 
 infection:
-	vendor/bin/infection --min-covered-msi=75 --min-msi=75
+	vendor/bin/infection --min-covered-msi=80 --min-msi=80
 
 test: composer
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml
