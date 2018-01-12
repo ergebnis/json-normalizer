@@ -20,6 +20,7 @@ $ composer require localheinz/json-normalizer
 This package comes with the following normalizers:
 
 * [`Localheinz\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
+* [`Localheinz\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 * [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
@@ -61,6 +62,33 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now have the callable applied to it.
+
+### `ChainNormalizer`
+
+If you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+JSON;
+
+$normalizer = new Normalizer\ChainNormalizer(
+    new Normalizer\JsonEncodeNormalizer(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+    new Normalizer\IndentNormalizer('  '),
+    new Normalizer\FinalNewLineNormalizer()
+);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now contain the result of applying all normalizers in a chain, one after another.
+
+:bulb: Be careful with the order of the normalizers, as one normalizer might override changes a previous normalizer applied.
 
 ### `FinalNewLineNormalizer`
 
