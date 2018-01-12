@@ -19,9 +19,33 @@ $ composer require localheinz/json-normalizer
 
 This package comes with the following normalizers:
 
+* [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
+
+### `FinalNewLineNormalizer`
+
+If you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+
+
+JSON;
+
+$normalizer = new Normalizer\FinalNewLineNormalizer();
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now have a single final new line.
 
 ### `IndentNormalizer`
 
