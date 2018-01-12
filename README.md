@@ -21,6 +21,7 @@ This package comes with the following normalizers:
 
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
+* [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
 * [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
@@ -70,6 +71,32 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now be indented with 2 spaces.
+
+### `JsonEncodeNormalizer`
+
+If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas M\u00f6ller",
+    "url": "https:\/\/localheinz.com"
+}
+JSON;
+
+$jsonEncodeOptions = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
+$normalizer = new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now be encoded with `$jsonEncodeOptions`.
+
+:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) 
+and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
 ### `NoFinalNewLineNormalizer`
 
