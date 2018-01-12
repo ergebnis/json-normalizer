@@ -14,34 +14,9 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\FinalNewLineNormalizer;
-use Localheinz\Json\Normalizer\NormalizerInterface;
-use Localheinz\Test\Util\Helper;
-use PHPUnit\Framework;
 
-final class FinalNewLineNormalizerTest extends Framework\TestCase
+final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
-    use Helper;
-
-    public function testImplementsNormalizerInterface()
-    {
-        $this->assertClassImplementsInterface(NormalizerInterface::class, FinalNewLineNormalizer::class);
-    }
-
-    public function testNormalizeRejectsInvalidJson()
-    {
-        $json = $this->faker()->realText();
-
-        $normalizer = new FinalNewLineNormalizer();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid JSON.',
-            $json
-        ));
-
-        $normalizer->normalize($json);
-    }
-
     /**
      * @dataProvider providerWhitespace
      *
