@@ -24,6 +24,6 @@ final class FinalNewLineNormalizer implements NormalizerInterface
             ));
         }
 
-        return $json . PHP_EOL;
+        return \rtrim($json) . PHP_EOL;
     }
 }
