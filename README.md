@@ -15,6 +15,37 @@ Run
 $ composer require localheinz/json-normalizer
 ```
 
+## Usage
+
+This package comes with the following normalizers:
+
+* [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
+
+:bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
+
+### `IndentNormalizer`
+
+If you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+JSON;
+
+$indent = '  ';
+
+$normalizer = new Normalizer\IndentNormalizer($indent);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now be indented with 2 spaces.
+
 ## Contributing
 
 Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
