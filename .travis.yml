@@ -1,0 +1,134 @@
+language: php
+
+sudo: false
+
+env:
+  global:
+    - secure: "FoE3nt0sRlX0LClfccFG1xVJBdFx2qFhxs+KHwW8H+1AiBQnvI7dFMOIPPrPuof2ylK0SOxEabO1CVCU2/ZQMognophR7UPS0E+o33m9GfXaLYFbUVhJWfuNnt16QIqD32CB/ahlA9em+X46AStJ/XrwV4oykRJmgE/ueGxrGC0rQA+rNA5jSpnWIBGFXXAUuvWvkeuoZzCEXqrcygQgKfMhDY70pn4l6km/z+p3r5AOQlgqzuWV7AlN5Q5/82/dfi1vl0xDi29qE80O66z9rOWdLdn1u3zTZuzIZAYvzxvyR5UMIGudZrg/ogZ68I98cx1wXvrvl0lKPG9C3RnFjWC6PaGurOz8OjUyXZ6nrCHHkquISHvYAsPadCQzf/NjorpLRj3mkn1rLi0k8waoR5UVm7mbHgNmfiixzPcFd5FHTlHl1VM8vtHFDdUpKA2wtUXficg7zRo/UQ714LgCYrOJiSYqJ+7z+q8+vFBTuo9U/UGqcxfk4GyHkYCYD2zz1K0PmQjjP6arEO1TWkrJ7IfTkMWwkOXZPLifsORpYmdGgdgY2XfELcu/oFSAUNAETIrfO8ddkDex0q1Ythtfjl/zRU4Dd4+OLm0Q7Iy8iRxJ2+iJUKi0YKxMkvQbl4eJtn94/1+OQmLUcCfqQC8GnURE2zs53OLcy2B8OQqDj8E="
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - $HOME/.php-cs-fixer
+
+stages:
+  - style
+  - test
+
+jobs:
+  include:
+    - stage: Style
+
+      php: 7.0
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - if [[ -n "$GITHUB_TOKEN" ]]; then composer config github-oauth.github.com $GITHUB_TOKEN; fi
+
+      install:
+        - composer install
+
+      before_script:
+        - mkdir -p $HOME/.php-cs-fixer
+
+      script:
+        - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
+
+    - &TEST
+
+      stage: Test
+
+      php: 7.0
+
+      env: WITH_LOWEST=true
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - if [[ -n "$GITHUB_TOKEN" ]]; then composer config github-oauth.github.com $GITHUB_TOKEN; fi
+
+      install:
+        - if [[ "$WITH_LOWEST" == "true" ]]; then composer update --prefer-lowest; fi
+        - if [[ "$WITH_LOCKED" == "true" ]]; then composer install; fi
+        - if [[ "$WITH_HIGHEST" == "true" ]]; then composer update; fi
+
+      script:
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-enable; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=build/logs/clover.xml; else vendor/bin/phpunit --configuration=test/Unit/phpunit.xml; fi
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then xdebug-disable; fi
+
+      after_success:
+        - if [[ "$WITH_COVERAGE" == "true" ]]; then bash <(curl -s https://codecov.io/bash); fi
+
+    - <<: *TEST
+
+      php: 7.0
+
+      env: WITH_LOCKED=true
+
+    - <<: *TEST
+
+      php: 7.0
+
+      env: WITH_HIGHEST=true
+
+    - <<: *TEST
+
+      php: 7.1
+
+      env: WITH_LOWEST=true
+
+    - <<: *TEST
+
+      php: 7.1
+
+      env: WITH_LOCKED=true WITH_COVERAGE=true
+
+    - <<: *TEST
+
+      php: 7.1
+
+      env: WITH_HIGHEST=true
+
+    - <<: *TEST
+
+      php: 7.2
+
+      env: WITH_LOWEST=true
+
+    - <<: *TEST
+
+      php: 7.2
+
+      env: WITH_LOCKED=true
+
+    - <<: *TEST
+
+      php: 7.2
+
+      env: WITH_HIGHEST=true
+
+    - stage: Infection
+
+      php: 7.2
+
+      before_install:
+        - source .travis/xdebug.sh
+        - xdebug-disable
+        - composer validate
+        - if [[ -n "$GITHUB_TOKEN" ]]; then composer config github-oauth.github.com $GITHUB_TOKEN; fi
+
+      install:
+        - composer install
+
+      before_script:
+        - xdebug-enable
+
+      script:
+        - vendor/bin/infection --min-covered-msi=80 --min-msi=80
+
+notifications:
+  email: false
