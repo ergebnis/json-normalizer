@@ -31,7 +31,9 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 }
 JSON;
 
-        $normalized = \rtrim($json . $whitespace) . PHP_EOL;
+        $json .= $whitespace;
+
+        $normalized = \rtrim($json) . PHP_EOL;
 
         $normalizer = new FinalNewLineNormalizer();
 
