@@ -21,6 +21,7 @@ This package comes with the following normalizers:
 
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
+* [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
 
@@ -69,6 +70,29 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now be indented with 2 spaces.
+
+### `NoFinalNewLineNormalizer`
+
+If you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+
+
+JSON;
+
+$normalizer = new Normalizer\NoFinalNewLineNormalizer();
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now not have a final new line or any whitespace at the end.
 
 ## Contributing
 
