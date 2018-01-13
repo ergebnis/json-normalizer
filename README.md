@@ -26,6 +26,7 @@ This package comes with the following normalizers:
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 * [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
 * [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
+* [`Localheinz\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
 
 :bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
 
@@ -221,6 +222,52 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now not have a final new line or any whitespace at the end.
+
+### `SchemaNormalizer`
+
+If you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
+
+Let's assume the following schema
+
+```json
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "name" : {
+            "type" : "string"
+        },
+        "role" : {
+            "type" : "string"
+        }
+    }
+}
+```
+
+exists at `/schema/example.json`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "url": "https://localheinz.com",
+    "name": "Andreas Möller"
+}
+JSON;
+
+$normalizer = new Normalizer\SchemaNormalizer('file:///schema/example.json');
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now be structured according to the JSON 
+schema (in this simple case, properties will be reordered). Internally, 
+the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) 
+to resolve schemas, as well as to ensure (before and after normalization) 
+that the JSON document is valid.
+
+:bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
 
 ## Contributing
 

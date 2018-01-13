@@ -1,0 +1,1107 @@
+{
+  "name": "ivan-chkv/tinymce-i18n",
+  "description": "Languages for TinyMCE 4",
+  "keywords": [
+    "tinymce",
+    "i18n",
+    "languages"
+  ],
+  "homepage": "https://www.tinymce.com/download/language-packages/",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "TinyMCE Community"
+    }
+  ],
+  "scripts": {
+    "post-update-cmd": [
+      "rm -frv langs",
+      "mkdir -pv langs",
+      "cp -v vendor/language/*/* langs"
+    ]
+  },
+  "require-dev": {
+    "language/ar": "*",
+    "language/ar_SA": "*",
+    "language/hy": "*",
+    "language/az": "*",
+    "language/eu": "*",
+    "language/be": "*",
+    "language/bn_BD": "*",
+    "language/bs": "*",
+    "language/bg_BG": "*",
+    "language/ca": "*",
+    "language/zh_CN": "*",
+    "language/zh_TW": "*",
+    "language/hr": "*",
+    "language/cs": "*",
+    "language/cs_CZ": "*",
+    "language/da": "*",
+    "language/dv": "*",
+    "language/nl": "*",
+    "language/en_CA": "*",
+    "language/en_GB": "*",
+    "language/eo": "*",
+    "language/et": "*",
+    "language/fo": "*",
+    "language/fi": "*",
+    "language/fr_FR": "*",
+    "language/fr_CH": "*",
+    "language/gd": "*",
+    "language/gl": "*",
+    "language/ka_GE": "*",
+    "language/de": "*",
+    "language/de_AT": "*",
+    "language/el": "*",
+    "language/he_IL": "*",
+    "language/hi_IN": "*",
+    "language/hu_HU": "*",
+    "language/is_IS": "*",
+    "language/id": "*",
+    "language/ga": "*",
+    "language/it": "*",
+    "language/ja": "*",
+    "language/kab": "*",
+    "language/kk": "*",
+    "language/km_KH": "*",
+    "language/ko": "*",
+    "language/ko_KR": "*",
+    "language/ku": "*",
+    "language/ku_IQ": "*",
+    "language/lv": "*",
+    "language/lt": "*",
+    "language/lb": "*",
+    "language/mk_MK": "*",
+    "language/ml": "*",
+    "language/ml_IN": "*",
+    "language/mn_MN": "*",
+    "language/nb_NO": "*",
+    "language/fa": "*",
+    "language/fa_IR": "*",
+    "language/pl": "*",
+    "language/pt_BR": "*",
+    "language/pt_PT": "*",
+    "language/ro": "*",
+    "language/ru": "*",
+    "language/ru_RU": "*",
+    "language/sr": "*",
+    "language/si_LK": "*",
+    "language/sk": "*",
+    "language/sl_SI": "*",
+    "language/es": "*",
+    "language/es_MX": "*",
+    "language/sv_SE": "*",
+    "language/tg": "*",
+    "language/ta": "*",
+    "language/ta_IN": "*",
+    "language/tt": "*",
+    "language/th_TH": "*",
+    "language/tr": "*",
+    "language/tr_TR": "*",
+    "language/ug": "*",
+    "language/uk": "*",
+    "language/uk_UA": "*",
+    "language/vi": "*",
+    "language/vi_VN": "*",
+    "language/cy": "*"
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ar",
+        "description": "Arabic",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ar"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ar_SA",
+        "description": "Arabic (Saudi Arabia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ar_SA"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/hy",
+        "description": "Armenian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/hy"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/az",
+        "description": "Azerbaijani",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/az"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/eu",
+        "description": "Basque",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/eu"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/be",
+        "description": "Belarusian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/be"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/bn_BD",
+        "description": "Bengali (Bangladesh)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/bn_BD"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/bs",
+        "description": "Bosnian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/bs"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/bg_BG",
+        "description": "Bulgarian (Bulgaria)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/bg_BG"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ca",
+        "description": "Catalan",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ca"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/zh_CN",
+        "description": "Chinese (China)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/zh_CN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/zh_TW",
+        "description": "Chinese (Taiwan)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/zh_TW"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/hr",
+        "description": "Croatian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/hr"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/cs",
+        "description": "Czech",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/cs"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/cs_CZ",
+        "description": "Czech (Czech Republic)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/cs_CZ"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/da",
+        "description": "Danish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/da"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/dv",
+        "description": "Divehi",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/dv"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/nl",
+        "description": "Dutch",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/nl"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/en_CA",
+        "description": "English (Canada)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/en_CA"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/en_GB",
+        "description": "English (United Kingdom)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/en_GB"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/eo",
+        "description": "Esperanto",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/eo"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/et",
+        "description": "Estonian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/et"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fo",
+        "description": "Faroese",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fo"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fi",
+        "description": "Finnish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fi"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fr_FR",
+        "description": "French (France)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fr_FR"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fr_CH",
+        "description": "French (Switzerland)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fr_CH"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/gd",
+        "description": "Gaelic, Scottish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/gd"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/gl",
+        "description": "Galician",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/gl"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ka_GE",
+        "description": "Georgian (Georgia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ka_GE"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/de",
+        "description": "German",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/de"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/de_AT",
+        "description": "German (Austria)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/de_AT"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/el",
+        "description": "Greek",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/el"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/he_IL",
+        "description": "Hebrew (Israel)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/he_IL"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/hi_IN",
+        "description": "Hindi (India)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/hi_IN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/hu_HU",
+        "description": "Hungarian (Hungary)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/hu_HU"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/is_IS",
+        "description": "Icelandic (Iceland)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/is_IS"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/id",
+        "description": "Indonesian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/id"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ga",
+        "description": "Irish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ga"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/it",
+        "description": "Italian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/it"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ja",
+        "description": "Japanese",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ja"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/kab",
+        "description": "Kabyle",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/kab"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/kk",
+        "description": "Kazakh",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/kk"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/km_KH",
+        "description": "Khmer (Cambodia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/km_KH"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ko",
+        "description": "Korean",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ko"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ko_KR",
+        "description": "Korean (Korea)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ko_KR"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ku",
+        "description": "Kurdish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ku"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ku_IQ",
+        "description": "Kurdish (Iraq)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ku_IQ"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/lv",
+        "description": "Latvian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/lv"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/lt",
+        "description": "Lithuanian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/lt"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/lb",
+        "description": "Luxembourgish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/lb"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/mk_MK",
+        "description": "Macedonian (Macedonia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/mk_MK"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ml",
+        "description": "Malayalam",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ml"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ml_IN",
+        "description": "Malayalam (India)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ml_IN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/mn_MN",
+        "description": "Mongolian (Mongolia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/mn_MN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/nb_NO",
+        "description": "Norwegian Bokmål (Norway)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/nb_NO"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fa",
+        "description": "Persian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fa"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/fa_IR",
+        "description": "Persian (Iran)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/fa_IR"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/pl",
+        "description": "Polish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/pl"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/pt_BR",
+        "description": "Portuguese (Brazil)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/pt_BR"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/pt_PT",
+        "description": "Portuguese (Portugal)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/pt_PT"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ro",
+        "description": "Romanian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ro"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ru",
+        "description": "Russian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ru"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ru_RU",
+        "description": "Russian (Russia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ru_RU"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/sr",
+        "description": "Serbian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/sr"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/si_LK",
+        "description": "Sinhala (Sri Lanka)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/si_LK"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/sk",
+        "description": "Slovak",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/sk"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/sl_SI",
+        "description": "Slovenian (Slovenia)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/sl_SI"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/es",
+        "description": "Spanish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/es"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/es_MX",
+        "description": "Spanish (Mexico)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/es_MX"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/sv_SE",
+        "description": "Swedish (Sweden)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/sv_SE"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/tg",
+        "description": "Tajik",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/tg"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ta",
+        "description": "Tamil",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ta"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ta_IN",
+        "description": "Tamil (India)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ta_IN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/tt",
+        "description": "Tatar",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/tt"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/th_TH",
+        "description": "Thai (Thailand)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/th_TH"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/tr",
+        "description": "Turkish",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/tr"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/tr_TR",
+        "description": "Turkish (Turkey)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/tr_TR"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/ug",
+        "description": "Uighur",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/ug"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/uk",
+        "description": "Ukrainian",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/uk"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/uk_UA",
+        "description": "Ukrainian (Ukraine)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/uk_UA"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/vi",
+        "description": "Vietnamese",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/vi"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/vi_VN",
+        "description": "Vietnamese (Viet Nam)",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/vi_VN"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "language/cy",
+        "description": "Welsh",
+        "version": "1.0.0",
+        "dist": {
+          "type": "zip",
+          "url": "https://www.tinymce.com/download/language/cy"
+        }
+      }
+    }
+  ]
+}
