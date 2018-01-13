@@ -1,0 +1,35 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "urls": {
+            "$ref": "#/definitions/urls"
+        }
+    },
+    "definitions": {
+        "urls": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/url"
+            }
+        },
+        "url": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
