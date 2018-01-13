@@ -19,6 +19,7 @@ $ composer require localheinz/json-normalizer
 
 This package comes with the following normalizers:
 
+* [`Localheinz\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
 * [`Localheinz\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
 * [`Localheinz\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
