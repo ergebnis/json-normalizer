@@ -1,22 +1,18 @@
 {
   "name": "localheinz/json-normalizer",
-  "description": "Provides normalizers for normalizing JSON documents.",
   "type": "library",
-  "license": "MIT",
+  "description": "Provides normalizers for normalizing JSON documents.",
   "keywords": [
     "json",
     "normalizer"
   ],
+  "license": "MIT",
   "authors": [
     {
       "name": "Andreas Möller",
       "email": "am@localheinz.com"
     }
   ],
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
   "require": {
     "php": "^7.0",
     "justinrainbow/json-schema": "^4.0.0 || ^5.0.0",
@@ -29,6 +25,10 @@
     "phpbench/phpbench": "~0.14.0",
     "phpspec/prophecy": "^1.7.1",
     "phpunit/phpunit": "^6.5.5"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
