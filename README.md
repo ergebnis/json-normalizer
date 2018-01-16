@@ -23,6 +23,7 @@ This package comes with the following normalizers:
 * [`Localheinz\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
 * [`Localheinz\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
 * [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
+* [`Localheinz\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
 * [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 * [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
 * [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
@@ -65,6 +66,8 @@ After applying the composed normalizer, the `AutoFormatNormalizer` will
 * decode with `json_decode()` and encode again with `json_encode()`, passing in the previously detected options
 * indent with the detected indent
 * add a final new line of detected
+
+:bulb: Alternatively, you can use the [`FixedFormatNormalizer`](#fixedformatnormalizer).
 
 ### `CallableNormalizer`
 
@@ -150,6 +153,36 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now have a single final new line.
+
+### `FixedFormatNormalizer`
+
+If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
+apply a fixed formatting, you can use the `FixedFormatNormalizer`.
+
+```php
+use Localheinz\Json\Normalizer;
+
+$json = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+JSON;
+
+/** @var Normalizer\NormalizerInterface $composedNormalizer*/
+/** @var Normalizer\Format\FormatInterface $format*/
+$normalizer = new Normalizer\FixedFormatNormalizer(
+    $composedNormalizer, 
+    $format
+);
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now have the composed normalizer applied, 
+but also apply the formatting according to `$format`.
+
+:bulb: Alternatively, you can use the [`AutoFormatNormalizer`](#autoformatnormalizer).
 
 ### `IndentNormalizer`
 
