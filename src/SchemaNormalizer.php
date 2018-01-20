@@ -141,7 +141,7 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function normalizeArray(array $array, \stdClass $arraySchema): array
     {
-        if (!$this->hasItemDefinition($arraySchema)) {
+        if (!$this->hasArrayItemsDefinition($arraySchema)) {
             return $array;
         }
 
@@ -161,7 +161,7 @@ final class SchemaNormalizer implements NormalizerInterface
             $objectSchema = $this->schemaStorage->resolveRefSchema($objectSchema);
         }
 
-        if (!$this->hasPropertyDefinitions($objectSchema)) {
+        if (!$this->hasObjectPropertyDefinitions($objectSchema)) {
             return $object;
         }
 
@@ -205,7 +205,7 @@ final class SchemaNormalizer implements NormalizerInterface
         return $normalized;
     }
 
-    private function hasPropertyDefinitions(\stdClass $schema): bool
+    private function hasObjectPropertyDefinitions(\stdClass $schema): bool
     {
         return \property_exists($schema, 'type')
             && 'object' === $schema->type
@@ -213,7 +213,7 @@ final class SchemaNormalizer implements NormalizerInterface
             && $schema->properties instanceof \stdClass;
     }
 
-    private function hasItemDefinition(\stdClass $schema): bool
+    private function hasArrayItemsDefinition(\stdClass $schema): bool
     {
         return \property_exists($schema, 'type')
             && 'array' === $schema->type
