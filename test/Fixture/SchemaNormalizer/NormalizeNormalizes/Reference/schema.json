@@ -1,6 +1,5 @@
 {
     "type": "object",
-    "additionalProperties": false,
     "properties": {
         "name": {
             "type": "string"
@@ -12,6 +11,7 @@
             "$ref": "#/definitions/urls"
         }
     },
+    "additionalProperties": false,
     "definitions": {
         "urls": {
             "type": "array",

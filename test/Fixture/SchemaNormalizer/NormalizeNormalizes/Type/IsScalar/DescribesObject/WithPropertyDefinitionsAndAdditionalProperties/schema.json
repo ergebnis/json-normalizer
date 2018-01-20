@@ -1,9 +1,9 @@
 {
     "type": "object",
-    "additionalProperties": false,
     "properties": {
-        "url": {
+        "name": {
             "type": "string"
         }
-    }
+    },
+    "additionalProperties": true
 }
