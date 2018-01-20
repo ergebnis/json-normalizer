@@ -207,18 +207,29 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function hasPropertyDefinitions(\stdClass $schema): bool
     {
-        return \property_exists($schema, 'type')
-            && 'object' === $schema->type
+        return $this->describesType('object', $schema)
             && \property_exists($schema, 'properties')
             && $schema->properties instanceof \stdClass;
     }
 
     private function hasItemDefinition(\stdClass $schema): bool
     {
-        return \property_exists($schema, 'type')
-            && 'array' === $schema->type
+        return $this->describesType('array', $schema)
             && \property_exists($schema, 'items')
             && $schema->items instanceof \stdClass;
+    }
+
+    private function describesType(string $type, \stdClass $schema): bool
+    {
+        if (!\property_exists($schema, 'type')) {
+            return false;
+        }
+
+        if ($schema->type === $type) {
+            return true;
+        }
+
+        return \is_array($schema->type) && \in_array($type, $schema->type, true);
     }
 
     private function hasReferenceDefinition(\stdClass $schema): bool
