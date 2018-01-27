@@ -39,7 +39,7 @@ JSON;
         $this->assertSame($normalized, $normalizer->normalize($json));
     }
 
-    public function providerWhitespace()
+    public function providerWhitespace(): \Generator
     {
         $values = [
             '',
