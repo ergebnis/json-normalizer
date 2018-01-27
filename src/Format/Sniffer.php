@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
-final class FormatSniffer implements FormatSnifferInterface
+final class Sniffer implements SnifferInterface
 {
     public function sniff(string $json): FormatInterface
     {

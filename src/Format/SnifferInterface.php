@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
-interface FormatSnifferInterface
+interface SnifferInterface
 {
     /**
      * @param string $json

@@ -84,9 +84,9 @@ JSON;
             ->shouldBeCalled()
             ->willReturn($hasFinalNewLine);
 
-        $formatSniffer = $this->prophesize(Format\FormatSnifferInterface::class);
+        $sniffer = $this->prophesize(Format\SnifferInterface::class);
 
-        $formatSniffer
+        $sniffer
             ->sniff(Argument::is($json))
             ->shouldBeCalled()
             ->willReturn($format);
@@ -103,7 +103,7 @@ JSON;
 
         $normalizer = new AutoFormatNormalizer(
             $composedNormalizer->reveal(),
-            $formatSniffer->reveal(),
+            $sniffer->reveal(),
             $printer->reveal()
         );
 

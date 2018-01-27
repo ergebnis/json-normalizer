@@ -14,25 +14,25 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Format\FormatInterface;
-use Localheinz\Json\Normalizer\Format\FormatSniffer;
-use Localheinz\Json\Normalizer\Format\FormatSnifferInterface;
+use Localheinz\Json\Normalizer\Format\Sniffer;
+use Localheinz\Json\Normalizer\Format\SnifferInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
-final class FormatSnifferTest extends Framework\TestCase
+final class SnifferTest extends Framework\TestCase
 {
     use Helper;
 
     public function testImplementsSnifferInterface(): void
     {
-        $this->assertClassImplementsInterface(FormatSnifferInterface::class, FormatSniffer::class);
+        $this->assertClassImplementsInterface(SnifferInterface::class, Sniffer::class);
     }
 
     public function testSniffRejectsInvalidJson(): void
     {
         $json = $this->faker()->realText();
 
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -51,7 +51,7 @@ final class FormatSnifferTest extends Framework\TestCase
      */
     public function testSniffReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $json): void
     {
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
@@ -100,7 +100,7 @@ final class FormatSnifferTest extends Framework\TestCase
      */
     public function testSniffReturnsFormatWithDefaultIndentIfUnableToSniff(string $json): void
     {
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
@@ -141,7 +141,7 @@ ${indent}"bar",
 ]
 JSON;
 
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
@@ -166,7 +166,7 @@ ${indent}"bar": 123,
 }
 JSON;
 
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
@@ -212,7 +212,7 @@ JSON;
 JSON;
         $json .= $actualWhitespace;
 
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
@@ -256,7 +256,7 @@ JSON;
 JSON;
         $json .= $actualWhitespace;
 
-        $sniffer = new FormatSniffer();
+        $sniffer = new Sniffer();
 
         $format = $sniffer->sniff($json);
 
