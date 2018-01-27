@@ -31,7 +31,7 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = -1;
         $indent = '  ';
-        $finalNewLine = true;
+        $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -42,7 +42,7 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent,
-            $finalNewLine
+            $hasFinalNewLine
         );
     }
 
@@ -54,7 +54,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidIndent(string $indent)
     {
         $jsonEncodeOptions = 0;
-        $finalNewLine = true;
+        $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -65,7 +65,7 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent,
-            $finalNewLine
+            $hasFinalNewLine
         );
     }
 
@@ -87,21 +87,21 @@ final class FormatTest extends Framework\TestCase
      * @dataProvider providerJsonIndentAndFinalNewLine
      *
      * @param string $indent
-     * @param bool   $finalNewLine
+     * @param bool   $hasFinalNewLine
      */
-    public function testConstructorSetsValues(string $indent, bool $finalNewLine)
+    public function testConstructorSetsValues(string $indent, bool $hasFinalNewLine)
     {
         $jsonEncodeOptions = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
         $format = new Format(
             $jsonEncodeOptions,
             $indent,
-            $finalNewLine
+            $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
         $this->assertSame($indent, $format->indent());
-        $this->assertSame($finalNewLine, $format->hasFinalNewLine());
+        $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
     public function providerJsonIndentAndFinalNewLine()
