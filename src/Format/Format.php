@@ -42,7 +42,7 @@ final class Format implements FormatInterface
         if (0 > $jsonEncodeOptions) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not valid options for json_encode().',
-                $indent
+                $jsonEncodeOptions
             ));
         }
 

@@ -36,7 +36,7 @@ final class FormatTest extends Framework\TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
             '"%s" is not valid options for json_encode().',
-            $indent
+            $jsonEncodeOptions
         ));
 
         new Format(
