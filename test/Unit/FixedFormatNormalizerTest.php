@@ -16,24 +16,12 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 use Localheinz\Json\Normalizer\FixedFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
 use Localheinz\Json\Normalizer\NormalizerInterface;
-use Localheinz\Json\Printer;
 use Prophecy\Argument;
 
 final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
-    /**
-     * @dataProvider providerFinalNewLine
-     *
-     * @param bool   $hasFinalNewLine
-     * @param string $suffix
-     */
-    public function testNormalizeEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine, string $suffix): void
+    public function testNormalizeNormalizesAndFormatsUsingFormat(): void
     {
-        $faker = $this->faker();
-
-        $jsonEncodeOptions = $faker->numberBetween(1);
-        $indent = \str_repeat(' ', $faker->numberBetween(1, 5));
-
         $json = <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -48,12 +36,7 @@ JSON;
 }
 JSON;
 
-        $encoded = \json_encode(
-            \json_decode($normalized),
-            $jsonEncodeOptions
-        );
-
-        $printed = <<<'JSON'
+        $formatted = <<<'JSON'
 {
     "name": "Andreas Möller (printed)",
     "url": "https://localheinz.com"
@@ -69,38 +52,23 @@ JSON;
 
         $format = $this->prophesize(Format\FormatInterface::class);
 
-        $format
-            ->jsonEncodeOptions()
-            ->shouldBeCalled()
-            ->willReturn($jsonEncodeOptions);
+        $formatter = $this->prophesize(Format\FormatterInterface::class);
 
-        $format
-            ->indent()
-            ->shouldBeCalled()
-            ->willReturn($indent);
-
-        $format
-            ->hasFinalNewLine()
-            ->shouldBeCalled()
-            ->willReturn($hasFinalNewLine);
-
-        $printer = $this->prophesize(Printer\PrinterInterface::class);
-
-        $printer
-            ->print(
-                Argument::is($encoded),
-                Argument::is($indent)
+        $formatter
+            ->format(
+                Argument::is($normalized),
+                Argument::is($format->reveal())
             )
             ->shouldBeCalled()
-            ->willReturn($printed);
+            ->willReturn($formatted);
 
         $normalizer = new FixedFormatNormalizer(
             $composedNormalizer->reveal(),
             $format->reveal(),
-            $printer->reveal()
+            $formatter->reveal()
         );
 
-        $this->assertSame($printed . $suffix, $normalizer->normalize($json));
+        $this->assertSame($formatted, $normalizer->normalize($json));
     }
 
     public function providerFinalNewLine(): \Generator

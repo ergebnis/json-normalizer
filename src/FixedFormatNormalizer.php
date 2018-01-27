@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-use Localheinz\Json\Printer;
-
 final class FixedFormatNormalizer implements NormalizerInterface
 {
     /**
@@ -28,18 +26,18 @@ final class FixedFormatNormalizer implements NormalizerInterface
     private $format;
 
     /**
-     * @var Printer\PrinterInterface
+     * @var Format\FormatterInterface
      */
-    private $printer;
+    private $formatter;
 
     public function __construct(
         NormalizerInterface $normalizer,
         Format\FormatInterface $format,
-        Printer\PrinterInterface $printer = null
+        Format\FormatterInterface $formatter = null
     ) {
         $this->normalizer = $normalizer;
         $this->format = $format;
-        $this->printer = $printer ?: new Printer\Printer();
+        $this->formatter = $formatter ?: new Format\Formatter();
     }
 
     public function normalize(string $json): string
@@ -53,20 +51,9 @@ final class FixedFormatNormalizer implements NormalizerInterface
 
         $normalized = $this->normalizer->normalize($json);
 
-        $encoded = \json_encode(
-            \json_decode($normalized),
-            $this->format->jsonEncodeOptions()
+        return $this->formatter->format(
+            $normalized,
+            $this->format
         );
-
-        $printed = $this->printer->print(
-            $encoded,
-            $this->format->indent()
-        );
-
-        if (!$this->format->hasFinalNewLine()) {
-            return $printed;
-        }
-
-        return $printed . PHP_EOL;
     }
 }

@@ -16,24 +16,12 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 use Localheinz\Json\Normalizer\AutoFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
 use Localheinz\Json\Normalizer\NormalizerInterface;
-use Localheinz\Json\Printer;
 use Prophecy\Argument;
 
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {
-    /**
-     * @dataProvider providerFinalNewLine
-     *
-     * @param bool   $hasFinalNewLine
-     * @param string $suffix
-     */
-    public function testNormalizeEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine, string $suffix): void
+    public function testNormalizeUsesSnifferToSniffFormatNormalizesAndFormatsUsingSniffedFormat(): void
     {
-        $faker = $this->faker();
-
-        $jsonEncodeOptions = $faker->numberBetween(1);
-        $indent = \str_repeat(' ', $faker->numberBetween(1, 5));
-
         $json = <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -48,14 +36,9 @@ JSON;
 }
 JSON;
 
-        $encoded = \json_encode(
-            \json_decode($normalized),
-            $jsonEncodeOptions
-        );
-
-        $printed = <<<'JSON'
+        $formatted = <<<'JSON'
 {
-    "name": "Andreas Möller (printed)",
+    "name": "Andreas Möller (formatted)",
     "url": "https://localheinz.com"
 }
 JSON;
@@ -69,21 +52,6 @@ JSON;
 
         $format = $this->prophesize(Format\FormatInterface::class);
 
-        $format
-            ->jsonEncodeOptions()
-            ->shouldBeCalled()
-            ->willReturn($jsonEncodeOptions);
-
-        $format
-            ->indent()
-            ->shouldBeCalled()
-            ->willReturn($indent);
-
-        $format
-            ->hasFinalNewLine()
-            ->shouldBeCalled()
-            ->willReturn($hasFinalNewLine);
-
         $sniffer = $this->prophesize(Format\SnifferInterface::class);
 
         $sniffer
@@ -91,43 +59,22 @@ JSON;
             ->shouldBeCalled()
             ->willReturn($format);
 
-        $printer = $this->prophesize(Printer\PrinterInterface::class);
+        $formatter = $this->prophesize(Format\FormatterInterface::class);
 
-        $printer
-            ->print(
-                Argument::is($encoded),
-                Argument::is($indent)
+        $formatter
+            ->format(
+                Argument::is($normalized),
+                Argument::is($format->reveal())
             )
             ->shouldBeCalled()
-            ->willReturn($printed);
+            ->willReturn($formatted);
 
         $normalizer = new AutoFormatNormalizer(
             $composedNormalizer->reveal(),
             $sniffer->reveal(),
-            $printer->reveal()
+            $formatter->reveal()
         );
 
-        $this->assertSame($printed . $suffix, $normalizer->normalize($json));
-    }
-
-    public function providerFinalNewLine(): \Generator
-    {
-        $values = [
-            'without-final-new-line' => [
-                false,
-                '',
-            ],
-            'with-final-new-line' => [
-                true,
-                PHP_EOL,
-            ],
-        ];
-
-        foreach ($values as $key => [$hasFinalNewLine, $suffix]) {
-            yield $key => [
-                $hasFinalNewLine,
-                $suffix,
-            ];
-        }
+        $this->assertSame($formatted, $normalizer->normalize($json));
     }
 }
