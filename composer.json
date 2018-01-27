@@ -6,6 +6,7 @@
     "json",
     "normalizer"
   ],
+  "homepage": "https://github.com/localheinz/json-normalizer",
   "license": "MIT",
   "authors": [
     {
@@ -39,5 +40,9 @@
     "psr-4": {
       "Localheinz\\Json\\Normalizer\\Test\\": "test/"
     }
+  },
+  "support": {
+    "issues": "https://github.com/localheinz/json-normalizer/issues",
+    "source": "https://github.com/localheinz/json-normalizer"
   }
 }
