@@ -22,7 +22,7 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
      *
      * @param string $whitespace
      */
-    public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace)
+    public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {
         $json = <<<'JSON'
 {

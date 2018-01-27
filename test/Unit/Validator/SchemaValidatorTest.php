@@ -24,7 +24,7 @@ final class SchemaValidatorTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsSchemaValidatorInterface()
+    public function testImplementsSchemaValidatorInterface(): void
     {
         $this->assertClassImplementsInterface(SchemaValidatorInterface::class, SchemaValidator::class);
     }
@@ -34,7 +34,7 @@ final class SchemaValidatorTest extends Framework\TestCase
      *
      * @param bool $isValid
      */
-    public function testValidateUsesSchemaValidator(bool $isValid)
+    public function testValidateUsesSchemaValidator(bool $isValid): void
     {
         $dataJson = <<<'JSON'
 {

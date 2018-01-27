@@ -21,7 +21,7 @@ use Prophecy\Argument;
 
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriCouldNotBeResolved()
+    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriCouldNotBeResolved(): void
     {
         $json = <<<'JSON'
 {
@@ -54,7 +54,7 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesUnreadableResource()
+    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesUnreadableResource(): void
     {
         $json = <<<'JSON'
 {
@@ -87,7 +87,7 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidMediaType()
+    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
         $json = <<<'JSON'
 {
@@ -120,7 +120,7 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson()
+    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson(): void
     {
         $json = <<<'JSON'
 {
@@ -153,7 +153,7 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    public function testNormalizeRejectsInvalidJsonAccordingToSchema()
+    public function testNormalizeRejectsInvalidJsonAccordingToSchema(): void
     {
         $json = <<<'JSON'
 {
@@ -205,7 +205,7 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfNormalizedIsInvalidAccordingToSchema()
+    public function testNormalizeThrowsRuntimeExceptionIfNormalizedIsInvalidAccordingToSchema(): void
     {
         $json = <<<'JSON'
 {
@@ -291,7 +291,7 @@ JSON;
      * @param string $json
      * @param string $schemaUri
      */
-    public function testNormalizeNormalizes(string $expected, string $json, string $schemaUri)
+    public function testNormalizeNormalizes(string $expected, string $json, string $schemaUri): void
     {
         $normalizer = new SchemaNormalizer($schemaUri);
 

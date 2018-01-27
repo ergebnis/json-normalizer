@@ -24,7 +24,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
      *
      * @param string $indent
      */
-    public function testConstructorRejectsInvalidIndent(string $indent)
+    public function testConstructorRejectsInvalidIndent(string $indent): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(\sprintf(
@@ -52,7 +52,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
         }
     }
 
-    public function testNormalizeUsesPrinterToNormalizeJsonWithIndent()
+    public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
         $indent = '  ';
 
