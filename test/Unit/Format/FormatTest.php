@@ -104,7 +104,7 @@ final class FormatTest extends Framework\TestCase
         $this->assertSame($finalNewLine, $format->hasFinalNewLine());
     }
 
-    public function providerJsonIndentAndFinalNewLine()
+    public function providerJsonIndentAndFinalNewLine(): \Generator
     {
         $indents = [
             '  ',
