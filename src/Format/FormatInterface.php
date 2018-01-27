@@ -20,4 +20,24 @@ interface FormatInterface
     public function indent(): string;
 
     public function hasFinalNewLine(): bool;
+
+    /**
+     * @param string $indent
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return FormatInterface
+     */
+    public function withIndent(string $indent): self;
+
+    /**
+     * @param int $jsonEncodeOptions
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return FormatInterface
+     */
+    public function withJsonEncodeOptions(int $jsonEncodeOptions): self;
+
+    public function withHasFinalNewLine(bool $hasFinalNewLine): self;
 }
