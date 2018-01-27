@@ -16,6 +16,11 @@ namespace Localheinz\Json\Normalizer\Format;
 final class Format implements FormatInterface
 {
     /**
+     * Constant for a regular expression matching valid indents.
+     */
+    private const PATTERN_INDENT = '/^[ \t]+$/';
+
+    /**
      * @var int
      */
     private $jsonEncodeOptions;
@@ -46,7 +51,7 @@ final class Format implements FormatInterface
             ));
         }
 
-        if (1 !== \preg_match('/^[ \t]+$/', $indent)) {
+        if (1 !== \preg_match(self::PATTERN_INDENT, $indent)) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not a valid indent.',
                 $indent
@@ -71,5 +76,46 @@ final class Format implements FormatInterface
     public function hasFinalNewLine(): bool
     {
         return $this->hasFinalNewLine;
+    }
+
+    public function withJsonEncodeOptions(int $jsonEncodeOptions): FormatInterface
+    {
+        if (0 > $jsonEncodeOptions) {
+            throw new \InvalidArgumentException(\sprintf(
+                '"%s" is not valid options for json_encode().',
+                $jsonEncodeOptions
+            ));
+        }
+
+        $mutated = clone $this;
+
+        $mutated->jsonEncodeOptions = $jsonEncodeOptions;
+
+        return $mutated;
+    }
+
+    public function withIndent(string $indent): FormatInterface
+    {
+        if (1 !== \preg_match(self::PATTERN_INDENT, $indent)) {
+            throw new \InvalidArgumentException(\sprintf(
+                '"%s" is not a valid indent.',
+                $indent
+            ));
+        }
+
+        $mutated = clone $this;
+
+        $mutated->indent = $indent;
+
+        return $mutated;
+    }
+
+    public function withHasFinalNewLine(bool $hasFinalNewLine): FormatInterface
+    {
+        $mutated = clone $this;
+
+        $mutated->hasFinalNewLine = $hasFinalNewLine;
+
+        return $mutated;
     }
 }

@@ -106,23 +106,151 @@ final class FormatTest extends Framework\TestCase
 
     public function providerJsonIndentAndFinalNewLine(): \Generator
     {
-        $indents = [
-            '  ',
-            "\t",
-        ];
-
-        $hasFinalNewLines = [
-            true,
-            false,
-        ];
-
-        foreach ($indents as $indent) {
-            foreach ($hasFinalNewLines as $hasFinalNewLine) {
+        foreach ($this->indents() as $indent) {
+            foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
                 yield [
                     $indent,
                     $hasFinalNewLine,
                 ];
             }
         }
+    }
+
+    public function testWithJsonEncodeOptionsRejectsInvalidJsonEncodeOptions(): void
+    {
+        $jsonEncodeOptions = -1;
+
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            true
+        );
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            '"%s" is not valid options for json_encode().',
+            $jsonEncodeOptions
+        ));
+
+        $format->withJsonEncodeOptions($jsonEncodeOptions);
+    }
+
+    public function testWithIndentClonesFormatAndSetsJsonEncodeOptions(): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            true
+        );
+
+        $jsonEncodeOptions = 9000;
+
+        $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
+
+        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertNotSame($format, $mutated);
+        $this->assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
+    }
+
+    /**
+     * @dataProvider providerInvalidIndent
+     *
+     * @param string $indent
+     */
+    public function testWithIndentRejectsInvalidIndent(string $indent): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            true
+        );
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            '"%s" is not a valid indent.',
+            $indent
+        ));
+
+        $format->withIndent($indent);
+    }
+
+    /**
+     * @dataProvider providerIndent
+     *
+     * @param string $indent
+     */
+    public function testWithIndentClonesFormatAndSetsIndent(string $indent): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            true
+        );
+
+        $mutated = $format->withIndent($indent);
+
+        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertNotSame($format, $mutated);
+        $this->assertSame($indent, $mutated->indent());
+    }
+
+    public function providerIndent(): \Generator
+    {
+        foreach ($this->indents() as $key => $indent) {
+            yield $key => [
+                $indent,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerHasFinalNewLine
+     *
+     * @param bool $hasFinalNewLine
+     */
+    public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            false
+        );
+
+        $mutated = $format->withHasFinalNewLine($hasFinalNewLine);
+
+        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertNotSame($format, $mutated);
+        $this->assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
+    }
+
+    public function providerHasFinalNewLine(): \Generator
+    {
+        foreach ($this->hasFinalNewLines() as $key => $hasFinalNewLine) {
+            yield $key => [
+                $hasFinalNewLine,
+            ];
+        }
+    }
+
+    /**
+     * @return string[]
+     */
+    private function indents(): array
+    {
+        return [
+            'space' => '  ',
+            'tab' => "\t",
+        ];
+    }
+
+    /**
+     * @return bool[]
+     */
+    private function hasFinalNewLines(): array
+    {
+        return [
+            'yes' => true,
+            'no' => false,
+        ];
     }
 }
