@@ -27,7 +27,7 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
      * @param bool   $hasFinalNewLine
      * @param string $suffix
      */
-    public function testNormalizeEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine, string $suffix)
+    public function testNormalizeEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine, string $suffix): void
     {
         $faker = $this->faker();
 
@@ -123,7 +123,7 @@ JSON;
             ],
         ];
 
-        foreach ($values as $key => list($hasFinalNewLine, $suffix)) {
+        foreach ($values as $key => [$hasFinalNewLine, $suffix]) {
             yield $key => [
                 $hasFinalNewLine,
                 $suffix,

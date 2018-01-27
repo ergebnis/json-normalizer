@@ -22,12 +22,12 @@ final class FormatTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsFormatInterface()
+    public function testImplementsFormatInterface(): void
     {
         $this->assertClassImplementsInterface(FormatInterface::class, Format::class);
     }
 
-    public function testConstructorRejectsInvalidEncodeOptions()
+    public function testConstructorRejectsInvalidEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
         $indent = '  ';
@@ -51,7 +51,7 @@ final class FormatTest extends Framework\TestCase
      *
      * @param string $indent
      */
-    public function testConstructorRejectsInvalidIndent(string $indent)
+    public function testConstructorRejectsInvalidIndent(string $indent): void
     {
         $jsonEncodeOptions = 0;
         $hasFinalNewLine = true;
@@ -89,7 +89,7 @@ final class FormatTest extends Framework\TestCase
      * @param string $indent
      * @param bool   $hasFinalNewLine
      */
-    public function testConstructorSetsValues(string $indent, bool $hasFinalNewLine)
+    public function testConstructorSetsValues(string $indent, bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 

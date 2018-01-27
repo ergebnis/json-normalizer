@@ -23,12 +23,12 @@ final class FormatSnifferTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsSnifferInterface()
+    public function testImplementsSnifferInterface(): void
     {
         $this->assertClassImplementsInterface(FormatSnifferInterface::class, FormatSniffer::class);
     }
 
-    public function testSniffRejectsInvalidJson()
+    public function testSniffRejectsInvalidJson(): void
     {
         $json = $this->faker()->realText();
 
@@ -49,7 +49,7 @@ final class FormatSnifferTest extends Framework\TestCase
      * @param int    $jsonEncodeOptions
      * @param string $json
      */
-    public function testSniffReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $json)
+    public function testSniffReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $json): void
     {
         $sniffer = new FormatSniffer();
 
@@ -98,7 +98,7 @@ final class FormatSnifferTest extends Framework\TestCase
      *
      * @param string $json
      */
-    public function testSniffReturnsFormatWithDefaultIndentIfUnableToSniff(string $json)
+    public function testSniffReturnsFormatWithDefaultIndentIfUnableToSniff(string $json): void
     {
         $sniffer = new FormatSniffer();
 
@@ -129,7 +129,7 @@ final class FormatSnifferTest extends Framework\TestCase
      *
      * @param string $indent
      */
-    public function testSniffReturnsFormatWithIndentSniffedFromArray(string $indent)
+    public function testSniffReturnsFormatWithIndentSniffedFromArray(string $indent): void
     {
         $json = <<<JSON
 [
@@ -154,7 +154,7 @@ JSON;
      *
      * @param string $indent
      */
-    public function testSniffReturnsFormatWithIndentIndentSniffedFromObject(string $indent)
+    public function testSniffReturnsFormatWithIndentIndentSniffedFromObject(string $indent): void
     {
         $json = <<<JSON
 {
@@ -199,7 +199,7 @@ JSON;
      *
      * @param string $actualWhitespace
      */
-    public function testSniffReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace)
+    public function testSniffReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
         $json = <<<'JSON'
 {
@@ -243,7 +243,7 @@ JSON;
      *
      * @param string $actualWhitespace
      */
-    public function testSniffReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace)
+    public function testSniffReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
         $json = <<<'JSON'
 {

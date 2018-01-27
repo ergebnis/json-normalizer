@@ -17,7 +17,7 @@ use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
 
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testConstructorRejectsInvalidJsonEncodeOptions()
+    public function testConstructorRejectsInvalidJsonEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
 
@@ -35,7 +35,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
      *
      * @param int $jsonEncodeOptions
      */
-    public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions)
+    public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
         $json = <<<'JSON'
 {

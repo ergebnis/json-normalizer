@@ -22,7 +22,7 @@ final class CallableNormalizerTest extends AbstractNormalizerTestCase
      *
      * @param callable $callable
      */
-    public function testNormalizePassesJsonThroughCallable(callable $callable)
+    public function testNormalizePassesJsonThroughCallable(callable $callable): void
     {
         $json = <<<'JSON'
 {

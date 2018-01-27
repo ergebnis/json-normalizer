@@ -23,7 +23,7 @@ final class SchemaNormalizerBench
      * @Revs(5)
      * @Iterations(1)
      */
-    public function benchNormalizeProjectComposerFile()
+    public function benchNormalizeProjectComposerFile(): void
     {
         $this->normalize(
             __DIR__ . '/../../composer.json',
@@ -37,7 +37,7 @@ final class SchemaNormalizerBench
      * @Revs(5)
      * @Iterations(1)
      */
-    public function benchNormalizeLargeComposerFile()
+    public function benchNormalizeLargeComposerFile(): void
     {
         $this->normalize(
             __DIR__ . '/../Fixture/LargeComposerFile/composer.json',
@@ -45,7 +45,7 @@ final class SchemaNormalizerBench
         );
     }
 
-    private function normalize(string $file, string $schemaUri)
+    private function normalize(string $file, string $schemaUri): void
     {
         $original = \file_get_contents($file);
 

@@ -19,7 +19,7 @@ use Prophecy\Argument;
 
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testNormalizePassesJsonThroughNormalizers()
+    public function testNormalizePassesJsonThroughNormalizers(): void
     {
         $count = $this->faker()->numberBetween(3, 5);
 
