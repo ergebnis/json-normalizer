@@ -23,9 +23,9 @@ final class AutoFormatNormalizer implements NormalizerInterface
     private $normalizer;
 
     /**
-     * @var Format\FormatSnifferInterface
+     * @var Format\SnifferInterface
      */
-    private $formatSniffer;
+    private $sniffer;
 
     /**
      * @var Printer\PrinterInterface
@@ -34,11 +34,11 @@ final class AutoFormatNormalizer implements NormalizerInterface
 
     public function __construct(
         NormalizerInterface $normalizer,
-        Format\FormatSnifferInterface $formatSniffer = null,
+        Format\SnifferInterface $sniffer = null,
         Printer\PrinterInterface $printer = null
     ) {
         $this->normalizer = $normalizer;
-        $this->formatSniffer = $formatSniffer ?: new Format\FormatSniffer();
+        $this->sniffer = $sniffer ?: new Format\Sniffer();
         $this->printer = $printer ?: new Printer\Printer();
     }
 
@@ -51,7 +51,7 @@ final class AutoFormatNormalizer implements NormalizerInterface
             ));
         }
 
-        $format = $this->formatSniffer->sniff($json);
+        $format = $this->sniffer->sniff($json);
 
         $normalized = $this->normalizer->normalize($json);
 
