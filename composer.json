@@ -20,7 +20,7 @@
     "localheinz/json-printer": "^1.0.0"
   },
   "require-dev": {
-    "infection/infection": "~0.7.0",
+    "infection/infection": "~0.7.1",
     "localheinz/php-cs-fixer-config": "~1.11.0",
     "localheinz/test-util": "0.6.1",
     "phpbench/phpbench": "~0.14.0",
