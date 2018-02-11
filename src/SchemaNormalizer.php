@@ -141,7 +141,10 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function normalizeArray(array $data, \stdClass $schema): array
     {
-        $schema = $this->resolveReferenceSchema($schema);
+        $schema = $this->resolveSchema(
+            $data,
+            $schema
+        );
 
         if (!$this->describesType('array', $schema)) {
             return $data;
@@ -178,7 +181,10 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function normalizeObject(\stdClass $data, \stdClass $schema): \stdClass
     {
-        $schema = $this->resolveReferenceSchema($schema);
+        $schema = $this->resolveSchema(
+            $data,
+            $schema
+        );
 
         if (!$this->describesType('object', $schema)) {
             return $data;
@@ -197,10 +203,15 @@ final class SchemaNormalizer implements NormalizerInterface
         );
 
         foreach ($objectProperties as $name => $valueSchema) {
-            $valueSchema = $this->resolveReferenceSchema($valueSchema);
+            $value = $data->{$name};
+
+            $valueSchema = $this->resolveSchema(
+                $value,
+                $valueSchema
+            );
 
             $normalized->{$name} = $this->normalizeData(
-                $data->{$name},
+                $value,
                 $valueSchema
             );
 
@@ -220,8 +231,22 @@ final class SchemaNormalizer implements NormalizerInterface
         return $normalized;
     }
 
-    private function resolveReferenceSchema(\stdClass $schema): \stdClass
+    private function resolveSchema($data, \stdClass $schema): \stdClass
     {
+        /**
+         * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#oneof
+         */
+        if (\property_exists($schema, 'oneOf') && \is_array($schema->oneOf)) {
+            foreach ($schema->oneOf as $oneOfSchema) {
+                if ($this->schemaValidator->isValid($data, $oneOfSchema)) {
+                    return $oneOfSchema;
+                }
+            }
+        }
+
+        /**
+         * @see https://spacetelescope.github.io/understanding-json-schema/structuring.html#reuse
+         */
         if (\property_exists($schema, '$ref') && \is_string($schema->{'$ref'})) {
             return $this->schemaStorage->resolveRefSchema($schema);
         }
