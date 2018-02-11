@@ -197,20 +197,14 @@ final class SchemaNormalizer implements NormalizerInterface
         );
 
         foreach ($objectProperties as $name => $valueSchema) {
-            if ($valueSchema instanceof \stdClass && $this->hasReferenceDefinition($valueSchema)) {
+            if ($this->hasReferenceDefinition($valueSchema)) {
                 $valueSchema = $this->schemaStorage->resolveRefSchema($valueSchema);
             }
 
-            $value = $object->{$name};
-
-            if ($valueSchema instanceof \stdClass && !\is_scalar($value)) {
-                $value = $this->normalizeData(
-                    $value,
-                    $valueSchema
-                );
-            }
-
-            $normalized->{$name} = $value;
+            $normalized->{$name} = $this->normalizeData(
+                $object->{$name},
+                $valueSchema
+            );
 
             unset($object->{$name});
         }
