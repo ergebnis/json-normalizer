@@ -113,12 +113,12 @@ final class SchemaNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param array|\stdClass $data
-     * @param \stdClass       $schema
+     * @param array|bool|float|int|\stdClass|string $data
+     * @param \stdClass                             $schema
      *
      * @throws \InvalidArgumentException
      *
-     * @return array|bool|int|string
+     * @return array|bool|float|int|\stdClass|string
      */
     private function normalizeData($data, \stdClass $schema)
     {
