@@ -9,7 +9,6 @@
         },
         "url": {
             "type": "object",
-            "additionalProperties": false,
             "properties": {
                 "type": {
                     "type": "string"
@@ -17,7 +16,8 @@
                 "url": {
                     "type": "string"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     }
 }
