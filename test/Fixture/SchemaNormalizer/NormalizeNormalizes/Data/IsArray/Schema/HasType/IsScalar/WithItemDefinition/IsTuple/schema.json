@@ -1,0 +1,28 @@
+{
+    "type": "array",
+    "items": [
+        {
+            "type": "integer"
+        },
+        {
+            "type": "boolean"
+        },
+        {
+            "type": "null"
+        },
+        {
+            "type": "string"
+        },
+        {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}
