@@ -141,6 +141,10 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function normalizeArray(array $data, \stdClass $schema): array
     {
+        if ($this->hasReferenceDefinition($schema)) {
+            $schema = $this->schemaStorage->resolveRefSchema($schema);
+        }
+
         if (!$this->describesType('array', $schema)) {
             return $data;
         }
