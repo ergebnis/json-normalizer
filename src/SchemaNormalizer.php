@@ -139,20 +139,39 @@ final class SchemaNormalizer implements NormalizerInterface
         return $data;
     }
 
-    private function normalizeArray(array $array, \stdClass $arraySchema): array
+    private function normalizeArray(array $data, \stdClass $schema): array
     {
-        if (!$this->hasArrayItemsDefinition($arraySchema)) {
-            return $array;
+        if (!$this->describesType('array', $schema)) {
+            return $data;
         }
 
-        $itemSchema = $arraySchema->items;
+        if (!\property_exists($schema, 'items')) {
+            return $data;
+        }
 
+        $itemSchema = $schema->items;
+
+        /**
+         * @see https://spacetelescope.github.io/understanding-json-schema/reference/array.html#tuple-validation
+         */
+        if (\is_array($itemSchema)) {
+            return \array_map(function ($item, \stdClass $itemSchema) {
+                return $this->normalizeData(
+                    $item,
+                    $itemSchema
+                );
+            }, $data, $itemSchema);
+        }
+
+        /**
+         * @see https://spacetelescope.github.io/understanding-json-schema/reference/array.html#list-validation
+         */
         return \array_map(function ($item) use ($itemSchema) {
             return $this->normalizeData(
                 $item,
                 $itemSchema
             );
-        }, $array);
+        }, $data);
     }
 
     private function normalizeObject(\stdClass $object, \stdClass $objectSchema): \stdClass
@@ -210,13 +229,6 @@ final class SchemaNormalizer implements NormalizerInterface
         return $this->describesType('object', $schema)
             && \property_exists($schema, 'properties')
             && $schema->properties instanceof \stdClass;
-    }
-
-    private function hasArrayItemsDefinition(\stdClass $schema): bool
-    {
-        return $this->describesType('array', $schema)
-            && \property_exists($schema, 'items')
-            && $schema->items instanceof \stdClass;
     }
 
     private function describesType(string $type, \stdClass $schema): bool
