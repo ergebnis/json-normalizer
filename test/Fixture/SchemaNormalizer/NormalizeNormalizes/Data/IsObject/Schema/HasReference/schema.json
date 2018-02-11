@@ -4,9 +4,6 @@
         "name": {
             "type": "string"
         },
-        "description": {
-            "type": "string"
-        },
         "urls": {
             "$ref": "#/definitions/urls"
         }
