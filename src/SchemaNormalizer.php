@@ -141,9 +141,7 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function normalizeArray(array $data, \stdClass $schema): array
     {
-        if ($this->hasReferenceDefinition($schema)) {
-            $schema = $this->schemaStorage->resolveRefSchema($schema);
-        }
+        $schema = $this->resolveReferenceSchema($schema);
 
         if (!$this->describesType('array', $schema)) {
             return $data;
@@ -178,38 +176,38 @@ final class SchemaNormalizer implements NormalizerInterface
         }, $data);
     }
 
-    private function normalizeObject(\stdClass $object, \stdClass $objectSchema): \stdClass
+    private function normalizeObject(\stdClass $data, \stdClass $schema): \stdClass
     {
-        if ($this->hasReferenceDefinition($objectSchema)) {
-            $objectSchema = $this->schemaStorage->resolveRefSchema($objectSchema);
+        $schema = $this->resolveReferenceSchema($schema);
+
+        if (!$this->describesType('object', $schema)) {
+            return $data;
         }
 
-        if (!$this->hasObjectPropertyDefinitions($objectSchema)) {
-            return $object;
+        if (!\property_exists($schema, 'properties')) {
+            return $data;
         }
 
         $normalized = new \stdClass();
 
         /** @var \stdClass[] $objectProperties */
         $objectProperties = \array_intersect_key(
-            \get_object_vars($objectSchema->properties),
-            \get_object_vars($object)
+            \get_object_vars($schema->properties),
+            \get_object_vars($data)
         );
 
         foreach ($objectProperties as $name => $valueSchema) {
-            if ($this->hasReferenceDefinition($valueSchema)) {
-                $valueSchema = $this->schemaStorage->resolveRefSchema($valueSchema);
-            }
+            $valueSchema = $this->resolveReferenceSchema($valueSchema);
 
             $normalized->{$name} = $this->normalizeData(
-                $object->{$name},
+                $data->{$name},
                 $valueSchema
             );
 
-            unset($object->{$name});
+            unset($data->{$name});
         }
 
-        $remainingProperties = \get_object_vars($object);
+        $remainingProperties = \get_object_vars($data);
 
         if (\count($remainingProperties)) {
             \ksort($remainingProperties);
@@ -222,11 +220,13 @@ final class SchemaNormalizer implements NormalizerInterface
         return $normalized;
     }
 
-    private function hasObjectPropertyDefinitions(\stdClass $schema): bool
+    private function resolveReferenceSchema(\stdClass $schema): \stdClass
     {
-        return $this->describesType('object', $schema)
-            && \property_exists($schema, 'properties')
-            && $schema->properties instanceof \stdClass;
+        if (\property_exists($schema, '$ref') && \is_string($schema->{'$ref'})) {
+            return $this->schemaStorage->resolveRefSchema($schema);
+        }
+
+        return $schema;
     }
 
     private function describesType(string $type, \stdClass $schema): bool
@@ -240,10 +240,5 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         return \is_array($schema->type) && \in_array($type, $schema->type, true);
-    }
-
-    private function hasReferenceDefinition(\stdClass $schema): bool
-    {
-        return \property_exists($schema, '$ref') && \is_string($schema->{'$ref'});
     }
 }
