@@ -297,7 +297,10 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        $this->assertSame($expected, $normalized);
+        $this->assertSame(
+            $this->prettyPrint($expected),
+            $this->prettyPrint($normalized)
+        );
     }
 
     public function providerNormalizeNormalizes(): \Generator
@@ -343,8 +346,8 @@ JSON;
                 ));
             }
 
-            $expected = $this->jsonFromFile($normalizedFile);
-            $json = $this->jsonFromFile($jsonFile);
+            $expected = \file_get_contents($normalizedFile);
+            $json = \file_get_contents($jsonFile);
             $schemaUri = \sprintf(
                 'file://%s',
                 $schemaFile
@@ -363,10 +366,11 @@ JSON;
         }
     }
 
-    private function jsonFromFile(string $file): string
+    private function prettyPrint(string $json): string
     {
-        $json = \file_get_contents($file);
-
-        return \json_encode(\json_decode($json));
+        return \json_encode(
+            \json_decode($json),
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+        );
     }
 }
