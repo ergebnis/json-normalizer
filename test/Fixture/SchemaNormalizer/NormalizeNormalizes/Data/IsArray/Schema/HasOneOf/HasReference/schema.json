@@ -1,0 +1,30 @@
+{
+    "type": "array",
+    "items": {
+        "oneOf": [
+            {
+                "$ref": "#/definitions/url-object"
+            },
+            {
+                "$ref": "#/definitions/url-string"
+            }
+        ]
+    },
+    "definitions": {
+        "url-object": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "url-string": {
+            "type": "string"
+        }
+    }
+}

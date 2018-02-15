@@ -239,7 +239,10 @@ final class SchemaNormalizer implements NormalizerInterface
         if (\property_exists($schema, 'oneOf') && \is_array($schema->oneOf)) {
             foreach ($schema->oneOf as $oneOfSchema) {
                 if ($this->schemaValidator->isValid($data, $oneOfSchema)) {
-                    return $oneOfSchema;
+                    return $this->resolveSchema(
+                        $data,
+                        $oneOfSchema
+                    );
                 }
             }
         }
