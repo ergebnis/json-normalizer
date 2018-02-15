@@ -251,7 +251,10 @@ final class SchemaNormalizer implements NormalizerInterface
          * @see https://spacetelescope.github.io/understanding-json-schema/structuring.html#reuse
          */
         if (\property_exists($schema, '$ref') && \is_string($schema->{'$ref'})) {
-            return $this->schemaStorage->resolveRefSchema($schema);
+            return $this->resolveSchema(
+                $data,
+                $this->schemaStorage->resolveRefSchema($schema)
+            );
         }
 
         return $schema;
