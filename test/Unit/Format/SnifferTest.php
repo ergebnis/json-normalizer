@@ -154,7 +154,7 @@ JSON;
      *
      * @param string $indent
      */
-    public function testSniffReturnsFormatWithIndentIndentSniffedFromObject(string $indent): void
+    public function testSniffReturnsFormatWithIndentSniffedFromObject(string $indent): void
     {
         $json = <<<JSON
 {
