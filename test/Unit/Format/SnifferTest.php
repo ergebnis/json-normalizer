@@ -64,28 +64,28 @@ final class SnifferTest extends Framework\TestCase
         return [
             [
                 0,
-'{
+                '{
   "name": "Andreas M\u00f6ller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer"
 }',
             ],
             [
                 JSON_UNESCAPED_SLASHES,
-'{
+                '{
   "name": "Andreas M\u00f6ller",
   "url": "https://github.com/localheinz/json-normalizer"
 }',
             ],
             [
                 JSON_UNESCAPED_UNICODE,
-'{
+                '{
   "name": "Andreas Möller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer"
 }',
             ],
             [
                 JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-'{
+                '{
   "name": "Andreas Möller",
   "url": "https://github.com/localheinz/json-normalizer"
 }',
