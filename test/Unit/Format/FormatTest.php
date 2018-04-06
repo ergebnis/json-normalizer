@@ -135,7 +135,7 @@ final class FormatTest extends Framework\TestCase
         $format->withJsonEncodeOptions($jsonEncodeOptions);
     }
 
-    public function testWithIndentClonesFormatAndSetsJsonEncodeOptions(): void
+    public function testWithJsonEncodeOptionsClonesFormatAndSetsJsonEncodeOptions(): void
     {
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
