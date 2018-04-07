@@ -195,6 +195,74 @@ JSON;
     }
 
     /**
+     * @dataProvider providerJsonWithoutWhitespace
+     *
+     * @param string $json
+     */
+    public function testSniffReturnsFormatWithDefaultNewLineIfUnableToSniff(string $json): void
+    {
+        $sniffer = new Sniffer();
+
+        $format = $sniffer->sniff($json);
+
+        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertSame(PHP_EOL, $format->newLine());
+    }
+
+    /**
+     * @dataProvider providerNewLine
+     *
+     * @param string $newLine
+     */
+    public function testSniffReturnsFormatWithNewLineSniffedFromArray(string $newLine): void
+    {
+        $json = <<<JSON
+["foo",${newLine}"bar"]
+JSON;
+
+        $sniffer = new Sniffer();
+
+        $format = $sniffer->sniff($json);
+
+        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertSame($newLine, $format->newLine());
+    }
+
+    /**
+     * @dataProvider providerNewLine
+     *
+     * @param string $newLine
+     */
+    public function testSniffReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLine): void
+    {
+        $json = <<<JSON
+{"foo": 9000,${newLine}"bar": 123}
+JSON;
+
+        $sniffer = new Sniffer();
+
+        $format = $sniffer->sniff($json);
+
+        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertSame($newLine, $format->newLine());
+    }
+
+    public function providerNewLine(): \Generator
+    {
+        $values = [
+            "\r\n",
+            "\n",
+            "\r",
+        ];
+
+        foreach ($values as $newLine) {
+            yield [
+                $newLine,
+            ];
+        }
+    }
+
+    /**
      * @dataProvider providerWhitespaceWithoutNewLine
      *
      * @param string $actualWhitespace

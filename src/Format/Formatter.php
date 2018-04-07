@@ -45,13 +45,14 @@ final class Formatter implements FormatterInterface
 
         $printed = $this->printer->print(
             $encoded,
-            $format->indent()
+            $format->indent(),
+            $format->newLine()
         );
 
         if (!$format->hasFinalNewLine()) {
             return $printed;
         }
 
-        return $printed . PHP_EOL;
+        return $printed . $format->newLine();
     }
 }
