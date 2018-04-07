@@ -27,6 +27,7 @@ final class Sniffer implements SnifferInterface
         return new Format(
             $this->jsonEncodeOptions($json),
             $this->indent($json),
+            $this->newLine($json),
             $this->hasFinalNewLine($json)
         );
     }
@@ -53,6 +54,15 @@ final class Sniffer implements SnifferInterface
         }
 
         return '    ';
+    }
+
+    private function newLine(string $json): string
+    {
+        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $json, $match)) {
+            return $match['newLine'];
+        }
+
+        return PHP_EOL;
     }
 
     private function hasFinalNewLine(string $json): bool

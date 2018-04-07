@@ -19,7 +19,18 @@ interface FormatInterface
 
     public function indent(): string;
 
+    public function newLine(): string;
+
     public function hasFinalNewLine(): bool;
+
+    /**
+     * @param int $jsonEncodeOptions
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @return FormatInterface
+     */
+    public function withJsonEncodeOptions(int $jsonEncodeOptions): self;
 
     /**
      * @param string $indent
@@ -31,13 +42,13 @@ interface FormatInterface
     public function withIndent(string $indent): self;
 
     /**
-     * @param int $jsonEncodeOptions
+     * @param string $newLine
      *
      * @throws \InvalidArgumentException
      *
      * @return FormatInterface
      */
-    public function withJsonEncodeOptions(int $jsonEncodeOptions): self;
+    public function withNewLine(string $newLine): self;
 
     public function withHasFinalNewLine(bool $hasFinalNewLine): self;
 }

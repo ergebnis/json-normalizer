@@ -31,6 +31,7 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = -1;
         $indent = '  ';
+        $newLine = PHP_EOL;
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -42,6 +43,7 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent,
+            $newLine,
             $hasFinalNewLine
         );
     }
@@ -54,6 +56,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidIndent(string $indent): void
     {
         $jsonEncodeOptions = 0;
+        $newLine = PHP_EOL;
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -65,6 +68,7 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent,
+            $newLine,
             $hasFinalNewLine
         );
     }
@@ -84,34 +88,85 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonIndentAndFinalNewLine
+     * @dataProvider providerInvalidNewLine
+     *
+     * @param string $newLine
+     */
+    public function testConstructorRejectsInvalidNewLine(string $newLine): void
+    {
+        $jsonEncodeOptions = 0;
+        $indent = '    ';
+        $hasFinalNewLine = true;
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            '"%s" is not a valid new-line character sequence.',
+            $newLine
+        ));
+
+        new Format(
+            $jsonEncodeOptions,
+            $indent,
+            $newLine,
+            $hasFinalNewLine
+        );
+    }
+
+    public function providerInvalidNewLine(): \Generator
+    {
+        $values = [
+            "\t",
+            " \r ",
+            " \r\n ",
+            " \n ",
+            ' ',
+            "\f",
+            "\x0b",
+            "\x85",
+        ];
+
+        foreach ($values as $value) {
+            yield [
+                $value,
+            ];
+        }
+    }
+
+    /**
+     * @dataProvider providerJsonIndentNewLineAndFinalNewLine
      *
      * @param string $indent
+     * @param string $newLine
      * @param bool   $hasFinalNewLine
      */
-    public function testConstructorSetsValues(string $indent, bool $hasFinalNewLine): void
+    public function testConstructorSetsValues(string $indent, string $newLine, bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
 
         $format = new Format(
             $jsonEncodeOptions,
             $indent,
+            $newLine,
             $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
         $this->assertSame($indent, $format->indent());
+        $this->assertSame($newLine, $format->newLine());
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
-    public function providerJsonIndentAndFinalNewLine(): \Generator
+    public function providerJsonIndentNewLineAndFinalNewLine(): \Generator
     {
         foreach ($this->indents() as $indent) {
-            foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
-                yield [
-                    $indent,
-                    $hasFinalNewLine,
-                ];
+            foreach ($this->newLines() as $newLine) {
+                foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
+                    yield [
+                        $indent,
+                        $newLine,
+                        $hasFinalNewLine,
+                    ];
+                }
             }
         }
     }
@@ -123,6 +178,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
             '    ',
+            PHP_EOL,
             true
         );
 
@@ -140,6 +196,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
             '    ',
+            PHP_EOL,
             true
         );
 
@@ -162,6 +219,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
             '    ',
+            PHP_EOL,
             true
         );
 
@@ -184,6 +242,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
             '    ',
+            PHP_EOL,
             true
         );
 
@@ -204,6 +263,59 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
+     * @dataProvider providerInvalidNewLine
+     *
+     * @param string $newLine
+     */
+    public function testWithNewLineRejectsInvalidNewLine(string $newLine): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            PHP_EOL,
+            true
+        );
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(\sprintf(
+            '"%s" is not a valid new-line character sequence.',
+            $newLine
+        ));
+
+        $format->withNewLine($newLine);
+    }
+
+    /**
+     * @dataProvider providerNewLine
+     *
+     * @param string $newLine
+     */
+    public function testWithNewLineClonesFormatAndSetsNewLine(string $newLine): void
+    {
+        $format = new Format(
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            '    ',
+            PHP_EOL,
+            true
+        );
+
+        $mutated = $format->withNewLine($newLine);
+
+        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertNotSame($format, $mutated);
+        $this->assertSame($newLine, $mutated->newLine());
+    }
+
+    public function providerNewLine(): \Generator
+    {
+        foreach ($this->newLines() as $newLine) {
+            yield [
+                $newLine,
+            ];
+        }
+    }
+
+    /**
      * @dataProvider providerHasFinalNewLine
      *
      * @param bool $hasFinalNewLine
@@ -213,6 +325,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
             '    ',
+            PHP_EOL,
             false
         );
 
@@ -240,6 +353,18 @@ final class FormatTest extends Framework\TestCase
         return [
             'space' => '  ',
             'tab' => "\t",
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function newLines(): array
+    {
+        return [
+            "\r\n",
+            "\n",
+            "\r",
         ];
     }
 

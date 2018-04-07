@@ -51,15 +51,19 @@ final class FormatterTest extends Framework\TestCase
     /**
      * @dataProvider providerFinalNewLine
      *
-     * @param bool   $hasFinalNewLine
-     * @param string $suffix
+     * @param bool $hasFinalNewLine
      */
-    public function testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine, string $suffix): void
+    public function testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine): void
     {
         $faker = $this->faker();
 
         $jsonEncodeOptions = $faker->numberBetween(1);
         $indent = \str_repeat(' ', $faker->numberBetween(1, 5));
+        $newLine = $faker->randomElement([
+            "\r\n",
+            "\n",
+            "\r",
+        ]);
 
         $json = <<<'JSON'
 {
@@ -93,6 +97,11 @@ JSON;
             ->willReturn($indent);
 
         $format
+            ->newLine()
+            ->shouldBeCalled()
+            ->willReturn($newLine);
+
+        $format
             ->hasFinalNewLine()
             ->shouldBeCalled()
             ->willReturn($hasFinalNewLine);
@@ -102,7 +111,8 @@ JSON;
         $printer
             ->print(
                 Argument::is($encoded),
-                Argument::is($indent)
+                Argument::is($indent),
+                Argument::is($newLine)
             )
             ->shouldBeCalled()
             ->willReturn($printed);
@@ -113,6 +123,8 @@ JSON;
             $json,
             $format->reveal()
         );
+
+        $suffix = $hasFinalNewLine ? $newLine : '';
 
         $this->assertSame($printed . $suffix, $formatted);
     }
