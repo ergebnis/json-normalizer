@@ -17,7 +17,7 @@ final class Sniffer implements SnifferInterface
 {
     public function sniff(string $json): FormatInterface
     {
-        if (null === \json_decode($json) && JSON_ERROR_NONE !== \json_last_error()) {
+        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not valid JSON.',
                 $json
@@ -37,11 +37,11 @@ final class Sniffer implements SnifferInterface
         $jsonEncodeOptions = 0;
 
         if (false === \strpos($json, '\/')) {
-            $jsonEncodeOptions |= JSON_UNESCAPED_SLASHES;
+            $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
         }
 
         if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $json)) {
-            $jsonEncodeOptions |= JSON_UNESCAPED_UNICODE;
+            $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
         }
 
         return $jsonEncodeOptions;
@@ -62,7 +62,7 @@ final class Sniffer implements SnifferInterface
             return $match['newLine'];
         }
 
-        return PHP_EOL;
+        return \PHP_EOL;
     }
 
     private function hasFinalNewLine(string $json): bool

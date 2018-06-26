@@ -18,6 +18,9 @@ use Localheinz\Json\Normalizer\Format;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeUsesSnifferToSniffFormatNormalizesAndFormatsUsingSniffedFormat(): void

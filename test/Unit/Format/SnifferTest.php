@@ -19,6 +19,9 @@ use Localheinz\Json\Normalizer\Format\SnifferInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class SnifferTest extends Framework\TestCase
 {
     use Helper;
@@ -70,21 +73,21 @@ final class SnifferTest extends Framework\TestCase
 }',
             ],
             [
-                JSON_UNESCAPED_SLASHES,
+                \JSON_UNESCAPED_SLASHES,
                 '{
   "name": "Andreas M\u00f6ller",
   "url": "https://github.com/localheinz/json-normalizer"
 }',
             ],
             [
-                JSON_UNESCAPED_UNICODE,
+                \JSON_UNESCAPED_UNICODE,
                 '{
   "name": "Andreas Möller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer"
 }',
             ],
             [
-                JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
+                \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
                 '{
   "name": "Andreas Möller",
   "url": "https://github.com/localheinz/json-normalizer"
@@ -206,7 +209,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame(PHP_EOL, $format->newLine());
+        $this->assertSame(\PHP_EOL, $format->newLine());
     }
 
     /**
@@ -338,12 +341,12 @@ JSON;
             '',
             ' ',
             "\t",
-            PHP_EOL,
+            \PHP_EOL,
         ];
 
         foreach ($characters as $before) {
             foreach ($characters as $after) {
-                $whitespace = $before . PHP_EOL . $after;
+                $whitespace = $before . \PHP_EOL . $after;
 
                 yield [
                     $whitespace,

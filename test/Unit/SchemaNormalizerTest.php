@@ -19,6 +19,9 @@ use Localheinz\Json\Normalizer\SchemaNormalizer;
 use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriCouldNotBeResolved(): void

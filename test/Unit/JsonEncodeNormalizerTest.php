@@ -15,6 +15,9 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
 
+/**
+ * @internal
+ */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testConstructorRejectsInvalidJsonEncodeOptions(): void
@@ -63,12 +66,12 @@ JSON;
          * Could add more, but the idea counts.
          */
         $jsonEncodeFlags = [
-            JSON_HEX_APOS,
-            JSON_HEX_QUOT,
-            JSON_HEX_TAG,
-            JSON_NUMERIC_CHECK,
-            JSON_UNESCAPED_SLASHES,
-            JSON_UNESCAPED_UNICODE,
+            \JSON_HEX_APOS,
+            \JSON_HEX_QUOT,
+            \JSON_HEX_TAG,
+            \JSON_NUMERIC_CHECK,
+            \JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE,
         ];
 
         $combinations = $this->combinations($jsonEncodeFlags);

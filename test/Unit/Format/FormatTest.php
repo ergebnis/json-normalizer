@@ -18,6 +18,9 @@ use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
+/**
+ * @internal
+ */
 final class FormatTest extends Framework\TestCase
 {
     use Helper;
@@ -31,7 +34,7 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = -1;
         $indent = '  ';
-        $newLine = PHP_EOL;
+        $newLine = \PHP_EOL;
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -56,7 +59,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidIndent(string $indent): void
     {
         $jsonEncodeOptions = 0;
-        $newLine = PHP_EOL;
+        $newLine = \PHP_EOL;
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -141,7 +144,7 @@ final class FormatTest extends Framework\TestCase
      */
     public function testConstructorSetsValues(string $indent, string $newLine, bool $hasFinalNewLine): void
     {
-        $jsonEncodeOptions = JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES;
+        $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
 
         $format = new Format(
             $jsonEncodeOptions,
@@ -176,9 +179,9 @@ final class FormatTest extends Framework\TestCase
         $jsonEncodeOptions = -1;
 
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -194,9 +197,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithJsonEncodeOptionsClonesFormatAndSetsJsonEncodeOptions(): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -217,9 +220,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithIndentRejectsInvalidIndent(string $indent): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -240,9 +243,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithIndentClonesFormatAndSetsIndent(string $indent): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -270,9 +273,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithNewLineRejectsInvalidNewLine(string $newLine): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -293,9 +296,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithNewLineClonesFormatAndSetsNewLine(string $newLine): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             true
         );
 
@@ -323,9 +326,9 @@ final class FormatTest extends Framework\TestCase
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {
         $format = new Format(
-            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             '    ',
-            PHP_EOL,
+            \PHP_EOL,
             false
         );
 
