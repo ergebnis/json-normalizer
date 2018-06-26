@@ -20,6 +20,9 @@ use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class SchemaValidatorTest extends Framework\TestCase
 {
     use Helper;

@@ -21,6 +21,9 @@ use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class FormatterTest extends Framework\TestCase
 {
     use Helper;
@@ -138,7 +141,7 @@ JSON;
             ],
             'with-final-new-line' => [
                 true,
-                PHP_EOL,
+                \PHP_EOL,
             ],
         ];
 

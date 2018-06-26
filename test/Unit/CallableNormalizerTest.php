@@ -15,6 +15,9 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\CallableNormalizer;
 
+/**
+ * @internal
+ */
 final class CallableNormalizerTest extends AbstractNormalizerTestCase
 {
     /**

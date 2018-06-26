@@ -15,6 +15,9 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\NoFinalNewLineNormalizer;
 
+/**
+ * @internal
+ */
 final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
@@ -45,7 +48,7 @@ JSON;
             '',
             ' ',
             "\t",
-            PHP_EOL,
+            \PHP_EOL,
         ];
 
         foreach ($values as $value) {

@@ -17,6 +17,9 @@ use Localheinz\Json\Normalizer\IndentNormalizer;
 use Localheinz\Json\Printer\PrinterInterface;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
     /**

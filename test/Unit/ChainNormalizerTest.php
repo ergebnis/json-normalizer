@@ -17,6 +17,9 @@ use Localheinz\Json\Normalizer\ChainNormalizer;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughNormalizers(): void

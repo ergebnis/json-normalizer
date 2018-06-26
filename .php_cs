@@ -13,6 +13,7 @@ EOF;
 
 $config = Config\Factory::fromRuleSet(new Config\RuleSet\Php71($header), [
     'mb_str_functions' => false,
+    'no_unset_on_property' => false,
 ]);
 
 $config->getFinder()->in(__DIR__);

@@ -59,7 +59,7 @@ final class SchemaNormalizer implements NormalizerInterface
     {
         $decoded = \json_decode($json);
 
-        if (null === $decoded && JSON_ERROR_NONE !== \json_last_error()) {
+        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not valid JSON.',
                 $json

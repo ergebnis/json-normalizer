@@ -18,6 +18,9 @@ use Localheinz\Json\Normalizer\Format;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
+/**
+ * @internal
+ */
 final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeNormalizesAndFormatsUsingFormat(): void
@@ -80,7 +83,7 @@ JSON;
             ],
             'with-final-new-line' => [
                 true,
-                PHP_EOL,
+                \PHP_EOL,
             ],
         ];
 
