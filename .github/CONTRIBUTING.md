@@ -28,6 +28,18 @@ $ make cs
 
 to automatically fix coding standard violations.
 
+## Static Code Analysis
+
+We are using [`phpstan/phpstan`](https://github.com/phpstan/phpstan) to statically analyze the code.
+
+Run
+
+```
+$ make stan
+```
+
+to run a static code analysis.
+
 ## Extra lazy?
 
 Run
@@ -36,4 +48,4 @@ Run
 $ make
 ```
 
-to run both coding standards check and tests!
+to enforce coding standards, perform a static code analysis, and run tests!

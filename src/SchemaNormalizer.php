@@ -67,6 +67,7 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         try {
+            /** @var \stdClass $schema */
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
         } catch (Exception\UriResolverException $exception) {
             throw new \RuntimeException(\sprintf(
@@ -97,6 +98,7 @@ final class SchemaNormalizer implements NormalizerInterface
             ));
         }
 
+        /** @var array|\stdClass $normalized */
         $normalized = $this->normalizeData(
             $decoded,
             $schema
@@ -251,9 +253,12 @@ final class SchemaNormalizer implements NormalizerInterface
          * @see https://spacetelescope.github.io/understanding-json-schema/structuring.html#reuse
          */
         if (\property_exists($schema, '$ref') && \is_string($schema->{'$ref'})) {
+            /** @var \stdClass $referenceSchema */
+            $referenceSchema = $this->schemaStorage->resolveRefSchema($schema);
+
             return $this->resolveSchema(
                 $data,
-                $this->schemaStorage->resolveRefSchema($schema)
+                $referenceSchema
             );
         }
 
