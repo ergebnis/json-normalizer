@@ -115,9 +115,13 @@ final class SnifferTest extends Framework\TestCase
     {
         $values = [
             'array-empty' => '[]',
-            'object-empty' => '{}',
             'array-without-indent' => '["foo","bar baz"]',
+            'bool-false' => 'false',
+            'bool-true' => 'true',
+            'null' => 'null',
+            'object-empty' => '{}',
             'object-without-indent' => '{"foo":"bar baz","baz":[9000,123]}',
+            'string' => '"foo"',
         ];
 
         foreach ($values as $key => $value) {
