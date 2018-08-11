@@ -98,7 +98,6 @@ final class SchemaNormalizer implements NormalizerInterface
             ));
         }
 
-        /** @var array|\stdClass $normalized */
         $normalized = $this->normalizeData(
             $decoded,
             $schema
@@ -115,12 +114,12 @@ final class SchemaNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param array|bool|float|int|\stdClass|string $data
-     * @param \stdClass                             $schema
+     * @param null|array|bool|float|int|\stdClass|string $data
+     * @param \stdClass                                  $schema
      *
      * @throws \InvalidArgumentException
      *
-     * @return array|bool|float|int|\stdClass|string
+     * @return null|array|bool|float|int|\stdClass|string
      */
     private function normalizeData($data, \stdClass $schema)
     {
