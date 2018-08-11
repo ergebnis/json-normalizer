@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/localheinz/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Localheinz\Json\Normalizer\Test\AutoReview;
 
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -19,26 +19,21 @@ use PHPUnit\Framework;
 /**
  * @internal
  */
-final class ProjectCodeTest extends Framework\TestCase
+final class SrcCodeTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testProductionClassesAreAbstractOrFinal(): void
+    public function testSrcClassesAreAbstractOrFinal(): void
     {
         $this->assertClassesAreAbstractOrFinal(__DIR__ . '/../../src');
     }
 
-    public function testProductionClassesHaveTests(): void
+    public function testSrcClassesHaveTests(): void
     {
         $this->assertClassesHaveTests(
             __DIR__ . '/../../src',
             'Localheinz\\Json\\Normalizer\\',
             'Localheinz\\Json\\Normalizer\\Test\\Unit\\'
         );
-    }
-
-    public function testTestClassesAreAbstractOrFinal(): void
-    {
-        $this->assertClassesAreAbstractOrFinal(__DIR__ . '/..');
     }
 }
