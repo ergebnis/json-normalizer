@@ -18,7 +18,7 @@ final class Format implements FormatInterface
     /**
      * Constant for a regular expression matching valid indents.
      */
-    private const PATTERN_INDENT = '/^[ \t]+$/';
+    private const PATTERN_INDENT = '/^( +|\t+)$/';
 
     /**
      * Constant for a regular expression matching valid new-line character sequence.
