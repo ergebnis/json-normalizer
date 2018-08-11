@@ -16,8 +16,8 @@ namespace Localheinz\Json\Normalizer\Validator;
 interface SchemaValidatorInterface
 {
     /**
-     * @param array|\stdClass $data
-     * @param \stdClass       $schema
+     * @param null|array|bool|float|int|\stdClass|string $data
+     * @param \stdClass                                  $schema
      *
      * @return bool
      */
