@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\ChainNormalizer;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\NormalizerInterface;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -24,55 +24,37 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
-        $count = $this->faker()->numberBetween(3, 5);
+        $json = $this->prophesize(JsonInterface::class);
 
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com",
-    "normalized-by": "%s"
-}
-JSON;
+        $results = \array_map(function () {
+            return $this->prophesize(JsonInterface::class)->reveal();
+        }, \range(0, 4));
 
-        $normalize = function (string $json, int $index) {
-            return \sprintf(
-                $json,
-                $index
-            );
-        };
+        $last = \end($results);
 
-        $normalized = $normalize(
-            $json,
-            $count - 1
-        );
+        $normalizers = \array_map(function ($result) use ($json) {
+            static $previous = null;
 
-        $normalizers = \array_fill(0, $count, null);
-
-        $normalizers = \array_map(function (int $index) use ($json, $normalize) {
-            $normalized = $normalize(
-                $json,
-                $index
-            );
-
-            if (0 < $index) {
-                $json = $normalize(
-                    $json,
-                    $index - 1
-                );
+            if (null === $previous) {
+                $previous = $json;
             }
 
             $normalizer = $this->prophesize(NormalizerInterface::class);
 
             $normalizer
-                ->normalize(Argument::exact($json))
+                ->normalize($previous)
                 ->shouldBeCalled()
-                ->willReturn($normalized);
+                ->willReturn($result);
+
+            $previous = $result;
 
             return $normalizer->reveal();
-        }, \array_keys($normalizers));
+        }, $results);
 
         $normalizer = new ChainNormalizer(...$normalizers);
 
-        $this->assertSame($normalized, $normalizer->normalize($json));
+        $normalized = $normalizer->normalize($json->reveal());
+
+        $this->assertSame($last, $normalized);
     }
 }

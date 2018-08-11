@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\AutoFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
@@ -25,52 +26,35 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeUsesSnifferToSniffFormatNormalizesAndFormatsUsingSniffedFormat(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-        $normalized = <<<'JSON'
-{
-    "name": "Andreas Möller (normalized)",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-        $formatted = <<<'JSON'
-{
-    "name": "Andreas Möller (formatted)",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
+        $normalized = $this->prophesize(JsonInterface::class);
+        $formatted = $this->prophesize(JsonInterface::class);
 
         $composedNormalizer = $this->prophesize(NormalizerInterface::class);
 
         $composedNormalizer
-            ->normalize(Argument::is($json))
+            ->normalize(Argument::is($json->reveal()))
             ->shouldBeCalled()
-            ->willReturn($normalized);
+            ->willReturn($normalized->reveal());
 
         $format = $this->prophesize(Format\FormatInterface::class);
 
         $sniffer = $this->prophesize(Format\SnifferInterface::class);
 
         $sniffer
-            ->sniff(Argument::is($json))
+            ->sniff(Argument::is($json->reveal()))
             ->shouldBeCalled()
-            ->willReturn($format);
+            ->willReturn($format->reveal());
 
         $formatter = $this->prophesize(Format\FormatterInterface::class);
 
         $formatter
             ->format(
-                Argument::is($normalized),
+                Argument::is($normalized->reveal()),
                 Argument::is($format->reveal())
             )
             ->shouldBeCalled()
-            ->willReturn($formatted);
+            ->willReturn($formatted->reveal());
 
         $normalizer = new AutoFormatNormalizer(
             $composedNormalizer->reveal(),
@@ -78,6 +62,6 @@ JSON;
             $formatter->reveal()
         );
 
-        $this->assertSame($formatted, $normalizer->normalize($json));
+        $this->assertSame($formatted->reveal(), $normalizer->normalize($json->reveal()));
     }
 }

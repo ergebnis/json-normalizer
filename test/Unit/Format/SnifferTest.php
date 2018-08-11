@@ -16,6 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Sniffer;
 use Localheinz\Json\Normalizer\Format\SnifferInterface;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -31,38 +32,30 @@ final class SnifferTest extends Framework\TestCase
         $this->assertClassImplementsInterface(SnifferInterface::class, Sniffer::class);
     }
 
-    public function testSniffRejectsInvalidJson(): void
-    {
-        $json = $this->faker()->realText();
-
-        $sniffer = new Sniffer();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid JSON.',
-            $json
-        ));
-
-        $sniffer->sniff($json);
-    }
-
     /**
-     * @dataProvider providerJsonAndJsonEncodeOptions
+     * @dataProvider providerJsonEncodeOptionsAndEncoded
      *
      * @param int    $jsonEncodeOptions
-     * @param string $json
+     * @param string $encoded
      */
-    public function testSniffReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $json): void
+    public function testSniffReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $encoded): void
     {
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
     }
 
-    public function providerJsonAndJsonEncodeOptions(): array
+    public function providerJsonEncodeOptionsAndEncoded(): array
     {
         return [
             [
@@ -97,21 +90,28 @@ final class SnifferTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonWithoutIndent
+     * @dataProvider providerEncodedWithoutIndent
      *
-     * @param string $json
+     * @param string $encoded
      */
-    public function testSniffReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $json): void
+    public function testSniffReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame('    ', $format->indent()->__toString());
     }
 
-    public function providerJsonWithoutIndent(): \Generator
+    public function providerEncodedWithoutIndent(): \Generator
     {
         $values = [
             'array-empty' => '[]',
@@ -143,7 +143,7 @@ final class SnifferTest extends Framework\TestCase
      */
     public function testSniffReturnsFormatWithIndentSniffedFromArray(string $indent, string $sniffedIndent): void
     {
-        $json = <<<JSON
+        $encoded = <<<JSON
 [
 "foo",
 ${indent}"bar",
@@ -153,9 +153,16 @@ ${indent}"bar",
 ]
 JSON;
 
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
@@ -170,7 +177,7 @@ JSON;
      */
     public function testSniffReturnsFormatWithIndentSniffedFromObject(string $indent, string $sniffedIndent): void
     {
-        $json = <<<JSON
+        $encoded = <<<JSON
 {
 "foo": 9000,
 ${indent}"bar": 123,
@@ -180,9 +187,16 @@ ${indent}"bar": 123,
 }
 JSON;
 
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
@@ -240,15 +254,22 @@ JSON;
     }
 
     /**
-     * @dataProvider providerJsonWithoutIndent
+     * @dataProvider providerEncodedWithoutIndent
      *
-     * @param string $json
+     * @param string $encoded
      */
-    public function testSniffReturnsFormatWithDefaultNewLineIfUnableToSniff(string $json): void
+    public function testSniffReturnsFormatWithDefaultNewLineIfUnableToSniff(string $encoded): void
     {
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame(\PHP_EOL, $format->newLine()->__toString());
@@ -261,13 +282,20 @@ JSON;
      */
     public function testSniffReturnsFormatWithNewLineSniffedFromArray(string $newLine): void
     {
-        $json = <<<JSON
+        $encoded = <<<JSON
 ["foo",${newLine}"bar"]
 JSON;
 
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
@@ -280,13 +308,20 @@ JSON;
      */
     public function testSniffReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLine): void
     {
-        $json = <<<JSON
+        $encoded = <<<JSON
 {"foo": 9000,${newLine}"bar": 123}
 JSON;
 
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
@@ -314,7 +349,7 @@ JSON;
      */
     public function testSniffReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "foo": 9000,
     "bar": 123,
@@ -323,11 +358,18 @@ JSON;
     }
 }
 JSON;
-        $json .= $actualWhitespace;
+        $encoded .= $actualWhitespace;
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
 
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertFalse($format->hasFinalNewLine());
@@ -358,7 +400,7 @@ JSON;
      */
     public function testSniffReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "foo": 9000,
     "bar": 123,
@@ -367,11 +409,18 @@ JSON;
     }
 }
 JSON;
-        $json .= $actualWhitespace;
+        $encoded .= $actualWhitespace;
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
 
         $sniffer = new Sniffer();
 
-        $format = $sniffer->sniff($json);
+        $format = $sniffer->sniff($json->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $format);
         $this->assertTrue($format->hasFinalNewLine());

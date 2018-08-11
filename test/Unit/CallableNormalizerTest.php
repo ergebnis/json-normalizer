@@ -14,76 +14,24 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\CallableNormalizer;
+use Localheinz\Json\Normalizer\JsonInterface;
 
 /**
  * @internal
  */
 final class CallableNormalizerTest extends AbstractNormalizerTestCase
 {
-    /**
-     * @dataProvider providerCallable
-     *
-     * @param callable $callable
-     */
-    public function testNormalizePassesJsonThroughCallable(callable $callable): void
+    public function testNormalizePassesJsonThroughCallable(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com",
-    "level": 1
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
+        $normalized = $this->prophesize(JsonInterface::class);
 
-        $normalized = $callable($json);
+        $callable = function () use ($normalized): JsonInterface {
+            return $normalized->reveal();
+        };
 
         $normalizer = new CallableNormalizer($callable);
 
-        $this->assertSame($normalized, $normalizer->normalize($json));
-    }
-
-    public function providerCallable(): \Generator
-    {
-        $values = [
-            'closure' => function (string $json): string {
-                $decoded = \json_decode($json);
-
-                foreach (\get_object_vars($decoded) as $name => $value) {
-                    if (!\is_int($value)) {
-                        continue;
-                    }
-
-                    $decoded->{$name} = $value + 1;
-                }
-
-                return \json_encode($decoded);
-            },
-            'function-name' => 'trim',
-            'method' => [
-                self::class,
-                'callable',
-            ],
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
-    public static function callable(string $json): string
-    {
-        $decoded = \json_decode($json);
-
-        foreach (\get_object_vars($decoded) as $name => $value) {
-            if (!\is_string($value)) {
-                continue;
-            }
-
-            $decoded->{$name} = $value . ' (ok)';
-        }
-
-        return \json_encode($decoded);
+        $this->assertSame($normalized->reveal(), $normalizer->normalize($json->reveal()));
     }
 }

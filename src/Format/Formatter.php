@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\Json;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer;
 
 final class Formatter implements FormatterInterface
@@ -27,19 +29,10 @@ final class Formatter implements FormatterInterface
         $this->printer = $printer ?: new Printer\Printer();
     }
 
-    public function format(string $json, FormatInterface $format): string
+    public function format(JsonInterface $json, FormatInterface $format): JsonInterface
     {
-        $decoded = \json_decode($json);
-
-        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
-
         $encoded = \json_encode(
-            $decoded,
+            $json->decoded(),
             $format->jsonEncodeOptions()
         );
 
@@ -50,9 +43,9 @@ final class Formatter implements FormatterInterface
         );
 
         if (!$format->hasFinalNewLine()) {
-            return $printed;
+            return Json::fromEncoded($printed);
         }
 
-        return $printed . $format->newLine();
+        return Json::fromEncoded($printed . $format->newLine());
     }
 }

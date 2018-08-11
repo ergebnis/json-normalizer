@@ -39,12 +39,14 @@ retain the original formatting, you can use the `AutoFormatNormalizer`.
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
 $normalizer = new Normalizer\AutoFormatNormalizer($composedNormalizer);
@@ -76,15 +78,17 @@ If you want to normalize a JSON file with a `callable`, you can use the `Callabl
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
 
-$callable = function (string $json): string {
-    $decoded = json_decode($json);
+$json = Normalizer\Json::fromEncoded($encoded);
+
+$callable = function (Normalizer\JsonInterface $json): Normalizer\JsonInterface {
+    $decoded = $json->decoded();
 
     foreach (get_object_vars($decoded) as $name => $value) {
         if ('https://localheinz.com' !== $value) {
@@ -94,7 +98,7 @@ $callable = function (string $json): string {
         $decoded->{$name} .= '/open-source/';
     }
 
-    return json_encode($decoded);
+    return Normalizer\Json::fromEncoded(json_encode($decoded));
 };
 
 $normalizer = new Normalizer\CallableNormalizer($callable);
@@ -111,12 +115,14 @@ If you want to apply multiple normalizers in a chain, you can use the `ChainNorm
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 
@@ -140,7 +146,7 @@ If you want to ensure that a JSON file has a single final new line, you can use 
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -148,6 +154,8 @@ $json = <<<'JSON'
 
 
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\FinalNewLineNormalizer();
 
@@ -164,12 +172,14 @@ apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
 /** @var Normalizer\Format\FormatInterface $format*/
@@ -193,12 +203,14 @@ If you need to adjust the indentation of a JSON file, you can use the `IndentNor
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 
@@ -216,12 +228,14 @@ If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNo
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas M\u00f6ller",
     "url": "https:\/\/localheinz.com"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $jsonEncodeOptions = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
@@ -242,7 +256,7 @@ If you want to ensure that a JSON file does not have a final new line, you can u
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -250,6 +264,8 @@ $json = <<<'JSON'
 
 
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\NoFinalNewLineNormalizer();
 
@@ -284,12 +300,14 @@ exists at `/schema/example.json`.
 ```php
 use Localheinz\Json\Normalizer;
 
-$json = <<<'JSON'
+$encoded = <<<'JSON'
 {
     "url": "https://localheinz.com",
     "name": "Andreas Möller"
 }
 JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\SchemaNormalizer('file:///schema/example.json');
 

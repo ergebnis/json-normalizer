@@ -13,14 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\JsonInterface;
+
 interface SnifferInterface
 {
-    /**
-     * @param string $json
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return FormatInterface
-     */
-    public function sniff(string $json): FormatInterface;
+    public function sniff(JsonInterface $json): FormatInterface;
 }

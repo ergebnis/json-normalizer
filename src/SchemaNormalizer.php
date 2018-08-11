@@ -55,16 +55,9 @@ final class SchemaNormalizer implements NormalizerInterface
         $this->schemaValidator = $schemaValidator;
     }
 
-    public function normalize(string $json): string
+    public function normalize(JsonInterface $json): JsonInterface
     {
-        $decoded = \json_decode($json);
-
-        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
+        $decoded = $json->decoded();
 
         try {
             /** @var \stdClass $schema */
@@ -110,7 +103,7 @@ final class SchemaNormalizer implements NormalizerInterface
             ));
         }
 
-        return \json_encode($normalized);
+        return Json::fromEncoded(\json_encode($normalized));
     }
 
     /**

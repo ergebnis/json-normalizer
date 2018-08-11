@@ -40,19 +40,10 @@ final class FixedFormatNormalizer implements NormalizerInterface
         $this->formatter = $formatter ?: new Format\Formatter();
     }
 
-    public function normalize(string $json): string
+    public function normalize(JsonInterface $json): JsonInterface
     {
-        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
-
-        $normalized = $this->normalizer->normalize($json);
-
         return $this->formatter->format(
-            $normalized,
+            $this->normalizer->normalize($json),
             $this->format
         );
     }

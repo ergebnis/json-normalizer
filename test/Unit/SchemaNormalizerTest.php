@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use JsonSchema\Exception;
 use JsonSchema\SchemaStorage;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
 use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Prophecy\Argument;
@@ -26,12 +27,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriCouldNotBeResolved(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
 
         $schemaUri = $this->faker()->url;
 
@@ -54,17 +50,12 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesUnreadableResource(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
 
         $schemaUri = $this->faker()->url;
 
@@ -87,17 +78,12 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
 
         $schemaUri = $this->faker()->url;
 
@@ -120,17 +106,12 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
 
         $schemaUri = $this->faker()->url;
 
@@ -153,17 +134,26 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     public function testNormalizeRejectsInvalidJsonAccordingToSchema(): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+
+        $decoded = \json_decode($encoded);
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->decoded()
+            ->shouldBeCalled()
+            ->willReturn($decoded);
 
         $schemaUri = $this->faker()->url;
 
@@ -173,7 +163,6 @@ JSON;
 }
 JSON;
 
-        $jsonDecoded = \json_decode($json);
         $schemaDecoded = \json_decode($schema);
 
         $schemaStorage = $this->prophesize(SchemaStorage::class);
@@ -187,7 +176,7 @@ JSON;
 
         $schemaValidator
             ->isValid(
-                Argument::exact($jsonDecoded),
+                Argument::exact($decoded),
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
@@ -205,17 +194,25 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     public function testNormalizeThrowsRuntimeExceptionIfNormalizedIsInvalidAccordingToSchema(): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "url": "https://localheinz.com",
     "name": "Andreas Möller"
 }
 JSON;
+        $decoded = \json_decode($encoded);
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->decoded()
+            ->shouldBeCalled()
+            ->willReturn($decoded);
 
         $schemaUri = $this->faker()->url;
 
@@ -241,7 +238,6 @@ JSON;
 }
 JSON;
 
-        $jsonDecoded = \json_decode($json);
         $schemaDecoded = \json_decode($schema);
         $normalizedDecoded = \json_decode($normalized);
 
@@ -256,7 +252,7 @@ JSON;
 
         $schemaValidator
             ->isValid(
-                Argument::exact($jsonDecoded),
+                Argument::is($decoded),
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
@@ -284,26 +280,35 @@ JSON;
             $schemaUri
         ));
 
-        $normalizer->normalize($json);
+        $normalizer->normalize($json->reveal());
     }
 
     /**
-     * @dataProvider providerNormalizeNormalizes
+     * @dataProvider providerExpectedEncodedAndSchemaUri
      *
      * @param string $expected
-     * @param string $json
+     * @param string $encoded
      * @param string $schemaUri
      */
-    public function testNormalizeNormalizes(string $expected, string $json, string $schemaUri): void
+    public function testNormalizeNormalizes(string $expected, string $encoded, string $schemaUri): void
     {
+        $decoded = \json_decode($encoded);
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->decoded()
+            ->shouldBeCalled()
+            ->willReturn($decoded);
+
         $normalizer = new SchemaNormalizer($schemaUri);
 
-        $normalized = $normalizer->normalize($json);
+        $normalized = $normalizer->normalize($json->reveal());
 
-        $this->assertSame($expected, $normalized);
+        $this->assertSame($expected, $normalized->encoded());
     }
 
-    public function providerNormalizeNormalizes(): \Generator
+    public function providerExpectedEncodedAndSchemaUri(): \Generator
     {
         $basePath = __DIR__ . '/../';
 

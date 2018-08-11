@@ -35,18 +35,13 @@ final class IndentNormalizer implements NormalizerInterface
         $this->printer = $printer ?: new Printer();
     }
 
-    public function normalize(string $json): string
+    public function normalize(JsonInterface $json): JsonInterface
     {
-        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
-
-        return $this->printer->print(
-            $json,
+        $withIndent = $this->printer->print(
+            $json->encoded(),
             $this->indent->__toString()
         );
+
+        return Json::fromEncoded($withIndent);
     }
 }

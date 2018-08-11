@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Bench;
 
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
@@ -47,11 +48,13 @@ final class SchemaNormalizerBench
 
     private function normalize(string $file, string $schemaUri): void
     {
-        $original = \file_get_contents($file);
+        $encoded = \file_get_contents($file);
+
+        $json = Json::fromEncoded($encoded);
 
         $normalizer = new SchemaNormalizer($schemaUri);
 
-        $normalizer->normalize($original);
+        $normalizer->normalize($json);
     }
 
     private function localComposerSchema(): string

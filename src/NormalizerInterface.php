@@ -16,12 +16,11 @@ namespace Localheinz\Json\Normalizer;
 interface NormalizerInterface
 {
     /**
-     * @param string $json
+     * @param JsonInterface $json
      *
-     * @throws \InvalidArgumentException
      * @throws \RuntimeException
      *
-     * @return string
+     * @return JsonInterface
      */
-    public function normalize(string $json): string;
+    public function normalize(JsonInterface $json): JsonInterface;
 }

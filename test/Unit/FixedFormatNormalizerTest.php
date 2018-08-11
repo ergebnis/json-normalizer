@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\FixedFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
@@ -25,31 +26,14 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeNormalizesAndFormatsUsingFormat(): void
     {
-        $json = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-        $normalized = <<<'JSON'
-{
-    "name": "Andreas Möller (normalized)",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-        $formatted = <<<'JSON'
-{
-    "name": "Andreas Möller (printed)",
-    "url": "https://localheinz.com"
-}
-JSON;
+        $json = $this->prophesize(JsonInterface::class);
+        $normalized = $this->prophesize(JsonInterface::class);
+        $formatted = $this->prophesize(JsonInterface::class);
 
         $composedNormalizer = $this->prophesize(NormalizerInterface::class);
 
         $composedNormalizer
-            ->normalize(Argument::is($json))
+            ->normalize(Argument::is($json->reveal()))
             ->shouldBeCalled()
             ->willReturn($normalized);
 
@@ -59,11 +43,11 @@ JSON;
 
         $formatter
             ->format(
-                Argument::is($normalized),
+                Argument::is($normalized->reveal()),
                 Argument::is($format->reveal())
             )
             ->shouldBeCalled()
-            ->willReturn($formatted);
+            ->willReturn($formatted->reveal());
 
         $normalizer = new FixedFormatNormalizer(
             $composedNormalizer->reveal(),
@@ -71,27 +55,6 @@ JSON;
             $formatter->reveal()
         );
 
-        $this->assertSame($formatted, $normalizer->normalize($json));
-    }
-
-    public function providerFinalNewLine(): \Generator
-    {
-        $values = [
-            'without-final-new-line' => [
-                false,
-                '',
-            ],
-            'with-final-new-line' => [
-                true,
-                \PHP_EOL,
-            ],
-        ];
-
-        foreach ($values as $key => [$hasFinalNewLine, $suffix]) {
-            yield $key => [
-                $hasFinalNewLine,
-                $suffix,
-            ];
-        }
+        $this->assertSame($formatted->reveal(), $normalizer->normalize($json->reveal()));
     }
 }

@@ -29,23 +29,6 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
         $this->assertClassImplementsInterface(NormalizerInterface::class, $this->className());
     }
 
-    final public function testNormalizeRejectsInvalidJson(): void
-    {
-        $json = $this->faker()->realText();
-
-        $reflection = new \ReflectionClass($this->className());
-
-        $normalizer = $reflection->newInstanceWithoutConstructor();
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid JSON.',
-            $json
-        ));
-
-        $normalizer->normalize($json);
-    }
-
     final protected function className(): string
     {
         return \preg_replace(
