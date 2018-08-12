@@ -97,11 +97,11 @@ final class SnifferTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonWithoutWhitespace
+     * @dataProvider providerJsonWithoutIndent
      *
      * @param string $json
      */
-    public function testSniffReturnsFormatWithDefaultIndentIfUnableToSniff(string $json): void
+    public function testSniffReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $json): void
     {
         $sniffer = new Sniffer();
 
@@ -111,17 +111,20 @@ final class SnifferTest extends Framework\TestCase
         $this->assertSame('    ', $format->indent());
     }
 
-    public function providerJsonWithoutWhitespace(): \Generator
+    public function providerJsonWithoutIndent(): \Generator
     {
         $values = [
             'array-empty' => '[]',
             'array-without-indent' => '["foo","bar baz"]',
             'bool-false' => 'false',
             'bool-true' => 'true',
+            'float' => '3.14',
+            'int' => '9000',
             'null' => 'null',
             'object-empty' => '{}',
             'object-without-indent' => '{"foo":"bar baz","baz":[9000,123]}',
-            'string' => '"foo"',
+            'string-blank' => '" "',
+            'string-word' => '"foo"',
         ];
 
         foreach ($values as $key => $value) {
@@ -202,7 +205,7 @@ JSON;
     }
 
     /**
-     * @dataProvider providerJsonWithoutWhitespace
+     * @dataProvider providerJsonWithoutIndent
      *
      * @param string $json
      */
