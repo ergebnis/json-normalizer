@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4533e5fac73699c6c92e8664ec5352be",
+    "content-hash": "679605bb676fafe6f19d45039cf6a6fd",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -74,16 +74,16 @@
         },
         {
             "name": "localheinz/json-printer",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/localheinz/json-printer.git",
-                "reference": "1a350fd94544df716d1c75ef107d34057f80ac7a"
+                "reference": "86f942599c8f9f922de4e21c2b9b6564c895cb0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/localheinz/json-printer/zipball/1a350fd94544df716d1c75ef107d34057f80ac7a",
-                "reference": "1a350fd94544df716d1c75ef107d34057f80ac7a",
+                "url": "https://api.github.com/repos/localheinz/json-printer/zipball/86f942599c8f9f922de4e21c2b9b6564c895cb0c",
+                "reference": "86f942599c8f9f922de4e21c2b9b6564c895cb0c",
                 "shasum": ""
             },
             "require": {
@@ -91,7 +91,7 @@
             },
             "require-dev": {
                 "infection/infection": "~0.8.1",
-                "localheinz/php-cs-fixer-config": "~1.13.1",
+                "localheinz/php-cs-fixer-config": "~1.14.0",
                 "localheinz/test-util": "0.6.1",
                 "phpbench/phpbench": "~0.14.0",
                 "phpunit/phpunit": "^6.5.7"
@@ -119,7 +119,7 @@
                 "json",
                 "printer"
             ],
-            "time": "2018-04-06T22:10:47+00:00"
+            "time": "2018-08-11T23:54:50+00:00"
         }
     ],
     "packages-dev": [
