@@ -49,7 +49,7 @@ final class Sniffer implements SnifferInterface
 
     private function indent(string $json): string
     {
-        if (1 === \preg_match('/^(?P<indent>[ \t]+)("|{)/m', $json, $match)) {
+        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $json, $match)) {
             return $match['indent'];
         }
 
