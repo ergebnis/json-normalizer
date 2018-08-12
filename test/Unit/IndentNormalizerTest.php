@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Json\Normalizer\IndentNormalizer;
 use Localheinz\Json\Printer\PrinterInterface;
 use Prophecy\Argument;
@@ -22,42 +23,19 @@ use Prophecy\Argument;
  */
 final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
-    /**
-     * @dataProvider providerInvalidIndent
-     *
-     * @param string $indent
-     */
-    public function testConstructorRejectsInvalidIndent(string $indent): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid indent.',
-            $indent
-        ));
-
-        new IndentNormalizer(
-            $indent,
-            $this->prophesize(PrinterInterface::class)->reveal()
-        );
-    }
-
-    public function providerInvalidIndent(): \Generator
-    {
-        $values = [
-            'not-whitespace' => $this->faker()->sentence,
-            'contains-line-feed' => " \n ",
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
-    }
-
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
-        $indent = '  ';
+        $string = $this->faker()->randomElement([
+            ' ',
+            "\t",
+        ]);
+
+        $indent = $this->prophesize(IndentInterface::class);
+
+        $indent
+            ->__toString()
+            ->shouldBeCalled()
+            ->willReturn($string);
 
         $json = <<<'JSON'
 {
@@ -78,13 +56,13 @@ JSON;
         $printer
             ->print(
                 Argument::is($json),
-                Argument::is($indent)
+                Argument::is($string)
             )
             ->shouldBeCalled()
             ->willReturn($normalized);
 
         $normalizer = new IndentNormalizer(
-            $indent,
+            $indent->reveal(),
             $printer->reveal()
         );
 

@@ -45,7 +45,7 @@ final class Formatter implements FormatterInterface
 
         $printed = $this->printer->print(
             $encoded,
-            $format->indent(),
+            (string) $format->indent(),
             $format->newLine()
         );
 

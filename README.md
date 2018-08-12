@@ -29,7 +29,7 @@ This package comes with the following normalizers:
 * [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 * [`Localheinz\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
 
-:bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`. 
+:bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`.
 
 ### `AutoFormatNormalizer`
 
@@ -52,9 +52,9 @@ $normalizer = new Normalizer\AutoFormatNormalizer($composedNormalizer);
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now have the composed normalizer applied, 
-but also retained the original formatting (within certain limits). Before 
-applying the composer normalizer, the `AutoFormatNormalizer` will attempt 
+The normalized version will now have the composed normalizer applied,
+but also retained the original formatting (within certain limits). Before
+applying the composer normalizer, the `AutoFormatNormalizer` will attempt
 to detect the following:
 
 * `json_encode()` options
@@ -118,9 +118,11 @@ $json = <<<'JSON'
 }
 JSON;
 
+$indent = Normalizer\Format\Indent::fromString('  ');
+
 $normalizer = new Normalizer\ChainNormalizer(
     new Normalizer\JsonEncodeNormalizer(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-    new Normalizer\IndentNormalizer('  '),
+    new Normalizer\IndentNormalizer($indent),
     new Normalizer\FinalNewLineNormalizer()
 );
 
@@ -179,7 +181,7 @@ $normalizer = new Normalizer\FixedFormatNormalizer(
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now have the composed normalizer applied, 
+The normalized version will now have the composed normalizer applied,
 but also apply the formatting according to `$format`.
 
 :bulb: Alternatively, you can use the [`AutoFormatNormalizer`](#autoformatnormalizer).
@@ -198,7 +200,7 @@ $json = <<<'JSON'
 }
 JSON;
 
-$indent = '  ';
+$indent = Normalizer\Format\Indent::fromString('  ');
 
 $normalizer = new Normalizer\IndentNormalizer($indent);
 
@@ -230,7 +232,7 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now be encoded with `$jsonEncodeOptions`.
 
-:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) 
+:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php)
 and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
 ### `NoFinalNewLineNormalizer`
@@ -294,10 +296,10 @@ $normalizer = new Normalizer\SchemaNormalizer('file:///schema/example.json');
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now be structured according to the JSON 
-schema (in this simple case, properties will be reordered). Internally, 
-the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) 
-to resolve schemas, as well as to ensure (before and after normalization) 
+The normalized version will now be structured according to the JSON
+schema (in this simple case, properties will be reordered). Internally,
+the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema)
+to resolve schemas, as well as to ensure (before and after normalization)
 that the JSON document is valid.
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).

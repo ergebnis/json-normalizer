@@ -16,11 +16,6 @@ namespace Localheinz\Json\Normalizer\Format;
 final class Format implements FormatInterface
 {
     /**
-     * Constant for a regular expression matching valid indents.
-     */
-    private const PATTERN_INDENT = '/^( +|\t+)$/';
-
-    /**
      * Constant for a regular expression matching valid new-line character sequence.
      */
     private const PATTERN_NEW_LINE = '/^(?>\r\n|\n|\r)$/';
@@ -31,7 +26,7 @@ final class Format implements FormatInterface
     private $jsonEncodeOptions;
 
     /**
-     * @var string
+     * @var IndentInterface
      */
     private $indent;
 
@@ -46,26 +41,19 @@ final class Format implements FormatInterface
     private $newLine;
 
     /**
-     * @param int    $jsonEncodeOptions
-     * @param string $indent
-     * @param string $newLine
-     * @param bool   $hasFinalNewLine
+     * @param int             $jsonEncodeOptions
+     * @param IndentInterface $indent
+     * @param string          $newLine
+     * @param bool            $hasFinalNewLine
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $jsonEncodeOptions, string $indent, string $newLine, bool $hasFinalNewLine)
+    public function __construct(int $jsonEncodeOptions, IndentInterface $indent, string $newLine, bool $hasFinalNewLine)
     {
         if (0 > $jsonEncodeOptions) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not valid options for json_encode().',
                 $jsonEncodeOptions
-            ));
-        }
-
-        if (1 !== \preg_match(self::PATTERN_INDENT, $indent)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid indent.',
-                $indent
             ));
         }
 
@@ -87,7 +75,7 @@ final class Format implements FormatInterface
         return $this->jsonEncodeOptions;
     }
 
-    public function indent(): string
+    public function indent(): IndentInterface
     {
         return $this->indent;
     }
@@ -118,15 +106,8 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withIndent(string $indent): FormatInterface
+    public function withIndent(IndentInterface $indent): FormatInterface
     {
-        if (1 !== \preg_match(self::PATTERN_INDENT, $indent)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid indent.',
-                $indent
-            ));
-        }
-
         $mutated = clone $this;
 
         $mutated->indent = $indent;

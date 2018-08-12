@@ -108,7 +108,7 @@ final class SnifferTest extends Framework\TestCase
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame('    ', $format->indent());
+        $this->assertSame('    ', $format->indent()->__toString());
     }
 
     public function providerJsonWithoutIndent(): \Generator
@@ -158,7 +158,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($sniffedIndent, $format->indent());
+        $this->assertSame($sniffedIndent, $format->indent()->__toString());
     }
 
     /**
@@ -185,7 +185,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($sniffedIndent, $format->indent());
+        $this->assertSame($sniffedIndent, $format->indent()->__toString());
     }
 
     public function providerPureIndentAndSniffedIndent(): \Generator
