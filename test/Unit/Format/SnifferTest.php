@@ -135,11 +135,13 @@ final class SnifferTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerIndent
+     * @dataProvider providerPureIndentAndSniffedIndent
+     * @dataProvider providerMixedIndentAndSniffedIndent
      *
      * @param string $indent
+     * @param string $sniffedIndent
      */
-    public function testSniffReturnsFormatWithIndentSniffedFromArray(string $indent): void
+    public function testSniffReturnsFormatWithIndentSniffedFromArray(string $indent, string $sniffedIndent): void
     {
         $json = <<<JSON
 [
@@ -156,15 +158,17 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($indent, $format->indent());
+        $this->assertSame($sniffedIndent, $format->indent());
     }
 
     /**
-     * @dataProvider providerIndent
+     * @dataProvider providerPureIndentAndSniffedIndent
+     * @dataProvider providerMixedIndentAndSniffedIndent
      *
      * @param string $indent
+     * @param string $sniffedIndent
      */
-    public function testSniffReturnsFormatWithIndentSniffedFromObject(string $indent): void
+    public function testSniffReturnsFormatWithIndentSniffedFromObject(string $indent, string $sniffedIndent): void
     {
         $json = <<<JSON
 {
@@ -181,26 +185,57 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($indent, $format->indent());
+        $this->assertSame($sniffedIndent, $format->indent());
     }
 
-    public function providerIndent(): \Generator
+    public function providerPureIndentAndSniffedIndent(): \Generator
     {
         $characters = [
-            ' ',
-            "\t",
+            'space' => ' ',
+            'tab' => "\t",
         ];
 
-        $counts = [1, 3];
+        $sizes = [1, 3];
 
-        foreach ($characters as $character) {
-            foreach ($counts as $count) {
-                $indent = \str_repeat($character, $count);
+        foreach ($characters as $style => $character) {
+            foreach ($sizes as $size) {
+                $key = \sprintf(
+                    '%s-%d',
+                    $style,
+                    $size
+                );
 
-                yield [
-                    $indent,
+                $pureIndent = \str_repeat(
+                    $character,
+                    $size
+                );
+
+                yield $key => [
+                    $pureIndent,
+                    $pureIndent,
                 ];
             }
+        }
+    }
+
+    public function providerMixedIndentAndSniffedIndent(): \Generator
+    {
+        $mixedIndents = [
+            'space-and-tab' => [
+                " \t",
+                ' ',
+            ],
+            'tab-and-space' => [
+                "\t ",
+                "\t",
+            ],
+        ];
+
+        foreach ($mixedIndents as $key => [$mixedIndent, $sniffedIndent]) {
+            yield $key => [
+                $mixedIndent,
+                $sniffedIndent,
+            ];
         }
     }
 
