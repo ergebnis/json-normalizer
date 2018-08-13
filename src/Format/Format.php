@@ -16,11 +16,6 @@ namespace Localheinz\Json\Normalizer\Format;
 final class Format implements FormatInterface
 {
     /**
-     * Constant for a regular expression matching valid new-line character sequence.
-     */
-    private const PATTERN_NEW_LINE = '/^(?>\r\n|\n|\r)$/';
-
-    /**
      * @var int
      */
     private $jsonEncodeOptions;
@@ -31,36 +26,29 @@ final class Format implements FormatInterface
     private $indent;
 
     /**
+     * @var NewLineInterface
+     */
+    private $newLine;
+
+    /**
      * @var bool
      */
     private $hasFinalNewLine;
 
     /**
-     * @var string
-     */
-    private $newLine;
-
-    /**
-     * @param int             $jsonEncodeOptions
-     * @param IndentInterface $indent
-     * @param string          $newLine
-     * @param bool            $hasFinalNewLine
+     * @param int              $jsonEncodeOptions
+     * @param IndentInterface  $indent
+     * @param NewLineInterface $newLine
+     * @param bool             $hasFinalNewLine
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(int $jsonEncodeOptions, IndentInterface $indent, string $newLine, bool $hasFinalNewLine)
+    public function __construct(int $jsonEncodeOptions, IndentInterface $indent, NewLineInterface $newLine, bool $hasFinalNewLine)
     {
         if (0 > $jsonEncodeOptions) {
             throw new \InvalidArgumentException(\sprintf(
                 '"%s" is not valid options for json_encode().',
                 $jsonEncodeOptions
-            ));
-        }
-
-        if (1 !== \preg_match(self::PATTERN_NEW_LINE, $newLine)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid new-line character sequence.',
-                $newLine
             ));
         }
 
@@ -80,7 +68,7 @@ final class Format implements FormatInterface
         return $this->indent;
     }
 
-    public function newLine(): string
+    public function newLine(): NewLineInterface
     {
         return $this->newLine;
     }
@@ -115,15 +103,8 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withNewLine(string $newLine): FormatInterface
+    public function withNewLine(NewLineInterface $newLine): FormatInterface
     {
-        if (1 !== \preg_match(self::PATTERN_NEW_LINE, $newLine)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid new-line character sequence.',
-                $newLine
-            ));
-        }
-
         $mutated = clone $this;
 
         $mutated->newLine = $newLine;
