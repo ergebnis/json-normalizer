@@ -115,18 +115,8 @@ final class IndentTest extends Framework\TestCase
 
     public function providerSizeStyleAndIndentString(): \Generator
     {
-        $sizes = [
-            'int-one' => 1,
-            'int-greater-than-one' => $this->faker()->numberBetween(2, 5),
-        ];
-
-        $characters = [
-            'space' => ' ',
-            'tab' => "\t",
-        ];
-
-        foreach ($sizes as $key => $size) {
-            foreach ($characters as $style => $character) {
+        foreach ($this->sizes() as $key => $size) {
+            foreach ($this->characters() as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size
@@ -170,5 +160,57 @@ final class IndentTest extends Framework\TestCase
                 $string,
             ];
         }
+    }
+
+    /**
+     * @dataProvider providerValidIndentString
+     *
+     * @param string $string
+     */
+    public function testFromStringReturnsIndent(string $string): void
+    {
+        $indent = Indent::fromString($string);
+
+        $this->assertInstanceOf(IndentInterface::class, $indent);
+
+        $this->assertSame($string, $indent->__toString());
+    }
+
+    public function providerValidIndentString(): \Generator
+    {
+        foreach ($this->sizes() as $key => $size) {
+            foreach ($this->characters() as $style => $character) {
+                $string = \str_repeat(
+                    $character,
+                    $size
+                );
+
+                yield [
+                    $string,
+                ];
+            }
+        }
+    }
+
+    /**
+     * @return int[]
+     */
+    private function sizes(): array
+    {
+        return [
+            'int-one' => 1,
+            'int-greater-than-one' => $this->faker()->numberBetween(2, 5),
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
+    private function characters(): array
+    {
+        return [
+            'space' => ' ',
+            'tab' => "\t",
+        ];
     }
 }
