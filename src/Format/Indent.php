@@ -18,16 +18,16 @@ final class Indent implements IndentInterface
     /**
      * @var string
      */
-    private $value;
+    private $string;
 
-    private function __construct(string $value)
+    private function __construct(string $string)
     {
-        $this->value = $value;
+        $this->string = $string;
     }
 
     public function __toString(): string
     {
-        return $this->value;
+        return $this->string;
     }
 
     /**
