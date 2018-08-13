@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
+use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -33,7 +34,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
-        $indent = '  ';
+        $indent = $this->prophesize(IndentInterface::class);
         $newLine = \PHP_EOL;
         $hasFinalNewLine = true;
 
@@ -45,50 +46,10 @@ final class FormatTest extends Framework\TestCase
 
         new Format(
             $jsonEncodeOptions,
-            $indent,
+            $indent->reveal(),
             $newLine,
             $hasFinalNewLine
         );
-    }
-
-    /**
-     * @dataProvider providerInvalidIndent
-     *
-     * @param string $indent
-     */
-    public function testConstructorRejectsInvalidIndent(string $indent): void
-    {
-        $jsonEncodeOptions = 0;
-        $newLine = \PHP_EOL;
-        $hasFinalNewLine = true;
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid indent.',
-            $indent
-        ));
-
-        new Format(
-            $jsonEncodeOptions,
-            $indent,
-            $newLine,
-            $hasFinalNewLine
-        );
-    }
-
-    public function providerInvalidIndent(): \Generator
-    {
-        $values = [
-            'string-contains-line-feed' => " \n ",
-            'string-mixed-space-and-tab' => " \t",
-            'string-not-whitespace' => $this->faker()->sentence,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 
     /**
@@ -99,7 +60,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidNewLine(string $newLine): void
     {
         $jsonEncodeOptions = 0;
-        $indent = '    ';
+        $indent = $this->prophesize(IndentInterface::class);
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -110,7 +71,7 @@ final class FormatTest extends Framework\TestCase
 
         new Format(
             $jsonEncodeOptions,
-            $indent,
+            $indent->reveal(),
             $newLine,
             $hasFinalNewLine
         );
@@ -137,40 +98,37 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonIndentNewLineAndFinalNewLine
+     * @dataProvider providerNewLineAndFinalNewLine
      *
-     * @param string $indent
      * @param string $newLine
      * @param bool   $hasFinalNewLine
      */
-    public function testConstructorSetsValues(string $indent, string $newLine, bool $hasFinalNewLine): void
+    public function testConstructorSetsValues(string $newLine, bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
+        $indent = $this->prophesize(IndentInterface::class);
 
         $format = new Format(
             $jsonEncodeOptions,
-            $indent,
+            $indent->reveal(),
             $newLine,
             $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
-        $this->assertSame($indent, $format->indent());
+        $this->assertSame($indent->reveal(), $format->indent());
         $this->assertSame($newLine, $format->newLine());
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
-    public function providerJsonIndentNewLineAndFinalNewLine(): \Generator
+    public function providerNewLineAndFinalNewLine(): \Generator
     {
-        foreach ($this->indents() as $indent) {
-            foreach ($this->newLines() as $newLine) {
-                foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
-                    yield [
-                        $indent,
-                        $newLine,
-                        $hasFinalNewLine,
-                    ];
-                }
+        foreach ($this->newLines() as $newLine) {
+            foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
+                yield [
+                    $newLine,
+                    $hasFinalNewLine,
+                ];
             }
         }
     }
@@ -181,7 +139,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             true
         );
@@ -199,7 +157,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             true
         );
@@ -213,57 +171,22 @@ final class FormatTest extends Framework\TestCase
         $this->assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
     }
 
-    /**
-     * @dataProvider providerInvalidIndent
-     *
-     * @param string $indent
-     */
-    public function testWithIndentRejectsInvalidIndent(string $indent): void
+    public function testWithIndentClonesFormatAndSetsIndent(): void
     {
+        $indent = $this->prophesize(IndentInterface::class);
+
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             true
         );
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid indent.',
-            $indent
-        ));
-
-        $format->withIndent($indent);
-    }
-
-    /**
-     * @dataProvider providerIndent
-     *
-     * @param string $indent
-     */
-    public function testWithIndentClonesFormatAndSetsIndent(string $indent): void
-    {
-        $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
-            \PHP_EOL,
-            true
-        );
-
-        $mutated = $format->withIndent($indent);
+        $mutated = $format->withIndent($indent->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $mutated);
         $this->assertNotSame($format, $mutated);
-        $this->assertSame($indent, $mutated->indent());
-    }
-
-    public function providerIndent(): \Generator
-    {
-        foreach ($this->indents() as $key => $indent) {
-            yield $key => [
-                $indent,
-            ];
-        }
+        $this->assertSame($indent->reveal(), $mutated->indent());
     }
 
     /**
@@ -275,7 +198,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             true
         );
@@ -298,7 +221,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             true
         );
@@ -328,7 +251,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            '    ',
+            $this->prophesize(IndentInterface::class)->reveal(),
             \PHP_EOL,
             false
         );
@@ -347,17 +270,6 @@ final class FormatTest extends Framework\TestCase
                 $hasFinalNewLine,
             ];
         }
-    }
-
-    /**
-     * @return string[]
-     */
-    private function indents(): array
-    {
-        return [
-            'space' => '  ',
-            'tab' => "\t",
-        ];
     }
 
     /**

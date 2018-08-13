@@ -47,13 +47,16 @@ final class Sniffer implements SnifferInterface
         return $jsonEncodeOptions;
     }
 
-    private function indent(string $json): string
+    private function indent(string $json): IndentInterface
     {
         if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $json, $match)) {
-            return $match['indent'];
+            return Indent::fromString($match['indent']);
         }
 
-        return '    ';
+        return Indent::fromSizeAndStyle(
+            4,
+            'space'
+        );
     }
 
     private function newLine(string $json): string

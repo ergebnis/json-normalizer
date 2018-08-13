@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
+use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Json\Printer\Printer;
 use Localheinz\Json\Printer\PrinterInterface;
 
 final class IndentNormalizer implements NormalizerInterface
 {
     /**
-     * @var string
+     * @var IndentInterface
      */
     private $indent;
 
@@ -28,23 +29,9 @@ final class IndentNormalizer implements NormalizerInterface
      */
     private $printer;
 
-    /**
-     * @param string                $indent
-     * @param null|PrinterInterface $printer
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function __construct(string $indent, PrinterInterface $printer = null)
+    public function __construct(IndentInterface $indent, PrinterInterface $printer = null)
     {
-        if (1 !== \preg_match('/^[ \t]+$/', $indent)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid indent.',
-                $indent
-            ));
-        }
-
         $this->indent = $indent;
-
         $this->printer = $printer ?: new Printer();
     }
 
@@ -59,7 +46,7 @@ final class IndentNormalizer implements NormalizerInterface
 
         return $this->printer->print(
             $json,
-            $this->indent
+            $this->indent->__toString()
         );
     }
 }

@@ -16,6 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
+use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Json\Printer;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -61,7 +62,15 @@ final class FormatterTest extends Framework\TestCase
         $faker = $this->faker();
 
         $jsonEncodeOptions = $faker->numberBetween(1);
-        $indent = \str_repeat(' ', $faker->numberBetween(1, 5));
+        $indentString = \str_repeat(' ', $faker->numberBetween(1, 5));
+
+        $indent = $this->prophesize(IndentInterface::class);
+
+        $indent
+            ->__toString()
+            ->shouldBeCalled()
+            ->willReturn($indentString);
+
         $newLine = $faker->randomElement([
             "\r\n",
             "\n",
@@ -114,7 +123,7 @@ JSON;
         $printer
             ->print(
                 Argument::is($encoded),
-                Argument::is($indent),
+                Argument::is($indentString),
                 Argument::is($newLine)
             )
             ->shouldBeCalled()
