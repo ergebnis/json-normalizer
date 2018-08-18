@@ -251,7 +251,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame(\PHP_EOL, $format->newLine());
+        $this->assertSame(\PHP_EOL, $format->newLine()->__toString());
     }
 
     /**
@@ -270,7 +270,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($newLine, $format->newLine());
+        $this->assertSame($newLine, $format->newLine()->__toString());
     }
 
     /**
@@ -289,7 +289,7 @@ JSON;
         $format = $sniffer->sniff($json);
 
         $this->assertInstanceOf(FormatInterface::class, $format);
-        $this->assertSame($newLine, $format->newLine());
+        $this->assertSame($newLine, $format->newLine()->__toString());
     }
 
     public function providerNewLine(): \Generator

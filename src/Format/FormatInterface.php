@@ -19,7 +19,7 @@ interface FormatInterface
 
     public function indent(): IndentInterface;
 
-    public function newLine(): string;
+    public function newLine(): NewLineInterface;
 
     public function hasFinalNewLine(): bool;
 
@@ -34,14 +34,7 @@ interface FormatInterface
 
     public function withIndent(IndentInterface $indent): self;
 
-    /**
-     * @param string $newLine
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return FormatInterface
-     */
-    public function withNewLine(string $newLine): self;
+    public function withNewLine(NewLineInterface $newLine): self;
 
     public function withHasFinalNewLine(bool $hasFinalNewLine): self;
 }

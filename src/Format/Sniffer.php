@@ -59,13 +59,13 @@ final class Sniffer implements SnifferInterface
         );
     }
 
-    private function newLine(string $json): string
+    private function newLine(string $json): NewLineInterface
     {
         if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $json, $match)) {
-            return $match['newLine'];
+            return NewLine::fromString($match['newLine']);
         }
 
-        return \PHP_EOL;
+        return NewLine::fromString(\PHP_EOL);
     }
 
     private function hasFinalNewLine(string $json): bool

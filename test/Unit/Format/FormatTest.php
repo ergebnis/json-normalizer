@@ -16,6 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\IndentInterface;
+use Localheinz\Json\Normalizer\Format\NewLineInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -35,7 +36,7 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = -1;
         $indent = $this->prophesize(IndentInterface::class);
-        $newLine = \PHP_EOL;
+        $newLine = $this->prophesize(NewLineInterface::class);
         $hasFinalNewLine = true;
 
         $this->expectException(\InvalidArgumentException::class);
@@ -47,90 +48,34 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent->reveal(),
-            $newLine,
+            $newLine->reveal(),
             $hasFinalNewLine
         );
     }
 
     /**
-     * @dataProvider providerInvalidNewLine
-     *
-     * @param string $newLine
-     */
-    public function testConstructorRejectsInvalidNewLine(string $newLine): void
-    {
-        $jsonEncodeOptions = 0;
-        $indent = $this->prophesize(IndentInterface::class);
-        $hasFinalNewLine = true;
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid new-line character sequence.',
-            $newLine
-        ));
-
-        new Format(
-            $jsonEncodeOptions,
-            $indent->reveal(),
-            $newLine,
-            $hasFinalNewLine
-        );
-    }
-
-    public function providerInvalidNewLine(): \Generator
-    {
-        $values = [
-            "\t",
-            " \r ",
-            " \r\n ",
-            " \n ",
-            ' ',
-            "\f",
-            "\x0b",
-            "\x85",
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
-    }
-
-    /**
-     * @dataProvider providerNewLineAndFinalNewLine
+     * @dataProvider providerHasFinalNewLine
      *
      * @param string $newLine
      * @param bool   $hasFinalNewLine
      */
-    public function testConstructorSetsValues(string $newLine, bool $hasFinalNewLine): void
+    public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
         $indent = $this->prophesize(IndentInterface::class);
+        $newLine = $this->prophesize(NewLineInterface::class);
 
         $format = new Format(
             $jsonEncodeOptions,
             $indent->reveal(),
-            $newLine,
+            $newLine->reveal(),
             $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
         $this->assertSame($indent->reveal(), $format->indent());
-        $this->assertSame($newLine, $format->newLine());
+        $this->assertSame($newLine->reveal(), $format->newLine());
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
-    }
-
-    public function providerNewLineAndFinalNewLine(): \Generator
-    {
-        foreach ($this->newLines() as $newLine) {
-            foreach ($this->hasFinalNewLines() as $hasFinalNewLine) {
-                yield [
-                    $newLine,
-                    $hasFinalNewLine,
-                ];
-            }
-        }
     }
 
     public function testWithJsonEncodeOptionsRejectsInvalidJsonEncodeOptions(): void
@@ -140,7 +85,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
+            $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
 
@@ -158,7 +103,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
+            $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
 
@@ -178,7 +123,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
+            $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
 
@@ -189,57 +134,22 @@ final class FormatTest extends Framework\TestCase
         $this->assertSame($indent->reveal(), $mutated->indent());
     }
 
-    /**
-     * @dataProvider providerInvalidNewLine
-     *
-     * @param string $newLine
-     */
-    public function testWithNewLineRejectsInvalidNewLine(string $newLine): void
+    public function testWithNewLineClonesFormatAndSetsNewLine(): void
     {
+        $newLine = $this->prophesize(NewLineInterface::class);
+
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
+            $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid new-line character sequence.',
-            $newLine
-        ));
-
-        $format->withNewLine($newLine);
-    }
-
-    /**
-     * @dataProvider providerNewLine
-     *
-     * @param string $newLine
-     */
-    public function testWithNewLineClonesFormatAndSetsNewLine(string $newLine): void
-    {
-        $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
-            true
-        );
-
-        $mutated = $format->withNewLine($newLine);
+        $mutated = $format->withNewLine($newLine->reveal());
 
         $this->assertInstanceOf(FormatInterface::class, $mutated);
         $this->assertNotSame($format, $mutated);
-        $this->assertSame($newLine, $mutated->newLine());
-    }
-
-    public function providerNewLine(): \Generator
-    {
-        foreach ($this->newLines() as $newLine) {
-            yield [
-                $newLine,
-            ];
-        }
+        $this->assertSame($newLine->reveal(), $mutated->newLine());
     }
 
     /**
@@ -252,7 +162,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             $this->prophesize(IndentInterface::class)->reveal(),
-            \PHP_EOL,
+            $this->prophesize(NewLineInterface::class)->reveal(),
             false
         );
 
@@ -265,33 +175,15 @@ final class FormatTest extends Framework\TestCase
 
     public function providerHasFinalNewLine(): \Generator
     {
-        foreach ($this->hasFinalNewLines() as $key => $hasFinalNewLine) {
+        $hasFinalNewLines = [
+            'yes' => true,
+            'no' => false,
+        ];
+
+        foreach ($hasFinalNewLines as $key => $hasFinalNewLine) {
             yield $key => [
                 $hasFinalNewLine,
             ];
         }
-    }
-
-    /**
-     * @return string[]
-     */
-    private function newLines(): array
-    {
-        return [
-            "\r\n",
-            "\n",
-            "\r",
-        ];
-    }
-
-    /**
-     * @return bool[]
-     */
-    private function hasFinalNewLines(): array
-    {
-        return [
-            'yes' => true,
-            'no' => false,
-        ];
     }
 }

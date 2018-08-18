@@ -17,6 +17,7 @@ use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
 use Localheinz\Json\Normalizer\Format\IndentInterface;
+use Localheinz\Json\Normalizer\Format\NewLineInterface;
 use Localheinz\Json\Printer;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -29,7 +30,7 @@ final class FormatterTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testImplementsFormatterInterface()
+    public function testImplementsFormatterInterface(): void
     {
         $this->assertClassImplementsInterface(FormatterInterface::class, Formatter::class);
     }
@@ -63,6 +64,11 @@ final class FormatterTest extends Framework\TestCase
 
         $jsonEncodeOptions = $faker->numberBetween(1);
         $indentString = \str_repeat(' ', $faker->numberBetween(1, 5));
+        $newLineString = $faker->randomElement([
+            "\r\n",
+            "\n",
+            "\r",
+        ]);
 
         $indent = $this->prophesize(IndentInterface::class);
 
@@ -71,11 +77,12 @@ final class FormatterTest extends Framework\TestCase
             ->shouldBeCalled()
             ->willReturn($indentString);
 
-        $newLine = $faker->randomElement([
-            "\r\n",
-            "\n",
-            "\r",
-        ]);
+        $newLine = $this->prophesize(NewLineInterface::class);
+
+        $newLine
+            ->__toString()
+            ->shouldBeCalled()
+            ->willReturn($newLineString);
 
         $json = <<<'JSON'
 {
@@ -106,12 +113,12 @@ JSON;
         $format
             ->indent()
             ->shouldBeCalled()
-            ->willReturn($indent);
+            ->willReturn($indent->reveal());
 
         $format
             ->newLine()
             ->shouldBeCalled()
-            ->willReturn($newLine);
+            ->willReturn($newLine->reveal());
 
         $format
             ->hasFinalNewLine()
@@ -124,7 +131,7 @@ JSON;
             ->print(
                 Argument::is($encoded),
                 Argument::is($indentString),
-                Argument::is($newLine)
+                Argument::is($newLineString)
             )
             ->shouldBeCalled()
             ->willReturn($printed);
@@ -136,7 +143,7 @@ JSON;
             $format->reveal()
         );
 
-        $suffix = $hasFinalNewLine ? $newLine : '';
+        $suffix = $hasFinalNewLine ? $newLineString : '';
 
         $this->assertSame($printed . $suffix, $formatted);
     }
