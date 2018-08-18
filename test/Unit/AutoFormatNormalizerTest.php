@@ -24,9 +24,17 @@ use Prophecy\Argument;
  */
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testNormalizeUsesSnifferToSniffFormatNormalizesAndFormatsUsingSniffedFormat(): void
+    public function testNormalizeNormalizesAndFormatsUsingJsonFormat(): void
     {
+        $format = $this->prophesize(Format\FormatInterface::class);
+
         $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->format()
+            ->shouldBeCalled()
+            ->willReturn($format->reveal());
+
         $normalized = $this->prophesize(JsonInterface::class);
         $formatted = $this->prophesize(JsonInterface::class);
 
@@ -36,15 +44,6 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
             ->normalize(Argument::is($json->reveal()))
             ->shouldBeCalled()
             ->willReturn($normalized->reveal());
-
-        $format = $this->prophesize(Format\FormatInterface::class);
-
-        $sniffer = $this->prophesize(Format\SnifferInterface::class);
-
-        $sniffer
-            ->sniff(Argument::is($json->reveal()))
-            ->shouldBeCalled()
-            ->willReturn($format->reveal());
 
         $formatter = $this->prophesize(Format\FormatterInterface::class);
 
@@ -58,7 +57,6 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 
         $normalizer = new AutoFormatNormalizer(
             $composedNormalizer->reveal(),
-            $sniffer->reveal(),
             $formatter->reveal()
         );
 

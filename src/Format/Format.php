@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\JsonInterface;
+
 final class Format implements FormatInterface
 {
     /**
@@ -56,6 +58,18 @@ final class Format implements FormatInterface
         $this->indent = $indent;
         $this->newLine = $newLine;
         $this->hasFinalNewLine = $hasFinalNewLine;
+    }
+
+    public static function fromJson(JsonInterface $json): FormatInterface
+    {
+        $encoded = $json->encoded();
+
+        return new self(
+            self::detectJsonEncodeOptions($encoded),
+            self::detectIndent($encoded),
+            self::detectNewLine($encoded),
+            self::detectHasFinalNewLine($encoded)
+        );
     }
 
     public function jsonEncodeOptions(): int
@@ -119,5 +133,50 @@ final class Format implements FormatInterface
         $mutated->hasFinalNewLine = $hasFinalNewLine;
 
         return $mutated;
+    }
+
+    private static function detectJsonEncodeOptions(string $encoded): int
+    {
+        $jsonEncodeOptions = 0;
+
+        if (false === \strpos($encoded, '\/')) {
+            $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
+        }
+
+        if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $encoded)) {
+            $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
+        }
+
+        return $jsonEncodeOptions;
+    }
+
+    private static function detectIndent(string $encoded): IndentInterface
+    {
+        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $encoded, $match)) {
+            return Indent::fromString($match['indent']);
+        }
+
+        return Indent::fromSizeAndStyle(
+            4,
+            'space'
+        );
+    }
+
+    private static function detectNewLine(string $encoded): NewLineInterface
+    {
+        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $encoded, $match)) {
+            return NewLine::fromString($match['newLine']);
+        }
+
+        return NewLine::fromString(\PHP_EOL);
+    }
+
+    private static function detectHasFinalNewLine(string $encoded): bool
+    {
+        if (\rtrim($encoded, " \t") === \rtrim($encoded)) {
+            return false;
+        }
+
+        return true;
     }
 }
