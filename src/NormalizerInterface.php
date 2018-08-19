@@ -18,7 +18,12 @@ interface NormalizerInterface
     /**
      * @param JsonInterface $json
      *
-     * @throws \RuntimeException
+     * @throws Exception\SchemaUriCouldNotBeResolvedException
+     * @throws Exception\SchemaUriCouldNotBeReadException
+     * @throws Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
+     * @throws Exception\SchemaUriReferencesInvalidJsonDocumentException
+     * @throws Exception\OriginalInvalidAccordingToSchemaException
+     * @throws Exception\NormalizedInvalidAccordingToSchemaException
      *
      * @return JsonInterface
      */

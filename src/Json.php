@@ -46,7 +46,7 @@ final class Json implements JsonInterface
     /**
      * @param string $encoded
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidJsonException
      *
      * @return JsonInterface
      */
@@ -55,10 +55,7 @@ final class Json implements JsonInterface
         $decoded = \json_decode($encoded);
 
         if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $encoded
-            ));
+            throw Exception\InvalidJsonException::fromEncoded($encoded);
         }
 
         return new self(

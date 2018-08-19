@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
 use Localheinz\Json\Normalizer\JsonInterface;
 
@@ -25,11 +26,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
     {
         $jsonEncodeOptions = -1;
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid options for json_encode().',
-            $jsonEncodeOptions
-        ));
+        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
 
         new JsonEncodeNormalizer($jsonEncodeOptions);
     }

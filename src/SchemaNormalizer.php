@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer;
 
 use JsonSchema\Constraints;
-use JsonSchema\Exception;
+use JsonSchema\Exception\InvalidSchemaMediaTypeException;
+use JsonSchema\Exception\JsonDecodingException;
+use JsonSchema\Exception\ResourceNotFoundException;
+use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
 
 final class SchemaNormalizer implements NormalizerInterface
@@ -62,33 +65,18 @@ final class SchemaNormalizer implements NormalizerInterface
         try {
             /** @var \stdClass $schema */
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
-        } catch (Exception\UriResolverException $exception) {
-            throw new \RuntimeException(\sprintf(
-                'Schema URI "%s" could not be resolved.',
-                $this->schemaUri
-            ));
-        } catch (Exception\ResourceNotFoundException $exception) {
-            throw new \RuntimeException(\sprintf(
-                'Schema URI "%s" does not reference a document that could be read.',
-                $this->schemaUri
-            ));
-        } catch (Exception\InvalidSchemaMediaTypeException $exception) {
-            throw new \RuntimeException(\sprintf(
-                'Schema URI "%s" does not reference a document with media type "application/schema+json".',
-                $this->schemaUri
-            ));
-        } catch (Exception\JsonDecodingException $exception) {
-            throw new \RuntimeException(\sprintf(
-                'Schema URI "%s" does not reference a document with valid JSON syntax.',
-                $this->schemaUri
-            ));
+        } catch (UriResolverException $exception) {
+            throw Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($this->schemaUri);
+        } catch (ResourceNotFoundException $exception) {
+            throw Exception\SchemaUriCouldNotBeReadException::fromSchemaUri($this->schemaUri);
+        } catch (InvalidSchemaMediaTypeException $exception) {
+            throw Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($this->schemaUri);
+        } catch (JsonDecodingException $exception) {
+            throw Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($this->schemaUri);
         }
 
         if (!$this->schemaValidator->isValid($decoded, $schema)) {
-            throw new \InvalidArgumentException(\sprintf(
-                'Original is not valid according to schema "%s".',
-                $this->schemaUri
-            ));
+            throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUri($this->schemaUri);
         }
 
         $normalized = $this->normalizeData(
@@ -97,10 +85,7 @@ final class SchemaNormalizer implements NormalizerInterface
         );
 
         if (!$this->schemaValidator->isValid($normalized, $schema)) {
-            throw new \RuntimeException(\sprintf(
-                'Normalized is not valid according to schema "%s".',
-                $this->schemaUri
-            ));
+            throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUri($this->schemaUri);
         }
 
         /** @var string $encoded */

@@ -23,15 +23,12 @@ final class JsonEncodeNormalizer implements NormalizerInterface
     /**
      * @param int $jsonEncodeOptions
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidJsonEncodeOptionsException
      */
     public function __construct(int $jsonEncodeOptions)
     {
         if (0 > $jsonEncodeOptions) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid options for json_encode().',
-                $jsonEncodeOptions
-            ));
+            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
         }
 
         $this->jsonEncodeOptions = $jsonEncodeOptions;

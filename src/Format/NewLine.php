@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\Exception;
+
 final class NewLine implements NewLineInterface
 {
     /**
@@ -33,17 +35,14 @@ final class NewLine implements NewLineInterface
     /**
      * @param string $string
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidNewLineStringException
      *
      * @return NewLineInterface
      */
     public static function fromString(string $string): NewLineInterface
     {
         if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $string)) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not a valid new-line character sequence.',
-                $string
-            ));
+            throw Exception\InvalidNewLineStringException::fromString($string);
         }
 
         return new self($string);

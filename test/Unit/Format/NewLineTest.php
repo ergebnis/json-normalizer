@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\Format\NewLineInterface;
 use Localheinz\Test\Util\Helper;
@@ -37,11 +38,7 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid new-line character sequence.',
-            $string
-        ));
+        $this->expectException(Exception\InvalidNewLineStringException::class);
 
         NewLine::fromString($string);
     }

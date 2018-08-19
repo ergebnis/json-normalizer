@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\JsonInterface;
 
 final class Format implements FormatInterface
@@ -43,15 +44,12 @@ final class Format implements FormatInterface
      * @param NewLineInterface $newLine
      * @param bool             $hasFinalNewLine
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidJsonEncodeOptionsException
      */
     public function __construct(int $jsonEncodeOptions, IndentInterface $indent, NewLineInterface $newLine, bool $hasFinalNewLine)
     {
         if (0 > $jsonEncodeOptions) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid options for json_encode().',
-                $jsonEncodeOptions
-            ));
+            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
         }
 
         $this->jsonEncodeOptions = $jsonEncodeOptions;
@@ -95,10 +93,7 @@ final class Format implements FormatInterface
     public function withJsonEncodeOptions(int $jsonEncodeOptions): FormatInterface
     {
         if (0 > $jsonEncodeOptions) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid options for json_encode().',
-                $jsonEncodeOptions
-            ));
+            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
         }
 
         $mutated = clone $this;
