@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
+use Localheinz\Json\Normalizer\JsonInterface;
 
 /**
  * @internal
@@ -40,7 +41,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
      */
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
   "name": "Andreas M\u00f6ller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer",
@@ -50,14 +51,25 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
   "string-tag": "<p>"
 }
 JSON;
+        $decoded = \json_decode($encoded);
+
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->decoded()
+            ->shouldBeCalled()
+            ->willReturn($decoded);
+
         $normalizer = new JsonEncodeNormalizer($jsonEncodeOptions);
 
-        $encoded = \json_encode(
-            \json_decode($json),
+        $normalized = $normalizer->normalize($json->reveal());
+
+        $encodedWithJsonEncodeOptions = \json_encode(
+            $decoded,
             $jsonEncodeOptions
         );
 
-        $this->assertSame($encoded, $normalizer->normalize($json));
+        $this->assertSame($encodedWithJsonEncodeOptions, $normalized->encoded());
     }
 
     public function providerJsonEncodeOptions(): \Generator

@@ -25,15 +25,8 @@ final class ChainNormalizer implements NormalizerInterface
         $this->normalizers = $normalizers;
     }
 
-    public function normalize(string $json): string
+    public function normalize(JsonInterface $json): JsonInterface
     {
-        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
-
         foreach ($this->normalizers as $normalizer) {
             $json = $normalizer->normalize($json);
         }

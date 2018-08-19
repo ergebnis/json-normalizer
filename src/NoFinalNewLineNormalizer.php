@@ -15,15 +15,10 @@ namespace Localheinz\Json\Normalizer;
 
 final class NoFinalNewLineNormalizer implements NormalizerInterface
 {
-    public function normalize(string $json): string
+    public function normalize(JsonInterface $json): JsonInterface
     {
-        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
+        $withFinalNewLine = \rtrim($json->encoded());
 
-        return \rtrim($json);
+        return Json::fromEncoded($withFinalNewLine);
     }
 }

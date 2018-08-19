@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Json\Normalizer\IndentNormalizer;
+use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer\PrinterInterface;
 use Prophecy\Argument;
 
@@ -25,7 +26,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
-        $string = $this->faker()->randomElement([
+        $indentString = $this->faker()->randomElement([
             ' ',
             "\t",
         ]);
@@ -35,18 +36,25 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
         $indent
             ->__toString()
             ->shouldBeCalled()
-            ->willReturn($string);
+            ->willReturn($indentString);
 
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
 
-        $normalized = <<<'JSON'
+        $json = $this->prophesize(JsonInterface::class);
+
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
+
+        $indented = <<<'JSON'
 {
-    "name": "Andreas Möller (normalized)",
+    "name": "Andreas Möller (indented)",
     "url": "https://localheinz.com"
 }
 JSON;
@@ -55,17 +63,19 @@ JSON;
 
         $printer
             ->print(
-                Argument::is($json),
-                Argument::is($string)
+                Argument::is($encoded),
+                Argument::is($indentString)
             )
             ->shouldBeCalled()
-            ->willReturn($normalized);
+            ->willReturn($indented);
 
         $normalizer = new IndentNormalizer(
             $indent->reveal(),
             $printer->reveal()
         );
 
-        $this->assertSame($normalized, $normalizer->normalize($json));
+        $normalized = $normalizer->normalize($json->reveal());
+
+        $this->assertSame($indented, $normalized->encoded());
     }
 }

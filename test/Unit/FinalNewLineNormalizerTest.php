@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\FinalNewLineNormalizer;
+use Localheinz\Json\Normalizer\JsonInterface;
 
 /**
  * @internal
@@ -27,20 +28,26 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
      */
     public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {
-        $json = <<<'JSON'
+        $encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }
 JSON;
+        $encoded .= $whitespace;
 
-        $json .= $whitespace;
+        $json = $this->prophesize(JsonInterface::class);
 
-        $normalized = \rtrim($json) . \PHP_EOL;
+        $json
+            ->encoded()
+            ->shouldBeCalled()
+            ->willReturn($encoded);
 
         $normalizer = new FinalNewLineNormalizer();
 
-        $this->assertSame($normalized, $normalizer->normalize($json));
+        $normalized = $normalizer->normalize($json->reveal());
+
+        $this->assertSame(\rtrim($encoded) . \PHP_EOL, $normalized->encoded());
     }
 
     public function providerWhitespace(): \Generator

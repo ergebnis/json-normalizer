@@ -13,43 +13,40 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\JsonInterface;
+
 final class Sniffer implements SnifferInterface
 {
-    public function sniff(string $json): FormatInterface
+    public function sniff(JsonInterface $json): FormatInterface
     {
-        if (null === \json_decode($json) && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \InvalidArgumentException(\sprintf(
-                '"%s" is not valid JSON.',
-                $json
-            ));
-        }
+        $encoded = $json->encoded();
 
         return new Format(
-            $this->jsonEncodeOptions($json),
-            $this->indent($json),
-            $this->newLine($json),
-            $this->hasFinalNewLine($json)
+            $this->jsonEncodeOptions($encoded),
+            $this->indent($encoded),
+            $this->newLine($encoded),
+            $this->hasFinalNewLine($encoded)
         );
     }
 
-    private function jsonEncodeOptions(string $json): int
+    private function jsonEncodeOptions(string $encoded): int
     {
         $jsonEncodeOptions = 0;
 
-        if (false === \strpos($json, '\/')) {
+        if (false === \strpos($encoded, '\/')) {
             $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
         }
 
-        if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $json)) {
+        if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $encoded)) {
             $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
         }
 
         return $jsonEncodeOptions;
     }
 
-    private function indent(string $json): IndentInterface
+    private function indent(string $encoded): IndentInterface
     {
-        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $json, $match)) {
+        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $encoded, $match)) {
             return Indent::fromString($match['indent']);
         }
 
@@ -59,18 +56,18 @@ final class Sniffer implements SnifferInterface
         );
     }
 
-    private function newLine(string $json): NewLineInterface
+    private function newLine(string $encoded): NewLineInterface
     {
-        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $json, $match)) {
+        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $encoded, $match)) {
             return NewLine::fromString($match['newLine']);
         }
 
         return NewLine::fromString(\PHP_EOL);
     }
 
-    private function hasFinalNewLine(string $json): bool
+    private function hasFinalNewLine(string $encoded): bool
     {
-        if (\rtrim($json, " \t") === \rtrim($json)) {
+        if (\rtrim($encoded, " \t") === \rtrim($encoded)) {
             return false;
         }
 
