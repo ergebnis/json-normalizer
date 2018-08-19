@@ -103,7 +103,10 @@ final class SchemaNormalizer implements NormalizerInterface
             ));
         }
 
-        return Json::fromEncoded(\json_encode($normalized));
+        /** @var string $encoded */
+        $encoded = \json_encode($normalized);
+
+        return Json::fromEncoded($encoded);
     }
 
     /**
