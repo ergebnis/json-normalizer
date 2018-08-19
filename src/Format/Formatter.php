@@ -31,6 +31,7 @@ final class Formatter implements FormatterInterface
 
     public function format(JsonInterface $json, FormatInterface $format): JsonInterface
     {
+        /** @var string $encoded */
         $encoded = \json_encode(
             $json->decoded(),
             $format->jsonEncodeOptions()
