@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
+use Localheinz\Json\Normalizer\Format\FormatInterface;
+
 final class Json implements JsonInterface
 {
     /**
@@ -24,6 +26,11 @@ final class Json implements JsonInterface
      * @var null|array|bool|float|int|\stdClass|string
      */
     private $decoded;
+
+    /**
+     * @var FormatInterface
+     */
+    private $format;
 
     private function __construct(string $encoded, $decoded)
     {
@@ -68,5 +75,14 @@ final class Json implements JsonInterface
     public function encoded(): string
     {
         return $this->encoded;
+    }
+
+    public function format(): Format\FormatInterface
+    {
+        if (null === $this->format) {
+            $this->format = Format\Format::fromJson($this);
+        }
+
+        return $this->format;
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Test\Util\Helper;
@@ -51,6 +52,13 @@ final class JsonTest extends Framework\TestCase
         $this->assertSame($encoded, $json->__toString());
         $this->assertSame($encoded, $json->encoded());
         $this->assertSame($encoded, \json_encode($json->decoded()));
+
+        $format = Format::fromJson($json);
+
+        $this->assertSame($format->jsonEncodeOptions(), $json->format()->jsonEncodeOptions());
+        $this->assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());
+        $this->assertSame($format->newLine()->__toString(), $json->format()->newLine()->__toString());
+        $this->assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());
     }
 
     public function providerEncoded(): \Generator

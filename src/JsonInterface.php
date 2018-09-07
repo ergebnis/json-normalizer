@@ -35,4 +35,11 @@ interface JsonInterface
      * @return null|array|bool|float|int|\stdClass|string
      */
     public function decoded();
+
+    /**
+     * Returns the format of the original JSON value.
+     *
+     * @return Format\FormatInterface
+     */
+    public function format(): Format\FormatInterface;
 }

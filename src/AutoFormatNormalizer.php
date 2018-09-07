@@ -21,22 +21,15 @@ final class AutoFormatNormalizer implements NormalizerInterface
     private $normalizer;
 
     /**
-     * @var Format\SnifferInterface
-     */
-    private $sniffer;
-
-    /**
      * @var Format\FormatterInterface
      */
     private $formatter;
 
     public function __construct(
         NormalizerInterface $normalizer,
-        Format\SnifferInterface $sniffer = null,
         Format\FormatterInterface $formatter = null
     ) {
         $this->normalizer = $normalizer;
-        $this->sniffer = $sniffer ?: new Format\Sniffer();
         $this->formatter = $formatter ?: new Format\Formatter();
     }
 
@@ -44,7 +37,7 @@ final class AutoFormatNormalizer implements NormalizerInterface
     {
         return $this->formatter->format(
             $this->normalizer->normalize($json),
-            $this->sniffer->sniff($json)
+            $json->format()
         );
     }
 }
