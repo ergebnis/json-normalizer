@@ -56,8 +56,7 @@ final class FormatTest extends Framework\TestCase
     /**
      * @dataProvider providerHasFinalNewLine
      *
-     * @param string $newLine
-     * @param bool   $hasFinalNewLine
+     * @param bool $hasFinalNewLine
      */
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
