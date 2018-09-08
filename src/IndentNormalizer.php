@@ -13,26 +13,24 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-use Localheinz\Json\Normalizer\Format\IndentInterface;
-use Localheinz\Json\Printer\Printer;
-use Localheinz\Json\Printer\PrinterInterface;
+use Localheinz\Json\Printer;
 
 final class IndentNormalizer implements NormalizerInterface
 {
     /**
-     * @var IndentInterface
+     * @var Format\IndentInterface
      */
     private $indent;
 
     /**
-     * @var PrinterInterface
+     * @var Printer\PrinterInterface
      */
     private $printer;
 
-    public function __construct(IndentInterface $indent, PrinterInterface $printer = null)
+    public function __construct(Format\IndentInterface $indent, Printer\PrinterInterface $printer = null)
     {
         $this->indent = $indent;
-        $this->printer = $printer ?: new Printer();
+        $this->printer = $printer ?: new Printer\Printer();
     }
 
     public function normalize(JsonInterface $json): JsonInterface

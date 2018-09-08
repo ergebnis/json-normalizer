@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-use Localheinz\Json\Normalizer\Format\FormatInterface;
-
 final class Json implements JsonInterface
 {
     /**
@@ -28,7 +26,7 @@ final class Json implements JsonInterface
     private $decoded;
 
     /**
-     * @var FormatInterface
+     * @var Format\FormatInterface
      */
     private $format;
 

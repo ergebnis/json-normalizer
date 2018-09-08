@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Exception;
 
-use Localheinz\Json\Normalizer\Exception\ExceptionInterface;
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -26,7 +26,7 @@ abstract class AbstractExceptionTestCase extends Framework\TestCase
 
     final public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(ExceptionInterface::class, $this->className());
+        $this->assertClassImplementsInterface(Exception\ExceptionInterface::class, $this->className());
     }
 
     final protected function className(): string
