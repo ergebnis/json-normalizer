@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Localheinz\Json\Normalizer\Exception;
+
 interface FormatInterface
 {
     public function jsonEncodeOptions(): int;
@@ -26,7 +28,7 @@ interface FormatInterface
     /**
      * @param int $jsonEncodeOptions
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\InvalidJsonEncodeOptionsException
      *
      * @return FormatInterface
      */

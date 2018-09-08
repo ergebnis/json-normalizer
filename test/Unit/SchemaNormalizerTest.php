@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
-use JsonSchema\Exception;
+use JsonSchema\Exception\InvalidSchemaMediaTypeException;
+use JsonSchema\Exception\JsonDecodingException;
+use JsonSchema\Exception\ResourceNotFoundException;
+use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
 use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
@@ -25,7 +29,7 @@ use Prophecy\Argument;
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriCouldNotBeResolved(): void
+    public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
         $json = $this->prophesize(JsonInterface::class);
 
@@ -36,7 +40,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
         $schemaStorage
             ->getSchema(Argument::is($schemaUri))
             ->shouldBeCalled()
-            ->willThrow(new Exception\UriResolverException());
+            ->willThrow(new UriResolverException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
@@ -44,16 +48,12 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
             $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Schema URI "%s" could not be resolved.',
-            $schemaUri
-        ));
+        $this->expectException(Exception\SchemaUriCouldNotBeResolvedException::class);
 
         $normalizer->normalize($json->reveal());
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesUnreadableResource(): void
+    public function testNormalizeThrowsSchemaUriCouldNotBeReadExceptionWhenSchemaUriReferencesUnreadableResource(): void
     {
         $json = $this->prophesize(JsonInterface::class);
 
@@ -64,7 +64,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
         $schemaStorage
             ->getSchema(Argument::is($schemaUri))
             ->shouldBeCalled()
-            ->willThrow(new Exception\ResourceNotFoundException());
+            ->willThrow(new ResourceNotFoundException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
@@ -72,16 +72,12 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
             $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Schema URI "%s" does not reference a document that could be read.',
-            $schemaUri
-        ));
+        $this->expectException(Exception\SchemaUriCouldNotBeReadException::class);
 
         $normalizer->normalize($json->reveal());
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidMediaType(): void
+    public function testNormalizeThrowsSchemaUriReferencesDocumentWithInvalidMediaTypeExceptionWhenSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
         $json = $this->prophesize(JsonInterface::class);
 
@@ -92,7 +88,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
         $schemaStorage
             ->getSchema(Argument::is($schemaUri))
             ->shouldBeCalled()
-            ->willThrow(new Exception\InvalidSchemaMediaTypeException());
+            ->willThrow(new InvalidSchemaMediaTypeException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
@@ -100,11 +96,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
             $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Schema URI "%s" does not reference a document with media type "application/schema+json".',
-            $schemaUri
-        ));
+        $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
 
         $normalizer->normalize($json->reveal());
     }
@@ -120,7 +112,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
         $schemaStorage
             ->getSchema($schemaUri)
             ->shouldBeCalled()
-            ->willThrow(new Exception\JsonDecodingException());
+            ->willThrow(new JsonDecodingException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
@@ -128,16 +120,12 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
             $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Schema URI "%s" does not reference a document with valid JSON syntax.',
-            $schemaUri
-        ));
+        $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocumentException::class);
 
         $normalizer->normalize($json->reveal());
     }
 
-    public function testNormalizeRejectsInvalidJsonAccordingToSchema(): void
+    public function testNormalizeThrowsOriginalInvalidAccordingToSchemaExceptionWhenOriginalNotValidAccordingToSchema(): void
     {
         $encoded = <<<'JSON'
 {
@@ -188,16 +176,12 @@ JSON;
             $schemaValidator->reveal()
         );
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Original is not valid according to schema "%s".',
-            $schemaUri
-        ));
+        $this->expectException(Exception\OriginalInvalidAccordingToSchemaException::class);
 
         $normalizer->normalize($json->reveal());
     }
 
-    public function testNormalizeThrowsRuntimeExceptionIfNormalizedIsInvalidAccordingToSchema(): void
+    public function testNormalizeThrowsNormalizedInvalidAccordingToSchemaExceptionWhenNormalizedNotValidAccordingToSchema(): void
     {
         $encoded = <<<'JSON'
 {
@@ -274,11 +258,7 @@ JSON;
             $schemaValidator->reveal()
         );
 
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Normalized is not valid according to schema "%s".',
-            $schemaUri
-        ));
+        $this->expectException(Exception\NormalizedInvalidAccordingToSchemaException::class);
 
         $normalizer->normalize($json->reveal());
     }

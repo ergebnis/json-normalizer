@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\IndentInterface;
@@ -33,18 +34,14 @@ final class FormatTest extends Framework\TestCase
         $this->assertClassImplementsInterface(FormatInterface::class, Format::class);
     }
 
-    public function testConstructorRejectsInvalidEncodeOptions(): void
+    public function testConstructorRejectsInvalidJsonEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
         $indent = $this->prophesize(IndentInterface::class);
         $newLine = $this->prophesize(NewLineInterface::class);
         $hasFinalNewLine = true;
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid options for json_encode().',
-            $jsonEncodeOptions
-        ));
+        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
 
         new Format(
             $jsonEncodeOptions,
@@ -89,11 +86,7 @@ final class FormatTest extends Framework\TestCase
             true
         );
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid options for json_encode().',
-            $jsonEncodeOptions
-        ));
+        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
 
         $format->withJsonEncodeOptions($jsonEncodeOptions);
     }

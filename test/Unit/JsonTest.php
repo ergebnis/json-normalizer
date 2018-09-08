@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\JsonInterface;
@@ -26,15 +27,11 @@ final class JsonTest extends Framework\TestCase
 {
     use Helper;
 
-    public function testFromEncodedRejectsInvalidJsonString(): void
+    public function testFromEncodedRejectsInvalidEncoded(): void
     {
         $string = $this->faker()->realText();
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not valid JSON.',
-            $string
-        ));
+        $this->expectException(Exception\InvalidJsonException::class);
 
         Json::fromEncoded($string);
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
+use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Test\Util\Helper;
@@ -42,11 +43,7 @@ final class IndentTest extends Framework\TestCase
             'tab',
         ]);
 
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Size needs to be greater than 0, but %d is not.',
-            $size
-        ));
+        $this->expectException(Exception\InvalidIndentSizeException::class);
 
         Indent::fromSizeAndStyle(
             $size,
@@ -76,17 +73,7 @@ final class IndentTest extends Framework\TestCase
         $size = $faker->numberBetween(1);
         $style = $faker->sentence;
 
-        $styles = [
-            'space',
-            'tab',
-        ];
-
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            'Style needs to be one of "%s", but "%s" is not.',
-            \implode('", "', $styles),
-            $style
-        ));
+        $this->expectException(Exception\InvalidIndentStyleException::class);
 
         Indent::fromSizeAndStyle(
             $size,
@@ -138,11 +125,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage(\sprintf(
-            '"%s" is not a valid indent.',
-            $string
-        ));
+        $this->expectException(Exception\InvalidIndentStringException::class);
 
         Indent::fromString($string);
     }
