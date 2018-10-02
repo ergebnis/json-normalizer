@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Exception;
 
-interface ExceptionInterface
+interface ExceptionInterface extends \Throwable
 {
 }
