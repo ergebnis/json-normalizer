@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\JsonInterface;
 use Localheinz\Json\Normalizer\ChainNormalizer;
-use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 
 /**

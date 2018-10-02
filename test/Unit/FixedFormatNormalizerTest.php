@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\Format\FormatInterface;
+use Localheinz\Json\JsonInterface;
 use Localheinz\Json\Normalizer\FixedFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
-use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
@@ -37,7 +38,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
             ->shouldBeCalled()
             ->willReturn($normalized);
 
-        $format = $this->prophesize(Format\FormatInterface::class);
+        $format = $this->prophesize(FormatInterface::class);
 
         $formatter = $this->prophesize(Format\FormatterInterface::class);
 

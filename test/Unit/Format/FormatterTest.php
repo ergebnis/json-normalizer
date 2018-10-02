@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
-use Localheinz\Json\Normalizer\Format\FormatInterface;
+use Localheinz\Json\Format\FormatInterface;
+use Localheinz\Json\Format\IndentInterface;
+use Localheinz\Json\Format\NewLineInterface;
+use Localheinz\Json\JsonInterface;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
-use Localheinz\Json\Normalizer\Format\IndentInterface;
-use Localheinz\Json\Normalizer\Format\NewLineInterface;
-use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;

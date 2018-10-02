@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Bench;
 
-use Localheinz\Json\Normalizer\Json;
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;

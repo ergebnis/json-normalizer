@@ -76,6 +76,8 @@ After applying the composed normalizer, the `AutoFormatNormalizer` will
 If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
 
 ```php
+use Localheinz\Json\Json;
+use Localheinz\Json\JsonInterface;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -85,9 +87,9 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
-$callable = function (Normalizer\JsonInterface $json): Normalizer\JsonInterface {
+$callable = function (JsonInterface $json): JsonInterface {
     $decoded = $json->decoded();
 
     foreach (get_object_vars($decoded) as $name => $value) {
@@ -98,7 +100,7 @@ $callable = function (Normalizer\JsonInterface $json): Normalizer\JsonInterface 
         $decoded->{$name} .= '/open-source/';
     }
 
-    return Normalizer\Json::fromEncoded(json_encode($decoded));
+    return Json::fromEncoded(json_encode($decoded));
 };
 
 $normalizer = new Normalizer\CallableNormalizer($callable);
@@ -113,6 +115,8 @@ The normalized version will now have the callable applied to it.
 If you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
 
 ```php
+use Localheinz\Json\Format;
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -122,9 +126,9 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
-$indent = Normalizer\Format\Indent::fromString('  ');
+$indent =Format\Indent::fromString('  ');
 
 $normalizer = new Normalizer\ChainNormalizer(
     new Normalizer\JsonEncodeNormalizer(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
@@ -144,6 +148,7 @@ The normalized version will now contain the result of applying all normalizers i
 If you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -155,7 +160,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\FinalNewLineNormalizer();
 
@@ -170,6 +175,8 @@ If you want to normalize a JSON file with an implementation of `NormalizerInterf
 apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
+use Localheinz\Json\Format;
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -179,10 +186,10 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
-/** @var Normalizer\Format\FormatInterface $format*/
+/** @var Format\FormatInterface $format*/
 $normalizer = new Normalizer\FixedFormatNormalizer(
     $composedNormalizer, 
     $format
@@ -201,6 +208,8 @@ but also apply the formatting according to `$format`.
 If you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
 
 ```php
+use Localheinz\Json\Format;
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -210,9 +219,9 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
-$indent = Normalizer\Format\Indent::fromString('  ');
+$indent = Format\Indent::fromString('  ');
 
 $normalizer = new Normalizer\IndentNormalizer($indent);
 
@@ -226,6 +235,7 @@ The normalized version will now be indented with 2 spaces.
 If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
 
 ```php
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -235,7 +245,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
 $jsonEncodeOptions = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
 
@@ -254,6 +264,7 @@ and the corresponding [JSON constants](http://php.net/manual/en/json.constants.p
 If you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -265,7 +276,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\NoFinalNewLineNormalizer();
 
@@ -298,6 +309,7 @@ Let's assume the following schema
 exists at `/schema/example.json`.
 
 ```php
+use Localheinz\Json\Json;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -307,7 +319,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromEncoded($encoded);
 
 $normalizer = new Normalizer\SchemaNormalizer('file:///schema/example.json');
 

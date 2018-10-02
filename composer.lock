@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a651b27c0c75d35662915e4249cc71c2",
+    "content-hash": "439c4666e6c20678c652ddb106138b6f",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -71,6 +71,52 @@
                 "schema"
             ],
             "time": "2017-10-21T13:15:38+00:00"
+        },
+        {
+            "name": "localheinz/json",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/json.git",
+                "reference": "736fca6a2f4ecbeccebdda2300dcee29aff10db2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/json/zipball/736fca6a2f4ecbeccebdda2300dcee29aff10db2",
+                "reference": "736fca6a2f4ecbeccebdda2300dcee29aff10db2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "infection/infection": "~0.10.0",
+                "localheinz/composer-normalize": "~0.8.0",
+                "localheinz/php-cs-fixer-config": "~1.15.0",
+                "localheinz/test-util": "~0.7.0",
+                "phpstan/phpstan": "~0.10.3",
+                "phpstan/phpstan-strict-rules": "~0.10.1",
+                "phpunit/phpunit": "^7.3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Localheinz\\Json\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides a value object for representing JSON data.",
+            "homepage": "https://github.com/localheinz/json",
+            "time": "2018-10-02T21:14:22+00:00"
         },
         {
             "name": "localheinz/json-printer",

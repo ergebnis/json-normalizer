@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Localheinz\Json\JsonInterface;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
-use Localheinz\Json\Normalizer\JsonInterface;
 
 /**
  * @internal
