@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
+use Localheinz\Json\Format\FormatInterface;
+use Localheinz\Json\JsonInterface;
+
 final class FixedFormatNormalizer implements NormalizerInterface
 {
     /**
@@ -21,7 +24,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
     private $normalizer;
 
     /**
-     * @var Format\FormatInterface
+     * @var FormatInterface
      */
     private $format;
 
@@ -32,7 +35,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
 
     public function __construct(
         NormalizerInterface $normalizer,
-        Format\FormatInterface $format,
+        FormatInterface $format,
         Format\FormatterInterface $formatter = null
     ) {
         $this->normalizer = $normalizer;

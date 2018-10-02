@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
+use Localheinz\Json\Json;
+use Localheinz\Json\JsonInterface;
+
 final class NoFinalNewLineNormalizer implements NormalizerInterface
 {
     public function normalize(JsonInterface $json): JsonInterface

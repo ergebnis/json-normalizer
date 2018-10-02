@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
+use Localheinz\Json\JsonInterface;
+
 interface NormalizerInterface
 {
     /**

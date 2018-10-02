@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Format\FormatInterface;
+use Localheinz\Json\JsonInterface;
 
 interface FormatterInterface
 {

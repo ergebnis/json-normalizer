@@ -19,6 +19,8 @@ use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
+use Localheinz\Json\Json;
+use Localheinz\Json\JsonInterface;
 
 final class SchemaNormalizer implements NormalizerInterface
 {
