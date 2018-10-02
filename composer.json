@@ -16,6 +16,7 @@
   ],
   "require": {
     "php": "^7.1",
+    "ext-json": "*",
     "justinrainbow/json-schema": "^4.0.0 || ^5.0.0",
     "localheinz/json-printer": "^2.0.1"
   },
