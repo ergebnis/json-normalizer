@@ -13,25 +13,25 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Exception;
 
-use Localheinz\Json\Normalizer\Exception\InvalidJsonException;
+use Localheinz\Json\Normalizer\Exception\InvalidJsonEncodedException;
 
 /**
  * @internal
  */
-final class InvalidJsonExceptionTest extends AbstractExceptionTestCase
+final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidJsonException::class);
+        $this->assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodedException::class);
     }
 
-    public function testFromEncodedReturnsInvalidJsonException(): void
+    public function testFromEncodedReturnsInvalidJsonEncodedException(): void
     {
         $encoded = $this->faker()->sentence;
 
-        $exception = InvalidJsonException::fromEncoded($encoded);
+        $exception = InvalidJsonEncodedException::fromEncoded($encoded);
 
-        $this->assertInstanceOf(InvalidJsonException::class, $exception);
+        $this->assertInstanceOf(InvalidJsonEncodedException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not valid JSON.',
