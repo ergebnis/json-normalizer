@@ -31,7 +31,7 @@ final class JsonTest extends Framework\TestCase
     {
         $string = $this->faker()->realText();
 
-        $this->expectException(Exception\InvalidJsonException::class);
+        $this->expectException(Exception\InvalidJsonEncodedException::class);
 
         Json::fromEncoded($string);
     }

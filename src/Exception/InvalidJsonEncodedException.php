@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Exception;
 
-final class InvalidJsonException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidJsonEncodedException extends \InvalidArgumentException implements ExceptionInterface
 {
     /**
      * @var string

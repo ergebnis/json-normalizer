@@ -44,7 +44,7 @@ final class Json implements JsonInterface
     /**
      * @param string $encoded
      *
-     * @throws Exception\InvalidJsonException
+     * @throws Exception\InvalidJsonEncodedException
      *
      * @return JsonInterface
      */
@@ -53,7 +53,7 @@ final class Json implements JsonInterface
         $decoded = \json_decode($encoded);
 
         if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw Exception\InvalidJsonException::fromEncoded($encoded);
+            throw Exception\InvalidJsonEncodedException::fromEncoded($encoded);
         }
 
         return new self(
