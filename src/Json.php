@@ -42,6 +42,27 @@ final class Json implements JsonInterface
     }
 
     /**
+     * @param mixed $decoded
+     *
+     * @throws Exception\InvalidJsonDecodedException
+     *
+     * @return JsonInterface
+     */
+    public static function fromDecoded($decoded): JsonInterface
+    {
+        $encoded = \json_encode($decoded);
+
+        if (false === $encoded && \JSON_ERROR_NONE !== \json_last_error()) {
+            throw Exception\InvalidJsonDecodedException::fromDecoded($decoded);
+        }
+
+        return new self(
+            $encoded,
+            $decoded
+        );
+    }
+
+    /**
      * @param string $encoded
      *
      * @throws Exception\InvalidJsonEncodedException

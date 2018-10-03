@@ -88,10 +88,7 @@ final class SchemaNormalizer implements NormalizerInterface
             throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUri($this->schemaUri);
         }
 
-        /** @var string $encoded */
-        $encoded = \json_encode($normalized);
-
-        return Json::fromEncoded($encoded);
+        return Json::fromDecoded($normalized);
     }
 
     /**
