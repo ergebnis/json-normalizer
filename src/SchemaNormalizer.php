@@ -58,7 +58,7 @@ final class SchemaNormalizer implements NormalizerInterface
         $this->schemaValidator = $schemaValidator;
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         $decoded = $json->decoded();
 

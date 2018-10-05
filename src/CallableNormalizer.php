@@ -25,7 +25,7 @@ final class CallableNormalizer implements NormalizerInterface
         $this->callable = $callable;
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         $callable = $this->callable;
 

@@ -66,8 +66,8 @@ JSON;
 
         $schemaValidator
             ->check(
-                Argument::exact($data),
-                Argument::exact($schema)
+                Argument::is($data),
+                Argument::is($schema)
             )
             ->shouldBeCalled();
 

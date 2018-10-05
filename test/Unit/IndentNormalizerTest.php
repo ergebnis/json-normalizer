@@ -15,7 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\IndentNormalizer;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Printer\PrinterInterface;
 use Prophecy\Argument;
 
@@ -28,19 +28,13 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
     {
         $indent = Indent::fromString('  ');
 
-        $encoded = <<<'JSON'
+        $json = Json::fromEncoded(
+<<<'JSON'
 {
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
+    "status": "original"
 }
-JSON;
-
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
+JSON
+        );
 
         $indented = <<<'JSON'
 {
@@ -53,7 +47,7 @@ JSON;
 
         $printer
             ->print(
-                Argument::is($encoded),
+                Argument::is($json->encoded()),
                 Argument::is($indent->__toString())
             )
             ->shouldBeCalled()
@@ -64,7 +58,7 @@ JSON;
             $printer->reveal()
         );
 
-        $normalized = $normalizer->normalize($json->reveal());
+        $normalized = $normalizer->normalize($json);
 
         $this->assertSame($indented, $normalized->encoded());
     }

@@ -25,7 +25,7 @@ final class ChainNormalizer implements NormalizerInterface
         $this->normalizers = $normalizers;
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         foreach ($this->normalizers as $normalizer) {
             $json = $normalizer->normalize($json);

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\NoFinalNewLineNormalizer;
 
 /**
@@ -28,26 +28,22 @@ final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
      */
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {
-        $encoded = <<<'JSON'
+        $json = Json::fromEncoded(
+<<<JSON
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
-}
-JSON;
-        $encoded .= $whitespace;
-
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
+}${whitespace}
+JSON
+        );
 
         $normalizer = new NoFinalNewLineNormalizer();
 
-        $normalized = $normalizer->normalize($json->reveal());
+        $normalized = $normalizer->normalize($json);
 
-        $this->assertSame(\rtrim($encoded), $normalized->encoded());
+        $expected = \rtrim($json->encoded());
+
+        $this->assertSame($expected, $normalized->encoded());
     }
 
     public function providerWhitespace(): \Generator

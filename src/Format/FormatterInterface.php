@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 
 interface FormatterInterface
 {
-    public function format(JsonInterface $json, Format $format): JsonInterface;
+    public function format(Json $json, Format $format): Json;
 }

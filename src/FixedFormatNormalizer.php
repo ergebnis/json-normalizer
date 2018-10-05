@@ -40,7 +40,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
         $this->formatter = $formatter ?: new Format\Formatter();
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         return $this->formatter->format(
             $this->normalizer->normalize($json),

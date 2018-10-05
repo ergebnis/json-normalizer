@@ -16,7 +16,6 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -45,7 +44,7 @@ final class JsonTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        $this->assertInstanceOf(JsonInterface::class, $json);
+        $this->assertInstanceOf(Json::class, $json);
         $this->assertSame($encoded, $json->__toString());
         $this->assertSame($encoded, $json->encoded());
         $this->assertSame($encoded, \json_encode($json->decoded()));

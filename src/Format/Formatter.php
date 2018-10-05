@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer;
 
 final class Formatter implements FormatterInterface
@@ -29,7 +28,7 @@ final class Formatter implements FormatterInterface
         $this->printer = $printer ?: new Printer\Printer();
     }
 
-    public function format(JsonInterface $json, Format $format): JsonInterface
+    public function format(Json $json, Format $format): Json
     {
         /** @var string $encoded */
         $encoded = \json_encode(

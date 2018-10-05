@@ -34,7 +34,7 @@ final class JsonEncodeNormalizer implements NormalizerInterface
         $this->jsonEncodeOptions = $jsonEncodeOptions;
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         /** @var string $encodedWithJsonEncodeOptions */
         $encodedWithJsonEncodeOptions = \json_encode(

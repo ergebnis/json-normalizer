@@ -15,7 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\FixedFormatNormalizer;
 use Localheinz\Json\Normalizer\Format;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
@@ -28,33 +28,53 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
     {
         $faker = $this->faker();
 
-        $json = $this->prophesize(JsonInterface::class);
-        $normalized = $this->prophesize(JsonInterface::class);
-        $formatted = $this->prophesize(JsonInterface::class);
+        $format = new Format\Format(
+            $faker->numberBetween(1),
+            Format\Indent::fromString("\t"),
+            Format\NewLine::fromString("\r\n"),
+            $faker->boolean
+        );
+
+        $json = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "original"
+}
+JSON
+        );
+
+        $normalized = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "normalized"
+}
+JSON
+        );
+
+        $formatted = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "formatted"
+}
+JSON
+        );
 
         $composedNormalizer = $this->prophesize(NormalizerInterface::class);
 
         $composedNormalizer
-            ->normalize(Argument::is($json->reveal()))
+            ->normalize(Argument::is($json))
             ->shouldBeCalled()
             ->willReturn($normalized);
-
-        $format = new Format\Format(
-            $faker->numberBetween(1),
-            Format\Indent::fromString('  '),
-            Format\NewLine::fromString("\r\n"),
-            $faker->boolean
-        );
 
         $formatter = $this->prophesize(Format\FormatterInterface::class);
 
         $formatter
             ->format(
-                Argument::is($normalized->reveal()),
+                Argument::is($normalized),
                 Argument::is($format)
             )
             ->shouldBeCalled()
-            ->willReturn($formatted->reveal());
+            ->willReturn($formatted);
 
         $normalizer = new FixedFormatNormalizer(
             $composedNormalizer->reveal(),
@@ -62,6 +82,6 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
             $formatter->reveal()
         );
 
-        $this->assertSame($formatted->reveal(), $normalizer->normalize($json->reveal()));
+        $this->assertSame($formatted, $normalizer->normalize($json));
     }
 }
