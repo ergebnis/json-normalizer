@@ -18,7 +18,7 @@ use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\NewLine;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Printer;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -53,31 +53,27 @@ final class FormatterTest extends Framework\TestCase
             "\r",
         ]);
 
-        $encoded = <<<'JSON'
+        $json = Json::fromEncoded(
+<<<'JSON'
 {
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
+    "name": "Andreas M\u00f6ller",
+    "url": "https:\/\/github.com\/localheinz\/json-normalizer",
+    "string-apostroph": "'",
+    "string-numeric": "9000",
+    "string-quote": "\"",
+    "string-tag": "<p>"
 }
-JSON;
-
-        $decoded = \json_decode($encoded);
-
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->decoded()
-            ->shouldBeCalled()
-            ->willReturn($decoded);
+JSON
+        );
 
         $encodedWithJsonEncodeOptions = \json_encode(
-            $decoded,
+            $json->decoded(),
             $jsonEncodeOptions
         );
 
         $printedWithIndentAndNewLine = <<<'JSON'
 {
-  "name": "Andreas Möller (printed)",
-  "url": "https://localheinz.com"
+    "status": "printed with indent and new-line"
 }
 JSON;
 
@@ -93,8 +89,8 @@ JSON;
         $printer
             ->print(
                 Argument::is($encodedWithJsonEncodeOptions),
-                Argument::is($indentString),
-                Argument::is($newLineString)
+                Argument::is($format->indent()->__toString()),
+                Argument::is($format->newLine()->__toString())
             )
             ->shouldBeCalled()
             ->willReturn($printedWithIndentAndNewLine);
@@ -102,15 +98,17 @@ JSON;
         $formatter = new Formatter($printer->reveal());
 
         $formatted = $formatter->format(
-            $json->reveal(),
+            $json,
             $format
         );
 
-        $this->assertInstanceOf(JsonInterface::class, $formatted);
+        $this->assertInstanceOf(Json::class, $formatted);
 
         $suffix = $hasFinalNewLine ? $newLineString : '';
 
-        $this->assertSame($printedWithIndentAndNewLine . $suffix, $formatted->encoded());
+        $expected = $printedWithIndentAndNewLine . $suffix;
+
+        $this->assertSame($expected, $formatted->encoded());
     }
 
     public function providerFinalNewLine(): \Generator

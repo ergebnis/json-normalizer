@@ -15,7 +15,7 @@ namespace Localheinz\Json\Normalizer;
 
 final class NoFinalNewLineNormalizer implements NormalizerInterface
 {
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         $withFinalNewLine = \rtrim($json->encoded());
 

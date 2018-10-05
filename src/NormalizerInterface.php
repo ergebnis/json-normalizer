@@ -16,7 +16,7 @@ namespace Localheinz\Json\Normalizer;
 interface NormalizerInterface
 {
     /**
-     * @param JsonInterface $json
+     * @param Json $json
      *
      * @throws Exception\SchemaUriCouldNotBeResolvedException
      * @throws Exception\SchemaUriCouldNotBeReadException
@@ -25,7 +25,7 @@ interface NormalizerInterface
      * @throws Exception\OriginalInvalidAccordingToSchemaException
      * @throws Exception\NormalizedInvalidAccordingToSchemaException
      *
-     * @return JsonInterface
+     * @return Json
      */
-    public function normalize(JsonInterface $json): JsonInterface;
+    public function normalize(Json $json): Json;
 }

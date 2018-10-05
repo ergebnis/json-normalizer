@@ -87,7 +87,7 @@ JSON;
 
 $json = Normalizer\Json::fromEncoded($encoded);
 
-$callable = function (Normalizer\JsonInterface $json): Normalizer\JsonInterface {
+$callable = function (Normalizer\Json $json): Normalizer\Json {
     $decoded = $json->decoded();
 
     foreach (get_object_vars($decoded) as $name => $value) {

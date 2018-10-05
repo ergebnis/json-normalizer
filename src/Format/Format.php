@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 
 final class Format
 {
@@ -58,7 +58,7 @@ final class Format
         $this->hasFinalNewLine = $hasFinalNewLine;
     }
 
-    public static function fromJson(JsonInterface $json): self
+    public static function fromJson(Json $json): self
     {
         $encoded = $json->encoded();
 

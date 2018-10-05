@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\ChainNormalizer;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\NormalizerInterface;
 
 /**
@@ -24,15 +24,27 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
-        $json = $this->prophesize(JsonInterface::class);
+        $json = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "original"
+}
+JSON
+        );
 
-        $results = \array_map(function () {
-            return $this->prophesize(JsonInterface::class)->reveal();
+        $results = \array_map(function (int $step) {
+            return Json::fromEncoded(
+<<<JSON
+{
+    "status": "normalized at step ${step}"
+}
+JSON
+            );
         }, \range(0, 4));
 
         $last = \end($results);
 
-        $normalizers = \array_map(function ($result) use ($json) {
+        $normalizers = \array_map(function ($result) use ($json): NormalizerInterface {
             static $previous = null;
 
             if (null === $previous) {
@@ -53,7 +65,7 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
 
         $normalizer = new ChainNormalizer(...$normalizers);
 
-        $normalized = $normalizer->normalize($json->reveal());
+        $normalized = $normalizer->normalize($json);
 
         $this->assertSame($last, $normalized);
     }

@@ -33,7 +33,7 @@ final class IndentNormalizer implements NormalizerInterface
         $this->printer = $printer ?: new Printer\Printer();
     }
 
-    public function normalize(JsonInterface $json): JsonInterface
+    public function normalize(Json $json): Json
     {
         $withIndent = $this->printer->print(
             $json->encoded(),

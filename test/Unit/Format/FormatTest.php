@@ -17,7 +17,7 @@ use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\NewLine;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
@@ -179,14 +179,9 @@ final class FormatTest extends Framework\TestCase
      */
     public function testFromJsonReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $encoded): void
     {
-        $json = $this->prophesize(JsonInterface::class);
+        $json = Json::fromEncoded($encoded);
 
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
@@ -233,14 +228,9 @@ final class FormatTest extends Framework\TestCase
      */
     public function testFromJsonReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
-        $json = $this->prophesize(JsonInterface::class);
+        $json = Json::fromEncoded($encoded);
 
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame('    ', $format->indent()->__toString());
@@ -278,7 +268,8 @@ final class FormatTest extends Framework\TestCase
      */
     public function testFromJsonReturnsFormatWithIndentSniffedFromArray(string $indent, string $sniffedIndent): void
     {
-        $encoded = <<<JSON
+        $json = Json::fromEncoded(
+            <<<JSON
 [
 "foo",
 ${indent}"bar",
@@ -286,16 +277,10 @@ ${indent}"bar",
         "qux": "quux"
     }
 ]
-JSON;
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
@@ -310,7 +295,8 @@ JSON;
      */
     public function testFromJsonReturnsFormatWithIndentSniffedFromObject(string $indent, string $sniffedIndent): void
     {
-        $encoded = <<<JSON
+        $json = Json::fromEncoded(
+<<<JSON
 {
 "foo": 9000,
 ${indent}"bar": 123,
@@ -318,16 +304,10 @@ ${indent}"bar": 123,
         "qux": "quux"
     }
 }
-JSON;
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
@@ -389,16 +369,11 @@ JSON;
      *
      * @param string $encoded
      */
-    public function testFromFormatReturnsFormatWithDefaultNewLineIfUnableToSniff(string $encoded): void
+    public function testFromJsonReturnsFormatWithDefaultNewLineIfUnableToSniff(string $encoded): void
     {
-        $json = $this->prophesize(JsonInterface::class);
+        $json = Json::fromEncoded($encoded);
 
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame(\PHP_EOL, $format->newLine()->__toString());
@@ -411,18 +386,13 @@ JSON;
      */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLine): void
     {
-        $encoded = <<<JSON
+        $json = Json::fromEncoded(
+<<<JSON
 ["foo",${newLine}"bar"]
-JSON;
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
@@ -435,18 +405,13 @@ JSON;
      */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLine): void
     {
-        $encoded = <<<JSON
+        $json = Json::fromEncoded(
+<<<JSON
 {"foo": 9000,${newLine}"bar": 123}
-JSON;
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
@@ -474,25 +439,19 @@ JSON;
      */
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
-        $encoded = <<<'JSON'
+        $json = Json::fromEncoded(
+<<<JSON
 {
     "foo": 9000,
     "bar": 123,
     "baz": {
         "qux": "quux"
     }
-}
-JSON;
-        $encoded .= $actualWhitespace;
+}${actualWhitespace}
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertFalse($format->hasFinalNewLine());
@@ -523,25 +482,19 @@ JSON;
      */
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
-        $encoded = <<<'JSON'
+        $json = Json::fromEncoded(
+<<<JSON
 {
     "foo": 9000,
     "bar": 123,
     "baz": {
         "qux": "quux"
     }
-}
-JSON;
-        $encoded .= $actualWhitespace;
+}${actualWhitespace}
+JSON
+        );
 
-        $json = $this->prophesize(JsonInterface::class);
-
-        $json
-            ->encoded()
-            ->shouldBeCalled()
-            ->willReturn($encoded);
-
-        $format = Format::fromJson($json->reveal());
+        $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
         $this->assertTrue($format->hasFinalNewLine());

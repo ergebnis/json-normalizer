@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-final class Json implements JsonInterface
+final class Json
 {
     /**
      * @var string
@@ -36,6 +36,11 @@ final class Json implements JsonInterface
         $this->decoded = $decoded;
     }
 
+    /**
+     * Returns the original JSON value.
+     *
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->encoded;
@@ -46,9 +51,9 @@ final class Json implements JsonInterface
      *
      * @throws Exception\InvalidJsonEncodedException
      *
-     * @return JsonInterface
+     * @return self
      */
-    public static function fromEncoded(string $encoded): JsonInterface
+    public static function fromEncoded(string $encoded): self
     {
         $decoded = \json_decode($encoded);
 
@@ -62,16 +67,31 @@ final class Json implements JsonInterface
         );
     }
 
+    /**
+     * Returns the decoded JSON value.
+     *
+     * @return null|array|bool|float|int|\stdClass|string
+     */
     public function decoded()
     {
         return $this->decoded;
     }
 
+    /**
+     * Returns the original JSON value.
+     *
+     * @return string
+     */
     public function encoded(): string
     {
         return $this->encoded;
     }
 
+    /**
+     * Returns the format of the original JSON value.
+     *
+     * @return Format\Format
+     */
     public function format(): Format\Format
     {
         if (null === $this->format) {

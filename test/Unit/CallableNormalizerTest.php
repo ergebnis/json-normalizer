@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
 use Localheinz\Json\Normalizer\CallableNormalizer;
-use Localheinz\Json\Normalizer\JsonInterface;
+use Localheinz\Json\Normalizer\Json;
 
 /**
  * @internal
@@ -23,15 +23,28 @@ final class CallableNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughCallable(): void
     {
-        $json = $this->prophesize(JsonInterface::class);
-        $normalized = $this->prophesize(JsonInterface::class);
+        $json = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "original"
+}
+JSON
+        );
 
-        $callable = function () use ($normalized): JsonInterface {
-            return $normalized->reveal();
+        $normalized = Json::fromEncoded(
+<<<'JSON'
+{
+    "status": "normalized"
+}
+JSON
+        );
+
+        $callable = function () use ($normalized): Json {
+            return $normalized;
         };
 
         $normalizer = new CallableNormalizer($callable);
 
-        $this->assertSame($normalized->reveal(), $normalizer->normalize($json->reveal()));
+        $this->assertSame($normalized, $normalizer->normalize($json));
     }
 }
