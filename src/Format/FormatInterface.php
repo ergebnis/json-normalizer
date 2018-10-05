@@ -21,7 +21,7 @@ interface FormatInterface
 
     public function indent(): Indent;
 
-    public function newLine(): NewLineInterface;
+    public function newLine(): NewLine;
 
     public function hasFinalNewLine(): bool;
 
@@ -36,7 +36,7 @@ interface FormatInterface
 
     public function withIndent(Indent $indent): self;
 
-    public function withNewLine(NewLineInterface $newLine): self;
+    public function withNewLine(NewLine $newLine): self;
 
     public function withHasFinalNewLine(bool $hasFinalNewLine): self;
 }

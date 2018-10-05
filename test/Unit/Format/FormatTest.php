@@ -17,7 +17,7 @@ use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
-use Localheinz\Json\Normalizer\Format\NewLineInterface;
+use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
@@ -38,7 +38,7 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = -1;
         $indent = Indent::fromString('  ');
-        $newLine = $this->prophesize(NewLineInterface::class);
+        $newLine = NewLine::fromString("\r\n");
         $hasFinalNewLine = true;
 
         $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
@@ -46,7 +46,7 @@ final class FormatTest extends Framework\TestCase
         new Format(
             $jsonEncodeOptions,
             $indent,
-            $newLine->reveal(),
+            $newLine,
             $hasFinalNewLine
         );
     }
@@ -60,18 +60,18 @@ final class FormatTest extends Framework\TestCase
     {
         $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
         $indent = Indent::fromString('  ');
-        $newLine = $this->prophesize(NewLineInterface::class);
+        $newLine = NewLine::fromString("\r\n");
 
         $format = new Format(
             $jsonEncodeOptions,
             $indent,
-            $newLine->reveal(),
+            $newLine,
             $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
         $this->assertSame($indent, $format->indent());
-        $this->assertSame($newLine->reveal(), $format->newLine());
+        $this->assertSame($newLine, $format->newLine());
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
@@ -82,7 +82,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             Indent::fromString('  '),
-            $this->prophesize(NewLineInterface::class)->reveal(),
+            NewLine::fromString("\r\n"),
             true
         );
 
@@ -96,7 +96,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             Indent::fromString('  '),
-            $this->prophesize(NewLineInterface::class)->reveal(),
+            NewLine::fromString("\r\n"),
             true
         );
 
@@ -116,7 +116,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             Indent::fromString('  '),
-            $this->prophesize(NewLineInterface::class)->reveal(),
+            NewLine::fromString("\r\n"),
             true
         );
 
@@ -129,20 +129,20 @@ final class FormatTest extends Framework\TestCase
 
     public function testWithNewLineClonesFormatAndSetsNewLine(): void
     {
-        $newLine = $this->prophesize(NewLineInterface::class);
+        $newLine = NewLine::fromString("\r\n");
 
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             Indent::fromString('  '),
-            $this->prophesize(NewLineInterface::class)->reveal(),
+            NewLine::fromString("\r"),
             true
         );
 
-        $mutated = $format->withNewLine($newLine->reveal());
+        $mutated = $format->withNewLine($newLine);
 
         $this->assertInstanceOf(FormatInterface::class, $mutated);
         $this->assertNotSame($format, $mutated);
-        $this->assertSame($newLine->reveal(), $mutated->newLine());
+        $this->assertSame($newLine, $mutated->newLine());
     }
 
     /**
@@ -155,7 +155,7 @@ final class FormatTest extends Framework\TestCase
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
             Indent::fromString('  '),
-            $this->prophesize(NewLineInterface::class)->reveal(),
+            NewLine::fromString("\r\n"),
             false
         );
 

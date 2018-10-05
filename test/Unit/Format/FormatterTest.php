@@ -17,7 +17,7 @@ use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
-use Localheinz\Json\Normalizer\Format\NewLineInterface;
+use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer;
 use Localheinz\Test\Util\Helper;
@@ -54,13 +54,7 @@ final class FormatterTest extends Framework\TestCase
         ]);
 
         $indent = Indent::fromString($indentString);
-
-        $newLine = $this->prophesize(NewLineInterface::class);
-
-        $newLine
-            ->__toString()
-            ->shouldBeCalled()
-            ->willReturn($newLineString);
+        $newLine = NewLine::fromString($newLineString);
 
         $encoded = <<<'JSON'
 {
@@ -105,7 +99,7 @@ JSON;
         $format
             ->newLine()
             ->shouldBeCalled()
-            ->willReturn($newLine->reveal());
+            ->willReturn($newLine);
 
         $format
             ->hasFinalNewLine()

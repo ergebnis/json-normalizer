@@ -15,8 +15,6 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\NewLine;
-use Localheinz\Json\Normalizer\Format\NewLineInterface;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**
@@ -24,13 +22,6 @@ use PHPUnit\Framework;
  */
 final class NewLineTest extends Framework\TestCase
 {
-    use Helper;
-
-    public function testImplementsNewLineInterface(): void
-    {
-        $this->assertClassImplementsInterface(NewLineInterface::class, NewLine::class);
-    }
-
     /**
      * @dataProvider providerInvalidNewLineString
      *
@@ -72,7 +63,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $newLine = NewLine::fromString($string);
 
-        $this->assertInstanceOf(NewLineInterface::class, $newLine);
+        $this->assertInstanceOf(NewLine::class, $newLine);
         $this->assertSame($string, $newLine->__toString());
     }
 
