@@ -26,7 +26,7 @@ final class Json implements JsonInterface
     private $decoded;
 
     /**
-     * @var Format\FormatInterface
+     * @var Format\Format
      */
     private $format;
 
@@ -72,7 +72,7 @@ final class Json implements JsonInterface
         return $this->encoded;
     }
 
-    public function format(): Format\FormatInterface
+    public function format(): Format\Format
     {
         if (null === $this->format) {
             $this->format = Format\Format::fromJson($this);

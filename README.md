@@ -182,7 +182,7 @@ JSON;
 $json = Normalizer\Json::fromEncoded($encoded);
 
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
-/** @var Normalizer\Format\FormatInterface $format*/
+/** @var Normalizer\Format\Format $format*/
 $normalizer = new Normalizer\FixedFormatNormalizer(
     $composedNormalizer, 
     $format

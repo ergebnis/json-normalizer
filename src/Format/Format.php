@@ -16,7 +16,7 @@ namespace Localheinz\Json\Normalizer\Format;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\JsonInterface;
 
-final class Format implements FormatInterface
+final class Format
 {
     /**
      * @var int
@@ -58,7 +58,7 @@ final class Format implements FormatInterface
         $this->hasFinalNewLine = $hasFinalNewLine;
     }
 
-    public static function fromJson(JsonInterface $json): FormatInterface
+    public static function fromJson(JsonInterface $json): self
     {
         $encoded = $json->encoded();
 
@@ -90,7 +90,14 @@ final class Format implements FormatInterface
         return $this->hasFinalNewLine;
     }
 
-    public function withJsonEncodeOptions(int $jsonEncodeOptions): FormatInterface
+    /**
+     * @param int $jsonEncodeOptions
+     *
+     * @throws Exception\InvalidJsonEncodeOptionsException
+     *
+     * @return self
+     */
+    public function withJsonEncodeOptions(int $jsonEncodeOptions): self
     {
         if (0 > $jsonEncodeOptions) {
             throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
@@ -103,7 +110,7 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withIndent(Indent $indent): FormatInterface
+    public function withIndent(Indent $indent): self
     {
         $mutated = clone $this;
 
@@ -112,7 +119,7 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withNewLine(NewLine $newLine): FormatInterface
+    public function withNewLine(NewLine $newLine): self
     {
         $mutated = clone $this;
 
@@ -121,7 +128,7 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withHasFinalNewLine(bool $hasFinalNewLine): FormatInterface
+    public function withHasFinalNewLine(bool $hasFinalNewLine): self
     {
         $mutated = clone $this;
 

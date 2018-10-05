@@ -39,7 +39,7 @@ interface JsonInterface
     /**
      * Returns the format of the original JSON value.
      *
-     * @return Format\FormatInterface
+     * @return Format\Format
      */
-    public function format(): Format\FormatInterface;
+    public function format(): Format\Format;
 }

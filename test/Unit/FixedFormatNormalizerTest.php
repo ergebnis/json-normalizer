@@ -26,6 +26,8 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeNormalizesAndFormatsUsingFormat(): void
     {
+        $faker = $this->faker();
+
         $json = $this->prophesize(JsonInterface::class);
         $normalized = $this->prophesize(JsonInterface::class);
         $formatted = $this->prophesize(JsonInterface::class);
@@ -37,21 +39,26 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
             ->shouldBeCalled()
             ->willReturn($normalized);
 
-        $format = $this->prophesize(Format\FormatInterface::class);
+        $format = new Format\Format(
+            $faker->numberBetween(1),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r\n"),
+            $faker->boolean
+        );
 
         $formatter = $this->prophesize(Format\FormatterInterface::class);
 
         $formatter
             ->format(
                 Argument::is($normalized->reveal()),
-                Argument::is($format->reveal())
+                Argument::is($format)
             )
             ->shouldBeCalled()
             ->willReturn($formatted->reveal());
 
         $normalizer = new FixedFormatNormalizer(
             $composedNormalizer->reveal(),
-            $format->reveal(),
+            $format,
             $formatter->reveal()
         );
 

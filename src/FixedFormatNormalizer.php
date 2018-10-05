@@ -21,7 +21,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
     private $normalizer;
 
     /**
-     * @var Format\FormatInterface
+     * @var Format\Format
      */
     private $format;
 
@@ -32,7 +32,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
 
     public function __construct(
         NormalizerInterface $normalizer,
-        Format\FormatInterface $format,
+        Format\Format $format,
         Format\FormatterInterface $formatter = null
     ) {
         $this->normalizer = $normalizer;

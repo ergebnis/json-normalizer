@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
-use Localheinz\Json\Normalizer\Format\FormatInterface;
+use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
@@ -53,9 +53,6 @@ final class FormatterTest extends Framework\TestCase
             "\r",
         ]);
 
-        $indent = Indent::fromString($indentString);
-        $newLine = NewLine::fromString($newLineString);
-
         $encoded = <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -84,27 +81,12 @@ JSON;
 }
 JSON;
 
-        $format = $this->prophesize(FormatInterface::class);
-
-        $format
-            ->jsonEncodeOptions()
-            ->shouldBeCalled()
-            ->willReturn($jsonEncodeOptions);
-
-        $format
-            ->indent()
-            ->shouldBeCalled()
-            ->willReturn($indent);
-
-        $format
-            ->newLine()
-            ->shouldBeCalled()
-            ->willReturn($newLine);
-
-        $format
-            ->hasFinalNewLine()
-            ->shouldBeCalled()
-            ->willReturn($hasFinalNewLine);
+        $format = new Format(
+            $jsonEncodeOptions,
+            Indent::fromString($indentString),
+            NewLine::fromString($newLineString),
+            $hasFinalNewLine
+        );
 
         $printer = $this->prophesize(Printer\PrinterInterface::class);
 
@@ -121,7 +103,7 @@ JSON;
 
         $formatted = $formatter->format(
             $json->reveal(),
-            $format->reveal()
+            $format
         );
 
         $this->assertInstanceOf(JsonInterface::class, $formatted);
