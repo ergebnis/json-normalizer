@@ -15,7 +15,7 @@ namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 
-final class NewLine implements NewLineInterface
+final class NewLine
 {
     /**
      * @var string
@@ -37,9 +37,9 @@ final class NewLine implements NewLineInterface
      *
      * @throws Exception\InvalidNewLineStringException
      *
-     * @return NewLineInterface
+     * @return self
      */
-    public static function fromString(string $string): NewLineInterface
+    public static function fromString(string $string): self
     {
         if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $string)) {
             throw Exception\InvalidNewLineStringException::fromString($string);

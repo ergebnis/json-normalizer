@@ -29,7 +29,7 @@ final class Format implements FormatInterface
     private $indent;
 
     /**
-     * @var NewLineInterface
+     * @var NewLine
      */
     private $newLine;
 
@@ -39,14 +39,14 @@ final class Format implements FormatInterface
     private $hasFinalNewLine;
 
     /**
-     * @param int              $jsonEncodeOptions
-     * @param Indent           $indent
-     * @param NewLineInterface $newLine
-     * @param bool             $hasFinalNewLine
+     * @param int     $jsonEncodeOptions
+     * @param Indent  $indent
+     * @param NewLine $newLine
+     * @param bool    $hasFinalNewLine
      *
      * @throws Exception\InvalidJsonEncodeOptionsException
      */
-    public function __construct(int $jsonEncodeOptions, Indent $indent, NewLineInterface $newLine, bool $hasFinalNewLine)
+    public function __construct(int $jsonEncodeOptions, Indent $indent, NewLine $newLine, bool $hasFinalNewLine)
     {
         if (0 > $jsonEncodeOptions) {
             throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
@@ -80,7 +80,7 @@ final class Format implements FormatInterface
         return $this->indent;
     }
 
-    public function newLine(): NewLineInterface
+    public function newLine(): NewLine
     {
         return $this->newLine;
     }
@@ -112,7 +112,7 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withNewLine(NewLineInterface $newLine): FormatInterface
+    public function withNewLine(NewLine $newLine): FormatInterface
     {
         $mutated = clone $this;
 
@@ -157,7 +157,7 @@ final class Format implements FormatInterface
         );
     }
 
-    private static function detectNewLine(string $encoded): NewLineInterface
+    private static function detectNewLine(string $encoded): NewLine
     {
         if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $encoded, $match)) {
             return NewLine::fromString($match['newLine']);
