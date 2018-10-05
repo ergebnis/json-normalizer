@@ -24,7 +24,7 @@ final class Format implements FormatInterface
     private $jsonEncodeOptions;
 
     /**
-     * @var IndentInterface
+     * @var Indent
      */
     private $indent;
 
@@ -40,13 +40,13 @@ final class Format implements FormatInterface
 
     /**
      * @param int              $jsonEncodeOptions
-     * @param IndentInterface  $indent
+     * @param Indent           $indent
      * @param NewLineInterface $newLine
      * @param bool             $hasFinalNewLine
      *
      * @throws Exception\InvalidJsonEncodeOptionsException
      */
-    public function __construct(int $jsonEncodeOptions, IndentInterface $indent, NewLineInterface $newLine, bool $hasFinalNewLine)
+    public function __construct(int $jsonEncodeOptions, Indent $indent, NewLineInterface $newLine, bool $hasFinalNewLine)
     {
         if (0 > $jsonEncodeOptions) {
             throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
@@ -75,7 +75,7 @@ final class Format implements FormatInterface
         return $this->jsonEncodeOptions;
     }
 
-    public function indent(): IndentInterface
+    public function indent(): Indent
     {
         return $this->indent;
     }
@@ -103,7 +103,7 @@ final class Format implements FormatInterface
         return $mutated;
     }
 
-    public function withIndent(IndentInterface $indent): FormatInterface
+    public function withIndent(Indent $indent): FormatInterface
     {
         $mutated = clone $this;
 
@@ -145,7 +145,7 @@ final class Format implements FormatInterface
         return $jsonEncodeOptions;
     }
 
-    private static function detectIndent(string $encoded): IndentInterface
+    private static function detectIndent(string $encoded): Indent
     {
         if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $encoded, $match)) {
             return Indent::fromString($match['indent']);

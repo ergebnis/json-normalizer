@@ -16,7 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
-use Localheinz\Json\Normalizer\Format\IndentInterface;
+use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\NewLineInterface;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Test\Util\Helper;
@@ -37,7 +37,7 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorRejectsInvalidJsonEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
-        $indent = $this->prophesize(IndentInterface::class);
+        $indent = Indent::fromString('  ');
         $newLine = $this->prophesize(NewLineInterface::class);
         $hasFinalNewLine = true;
 
@@ -45,7 +45,7 @@ final class FormatTest extends Framework\TestCase
 
         new Format(
             $jsonEncodeOptions,
-            $indent->reveal(),
+            $indent,
             $newLine->reveal(),
             $hasFinalNewLine
         );
@@ -59,18 +59,18 @@ final class FormatTest extends Framework\TestCase
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
-        $indent = $this->prophesize(IndentInterface::class);
+        $indent = Indent::fromString('  ');
         $newLine = $this->prophesize(NewLineInterface::class);
 
         $format = new Format(
             $jsonEncodeOptions,
-            $indent->reveal(),
+            $indent,
             $newLine->reveal(),
             $hasFinalNewLine
         );
 
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
-        $this->assertSame($indent->reveal(), $format->indent());
+        $this->assertSame($indent, $format->indent());
         $this->assertSame($newLine->reveal(), $format->newLine());
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
@@ -81,7 +81,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
+            Indent::fromString('  '),
             $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
@@ -95,7 +95,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
+            Indent::fromString('  '),
             $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
@@ -111,20 +111,20 @@ final class FormatTest extends Framework\TestCase
 
     public function testWithIndentClonesFormatAndSetsIndent(): void
     {
-        $indent = $this->prophesize(IndentInterface::class);
+        $indent = Indent::fromString("\t");
 
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
+            Indent::fromString('  '),
             $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
 
-        $mutated = $format->withIndent($indent->reveal());
+        $mutated = $format->withIndent($indent);
 
         $this->assertInstanceOf(FormatInterface::class, $mutated);
         $this->assertNotSame($format, $mutated);
-        $this->assertSame($indent->reveal(), $mutated->indent());
+        $this->assertSame($indent, $mutated->indent());
     }
 
     public function testWithNewLineClonesFormatAndSetsNewLine(): void
@@ -133,7 +133,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
+            Indent::fromString('  '),
             $this->prophesize(NewLineInterface::class)->reveal(),
             true
         );
@@ -154,7 +154,7 @@ final class FormatTest extends Framework\TestCase
     {
         $format = new Format(
             \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            $this->prophesize(IndentInterface::class)->reveal(),
+            Indent::fromString('  '),
             $this->prophesize(NewLineInterface::class)->reveal(),
             false
         );

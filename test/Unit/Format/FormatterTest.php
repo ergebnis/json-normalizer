@@ -16,7 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
-use Localheinz\Json\Normalizer\Format\IndentInterface;
+use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\NewLineInterface;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer;
@@ -53,12 +53,7 @@ final class FormatterTest extends Framework\TestCase
             "\r",
         ]);
 
-        $indent = $this->prophesize(IndentInterface::class);
-
-        $indent
-            ->__toString()
-            ->shouldBeCalled()
-            ->willReturn($indentString);
+        $indent = Indent::fromString($indentString);
 
         $newLine = $this->prophesize(NewLineInterface::class);
 
@@ -105,7 +100,7 @@ JSON;
         $format
             ->indent()
             ->shouldBeCalled()
-            ->willReturn($indent->reveal());
+            ->willReturn($indent);
 
         $format
             ->newLine()

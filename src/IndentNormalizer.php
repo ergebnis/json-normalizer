@@ -18,7 +18,7 @@ use Localheinz\Json\Printer;
 final class IndentNormalizer implements NormalizerInterface
 {
     /**
-     * @var Format\IndentInterface
+     * @var Format\Indent
      */
     private $indent;
 
@@ -27,7 +27,7 @@ final class IndentNormalizer implements NormalizerInterface
      */
     private $printer;
 
-    public function __construct(Format\IndentInterface $indent, Printer\PrinterInterface $printer = null)
+    public function __construct(Format\Indent $indent, Printer\PrinterInterface $printer = null)
     {
         $this->indent = $indent;
         $this->printer = $printer ?: new Printer\Printer();
