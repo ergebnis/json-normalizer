@@ -15,11 +15,9 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
-use Localheinz\Json\Normalizer\Format\FormatInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\JsonInterface;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**
@@ -27,13 +25,6 @@ use PHPUnit\Framework;
  */
 final class FormatTest extends Framework\TestCase
 {
-    use Helper;
-
-    public function testImplementsFormatInterface(): void
-    {
-        $this->assertClassImplementsInterface(FormatInterface::class, Format::class);
-    }
-
     public function testConstructorRejectsInvalidJsonEncodeOptions(): void
     {
         $jsonEncodeOptions = -1;
@@ -104,7 +95,7 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
 
-        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertInstanceOf(Format::class, $mutated);
         $this->assertNotSame($format, $mutated);
         $this->assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
     }
@@ -122,7 +113,7 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withIndent($indent);
 
-        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertInstanceOf(Format::class, $mutated);
         $this->assertNotSame($format, $mutated);
         $this->assertSame($indent, $mutated->indent());
     }
@@ -140,7 +131,7 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withNewLine($newLine);
 
-        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertInstanceOf(Format::class, $mutated);
         $this->assertNotSame($format, $mutated);
         $this->assertSame($newLine, $mutated->newLine());
     }
@@ -161,7 +152,7 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withHasFinalNewLine($hasFinalNewLine);
 
-        $this->assertInstanceOf(FormatInterface::class, $mutated);
+        $this->assertInstanceOf(Format::class, $mutated);
         $this->assertNotSame($format, $mutated);
         $this->assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
     }
@@ -197,7 +188,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
     }
 
@@ -251,7 +242,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame('    ', $format->indent()->__toString());
     }
 
@@ -306,7 +297,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
     }
 
@@ -338,7 +329,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($sniffedIndent, $format->indent()->__toString());
     }
 
@@ -409,7 +400,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame(\PHP_EOL, $format->newLine()->__toString());
     }
 
@@ -433,7 +424,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
     }
 
@@ -457,7 +448,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertSame($newLine, $format->newLine()->__toString());
     }
 
@@ -503,7 +494,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertFalse($format->hasFinalNewLine());
     }
 
@@ -552,7 +543,7 @@ JSON;
 
         $format = Format::fromJson($json->reveal());
 
-        $this->assertInstanceOf(FormatInterface::class, $format);
+        $this->assertInstanceOf(Format::class, $format);
         $this->assertTrue($format->hasFinalNewLine());
     }
 

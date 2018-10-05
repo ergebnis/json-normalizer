@@ -17,5 +17,5 @@ use Localheinz\Json\Normalizer\JsonInterface;
 
 interface FormatterInterface
 {
-    public function format(JsonInterface $json, FormatInterface $format): JsonInterface;
+    public function format(JsonInterface $json, Format $format): JsonInterface;
 }

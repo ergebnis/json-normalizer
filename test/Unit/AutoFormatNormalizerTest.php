@@ -26,14 +26,21 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeNormalizesAndFormatsUsingJsonFormat(): void
     {
-        $format = $this->prophesize(Format\FormatInterface::class);
+        $faker = $this->faker();
+
+        $format = new Format\Format(
+            $faker->numberBetween(1),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r\n"),
+            $faker->boolean
+        );
 
         $json = $this->prophesize(JsonInterface::class);
 
         $json
             ->format()
             ->shouldBeCalled()
-            ->willReturn($format->reveal());
+            ->willReturn($format);
 
         $normalized = $this->prophesize(JsonInterface::class);
         $formatted = $this->prophesize(JsonInterface::class);
@@ -50,7 +57,7 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
         $formatter
             ->format(
                 Argument::is($normalized->reveal()),
-                Argument::is($format->reveal())
+                Argument::is($format)
             )
             ->shouldBeCalled()
             ->willReturn($formatted->reveal());

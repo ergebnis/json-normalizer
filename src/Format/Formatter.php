@@ -29,7 +29,7 @@ final class Formatter implements FormatterInterface
         $this->printer = $printer ?: new Printer\Printer();
     }
 
-    public function format(JsonInterface $json, FormatInterface $format): JsonInterface
+    public function format(JsonInterface $json, Format $format): JsonInterface
     {
         /** @var string $encoded */
         $encoded = \json_encode(
