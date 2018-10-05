@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
-use Localheinz\Json\Normalizer\Format\IndentInterface;
+use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\IndentNormalizer;
 use Localheinz\Json\Normalizer\JsonInterface;
 use Localheinz\Json\Printer\PrinterInterface;
@@ -26,17 +26,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
-        $indentString = $this->faker()->randomElement([
-            ' ',
-            "\t",
-        ]);
-
-        $indent = $this->prophesize(IndentInterface::class);
-
-        $indent
-            ->__toString()
-            ->shouldBeCalled()
-            ->willReturn($indentString);
+        $indent = Indent::fromString('  ');
 
         $encoded = <<<'JSON'
 {
@@ -64,13 +54,13 @@ JSON;
         $printer
             ->print(
                 Argument::is($encoded),
-                Argument::is($indentString)
+                Argument::is($indent->__toString())
             )
             ->shouldBeCalled()
             ->willReturn($indented);
 
         $normalizer = new IndentNormalizer(
-            $indent->reveal(),
+            $indent,
             $printer->reveal()
         );
 

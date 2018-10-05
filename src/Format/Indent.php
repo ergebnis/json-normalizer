@@ -15,7 +15,7 @@ namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 
-final class Indent implements IndentInterface
+final class Indent
 {
     /**
      * @var string
@@ -37,9 +37,9 @@ final class Indent implements IndentInterface
      *
      * @throws Exception\InvalidIndentStringException
      *
-     * @return IndentInterface
+     * @return self
      */
-    public static function fromString(string $string): IndentInterface
+    public static function fromString(string $string): self
     {
         if (1 !== \preg_match('/^( *|\t+)$/', $string)) {
             throw Exception\InvalidIndentStringException::fromString($string);
@@ -55,9 +55,9 @@ final class Indent implements IndentInterface
      * @throws Exception\InvalidIndentSizeException
      * @throws Exception\InvalidIndentStyleException
      *
-     * @return IndentInterface
+     * @return self
      */
-    public static function fromSizeAndStyle(int $size, string $style): IndentInterface
+    public static function fromSizeAndStyle(int $size, string $style): self
     {
         $minimumSize = 1;
 

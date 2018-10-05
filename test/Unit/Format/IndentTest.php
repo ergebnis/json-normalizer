@@ -15,7 +15,6 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Indent;
-use Localheinz\Json\Normalizer\Format\IndentInterface;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -25,11 +24,6 @@ use PHPUnit\Framework;
 final class IndentTest extends Framework\TestCase
 {
     use Helper;
-
-    public function testImplementsIndentInterface(): void
-    {
-        $this->assertClassImplementsInterface(IndentInterface::class, Indent::class);
-    }
 
     /**
      * @dataProvider providerInvalidSize
@@ -95,7 +89,7 @@ final class IndentTest extends Framework\TestCase
             $style
         );
 
-        $this->assertInstanceOf(IndentInterface::class, $indent);
+        $this->assertInstanceOf(Indent::class, $indent);
 
         $this->assertSame($string, $indent->__toString());
     }
@@ -154,7 +148,7 @@ final class IndentTest extends Framework\TestCase
     {
         $indent = Indent::fromString($string);
 
-        $this->assertInstanceOf(IndentInterface::class, $indent);
+        $this->assertInstanceOf(Indent::class, $indent);
 
         $this->assertSame($string, $indent->__toString());
     }

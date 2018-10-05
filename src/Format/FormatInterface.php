@@ -19,7 +19,7 @@ interface FormatInterface
 {
     public function jsonEncodeOptions(): int;
 
-    public function indent(): IndentInterface;
+    public function indent(): Indent;
 
     public function newLine(): NewLineInterface;
 
@@ -34,7 +34,7 @@ interface FormatInterface
      */
     public function withJsonEncodeOptions(int $jsonEncodeOptions): self;
 
-    public function withIndent(IndentInterface $indent): self;
+    public function withIndent(Indent $indent): self;
 
     public function withNewLine(NewLineInterface $newLine): self;
 
