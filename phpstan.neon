@@ -1,3 +1,0 @@
-parameters:
-	ignoreErrors:
-		- '#Parameter \#1 \$encoded of class Localheinz\\Json\\Normalizer\\Json constructor expects string, string|false given.#'
