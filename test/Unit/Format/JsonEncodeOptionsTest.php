@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
+use Localheinz\Json\Normalizer\Json;
 use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
@@ -77,5 +78,55 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
                 $string,
             ];
         }
+    }
+
+    /**
+     * @dataProvider providerJsonEncodeOptionsAndEncoded
+     *
+     * @param int    $value
+     * @param string $encoded
+     */
+    public function testFromJsonReturnsJsonEncodeOptions(int $value, string $encoded): void
+    {
+        $json = Json::fromEncoded($encoded);
+
+        $jsonEncodeOptions = JsonEncodeOptions::fromJson($json);
+
+        $this->assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
+        $this->assertSame($value, $jsonEncodeOptions->value());
+    }
+
+    public function providerJsonEncodeOptionsAndEncoded(): array
+    {
+        return [
+            [
+                0,
+                '{
+  "name": "Andreas M\u00f6ller",
+  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
+}',
+            ],
+            [
+                \JSON_UNESCAPED_SLASHES,
+                '{
+  "name": "Andreas M\u00f6ller",
+  "url": "https://github.com/localheinz/json-normalizer"
+}',
+            ],
+            [
+                \JSON_UNESCAPED_UNICODE,
+                '{
+  "name": "Andreas Möller",
+  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
+}',
+            ],
+            [
+                \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
+                '{
+  "name": "Andreas Möller",
+  "url": "https://github.com/localheinz/json-normalizer"
+}',
+            ],
+        ];
     }
 }

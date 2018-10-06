@@ -139,56 +139,6 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonEncodeOptionsAndEncoded
-     *
-     * @param int    $jsonEncodeOptions
-     * @param string $encoded
-     */
-    public function testFromJsonReturnsFormatWithJsonEncodeOptions(int $jsonEncodeOptions, string $encoded): void
-    {
-        $json = Json::fromEncoded($encoded);
-
-        $format = Format::fromJson($json);
-
-        $this->assertInstanceOf(Format::class, $format);
-        $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions()->value());
-    }
-
-    public function providerJsonEncodeOptionsAndEncoded(): array
-    {
-        return [
-            [
-                0,
-                '{
-  "name": "Andreas M\u00f6ller",
-  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}',
-            ],
-            [
-                \JSON_UNESCAPED_SLASHES,
-                '{
-  "name": "Andreas M\u00f6ller",
-  "url": "https://github.com/localheinz/json-normalizer"
-}',
-            ],
-            [
-                \JSON_UNESCAPED_UNICODE,
-                '{
-  "name": "Andreas Möller",
-  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}',
-            ],
-            [
-                \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
-                '{
-  "name": "Andreas Möller",
-  "url": "https://github.com/localheinz/json-normalizer"
-}',
-            ],
-        ];
-    }
-
-    /**
      * @dataProvider providerEncodedWithoutIndent
      *
      * @param string $encoded

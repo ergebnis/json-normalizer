@@ -54,7 +54,7 @@ final class Format
         $encoded = $json->encoded();
 
         return new self(
-            self::detectJsonEncodeOptions($encoded),
+            JsonEncodeOptions::fromJson($json),
             Indent::fromJson($json),
             self::detectNewLine($encoded),
             self::detectHasFinalNewLine($encoded)
@@ -115,21 +115,6 @@ final class Format
         $mutated->hasFinalNewLine = $hasFinalNewLine;
 
         return $mutated;
-    }
-
-    private static function detectJsonEncodeOptions(string $encoded): JsonEncodeOptions
-    {
-        $jsonEncodeOptions = 0;
-
-        if (false === \strpos($encoded, '\/')) {
-            $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
-        }
-
-        if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $encoded)) {
-            $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
-        }
-
-        return JsonEncodeOptions::fromInt($jsonEncodeOptions);
     }
 
     private static function detectNewLine(string $encoded): NewLine
