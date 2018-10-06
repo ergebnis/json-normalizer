@@ -56,7 +56,7 @@ final class Format
         return new self(
             JsonEncodeOptions::fromJson($json),
             Indent::fromJson($json),
-            self::detectNewLine($encoded),
+            NewLine::fromJson($json),
             self::detectHasFinalNewLine($encoded)
         );
     }
@@ -115,15 +115,6 @@ final class Format
         $mutated->hasFinalNewLine = $hasFinalNewLine;
 
         return $mutated;
-    }
-
-    private static function detectNewLine(string $encoded): NewLine
-    {
-        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $encoded, $match)) {
-            return NewLine::fromString($match['newLine']);
-        }
-
-        return NewLine::fromString(\PHP_EOL);
     }
 
     private static function detectHasFinalNewLine(string $encoded): bool
