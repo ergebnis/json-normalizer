@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
+use Localheinz\Json\Normalizer\Json;
 
 final class Indent
 {
@@ -86,5 +87,17 @@ final class Indent
         );
 
         return new self($value);
+    }
+
+    public static function fromJson(Json $json): self
+    {
+        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $json->encoded(), $match)) {
+            return self::fromString($match['indent']);
+        }
+
+        return self::fromSizeAndStyle(
+            4,
+            'space'
+        );
     }
 }
