@@ -55,7 +55,7 @@ final class Format
 
         return new self(
             self::detectJsonEncodeOptions($encoded),
-            self::detectIndent($encoded),
+            Indent::fromJson($json),
             self::detectNewLine($encoded),
             self::detectHasFinalNewLine($encoded)
         );
@@ -130,18 +130,6 @@ final class Format
         }
 
         return JsonEncodeOptions::fromInt($jsonEncodeOptions);
-    }
-
-    private static function detectIndent(string $encoded): Indent
-    {
-        if (1 === \preg_match('/^(?P<indent>( +|\t+)).*/m', $encoded, $match)) {
-            return Indent::fromString($match['indent']);
-        }
-
-        return Indent::fromSizeAndStyle(
-            4,
-            'space'
-        );
     }
 
     private static function detectNewLine(string $encoded): NewLine
