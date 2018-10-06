@@ -16,21 +16,12 @@ namespace Localheinz\Json\Normalizer;
 final class JsonEncodeNormalizer implements NormalizerInterface
 {
     /**
-     * @var int
+     * @var Format\JsonEncodeOptions
      */
     private $jsonEncodeOptions;
 
-    /**
-     * @param int $jsonEncodeOptions
-     *
-     * @throws Exception\InvalidJsonEncodeOptionsException
-     */
-    public function __construct(int $jsonEncodeOptions)
+    public function __construct(Format\JsonEncodeOptions $jsonEncodeOptions)
     {
-        if (0 > $jsonEncodeOptions) {
-            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
-        }
-
         $this->jsonEncodeOptions = $jsonEncodeOptions;
     }
 
@@ -39,7 +30,7 @@ final class JsonEncodeNormalizer implements NormalizerInterface
         /** @var string $encodedWithJsonEncodeOptions */
         $encodedWithJsonEncodeOptions = \json_encode(
             $json->decoded(),
-            $this->jsonEncodeOptions
+            $this->jsonEncodeOptions->value()
         );
 
         return Json::fromEncoded($encodedWithJsonEncodeOptions);

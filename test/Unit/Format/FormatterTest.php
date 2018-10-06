@@ -17,6 +17,7 @@ use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\Formatter;
 use Localheinz\Json\Normalizer\Format\FormatterInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
+use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
 use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Printer;
@@ -78,7 +79,7 @@ JSON
 JSON;
 
         $format = new Format(
-            $jsonEncodeOptions,
+            JsonEncodeOptions::fromInt($jsonEncodeOptions),
             Indent::fromString($indentString),
             NewLine::fromString($newLineString),
             $hasFinalNewLine

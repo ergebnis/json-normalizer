@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
-use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\Indent;
+use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
 use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\Json;
 use PHPUnit\Framework;
@@ -25,23 +25,6 @@ use PHPUnit\Framework;
  */
 final class FormatTest extends Framework\TestCase
 {
-    public function testConstructorRejectsInvalidJsonEncodeOptions(): void
-    {
-        $jsonEncodeOptions = -1;
-        $indent = Indent::fromString('  ');
-        $newLine = NewLine::fromString("\r\n");
-        $hasFinalNewLine = true;
-
-        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
-
-        new Format(
-            $jsonEncodeOptions,
-            $indent,
-            $newLine,
-            $hasFinalNewLine
-        );
-    }
-
     /**
      * @dataProvider providerHasFinalNewLine
      *
@@ -49,7 +32,7 @@ final class FormatTest extends Framework\TestCase
      */
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
-        $jsonEncodeOptions = \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES;
+        $jsonEncodeOptions = JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
         $indent = Indent::fromString('  ');
         $newLine = NewLine::fromString("\r\n");
 
@@ -66,32 +49,16 @@ final class FormatTest extends Framework\TestCase
         $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
-    public function testWithJsonEncodeOptionsRejectsInvalidJsonEncodeOptions(): void
-    {
-        $jsonEncodeOptions = -1;
-
-        $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
-            Indent::fromString('  '),
-            NewLine::fromString("\r\n"),
-            true
-        );
-
-        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
-
-        $format->withJsonEncodeOptions($jsonEncodeOptions);
-    }
-
     public function testWithJsonEncodeOptionsClonesFormatAndSetsJsonEncodeOptions(): void
     {
         $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
+            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
             Indent::fromString('  '),
             NewLine::fromString("\r\n"),
             true
         );
 
-        $jsonEncodeOptions = 9000;
+        $jsonEncodeOptions = JsonEncodeOptions::fromInt(9000);
 
         $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
 
@@ -105,7 +72,7 @@ final class FormatTest extends Framework\TestCase
         $indent = Indent::fromString("\t");
 
         $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
+            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
             Indent::fromString('  '),
             NewLine::fromString("\r\n"),
             true
@@ -123,7 +90,7 @@ final class FormatTest extends Framework\TestCase
         $newLine = NewLine::fromString("\r\n");
 
         $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
+            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
             Indent::fromString('  '),
             NewLine::fromString("\r"),
             true
@@ -144,7 +111,7 @@ final class FormatTest extends Framework\TestCase
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {
         $format = new Format(
-            \JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES,
+            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
             Indent::fromString('  '),
             NewLine::fromString("\r\n"),
             false
@@ -184,7 +151,7 @@ final class FormatTest extends Framework\TestCase
         $format = Format::fromJson($json);
 
         $this->assertInstanceOf(Format::class, $format);
-        $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
+        $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions()->value());
     }
 
     public function providerJsonEncodeOptionsAndEncoded(): array

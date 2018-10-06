@@ -13,13 +13,12 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
-use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Json;
 
 final class Format
 {
     /**
-     * @var int
+     * @var JsonEncodeOptions
      */
     private $jsonEncodeOptions;
 
@@ -38,20 +37,12 @@ final class Format
      */
     private $hasFinalNewLine;
 
-    /**
-     * @param int     $jsonEncodeOptions
-     * @param Indent  $indent
-     * @param NewLine $newLine
-     * @param bool    $hasFinalNewLine
-     *
-     * @throws Exception\InvalidJsonEncodeOptionsException
-     */
-    public function __construct(int $jsonEncodeOptions, Indent $indent, NewLine $newLine, bool $hasFinalNewLine)
-    {
-        if (0 > $jsonEncodeOptions) {
-            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
-        }
-
+    public function __construct(
+        JsonEncodeOptions $jsonEncodeOptions,
+        Indent $indent,
+        NewLine $newLine,
+        bool $hasFinalNewLine
+    ) {
         $this->jsonEncodeOptions = $jsonEncodeOptions;
         $this->indent = $indent;
         $this->newLine = $newLine;
@@ -70,7 +61,7 @@ final class Format
         );
     }
 
-    public function jsonEncodeOptions(): int
+    public function jsonEncodeOptions(): JsonEncodeOptions
     {
         return $this->jsonEncodeOptions;
     }
@@ -90,19 +81,8 @@ final class Format
         return $this->hasFinalNewLine;
     }
 
-    /**
-     * @param int $jsonEncodeOptions
-     *
-     * @throws Exception\InvalidJsonEncodeOptionsException
-     *
-     * @return self
-     */
-    public function withJsonEncodeOptions(int $jsonEncodeOptions): self
+    public function withJsonEncodeOptions(JsonEncodeOptions $jsonEncodeOptions): self
     {
-        if (0 > $jsonEncodeOptions) {
-            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
-        }
-
         $mutated = clone $this;
 
         $mutated->jsonEncodeOptions = $jsonEncodeOptions;
@@ -137,7 +117,7 @@ final class Format
         return $mutated;
     }
 
-    private static function detectJsonEncodeOptions(string $encoded): int
+    private static function detectJsonEncodeOptions(string $encoded): JsonEncodeOptions
     {
         $jsonEncodeOptions = 0;
 
@@ -149,7 +129,7 @@ final class Format
             $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
         }
 
-        return $jsonEncodeOptions;
+        return JsonEncodeOptions::fromInt($jsonEncodeOptions);
     }
 
     private static function detectIndent(string $encoded): Indent
