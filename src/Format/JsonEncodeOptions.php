@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
+use Localheinz\Json\Normalizer\Json;
 
 final class JsonEncodeOptions
 {
@@ -41,6 +42,21 @@ final class JsonEncodeOptions
         }
 
         return new self($value);
+    }
+
+    public static function fromJson(Json $json): self
+    {
+        $jsonEncodeOptions = 0;
+
+        if (false === \strpos($json->encoded(), '\/')) {
+            $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
+        }
+
+        if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $json->encoded())) {
+            $jsonEncodeOptions |= \JSON_UNESCAPED_UNICODE;
+        }
+
+        return self::fromInt($jsonEncodeOptions);
     }
 
     public function value(): int
