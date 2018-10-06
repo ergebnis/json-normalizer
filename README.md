@@ -125,9 +125,10 @@ JSON;
 $json = Normalizer\Json::fromEncoded($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
+$jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 $normalizer = new Normalizer\ChainNormalizer(
-    new Normalizer\JsonEncodeNormalizer(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+    new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions),
     new Normalizer\IndentNormalizer($indent),
     new Normalizer\FinalNewLineNormalizer()
 );
@@ -237,7 +238,7 @@ JSON;
 
 $json = Normalizer\Json::fromEncoded($encoded);
 
-$jsonEncodeOptions = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+$jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
 $normalizer = new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions);
 

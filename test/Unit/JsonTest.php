@@ -51,7 +51,7 @@ final class JsonTest extends Framework\TestCase
 
         $format = Format::fromJson($json);
 
-        $this->assertSame($format->jsonEncodeOptions(), $json->format()->jsonEncodeOptions());
+        $this->assertSame($format->jsonEncodeOptions()->value(), $json->format()->jsonEncodeOptions()->value());
         $this->assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());
         $this->assertSame($format->newLine()->__toString(), $json->format()->newLine()->__toString());
         $this->assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());

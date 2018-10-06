@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
-use Localheinz\Json\Normalizer\Exception;
+use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
 
@@ -22,15 +22,6 @@ use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
  */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
-    public function testConstructorRejectsInvalidJsonEncodeOptions(): void
-    {
-        $jsonEncodeOptions = -1;
-
-        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
-
-        new JsonEncodeNormalizer($jsonEncodeOptions);
-    }
-
     /**
      * @dataProvider providerJsonEncodeOptions
      *
@@ -51,7 +42,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $normalizer = new JsonEncodeNormalizer($jsonEncodeOptions);
+        $normalizer = new JsonEncodeNormalizer(JsonEncodeOptions::fromInt($jsonEncodeOptions));
 
         $normalized = $normalizer->normalize($json);
 
