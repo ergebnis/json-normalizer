@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Localheinz\Json\Normalizer\Format;
 
 use Localheinz\Json\Normalizer\Exception;
+use Localheinz\Json\Normalizer\Json;
 
 final class NewLine
 {
@@ -46,5 +47,14 @@ final class NewLine
         }
 
         return new self($string);
+    }
+
+    public static function fromJson(Json $json): self
+    {
+        if (1 === \preg_match('/(?P<newLine>\r\n|\n|\r)/', $json->encoded(), $match)) {
+            return self::fromString($match['newLine']);
+        }
+
+        return self::fromString(\PHP_EOL);
     }
 }

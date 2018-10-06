@@ -15,6 +15,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\NewLine;
+use Localheinz\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
@@ -78,6 +79,71 @@ final class NewLineTest extends Framework\TestCase
         foreach ($strings as $string) {
             yield [
                 $string,
+            ];
+        }
+    }
+
+    public function testFromJsonReturnsFormatWithDefaultNewLineIfNoneFound(): void
+    {
+        $encoded = '{"foo": "bar"}';
+
+        $json = Json::fromEncoded($encoded);
+
+        $newLine = NewLine::fromJson($json);
+
+        $this->assertInstanceOf(NewLine::class, $newLine);
+        $this->assertSame(\PHP_EOL, $newLine->__toString());
+    }
+
+    /**
+     * @dataProvider providerNewLine
+     *
+     * @param string $newLineString
+     */
+    public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
+    {
+        $json = Json::fromEncoded(
+<<<JSON
+["foo",${newLineString}"bar"]
+JSON
+        );
+
+        $newLine = NewLine::fromJson($json);
+
+        $this->assertInstanceOf(NewLine::class, $newLine);
+        $this->assertSame($newLineString, $newLine->__toString());
+    }
+
+    /**
+     * @dataProvider providerNewLine
+     *
+     * @param string $newLineString
+     */
+    public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
+    {
+        $json = Json::fromEncoded(
+<<<JSON
+{"foo": 9000,${newLineString}"bar": 123}
+JSON
+        );
+
+        $newLine = NewLine::fromJson($json);
+
+        $this->assertInstanceOf(NewLine::class, $newLine);
+        $this->assertSame($newLineString, $newLine->__toString());
+    }
+
+    public function providerNewLine(): \Generator
+    {
+        $values = [
+            "\r\n",
+            "\n",
+            "\r",
+        ];
+
+        foreach ($values as $newLine) {
+            yield [
+                $newLine,
             ];
         }
     }
