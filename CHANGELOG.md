@@ -14,6 +14,10 @@ For a full diff see [`0.9.0...master`](https://github.com/localheinz/json-normal
 * Added a `ChainUriRetriever` which allows specifying multiple URI retrievers ([#102](https://github.com/localheinz/json-normalizer/pull/#102)), by [@localheinz](https://github.com/localheinz)
 * Added this changelog ([#103](https://github.com/localheinz/json-normalizer/pull/#103)), by [@localheinz](https://github.com/localheinz)
 
+### Changed
+
+* Allowing injection of a `UriRetriever` into the `SchemaNormalizer`, and defaulting to a `ChainUriRetriever` which composes `FileGetContents` and `Curl` URI retrievers ([#104](https://github.com/localheinz/json-normalizer/pull/#104)), by [@localheinz](https://github.com/localheinz)
+
 ## [`0.9.0`](https://github.com/localheinz/json-normalizer/releases/tag/0.9.0) 
 
 For a full diff see [`0.8.0...0.9.0`](https://github.com/localheinz/json-normalizer/compare/0.8.0...0.9.0).
