@@ -323,6 +323,10 @@ that the JSON document is valid.
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
 
+## Changelog
+
+Please have a look at [`CHANGELOG.md`](CHANGELOG.md).
+
 ## Contributing
 
 Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
