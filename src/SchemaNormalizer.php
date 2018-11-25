@@ -214,7 +214,7 @@ final class SchemaNormalizer implements NormalizerInterface
 
         $remainingProperties = \get_object_vars($data);
 
-        if (\count($remainingProperties)) {
+        if (0 < \count($remainingProperties)) {
             \ksort($remainingProperties);
 
             foreach ($remainingProperties as $name => $value) {
