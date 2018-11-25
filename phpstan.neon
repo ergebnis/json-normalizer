@@ -1,2 +1,10 @@
 includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
+		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::retrieve\(\) has no return typehint specified.#'
+		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::retrieve\(\) has parameter \$uri with no typehint specified.#'
+		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
+		- '#Method Localheinz\\Json\\Normalizer\\Validator\\SchemaValidator::isValid\(\) has parameter \$data with no typehint specified.#'
