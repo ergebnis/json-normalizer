@@ -15,7 +15,7 @@ infection: vendor
 	vendor/bin/infection --min-covered-msi=95 --min-msi=95
 
 stan: vendor
-	vendor/bin/phpstan analyse --level=max src
+	vendor/bin/phpstan analyse --configuration=phpstan.neon --level=max src
 
 test: vendor
 	vendor/bin/phpunit --configuration=test/AutoReview/phpunit.xml
