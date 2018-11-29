@@ -256,7 +256,7 @@ JSON
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
-            ->will(static function () use ($schemaValidator, $normalized, $schemaDecoded) {
+            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded) {
                 $schemaValidator
                     ->isValid(
                         Argument::exact($normalized->decoded()),
