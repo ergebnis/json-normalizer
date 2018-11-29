@@ -39,12 +39,12 @@ JSON
 JSON
         );
 
-        $callable = function () use ($normalized): Json {
+        $callable = static function () use ($normalized): Json {
             return $normalized;
         };
 
         $normalizer = new CallableNormalizer($callable);
 
-        $this->assertSame($normalized, $normalizer->normalize($json));
+        self::assertSame($normalized, $normalizer->normalize($json));
     }
 }

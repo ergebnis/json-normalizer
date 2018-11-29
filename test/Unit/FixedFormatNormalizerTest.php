@@ -82,6 +82,6 @@ JSON
             $formatter->reveal()
         );
 
-        $this->assertSame($formatted, $normalizer->normalize($json));
+        self::assertSame($formatted, $normalizer->normalize($json));
     }
 }

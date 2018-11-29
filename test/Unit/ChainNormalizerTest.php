@@ -32,7 +32,7 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $results = \array_map(function (int $step) {
+        $results = \array_map(static function (int $step) {
             return Json::fromEncoded(
 <<<JSON
 {
@@ -67,6 +67,6 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        $this->assertSame($last, $normalized);
+        self::assertSame($last, $normalized);
     }
 }

@@ -43,7 +43,7 @@ JSON
 
         $expected = \rtrim($json->encoded());
 
-        $this->assertSame($expected, $normalized->encoded());
+        self::assertSame($expected, $normalized->encoded());
     }
 
     public function providerWhitespace(): \Generator

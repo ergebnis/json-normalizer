@@ -30,7 +30,7 @@ final class UriRetrieverRequiredExceptionTest extends AbstractExceptionTestCase
     {
         $exception = UriRetrieverRequiredException::create();
 
-        $this->assertInstanceOf(UriRetrieverRequiredException::class, $exception);
-        $this->assertSame('Cannot retrieve URIs when no retrievers have been injected.', $exception->getMessage());
+        self::assertInstanceOf(UriRetrieverRequiredException::class, $exception);
+        self::assertSame('Cannot retrieve URIs when no retrievers have been injected.', $exception->getMessage());
     }
 }

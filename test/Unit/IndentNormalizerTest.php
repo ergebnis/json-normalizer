@@ -60,6 +60,6 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        $this->assertSame($indented, $normalized->encoded());
+        self::assertSame($indented, $normalized->encoded());
     }
 }

@@ -103,13 +103,13 @@ JSON;
             $format
         );
 
-        $this->assertInstanceOf(Json::class, $formatted);
+        self::assertInstanceOf(Json::class, $formatted);
 
         $suffix = $hasFinalNewLine ? $newLineString : '';
 
         $expected = $printedWithIndentAndNewLine . $suffix;
 
-        $this->assertSame($expected, $formatted->encoded());
+        self::assertSame($expected, $formatted->encoded());
     }
 
     public function providerFinalNewLine(): \Generator

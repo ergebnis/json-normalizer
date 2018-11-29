@@ -31,14 +31,14 @@ final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestC
 
         $exception = InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
 
-        $this->assertInstanceOf(InvalidJsonEncodeOptionsException::class, $exception);
+        self::assertInstanceOf(InvalidJsonEncodeOptionsException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not valid options for json_encode().',
             $jsonEncodeOptions
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($jsonEncodeOptions, $exception->jsonEncodeOptions());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($jsonEncodeOptions, $exception->jsonEncodeOptions());
     }
 }

@@ -78,7 +78,7 @@ JSON;
 
         $validator = new SchemaValidator($schemaValidator->reveal());
 
-        $this->assertSame($isValid, $validator->isValid($data, $schema));
+        self::assertSame($isValid, $validator->isValid($data, $schema));
     }
 
     public function providerIsValid(): \Generator

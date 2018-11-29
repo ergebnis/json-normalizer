@@ -31,14 +31,14 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 
         $exception = InvalidJsonEncodedException::fromEncoded($encoded);
 
-        $this->assertInstanceOf(InvalidJsonEncodedException::class, $exception);
+        self::assertInstanceOf(InvalidJsonEncodedException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not valid JSON.',
             $encoded
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($encoded, $exception->encoded());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($encoded, $exception->encoded());
     }
 }

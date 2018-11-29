@@ -90,9 +90,9 @@ final class IndentTest extends Framework\TestCase
             $style
         );
 
-        $this->assertInstanceOf(Indent::class, $indent);
+        self::assertInstanceOf(Indent::class, $indent);
 
-        $this->assertSame($string, $indent->__toString());
+        self::assertSame($string, $indent->__toString());
     }
 
     public function providerSizeStyleAndIndentString(): \Generator
@@ -149,9 +149,9 @@ final class IndentTest extends Framework\TestCase
     {
         $indent = Indent::fromString($string);
 
-        $this->assertInstanceOf(Indent::class, $indent);
+        self::assertInstanceOf(Indent::class, $indent);
 
-        $this->assertSame($string, $indent->__toString());
+        self::assertSame($string, $indent->__toString());
     }
 
     public function providerValidIndentString(): \Generator
@@ -193,8 +193,8 @@ JSON
 
         $indent = Indent::fromJson($json);
 
-        $this->assertInstanceOf(Indent::class, $indent);
-        $this->assertSame($sniffedIndent, $indent->__toString());
+        self::assertInstanceOf(Indent::class, $indent);
+        self::assertSame($sniffedIndent, $indent->__toString());
     }
 
     /**
@@ -220,8 +220,8 @@ JSON
 
         $indent = Indent::fromJson($json);
 
-        $this->assertInstanceOf(Indent::class, $indent);
-        $this->assertSame($sniffedIndent, $indent->__toString());
+        self::assertInstanceOf(Indent::class, $indent);
+        self::assertSame($sniffedIndent, $indent->__toString());
     }
 
     public function providerPureIndentAndSniffedIndent(): \Generator

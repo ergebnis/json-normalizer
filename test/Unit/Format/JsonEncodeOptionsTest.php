@@ -61,9 +61,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $jsonEncodeOptions = JsonEncodeOptions::fromInt($value);
 
-        $this->assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
+        self::assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
 
-        $this->assertSame($value, $jsonEncodeOptions->value());
+        self::assertSame($value, $jsonEncodeOptions->value());
     }
 
     public function providerValidValue(): \Generator
@@ -92,8 +92,8 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
         $jsonEncodeOptions = JsonEncodeOptions::fromJson($json);
 
-        $this->assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
-        $this->assertSame($value, $jsonEncodeOptions->value());
+        self::assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
+        self::assertSame($value, $jsonEncodeOptions->value());
     }
 
     public function providerJsonEncodeOptionsAndEncoded(): array

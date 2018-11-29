@@ -31,14 +31,14 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 
         $exception = InvalidNewLineStringException::fromString($string);
 
-        $this->assertInstanceOf(InvalidNewLineStringException::class, $exception);
+        self::assertInstanceOf(InvalidNewLineStringException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not a valid new-line character sequence.',
             $string
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($string, $exception->string());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($string, $exception->string());
     }
 }

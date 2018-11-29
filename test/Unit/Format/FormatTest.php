@@ -43,10 +43,10 @@ final class FormatTest extends Framework\TestCase
             $hasFinalNewLine
         );
 
-        $this->assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
-        $this->assertSame($indent, $format->indent());
-        $this->assertSame($newLine, $format->newLine());
-        $this->assertSame($hasFinalNewLine, $format->hasFinalNewLine());
+        self::assertSame($jsonEncodeOptions, $format->jsonEncodeOptions());
+        self::assertSame($indent, $format->indent());
+        self::assertSame($newLine, $format->newLine());
+        self::assertSame($hasFinalNewLine, $format->hasFinalNewLine());
     }
 
     public function testWithJsonEncodeOptionsClonesFormatAndSetsJsonEncodeOptions(): void
@@ -62,9 +62,9 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
 
-        $this->assertInstanceOf(Format::class, $mutated);
-        $this->assertNotSame($format, $mutated);
-        $this->assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
+        self::assertInstanceOf(Format::class, $mutated);
+        self::assertNotSame($format, $mutated);
+        self::assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
     }
 
     public function testWithIndentClonesFormatAndSetsIndent(): void
@@ -80,9 +80,9 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withIndent($indent);
 
-        $this->assertInstanceOf(Format::class, $mutated);
-        $this->assertNotSame($format, $mutated);
-        $this->assertSame($indent, $mutated->indent());
+        self::assertInstanceOf(Format::class, $mutated);
+        self::assertNotSame($format, $mutated);
+        self::assertSame($indent, $mutated->indent());
     }
 
     public function testWithNewLineClonesFormatAndSetsNewLine(): void
@@ -98,9 +98,9 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withNewLine($newLine);
 
-        $this->assertInstanceOf(Format::class, $mutated);
-        $this->assertNotSame($format, $mutated);
-        $this->assertSame($newLine, $mutated->newLine());
+        self::assertInstanceOf(Format::class, $mutated);
+        self::assertNotSame($format, $mutated);
+        self::assertSame($newLine, $mutated->newLine());
     }
 
     /**
@@ -119,9 +119,9 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withHasFinalNewLine($hasFinalNewLine);
 
-        $this->assertInstanceOf(Format::class, $mutated);
-        $this->assertNotSame($format, $mutated);
-        $this->assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
+        self::assertInstanceOf(Format::class, $mutated);
+        self::assertNotSame($format, $mutated);
+        self::assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
     }
 
     public function providerHasFinalNewLine(): \Generator
@@ -149,8 +149,8 @@ final class FormatTest extends Framework\TestCase
 
         $format = Format::fromJson($json);
 
-        $this->assertInstanceOf(Format::class, $format);
-        $this->assertSame('    ', $format->indent()->__toString());
+        self::assertInstanceOf(Format::class, $format);
+        self::assertSame('    ', $format->indent()->__toString());
     }
 
     public function providerEncodedWithoutIndent(): \Generator
@@ -197,8 +197,8 @@ JSON
 
         $format = Format::fromJson($json);
 
-        $this->assertInstanceOf(Format::class, $format);
-        $this->assertFalse($format->hasFinalNewLine());
+        self::assertInstanceOf(Format::class, $format);
+        self::assertFalse($format->hasFinalNewLine());
     }
 
     public function providerWhitespaceWithoutNewLine(): \Generator
@@ -240,8 +240,8 @@ JSON
 
         $format = Format::fromJson($json);
 
-        $this->assertInstanceOf(Format::class, $format);
-        $this->assertTrue($format->hasFinalNewLine());
+        self::assertInstanceOf(Format::class, $format);
+        self::assertTrue($format->hasFinalNewLine());
     }
 
     public function providerWhitespaceWithNewLine(): \Generator

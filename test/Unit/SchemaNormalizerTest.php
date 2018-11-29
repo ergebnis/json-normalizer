@@ -294,7 +294,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        $this->assertSame($expected, $normalized->encoded());
+        self::assertSame($expected, $normalized->encoded());
     }
 
     public function providerExpectedEncodedAndSchemaUri(): \Generator

@@ -46,7 +46,7 @@ final class ChainUriRetrieverTest extends Framework\TestCase
 
         $uriRetriever = new ChainUriRetriever($retriever);
 
-        $this->assertNull($uriRetriever->getContentType());
+        self::assertNull($uriRetriever->getContentType());
     }
 
     public function testRetrieveThrowsResourceNotFoundExceptionWhenNoneOfTheRetrieversWhereAbleToRetrieveUri(): void
@@ -106,7 +106,7 @@ final class ChainUriRetrieverTest extends Framework\TestCase
             $untouchedRetriever->reveal()
         );
 
-        $this->assertSame($schema, $uriRetriever->retrieve($uri));
-        $this->assertSame($contentType, $uriRetriever->getContentType());
+        self::assertSame($schema, $uriRetriever->retrieve($uri));
+        self::assertSame($contentType, $uriRetriever->getContentType());
     }
 }

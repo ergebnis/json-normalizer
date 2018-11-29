@@ -31,14 +31,14 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends
 
         $exception = SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($schemaUri);
 
-        $this->assertInstanceOf(SchemaUriReferencesDocumentWithInvalidMediaTypeException::class, $exception);
+        self::assertInstanceOf(SchemaUriReferencesDocumentWithInvalidMediaTypeException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with media type "application/schema+json".',
             $schemaUri
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($schemaUri, $exception->schemaUri());
     }
 }

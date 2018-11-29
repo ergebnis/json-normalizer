@@ -31,14 +31,14 @@ final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCa
 
         $exception = SchemaUriCouldNotBeReadException::fromSchemaUri($schemaUri);
 
-        $this->assertInstanceOf(SchemaUriCouldNotBeReadException::class, $exception);
+        self::assertInstanceOf(SchemaUriCouldNotBeReadException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document that could be read.',
             $schemaUri
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($schemaUri, $exception->schemaUri());
     }
 }

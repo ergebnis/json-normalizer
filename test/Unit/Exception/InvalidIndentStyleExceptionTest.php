@@ -37,7 +37,7 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
             ...$allowedStyles
         );
 
-        $this->assertInstanceOf(InvalidIndentStyleException::class, $exception);
+        self::assertInstanceOf(InvalidIndentStyleException::class, $exception);
 
         $message = \sprintf(
             'Style needs to be one of "%s", but "%s" is not.',
@@ -45,8 +45,8 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
             $style
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($style, $exception->style());
-        $this->assertSame($allowedStyles, $exception->allowedStyles());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($style, $exception->style());
+        self::assertSame($allowedStyles, $exception->allowedStyles());
     }
 }

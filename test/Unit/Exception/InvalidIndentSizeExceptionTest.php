@@ -37,7 +37,7 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
             $minimumSize
         );
 
-        $this->assertInstanceOf(InvalidIndentSizeException::class, $exception);
+        self::assertInstanceOf(InvalidIndentSizeException::class, $exception);
 
         $message = \sprintf(
             'Size needs to be greater than %d, but %d is not.',
@@ -45,8 +45,8 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
             $size
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($size, $exception->size());
-        $this->assertSame($minimumSize, $exception->minimumSize());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($size, $exception->size());
+        self::assertSame($minimumSize, $exception->minimumSize());
     }
 }
