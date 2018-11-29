@@ -31,14 +31,14 @@ final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 
         $exception = InvalidIndentStringException::fromString($string);
 
-        $this->assertInstanceOf(InvalidIndentStringException::class, $exception);
+        self::assertInstanceOf(InvalidIndentStringException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not a valid indent string',
             $string
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($string, $exception->string());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($string, $exception->string());
     }
 }

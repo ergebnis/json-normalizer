@@ -64,8 +64,8 @@ final class NewLineTest extends Framework\TestCase
     {
         $newLine = NewLine::fromString($string);
 
-        $this->assertInstanceOf(NewLine::class, $newLine);
-        $this->assertSame($string, $newLine->__toString());
+        self::assertInstanceOf(NewLine::class, $newLine);
+        self::assertSame($string, $newLine->__toString());
     }
 
     public function providerValidNewLineString(): \Generator
@@ -91,8 +91,8 @@ final class NewLineTest extends Framework\TestCase
 
         $newLine = NewLine::fromJson($json);
 
-        $this->assertInstanceOf(NewLine::class, $newLine);
-        $this->assertSame(\PHP_EOL, $newLine->__toString());
+        self::assertInstanceOf(NewLine::class, $newLine);
+        self::assertSame(\PHP_EOL, $newLine->__toString());
     }
 
     /**
@@ -110,8 +110,8 @@ JSON
 
         $newLine = NewLine::fromJson($json);
 
-        $this->assertInstanceOf(NewLine::class, $newLine);
-        $this->assertSame($newLineString, $newLine->__toString());
+        self::assertInstanceOf(NewLine::class, $newLine);
+        self::assertSame($newLineString, $newLine->__toString());
     }
 
     /**
@@ -129,8 +129,8 @@ JSON
 
         $newLine = NewLine::fromJson($json);
 
-        $this->assertInstanceOf(NewLine::class, $newLine);
-        $this->assertSame($newLineString, $newLine->__toString());
+        self::assertInstanceOf(NewLine::class, $newLine);
+        self::assertSame($newLineString, $newLine->__toString());
     }
 
     public function providerNewLine(): \Generator

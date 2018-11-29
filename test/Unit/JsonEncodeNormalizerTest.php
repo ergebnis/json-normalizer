@@ -51,7 +51,7 @@ JSON
             $jsonEncodeOptions
         );
 
-        $this->assertSame($expected, $normalized->encoded());
+        self::assertSame($expected, $normalized->encoded());
     }
 
     public function providerJsonEncodeOptions(): \Generator
@@ -73,7 +73,7 @@ JSON
         foreach ($combinations as $combination) {
             $jsonEncodeOptions = \array_reduce(
                 $combination,
-                function (int $jsonEncodeFlag, int $jsonEncodeOptions) {
+                static function (int $jsonEncodeFlag, int $jsonEncodeOptions) {
                     $jsonEncodeOptions |= $jsonEncodeFlag;
 
                     return $jsonEncodeOptions;

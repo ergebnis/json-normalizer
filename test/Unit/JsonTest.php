@@ -44,17 +44,17 @@ final class JsonTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        $this->assertInstanceOf(Json::class, $json);
-        $this->assertSame($encoded, $json->__toString());
-        $this->assertSame($encoded, $json->encoded());
-        $this->assertSame($encoded, \json_encode($json->decoded()));
+        self::assertInstanceOf(Json::class, $json);
+        self::assertSame($encoded, $json->__toString());
+        self::assertSame($encoded, $json->encoded());
+        self::assertSame($encoded, \json_encode($json->decoded()));
 
         $format = Format::fromJson($json);
 
-        $this->assertSame($format->jsonEncodeOptions()->value(), $json->format()->jsonEncodeOptions()->value());
-        $this->assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());
-        $this->assertSame($format->newLine()->__toString(), $json->format()->newLine()->__toString());
-        $this->assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());
+        self::assertSame($format->jsonEncodeOptions()->value(), $json->format()->jsonEncodeOptions()->value());
+        self::assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());
+        self::assertSame($format->newLine()->__toString(), $json->format()->newLine()->__toString());
+        self::assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());
     }
 
     public function providerEncoded(): \Generator

@@ -256,7 +256,7 @@ JSON
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
-            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded) {
+            ->will(static function () use ($schemaValidator, $normalized, $schemaDecoded) {
                 $schemaValidator
                     ->isValid(
                         Argument::exact($normalized->decoded()),
@@ -294,7 +294,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        $this->assertSame($expected, $normalized->encoded());
+        self::assertSame($expected, $normalized->encoded());
     }
 
     public function providerExpectedEncodedAndSchemaUri(): \Generator

@@ -31,14 +31,14 @@ final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends Abstract
 
         $exception = SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
 
-        $this->assertInstanceOf(SchemaUriReferencesInvalidJsonDocumentException::class, $exception);
+        self::assertInstanceOf(SchemaUriReferencesInvalidJsonDocumentException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with valid JSON syntax.',
             $schemaUri
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($schemaUri, $exception->schemaUri());
     }
 }

@@ -31,14 +31,14 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
 
         $exception = SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
 
-        $this->assertInstanceOf(SchemaUriCouldNotBeResolvedException::class, $exception);
+        self::assertInstanceOf(SchemaUriCouldNotBeResolvedException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" could not be resolved.',
             $schemaUri
         );
 
-        $this->assertSame($message, $exception->getMessage());
-        $this->assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($message, $exception->getMessage());
+        self::assertSame($schemaUri, $exception->schemaUri());
     }
 }
