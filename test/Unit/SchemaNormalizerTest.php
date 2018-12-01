@@ -320,6 +320,13 @@ JSON
                 $normalizedFile
             );
 
+            if (!\is_string($jsonFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce JSON file name from normalized file name "%s".',
+                    $normalizedFile
+                ));
+            }
+
             if (!\file_exists($jsonFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
@@ -332,6 +339,13 @@ JSON
                 'schema.json',
                 $normalizedFile
             );
+
+            if (!\is_string($schemaFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce  file name from normalized file name "%s".',
+                    $normalizedFile
+                ));
+            }
 
             if (!\file_exists($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
@@ -364,6 +378,31 @@ JSON
     {
         $json = \file_get_contents($file);
 
-        return \json_encode(\json_decode($json));
+        if (!\is_string($json)) {
+            throw new \RuntimeException(\sprintf(
+                'Unable to read content from file "%s".',
+                $file
+            ));
+        }
+
+        $decoded = \json_decode($json);
+
+        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
+            throw new \RuntimeException(\sprintf(
+                'File "%s" does not contain valid JSON.',
+                $file
+            ));
+        }
+
+        $encoded = \json_encode($decoded);
+
+        if (!\is_string($encoded)) {
+            throw new \RuntimeException(\sprintf(
+                'Unable to re-encode content from file "%s".',
+                $file
+            ));
+        }
+
+        return $encoded;
     }
 }

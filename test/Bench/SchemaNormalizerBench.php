@@ -50,6 +50,13 @@ final class SchemaNormalizerBench
     {
         $encoded = \file_get_contents($file);
 
+        if (!\is_string($encoded)) {
+            throw new \RuntimeException(\sprintf(
+                'File "%s" does not contain valid JSON.',
+                $file
+            ));
+        }
+
         $json = Json::fromEncoded($encoded);
 
         $normalizer = new SchemaNormalizer($schemaUri);

@@ -31,7 +31,7 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
 
     final protected function className(): string
     {
-        return \preg_replace(
+        $className = \preg_replace(
             '/Test$/',
             '',
             \str_replace(
@@ -40,5 +40,14 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
                 static::class
             )
         );
+
+        if (!\is_string($className)) {
+            throw new \RuntimeException(\sprintf(
+                'Unable to deduce source class name from test class name "%s".',
+                static::class
+            ));
+        }
+
+        return $className;
     }
 }
