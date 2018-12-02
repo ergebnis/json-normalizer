@@ -1,6 +1,7 @@
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
 	ignoreErrors:
@@ -9,3 +10,4 @@ parameters:
 		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::retrieve\(\) has parameter \$uri with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\Validator\\SchemaValidator::isValid\(\) has parameter \$data with no typehint specified.#'
+	tmpDir: %currentWorkingDirectory%/.phpstan

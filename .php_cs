@@ -1,8 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/**
+ * Copyright (c) 2018 Andreas Möller.
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ *
+ * @see https://github.com/localheinz/json-normalizer
+ */
 use Localheinz\PhpCsFixer\Config;
 
-$header = <<<EOF
+$header = <<<'EOF'
 Copyright (c) 2018 Andreas Möller
 
 For the full copyright and license information, please view
@@ -17,10 +27,20 @@ $config = Config\Factory::fromRuleSet(new Config\RuleSet\Php71($header), [
     'static_lambda' => false,
 ]);
 
-$config->getFinder()->in(__DIR__);
+$config->getFinder()
+    ->ignoreDotFiles(false)
+    ->in(__DIR__)
+    ->exclude([
+        '.github',
+        '.infection',
+        '.php-cs-fixer',
+        '.phpstan',
+        '.travis',
+    ])
+    ->name('.php_cs');
 
-$cacheDir = \getenv('TRAVIS') ? \getenv('HOME') . '/.php-cs-fixer' : __DIR__;
+$directory = \getenv('TRAVIS') ? \getenv('HOME') : __DIR__;
 
-$config->setCacheFile($cacheDir . '/.php_cs.cache');
+$config->setCacheFile($directory . '/.php-cs-fixer/.php_cs.cache');
 
 return $config;
