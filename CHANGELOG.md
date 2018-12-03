@@ -17,7 +17,7 @@ For a full diff see [`0.9.0...master`](https://github.com/localheinz/json-normal
 ### Changed
 
 * Allowing injection of a `UriRetriever` into the `SchemaNormalizer`, and defaulting to a `ChainUriRetriever` which composes `FileGetContents` and `Curl` URI retrievers ([#104](https://github.com/localheinz/json-normalizer/pull/104)), by [@localheinz](https://github.com/localheinz)
-* Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies of `` (#109), by [@localheinz](https://github.com/localheinz)
+* Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109](https://github.com/localheinz/json-normalizer/pull/109)), by [@localheinz](https://github.com/localheinz)
 
 ## [`0.9.0`](https://github.com/localheinz/json-normalizer/releases/tag/0.9.0)
 
