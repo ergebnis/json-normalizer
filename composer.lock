@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84595799dd3e3b3721550505f4a84d00",
+    "content-hash": "50152cfbf1dcb66f46c3c3efa07b2044",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -950,6 +950,59 @@
             "description": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
             "homepage": "https://github.com/localheinz/php-cs-fixer-config",
             "time": "2018-11-27T07:03:30+00:00"
+        },
+        {
+            "name": "localheinz/phpstan-rules",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/localheinz/phpstan-rules.git",
+                "reference": "f9bc5f56f3363b41b889dbc17e10d9f290439216"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/localheinz/phpstan-rules/zipball/f9bc5f56f3363b41b889dbc17e10d9f290439216",
+                "reference": "f9bc5f56f3363b41b889dbc17e10d9f290439216",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^4.1.0",
+                "php": "^7.1",
+                "phpstan/phpstan": "~0.10.5"
+            },
+            "require-dev": {
+                "infection/infection": "~0.11.2",
+                "localheinz/composer-normalize": "^1.0.0",
+                "localheinz/php-cs-fixer-config": "~1.17.0",
+                "localheinz/test-util": "~0.7.0",
+                "phpstan/phpstan-deprecation-rules": "~0.10.2",
+                "phpstan/phpstan-strict-rules": "~0.10.1",
+                "phpunit/phpunit": "^7.4.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Localheinz\\PHPStan\\Rules\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides additional rules for phpstan/phpstan.",
+            "homepage": "https://github.com/localheinz/phpstan-rules",
+            "keywords": [
+                "PHPStan",
+                "phpstan-extreme-rules",
+                "phpstan-rules"
+            ],
+            "time": "2018-12-05T20:37:27+00:00"
         },
         {
             "name": "localheinz/test-util",
