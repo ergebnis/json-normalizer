@@ -18,10 +18,12 @@ use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
-use Localheinz\Json\Normalizer\Validator;
+use Localheinz\Json\Normalizer\Validator\SchemaValidator;
+use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Prophecy\Argument;
 
 /**
@@ -52,7 +54,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(Validator\SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeResolvedException::class);
@@ -83,7 +85,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(Validator\SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeReadException::class);
@@ -114,7 +116,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(Validator\SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
         $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
@@ -145,7 +147,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(Validator\SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal()
         );
 
         $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocumentException::class);
@@ -181,7 +183,7 @@ JSON;
             ->shouldBeCalled()
             ->willReturn($schemaDecoded);
 
-        $schemaValidator = $this->prophesize(Validator\SchemaValidatorInterface::class);
+        $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
 
         $schemaValidator
             ->isValid(
@@ -248,7 +250,7 @@ JSON
             ->shouldBeCalled()
             ->willReturn($schemaDecoded);
 
-        $schemaValidator = $this->prophesize(Validator\SchemaValidatorInterface::class);
+        $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
 
         $schemaValidator
             ->isValid(
@@ -290,7 +292,11 @@ JSON
     {
         $json = Json::fromEncoded($encoded);
 
-        $normalizer = new SchemaNormalizer($schemaUri);
+        $normalizer = new SchemaNormalizer(
+            $schemaUri,
+            new SchemaStorage(),
+            new SchemaValidator(new Validator())
+        );
 
         $normalized = $normalizer->normalize($json);
 

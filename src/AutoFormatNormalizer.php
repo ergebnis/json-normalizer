@@ -25,12 +25,10 @@ final class AutoFormatNormalizer implements NormalizerInterface
      */
     private $formatter;
 
-    public function __construct(
-        NormalizerInterface $normalizer,
-        Format\FormatterInterface $formatter = null
-    ) {
+    public function __construct(NormalizerInterface $normalizer, Format\FormatterInterface $formatter)
+    {
         $this->normalizer = $normalizer;
-        $this->formatter = $formatter ?: new Format\Formatter();
+        $this->formatter = $formatter;
     }
 
     public function normalize(Json $json): Json

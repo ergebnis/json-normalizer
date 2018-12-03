@@ -13,14 +13,11 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-use JsonSchema\Constraints;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
-use JsonSchema\Uri\Retrievers;
-use JsonSchema\Uri\UriRetriever;
 
 final class SchemaNormalizer implements NormalizerInterface
 {
@@ -41,30 +38,9 @@ final class SchemaNormalizer implements NormalizerInterface
 
     public function __construct(
         string $schemaUri,
-        SchemaStorage $schemaStorage = null,
-        Validator\SchemaValidatorInterface $schemaValidator = null,
-        UriRetriever $uriRetriever = null
+        SchemaStorage $schemaStorage,
+        Validator\SchemaValidatorInterface $schemaValidator
     ) {
-        if (null === $uriRetriever) {
-            $uriRetriever = new UriRetriever();
-
-            $uriRetriever->setUriRetriever(new JsonSchema\Uri\Retrievers\ChainUriRetriever(
-                new Retrievers\FileGetContents(),
-                new Retrievers\Curl()
-            ));
-        }
-
-        if (null === $schemaStorage) {
-            $schemaStorage = new SchemaStorage($uriRetriever);
-        }
-
-        if (null === $schemaValidator) {
-            $schemaValidator = new Validator\SchemaValidator(new \JsonSchema\Validator(new Constraints\Factory(
-                $schemaStorage,
-                $uriRetriever
-            )));
-        }
-
         $this->schemaUri = $schemaUri;
         $this->schemaStorage = $schemaStorage;
         $this->schemaValidator = $schemaValidator;

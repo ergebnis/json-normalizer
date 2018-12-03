@@ -27,10 +27,10 @@ final class IndentNormalizer implements NormalizerInterface
      */
     private $printer;
 
-    public function __construct(Format\Indent $indent, Printer\PrinterInterface $printer = null)
+    public function __construct(Format\Indent $indent, Printer\PrinterInterface $printer)
     {
         $this->indent = $indent;
-        $this->printer = $printer ?: new Printer\Printer();
+        $this->printer = $printer;
     }
 
     public function normalize(Json $json): Json
