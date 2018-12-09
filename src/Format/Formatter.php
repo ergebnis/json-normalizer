@@ -23,9 +23,9 @@ final class Formatter implements FormatterInterface
      */
     private $printer;
 
-    public function __construct(Printer\PrinterInterface $printer = null)
+    public function __construct(Printer\PrinterInterface $printer)
     {
-        $this->printer = $printer ?: new Printer\Printer();
+        $this->printer = $printer;
     }
 
     public function format(Json $json, Format $format): Json

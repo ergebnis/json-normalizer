@@ -1,11 +1,13 @@
 includes:
 	- vendor/jangregor/phpstan-prophecy/src/extension.neon
+	- vendor/localheinz/phpstan-rules/rules.neon
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
 	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
 	ignoreErrors:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
+		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::getContentType\(\) has a nullable return type declaration.#'
 		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::retrieve\(\) has no return typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::retrieve\(\) has parameter \$uri with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'

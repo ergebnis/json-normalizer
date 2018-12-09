@@ -33,11 +33,11 @@ final class FixedFormatNormalizer implements NormalizerInterface
     public function __construct(
         NormalizerInterface $normalizer,
         Format\Format $format,
-        Format\FormatterInterface $formatter = null
+        Format\FormatterInterface $formatter
     ) {
         $this->normalizer = $normalizer;
         $this->format = $format;
-        $this->formatter = $formatter ?: new Format\Formatter();
+        $this->formatter = $formatter;
     }
 
     public function normalize(Json $json): Json

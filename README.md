@@ -38,6 +38,7 @@ retain the original formatting, you can use the `AutoFormatNormalizer`.
 
 ```php
 use Localheinz\Json\Normalizer;
+use Localheinz\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -49,7 +50,10 @@ JSON;
 $json = Normalizer\Json::fromEncoded($encoded);
 
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
-$normalizer = new Normalizer\AutoFormatNormalizer($composedNormalizer);
+$normalizer = new Normalizer\AutoFormatNormalizer(
+    $composedNormalizer,
+    new Normalizer\Format\Formatter(new Printer\Printer())
+);
 
 $normalized = $normalizer->normalize($json);
 ```
@@ -114,6 +118,7 @@ If you want to apply multiple normalizers in a chain, you can use the `ChainNorm
 
 ```php
 use Localheinz\Json\Normalizer;
+use Localheinz\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -129,7 +134,10 @@ $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED
 
 $normalizer = new Normalizer\ChainNormalizer(
     new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions),
-    new Normalizer\IndentNormalizer($indent),
+    new Normalizer\IndentNormalizer(
+        $indent,
+        new Printer\Printer()
+    ),
     new Normalizer\FinalNewLineNormalizer()
 );
 
@@ -172,6 +180,7 @@ apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
 use Localheinz\Json\Normalizer;
+use Localheinz\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -186,7 +195,8 @@ $json = Normalizer\Json::fromEncoded($encoded);
 /** @var Normalizer\Format\Format $format*/
 $normalizer = new Normalizer\FixedFormatNormalizer(
     $composedNormalizer, 
-    $format
+    $format,
+    new Normalizer\Format\Formatter(new Printer\Printer())
 );
 
 $normalized = $normalizer->normalize($json);
@@ -203,6 +213,7 @@ If you need to adjust the indentation of a JSON file, you can use the `IndentNor
 
 ```php
 use Localheinz\Json\Normalizer;
+use Localheinz\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -215,7 +226,10 @@ $json = Normalizer\Json::fromEncoded($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 
-$normalizer = new Normalizer\IndentNormalizer($indent);
+$normalizer = new Normalizer\IndentNormalizer(
+    $indent,
+    new Printer\Printer()
+);
 
 $normalized = $normalizer->normalize($json);
 ```
@@ -299,6 +313,8 @@ Let's assume the following schema
 exists at `/schema/example.json`.
 
 ```php
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
 use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -310,7 +326,11 @@ JSON;
 
 $json = Normalizer\Json::fromEncoded($encoded);
 
-$normalizer = new Normalizer\SchemaNormalizer('file:///schema/example.json');
+$normalizer = new Normalizer\SchemaNormalizer(
+    'file:///schema/example.json',
+    new SchemaStorage(),
+    new Normalizer\Validator\SchemaValidator(new Validator())
+);
 
 $normalized = $normalizer->normalize($json);
 ```

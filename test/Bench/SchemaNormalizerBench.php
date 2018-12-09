@@ -13,8 +13,11 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Bench;
 
+use JsonSchema\SchemaStorage;
+use JsonSchema\Validator;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\SchemaNormalizer;
+use Localheinz\Json\Normalizer\Validator\SchemaValidator;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 
@@ -59,7 +62,11 @@ final class SchemaNormalizerBench
 
         $json = Json::fromEncoded($encoded);
 
-        $normalizer = new SchemaNormalizer($schemaUri);
+        $normalizer = new SchemaNormalizer(
+            $schemaUri,
+            new SchemaStorage(),
+            new SchemaValidator(new Validator())
+        );
 
         $normalizer->normalize($json);
     }
