@@ -66,8 +66,6 @@ JSON
 
         $normalizer = new ChainNormalizer(...$normalizers);
 
-        $normalized = $normalizer->normalize($json);
-
-        self::assertSame($last, $normalized);
+        self::assertSame($last, $normalizer->normalize($json));
     }
 }
