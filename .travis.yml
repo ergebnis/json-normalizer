@@ -6,9 +6,10 @@ env:
 
 cache:
   directories:
+    - $HOME/.build/php-cs-fixer
+    - $HOME/.build/phpstan
+    - $HOME/.build/phpunit
     - $HOME/.composer/cache
-    - $HOME/.php-cs-fixer
-    - $HOME/.phpstan
 
 stages:
   - style
@@ -32,14 +33,14 @@ jobs:
         - composer install
 
       before_script:
-        - mkdir -p $HOME/.php-cs-fixer
+        - mkdir -p $HOME/.build/php-cs-fixer
 
       script:
         - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run --verbose
 
     - stage: Stan
 
-      php: 7.1
+      php: 7.3
 
       before_install:
         - source .travis/xdebug.sh
@@ -51,10 +52,10 @@ jobs:
         - composer install
 
       before_script:
-        - mkdir -p $HOME/.phpstan
+        - mkdir -p $HOME/.build/phpstan
 
       script:
-        - vendor/bin/phpstan analyse --configuration=phpstan.neon src test
+        - vendor/bin/phpstan analyse --configuration=phpstan.neon
 
     - &TEST
 
@@ -147,7 +148,7 @@ jobs:
 
       before_script:
         - xdebug-enable
-        - mkdir -p $HOME/.infection
+        - mkdir -p $HOME/.build/infection
 
       script:
         - vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=96 --min-msi=96
