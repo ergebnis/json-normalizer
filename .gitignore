@@ -1,4 +1,2 @@
-/.infection/
-/.php-cs-fixer/
-/.phpstan/
+/.build/
 /vendor/

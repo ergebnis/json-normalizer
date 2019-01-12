@@ -98,7 +98,7 @@ $callable = function (Normalizer\Json $json): Normalizer\Json {
         if ('https://localheinz.com' !== $value) {
             continue;
         }
-        
+
         $decoded->{$name} .= '/open-source/';
     }
 
@@ -194,7 +194,7 @@ $json = Normalizer\Json::fromEncoded($encoded);
 /** @var Normalizer\NormalizerInterface $composedNormalizer*/
 /** @var Normalizer\Format\Format $format*/
 $normalizer = new Normalizer\FixedFormatNormalizer(
-    $composedNormalizer, 
+    $composedNormalizer,
     $format,
     new Normalizer\Format\Formatter(new Printer\Printer())
 );
