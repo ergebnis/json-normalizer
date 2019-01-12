@@ -16,6 +16,7 @@ namespace Localheinz\Json\Normalizer\Test\Unit;
 use Localheinz\Json\Normalizer\ChainNormalizer;
 use Localheinz\Json\Normalizer\Json;
 use Localheinz\Json\Normalizer\NormalizerInterface;
+use Prophecy\Argument;
 
 /**
  * @internal
@@ -54,7 +55,7 @@ JSON
             $normalizer = $this->prophesize(NormalizerInterface::class);
 
             $normalizer
-                ->normalize($previous)
+                ->normalize(Argument::is($previous))
                 ->shouldBeCalled()
                 ->willReturn($result);
 
