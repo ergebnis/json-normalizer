@@ -180,7 +180,7 @@ final class IndentTest extends Framework\TestCase
     public function testFromJsonReturnsIndentSniffedFromArray(string $actualIndent, string $sniffedIndent): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 [
 "foo",
 ${actualIndent}"bar",
@@ -207,7 +207,7 @@ JSON
     public function testFromJsonReturnsIndentSniffedFromObject(string $actualIndent, string $sniffedIndent): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {
 "foo": 9000,
 ${actualIndent}"bar": 123,

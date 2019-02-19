@@ -29,7 +29,7 @@ final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"

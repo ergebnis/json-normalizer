@@ -34,7 +34,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -65,7 +65,7 @@ JSON
     public function testNormalizeThrowsSchemaUriCouldNotBeReadExceptionWhenSchemaUriReferencesUnreadableResource(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -96,7 +96,7 @@ JSON
     public function testNormalizeThrowsSchemaUriReferencesDocumentWithInvalidMediaTypeExceptionWhenSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -127,7 +127,7 @@ JSON
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -158,7 +158,7 @@ JSON
     public function testNormalizeThrowsOriginalInvalidAccordingToSchemaExceptionWhenOriginalNotValidAccordingToSchema(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
@@ -207,7 +207,7 @@ JSON;
     public function testNormalizeThrowsNormalizedInvalidAccordingToSchemaExceptionWhenNormalizedNotValidAccordingToSchema(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "url": "https://localheinz.com",
     "name": "Andreas Möller"
@@ -233,7 +233,7 @@ JSON
 JSON;
 
         $normalized = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"

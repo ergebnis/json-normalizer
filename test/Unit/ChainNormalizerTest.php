@@ -26,7 +26,7 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "original"
 }
@@ -35,7 +35,7 @@ JSON
 
         $results = \array_map(static function (int $step) {
             return Json::fromEncoded(
-<<<JSON
+                <<<JSON
 {
     "status": "normalized at step ${step}"
 }
