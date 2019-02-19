@@ -29,7 +29,7 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"

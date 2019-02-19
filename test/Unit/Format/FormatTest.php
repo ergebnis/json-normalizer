@@ -184,7 +184,7 @@ final class FormatTest extends Framework\TestCase
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {
     "foo": 9000,
     "bar": 123,
@@ -227,7 +227,7 @@ JSON
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {
     "foo": 9000,
     "bar": 123,

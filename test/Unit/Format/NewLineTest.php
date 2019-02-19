@@ -103,7 +103,7 @@ final class NewLineTest extends Framework\TestCase
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 ["foo",${newLineString}"bar"]
 JSON
         );
@@ -122,7 +122,7 @@ JSON
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
         $json = Json::fromEncoded(
-<<<JSON
+            <<<JSON
 {"foo": 9000,${newLineString}"bar": 123}
 JSON
         );

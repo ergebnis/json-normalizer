@@ -29,7 +29,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
         $indent = Indent::fromString('  ');
 
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "original"
 }

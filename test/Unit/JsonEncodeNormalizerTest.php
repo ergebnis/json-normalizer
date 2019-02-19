@@ -30,7 +30,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas M\u00f6ller",
     "url": "https:\/\/github.com\/localheinz\/json-normalizer",

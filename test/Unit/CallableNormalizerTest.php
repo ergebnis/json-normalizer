@@ -24,7 +24,7 @@ final class CallableNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizePassesJsonThroughCallable(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "original"
 }
@@ -32,7 +32,7 @@ JSON
         );
 
         $normalized = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "normalized"
 }

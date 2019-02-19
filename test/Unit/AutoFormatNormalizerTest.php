@@ -27,7 +27,7 @@ final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
     public function testNormalizeNormalizesAndFormatsUsingJsonFormat(): void
     {
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "original"
 }
@@ -35,7 +35,7 @@ JSON
         );
 
         $normalized = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "normalized"
 }
@@ -43,7 +43,7 @@ JSON
         );
 
         $formatted = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "status": "formatted"
 }

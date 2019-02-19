@@ -55,7 +55,7 @@ final class FormatterTest extends Framework\TestCase
         ]);
 
         $json = Json::fromEncoded(
-<<<'JSON'
+            <<<'JSON'
 {
     "name": "Andreas M\u00f6ller",
     "url": "https:\/\/github.com\/localheinz\/json-normalizer",
