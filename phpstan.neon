@@ -6,6 +6,11 @@ includes:
 	- vendor/phpstan/phpstan/conf/config.levelmax.neon
 
 parameters:
+	classesAllowedToBeExtended:
+		- InvalidArgumentException
+		- Localheinz\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
+		- Localheinz\Json\Normalizer\Test\Unit\Exception\AbstractExceptionTestCase
+		- RuntimeException
 	ignoreErrors:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::getContentType\(\) has a nullable return type declaration.#'
