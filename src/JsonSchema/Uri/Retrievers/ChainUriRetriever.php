@@ -25,9 +25,9 @@ final class ChainUriRetriever implements Uri\Retrievers\UriRetrieverInterface
     private $retrievers;
 
     /**
-     * @var null|string
+     * @var string
      */
-    private $contentType;
+    private $contentType = '';
 
     /**
      * @param Uri\Retrievers\UriRetrieverInterface ...$retrievers
@@ -63,7 +63,7 @@ final class ChainUriRetriever implements Uri\Retrievers\UriRetrieverInterface
         ));
     }
 
-    public function getContentType(): ?string
+    public function getContentType(): string
     {
         return $this->contentType;
     }
