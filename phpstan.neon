@@ -15,6 +15,7 @@ parameters:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::getContentType\(\) has a nullable return type declaration.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
+		- '#Return type \(string\|null\) of method Localheinz\\Json\\Normalizer\\JsonSchema\\Uri\\Retrievers\\ChainUriRetriever::getContentType\(\) should be covariant with return type \(string\) of method JsonSchema\\Uri\\Retrievers\\UriRetrieverInterface::getContentType\(\)#'
 	paths:
 		- src
 		- test
