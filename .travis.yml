@@ -111,7 +111,7 @@ jobs:
 
       php: 7.2
 
-      env: WITH_LOCKED=true WITH_COVERAGE=true
+      env: WITH_LOCKED=true
 
     - <<: *TEST
 
@@ -129,7 +129,7 @@ jobs:
 
       php: 7.3
 
-      env: WITH_LOCKED=true
+      env: WITH_LOCKED=true WITH_COVERAGE=true
 
     - <<: *TEST
 
@@ -139,7 +139,7 @@ jobs:
 
     - stage: Infection
 
-      php: 7.2
+      php: 7.3
 
       before_install:
         - source .travis/xdebug.sh
