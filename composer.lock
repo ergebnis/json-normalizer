@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fdcc62957a6761439a27bb3c0a901cc",
+    "content-hash": "0820a544bbea5413207569f440bb1000",
     "packages": [
         {
             "name": "justinrainbow/json-schema",
@@ -957,16 +957,16 @@
         },
         {
             "name": "localheinz/phpstan-rules",
-            "version": "0.7.1",
+            "version": "0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/localheinz/phpstan-rules.git",
-                "reference": "fbbd15c097cd76a42d525badfd5342cd3c7d36a5"
+                "reference": "c897d1212ca0a8f53522792b0a00f52133f519a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/localheinz/phpstan-rules/zipball/fbbd15c097cd76a42d525badfd5342cd3c7d36a5",
-                "reference": "fbbd15c097cd76a42d525badfd5342cd3c7d36a5",
+                "url": "https://api.github.com/repos/localheinz/phpstan-rules/zipball/c897d1212ca0a8f53522792b0a00f52133f519a4",
+                "reference": "c897d1212ca0a8f53522792b0a00f52133f519a4",
                 "shasum": ""
             },
             "require": {
@@ -975,15 +975,22 @@
                 "phpstan/phpstan": "~0.10.5 || ~0.11.0"
             },
             "require-dev": {
-                "infection/infection": "~0.11.5",
+                "infection/infection": "~0.12.2",
                 "localheinz/composer-normalize": "^1.1.1",
-                "localheinz/php-cs-fixer-config": "~1.19.0",
+                "localheinz/php-cs-fixer-config": "~1.21.0",
                 "localheinz/test-util": "~0.7.0",
                 "phpstan/phpstan-deprecation-rules": "~0.10.2 || ~0.11.0",
                 "phpstan/phpstan-strict-rules": "~0.10.1 || ~0.11.0",
-                "phpunit/phpunit": "^7.5.2"
+                "phpunit/phpunit": "^7.5.9"
             },
-            "type": "library",
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "rules.neon"
+                    ]
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Localheinz\\PHPStan\\Rules\\": "src/"
@@ -1006,7 +1013,7 @@
                 "phpstan-extreme-rules",
                 "phpstan-rules"
             ],
-            "time": "2019-01-17T22:24:11+00:00"
+            "time": "2019-05-20T09:08:06+00:00"
         },
         {
             "name": "localheinz/test-util",
@@ -1314,7 +1321,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🅱 Nette Bootstrap: the simple way to configure and bootstrap your Nette application.",
+            "description": "? Nette Bootstrap: the simple way to configure and bootstrap your Nette application.",
             "homepage": "https://nette.org",
             "keywords": [
                 "bootstrapping",
@@ -1379,7 +1386,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "💎 Nette Dependency Injection Container: Flexible, compiled and full-featured DIC with perfectly usable autowiring and support for all new PHP 7.1 features.",
+            "description": "? Nette Dependency Injection Container: Flexible, compiled and full-featured DIC with perfectly usable autowiring and support for all new PHP 7.1 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "compiled",
@@ -1444,7 +1451,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
+            "description": "? Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -1504,7 +1511,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
+            "description": "? Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -1567,7 +1574,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
+            "description": "? Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -1631,7 +1638,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🍀 Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
+            "description": "? Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
             "homepage": "https://nette.org",
             "keywords": [
                 "autoload",
@@ -1704,7 +1711,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "🛠 Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "description": "? Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
             "homepage": "https://nette.org",
             "keywords": [
                 "array",
@@ -1726,16 +1733,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.1",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0"
+                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
-                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
+                "reference": "1bd73cc04c3843ad8d6b0bfc0956026a151fc420",
                 "shasum": ""
             },
             "require": {
@@ -1773,7 +1780,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-02-16T20:54:15+00:00"
+            "time": "2019-05-25T20:07:01+00:00"
         },
         {
             "name": "ocramius/package-versions",
