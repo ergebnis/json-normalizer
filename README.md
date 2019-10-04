@@ -1,6 +1,6 @@
 # json-normalizer
 
-[![Build Status](https://travis-ci.com/localheinz/json-normalizer.svg?branch=master)](https://travis-ci.com/localheinz/json-normalizer)
+[![Continuous Integration Status](https://github.com/localheinz/json-normalizer/workflows/Continuous%20Integration/badge.svg)](https://github.com/localheinz/json-normalizer/actions)
 [![codecov](https://codecov.io/gh/localheinz/json-normalizer/branch/master/graph/badge.svg)](https://codecov.io/gh/localheinz/json-normalizer)
 [![Latest Stable Version](https://poser.pugx.org/localheinz/json-normalizer/v/stable)](https://packagist.org/packages/localheinz/json-normalizer)
 [![Total Downloads](https://poser.pugx.org/localheinz/json-normalizer/downloads)](https://packagist.org/packages/localheinz/json-normalizer)
