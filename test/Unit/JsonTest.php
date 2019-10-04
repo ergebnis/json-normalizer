@@ -23,6 +23,12 @@ use PHPUnit\Framework;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\Json
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidJsonEncodedException
+ * @uses \Localheinz\Json\Normalizer\Format\Format
+ * @uses \Localheinz\Json\Normalizer\Format\Indent
+ * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Localheinz\Json\Normalizer\Format\NewLine
  */
 final class JsonTest extends Framework\TestCase
 {

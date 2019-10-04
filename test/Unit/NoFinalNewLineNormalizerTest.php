@@ -20,6 +20,8 @@ use Localheinz\Json\Normalizer\NoFinalNewLineNormalizer;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\NoFinalNewLineNormalizer
+ *
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {

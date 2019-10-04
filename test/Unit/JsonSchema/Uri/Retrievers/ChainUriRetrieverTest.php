@@ -25,6 +25,8 @@ use Prophecy\Argument;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException
  */
 final class ChainUriRetrieverTest extends Framework\TestCase
 {

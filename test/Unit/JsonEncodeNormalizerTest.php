@@ -21,6 +21,9 @@ use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\JsonEncodeNormalizer
+ *
+ * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {

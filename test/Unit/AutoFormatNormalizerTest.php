@@ -23,6 +23,12 @@ use Prophecy\Argument;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\AutoFormatNormalizer
+ *
+ * @uses \Localheinz\Json\Normalizer\Format\Format
+ * @uses \Localheinz\Json\Normalizer\Format\Indent
+ * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Localheinz\Json\Normalizer\Format\NewLine
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {

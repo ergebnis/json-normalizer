@@ -23,6 +23,9 @@ use PHPUnit\Framework;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {

@@ -22,6 +22,8 @@ use Prophecy\Argument;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\ChainNormalizer
+ *
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {

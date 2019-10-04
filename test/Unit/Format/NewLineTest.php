@@ -22,6 +22,9 @@ use PHPUnit\Framework;
  * @internal
  *
  * @covers \Localheinz\Json\Normalizer\Format\NewLine
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class NewLineTest extends Framework\TestCase
 {
