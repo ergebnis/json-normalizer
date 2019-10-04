@@ -23,6 +23,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class ChainUriRetrieverTest extends Framework\TestCase
 {

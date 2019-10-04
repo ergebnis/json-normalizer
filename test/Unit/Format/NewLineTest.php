@@ -20,6 +20,7 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class NewLineTest extends Framework\TestCase
 {
@@ -104,7 +105,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $json = Json::fromEncoded(
             <<<JSON
-["foo",${newLineString}"bar"]
+["foo",{$newLineString}"bar"]
 JSON
         );
 
@@ -123,7 +124,7 @@ JSON
     {
         $json = Json::fromEncoded(
             <<<JSON
-{"foo": 9000,${newLineString}"bar": 123}
+{"foo": 9000,{$newLineString}"bar": 123}
 JSON
         );
 

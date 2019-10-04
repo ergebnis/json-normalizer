@@ -19,6 +19,7 @@ use Localheinz\Json\Normalizer\JsonEncodeNormalizer;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {

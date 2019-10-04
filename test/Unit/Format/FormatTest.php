@@ -22,6 +22,7 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class FormatTest extends Framework\TestCase
 {
@@ -191,7 +192,7 @@ final class FormatTest extends Framework\TestCase
     "baz": {
         "qux": "quux"
     }
-}${actualWhitespace}
+}{$actualWhitespace}
 JSON
         );
 
@@ -234,7 +235,7 @@ JSON
     "baz": {
         "qux": "quux"
     }
-}${actualWhitespace}
+}{$actualWhitespace}
 JSON
         );
 

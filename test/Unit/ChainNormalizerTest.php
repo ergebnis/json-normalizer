@@ -20,6 +20,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -37,7 +38,7 @@ JSON
             return Json::fromEncoded(
                 <<<JSON
 {
-    "status": "normalized at step ${step}"
+    "status": "normalized at step {$step}"
 }
 JSON
             );

@@ -21,6 +21,7 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {

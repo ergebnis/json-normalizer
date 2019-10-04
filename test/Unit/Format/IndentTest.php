@@ -21,6 +21,7 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class IndentTest extends Framework\TestCase
 {
@@ -183,7 +184,7 @@ final class IndentTest extends Framework\TestCase
             <<<JSON
 [
 "foo",
-${actualIndent}"bar",
+{$actualIndent}"bar",
     {
         "qux": "quux"
     }
@@ -210,7 +211,7 @@ JSON
             <<<JSON
 {
 "foo": 9000,
-${actualIndent}"bar": 123,
+{$actualIndent}"bar": 123,
     "baz": {
         "qux": "quux"
     }

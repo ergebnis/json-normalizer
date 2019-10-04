@@ -28,6 +28,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -239,7 +240,7 @@ JSON;
     "url": "https://localheinz.com"
 }
 JSON
-);
+        );
 
         $schemaDecoded = \json_decode($schema);
 

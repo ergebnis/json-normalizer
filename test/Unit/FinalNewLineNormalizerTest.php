@@ -18,6 +18,7 @@ use Localheinz\Json\Normalizer\Json;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -33,7 +34,7 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
-}${whitespace}
+}{$whitespace}
 JSON
         );
 

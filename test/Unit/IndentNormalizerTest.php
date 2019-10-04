@@ -21,6 +21,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {

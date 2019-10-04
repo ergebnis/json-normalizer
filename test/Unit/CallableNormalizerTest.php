@@ -18,6 +18,7 @@ use Localheinz\Json\Normalizer\Json;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class CallableNormalizerTest extends AbstractNormalizerTestCase
 {

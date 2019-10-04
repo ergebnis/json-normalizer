@@ -17,6 +17,7 @@ use Localheinz\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCase
 {

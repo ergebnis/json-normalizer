@@ -17,6 +17,7 @@ use Localheinz\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidM
 
 /**
  * @internal
+ * @coversNothing
  */
 final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends AbstractExceptionTestCase
 {

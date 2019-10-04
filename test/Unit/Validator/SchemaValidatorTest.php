@@ -22,6 +22,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class SchemaValidatorTest extends Framework\TestCase
 {

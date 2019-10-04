@@ -27,6 +27,7 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class FormatterTest extends Framework\TestCase
 {
