@@ -28,7 +28,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\SchemaNormalizer
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {

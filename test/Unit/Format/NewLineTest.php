@@ -20,7 +20,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\NewLine
  */
 final class NewLineTest extends Framework\TestCase
 {

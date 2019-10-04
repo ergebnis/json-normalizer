@@ -18,7 +18,8 @@ use Localheinz\Json\Normalizer\NoFinalNewLineNormalizer;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\NoFinalNewLineNormalizer
  */
 final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {

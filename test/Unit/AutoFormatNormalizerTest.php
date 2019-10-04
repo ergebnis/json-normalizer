@@ -21,7 +21,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\AutoFormatNormalizer
  */
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {

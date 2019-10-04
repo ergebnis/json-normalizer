@@ -21,7 +21,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Json
  */
 final class JsonTest extends Framework\TestCase
 {

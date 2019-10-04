@@ -22,7 +22,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\Format
  */
 final class FormatTest extends Framework\TestCase
 {

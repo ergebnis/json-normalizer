@@ -27,7 +27,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\Formatter
  */
 final class FormatterTest extends Framework\TestCase
 {

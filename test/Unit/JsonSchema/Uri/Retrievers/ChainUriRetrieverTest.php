@@ -23,7 +23,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever
  */
 final class ChainUriRetrieverTest extends Framework\TestCase
 {

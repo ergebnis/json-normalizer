@@ -18,7 +18,8 @@ use Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException
  */
 final class UriRetrieverRequiredExceptionTest extends AbstractExceptionTestCase
 {

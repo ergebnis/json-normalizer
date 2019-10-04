@@ -21,7 +21,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\IndentNormalizer
  */
 final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {

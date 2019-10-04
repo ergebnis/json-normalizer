@@ -20,7 +20,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\ChainNormalizer
  */
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {

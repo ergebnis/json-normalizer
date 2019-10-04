@@ -21,7 +21,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\Indent
  */
 final class IndentTest extends Framework\TestCase
 {

@@ -21,7 +21,8 @@ use PHPUnit\Framework;
 
 /**
  * @internal
- * @coversNothing
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
