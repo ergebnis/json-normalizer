@@ -23,7 +23,7 @@
   "require-dev": {
     "infection/infection": "~0.13.4",
     "jangregor/phpstan-prophecy": "~0.4.1",
-    "localheinz/php-cs-fixer-config": "~1.19.2",
+    "localheinz/php-cs-fixer-config": "~1.23.0",
     "localheinz/phpstan-rules": "~0.7.1",
     "localheinz/test-util": "~0.7.0",
     "phpbench/phpbench": "~0.14.0",
