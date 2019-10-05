@@ -14,6 +14,7 @@ parameters:
 	ignoreErrors:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
+	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		- src
 		- test
