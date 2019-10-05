@@ -275,6 +275,26 @@ JSON
         }
     }
 
+    public function testFromJsonReturnsIndentWithDefaultsWhenIndentCouldNotBeSniffed(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{"foo":9000,"bar":123,"baz":{"qux":"quux"}}
+JSON
+        );
+
+        $indent = Indent::fromJson($json);
+
+        self::assertInstanceOf(Indent::class, $indent);
+
+        $default = \str_repeat(
+            ' ',
+            4
+        );
+
+        self::assertSame($default, $indent->__toString());
+    }
+
     /**
      * @return int[]
      */
