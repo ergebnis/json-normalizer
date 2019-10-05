@@ -21,6 +21,13 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\Indent
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentSizeException
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentStringException
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentStyleException
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
 {
@@ -183,7 +190,7 @@ final class IndentTest extends Framework\TestCase
             <<<JSON
 [
 "foo",
-${actualIndent}"bar",
+{$actualIndent}"bar",
     {
         "qux": "quux"
     }
@@ -210,7 +217,7 @@ JSON
             <<<JSON
 {
 "foo": 9000,
-${actualIndent}"bar": 123,
+{$actualIndent}"bar": 123,
     "baz": {
         "qux": "quux"
     }

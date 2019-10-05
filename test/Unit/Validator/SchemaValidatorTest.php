@@ -22,6 +22,8 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Validator\SchemaValidator
  */
 final class SchemaValidatorTest extends Framework\TestCase
 {

@@ -17,6 +17,8 @@ use Localheinz\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentE
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
  */
 final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends AbstractExceptionTestCase
 {

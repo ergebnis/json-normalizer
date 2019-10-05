@@ -20,6 +20,11 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\NewLine
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class NewLineTest extends Framework\TestCase
 {
@@ -104,7 +109,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $json = Json::fromEncoded(
             <<<JSON
-["foo",${newLineString}"bar"]
+["foo",{$newLineString}"bar"]
 JSON
         );
 
@@ -123,7 +128,7 @@ JSON
     {
         $json = Json::fromEncoded(
             <<<JSON
-{"foo": 9000,${newLineString}"bar": 123}
+{"foo": 9000,{$newLineString}"bar": 123}
 JSON
         );
 

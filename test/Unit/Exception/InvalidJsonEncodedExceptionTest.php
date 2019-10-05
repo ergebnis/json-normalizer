@@ -17,6 +17,8 @@ use Localheinz\Json\Normalizer\Exception\InvalidJsonEncodedException;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\InvalidJsonEncodedException
  */
 final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 {

@@ -17,6 +17,8 @@ use Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException
  */
 final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 {

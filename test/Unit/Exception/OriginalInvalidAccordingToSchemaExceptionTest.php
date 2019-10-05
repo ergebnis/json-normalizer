@@ -17,6 +17,8 @@ use Localheinz\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaExcepti
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaException
  */
 final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExceptionTestCase
 {

@@ -22,6 +22,13 @@ use PHPUnit\Framework;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Format\Format
+ *
+ * @uses \Localheinz\Json\Normalizer\Format\Indent
+ * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Localheinz\Json\Normalizer\Format\NewLine
+ * @uses \Localheinz\Json\Normalizer\Json
  */
 final class FormatTest extends Framework\TestCase
 {
@@ -191,7 +198,7 @@ final class FormatTest extends Framework\TestCase
     "baz": {
         "qux": "quux"
     }
-}${actualWhitespace}
+}{$actualWhitespace}
 JSON
         );
 
@@ -234,7 +241,7 @@ JSON
     "baz": {
         "qux": "quux"
     }
-}${actualWhitespace}
+}{$actualWhitespace}
 JSON
         );
 

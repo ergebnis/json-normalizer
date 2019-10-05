@@ -17,6 +17,8 @@ use Localheinz\Json\Normalizer\Exception\InvalidIndentStyleException;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\Exception\InvalidIndentStyleException
  */
 final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
 {

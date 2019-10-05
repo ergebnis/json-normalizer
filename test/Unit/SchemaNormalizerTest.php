@@ -28,6 +28,17 @@ use Prophecy\Argument;
 
 /**
  * @internal
+ *
+ * @covers \Localheinz\Json\Normalizer\SchemaNormalizer
+ *
+ * @uses \Localheinz\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException
+ * @uses \Localheinz\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaException
+ * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException
+ * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException
+ * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
+ * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
+ * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Localheinz\Json\Normalizer\Validator\SchemaValidator
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -239,7 +250,7 @@ JSON;
     "url": "https://localheinz.com"
 }
 JSON
-);
+        );
 
         $schemaDecoded = \json_decode($schema);
 
