@@ -39,6 +39,12 @@ labels:
   - name: enhancement
     color: 0e8a16
 
+  - name: question
+    color: cc317c
+
+  - name: security
+    color: ee0701
+
   - name: stale
     color: eeeeee
 
