@@ -74,6 +74,8 @@ $ make
 
 to enforce coding standards, perform a static code analysis, run tests, and run benchmarks!
 
+## Help
+
 :bulb: Run
 
 ```
