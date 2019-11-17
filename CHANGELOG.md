@@ -19,6 +19,10 @@ For a full diff see [`0.9.0...master`](https://github.com/localheinz/json-normal
 * Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109](https://github.com/localheinz/json-normalizer/pull/109)), by [@localheinz](https://github.com/localheinz)
 * Dropped nullable return type declaration from `ChainUriRetriever::getContentType()`, defaulting to an empty `string` when `ChainUriRetriever::retrieve()` wasn't invoked yet ([#132](https://github.com/localheinz/json-normalizer/pull/132)), by [@localheinz](https://github.com/localheinz)
 
+### Fixed
+
+* Dropped support for PHP 7.1 ([#163](https://github.com/localheinz/json-normalizer/pull/163)), by [@localheinz](https://github.com/localheinz)
+
 ## [`0.9.0`](https://github.com/localheinz/json-normalizer/releases/tag/0.9.0)
 
 For a full diff see [`0.8.0...0.9.0`](https://github.com/localheinz/json-normalizer/compare/0.8.0...0.9.0).
