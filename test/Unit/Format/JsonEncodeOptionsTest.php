@@ -47,7 +47,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $values = [
             'int-minus-one' => -1,
-            'int-less-than-minus-one' => -1 * $this->faker()->numberBetween(2),
+            'int-less-than-minus-one' => -1 * self::faker()->numberBetween(2),
         ];
 
         foreach ($values as $key => $string) {
@@ -75,7 +75,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $values = [
             'int-zero' => 0,
-            'int-greater-than-zero' => $this->faker()->numberBetween(1),
+            'int-greater-than-zero' => self::faker()->numberBetween(1),
         ];
 
         foreach ($values as $key => $string) {

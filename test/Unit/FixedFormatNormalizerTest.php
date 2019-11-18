@@ -34,7 +34,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeNormalizesAndFormatsUsingFormat(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $format = new Format\Format(
             Format\JsonEncodeOptions::fromInt($faker->numberBetween(1)),

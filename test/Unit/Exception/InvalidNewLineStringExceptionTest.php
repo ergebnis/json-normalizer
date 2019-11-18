@@ -24,12 +24,12 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
     }
 
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
-        $string = $this->faker()->word;
+        $string = self::faker()->word;
 
         $exception = InvalidNewLineStringException::fromString($string);
 

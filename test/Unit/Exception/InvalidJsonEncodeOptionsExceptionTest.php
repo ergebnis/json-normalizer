@@ -24,12 +24,12 @@ final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestC
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodeOptionsException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodeOptionsException::class);
     }
 
     public function testFromJsonEncodeOptionsReturnsInvalidJsonEncodeOptionsException(): void
     {
-        $jsonEncodeOptions = $this->faker()->randomNumber();
+        $jsonEncodeOptions = self::faker()->randomNumber();
 
         $exception = InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
 

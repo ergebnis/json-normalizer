@@ -24,12 +24,12 @@ final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidIndentStringException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentStringException::class);
     }
 
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
-        $string = $this->faker()->word;
+        $string = self::faker()->word;
 
         $exception = InvalidIndentStringException::fromString($string);
 

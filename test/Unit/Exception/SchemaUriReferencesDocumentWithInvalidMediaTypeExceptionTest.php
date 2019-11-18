@@ -24,12 +24,12 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
+        self::assertClassExtends(\RuntimeException::class, SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
     }
 
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($schemaUri);
 

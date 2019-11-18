@@ -24,12 +24,12 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidIndentStyleException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentStyleException::class);
     }
 
     public function testFromStyleAndAllowedStylesReturnsInvalidIndentStyleException(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $style = $faker->word;
 

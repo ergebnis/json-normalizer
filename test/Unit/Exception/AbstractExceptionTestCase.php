@@ -26,7 +26,7 @@ abstract class AbstractExceptionTestCase extends Framework\TestCase
 
     final public function testImplementsExceptionInterface(): void
     {
-        $this->assertClassImplementsInterface(Exception\ExceptionInterface::class, $this->className());
+        self::assertClassImplementsInterface(Exception\ExceptionInterface::class, $this->className());
     }
 
     final protected function className(): string

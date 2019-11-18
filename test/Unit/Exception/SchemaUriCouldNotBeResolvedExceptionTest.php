@@ -24,12 +24,12 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, SchemaUriCouldNotBeResolvedException::class);
+        self::assertClassExtends(\RuntimeException::class, SchemaUriCouldNotBeResolvedException::class);
     }
 
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
 

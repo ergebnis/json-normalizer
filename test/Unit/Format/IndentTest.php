@@ -40,7 +40,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
-        $style = $this->faker()->randomElement([
+        $style = self::faker()->randomElement([
             'space',
             'tab',
         ]);
@@ -58,7 +58,7 @@ final class IndentTest extends Framework\TestCase
         $sizes = [
             'int-zero' => 0,
             'int-minus-one' => -1,
-            'int-less-than-minus-one' => -1 * $this->faker()->numberBetween(2),
+            'int-less-than-minus-one' => -1 * self::faker()->numberBetween(2),
         ];
 
         foreach ($sizes as $key => $size) {
@@ -70,7 +70,7 @@ final class IndentTest extends Framework\TestCase
 
     public function testFromSizeAndStyleRejectsInvalidStyle(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $size = $faker->numberBetween(1);
         $style = $faker->sentence;
@@ -135,7 +135,7 @@ final class IndentTest extends Framework\TestCase
     public function providerInvalidIndentString(): \Generator
     {
         $strings = [
-            'string-not-whitespace' => $this->faker()->sentence,
+            'string-not-whitespace' => self::faker()->sentence,
             'string-contains-line-feed' => " \n ",
             'string-mixed-space-and-tab' => " \t",
         ];
@@ -309,7 +309,7 @@ JSON
     {
         return [
             'int-one' => 1,
-            'int-greater-than-one' => $this->faker()->numberBetween(2, 5),
+            'int-greater-than-one' => self::faker()->numberBetween(2, 5),
         ];
     }
 
