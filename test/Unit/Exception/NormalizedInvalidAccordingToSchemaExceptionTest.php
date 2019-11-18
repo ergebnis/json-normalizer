@@ -24,12 +24,12 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, NormalizedInvalidAccordingToSchemaException::class);
+        self::assertClassExtends(\RuntimeException::class, NormalizedInvalidAccordingToSchemaException::class);
     }
 
     public function testFromSchemaUriReturnsNormalizedInvalidAccordingToSchemaException(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUri($schemaUri);
 

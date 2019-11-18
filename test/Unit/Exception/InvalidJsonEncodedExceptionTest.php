@@ -24,12 +24,12 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodedException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodedException::class);
     }
 
     public function testFromEncodedReturnsInvalidJsonEncodedException(): void
     {
-        $encoded = $this->faker()->sentence;
+        $encoded = self::faker()->sentence;
 
         $exception = InvalidJsonEncodedException::fromEncoded($encoded);
 

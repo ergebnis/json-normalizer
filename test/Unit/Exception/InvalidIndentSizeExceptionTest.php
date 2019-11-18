@@ -24,12 +24,12 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidIndentSizeException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentSizeException::class);
     }
 
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentSizeException(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $size = $faker->numberBetween(1);
         $minimumSize = $faker->numberBetween(1);

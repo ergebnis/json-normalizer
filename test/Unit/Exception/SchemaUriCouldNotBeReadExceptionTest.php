@@ -24,12 +24,12 @@ final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCa
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, SchemaUriCouldNotBeReadException::class);
+        self::assertClassExtends(\RuntimeException::class, SchemaUriCouldNotBeReadException::class);
     }
 
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = SchemaUriCouldNotBeReadException::fromSchemaUri($schemaUri);
 

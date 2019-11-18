@@ -25,7 +25,7 @@ final class UriRetrieverRequiredExceptionTest extends AbstractExceptionTestCase
 {
     public function testExtendsInvalidArgumentException(): void
     {
-        $this->assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
+        self::assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
     }
 
     public function testCreateReturnsUriRetrieverRequiredException(): void

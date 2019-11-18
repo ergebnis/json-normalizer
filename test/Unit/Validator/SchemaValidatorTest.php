@@ -31,7 +31,7 @@ final class SchemaValidatorTest extends Framework\TestCase
 
     public function testImplementsSchemaValidatorInterface(): void
     {
-        $this->assertClassImplementsInterface(SchemaValidatorInterface::class, SchemaValidator::class);
+        self::assertClassImplementsInterface(SchemaValidatorInterface::class, SchemaValidator::class);
     }
 
     /**

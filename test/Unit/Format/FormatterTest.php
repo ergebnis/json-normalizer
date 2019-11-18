@@ -42,7 +42,7 @@ final class FormatterTest extends Framework\TestCase
 
     public function testImplementsFormatterInterface(): void
     {
-        $this->assertClassImplementsInterface(FormatterInterface::class, Formatter::class);
+        self::assertClassImplementsInterface(FormatterInterface::class, Formatter::class);
     }
 
     /**
@@ -52,7 +52,7 @@ final class FormatterTest extends Framework\TestCase
      */
     public function testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $jsonEncodeOptions = $faker->numberBetween(1);
         $indentString = \str_repeat(' ', $faker->numberBetween(1, 5));

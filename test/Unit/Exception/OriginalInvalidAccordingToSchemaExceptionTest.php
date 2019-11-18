@@ -24,12 +24,12 @@ final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExcept
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, OriginalInvalidAccordingToSchemaException::class);
+        self::assertClassExtends(\RuntimeException::class, OriginalInvalidAccordingToSchemaException::class);
     }
 
     public function testFromSchemaUriReturnsOriginalInvalidAccordingToSchemaException(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = OriginalInvalidAccordingToSchemaException::fromSchemaUri($schemaUri);
 

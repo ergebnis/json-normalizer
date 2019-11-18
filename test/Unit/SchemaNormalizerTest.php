@@ -53,7 +53,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schemaStorage = $this->prophesize(SchemaStorage::class);
 
@@ -84,7 +84,7 @@ JSON
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schemaStorage = $this->prophesize(SchemaStorage::class);
 
@@ -115,7 +115,7 @@ JSON
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schemaStorage = $this->prophesize(SchemaStorage::class);
 
@@ -146,7 +146,7 @@ JSON
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schemaStorage = $this->prophesize(SchemaStorage::class);
 
@@ -177,7 +177,7 @@ JSON
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schema = <<<'JSON'
 {
@@ -226,7 +226,7 @@ JSON;
 JSON
         );
 
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $schema = <<<'JSON'
 {

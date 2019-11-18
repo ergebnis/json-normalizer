@@ -34,7 +34,7 @@ final class ChainUriRetrieverTest extends Framework\TestCase
 
     public function testImplementsUriRetrieverInterface(): void
     {
-        $this->assertClassImplementsInterface(Uri\Retrievers\UriRetrieverInterface::class, ChainUriRetriever::class);
+        self::assertClassImplementsInterface(Uri\Retrievers\UriRetrieverInterface::class, ChainUriRetriever::class);
     }
 
     public function testConstructorRejectsEmptyRetrievers(): void
@@ -55,7 +55,7 @@ final class ChainUriRetrieverTest extends Framework\TestCase
 
     public function testRetrieveThrowsResourceNotFoundExceptionWhenNoneOfTheRetrieversWhereAbleToRetrieveUri(): void
     {
-        $uri = $this->faker()->url;
+        $uri = self::faker()->url;
 
         $retrievers = \array_map(function () use ($uri): Uri\Retrievers\UriRetrieverInterface {
             $retriever = $this->prophesize(Uri\Retrievers\UriRetrieverInterface::class);
@@ -77,7 +77,7 @@ final class ChainUriRetrieverTest extends Framework\TestCase
 
     public function testRetrieveReturnsSchemaFromFirstRetrieverThatWasAbleToRetrieve(): void
     {
-        $faker = $this->faker();
+        $faker = self::faker();
 
         $uri = $faker->url;
         $schema = \json_encode($faker->words);

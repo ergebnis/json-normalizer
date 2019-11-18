@@ -26,7 +26,7 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
 
     final public function testImplementsNormalizerInterface(): void
     {
-        $this->assertClassImplementsInterface(NormalizerInterface::class, $this->className());
+        self::assertClassImplementsInterface(NormalizerInterface::class, $this->className());
     }
 
     final protected function className(): string

@@ -24,12 +24,12 @@ final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends Abstract
 {
     public function testExtendsRuntimeException(): void
     {
-        $this->assertClassExtends(\RuntimeException::class, SchemaUriReferencesInvalidJsonDocumentException::class);
+        self::assertClassExtends(\RuntimeException::class, SchemaUriReferencesInvalidJsonDocumentException::class);
     }
 
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
-        $schemaUri = $this->faker()->url;
+        $schemaUri = self::faker()->url;
 
         $exception = SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
 
