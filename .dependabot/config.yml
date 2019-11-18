@@ -16,6 +16,11 @@ update_configs:
     default_reviewers:
       - "localheinz"
     directory: "/"
+    ignored_updates:
+      - match:
+          dependency_name: "justinrainbow/json-schema"
+      - match:
+          dependency_name: "localheinz/json-printer"
     package_manager: "php:composer"
     update_schedule: "live"
     version_requirement_updates: "increase_versions"
