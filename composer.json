@@ -17,7 +17,7 @@
   "require": {
     "php": "^7.2",
     "ext-json": "*",
-    "justinrainbow/json-schema": "^4.0.0 || ^5.0.0",
+    "justinrainbow/json-schema": "^5.2.9",
     "localheinz/json-printer": "^2.0.1"
   },
   "require-dev": {
