@@ -21,7 +21,7 @@
     "localheinz/json-printer": "^2.0.1"
   },
   "require-dev": {
-    "ergebnis/php-cs-fixer-config": "~1.0.0",
+    "ergebnis/php-cs-fixer-config": "~1.1.0",
     "infection/infection": "~0.13.6",
     "jangregor/phpstan-prophecy": "~0.4.2",
     "localheinz/phpstan-rules": "~0.13.0",
