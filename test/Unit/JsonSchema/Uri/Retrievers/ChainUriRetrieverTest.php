@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\JsonSchema\Uri\Retrievers;
 
+use Ergebnis\Test\Util\Helper;
 use JsonSchema\Exception;
 use JsonSchema\Uri;
 use Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException;
 use Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 

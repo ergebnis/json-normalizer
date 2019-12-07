@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Test\Util\Helper;
 use Localheinz\Json\Normalizer\Exception;
 use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**

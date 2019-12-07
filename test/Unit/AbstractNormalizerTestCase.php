@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Test\Util\Helper;
 use Localheinz\Json\Normalizer\NormalizerInterface;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**
