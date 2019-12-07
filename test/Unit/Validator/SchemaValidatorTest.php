@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Validator;
 
+use Ergebnis\Test\Util\Helper;
 use JsonSchema\Validator;
 use Localheinz\Json\Normalizer\Validator\SchemaValidator;
 use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
-use Localheinz\Test\Util\Helper;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
