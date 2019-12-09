@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Printer;
 use Ergebnis\Test\Util\Helper;
 use Localheinz\Json\Normalizer\Format\Format;
 use Localheinz\Json\Normalizer\Format\Formatter;
@@ -21,7 +22,6 @@ use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\Format\JsonEncodeOptions;
 use Localheinz\Json\Normalizer\Format\NewLine;
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Printer;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 

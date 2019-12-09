@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Format;
 
+use Ergebnis\Json\Printer;
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Printer;
 
 final class Formatter implements FormatterInterface
 {

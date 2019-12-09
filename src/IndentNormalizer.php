@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer;
 
-use Localheinz\Json\Printer;
+use Ergebnis\Json\Printer;
 
 final class IndentNormalizer implements NormalizerInterface
 {
