@@ -1,10 +1,5 @@
 includes:
-	- vendor/jangregor/phpstan-prophecy/src/extension.neon
-	- vendor/localheinz/phpstan-rules/rules.neon
-	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
-	- vendor/phpstan/phpstan/conf/bleedingEdge.neon
-	- vendor/phpstan/phpstan/conf/config.levelmax.neon
+	- phpstan-baseline.neon
 
 parameters:
 	classesAllowedToBeExtended:
@@ -16,6 +11,7 @@ parameters:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
 	inferPrivatePropertyTypeFromConstructor: true
+	level: max
 	paths:
 		- src
 		- test
