@@ -108,7 +108,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.3
+          - 7.4
 
     steps:
       - name: "Checkout"
@@ -145,6 +145,7 @@ jobs:
         php-version:
           - 7.2
           - 7.3
+          - 7.4
 
         dependencies:
           - lowest
@@ -199,7 +200,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.3
+          - 7.4
 
     steps:
       - name: "Checkout"
@@ -239,7 +240,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.3
+          - 7.4
 
     steps:
       - name: "Checkout"
@@ -274,7 +275,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - 7.3
+          - 7.4
 
     steps:
       - name: "Checkout"
