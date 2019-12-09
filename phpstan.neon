@@ -2,11 +2,12 @@ includes:
 	- phpstan-baseline.neon
 
 parameters:
-	classesAllowedToBeExtended:
-		- InvalidArgumentException
-		- Localheinz\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
-		- Localheinz\Json\Normalizer\Test\Unit\Exception\AbstractExceptionTestCase
-		- RuntimeException
+	ergebnis:
+		classesAllowedToBeExtended:
+			- InvalidArgumentException
+			- Localheinz\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
+			- Localheinz\Json\Normalizer\Test\Unit\Exception\AbstractExceptionTestCase
+			- RuntimeException
 	ignoreErrors:
 		- '#Method Localheinz\\Json\\Normalizer\\Json::__construct\(\) has parameter \$decoded with no typehint specified.#'
 		- '#Method Localheinz\\Json\\Normalizer\\SchemaNormalizer::resolveSchema\(\) has parameter \$data with no typehint specified.#'
