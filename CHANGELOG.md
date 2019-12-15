@@ -18,6 +18,7 @@ For a full diff see [`0.9.0...master`][0.9.0...master].
 * Allowing injection of a `UriRetriever` into the `SchemaNormalizer`, and defaulting to a `ChainUriRetriever` which composes `FileGetContents` and `Curl` URI retrievers ([#104]), by [@localheinz]
 * Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109]), by [@localheinz]
 * Dropped nullable return type declaration from `ChainUriRetriever::getContentType()`, defaulting to an empty `string` when `ChainUriRetriever::retrieve()` wasn't invoked yet ([#132]), by [@localheinz]
+* Started using `ergebnis/json-printer` instead of `localheinz/json-printer` ([#176]), by [@localheinz]
 
 ### Fixed
 
@@ -241,6 +242,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#109]: https://github.com/localheinz/json-normalizer/pull/109
 [#132]: https://github.com/localheinz/json-normalizer/pull/132
 [#163]: https://github.com/localheinz/json-normalizer/pull/163
+[#176]: https://github.com/localheinz/json-normalizer/pull/176
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@localheinz]: https://github.com/localheinz

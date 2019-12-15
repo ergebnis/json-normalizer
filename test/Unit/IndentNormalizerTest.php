@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Localheinz\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Printer\PrinterInterface;
 use Localheinz\Json\Normalizer\Format\Indent;
 use Localheinz\Json\Normalizer\IndentNormalizer;
 use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Printer\PrinterInterface;
 use Prophecy\Argument;
 
 /**
