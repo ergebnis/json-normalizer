@@ -8,25 +8,25 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\JsonSchema\Uri\Retrievers;
+namespace Ergebnis\Json\Normalizer\Test\Unit\JsonSchema\Uri\Retrievers;
 
+use Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException;
+use Ergebnis\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever;
 use Ergebnis\Test\Util\Helper;
 use JsonSchema\Exception;
 use JsonSchema\Uri;
-use Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException;
-use Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever
+ * @covers \Ergebnis\Json\Normalizer\JsonSchema\Uri\Retrievers\ChainUriRetriever
  *
- * @uses \Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException
+ * @uses \Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException
  */
 final class ChainUriRetrieverTest extends Framework\TestCase
 {

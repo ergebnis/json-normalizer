@@ -8,37 +8,37 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\SchemaNormalizer;
+use Ergebnis\Json\Normalizer\Validator\SchemaValidator;
+use Ergebnis\Json\Normalizer\Validator\SchemaValidatorInterface;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
-use Localheinz\Json\Normalizer\Exception;
-use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Normalizer\SchemaNormalizer;
-use Localheinz\Json\Normalizer\Validator\SchemaValidator;
-use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\SchemaNormalizer
+ * @covers \Ergebnis\Json\Normalizer\SchemaNormalizer
  *
- * @uses \Localheinz\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException
- * @uses \Localheinz\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaException
- * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException
- * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException
- * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
- * @uses \Localheinz\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
- * @uses \Localheinz\Json\Normalizer\Json
- * @uses \Localheinz\Json\Normalizer\Validator\SchemaValidator
+ * @uses \Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException
+ * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaException
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
+ * @uses \Ergebnis\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Validator\SchemaValidator
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {

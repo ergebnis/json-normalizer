@@ -8,20 +8,20 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Localheinz\Json\Normalizer\FinalNewLineNormalizer;
-use Localheinz\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\FinalNewLineNormalizer;
+use Ergebnis\Json\Normalizer\Json;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\FinalNewLineNormalizer
+ * @covers \Ergebnis\Json\Normalizer\FinalNewLineNormalizer
  *
- * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {

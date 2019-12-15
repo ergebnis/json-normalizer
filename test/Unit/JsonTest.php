@@ -8,27 +8,27 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Format\Format;
+use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\Json\Normalizer\Exception;
-use Localheinz\Json\Normalizer\Format\Format;
-use Localheinz\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Json
+ * @covers \Ergebnis\Json\Normalizer\Json
  *
- * @uses \Localheinz\Json\Normalizer\Exception\InvalidJsonEncodedException
- * @uses \Localheinz\Json\Normalizer\Format\Format
- * @uses \Localheinz\Json\Normalizer\Format\Indent
- * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Localheinz\Json\Normalizer\Format\NewLine
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodedException
+ * @uses \Ergebnis\Json\Normalizer\Format\Format
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  */
 final class JsonTest extends Framework\TestCase
 {

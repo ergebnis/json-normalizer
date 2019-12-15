@@ -3,12 +3,12 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Method Localheinz\\\\Json\\\\Normalizer\\\\Json\\:\\:__construct\\(\\) has parameter \\$decoded with no typehint specified\\.$#"
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Json\\:\\:__construct\\(\\) has parameter \\$decoded with no typehint specified\\.$#"
 			count: 1
 			path: src/Json.php
 
 		-
-			message: "#^Method Localheinz\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:resolveSchema\\(\\) has parameter \\$data with no typehint specified\\.$#"
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:resolveSchema\\(\\) has parameter \\$data with no typehint specified\\.$#"
 			count: 1
 			path: src/SchemaNormalizer.php
 

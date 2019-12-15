@@ -8,22 +8,22 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Validator;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Validator;
 
+use Ergebnis\Json\Normalizer\Validator\SchemaValidator;
+use Ergebnis\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Ergebnis\Test\Util\Helper;
 use JsonSchema\Validator;
-use Localheinz\Json\Normalizer\Validator\SchemaValidator;
-use Localheinz\Json\Normalizer\Validator\SchemaValidatorInterface;
 use PHPUnit\Framework;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Validator\SchemaValidator
+ * @covers \Ergebnis\Json\Normalizer\Validator\SchemaValidator
  */
 final class SchemaValidatorTest extends Framework\TestCase
 {

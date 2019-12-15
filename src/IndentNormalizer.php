@@ -8,10 +8,10 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer;
+namespace Ergebnis\Json\Normalizer;
 
 use Ergebnis\Json\Printer;
 

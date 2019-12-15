@@ -8,7 +8,7 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
 use Ergebnis\PhpCsFixer\Config;
@@ -19,7 +19,7 @@ Copyright (c) 2018 Andreas Möller
 For the full copyright and license information, please view
 the LICENSE file that was distributed with this source code.
 
-@see https://github.com/localheinz/json-normalizer
+@see https://github.com/ergebnis/json-normalizer
 EOF;
 
 $config = Config\Factory::fromRuleSet(new Config\RuleSet\Php71($header), [
