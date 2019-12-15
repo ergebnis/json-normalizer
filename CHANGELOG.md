@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/localheinz/json-normalizer/compare/0.9.0...HEAD)
+## Unreleased
 
 For a full diff see [`0.9.0...master`][0.9.0...master].
 
@@ -19,6 +19,37 @@ For a full diff see [`0.9.0...master`][0.9.0...master].
 * Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109]), by [@localheinz]
 * Dropped nullable return type declaration from `ChainUriRetriever::getContentType()`, defaulting to an empty `string` when `ChainUriRetriever::retrieve()` wasn't invoked yet ([#132]), by [@localheinz]
 * Started using `ergebnis/json-printer` instead of `localheinz/json-printer` ([#176]), by [@localheinz]
+* Renamed vendor namespace `Localheinz` to `Ergebnis` after move to [@ergebnis] ([#181]), by [@localheinz]
+
+  Run
+
+  ```
+  $ composer remove localheinz/json-normalizer
+  ```
+
+  and
+
+  ```
+  $ composer require ergebnis/json-normalizer
+  ```
+
+  to update.
+
+  Run
+
+  ```
+  $ find . -type f -exec sed -i '.bak' 's/Localheinz\\Json\\Normalizer/Ergebnis\\Json\\Normalizer/g' {} \;
+  ```
+
+  to replace occurrences of `Localheinz\Json\Normalizer` with `Ergebnis\Json\Normalizer`.
+
+  Run
+
+  ```
+  $ find -type f -name '*.bak' -delete
+  ```
+
+  to delete backup files created in the previous step.
 
 ### Fixed
 
@@ -166,83 +197,85 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 * Added `AutoFormatNormalizer` ([#13]), by [@localheinz]
 * Added `SchemaNormalizer` ([#15]), by [@localheinz]
 
-[0.1.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.1.0
-[0.2.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.2.0
-[0.3.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.3.0
-[0.4.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.4.0
-[0.5.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.5.0
-[0.5.1]: https://github.com/localheinz/json-normalizer/releases/tag/0.5.1
-[0.5.2]: https://github.com/localheinz/json-normalizer/releases/tag/0.5.2
-[0.6.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.6.0
-[0.7.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.7.0
-[0.8.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.8.0
-[0.9.0]: https://github.com/localheinz/json-normalizer/releases/tag/0.9.0
+[0.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.1.0
+[0.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.2.0
+[0.3.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.3.0
+[0.4.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.4.0
+[0.5.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.5.0
+[0.5.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.5.1
+[0.5.2]: https://github.com/ergebnis/json-normalizer/releases/tag/0.5.2
+[0.6.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.6.0
+[0.7.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.7.0
+[0.8.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.8.0
+[0.9.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.9.0
 
-[5d8b3e2...0.1.0]: https://github.com/localheinz/json-normalizer/compare/5d8b3e2...0.1.0
+[5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 
-[0.1.0...0.2.0]: https://github.com/localheinz/json-normalizer/compare/0.1.0...0.2.0
-[0.2.0...0.3.0]: https://github.com/localheinz/json-normalizer/compare/0.2.0...0.3.0
-[0.3.0...0.4.0]: https://github.com/localheinz/json-normalizer/compare/0.3.0...0.4.0
-[0.4.0...0.5.0]: https://github.com/localheinz/json-normalizer/compare/0.4.0...0.5.0
-[0.5.0...0.5.1]: https://github.com/localheinz/json-normalizer/compare/0.5.0...0.5.1
-[0.5.1...0.5.2]: https://github.com/localheinz/json-normalizer/compare/0.5.1...0.5.2
-[0.5.2...0.6.0]: https://github.com/localheinz/json-normalizer/compare/0.5.2...0.6.0
-[0.6.0...0.7.0]: https://github.com/localheinz/json-normalizer/compare/0.6.0...0.7.0
-[0.7.0...0.8.0]: https://github.com/localheinz/json-normalizer/compare/0.7.0...0.8.0
-[0.8.0...0.9.0]: https://github.com/localheinz/json-normalizer/compare/0.8.0...0.9.0
-[0.9.0...master]: https://github.com/localheinz/json-normalizer/compare/0.9.0...master
+[0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
+[0.2.0...0.3.0]: https://github.com/ergebnis/json-normalizer/compare/0.2.0...0.3.0
+[0.3.0...0.4.0]: https://github.com/ergebnis/json-normalizer/compare/0.3.0...0.4.0
+[0.4.0...0.5.0]: https://github.com/ergebnis/json-normalizer/compare/0.4.0...0.5.0
+[0.5.0...0.5.1]: https://github.com/ergebnis/json-normalizer/compare/0.5.0...0.5.1
+[0.5.1...0.5.2]: https://github.com/ergebnis/json-normalizer/compare/0.5.1...0.5.2
+[0.5.2...0.6.0]: https://github.com/ergebnis/json-normalizer/compare/0.5.2...0.6.0
+[0.6.0...0.7.0]: https://github.com/ergebnis/json-normalizer/compare/0.6.0...0.7.0
+[0.7.0...0.8.0]: https://github.com/ergebnis/json-normalizer/compare/0.7.0...0.8.0
+[0.8.0...0.9.0]: https://github.com/ergebnis/json-normalizer/compare/0.8.0...0.9.0
+[0.9.0...master]: https://github.com/ergebnis/json-normalizer/compare/0.9.0...master
 
-[#1]: https://github.com/localheinz/json-normalizer/pull/1
-[#2]: https://github.com/localheinz/json-normalizer/pull/2
-[#3]: https://github.com/localheinz/json-normalizer/pull/3
-[#7]: https://github.com/localheinz/json-normalizer/pull/7
-[#8]: https://github.com/localheinz/json-normalizer/pull/8
-[#9]: https://github.com/localheinz/json-normalizer/pull/9
-[#10]: https://github.com/localheinz/json-normalizer/pull/10
-[#12]: https://github.com/localheinz/json-normalizer/pull/12
-[#13]: https://github.com/localheinz/json-normalizer/pull/13
-[#15]: https://github.com/localheinz/json-normalizer/pull/15
-[#17]: https://github.com/localheinz/json-normalizer/pull/17
-[#27]: https://github.com/localheinz/json-normalizer/pull/27
-[#29]: https://github.com/localheinz/json-normalizer/pull/29
-[#30]: https://github.com/localheinz/json-normalizer/pull/30
-[#31]: https://github.com/localheinz/json-normalizer/pull/31
-[#37]: https://github.com/localheinz/json-normalizer/pull/37
-[#40]: https://github.com/localheinz/json-normalizer/pull/40
-[#45]: https://github.com/localheinz/json-normalizer/pull/45
-[#47]: https://github.com/localheinz/json-normalizer/pull/47
-[#49]: https://github.com/localheinz/json-normalizer/pull/49
-[#55]: https://github.com/localheinz/json-normalizer/pull/55
-[#64]: https://github.com/localheinz/json-normalizer/pull/64
-[#67]: https://github.com/localheinz/json-normalizer/pull/67
-[#68]: https://github.com/localheinz/json-normalizer/pull/68
-[#69]: https://github.com/localheinz/json-normalizer/pull/69
-[#71]: https://github.com/localheinz/json-normalizer/pull/71
-[#72]: https://github.com/localheinz/json-normalizer/pull/72
-[#73]: https://github.com/localheinz/json-normalizer/pull/73
-[#76]: https://github.com/localheinz/json-normalizer/pull/76
-[#77]: https://github.com/localheinz/json-normalizer/pull/77
-[#79]: https://github.com/localheinz/json-normalizer/pull/79
-[#82]: https://github.com/localheinz/json-normalizer/pull/82
-[#84]: https://github.com/localheinz/json-normalizer/pull/84
-[#85]: https://github.com/localheinz/json-normalizer/pull/85
-[#86]: https://github.com/localheinz/json-normalizer/pull/86
-[#88]: https://github.com/localheinz/json-normalizer/pull/88
-[#89]: https://github.com/localheinz/json-normalizer/pull/89
-[#90]: https://github.com/localheinz/json-normalizer/pull/90
-[#91]: https://github.com/localheinz/json-normalizer/pull/91
-[#92]: https://github.com/localheinz/json-normalizer/pull/92
-[#93]: https://github.com/localheinz/json-normalizer/pull/93
-[#94]: https://github.com/localheinz/json-normalizer/pull/94
-[#95]: https://github.com/localheinz/json-normalizer/pull/95
-[#96]: https://github.com/localheinz/json-normalizer/pull/96
-[#102]: https://github.com/localheinz/json-normalizer/pull/102
-[#103]: https://github.com/localheinz/json-normalizer/pull/103
-[#104]: https://github.com/localheinz/json-normalizer/pull/104
-[#109]: https://github.com/localheinz/json-normalizer/pull/109
-[#132]: https://github.com/localheinz/json-normalizer/pull/132
-[#163]: https://github.com/localheinz/json-normalizer/pull/163
-[#176]: https://github.com/localheinz/json-normalizer/pull/176
+[#1]: https://github.com/ergebnis/json-normalizer/pull/1
+[#2]: https://github.com/ergebnis/json-normalizer/pull/2
+[#3]: https://github.com/ergebnis/json-normalizer/pull/3
+[#7]: https://github.com/ergebnis/json-normalizer/pull/7
+[#8]: https://github.com/ergebnis/json-normalizer/pull/8
+[#9]: https://github.com/ergebnis/json-normalizer/pull/9
+[#10]: https://github.com/ergebnis/json-normalizer/pull/10
+[#12]: https://github.com/ergebnis/json-normalizer/pull/12
+[#13]: https://github.com/ergebnis/json-normalizer/pull/13
+[#15]: https://github.com/ergebnis/json-normalizer/pull/15
+[#17]: https://github.com/ergebnis/json-normalizer/pull/17
+[#27]: https://github.com/ergebnis/json-normalizer/pull/27
+[#29]: https://github.com/ergebnis/json-normalizer/pull/29
+[#30]: https://github.com/ergebnis/json-normalizer/pull/30
+[#31]: https://github.com/ergebnis/json-normalizer/pull/31
+[#37]: https://github.com/ergebnis/json-normalizer/pull/37
+[#40]: https://github.com/ergebnis/json-normalizer/pull/40
+[#45]: https://github.com/ergebnis/json-normalizer/pull/45
+[#47]: https://github.com/ergebnis/json-normalizer/pull/47
+[#49]: https://github.com/ergebnis/json-normalizer/pull/49
+[#55]: https://github.com/ergebnis/json-normalizer/pull/55
+[#64]: https://github.com/ergebnis/json-normalizer/pull/64
+[#67]: https://github.com/ergebnis/json-normalizer/pull/67
+[#68]: https://github.com/ergebnis/json-normalizer/pull/68
+[#69]: https://github.com/ergebnis/json-normalizer/pull/69
+[#71]: https://github.com/ergebnis/json-normalizer/pull/71
+[#72]: https://github.com/ergebnis/json-normalizer/pull/72
+[#73]: https://github.com/ergebnis/json-normalizer/pull/73
+[#76]: https://github.com/ergebnis/json-normalizer/pull/76
+[#77]: https://github.com/ergebnis/json-normalizer/pull/77
+[#79]: https://github.com/ergebnis/json-normalizer/pull/79
+[#82]: https://github.com/ergebnis/json-normalizer/pull/82
+[#84]: https://github.com/ergebnis/json-normalizer/pull/84
+[#85]: https://github.com/ergebnis/json-normalizer/pull/85
+[#86]: https://github.com/ergebnis/json-normalizer/pull/86
+[#88]: https://github.com/ergebnis/json-normalizer/pull/88
+[#89]: https://github.com/ergebnis/json-normalizer/pull/89
+[#90]: https://github.com/ergebnis/json-normalizer/pull/90
+[#91]: https://github.com/ergebnis/json-normalizer/pull/91
+[#92]: https://github.com/ergebnis/json-normalizer/pull/92
+[#93]: https://github.com/ergebnis/json-normalizer/pull/93
+[#94]: https://github.com/ergebnis/json-normalizer/pull/94
+[#95]: https://github.com/ergebnis/json-normalizer/pull/95
+[#96]: https://github.com/ergebnis/json-normalizer/pull/96
+[#102]: https://github.com/ergebnis/json-normalizer/pull/102
+[#103]: https://github.com/ergebnis/json-normalizer/pull/103
+[#104]: https://github.com/ergebnis/json-normalizer/pull/104
+[#109]: https://github.com/ergebnis/json-normalizer/pull/109
+[#132]: https://github.com/ergebnis/json-normalizer/pull/132
+[#163]: https://github.com/ergebnis/json-normalizer/pull/163
+[#176]: https://github.com/ergebnis/json-normalizer/pull/176
+[#181]: https://github.com/ergebnis/json-normalizer/pull/181
 
 [@BackEndTea]: https://github.com/BackEndTea
+[@ergebnis]: https://github.com/ergebnis
 [@localheinz]: https://github.com/localheinz

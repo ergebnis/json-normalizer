@@ -1,12 +1,12 @@
 {
-  "name": "localheinz/json-normalizer",
+  "name": "ergebnis/json-normalizer",
   "type": "library",
   "description": "Provides normalizers for normalizing JSON documents.",
   "keywords": [
     "json",
     "normalizer"
   ],
-  "homepage": "https://github.com/localheinz/json-normalizer",
+  "homepage": "https://github.com/ergebnis/json-normalizer",
   "license": "MIT",
   "authors": [
     {
@@ -39,16 +39,16 @@
   },
   "autoload": {
     "psr-4": {
-      "Localheinz\\Json\\Normalizer\\": "src/"
+      "Ergebnis\\Json\\Normalizer\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Localheinz\\Json\\Normalizer\\Test\\": "test/"
+      "Ergebnis\\Json\\Normalizer\\Test\\": "test/"
     }
   },
   "support": {
-    "issues": "https://github.com/localheinz/json-normalizer/issues",
-    "source": "https://github.com/localheinz/json-normalizer"
+    "issues": "https://github.com/ergebnis/json-normalizer/issues",
+    "source": "https://github.com/ergebnis/json-normalizer"
   }
 }

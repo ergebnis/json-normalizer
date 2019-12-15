@@ -8,16 +8,16 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Bench;
+namespace Ergebnis\Json\Normalizer\Test\Bench;
 
+use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\SchemaNormalizer;
+use Ergebnis\Json\Normalizer\Validator\SchemaValidator;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
-use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Normalizer\SchemaNormalizer;
-use Localheinz\Json\Normalizer\Validator\SchemaValidator;
 use PhpBench\Benchmark\Metadata\Annotations\Iterations;
 use PhpBench\Benchmark\Metadata\Annotations\Revs;
 

@@ -8,23 +8,23 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Format;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
-use Localheinz\Json\Normalizer\Exception;
-use Localheinz\Json\Normalizer\Format\NewLine;
-use Localheinz\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Format\NewLine;
+use Ergebnis\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Format\NewLine
+ * @covers \Ergebnis\Json\Normalizer\Format\NewLine
  *
- * @uses \Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException
- * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException
+ * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class NewLineTest extends Framework\TestCase
 {

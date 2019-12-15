@@ -8,26 +8,26 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Format;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Format\Indent;
+use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\Json\Normalizer\Exception;
-use Localheinz\Json\Normalizer\Format\Indent;
-use Localheinz\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Format\Indent
+ * @covers \Ergebnis\Json\Normalizer\Format\Indent
  *
- * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentSizeException
- * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentStringException
- * @uses \Localheinz\Json\Normalizer\Exception\InvalidIndentStyleException
- * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyleException
+ * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
 {

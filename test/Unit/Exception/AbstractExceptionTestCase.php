@@ -8,13 +8,13 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Exception;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
+use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Test\Util\Helper;
-use Localheinz\Json\Normalizer\Exception;
 use PHPUnit\Framework;
 
 /**
@@ -35,8 +35,8 @@ abstract class AbstractExceptionTestCase extends Framework\TestCase
             '/Test$/',
             '',
             \str_replace(
-                'Localheinz\\Json\\Normalizer\\Test\\Unit\\Exception\\',
-                'Localheinz\\Json\\Normalizer\\Exception\\',
+                'Ergebnis\\Json\\Normalizer\\Test\\Unit\\Exception\\',
+                'Ergebnis\\Json\\Normalizer\\Exception\\',
                 static::class
             )
         );

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60f1ce843a608b014e76c92f9e11bf62",
+    "content-hash": "fa9be8e96218cf19e110b8db60d3cd53",
     "packages": [
         {
             "name": "ergebnis/json-printer",

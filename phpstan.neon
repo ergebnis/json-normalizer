@@ -4,9 +4,9 @@ includes:
 parameters:
 	ergebnis:
 		classesAllowedToBeExtended:
+			- Ergebnis\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
+			- Ergebnis\Json\Normalizer\Test\Unit\Exception\AbstractExceptionTestCase
 			- InvalidArgumentException
-			- Localheinz\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
-			- Localheinz\Json\Normalizer\Test\Unit\Exception\AbstractExceptionTestCase
 			- RuntimeException
 	inferPrivatePropertyTypeFromConstructor: true
 	level: max

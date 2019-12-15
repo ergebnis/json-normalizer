@@ -8,14 +8,14 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\JsonSchema\Uri\Retrievers;
+namespace Ergebnis\Json\Normalizer\JsonSchema\Uri\Retrievers;
 
+use Ergebnis\Json\Normalizer\Exception;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Uri;
-use Localheinz\Json\Normalizer\Exception;
 
 final class ChainUriRetriever implements Uri\Retrievers\UriRetrieverInterface
 {

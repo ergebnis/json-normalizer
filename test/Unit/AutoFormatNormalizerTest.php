@@ -8,27 +8,27 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Localheinz\Json\Normalizer\AutoFormatNormalizer;
-use Localheinz\Json\Normalizer\Format;
-use Localheinz\Json\Normalizer\Json;
-use Localheinz\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\AutoFormatNormalizer;
+use Ergebnis\Json\Normalizer\Format;
+use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\NormalizerInterface;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\AutoFormatNormalizer
+ * @covers \Ergebnis\Json\Normalizer\AutoFormatNormalizer
  *
- * @uses \Localheinz\Json\Normalizer\Format\Format
- * @uses \Localheinz\Json\Normalizer\Format\Indent
- * @uses \Localheinz\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Localheinz\Json\Normalizer\Format\NewLine
- * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Format\Format
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\Format\NewLine
+ * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class AutoFormatNormalizerTest extends AbstractNormalizerTestCase
 {

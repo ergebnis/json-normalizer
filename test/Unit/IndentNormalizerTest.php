@@ -8,24 +8,24 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit;
+namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Normalizer\Format\Indent;
+use Ergebnis\Json\Normalizer\IndentNormalizer;
+use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Printer\PrinterInterface;
-use Localheinz\Json\Normalizer\Format\Indent;
-use Localheinz\Json\Normalizer\IndentNormalizer;
-use Localheinz\Json\Normalizer\Json;
 use Prophecy\Argument;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\IndentNormalizer
+ * @covers \Ergebnis\Json\Normalizer\IndentNormalizer
  *
- * @uses \Localheinz\Json\Normalizer\Format\Indent
- * @uses \Localheinz\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {

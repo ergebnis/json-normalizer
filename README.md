@@ -1,9 +1,9 @@
 # json-normalizer
 
-[![Continuous Integration](https://github.com/localheinz/json-normalizer/workflows/Continuous%20Integration/badge.svg)](https://github.com/localheinz/json-normalizer/actions)
-[![Code Coverage](https://codecov.io/gh/localheinz/json-normalizer/branch/master/graph/badge.svg)](https://codecov.io/gh/localheinz/json-normalizer)
-[![Latest Stable Version](https://poser.pugx.org/localheinz/json-normalizer/v/stable)](https://packagist.org/packages/localheinz/json-normalizer)
-[![Total Downloads](https://poser.pugx.org/localheinz/json-normalizer/downloads)](https://packagist.org/packages/localheinz/json-normalizer)
+[![Continuous Integration](https://github.com/ergebnis/json-normalizer/workflows/Continuous%20Integration/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
+[![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
+[![Latest Stable Version](https://poser.pugx.org/ergebnis/json-normalizer/v/stable)](https://packagist.org/packages/ergebnis/json-normalizer)
+[![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 
 Provides normalizers for normalizing JSON documents.
 
@@ -12,7 +12,7 @@ Provides normalizers for normalizing JSON documents.
 Run
 
 ```
-$ composer require localheinz/json-normalizer
+$ composer require ergebnis/json-normalizer
 ```
 
 ## Usage

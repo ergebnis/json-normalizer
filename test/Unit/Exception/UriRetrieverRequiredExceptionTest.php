@@ -8,18 +8,18 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Exception;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Localheinz\Json\Normalizer\Exception\InvalidNewLineStringException;
-use Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException;
+use Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException;
+use Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Exception\UriRetrieverRequiredException
+ * @covers \Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException
  */
 final class UriRetrieverRequiredExceptionTest extends AbstractExceptionTestCase
 {

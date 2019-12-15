@@ -8,17 +8,17 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
  *
- * @see https://github.com/localheinz/json-normalizer
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Localheinz\Json\Normalizer\Test\Unit\Exception;
+namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Localheinz\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException;
+use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException;
 
 /**
  * @internal
  *
- * @covers \Localheinz\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException
  */
 final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestCase
 {
