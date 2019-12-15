@@ -19,17 +19,17 @@ $ composer require ergebnis/json-normalizer
 
 This package comes with the following normalizers:
 
-* [`Localheinz\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
-* [`Localheinz\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
-* [`Localheinz\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
-* [`Localheinz\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
-* [`Localheinz\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
-* [`Localheinz\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
-* [`Localheinz\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
-* [`Localheinz\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
-* [`Localheinz\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
+* [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
+* [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
+* [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
+* [`Ergebnis\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
+* [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
+* [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
+* [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
+* [`Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
+* [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
 
-:bulb: All of these normalizers implement the `Localheinz\Json\Normalizer\NormalizerInterface`.
+:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
 
 ### `AutoFormatNormalizer`
 
@@ -37,8 +37,10 @@ If you want to normalize a JSON file with an implementation of `NormalizerInterf
 retain the original formatting, you can use the `AutoFormatNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
-use Localheinz\Json\Printer;
+<?php
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -80,7 +82,9 @@ After applying the composed normalizer, the `AutoFormatNormalizer` will
 If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
+<?php
+
+use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
 {
@@ -117,8 +121,10 @@ The normalized version will now have the callable applied to it.
 If you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
-use Localheinz\Json\Printer;
+<?php
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -153,7 +159,9 @@ The normalized version will now contain the result of applying all normalizers i
 If you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
+<?php
+
+use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
 {
@@ -179,8 +187,10 @@ If you want to normalize a JSON file with an implementation of `NormalizerInterf
 apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
-use Localheinz\Json\Printer;
+<?php
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -212,8 +222,10 @@ but also apply the formatting according to `$format`.
 If you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
-use Localheinz\Json\Printer;
+<?php
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Printer;
 
 $encoded = <<<'JSON'
 {
@@ -241,7 +253,9 @@ The normalized version will now be indented with 2 spaces.
 If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
+<?php
+
+use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
 {
@@ -269,7 +283,9 @@ and the corresponding [JSON constants](http://php.net/manual/en/json.constants.p
 If you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
-use Localheinz\Json\Normalizer;
+<?php
+
+use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
 {
@@ -313,9 +329,11 @@ Let's assume the following schema
 exists at `/schema/example.json`.
 
 ```php
+<?php
+
+use Ergebnis\Json\Normalizer;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
-use Localheinz\Json\Normalizer;
 
 $encoded = <<<'JSON'
 {
