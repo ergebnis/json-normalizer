@@ -25,7 +25,7 @@
     "ergebnis/phpstan-rules": "~0.14.2",
     "ergebnis/test-util": "~0.9.1",
     "infection/infection": "~0.13.6",
-    "jangregor/phpstan-prophecy": "~0.4.2",
+    "jangregor/phpstan-prophecy": "~0.5.0",
     "phpbench/phpbench": "~0.16.10",
     "phpstan/extension-installer": "^1.0.3",
     "phpstan/phpstan": "~0.11.19",
