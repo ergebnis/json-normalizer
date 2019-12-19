@@ -15,9 +15,9 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.1",
     "ext-json": "*",
-    "ergebnis/json-printer": "^3.0.1",
+    "ergebnis/json-printer": "^3.0.2",
     "justinrainbow/json-schema": "^4.0.0 || ^5.0.0"
   },
   "require-dev": {
@@ -31,7 +31,7 @@
     "phpstan/phpstan": "~0.11.19",
     "phpstan/phpstan-deprecation-rules": "~0.11.2",
     "phpstan/phpstan-strict-rules": "~0.11.1",
-    "phpunit/phpunit": "^8.5.0"
+    "phpunit/phpunit": "^7.5.18"
   },
   "config": {
     "preferred-install": "dist",

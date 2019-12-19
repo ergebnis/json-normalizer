@@ -6,9 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.10.0...master`][0.10.0...master].
+For a full diff see [`0.10.1...master`][0.10.1...master].
 
-## Unreleased
+## [`0.10.1`][0.10.1]
+
+For a full diff see [`0.10.0...0.10.1`][0.10.0...0.10.1].
+
+### Fixed
+
+* Brought back support for PHP 7.1 ([#191]), by [@localheinz]
+
+## [`0.10.0`][0.10.0]
 
 For a full diff see [`0.9.0...0.10.0`][0.9.0...0.10.0].
 
@@ -213,9 +221,9 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.8.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.8.0
 [0.9.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.9.0
 [0.10.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
+[0.10.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
-
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
 [0.2.0...0.3.0]: https://github.com/ergebnis/json-normalizer/compare/0.2.0...0.3.0
 [0.3.0...0.4.0]: https://github.com/ergebnis/json-normalizer/compare/0.3.0...0.4.0
@@ -227,7 +235,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.7.0...0.8.0]: https://github.com/ergebnis/json-normalizer/compare/0.7.0...0.8.0
 [0.8.0...0.9.0]: https://github.com/ergebnis/json-normalizer/compare/0.8.0...0.9.0
 [0.9.0...0.10.0]: https://github.com/ergebnis/json-normalizer/compare/0.9.0...0.10.0
-[0.10.0...master]: https://github.com/ergebnis/json-normalizer/compare/0.10.0...master
+[0.10.0...0.10.1]: https://github.com/ergebnis/json-normalizer/compare/0.10.0...0.10.1
+[0.10.1...master]: https://github.com/ergebnis/json-normalizer/compare/0.10.1...master
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -281,6 +290,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#163]: https://github.com/ergebnis/json-normalizer/pull/163
 [#176]: https://github.com/ergebnis/json-normalizer/pull/176
 [#181]: https://github.com/ergebnis/json-normalizer/pull/181
+[#191]: https://github.com/ergebnis/json-normalizer/pull/191
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis
