@@ -21,7 +21,7 @@
     "justinrainbow/json-schema": "^4.0.0 || ^5.0.0"
   },
   "require-dev": {
-    "ergebnis/php-cs-fixer-config": "~1.1.1",
+    "ergebnis/php-cs-fixer-config": "~1.1.2",
     "ergebnis/phpstan-rules": "~0.14.1",
     "ergebnis/test-util": "~0.9.1",
     "infection/infection": "~0.13.6",
