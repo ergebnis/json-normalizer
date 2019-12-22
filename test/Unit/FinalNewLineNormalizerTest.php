@@ -26,7 +26,7 @@ use Ergebnis\Json\Normalizer\Json;
 final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
-     * @dataProvider providerWhitespace
+     * @dataProvider \Ergebnis\Json\Normalizer\Test\Util\DataProvider\Text::provideWhitespace()
      *
      * @param string $whitespace
      */
@@ -48,24 +48,5 @@ JSON
         $expected = \rtrim($json->encoded()) . \PHP_EOL;
 
         self::assertSame($expected, $normalized->encoded());
-    }
-
-    /**
-     * @return \Generator<array<string>>
-     */
-    public function providerWhitespace(): \Generator
-    {
-        $values = [
-            '',
-            ' ',
-            "\t",
-            \PHP_EOL,
-        ];
-
-        foreach ($values as $value) {
-            yield [
-                $value,
-            ];
-        }
     }
 }

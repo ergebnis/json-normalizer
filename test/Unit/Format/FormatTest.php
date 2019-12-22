@@ -33,7 +33,7 @@ use PHPUnit\Framework;
 final class FormatTest extends Framework\TestCase
 {
     /**
-     * @dataProvider providerHasFinalNewLine
+     * @dataProvider \Ergebnis\Json\Normalizer\Test\Util\DataProvider\Boolean::provideBoolean()
      *
      * @param bool $hasFinalNewLine
      */
@@ -111,7 +111,7 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerHasFinalNewLine
+     * @dataProvider \Ergebnis\Json\Normalizer\Test\Util\DataProvider\Boolean::provideBoolean()
      *
      * @param bool $hasFinalNewLine
      */
@@ -129,23 +129,6 @@ final class FormatTest extends Framework\TestCase
         self::assertInstanceOf(Format::class, $mutated);
         self::assertNotSame($format, $mutated);
         self::assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
-    }
-
-    /**
-     * @return \Generator<array<bool>>
-     */
-    public function providerHasFinalNewLine(): \Generator
-    {
-        $hasFinalNewLines = [
-            'yes' => true,
-            'no' => false,
-        ];
-
-        foreach ($hasFinalNewLines as $key => $hasFinalNewLine) {
-            yield $key => [
-                $hasFinalNewLine,
-            ];
-        }
     }
 
     /**

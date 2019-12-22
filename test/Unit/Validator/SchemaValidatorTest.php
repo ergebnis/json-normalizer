@@ -35,7 +35,7 @@ final class SchemaValidatorTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerIsValid
+     * @dataProvider \Ergebnis\Json\Normalizer\Test\Util\DataProvider\Boolean::provideBoolean()
      *
      * @param bool $isValid
      */
@@ -81,22 +81,5 @@ JSON;
         $validator = new SchemaValidator($schemaValidator->reveal());
 
         self::assertSame($isValid, $validator->isValid($data, $schema));
-    }
-
-    /**
-     * @return \Generator<array<bool>>
-     */
-    public function providerIsValid(): \Generator
-    {
-        $values = [
-            'is-valid' => true,
-            'is-not-valid' => false,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 }

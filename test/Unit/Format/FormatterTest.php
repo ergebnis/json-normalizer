@@ -46,7 +46,7 @@ final class FormatterTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerFinalNewLine
+     * @dataProvider \Ergebnis\Json\Normalizer\Test\Util\DataProvider\Boolean::provideBoolean()
      *
      * @param bool $hasFinalNewLine
      */
@@ -118,22 +118,5 @@ JSON;
         $expected = $printedWithIndentAndNewLine . $suffix;
 
         self::assertSame($expected, $formatted->encoded());
-    }
-
-    /**
-     * @return \Generator<array<bool>>
-     */
-    public function providerFinalNewLine(): \Generator
-    {
-        $values = [
-            'bool-false' => false,
-            'bool-true' => true,
-        ];
-
-        foreach ($values as $key => $value) {
-            yield $key => [
-                $value,
-            ];
-        }
     }
 }
