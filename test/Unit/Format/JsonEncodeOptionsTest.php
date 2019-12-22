@@ -43,6 +43,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         JsonEncodeOptions::fromInt($value);
     }
 
+    /**
+     * @return \Generator<array<int>>
+     */
     public function providerInvalidValue(): \Generator
     {
         $values = [
@@ -50,9 +53,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
             'int-less-than-minus-one' => -1 * self::faker()->numberBetween(2),
         ];
 
-        foreach ($values as $key => $string) {
+        foreach ($values as $key => $value) {
             yield $key => [
-                $string,
+                $value,
             ];
         }
     }
@@ -71,6 +74,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         self::assertSame($value, $jsonEncodeOptions->value());
     }
 
+    /**
+     * @return \Generator<array<int>>
+     */
     public function providerValidValue(): \Generator
     {
         $values = [
@@ -101,6 +107,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         self::assertSame($value, $jsonEncodeOptions->value());
     }
 
+    /**
+     * @return array<array{0: int, 1: string}>
+     */
     public function providerJsonEncodeOptionsAndEncoded(): array
     {
         return [

@@ -120,6 +120,9 @@ JSON;
         self::assertSame($expected, $formatted->encoded());
     }
 
+    /**
+     * @return \Generator<array<bool>>
+     */
     public function providerFinalNewLine(): \Generator
     {
         $values = [

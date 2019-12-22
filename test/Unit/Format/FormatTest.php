@@ -131,6 +131,9 @@ final class FormatTest extends Framework\TestCase
         self::assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
     }
 
+    /**
+     * @return \Generator<array<bool>>
+     */
     public function providerHasFinalNewLine(): \Generator
     {
         $hasFinalNewLines = [
@@ -160,6 +163,9 @@ final class FormatTest extends Framework\TestCase
         self::assertSame('    ', $format->indent()->__toString());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerEncodedWithoutIndent(): \Generator
     {
         $values = [
@@ -208,6 +214,9 @@ JSON
         self::assertFalse($format->hasFinalNewLine());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerWhitespaceWithoutNewLine(): \Generator
     {
         $characters = [
@@ -251,6 +260,9 @@ JSON
         self::assertTrue($format->hasFinalNewLine());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerWhitespaceWithNewLine(): \Generator
     {
         $characters = [

@@ -83,6 +83,9 @@ JSON;
         self::assertSame($isValid, $validator->isValid($data, $schema));
     }
 
+    /**
+     * @return \Generator<array<bool>>
+     */
     public function providerIsValid(): \Generator
     {
         $values = [

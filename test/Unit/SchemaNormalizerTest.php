@@ -269,7 +269,7 @@ JSON
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
-            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded) {
+            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded): bool {
                 $schemaValidator
                     ->isValid(
                         Argument::exact($normalized->decoded()),
@@ -314,6 +314,9 @@ JSON
         self::assertSame($expected, $normalized->encoded());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerExpectedEncodedAndSchemaUri(): \Generator
     {
         $basePath = __DIR__ . '/../';
