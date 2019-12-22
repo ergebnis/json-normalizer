@@ -40,6 +40,9 @@ final class NewLineTest extends Framework\TestCase
         NewLine::fromString($string);
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerInvalidNewLineString(): \Generator
     {
         $strings = [
@@ -73,6 +76,9 @@ final class NewLineTest extends Framework\TestCase
         self::assertSame($string, $newLine->__toString());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerValidNewLineString(): \Generator
     {
         $strings = [
@@ -138,6 +144,9 @@ JSON
         self::assertSame($newLineString, $newLine->__toString());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerNewLine(): \Generator
     {
         $values = [

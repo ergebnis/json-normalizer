@@ -21,7 +21,7 @@ final class Json
     private $encoded;
 
     /**
-     * @var null|array|bool|float|int|\stdClass|string
+     * @var null|array<mixed>|bool|float|int|\stdClass|string
      */
     private $decoded;
 
@@ -70,7 +70,7 @@ final class Json
     /**
      * Returns the decoded JSON value.
      *
-     * @return null|array|bool|float|int|\stdClass|string
+     * @return null|array<mixed>|bool|float|int|\stdClass|string
      */
     public function decoded()
     {

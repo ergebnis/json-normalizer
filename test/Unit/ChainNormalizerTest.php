@@ -37,7 +37,7 @@ final class ChainNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $results = \array_map(static function (int $step) {
+        $results = \array_map(static function (int $step): Json {
             return Json::fromEncoded(
                 <<<JSON
 {

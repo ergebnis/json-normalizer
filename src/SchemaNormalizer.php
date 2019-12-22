@@ -83,12 +83,12 @@ final class SchemaNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param null|array|bool|float|int|\stdClass|string $data
-     * @param \stdClass                                  $schema
+     * @param null|array<mixed>|bool|float|int|\stdClass|string $data
+     * @param \stdClass                                         $schema
      *
      * @throws \InvalidArgumentException
      *
-     * @return null|array|bool|float|int|\stdClass|string
+     * @return null|array<mixed>|bool|float|int|\stdClass|string
      */
     private function normalizeData($data, \stdClass $schema)
     {
@@ -109,6 +109,12 @@ final class SchemaNormalizer implements NormalizerInterface
         return $data;
     }
 
+    /**
+     * @param array<mixed> $data
+     * @param \stdClass    $schema
+     *
+     * @return array<mixed>
+     */
     private function normalizeArray(array $data, \stdClass $schema): array
     {
         $schema = $this->resolveSchema(

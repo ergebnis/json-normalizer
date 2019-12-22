@@ -59,6 +59,9 @@ JSON
         self::assertSame($expected, $normalized->encoded());
     }
 
+    /**
+     * @return \Generator<array<int>>
+     */
     public function providerJsonEncodeOptions(): \Generator
     {
         /**
@@ -78,7 +81,7 @@ JSON
         foreach ($combinations as $combination) {
             $jsonEncodeOptions = \array_reduce(
                 $combination,
-                static function (int $jsonEncodeFlag, int $jsonEncodeOptions) {
+                static function (int $jsonEncodeFlag, int $jsonEncodeOptions): int {
                     $jsonEncodeOptions |= $jsonEncodeFlag;
 
                     return $jsonEncodeOptions;
@@ -95,9 +98,9 @@ JSON
     /**
      * @see https://docstore.mik.ua/orelly/webprog/pcook/ch04_25.htm
      *
-     * @param array $elements
+     * @param int[] $elements
      *
-     * @return array
+     * @return array<array<int>>
      */
     private function combinations(array $elements): array
     {

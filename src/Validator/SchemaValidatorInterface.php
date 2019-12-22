@@ -16,8 +16,8 @@ namespace Ergebnis\Json\Normalizer\Validator;
 interface SchemaValidatorInterface
 {
     /**
-     * @param null|array|bool|float|int|\stdClass|string $data
-     * @param \stdClass                                  $schema
+     * @param null|array<mixed>|bool|float|int|\stdClass|string $data
+     * @param \stdClass                                         $schema
      *
      * @return bool
      */

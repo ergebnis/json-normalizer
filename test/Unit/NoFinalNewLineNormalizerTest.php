@@ -50,6 +50,9 @@ JSON
         self::assertSame($expected, $normalized->encoded());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerWhitespace(): \Generator
     {
         $values = [

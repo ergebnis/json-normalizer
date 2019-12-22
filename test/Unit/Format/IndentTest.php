@@ -53,6 +53,9 @@ final class IndentTest extends Framework\TestCase
         );
     }
 
+    /**
+     * @return \Generator<array<int>>
+     */
     public function providerInvalidSize(): \Generator
     {
         $sizes = [
@@ -102,6 +105,9 @@ final class IndentTest extends Framework\TestCase
         self::assertSame($string, $indent->__toString());
     }
 
+    /**
+     * @return \Generator<array{0: int, 1: string, 2: string}>
+     */
     public function providerSizeStyleAndIndentString(): \Generator
     {
         foreach ($this->sizes() as $key => $size) {
@@ -132,6 +138,9 @@ final class IndentTest extends Framework\TestCase
         Indent::fromString($string);
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerInvalidIndentString(): \Generator
     {
         $strings = [
@@ -161,6 +170,9 @@ final class IndentTest extends Framework\TestCase
         self::assertSame($string, $indent->__toString());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerValidIndentString(): \Generator
     {
         foreach ($this->sizes() as $key => $size) {
@@ -231,6 +243,9 @@ JSON
         self::assertSame($sniffedIndent, $indent->__toString());
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerPureIndentAndSniffedIndent(): \Generator
     {
         $characters = [
@@ -261,6 +276,9 @@ JSON
         }
     }
 
+    /**
+     * @return \Generator<array<string>>
+     */
     public function providerMixedIndentAndSniffedIndent(): \Generator
     {
         $mixedIndents = [

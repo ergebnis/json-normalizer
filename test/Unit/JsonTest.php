@@ -65,6 +65,9 @@ final class JsonTest extends Framework\TestCase
         self::assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());
     }
 
+    /**
+     * @return \Generator<array<null|array|bool|float|int|string>>
+     */
     public function providerEncoded(): \Generator
     {
         $values = [
