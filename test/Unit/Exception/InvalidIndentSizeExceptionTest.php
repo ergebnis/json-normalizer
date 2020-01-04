@@ -22,11 +22,6 @@ use Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException;
  */
 final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentSizeException::class);
-    }
-
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentSizeException(): void
     {
         $faker = self::faker();
@@ -38,8 +33,6 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
             $size,
             $minimumSize
         );
-
-        self::assertInstanceOf(InvalidIndentSizeException::class, $exception);
 
         $message = \sprintf(
             'Size needs to be greater than %d, but %d is not.',

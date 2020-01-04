@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaExcepti
  */
 final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsRuntimeException(): void
-    {
-        self::assertClassExtends(\RuntimeException::class, NormalizedInvalidAccordingToSchemaException::class);
-    }
-
     public function testFromSchemaUriReturnsNormalizedInvalidAccordingToSchemaException(): void
     {
         $schemaUri = self::faker()->url;
 
         $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUri($schemaUri);
-
-        self::assertInstanceOf(NormalizedInvalidAccordingToSchemaException::class, $exception);
 
         $message = \sprintf(
             'Normalized JSON is not valid according to schema "%s".',

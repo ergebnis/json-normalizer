@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException;
  */
 final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentStringException::class);
-    }
-
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
         $string = self::faker()->word;
 
         $exception = InvalidIndentStringException::fromString($string);
-
-        self::assertInstanceOf(InvalidIndentStringException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not a valid indent string',

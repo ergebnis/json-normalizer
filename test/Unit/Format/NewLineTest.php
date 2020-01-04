@@ -72,7 +72,6 @@ final class NewLineTest extends Framework\TestCase
     {
         $newLine = NewLine::fromString($string);
 
-        self::assertInstanceOf(NewLine::class, $newLine);
         self::assertSame($string, $newLine->__toString());
     }
 
@@ -102,7 +101,6 @@ final class NewLineTest extends Framework\TestCase
 
         $newLine = NewLine::fromJson($json);
 
-        self::assertInstanceOf(NewLine::class, $newLine);
         self::assertSame(\PHP_EOL, $newLine->__toString());
     }
 
@@ -121,7 +119,6 @@ JSON
 
         $newLine = NewLine::fromJson($json);
 
-        self::assertInstanceOf(NewLine::class, $newLine);
         self::assertSame($newLineString, $newLine->__toString());
     }
 
@@ -140,7 +137,6 @@ JSON
 
         $newLine = NewLine::fromJson($json);
 
-        self::assertInstanceOf(NewLine::class, $newLine);
         self::assertSame($newLineString, $newLine->__toString());
     }
 

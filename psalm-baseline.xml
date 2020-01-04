@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.8.1@8e54e3aa060fc490d86d0e2abbf62750516d40fd">
+  <file src="src/Exception/InvalidIndentSizeException.php">
+    <MissingConstructor occurrences="1">
+      <code>$size</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/InvalidIndentStringException.php">
+    <MissingConstructor occurrences="1">
+      <code>$string</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/InvalidIndentStyleException.php">
+    <MissingConstructor occurrences="1">
+      <code>$style</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/InvalidJsonEncodeOptionsException.php">
+    <MissingConstructor occurrences="1">
+      <code>$jsonEncodeOptions</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/InvalidJsonEncodedException.php">
+    <MissingConstructor occurrences="1">
+      <code>$encoded</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/InvalidNewLineStringException.php">
+    <MissingConstructor occurrences="1">
+      <code>$string</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/NormalizedInvalidAccordingToSchemaException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/OriginalInvalidAccordingToSchemaException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/SchemaUriCouldNotBeReadException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/SchemaUriCouldNotBeResolvedException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/SchemaUriReferencesDocumentWithInvalidMediaTypeException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Exception/SchemaUriReferencesInvalidJsonDocumentException.php">
+    <MissingConstructor occurrences="1">
+      <code>$schemaUri</code>
+    </MissingConstructor>
+  </file>
+  <file src="src/Json.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $this-&gt;format</code>
+    </DocblockTypeContradiction>
+    <MissingParamType occurrences="1">
+      <code>$decoded</code>
+    </MissingParamType>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$format</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/SchemaNormalizer.php">
+    <MissingClosureParamType occurrences="1">
+      <code>$item</code>
+    </MissingClosureParamType>
+    <MissingParamType occurrences="1">
+      <code>$data</code>
+    </MissingParamType>
+    <PossiblyNullArgument occurrences="1">
+      <code>\get_object_vars($schema-&gt;properties)</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="test/Unit/FinalNewLineNormalizerTest.php">
+    <UndefinedMethod occurrences="1">
+      <code>testNormalizeEnsuresSingleFinalNewLine</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Format/FormatTest.php">
+    <UndefinedMethod occurrences="2">
+      <code>testConstructorSetsValues</code>
+      <code>testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Format/FormatterTest.php">
+    <RedundantCondition occurrences="1">
+      <code>assertInstanceOf</code>
+    </RedundantCondition>
+    <UndefinedMethod occurrences="1">
+      <code>testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Format/IndentTest.php">
+    <MoreSpecificReturnType occurrences="1">
+      <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
+    </MoreSpecificReturnType>
+  </file>
+  <file src="test/Unit/JsonSchema/Uri/Retrievers/ChainUriRetrieverTest.php">
+    <TooManyArguments occurrences="1"/>
+  </file>
+  <file src="test/Unit/NoFinalNewLineNormalizerTest.php">
+    <UndefinedMethod occurrences="1">
+      <code>testNormalizeRemovesAllWhitespaceFromEndOfJson</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Unit/Validator/SchemaValidatorTest.php">
+    <UndefinedMethod occurrences="1">
+      <code>testValidateUsesSchemaValidator</code>
+    </UndefinedMethod>
+  </file>
+</files>

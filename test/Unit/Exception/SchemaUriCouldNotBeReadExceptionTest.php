@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException;
  */
 final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsRuntimeException(): void
-    {
-        self::assertClassExtends(\RuntimeException::class, SchemaUriCouldNotBeReadException::class);
-    }
-
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
     {
         $schemaUri = self::faker()->url;
 
         $exception = SchemaUriCouldNotBeReadException::fromSchemaUri($schemaUri);
-
-        self::assertInstanceOf(SchemaUriCouldNotBeReadException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document that could be read.',

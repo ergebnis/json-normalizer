@@ -69,7 +69,6 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
 
-        self::assertInstanceOf(Format::class, $mutated);
         self::assertNotSame($format, $mutated);
         self::assertSame($jsonEncodeOptions, $mutated->jsonEncodeOptions());
     }
@@ -87,7 +86,6 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withIndent($indent);
 
-        self::assertInstanceOf(Format::class, $mutated);
         self::assertNotSame($format, $mutated);
         self::assertSame($indent, $mutated->indent());
     }
@@ -105,7 +103,6 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withNewLine($newLine);
 
-        self::assertInstanceOf(Format::class, $mutated);
         self::assertNotSame($format, $mutated);
         self::assertSame($newLine, $mutated->newLine());
     }
@@ -126,7 +123,6 @@ final class FormatTest extends Framework\TestCase
 
         $mutated = $format->withHasFinalNewLine($hasFinalNewLine);
 
-        self::assertInstanceOf(Format::class, $mutated);
         self::assertNotSame($format, $mutated);
         self::assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
     }
@@ -142,7 +138,6 @@ final class FormatTest extends Framework\TestCase
 
         $format = Format::fromJson($json);
 
-        self::assertInstanceOf(Format::class, $format);
         self::assertSame('    ', $format->indent()->__toString());
     }
 
@@ -193,7 +188,6 @@ JSON
 
         $format = Format::fromJson($json);
 
-        self::assertInstanceOf(Format::class, $format);
         self::assertFalse($format->hasFinalNewLine());
     }
 
@@ -239,7 +233,6 @@ JSON
 
         $format = Format::fromJson($json);
 
-        self::assertInstanceOf(Format::class, $format);
         self::assertTrue($format->hasFinalNewLine());
     }
 
