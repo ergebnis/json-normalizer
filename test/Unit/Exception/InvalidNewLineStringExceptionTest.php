@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException;
  */
 final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
-    }
-
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
         $string = self::faker()->word;
 
         $exception = InvalidNewLineStringException::fromString($string);
-
-        self::assertInstanceOf(InvalidNewLineStringException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not a valid new-line character sequence.',

@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentExc
  */
 final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsRuntimeException(): void
-    {
-        self::assertClassExtends(\RuntimeException::class, SchemaUriReferencesInvalidJsonDocumentException::class);
-    }
-
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
         $schemaUri = self::faker()->url;
 
         $exception = SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
-
-        self::assertInstanceOf(SchemaUriReferencesInvalidJsonDocumentException::class, $exception);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with valid JSON syntax.',

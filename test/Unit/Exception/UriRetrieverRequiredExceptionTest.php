@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException;
 use Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException;
 
 /**
@@ -23,16 +22,10 @@ use Ergebnis\Json\Normalizer\Exception\UriRetrieverRequiredException;
  */
 final class UriRetrieverRequiredExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidNewLineStringException::class);
-    }
-
     public function testCreateReturnsUriRetrieverRequiredException(): void
     {
         $exception = UriRetrieverRequiredException::create();
 
-        self::assertInstanceOf(UriRetrieverRequiredException::class, $exception);
         self::assertSame('Cannot retrieve URIs when no retrievers have been injected.', $exception->getMessage());
     }
 }

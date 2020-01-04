@@ -41,8 +41,6 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
             ...$allowedStyles
         );
 
-        self::assertInstanceOf(InvalidIndentStyleException::class, $exception);
-
         $message = \sprintf(
             'Style needs to be one of "%s", but "%s" is not.',
             \implode('", "', $allowedStyles),

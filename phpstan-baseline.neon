@@ -1,5 +1,3 @@
-
-
 parameters:
 	ignoreErrors:
 		-
@@ -11,5 +9,4 @@ parameters:
 			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:resolveSchema\\(\\) has parameter \\$data with no typehint specified\\.$#"
 			count: 1
 			path: src/SchemaNormalizer.php
-
 

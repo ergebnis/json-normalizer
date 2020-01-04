@@ -22,18 +22,11 @@ use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException;
  */
 final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestCase
 {
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidJsonEncodeOptionsException::class);
-    }
-
     public function testFromJsonEncodeOptionsReturnsInvalidJsonEncodeOptionsException(): void
     {
         $jsonEncodeOptions = self::faker()->randomNumber();
 
         $exception = InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
-
-        self::assertInstanceOf(InvalidJsonEncodeOptionsException::class, $exception);
 
         $message = \sprintf(
             '"%s" is not valid options for json_encode().',

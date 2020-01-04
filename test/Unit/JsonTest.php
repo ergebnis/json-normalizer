@@ -52,7 +52,6 @@ final class JsonTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        self::assertInstanceOf(Json::class, $json);
         self::assertSame($encoded, $json->__toString());
         self::assertSame($encoded, $json->encoded());
         self::assertSame($encoded, \json_encode($json->decoded()));

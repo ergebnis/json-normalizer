@@ -69,8 +69,6 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $jsonEncodeOptions = JsonEncodeOptions::fromInt($value);
 
-        self::assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
-
         self::assertSame($value, $jsonEncodeOptions->value());
     }
 
@@ -103,7 +101,6 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
         $jsonEncodeOptions = JsonEncodeOptions::fromJson($json);
 
-        self::assertInstanceOf(JsonEncodeOptions::class, $jsonEncodeOptions);
         self::assertSame($value, $jsonEncodeOptions->value());
     }
 
