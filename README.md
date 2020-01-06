@@ -7,7 +7,7 @@
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-normalizer/v/stable)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 
-Provides normalizers for normalizing JSON documents.
+Provides generic and vendor-specific normalizers for normalizing JSON documents.
 
 ## Installation
 
@@ -19,7 +19,7 @@ $ composer require ergebnis/json-normalizer
 
 ## Usage
 
-### Generic
+### Generic normalizers
 
 This package comes with the following generic normalizers:
 
@@ -37,8 +37,7 @@ This package comes with the following generic normalizers:
 
 #### `AutoFormatNormalizer`
 
-If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
-retain the original formatting, you can use the `AutoFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
 
 ```php
 <?php
@@ -64,10 +63,7 @@ $normalizer = new Normalizer\AutoFormatNormalizer(
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now have the composed normalizer applied,
-but also retained the original formatting (within certain limits). Before
-applying the composer normalizer, the `AutoFormatNormalizer` will attempt
-to detect the following:
+The normalized version will now have the composed normalizer applied, but also retained the original formatting (within certain limits). Before applying the composer normalizer, the `AutoFormatNormalizer` will attempt to detect the following:
 
 * `json_encode()` options
 * indent
@@ -83,7 +79,7 @@ After applying the composed normalizer, the `AutoFormatNormalizer` will
 
 #### `CallableNormalizer`
 
-If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
+When you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
 
 ```php
 <?php
@@ -122,7 +118,7 @@ The normalized version will now have the callable applied to it.
 
 #### `ChainNormalizer`
 
-If you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
+When you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
 
 ```php
 <?php
@@ -160,7 +156,7 @@ The normalized version will now contain the result of applying all normalizers i
 
 #### `FinalNewLineNormalizer`
 
-If you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
+When you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
 <?php
@@ -187,8 +183,7 @@ The normalized version will now have a single final new line.
 
 #### `FixedFormatNormalizer`
 
-If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
-apply a fixed formatting, you can use the `FixedFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
 <?php
@@ -216,14 +211,13 @@ $normalizer = new Normalizer\FixedFormatNormalizer(
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now have the composed normalizer applied,
-but also apply the formatting according to `$format`.
+The normalized version will now have the composed normalizer applied, but also the formatting applied according to `$format`.
 
 :bulb: Alternatively, you can use the [`AutoFormatNormalizer`](#autoformatnormalizer).
 
 #### `IndentNormalizer`
 
-If you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
+When you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
 
 ```php
 <?php
@@ -254,7 +248,7 @@ The normalized version will now be indented with 2 spaces.
 
 #### `JsonEncodeNormalizer`
 
-If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
+When you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
 
 ```php
 <?php
@@ -279,12 +273,11 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now be encoded with `$jsonEncodeOptions`.
 
-:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php)
-and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
+:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
 #### `NoFinalNewLineNormalizer`
 
-If you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
+When you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
 
 ```php
 <?php
@@ -311,7 +304,7 @@ The normalized version will now not have a final new line or any whitespace at t
 
 #### `SchemaNormalizer`
 
-If you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
+When you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
 
 Let's assume the following schema
 
@@ -357,13 +350,78 @@ $normalizer = new Normalizer\SchemaNormalizer(
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now be structured according to the JSON
-schema (in this simple case, properties will be reordered). Internally,
-the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema)
-to resolve schemas, as well as to ensure (before and after normalization)
-that the JSON document is valid.
+The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
+
+### Vendor-specific normalizers
+
+This package comes with the following vendor-specific normalizers:
+
+* [`Ergebnis\Json\Normalizer\Vendor\Composer\JsonNormalizer`](#vendorcomposercomposerjsonnormalizer)
+
+#### `Vendor\Composer\ComposerJsonNormalizer`
+
+The `Vendor\Composer\ComposerJsonNormalizer` can be used to normalize a `composer.json` file according to its underlying JSON schema.
+
+It composes the following normalizers:
+
+* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
+* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
+* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
+* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
+
+#### `Vendor\Composer\BinNormalizer`
+
+When `composer.json` contains an array of scripts in the `bin` section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
+
+:bulb: Find out more about the `bin` section at [Composer: The composer.json schema](https://getcomposer.org/doc/04-schema.md#bin).
+
+#### `Vendor\Composer\ConfigHashNormalizer`
+
+When `composer.json` contains any configuration in the
+
+* `config`
+* `extra`
+* `scripts-descriptions`
+
+sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
+
+:bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
+
+#### `Vendor\Composer\PackageHashNormalizer`
+
+When `composer.json` contains any configuration in the
+
+* `conflict`
+* `provide`
+* `replace`
+* `require`
+* `require-dev`
+* `suggest`
+
+sections, the `Vendor\Composer\PackageHashNormalizer` will sort the content of these sections.
+
+:bulb: This transfers the behaviour from using the `--sort-packages` or `sort-packages` configuration flag to other sections. Find out more about the `--sort-packages` flag and configuration at [Composer: Config](https://getcomposer.org/doc/06-config.md#sort-packages) and [Composer: Command Line Interface / Commands](https://getcomposer.org/doc/03-cli.md#require).
+
+#### `Vendor\Composer\VersionConstraintNormalizer`
+
+When `composer.json` contains version constraints in the
+
+* `conflict`
+* `provide`
+* `replace`
+* `require`
+* `require-dev`
+
+sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
+
+* all constraints are trimmed
+* *and* constraints are separated by a single space (` `) or a comma (`,`)
+* *or* constraints are separated by double-pipe with a single space before and after (` || `)
+* *range* constraints are separated by a single space (` `)
+
+:bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
 ## Changelog
 
@@ -380,3 +438,7 @@ Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github
 ## License
 
 This package is licensed using the MIT License.
+
+## Credits
+
+The algorithm for sorting packages in the [`Vendor\Composer\PackageHashNormalizer`](src/Vendor/Composer/PackageHashNormalizer.php) has been adopted from [`Composer\Json\JsonManipulator::sortPackages()`](https://github.com/composer/composer/blob/1.6.2/src/Composer/Json/JsonManipulator.php#L110-L146) (originally licensed under MIT by [Nils Adermann](https://github.com/naderman) and [Jordi Boggiano](https://github.com/seldaek)), which I initially contributed to `composer/composer` with [`composer/composer#3549`](https://github.com/composer/composer/pull/3549) and [`composer/composer#3872`](https://github.com/composer/composer/pull/3872).

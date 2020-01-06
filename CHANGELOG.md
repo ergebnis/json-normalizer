@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`0.10.1...master`][0.10.1...master].
 
+### Added
+
+* Merged in normalizers from [`ergebnis/composer-json-normalizer`](https://github.com/ergebnis/composer-json-normalizer) ([#203]), by [@localheinz]
+
 ### Removed
 
 * Removed the `ChainUriRetriever` ([#202]), by [@localheinz]
@@ -296,6 +300,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#181]: https://github.com/ergebnis/json-normalizer/pull/181
 [#191]: https://github.com/ergebnis/json-normalizer/pull/191
 [#202]: https://github.com/ergebnis/json-normalizer/pull/202
+[#203]: https://github.com/ergebnis/json-normalizer/pull/203
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis

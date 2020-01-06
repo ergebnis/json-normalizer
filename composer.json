@@ -1,7 +1,7 @@
 {
   "name": "ergebnis/json-normalizer",
   "type": "library",
-  "description": "Provides normalizers for normalizing JSON documents.",
+  "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
   "keywords": [
     "json",
     "normalizer"
