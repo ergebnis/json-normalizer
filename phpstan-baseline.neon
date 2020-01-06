@@ -10,3 +10,8 @@ parameters:
 			count: 1
 			path: src/SchemaNormalizer.php
 
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Ergebnis\\\\\\\\Json…' and Ergebnis\\\\Json\\\\Normalizer\\\\Json will always evaluate to true\\.$#"
+			count: 1
+			path: test/Unit/Format/FormatterTest.php
+

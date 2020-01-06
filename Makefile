@@ -11,7 +11,7 @@ bench: vendor ## Runs benchmarks with phpbench/phpbench
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
 	mkdir -p .build/phpunit
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
-	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-clover=.build/logs/clover.xml --prepend=.build/phpunit/xdebug-filter.php
+	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text --prepend=.build/phpunit/xdebug-filter.php
 
 .PHONY: coding-standards
 coding-standards: vendor ## Fixes code style issues with friendsofphp/php-cs-fixer
@@ -36,7 +36,7 @@ static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan
 	mkdir -p .build/phpstan
 	vendor/bin/phpstan analyse --configuration=phpstan.neon
 	mkdir -p .build/psalm
-	vendor/bin/psalm --config=psalm.xml --show-info=false
+	vendor/bin/psalm --config=psalm.xml --show-info=false --stats
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: vendor ## Generates a baseline for static code analysis with phpstan/phpstan and vimeo/psalm
