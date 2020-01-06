@@ -106,9 +106,6 @@
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
     </MoreSpecificReturnType>
   </file>
-  <file src="test/Unit/JsonSchema/Uri/Retrievers/ChainUriRetrieverTest.php">
-    <TooManyArguments occurrences="1"/>
-  </file>
   <file src="test/Unit/NoFinalNewLineNormalizerTest.php">
     <UndefinedMethod occurrences="1">
       <code>testNormalizeRemovesAllWhitespaceFromEndOfJson</code>
