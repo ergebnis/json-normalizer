@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`0.10.1...master`][0.10.1...master].
 
+### Removed
+
+* Removed the `ChainUriRetriever` ([#202]), by [@localheinz]
+
 ## [`0.10.1`][0.10.1]
 
 For a full diff see [`0.10.0...0.10.1`][0.10.0...0.10.1].
@@ -291,6 +295,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#176]: https://github.com/ergebnis/json-normalizer/pull/176
 [#181]: https://github.com/ergebnis/json-normalizer/pull/181
 [#191]: https://github.com/ergebnis/json-normalizer/pull/191
+[#202]: https://github.com/ergebnis/json-normalizer/pull/202
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis
