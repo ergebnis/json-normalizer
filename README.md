@@ -19,7 +19,9 @@ $ composer require ergebnis/json-normalizer
 
 ## Usage
 
-This package comes with the following normalizers:
+### Generic
+
+This package comes with the following generic normalizers:
 
 * [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
 * [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
@@ -33,7 +35,7 @@ This package comes with the following normalizers:
 
 :bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
 
-### `AutoFormatNormalizer`
+#### `AutoFormatNormalizer`
 
 If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
 retain the original formatting, you can use the `AutoFormatNormalizer`.
@@ -79,7 +81,7 @@ After applying the composed normalizer, the `AutoFormatNormalizer` will
 
 :bulb: Alternatively, you can use the [`FixedFormatNormalizer`](#fixedformatnormalizer).
 
-### `CallableNormalizer`
+#### `CallableNormalizer`
 
 If you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
 
@@ -118,7 +120,7 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now have the callable applied to it.
 
-### `ChainNormalizer`
+#### `ChainNormalizer`
 
 If you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
 
@@ -156,7 +158,7 @@ The normalized version will now contain the result of applying all normalizers i
 
 :bulb: Be careful with the order of the normalizers, as one normalizer might override changes a previous normalizer applied.
 
-### `FinalNewLineNormalizer`
+#### `FinalNewLineNormalizer`
 
 If you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
 
@@ -183,7 +185,7 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now have a single final new line.
 
-### `FixedFormatNormalizer`
+#### `FixedFormatNormalizer`
 
 If you want to normalize a JSON file with an implementation of `NormalizerInterface`, but
 apply a fixed formatting, you can use the `FixedFormatNormalizer`.
@@ -219,7 +221,7 @@ but also apply the formatting according to `$format`.
 
 :bulb: Alternatively, you can use the [`AutoFormatNormalizer`](#autoformatnormalizer).
 
-### `IndentNormalizer`
+#### `IndentNormalizer`
 
 If you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
 
@@ -250,7 +252,7 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now be indented with 2 spaces.
 
-### `JsonEncodeNormalizer`
+#### `JsonEncodeNormalizer`
 
 If you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
 
@@ -280,7 +282,7 @@ The normalized version will now be encoded with `$jsonEncodeOptions`.
 :bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php)
 and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
-### `NoFinalNewLineNormalizer`
+#### `NoFinalNewLineNormalizer`
 
 If you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
 
@@ -307,7 +309,7 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now not have a final new line or any whitespace at the end.
 
-### `SchemaNormalizer`
+#### `SchemaNormalizer`
 
 If you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
 
