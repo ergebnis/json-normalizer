@@ -75,7 +75,7 @@ final class SchemaNormalizerBench
     {
         return \sprintf(
             'file://%s',
-            __DIR__ . '/../Fixture/composer-schema.json'
+            __DIR__ . '/../Fixture/Vendor/Composer/composer-schema.json'
         );
     }
 }

@@ -11,6 +11,11 @@ parameters:
 			path: src/SchemaNormalizer.php
 
 		-
+			message: "#^Anonymous function should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Ergebnis\\\\\\\\Json…' and Ergebnis\\\\Json\\\\Normalizer\\\\Json will always evaluate to true\\.$#"
 			count: 1
 			path: test/Unit/Format/FormatterTest.php

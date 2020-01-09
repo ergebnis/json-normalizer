@@ -9,8 +9,8 @@ on:
       - "master"
 
 env:
-  MIN_COVERED_MSI: 97
-  MIN_MSI: 95
+  MIN_COVERED_MSI: 96
+  MIN_MSI: 96
   REQUIRED_PHP_EXTENSIONS: "mbstring"
 
 jobs:

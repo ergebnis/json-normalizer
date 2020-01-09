@@ -77,7 +77,7 @@ repository:
   allow_rebase_merge: false
   allow_squash_merge: false
   default_branch: "master"
-  description: ":page_with_curl: Provides normalizers for normalizing JSON documents."
+  description: ":page_with_curl: Provides generic and vendor-specific normalizers for normalizing JSON documents."
   has_downloads: true
   has_issues: true
   has_pages: false
