@@ -108,8 +108,8 @@ final class IndentTest extends Framework\TestCase
      */
     public function providerSizeStyleAndIndentString(): \Generator
     {
-        foreach ($this->sizes() as $key => $size) {
-            foreach ($this->characters() as $style => $character) {
+        foreach (self::sizes() as $key => $size) {
+            foreach (self::characters() as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size
@@ -171,8 +171,8 @@ final class IndentTest extends Framework\TestCase
      */
     public function providerValidIndentString(): \Generator
     {
-        foreach ($this->sizes() as $key => $size) {
-            foreach ($this->characters() as $style => $character) {
+        foreach (self::sizes() as $key => $size) {
+            foreach (self::characters() as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size
@@ -315,7 +315,7 @@ JSON
     /**
      * @return int[]
      */
-    private function sizes(): array
+    private static function sizes(): array
     {
         return [
             'int-one' => 1,
@@ -326,7 +326,7 @@ JSON
     /**
      * @return string[]
      */
-    private function characters(): array
+    private static function characters(): array
     {
         return [
             'space' => ' ',

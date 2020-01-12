@@ -124,7 +124,7 @@ JSON
      */
     public function providerProperty(): \Generator
     {
-        foreach ($this->propertiesWhereKeysOfHashArePackages() as $value) {
+        foreach (self::propertiesWhereKeysOfHashArePackages() as $value) {
             yield $value => [
                 $value,
             ];
@@ -134,7 +134,7 @@ JSON
     /**
      * @return string[]
      */
-    private function propertiesWhereKeysOfHashArePackages(): array
+    private static function propertiesWhereKeysOfHashArePackages(): array
     {
         return [
             'conflict',

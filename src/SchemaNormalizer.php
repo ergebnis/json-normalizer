@@ -122,7 +122,7 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema
         );
 
-        if (!$this->describesType('array', $schema)) {
+        if (!self::describesType('array', $schema)) {
             return $data;
         }
 
@@ -162,7 +162,7 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema
         );
 
-        if (!$this->describesType('object', $schema)) {
+        if (!self::describesType('object', $schema)) {
             return $data;
         }
 
@@ -239,7 +239,7 @@ final class SchemaNormalizer implements NormalizerInterface
         return $schema;
     }
 
-    private function describesType(string $type, \stdClass $schema): bool
+    private static function describesType(string $type, \stdClass $schema): bool
     {
         if (!\property_exists($schema, 'type')) {
             return false;

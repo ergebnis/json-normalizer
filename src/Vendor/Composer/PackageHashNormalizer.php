@@ -59,7 +59,7 @@ final class PackageHashNormalizer implements NormalizerInterface
                 continue;
             }
 
-            $decoded->{$name} = $this->sortPackages($packages);
+            $decoded->{$name} = self::sortPackages($packages);
         }
 
         /** @var string $encoded */
@@ -78,7 +78,7 @@ final class PackageHashNormalizer implements NormalizerInterface
      *
      * @return string[]
      */
-    private function sortPackages(array $packages): array
+    private static function sortPackages(array $packages): array
     {
         $prefix = static function (string $requirement): string {
             if (1 === \preg_match(self::PLATFORM_PACKAGE_REGEX, $requirement)) {

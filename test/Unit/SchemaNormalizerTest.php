@@ -374,8 +374,8 @@ JSON
                 ));
             }
 
-            $expected = $this->jsonFromFile($normalizedFile);
-            $json = $this->jsonFromFile($jsonFile);
+            $expected = self::jsonFromFile($normalizedFile);
+            $json = self::jsonFromFile($jsonFile);
             $schemaUri = \sprintf(
                 'file://%s',
                 $schemaFile
@@ -394,7 +394,7 @@ JSON
         }
     }
 
-    private function jsonFromFile(string $file): string
+    private static function jsonFromFile(string $file): string
     {
         $json = \file_get_contents($file);
 
