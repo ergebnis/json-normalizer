@@ -29,9 +29,9 @@ final class SchemaNormalizerBench
      */
     public function benchNormalizeProjectComposerFile(): void
     {
-        $this->normalize(
+        self::normalize(
             __DIR__ . '/../../composer.json',
-            $this->localComposerSchema()
+            self::localComposerSchema()
         );
     }
 
@@ -43,13 +43,13 @@ final class SchemaNormalizerBench
      */
     public function benchNormalizeLargeComposerFile(): void
     {
-        $this->normalize(
+        self::normalize(
             __DIR__ . '/../Fixture/LargeComposerFile/composer.json',
-            $this->localComposerSchema()
+            self::localComposerSchema()
         );
     }
 
-    private function normalize(string $file, string $schemaUri): void
+    private static function normalize(string $file, string $schemaUri): void
     {
         $encoded = \file_get_contents($file);
 
@@ -71,7 +71,7 @@ final class SchemaNormalizerBench
         $normalizer->normalize($json);
     }
 
-    private function localComposerSchema(): string
+    private static function localComposerSchema(): string
     {
         return \sprintf(
             'file://%s',

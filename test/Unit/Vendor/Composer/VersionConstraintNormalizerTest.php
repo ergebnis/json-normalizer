@@ -54,7 +54,7 @@ JSON
      */
     public function providerVersionConstraint(): \Generator
     {
-        foreach (\array_keys($this->versionConstraints()) as $versionConstraint) {
+        foreach (\array_keys(self::versionConstraints()) as $versionConstraint) {
             yield [
                 $versionConstraint,
             ];
@@ -88,7 +88,7 @@ JSON
      */
     public function providerProperty(): \Generator
     {
-        $properties = $this->propertiesWhereValuesOfHashAreVersionConstraints();
+        $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
 
         foreach ($properties as $property) {
             yield [
@@ -138,8 +138,8 @@ JSON
      */
     public function providerPropertyAndVersionConstraint(): \Generator
     {
-        $properties = $this->propertiesWhereValuesOfHashAreVersionConstraints();
-        $versionConstraints = $this->versionConstraints();
+        $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
+        $versionConstraints = self::versionConstraints();
 
         foreach ($properties as $property) {
             foreach ($versionConstraints as $versionConstraint => $normalizedVersionConstraint) {
@@ -198,8 +198,8 @@ JSON
             ' ',
         ];
 
-        $properties = $this->propertiesWhereValuesOfHashAreVersionConstraints();
-        $versionConstraints = \array_unique(\array_values($this->versionConstraints()));
+        $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
+        $versionConstraints = \array_unique(\array_values(self::versionConstraints()));
 
         foreach ($properties as $property) {
             foreach ($versionConstraints as $trimmedVersionConstraint) {
@@ -225,7 +225,7 @@ JSON
     /**
      * @return string[]
      */
-    private function propertiesWhereValuesOfHashAreVersionConstraints(): array
+    private static function propertiesWhereValuesOfHashAreVersionConstraints(): array
     {
         return [
             'conflict',
@@ -241,7 +241,7 @@ JSON
      *
      * @return string[]
      */
-    private function versionConstraints(): array
+    private static function versionConstraints(): array
     {
         return [
             /**

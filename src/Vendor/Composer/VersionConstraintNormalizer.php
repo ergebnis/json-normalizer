@@ -72,7 +72,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
             }
 
             $decoded->{$name} = \array_map(function (string $versionConstraint): string {
-                return $this->normalizeVersionConstraint($versionConstraint);
+                return self::normalizeVersionConstraint($versionConstraint);
             }, $packages);
         }
 
@@ -82,7 +82,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
         return Json::fromEncoded($encoded);
     }
 
-    private function normalizeVersionConstraint(string $versionConstraint): string
+    private static function normalizeVersionConstraint(string $versionConstraint): string
     {
         $normalized = $versionConstraint;
 

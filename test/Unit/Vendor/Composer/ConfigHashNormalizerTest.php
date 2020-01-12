@@ -116,7 +116,7 @@ JSON
      */
     public function providerProperty(): \Generator
     {
-        foreach ($this->properties() as $value) {
+        foreach (self::properties() as $value) {
             yield $value => [
                 $value,
             ];
@@ -126,7 +126,7 @@ JSON
     /**
      * @return string[]
      */
-    private function properties(): array
+    private static function properties(): array
     {
         return [
             'config',

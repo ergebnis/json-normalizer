@@ -76,7 +76,7 @@ JSON
             \JSON_UNESCAPED_UNICODE,
         ];
 
-        $combinations = $this->combinations($jsonEncodeFlags);
+        $combinations = self::combinations($jsonEncodeFlags);
 
         foreach ($combinations as $combination) {
             $jsonEncodeOptions = \array_reduce(
@@ -102,7 +102,7 @@ JSON
      *
      * @return array<array<int>>
      */
-    private function combinations(array $elements): array
+    private static function combinations(array $elements): array
     {
         $combinations = [[]];
 
