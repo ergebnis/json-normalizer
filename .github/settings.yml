@@ -36,6 +36,12 @@ branches:
           - "codecov/project"
         strict: false
       restrictions:
+
+        # https://developer.github.com/v3/repos/branches/#parameters-1
+
+        # Note: User, app, and team restrictions are only available for organization-owned repositories.
+        # Set to null to disable when using this configuration for a repository on a personal account.
+
         apps:
           - "dependabot-preview"
         teams: []
@@ -76,6 +82,7 @@ repository:
   allow_merge_commit: true
   allow_rebase_merge: false
   allow_squash_merge: false
+  archived: false
   default_branch: "master"
   description: ":page_with_curl: Provides generic and vendor-specific normalizers for normalizing JSON documents."
   has_downloads: true
