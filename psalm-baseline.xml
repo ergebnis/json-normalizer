@@ -82,39 +82,15 @@
       <code>\get_object_vars($schema-&gt;properties)</code>
     </PossiblyNullArgument>
   </file>
-  <file src="test/Unit/FinalNewLineNormalizerTest.php">
-    <UndefinedMethod occurrences="1">
-      <code>testNormalizeEnsuresSingleFinalNewLine</code>
-    </UndefinedMethod>
-  </file>
-  <file src="test/Unit/Format/FormatTest.php">
-    <UndefinedMethod occurrences="2">
-      <code>testConstructorSetsValues</code>
-      <code>testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine</code>
-    </UndefinedMethod>
-  </file>
   <file src="test/Unit/Format/FormatterTest.php">
     <RedundantCondition occurrences="1">
       <code>assertInstanceOf</code>
     </RedundantCondition>
-    <UndefinedMethod occurrences="1">
-      <code>testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine</code>
-    </UndefinedMethod>
   </file>
   <file src="test/Unit/Format/IndentTest.php">
     <MoreSpecificReturnType occurrences="1">
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
     </MoreSpecificReturnType>
-  </file>
-  <file src="test/Unit/NoFinalNewLineNormalizerTest.php">
-    <UndefinedMethod occurrences="1">
-      <code>testNormalizeRemovesAllWhitespaceFromEndOfJson</code>
-    </UndefinedMethod>
-  </file>
-  <file src="test/Unit/Validator/SchemaValidatorTest.php">
-    <UndefinedMethod occurrences="1">
-      <code>testValidateUsesSchemaValidator</code>
-    </UndefinedMethod>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <NonStaticSelfCall occurrences="1"/>
