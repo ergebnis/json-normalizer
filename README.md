@@ -2,8 +2,10 @@
 
 [![Continuous Deployment](https://github.com/ergebnis/json-normalizer/workflows/Continuous%20Deployment/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Continuous Integration](https://github.com/ergebnis/json-normalizer/workflows/Continuous%20Integration/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
+
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/json-normalizer/coverage.svg)](https://shepherd.dev/github/ergebnis/json-normalizer)
+
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-normalizer/v/stable)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 
@@ -437,7 +439,7 @@ Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github
 
 ## License
 
-This package is licensed using the MIT License.
+This package is licensed using the [MIT License](LICENSE.md).
 
 ## Credits
 
