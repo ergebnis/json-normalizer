@@ -17,8 +17,8 @@ final class NoFinalNewLineNormalizer implements NormalizerInterface
 {
     public function normalize(Json $json): Json
     {
-        $withFinalNewLine = \rtrim($json->encoded());
+        $withoutFinalNewLine = \rtrim($json->encoded());
 
-        return Json::fromEncoded($withFinalNewLine);
+        return Json::fromEncoded($withoutFinalNewLine);
     }
 }
