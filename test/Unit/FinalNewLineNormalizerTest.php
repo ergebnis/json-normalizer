@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Normalizer\FinalNewLineNormalizer;
+use Ergebnis\Json\Normalizer\Format\NewLine;
 use Ergebnis\Json\Normalizer\Json;
 
 /**
@@ -45,7 +46,9 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        $expected = \rtrim($json->encoded()) . \PHP_EOL;
+        $newLine = NewLine::fromJson($json);
+
+        $expected = \rtrim($json->encoded()) . $newLine->__toString();
 
         self::assertSame($expected, $normalized->encoded());
     }
