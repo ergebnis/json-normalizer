@@ -279,7 +279,7 @@ The normalized version will now be encoded with `$jsonEncodeOptions`.
 
 #### `NoFinalNewLineNormalizer`
 
-When you want to ensure that a JSON file does not have a final new line, you can use the `FinalNewLineNormalizer`.
+When you want to ensure that a JSON file does not have a final new line, you can use the `NoFinalNewLineNormalizer`.
 
 ```php
 <?php
