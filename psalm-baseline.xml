@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="3.9.5@0cfe565d0afbcd31eadcc281b9017b5692911661">
+  <file src="src/CallableNormalizer.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>Json</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$callable($json)</code>
+    </MixedReturnStatement>
+  </file>
   <file src="src/Exception/InvalidIndentSizeException.php">
     <MissingConstructor occurrences="1">
       <code>$size</code>
@@ -67,6 +75,10 @@
     <MissingParamType occurrences="1">
       <code>$decoded</code>
     </MissingParamType>
+    <MixedAssignment occurrences="2">
+      <code>$this-&gt;decoded</code>
+      <code>$decoded</code>
+    </MixedAssignment>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$format</code>
     </PropertyNotSetInConstructor>
@@ -75,9 +87,51 @@
     <MissingParamType occurrences="1">
       <code>$data</code>
     </MissingParamType>
+    <MixedArgument occurrences="7">
+      <code>$item</code>
+      <code>$item</code>
+      <code>$itemSchema</code>
+      <code>$schema-&gt;properties</code>
+      <code>$value</code>
+      <code>$data</code>
+      <code>$oneOfSchema</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
+      <code>$itemSchema</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$oneOfSchema</code>
+    </MixedAssignment>
     <PossiblyNullArgument occurrences="1">
       <code>\get_object_vars($schema-&gt;properties)</code>
     </PossiblyNullArgument>
+  </file>
+  <file src="src/Validator/SchemaValidator.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;validator-&gt;isValid()</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Vendor/Composer/ConfigHashNormalizer.php">
+    <MixedAssignment occurrences="1">
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Vendor/Composer/PackageHashNormalizer.php">
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$packages</code>
+      <code>$packages</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="1">
+      <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Vendor/Composer/VersionConstraintNormalizer.php">
+    <MixedAssignment occurrences="1">
+      <code>$value</code>
+    </MixedAssignment>
   </file>
   <file src="test/Unit/AbstractNormalizerTestCase.php">
     <ArgumentTypeCoercion occurrences="1">
@@ -89,20 +143,151 @@
       <code>$this-&gt;className()</code>
     </ArgumentTypeCoercion>
   </file>
+  <file src="test/Unit/Format/FormatTest.php">
+    <MixedInferredReturnType occurrences="3">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
   <file src="test/Unit/Format/FormatterTest.php">
+    <MixedArgument occurrences="1">
+      <code>$newLineString</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$newLineString</code>
+    </MixedAssignment>
     <RedundantCondition occurrences="1">
       <code>assertInstanceOf</code>
     </RedundantCondition>
   </file>
   <file src="test/Unit/Format/IndentTest.php">
+    <MixedArgument occurrences="1">
+      <code>$style</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$style</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="6">
+      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
+      <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
     <MoreSpecificReturnType occurrences="1">
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
     </MoreSpecificReturnType>
+  </file>
+  <file src="test/Unit/Format/JsonEncodeOptionsTest.php">
+    <MixedInferredReturnType occurrences="2">
+      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/Format/NewLineTest.php">
+    <MixedInferredReturnType occurrences="3">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/JsonEncodeNormalizerTest.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/JsonTest.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;null|array|bool|float|int|string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/SchemaNormalizerTest.php">
+    <MixedArgument occurrences="6">
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$fileInfo-&gt;getPath()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="5">
+      <code>$schemaDecoded</code>
+      <code>$schemaDecoded</code>
+      <code>$fileInfo</code>
+      <code>$normalizedFile</code>
+      <code>$decoded</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="4">
+      <code>isFile</code>
+      <code>getBasename</code>
+      <code>getRealPath</code>
+      <code>getPath</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/Unit/Validator/SchemaValidatorTest.php">
+    <MixedArgument occurrences="2">
+      <code>$data</code>
+      <code>$schema</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$data</code>
+      <code>$schema</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/Unit/Vendor/Composer/AbstractComposerTestCase.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$className</code>
     </ArgumentTypeCoercion>
+    <MixedInferredReturnType occurrences="2">
+      <code>NormalizerInterface</code>
+      <code>NormalizerInterface[]</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$property-&gt;getValue($normalizer)</code>
+      <code>$property-&gt;getValue($normalizer)</code>
+    </MixedReturnStatement>
     <NonStaticSelfCall occurrences="1"/>
+  </file>
+  <file src="test/Unit/Vendor/Composer/ConfigHashNormalizerTest.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/Vendor/Composer/PackageHashNormalizerTest.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Unit/Vendor/Composer/VersionConstraintNormalizerTest.php">
+    <MixedInferredReturnType occurrences="4">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+    <MixedReturnTypeCoercion occurrences="2">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedReturnTypeCoercion>
+  </file>
+  <file src="test/Util/DataProvider/Boolean.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;bool&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/Util/DataProvider/Text.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
   </file>
 </files>

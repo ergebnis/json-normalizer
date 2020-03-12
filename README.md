@@ -1,7 +1,9 @@
 # json-normalizer
 
-[![Continuous Deployment](https://github.com/ergebnis/json-normalizer/workflows/Continuous%20Deployment/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Continuous Integration](https://github.com/ergebnis/json-normalizer/workflows/Continuous%20Integration/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
+[![Integrate](https://github.com/ergebnis/json-normalizer/workflows/Integrate/badge.svg?branch=master)](https://github.com/ergebnis/json-normalizer/actions)
+[![Prune](https://github.com/ergebnis/json-normalizer/workflows/Prune/badge.svg?branch=master)](https://github.com/ergebnis/json-normalizer/actions)
+[![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg?branch=master)](https://github.com/ergebnis/json-normalizer/actions)
+[![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg?branch=master)](https://github.com/ergebnis/json-normalizer/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/master/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/json-normalizer/coverage.svg)](https://shepherd.dev/github/ergebnis/json-normalizer)
@@ -439,7 +441,9 @@ Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github
 
 ## License
 
-This package is licensed using the [MIT License](LICENSE.md).
+This package is licensed using the MIT License.
+
+Please have a look at [`LICENSE.md`](LICENSE.md).
 
 ## Credits
 
