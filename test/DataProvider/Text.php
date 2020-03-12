@@ -11,22 +11,24 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Util\DataProvider;
+namespace Ergebnis\Json\Normalizer\Test\DataProvider;
 
-final class Boolean
+final class Text
 {
     /**
-     * @return \Generator<array<bool>>
+     * @return \Generator<array<string>>
      */
-    public static function provideBoolean(): \Generator
+    public function provideWhitespace(): \Generator
     {
         $values = [
-            'bool-false' => false,
-            'bool-true' => true,
+            '',
+            ' ',
+            "\t",
+            \PHP_EOL,
         ];
 
-        foreach ($values as $key => $value) {
-            yield $key => [
+        foreach ($values as $value) {
+            yield [
                 $value,
             ];
         }

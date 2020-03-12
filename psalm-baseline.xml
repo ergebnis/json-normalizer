@@ -133,6 +133,16 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
+  <file src="test/DataProvider/Boolean.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;bool&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
+  <file src="test/DataProvider/Text.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
+  </file>
   <file src="test/Unit/AbstractNormalizerTestCase.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;className()</code>
@@ -279,15 +289,5 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedReturnTypeCoercion>
-  </file>
-  <file src="test/Util/DataProvider/Boolean.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;bool&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
-  <file src="test/Util/DataProvider/Text.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
   </file>
 </files>
