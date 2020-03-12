@@ -15,12 +15,13 @@ code-coverage: vendor ## Collects coverage from running unit tests with phpunit/
 
 .PHONY: coding-standards
 coding-standards: vendor ## Fixes code style issues with friendsofphp/php-cs-fixer
+	yamllint -c .yamllint.yaml --strict .
 	mkdir -p .build/php-cs-fixer
 	vendor/bin/php-cs-fixer fix --config=.php_cs --diff --diff-format=udiff --verbose
 
 .PHONY: dependency-analysis
 dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-require-checker
-	docker run --interactive --rm --tty --volume ${PWD}:/app webfactory/composer-require-checker:2.0.0
+	docker run --interactive --rm --tty --volume ${PWD}:/app webfactory/composer-require-checker:2.1.0
 
 .PHONY: help
 help: ## Displays this list of targets with descriptions
