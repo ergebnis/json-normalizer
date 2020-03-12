@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.8.2@90d6b73fd8062432030ef39b7b6694b3902daa31">
+<files psalm-version="3.9.5@0cfe565d0afbcd31eadcc281b9017b5692911661">
   <file src="src/Exception/InvalidIndentSizeException.php">
     <MissingConstructor occurrences="1">
       <code>$size</code>
@@ -72,15 +72,22 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/SchemaNormalizer.php">
-    <MissingClosureParamType occurrences="1">
-      <code>$item</code>
-    </MissingClosureParamType>
     <MissingParamType occurrences="1">
       <code>$data</code>
     </MissingParamType>
     <PossiblyNullArgument occurrences="1">
       <code>\get_object_vars($schema-&gt;properties)</code>
     </PossiblyNullArgument>
+  </file>
+  <file src="test/Unit/AbstractNormalizerTestCase.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;className()</code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="test/Unit/Exception/AbstractExceptionTestCase.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$this-&gt;className()</code>
+    </ArgumentTypeCoercion>
   </file>
   <file src="test/Unit/Format/FormatterTest.php">
     <RedundantCondition occurrences="1">
@@ -93,6 +100,9 @@
     </MoreSpecificReturnType>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$className</code>
+    </ArgumentTypeCoercion>
     <NonStaticSelfCall occurrences="1"/>
   </file>
 </files>

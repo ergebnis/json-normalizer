@@ -16,7 +16,22 @@ parameters:
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
+			message: "#^Parameter \\#2 \\$className of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\AbstractNormalizerTestCase\\:\\:assertClassImplementsInterface\\(\\) expects class\\-string, string given\\.$#"
+			count: 1
+			path: test/Unit/AbstractNormalizerTestCase.php
+
+		-
+			message: "#^Parameter \\#2 \\$className of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\Exception\\\\AbstractExceptionTestCase\\:\\:assertClassImplementsInterface\\(\\) expects class\\-string, string given\\.$#"
+			count: 1
+			path: test/Unit/Exception/AbstractExceptionTestCase.php
+
+		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Ergebnis\\\\\\\\Json…' and Ergebnis\\\\Json\\\\Normalizer\\\\Json will always evaluate to true\\.$#"
 			count: 1
 			path: test/Unit/Format/FormatterTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$className of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\AbstractNormalizerTestCase\\:\\:assertClassImplementsInterface\\(\\) expects class\\-string, string given\\.$#"
+			count: 1
+			path: test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php
 
