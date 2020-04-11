@@ -2,10 +2,7 @@ MIN_COVERED_MSI:=96
 MIN_MSI:=96
 
 .PHONY: it
-it: coding-standards dependency-analysis static-code-analysis tests bench ## Runs the coding-standards, dependency-analysis, static-code-analysis, tests, and bench targets
-
-bench: vendor ## Runs benchmarks with phpbench/phpbench
-	vendor/bin/phpbench run --report=aggregate
+it: coding-standards static-code-analysis tests ## Runs the coding-standards, static-code-analysis, and tests targets
 
 .PHONY: code-coverage
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
@@ -37,13 +34,12 @@ static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan
 	mkdir -p .build/phpstan
 	vendor/bin/phpstan analyse --configuration=phpstan.neon
 	mkdir -p .build/psalm
-	vendor/bin/psalm --config=psalm.xml --show-info=false --stats
+	vendor/bin/psalm --config=psalm.xml --diff --diff-methods --show-info=false --stats --threads=4
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: vendor ## Generates a baseline for static code analysis with phpstan/phpstan and vimeo/psalm
 	mkdir -p .build/phpstan
-	echo '' > phpstan-baseline.neon
-	vendor/bin/phpstan analyze --configuration=phpstan.neon --error-format=baselineNeon > phpstan-baseline.neon || true
+	vendor/bin/phpstan analyze --configuration=phpstan.neon --generate-baseline=phpstan-baseline.neon
 	mkdir -p .build/psalm
 	vendor/bin/psalm --config=psalm.xml --set-baseline=psalm-baseline.xml
 

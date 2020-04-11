@@ -56,7 +56,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -83,7 +83,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: ".build/php-cs-fixer"
-          key: "php-${{ matrix.php-version }}-php-cs-fixer-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-php-cs-fixer-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-php-cs-fixer-"
 
       - name: "Run friendsofphp/php-cs-fixer"
@@ -121,7 +121,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -171,7 +171,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "${{ matrix.php-version }}-composer-locked-${{ hashFiles('**/composer.lock') }}"
+          key: "${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
           restore-keys: "${{ matrix.php-version }}-composer-locked-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -189,14 +189,28 @@ jobs:
       - name: "Create cache directory for phpstan/phpstan"
         run: "mkdir -p .build/phpstan"
 
+      - name: "Cache cache directory for phpstan/phpstan"
+        uses: "actions/cache@v1"
+        with:
+          path: ".build/phpstan"
+          key: "php-${{ matrix.php-version }}-phpstan-${{ github.sha }}"
+          restore-keys: "php-${{ matrix.php-version }}-phpstan-"
+
       - name: "Run phpstan/phpstan"
         run: "vendor/bin/phpstan analyse --configuration=phpstan.neon"
 
       - name: "Create cache directory for vimeo/psalm"
         run: "mkdir -p .build/psalm"
 
+      - name: "Cache cache directory for vimeo/psalm"
+        uses: "actions/cache@v1"
+        with:
+          path: ".build/psalm"
+          key: "php-${{ matrix.php-version }}-psalm-${{ github.sha }}"
+          restore-keys: "php-${{ matrix.php-version }}-psalm-"
+
       - name: "Run vimeo/psalm"
-        run: "vendor/bin/psalm --config=psalm.xml --shepherd --show-info=false --stats"
+        run: "vendor/bin/psalm --config=psalm.xml --diff --diff-methods --shepherd --show-info=false --stats --threads=4"
 
   tests:
     name: "Tests"
@@ -235,7 +249,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -291,7 +305,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -349,7 +363,7 @@ jobs:
         uses: "actions/cache@v1"
         with:
           path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install lowest dependencies from composer.json"
@@ -367,63 +381,12 @@ jobs:
       - name: "Run mutation tests with Xdebug and infection/infection"
         run: "vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=${{ env.MIN_COVERED_MSI }} --min-msi=${{ env.MIN_MSI }}"
 
-  benchmarks:
-    name: "Benchmarks"
-
-    runs-on: "ubuntu-latest"
-
-    strategy:
-      matrix:
-        php-version:
-          - "7.4"
-
-        dependencies:
-          - "locked"
-
-    steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v2"
-
-      - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@v2"
-        with:
-          coverage: "xdebug"
-          extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
-          php-version: "${{ matrix.php-version }}"
-
-      - name: "Determine composer cache directory"
-        id: "determine-composer-cache-directory"
-        run: "echo \"::set-output name=directory::$(composer config cache-dir)\""
-
-      - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v1"
-        with:
-          path: "${{ steps.determine-composer-cache-directory.outputs.directory }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
-
-      - name: "Install lowest dependencies from composer.json"
-        if: "matrix.dependencies == 'lowest'"
-        run: "composer update --no-interaction --no-progress --no-suggest --prefer-lowest"
-
-      - name: "Install locked dependencies from composer.lock"
-        if: "matrix.dependencies == 'locked'"
-        run: "composer install --no-interaction --no-progress --no-suggest"
-
-      - name: "Install highest dependencies from composer.json"
-        if: "matrix.dependencies == 'highest'"
-        run: "composer update --no-interaction --no-progress --no-suggest"
-
-      - name: "Run benchmarks with phpbench/phpbench"
-        run: "vendor/bin/phpbench run --report=aggregate"
-
-  review:
-    name: "Review"
+  merge:
+    name: "Merge"
 
     runs-on: "ubuntu-latest"
 
     needs:
-      - "benchmarks"
       - "code-coverage"
       - "coding-standards"
       - "dependency-analysis"
@@ -431,15 +394,93 @@ jobs:
       - "static-code-analysis"
       - "tests"
 
-    steps:
-      - name: "Approve pull requests created by dependabot that update development dependencies"
-        uses: "hmarr/auto-approve-action@v2.0.0"
-        if: "(github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]') && github.event_name == 'pull_request' && startsWith(github.event.pull_request.title, 'Build(deps-dev)')"
-        with:
-          github-token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
+    if: >
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.draft == false && (
+        github.event.action == 'opened' ||
+        github.event.action == 'reopened' ||
+        github.event.action == 'synchronize'
+      ) && (
+        (github.actor == 'dependabot-preview[bot]' && startsWith(github.event.pull_request.title, 'Build(deps-dev)')) ||
+        (github.actor == 'ergebnis-bot' && github.event.pull_request.title == 'Enhancement: Update license year') ||
+        (github.actor == 'localheinz' && contains(github.event.pull_request.labels.*.name, 'merge'))
+      )
 
-      - name: "Approve pull requests created by @ergebnis-bot that update the license year"
-        uses: "hmarr/auto-approve-action@v2.0.0"
-        if: "github.actor == 'ergebnis-bot' && github.event_name == 'pull_request' && github.event.pull_request.title == 'Enhancement: Update license year'"
+    steps:
+      - name: "Request review from @ergebnis-bot"
+        uses: "actions/github-script@0.8.0"
         with:
           github-token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
+          script: |
+            const pullRequest = context.payload.pull_request
+            const repository = context.repo
+
+            const reviewers = [
+              "ergebnis-bot",
+            ]
+
+            await github.pulls.createReviewRequest({
+              owner: repository.owner,
+              pull_number: pullRequest.number,
+              repo: repository.repo,
+              reviewers: reviewers,
+            })
+
+      - name: "Wait"
+        run: "sleep 3"
+
+      - name: "Assign @ergebnis-bot"
+        uses: "actions/github-script@0.8.0"
+        with:
+          github-token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
+          script: |
+            const pullRequest = context.payload.pull_request
+            const repository = context.repo
+
+            const reviewers = [
+              "ergebnis-bot",
+            ]
+
+            await github.issues.addAssignees({
+              assignees: reviewers,
+              issue_number: pullRequest.number,
+              owner: repository.owner,
+              repo: repository.repo,
+            })
+
+      - name: "Wait"
+        run: "sleep 3"
+
+      - name: "Approve pull request"
+        uses: "actions/github-script@0.8.0"
+        if: "github.actor != 'ergebnis-bot'"
+        with:
+          github-token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
+          script: |
+            const pullRequest = context.payload.pull_request
+            const repository = context.repo
+
+            await github.pulls.createReview({
+              event: "APPROVE",
+              owner: repository.owner,
+              pull_number: pullRequest.number,
+              repo: repository.repo,
+            })
+
+      - name: "Wait"
+        run: "sleep 3"
+
+      - name: "Merge pull request"
+        uses: "actions/github-script@0.8.0"
+        with:
+          github-token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
+          script: |
+            const pullRequest = context.payload.pull_request
+            const repository = context.repo
+
+            await github.pulls.merge({
+              merge_method: "merge",
+              owner: repository.owner,
+              pull_number: pullRequest.number,
+              repo: repository.repo,
+            })

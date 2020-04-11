@@ -11,7 +11,17 @@ For details, take a look at the following workflow configuration files:
 
 ## Coding Standards
 
-We are using [`friendsofphp/php-cs-fixer`](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to enforce coding standards.
+We are using [`yamllint`](https://github.com/adrienverge/yamllint) to enforce coding standards in YAML files.
+
+If you do not have `yamllint` installed yet, run
+
+```
+$ brew install yamllint
+```
+
+to install `yamllint`.
+
+We are using [`friendsofphp/php-cs-fixer`](https://github.com/FriendsOfPHP/PHP-CS-Fixer) to enforce coding standards in PHP files.
 
 Run
 
@@ -81,18 +91,6 @@ $ make mutation-tests
 
 to run mutation tests.
 
-## Benchmarks
-
-We are using [`phpbench/phpbench`](http://github.com/phpbench/phpbench) to benchmark performance and memory consumption.
-
-Run
-
-```
-$ make bench
-```
-
-to run all the benchmarks.
-
 ## Extra lazy?
 
 Run
@@ -101,7 +99,7 @@ Run
 $ make
 ```
 
-to enforce coding standards, run a dependency analysis, run a static code analysis, and run tests!
+to enforce coding standards, run a static code analysis, and run tests!
 
 ## Help
 
