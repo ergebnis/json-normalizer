@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.9.5@0cfe565d0afbcd31eadcc281b9017b5692911661">
+<files psalm-version="3.10.1@eeed5ecccc10131397f0eb7ee6da810c0be3a7fc">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -266,7 +266,6 @@
       <code>$property-&gt;getValue($normalizer)</code>
       <code>$property-&gt;getValue($normalizer)</code>
     </MixedReturnStatement>
-    <NonStaticSelfCall occurrences="1"/>
   </file>
   <file src="test/Unit/Vendor/Composer/ConfigHashNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
