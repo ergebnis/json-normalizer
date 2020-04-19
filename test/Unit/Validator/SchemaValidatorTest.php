@@ -24,6 +24,8 @@ use Prophecy\Argument;
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Validator\SchemaValidator
+ *
+ * @uses \Ergebnis\Json\Normalizer\Validator\Result
  */
 final class SchemaValidatorTest extends Framework\TestCase
 {
@@ -39,7 +41,7 @@ final class SchemaValidatorTest extends Framework\TestCase
      *
      * @param bool $isValid
      */
-    public function testValidateUsesSchemaValidator(bool $isValid): void
+    public function testIsValidUsesSchemaValidator(bool $isValid): void
     {
         $dataJson = <<<'JSON'
 {
@@ -81,5 +83,113 @@ JSON;
         $validator = new SchemaValidator($schemaValidator->reveal());
 
         self::assertSame($isValid, $validator->isValid($data, $schema));
+    }
+
+    public function testValidateReturnsResultWhenDataIsNotValidAccordingToSchema(): void
+    {
+        $dataJson = <<<'JSON'
+{
+    "number": 1600,
+    "street_name": "Pennsylvania",
+    "street_type": "Avenue",
+    "direction": "NW"
+}
+JSON;
+
+        $schemaJson = <<<'JSON'
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "telephone": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "email"
+    ],
+    "additionalProperties": false
+}
+JSON;
+
+        $data = \json_decode($dataJson);
+        $schema = \json_decode($schemaJson);
+
+        $validator = new SchemaValidator(new Validator());
+
+        $result = $validator->validate(
+            $data,
+            $schema
+        );
+
+        self::assertFalse($result->isValid());
+
+        $expected = [
+            'name: The property name is required',
+            'email: The property email is required',
+            'The property number is not defined and the definition does not allow additional properties',
+            'The property street_name is not defined and the definition does not allow additional properties',
+            'The property street_type is not defined and the definition does not allow additional properties',
+            'The property direction is not defined and the definition does not allow additional properties',
+        ];
+
+        self::assertSame($expected, $result->errors());
+    }
+
+    public function testValidateReturnsResultWhenDataIsValidAccordingToSchema(): void
+    {
+        $dataJson = <<<'JSON'
+{
+    "name": "Jane Doe",
+    "email": "jane.doe@example.org"
+}
+JSON;
+
+        $schemaJson = <<<'JSON'
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "email": {
+            "type": "string"
+        },
+        "address": {
+            "type": "string"
+        },
+        "telephone": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "name",
+        "email"
+    ],
+    "additionalProperties": false
+}
+JSON;
+
+        $data = \json_decode($dataJson);
+        $schema = \json_decode($schemaJson);
+
+        $validator = new SchemaValidator(new Validator());
+
+        $result = $validator->validate(
+            $data,
+            $schema
+        );
+
+        self::assertTrue($result->isValid());
+        self::assertSame([], $result->errors());
     }
 }

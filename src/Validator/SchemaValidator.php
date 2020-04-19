@@ -38,4 +38,55 @@ final class SchemaValidator implements SchemaValidatorInterface
 
         return $this->validator->isValid();
     }
+
+    public function validate($data, \stdClass $schema): Result
+    {
+        $this->validator->reset();
+
+        $this->validator->check(
+            $data,
+            $schema
+        );
+
+        /** @var array $originalErrors */
+        $originalErrors = $this->validator->getErrors();
+
+        $errors = \array_map(static function (array $error): string {
+            $property = '';
+
+            if (
+                \array_key_exists('property', $error)
+                && \is_string($error['property'])
+                && '' !== \trim($error['property'])
+            ) {
+                $property = \trim($error['property']);
+            }
+
+            $message = '';
+
+            if (
+                \array_key_exists('message', $error)
+                && \is_string($error['message'])
+                && '' !== \trim($error['message'])
+            ) {
+                $message = \trim($error['message']);
+            }
+
+            if ('' === $property) {
+                return $message;
+            }
+
+            return \sprintf(
+                '%s: %s',
+                $property,
+                $message
+            );
+        }, $originalErrors);
+
+        $filtered = \array_filter($errors, static function (string $error): bool {
+            return '' !== $error;
+        });
+
+        return Result::create(...$filtered);
+    }
 }

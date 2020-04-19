@@ -176,11 +176,19 @@
     </MixedMethodCall>
   </file>
   <file src="test/Unit/Validator/SchemaValidatorTest.php">
-    <MixedArgument occurrences="2">
+    <MixedArgument occurrences="6">
+      <code>$data</code>
+      <code>$schema</code>
+      <code>$data</code>
+      <code>$schema</code>
       <code>$data</code>
       <code>$schema</code>
     </MixedArgument>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment occurrences="6">
+      <code>$data</code>
+      <code>$schema</code>
+      <code>$data</code>
+      <code>$schema</code>
       <code>$data</code>
       <code>$schema</code>
     </MixedAssignment>

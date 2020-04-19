@@ -63,8 +63,16 @@ final class SchemaNormalizer implements NormalizerInterface
             throw Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($this->schemaUri);
         }
 
-        if (!$this->schemaValidator->isValid($decoded, $schema)) {
-            throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUri($this->schemaUri);
+        $resultBeforeNormalization = $this->schemaValidator->validate(
+            $decoded,
+            $schema
+        );
+
+        if (!$resultBeforeNormalization->isValid()) {
+            throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+                $this->schemaUri,
+                ...$resultBeforeNormalization->errors()
+            );
         }
 
         $normalized = $this->normalizeData(
@@ -72,8 +80,16 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema
         );
 
-        if (!$this->schemaValidator->isValid($normalized, $schema)) {
-            throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUri($this->schemaUri);
+        $resultAfterNormalization = $this->schemaValidator->validate(
+            $normalized,
+            $schema
+        );
+
+        if (!$resultAfterNormalization->isValid()) {
+            throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+                $this->schemaUri,
+                ...$resultAfterNormalization->errors()
+            );
         }
 
         /** @var string $encoded */
@@ -214,7 +230,12 @@ final class SchemaNormalizer implements NormalizerInterface
          */
         if (\property_exists($schema, 'oneOf') && \is_array($schema->oneOf)) {
             foreach ($schema->oneOf as $oneOfSchema) {
-                if ($this->schemaValidator->isValid($data, $oneOfSchema)) {
+                $result = $this->schemaValidator->validate(
+                    $data,
+                    $oneOfSchema
+                );
+
+                if ($result->isValid()) {
                     return $this->resolveSchema(
                         $data,
                         $oneOfSchema

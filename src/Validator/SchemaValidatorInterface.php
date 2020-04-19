@@ -22,4 +22,12 @@ interface SchemaValidatorInterface
      * @return bool
      */
     public function isValid($data, \stdClass $schema): bool;
+
+    /**
+     * @param null|array<mixed>|bool|float|int|\stdClass|string $data
+     * @param \stdClass                                         $schema
+     *
+     * @return Result
+     */
+    public function validate($data, \stdClass $schema): Result;
 }

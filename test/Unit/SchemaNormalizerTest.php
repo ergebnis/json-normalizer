@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
+use Ergebnis\Json\Normalizer\Validator\Result;
 use Ergebnis\Json\Normalizer\Validator\SchemaValidator;
 use Ergebnis\Json\Normalizer\Validator\SchemaValidatorInterface;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
@@ -38,6 +39,7 @@ use Prophecy\Argument;
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
  * @uses \Ergebnis\Json\Normalizer\Json
+ * @uses \Ergebnis\Json\Normalizer\Validator\Result
  * @uses \Ergebnis\Json\Normalizer\Validator\SchemaValidator
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
@@ -168,6 +170,8 @@ JSON
 
     public function testNormalizeThrowsOriginalInvalidAccordingToSchemaExceptionWhenOriginalNotValidAccordingToSchema(): void
     {
+        $faker = self::faker();
+
         $json = Json::fromEncoded(
             <<<'JSON'
 {
@@ -177,7 +181,7 @@ JSON
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = $faker->url;
 
         $schema = <<<'JSON'
 {
@@ -197,12 +201,16 @@ JSON;
         $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
 
         $schemaValidator
-            ->isValid(
+            ->validate(
                 Argument::is($json->decoded()),
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
-            ->willReturn(false);
+            ->willReturn(Result::create(
+                $faker->sentence,
+                $faker->sentence,
+                $faker->sentence
+            ));
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
@@ -217,6 +225,8 @@ JSON;
 
     public function testNormalizeThrowsNormalizedInvalidAccordingToSchemaExceptionWhenNormalizedNotValidAccordingToSchema(): void
     {
+        $faker = self::faker();
+
         $json = Json::fromEncoded(
             <<<'JSON'
 {
@@ -226,7 +236,7 @@ JSON;
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = $faker->url;
 
         $schema = <<<'JSON'
 {
@@ -264,21 +274,25 @@ JSON
         $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
 
         $schemaValidator
-            ->isValid(
+            ->validate(
                 Argument::is($json->decoded()),
                 Argument::is($schemaDecoded)
             )
             ->shouldBeCalled()
-            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded): bool {
+            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded, $faker): Result {
                 $schemaValidator
-                    ->isValid(
+                    ->validate(
                         Argument::exact($normalized->decoded()),
                         Argument::is($schemaDecoded)
                     )
                     ->shouldBeCalled()
-                    ->willReturn(false);
+                    ->willReturn(Result::create(
+                        $faker->sentence,
+                        $faker->sentence,
+                        $faker->sentence
+                    ));
 
-                return true;
+                return Result::create();
             });
 
         $normalizer = new SchemaNormalizer(
