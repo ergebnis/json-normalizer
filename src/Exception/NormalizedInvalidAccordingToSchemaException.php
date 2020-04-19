@@ -20,7 +20,12 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
      */
     private $schemaUri = '';
 
-    public static function fromSchemaUri(string $schemaUri): self
+    /**
+     * @var string[]
+     */
+    private $errors = [];
+
+    public static function fromSchemaUriAndErrors(string $schemaUri, string ...$errors): self
     {
         $exception = new self(\sprintf(
             'Normalized JSON is not valid according to schema "%s".',
@@ -28,6 +33,7 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
         ));
 
         $exception->schemaUri = $schemaUri;
+        $exception->errors = $errors;
 
         return $exception;
     }
@@ -35,5 +41,13 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
     public function schemaUri(): string
     {
         return $this->schemaUri;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function errors(): array
+    {
+        return $this->errors;
     }
 }

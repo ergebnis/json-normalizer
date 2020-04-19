@@ -26,14 +26,26 @@ final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExcept
     {
         $exception = new OriginalInvalidAccordingToSchemaException();
 
+        self::assertSame([], $exception->errors());
         self::assertSame('', $exception->schemaUri());
     }
 
-    public function testFromSchemaUriReturnsOriginalInvalidAccordingToSchemaException(): void
+    public function testFromSchemaUriAndErrorsReturnsOriginalInvalidAccordingToSchemaException(): void
     {
-        $schemaUri = self::faker()->url;
+        $faker = self::faker();
 
-        $exception = OriginalInvalidAccordingToSchemaException::fromSchemaUri($schemaUri);
+        $schemaUri = $faker->url;
+
+        $errors = [
+            $faker->sentence,
+            $faker->sentence,
+            $faker->sentence,
+        ];
+
+        $exception = OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+            $schemaUri,
+            ...$errors
+        );
 
         $message = \sprintf(
             'Original JSON is not valid according to schema "%s".',
@@ -42,5 +54,6 @@ final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExcept
 
         self::assertSame($message, $exception->getMessage());
         self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($errors, $exception->errors());
     }
 }

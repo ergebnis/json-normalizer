@@ -27,13 +27,25 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
         $exception = new NormalizedInvalidAccordingToSchemaException();
 
         self::assertSame('', $exception->schemaUri());
+        self::assertSame([], $exception->errors());
     }
 
     public function testFromSchemaUriReturnsNormalizedInvalidAccordingToSchemaException(): void
     {
-        $schemaUri = self::faker()->url;
+        $faker = self::faker();
 
-        $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUri($schemaUri);
+        $schemaUri = $faker->url;
+
+        $errors = [
+            $faker->sentence,
+            $faker->sentence,
+            $faker->sentence,
+        ];
+
+        $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+            $schemaUri,
+            ...$errors
+        );
 
         $message = \sprintf(
             'Normalized JSON is not valid according to schema "%s".',
@@ -42,5 +54,6 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
 
         self::assertSame($message, $exception->getMessage());
         self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($errors, $exception->errors());
     }
 }
