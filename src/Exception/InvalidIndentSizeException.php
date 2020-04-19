@@ -18,12 +18,12 @@ final class InvalidIndentSizeException extends \InvalidArgumentException impleme
     /**
      * @var int
      */
-    private $size;
+    private $size = 0;
 
     /**
      * @var int
      */
-    private $minimumSize;
+    private $minimumSize = 0;
 
     public static function fromSizeAndMinimumSize(int $size, int $minimumSize): self
     {

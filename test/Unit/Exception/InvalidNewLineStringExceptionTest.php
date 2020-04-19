@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException;
  */
 final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidNewLineStringException();
+
+        self::assertSame('', $exception->string());
+    }
+
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
         $string = self::faker()->word;

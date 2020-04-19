@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaExcepti
  */
 final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new NormalizedInvalidAccordingToSchemaException();
+
+        self::assertSame('', $exception->schemaUri());
+    }
+
     public function testFromSchemaUriReturnsNormalizedInvalidAccordingToSchemaException(): void
     {
         $schemaUri = self::faker()->url;

@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodedException;
  */
 final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidJsonEncodedException();
+
+        self::assertSame('', $exception->encoded());
+    }
+
     public function testFromEncodedReturnsInvalidJsonEncodedException(): void
     {
         $encoded = self::faker()->sentence;

@@ -18,7 +18,7 @@ final class SchemaUriReferencesInvalidJsonDocumentException extends \RuntimeExce
     /**
      * @var string
      */
-    private $schemaUri;
+    private $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {

@@ -22,6 +22,14 @@ use Ergebnis\Json\Normalizer\Exception\InvalidIndentStyleException;
  */
 final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidIndentStyleException();
+
+        self::assertSame([], $exception->allowedStyles());
+        self::assertSame('', $exception->style());
+    }
+
     public function testExtendsInvalidArgumentException(): void
     {
         self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentStyleException::class);

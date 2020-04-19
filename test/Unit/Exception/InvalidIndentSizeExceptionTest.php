@@ -22,6 +22,14 @@ use Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException;
  */
 final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidIndentSizeException();
+
+        self::assertSame(0, $exception->minimumSize());
+        self::assertSame(0, $exception->size());
+    }
+
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentSizeException(): void
     {
         $faker = self::faker();

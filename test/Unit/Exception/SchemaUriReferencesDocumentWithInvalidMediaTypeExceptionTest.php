@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMed
  */
 final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new SchemaUriReferencesDocumentWithInvalidMediaTypeException();
+
+        self::assertSame('', $exception->schemaUri());
+    }
+
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
         $schemaUri = self::faker()->url;

@@ -18,7 +18,7 @@ final class SchemaUriCouldNotBeResolvedException extends \RuntimeException imple
     /**
      * @var string
      */
-    private $schemaUri;
+    private $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {

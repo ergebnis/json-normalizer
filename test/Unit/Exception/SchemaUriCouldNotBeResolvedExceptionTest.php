@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException;
  */
 final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new SchemaUriCouldNotBeResolvedException();
+
+        self::assertSame('', $exception->schemaUri());
+    }
+
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
     {
         $schemaUri = self::faker()->url;
