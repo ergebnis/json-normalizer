@@ -31,6 +31,11 @@ parameters:
 			path: test/Unit/Format/FormatterTest.php
 
 		-
+			message: "#^Call to deprecated method isValid\\(\\) of class Ergebnis\\\\Json\\\\Normalizer\\\\Validator\\\\SchemaValidator\\:\nwill be removed in 0\\.13\\.0$#"
+			count: 1
+			path: test/Unit/Validator/SchemaValidatorTest.php
+
+		-
 			message: "#^Parameter \\#2 \\$className of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\AbstractNormalizerTestCase\\:\\:assertClassImplementsInterface\\(\\) expects class\\-string, string given\\.$#"
 			count: 1
 			path: test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php
