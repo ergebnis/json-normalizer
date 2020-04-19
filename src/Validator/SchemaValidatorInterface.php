@@ -16,6 +16,8 @@ namespace Ergebnis\Json\Normalizer\Validator;
 interface SchemaValidatorInterface
 {
     /**
+     * @deprecated will be removed in 0.13.0
+     *
      * @param null|array<mixed>|bool|float|int|\stdClass|string $data
      * @param \stdClass                                         $schema
      *

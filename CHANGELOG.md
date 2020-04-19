@@ -6,11 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.11.0...master`][0.11.0...master].
+For a full diff see [`0.12.0...master`][0.12.0...master].
+
+## [`0.12.0`][0.12.0]
+
+For a full diff see [`0.11.0...0.12.0`][0.11.0...0.12.0].
 
 ### Added
 
 * Added `SchemaValidator::validate()`, which returns a `Result` composing validation error messages ([#268]), by [@localheinz]
+
+### Deprecated
+
+* Deprecated `SchemaValidator::isValid()` ([#269]), by [@localheinz]
 
 ## [`0.11.0`][0.11.0]
 
@@ -239,6 +247,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.10.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
 [0.10.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
 [0.11.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.11.0
+[0.12.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.12.0
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -254,7 +263,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.9.0...0.10.0]: https://github.com/ergebnis/json-normalizer/compare/0.9.0...0.10.0
 [0.10.0...0.10.1]: https://github.com/ergebnis/json-normalizer/compare/0.10.0...0.10.1
 [0.10.1...0.11.0]: https://github.com/ergebnis/json-normalizer/compare/0.10.1...0.11.0
-[0.11.0...master]: https://github.com/ergebnis/json-normalizer/compare/0.11.0...master
+[0.11.0...0.12.0]: https://github.com/ergebnis/json-normalizer/compare/0.11.0...0.12.0
+[0.12.0...master]: https://github.com/ergebnis/json-normalizer/compare/0.12.0...master
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -312,6 +322,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#202]: https://github.com/ergebnis/json-normalizer/pull/202
 [#203]: https://github.com/ergebnis/json-normalizer/pull/203
 [#268]: https://github.com/ergebnis/json-normalizer/pull/268
+[#269]: https://github.com/ergebnis/json-normalizer/pull/269
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis
