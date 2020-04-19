@@ -53,6 +53,7 @@ final class PackageHashNormalizer implements NormalizerInterface
         }
 
         foreach ($objectProperties as $name => $value) {
+            /** @var array<string, string> $packages */
             $packages = (array) $decoded->{$name};
 
             if (0 === \count($packages)) {
@@ -74,9 +75,9 @@ final class PackageHashNormalizer implements NormalizerInterface
      *
      * @see https://github.com/composer/composer/blob/1.6.2/src/Composer/Json/JsonManipulator.php#L110-L146
      *
-     * @param string[] $packages
+     * @param array<string, string> $packages
      *
-     * @return string[]
+     * @return array<string, string>
      */
     private static function sortPackages(array $packages): array
     {
