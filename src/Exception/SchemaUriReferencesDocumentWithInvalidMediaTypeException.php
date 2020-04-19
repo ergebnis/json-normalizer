@@ -18,7 +18,7 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeException extends \Ru
     /**
      * @var string
      */
-    private $schemaUri;
+    private $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {

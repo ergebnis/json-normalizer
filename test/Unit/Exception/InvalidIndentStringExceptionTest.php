@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException;
  */
 final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidIndentStringException();
+
+        self::assertSame('', $exception->string());
+    }
+
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
         $string = self::faker()->word;

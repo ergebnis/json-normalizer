@@ -18,12 +18,12 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
     /**
      * @var string
      */
-    private $style;
+    private $style = '';
 
     /**
      * @var string[]
      */
-    private $allowedStyles;
+    private $allowedStyles = [];
 
     public static function fromStyleAndAllowedStyles(string $style, string ...$allowedStyles): self
     {

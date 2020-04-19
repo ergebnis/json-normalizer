@@ -18,7 +18,7 @@ final class InvalidJsonEncodeOptionsException extends \InvalidArgumentException 
     /**
      * @var int
      */
-    private $jsonEncodeOptions;
+    private $jsonEncodeOptions = 0;
 
     public static function fromJsonEncodeOptions(int $jsonEncodeOptions): self
     {

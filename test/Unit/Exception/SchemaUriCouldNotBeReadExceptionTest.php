@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException;
  */
 final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new SchemaUriCouldNotBeReadException();
+
+        self::assertSame('', $exception->schemaUri());
+    }
+
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
     {
         $schemaUri = self::faker()->url;

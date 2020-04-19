@@ -18,7 +18,7 @@ final class SchemaUriCouldNotBeReadException extends \RuntimeException implement
     /**
      * @var string
      */
-    private $schemaUri;
+    private $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {

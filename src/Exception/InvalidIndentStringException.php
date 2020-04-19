@@ -18,7 +18,7 @@ final class InvalidIndentStringException extends \InvalidArgumentException imple
     /**
      * @var string
      */
-    private $string;
+    private $string = '';
 
     public static function fromString(string $string): self
     {

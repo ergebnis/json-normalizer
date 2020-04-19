@@ -22,6 +22,13 @@ use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException;
  */
 final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestCase
 {
+    public function testDefaults(): void
+    {
+        $exception = new InvalidJsonEncodeOptionsException();
+
+        self::assertSame(0, $exception->jsonEncodeOptions());
+    }
+
     public function testFromJsonEncodeOptionsReturnsInvalidJsonEncodeOptionsException(): void
     {
         $jsonEncodeOptions = self::faker()->randomNumber();

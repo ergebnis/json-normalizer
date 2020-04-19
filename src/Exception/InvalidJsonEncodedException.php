@@ -18,7 +18,7 @@ final class InvalidJsonEncodedException extends \InvalidArgumentException implem
     /**
      * @var string
      */
-    private $encoded;
+    private $encoded = '';
 
     public static function fromEncoded(string $encoded): self
     {
