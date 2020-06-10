@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.12.0...master`][0.12.0...master].
+For a full diff see [`0.12.0...main`][0.12.0...main].
 
 ## [`0.12.0`][0.12.0]
 
@@ -264,7 +264,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.10.0...0.10.1]: https://github.com/ergebnis/json-normalizer/compare/0.10.0...0.10.1
 [0.10.1...0.11.0]: https://github.com/ergebnis/json-normalizer/compare/0.10.1...0.11.0
 [0.11.0...0.12.0]: https://github.com/ergebnis/json-normalizer/compare/0.11.0...0.12.0
-[0.12.0...master]: https://github.com/ergebnis/json-normalizer/compare/0.12.0...master
+[0.12.0...main]: https://github.com/ergebnis/json-normalizer/compare/0.12.0...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
