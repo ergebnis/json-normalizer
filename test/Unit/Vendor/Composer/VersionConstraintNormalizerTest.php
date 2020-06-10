@@ -247,9 +247,9 @@ JSON
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#branches
              */
-            'dev-master' => 'dev-master',
+            'dev-main' => 'dev-main',
             'dev-my-feature' => 'dev-my-feature',
-            'dev-master#bf2eeff' => 'dev-master#bf2eeff',
+            'dev-main#bf2eeff' => 'dev-main#bf2eeff',
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#exact-version-constraint
              */
