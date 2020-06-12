@@ -53,4 +53,4 @@ tests: vendor ## Runs auto-review, unit, and integration tests with phpunit/phpu
 vendor: composer.json composer.lock
 	composer validate --strict
 	composer install --no-interaction --no-progress --no-suggest
-	docker run --interactive --rm --tty --workdir=/app --volume ${PWD}:/app localheinz/composer-normalize-action:0.5.2
+	docker run --interactive --rm --tty --workdir=/app --volume ${PWD}:/app ergebnis/composer-normalize-action:0.8.0
