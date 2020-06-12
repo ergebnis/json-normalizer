@@ -69,6 +69,7 @@ final class Indent
             );
         }
 
+        /** @var array<string, string> $characters */
         $characters = [
             'space' => ' ',
             'tab' => "\t",
