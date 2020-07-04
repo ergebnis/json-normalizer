@@ -133,6 +133,8 @@ JSON;
 
         self::assertFalse($result->isValid());
 
+        $errors = $result->errors();
+
         $expected = [
             'name: The property name is required',
             'email: The property email is required',
@@ -142,7 +144,10 @@ JSON;
             'The property direction is not defined and the definition does not allow additional properties',
         ];
 
-        self::assertSame($expected, $result->errors());
+        \sort($errors);
+        \sort($expected);
+
+        self::assertEquals($expected, $errors);
     }
 
     public function testValidateReturnsResultWhenDataIsValidAccordingToSchema(): void
