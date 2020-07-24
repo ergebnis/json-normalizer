@@ -21,10 +21,10 @@
     "justinrainbow/json-schema": "^5.2.10"
   },
   "require-dev": {
-    "ergebnis/license": "~1.0.0",
+    "ergebnis/license": "^1.0.0",
     "ergebnis/php-cs-fixer-config": "^2.2.1",
     "ergebnis/phpstan-rules": "~0.15.0",
-    "ergebnis/test-util": "~1.0.0",
+    "ergebnis/test-util": "^1.0.0",
     "infection/infection": "~0.13.6",
     "jangregor/phpstan-prophecy": "~0.8.0",
     "phpstan/extension-installer": "^1.0.4",
