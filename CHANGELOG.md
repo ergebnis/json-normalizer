@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.13.0...main`][0.13.0...main].
+For a full diff see [`0.13.1...main`][0.13.1...main].
+
+## [`0.13.1`][0.13.1]
+
+For a full diff see [`0.13.0...0.13.1`][0.13.0...0.13.1].
+
+### Changed
+
+* Dropped support for PHP 7.1 ([#335]), by [@localheinz]
 
 ## [`0.13.0`][0.13.0]
 
@@ -257,6 +265,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.11.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.11.0
 [0.12.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.12.0
 [0.13.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.13.0
+[0.13.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.13.1
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -274,7 +283,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.10.1...0.11.0]: https://github.com/ergebnis/json-normalizer/compare/0.10.1...0.11.0
 [0.11.0...0.12.0]: https://github.com/ergebnis/json-normalizer/compare/0.11.0...0.12.0
 [0.12.0...0.13.0]: https://github.com/ergebnis/json-normalizer/compare/0.12.0...0.13.0
-[0.13.0...main]: https://github.com/ergebnis/json-normalizer/compare/0.13.0...main
+[0.13.0...0.13.1]: https://github.com/ergebnis/json-normalizer/compare/0.13.0...0.13.1
+[0.13.1...main]: https://github.com/ergebnis/json-normalizer/compare/0.13.1...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -334,6 +344,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#268]: https://github.com/ergebnis/json-normalizer/pull/268
 [#269]: https://github.com/ergebnis/json-normalizer/pull/269
 [#308]: https://github.com/ergebnis/json-normalizer/pull/308
+[#335]: https://github.com/ergebnis/json-normalizer/pull/335
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis

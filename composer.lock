@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3558295a8a87ee19d0ef4e3a1e243510",
+    "content-hash": "175cfb7f95b35d46d0edc17970db7820",
     "packages": [
         {
             "name": "ergebnis/json-printer",
@@ -4893,12 +4893,12 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1 || ^8.0",
+        "php": "^7.2 || ^8.0",
         "ext-json": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "7.1.33"
+        "php": "7.2.33"
     },
     "plugin-api-version": "1.1.0"
 }
