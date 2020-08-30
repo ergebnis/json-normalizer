@@ -1,5 +1,5 @@
-MIN_COVERED_MSI:=91
-MIN_MSI:=91
+MIN_COVERED_MSI:=92
+MIN_MSI:=90
 
 .PHONY: it
 it: coding-standards static-code-analysis tests ## Runs the coding-standards, static-code-analysis, and tests targets
@@ -7,8 +7,7 @@ it: coding-standards static-code-analysis tests ## Runs the coding-standards, st
 .PHONY: code-coverage
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
 	mkdir -p .build/phpunit
-	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
-	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text --prepend=.build/phpunit/xdebug-filter.php
+	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text
 
 .PHONY: coding-standards
 coding-standards: vendor ## Normalizes composer.json with ergebnis/composer-normalize, lints YAML files with yamllint and fixes code style issues with friendsofphp/php-cs-fixer
@@ -19,7 +18,7 @@ coding-standards: vendor ## Normalizes composer.json with ergebnis/composer-norm
 
 .PHONY: dependency-analysis
 dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-require-checker
-	tools/composer-require-checker check
+	tools/composer-require-checker check --config-file=$(shell pwd)/composer-require-checker.json
 
 .PHONY: help
 help: ## Displays this list of targets with descriptions
@@ -33,7 +32,7 @@ mutation-tests: vendor ## Runs mutation tests with infection/infection
 .PHONY: static-code-analysis
 static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan and vimeo/psalm
 	mkdir -p .build/phpstan
-	vendor/bin/phpstan analyse --configuration=phpstan.neon
+	vendor/bin/phpstan analyse --configuration=phpstan.neon --memory-limit=-1
 	mkdir -p .build/psalm
 	vendor/bin/psalm --config=psalm.xml --diff --diff-methods --show-info=false --stats --threads=4
 
