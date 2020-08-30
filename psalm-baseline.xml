@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.11.5@3c60609c218d4d4b3b257728b8089094e5c6c6c2">
+<files psalm-version="3.14.2@3538fe1955d47f6ee926c0769d71af6db08aa488">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -7,6 +7,11 @@
     <MixedReturnStatement occurrences="1">
       <code>$callable($json)</code>
     </MixedReturnStatement>
+  </file>
+  <file src="src/Format/Formatter.php">
+    <ImplicitToStringCast occurrences="1">
+      <code>$format-&gt;newLine()</code>
+    </ImplicitToStringCast>
   </file>
   <file src="src/Json.php">
     <DocblockTypeContradiction occurrences="1">
@@ -58,16 +63,25 @@
     <MixedAssignment occurrences="1">
       <code>$value</code>
     </MixedAssignment>
+    <UnusedVariable occurrences="1">
+      <code>$value</code>
+    </UnusedVariable>
   </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
     <MixedAssignment occurrences="1">
       <code>$value</code>
     </MixedAssignment>
+    <UnusedVariable occurrences="1">
+      <code>$value</code>
+    </UnusedVariable>
   </file>
   <file src="src/Vendor/Composer/VersionConstraintNormalizer.php">
     <MixedAssignment occurrences="1">
       <code>$value</code>
     </MixedAssignment>
+    <UnusedVariable occurrences="1">
+      <code>$value</code>
+    </UnusedVariable>
   </file>
   <file src="test/DataProvider/Boolean.php">
     <MixedInferredReturnType occurrences="1">
@@ -125,6 +139,11 @@
     <MoreSpecificReturnType occurrences="1">
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
     </MoreSpecificReturnType>
+    <UnusedVariable occurrences="3">
+      <code>$key</code>
+      <code>$key</code>
+      <code>$style</code>
+    </UnusedVariable>
   </file>
   <file src="test/Unit/Format/JsonEncodeOptionsTest.php">
     <MixedInferredReturnType occurrences="2">
