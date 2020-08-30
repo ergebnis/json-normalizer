@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "88684c83999b22502d93a4b5509cbd23",
+    "content-hash": "7a9278bee1a9af906c46022b864bc9bb",
     "packages": [
         {
             "name": "ergebnis/json-printer",
@@ -2405,16 +2405,16 @@
         },
         {
             "name": "phpstan/phpstan-phpunit",
-            "version": "0.12.13",
+            "version": "0.12.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-phpunit.git",
-                "reference": "92fb18f91ded4981e24862cc34fb19eeced64099"
+                "reference": "1dd916d181b0539dea5cd37e91546afb8b107e17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/92fb18f91ded4981e24862cc34fb19eeced64099",
-                "reference": "92fb18f91ded4981e24862cc34fb19eeced64099",
+                "url": "https://api.github.com/repos/phpstan/phpstan-phpunit/zipball/1dd916d181b0539dea5cd37e91546afb8b107e17",
+                "reference": "1dd916d181b0539dea5cd37e91546afb8b107e17",
                 "shasum": ""
             },
             "require": {
@@ -2457,7 +2457,7 @@
                 "MIT"
             ],
             "description": "PHPUnit extensions and rules for PHPStan",
-            "time": "2020-07-21T14:48:45+00:00"
+            "time": "2020-08-05T13:28:50+00:00"
         },
         {
             "name": "phpstan/phpstan-strict-rules",
