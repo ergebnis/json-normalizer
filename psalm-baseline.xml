@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.14.2@3538fe1955d47f6ee926c0769d71af6db08aa488">
+<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -21,8 +21,8 @@
       <code>$decoded</code>
     </MissingParamType>
     <MixedAssignment occurrences="2">
-      <code>$this-&gt;decoded</code>
       <code>$decoded</code>
+      <code>$this-&gt;decoded</code>
     </MixedAssignment>
     <PropertyNotSetInConstructor occurrences="1">
       <code>$format</code>
@@ -33,19 +33,19 @@
       <code>$data</code>
     </MissingParamType>
     <MixedArgument occurrences="7">
+      <code>$data</code>
       <code>$item</code>
       <code>$item</code>
       <code>$itemSchema</code>
+      <code>$oneOfSchema</code>
       <code>$schema-&gt;properties</code>
       <code>$value</code>
-      <code>$data</code>
-      <code>$oneOfSchema</code>
     </MixedArgument>
     <MixedAssignment occurrences="4">
       <code>$itemSchema</code>
-      <code>$value</code>
-      <code>$value</code>
       <code>$oneOfSchema</code>
+      <code>$value</code>
+      <code>$value</code>
     </MixedAssignment>
     <PossiblyNullArgument occurrences="1">
       <code>\get_object_vars($schema-&gt;properties)</code>
@@ -130,11 +130,11 @@
     </MixedAssignment>
     <MixedInferredReturnType occurrences="6">
       <code>\Generator&lt;array&lt;int&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
     <MoreSpecificReturnType occurrences="1">
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
@@ -170,45 +170,45 @@
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">
     <MixedArgument occurrences="6">
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
       <code>$fileInfo-&gt;getPath()</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
+      <code>$normalizedFile</code>
     </MixedArgument>
     <MixedAssignment occurrences="5">
-      <code>$schemaDecoded</code>
-      <code>$schemaDecoded</code>
+      <code>$decoded</code>
       <code>$fileInfo</code>
       <code>$normalizedFile</code>
-      <code>$decoded</code>
+      <code>$schemaDecoded</code>
+      <code>$schemaDecoded</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
     <MixedMethodCall occurrences="4">
-      <code>isFile</code>
       <code>getBasename</code>
-      <code>getRealPath</code>
       <code>getPath</code>
+      <code>getRealPath</code>
+      <code>isFile</code>
     </MixedMethodCall>
   </file>
   <file src="test/Unit/Validator/SchemaValidatorTest.php">
     <MixedArgument occurrences="6">
       <code>$data</code>
-      <code>$schema</code>
+      <code>$data</code>
       <code>$data</code>
       <code>$schema</code>
-      <code>$data</code>
+      <code>$schema</code>
       <code>$schema</code>
     </MixedArgument>
     <MixedAssignment occurrences="6">
       <code>$data</code>
-      <code>$schema</code>
+      <code>$data</code>
       <code>$data</code>
       <code>$schema</code>
-      <code>$data</code>
+      <code>$schema</code>
       <code>$schema</code>
     </MixedAssignment>
   </file>
