@@ -34,11 +34,7 @@ final class Indent
     }
 
     /**
-     * @param string $string
-     *
      * @throws Exception\InvalidIndentStringException
-     *
-     * @return self
      */
     public static function fromString(string $string): self
     {
@@ -50,13 +46,8 @@ final class Indent
     }
 
     /**
-     * @param int    $size
-     * @param string $style
-     *
      * @throws Exception\InvalidIndentSizeException
      * @throws Exception\InvalidIndentStyleException
-     *
-     * @return self
      */
     public static function fromSizeAndStyle(int $size, string $style): self
     {

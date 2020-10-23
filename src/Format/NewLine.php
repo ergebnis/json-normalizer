@@ -34,11 +34,7 @@ final class NewLine
     }
 
     /**
-     * @param string $string
-     *
      * @throws Exception\InvalidNewLineStringException
-     *
-     * @return self
      */
     public static function fromString(string $string): self
     {

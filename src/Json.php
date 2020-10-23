@@ -38,8 +38,6 @@ final class Json
 
     /**
      * Returns the original JSON value.
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -47,11 +45,7 @@ final class Json
     }
 
     /**
-     * @param string $encoded
-     *
      * @throws Exception\InvalidJsonEncodedException
-     *
-     * @return self
      */
     public static function fromEncoded(string $encoded): self
     {
@@ -79,8 +73,6 @@ final class Json
 
     /**
      * Returns the original JSON value.
-     *
-     * @return string
      */
     public function encoded(): string
     {
@@ -89,8 +81,6 @@ final class Json
 
     /**
      * Returns the format of the original JSON value.
-     *
-     * @return Format\Format
      */
     public function format(): Format\Format
     {

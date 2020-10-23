@@ -29,8 +29,6 @@ final class JsonEncodeOptions
     }
 
     /**
-     * @param int $value
-     *
      * @throws Exception\InvalidJsonEncodeOptionsException
      *
      * @return JsonEncodeOptions

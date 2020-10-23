@@ -27,8 +27,6 @@ final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Text::provideWhitespace()
-     *
-     * @param string $whitespace
      */
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {

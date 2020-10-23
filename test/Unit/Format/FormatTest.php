@@ -34,8 +34,6 @@ final class FormatTest extends Framework\TestCase
 {
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
-     *
-     * @param bool $hasFinalNewLine
      */
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
@@ -109,8 +107,6 @@ final class FormatTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
-     *
-     * @param bool $hasFinalNewLine
      */
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {
@@ -129,8 +125,6 @@ final class FormatTest extends Framework\TestCase
 
     /**
      * @dataProvider providerEncodedWithoutIndent
-     *
-     * @param string $encoded
      */
     public function testFromJsonReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
@@ -169,8 +163,6 @@ final class FormatTest extends Framework\TestCase
 
     /**
      * @dataProvider providerWhitespaceWithoutNewLine
-     *
-     * @param string $actualWhitespace
      */
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
@@ -214,8 +206,6 @@ JSON
 
     /**
      * @dataProvider providerWhitespaceWithNewLine
-     *
-     * @param string $actualWhitespace
      */
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {

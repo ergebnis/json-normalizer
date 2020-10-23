@@ -24,8 +24,6 @@ abstract class AbstractComposerTestCase extends AbstractNormalizerTestCase
 {
     /**
      * @dataProvider providerJsonNotDecodingToObject
-     *
-     * @param string $encoded
      */
     final public function testNormalizeDoesNotModifyWhenJsonDecodedIsNotAnObject(string $encoded): void
     {

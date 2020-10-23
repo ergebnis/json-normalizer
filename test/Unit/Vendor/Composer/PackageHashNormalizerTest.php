@@ -47,8 +47,6 @@ JSON
 
     /**
      * @dataProvider providerProperty
-     *
-     * @param string $property
      */
     public function testNormalizeIgnoresEmptyPackageHash(string $property): void
     {
@@ -69,8 +67,6 @@ JSON
 
     /**
      * @dataProvider providerProperty
-     *
-     * @param string $property
      */
     public function testNormalizeSortsPackageHashIfPropertyExists(string $property): void
     {
