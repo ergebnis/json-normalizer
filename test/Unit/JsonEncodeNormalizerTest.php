@@ -29,8 +29,6 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
      * @dataProvider providerJsonEncodeOptions
-     *
-     * @param int $jsonEncodeOptions
      */
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {

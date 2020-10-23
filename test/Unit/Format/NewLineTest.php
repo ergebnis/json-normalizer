@@ -30,8 +30,6 @@ final class NewLineTest extends Framework\TestCase
 {
     /**
      * @dataProvider providerInvalidNewLineString
-     *
-     * @param string $string
      */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
@@ -65,8 +63,6 @@ final class NewLineTest extends Framework\TestCase
 
     /**
      * @dataProvider providerValidNewLineString
-     *
-     * @param string $string
      */
     public function testFromStringReturnsNewLine(string $string): void
     {
@@ -106,8 +102,6 @@ final class NewLineTest extends Framework\TestCase
 
     /**
      * @dataProvider providerNewLine
-     *
-     * @param string $newLineString
      */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
@@ -124,8 +118,6 @@ JSON
 
     /**
      * @dataProvider providerNewLine
-     *
-     * @param string $newLineString
      */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {

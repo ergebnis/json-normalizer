@@ -33,8 +33,6 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
     /**
      * @dataProvider providerInvalidValue
-     *
-     * @param int $value
      */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
@@ -62,8 +60,6 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
     /**
      * @dataProvider providerValidValue
-     *
-     * @param int $value
      */
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
@@ -91,9 +87,6 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
     /**
      * @dataProvider providerJsonEncodeOptionsAndEncoded
-     *
-     * @param int    $value
-     * @param string $encoded
      */
     public function testFromJsonReturnsJsonEncodeOptions(int $value, string $encoded): void
     {

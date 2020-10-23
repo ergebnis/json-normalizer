@@ -35,8 +35,6 @@ final class IndentTest extends Framework\TestCase
 
     /**
      * @dataProvider providerInvalidSize
-     *
-     * @param int $size
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
@@ -88,10 +86,6 @@ final class IndentTest extends Framework\TestCase
 
     /**
      * @dataProvider providerSizeStyleAndIndentString
-     *
-     * @param int    $size
-     * @param string $style
-     * @param string $string
      */
     public function testFromSizeAndStyleReturnsIndent(int $size, string $style, string $string): void
     {
@@ -126,8 +120,6 @@ final class IndentTest extends Framework\TestCase
 
     /**
      * @dataProvider providerInvalidIndentString
-     *
-     * @param string $string
      */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
@@ -156,8 +148,6 @@ final class IndentTest extends Framework\TestCase
 
     /**
      * @dataProvider providerValidIndentString
-     *
-     * @param string $string
      */
     public function testFromStringReturnsIndent(string $string): void
     {
@@ -188,9 +178,6 @@ final class IndentTest extends Framework\TestCase
     /**
      * @dataProvider providerPureIndentAndSniffedIndent
      * @dataProvider providerMixedIndentAndSniffedIndent
-     *
-     * @param string $actualIndent
-     * @param string $sniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromArray(string $actualIndent, string $sniffedIndent): void
     {
@@ -214,9 +201,6 @@ JSON
     /**
      * @dataProvider providerPureIndentAndSniffedIndent
      * @dataProvider providerMixedIndentAndSniffedIndent
-     *
-     * @param string $actualIndent
-     * @param string $sniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromObject(string $actualIndent, string $sniffedIndent): void
     {

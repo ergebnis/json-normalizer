@@ -38,8 +38,6 @@ final class SchemaValidatorTest extends Framework\TestCase
 
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
-     *
-     * @param bool $isValid
      */
     public function testIsValidUsesSchemaValidator(bool $isValid): void
     {

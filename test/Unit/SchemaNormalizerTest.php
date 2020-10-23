@@ -308,10 +308,6 @@ JSON
 
     /**
      * @dataProvider providerExpectedEncodedAndSchemaUri
-     *
-     * @param string $expected
-     * @param string $encoded
-     * @param string $schemaUri
      */
     public function testNormalizeNormalizes(string $expected, string $encoded, string $schemaUri): void
     {

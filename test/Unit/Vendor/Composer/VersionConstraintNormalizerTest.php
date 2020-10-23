@@ -27,8 +27,6 @@ final class VersionConstraintNormalizerTest extends AbstractComposerTestCase
 {
     /**
      * @dataProvider providerVersionConstraint
-     *
-     * @param string $constraint
      */
     public function testNormalizeDoesNotModifyOtherProperty(string $constraint): void
     {
@@ -63,8 +61,6 @@ JSON
 
     /**
      * @dataProvider providerProperty
-     *
-     * @param string $property
      */
     public function testNormalizeIgnoresEmptyPackageHash(string $property): void
     {
@@ -99,10 +95,6 @@ JSON
 
     /**
      * @dataProvider providerPropertyAndVersionConstraint
-     *
-     * @param string $property
-     * @param string $versionConstraint
-     * @param string $normalizedVersionConstraint
      */
     public function testNormalizeNormalizesVersionConstraints(string $property, string $versionConstraint, string $normalizedVersionConstraint): void
     {
@@ -154,10 +146,6 @@ JSON
 
     /**
      * @dataProvider providerPropertyAndUntrimmedVersionConstraint
-     *
-     * @param string $property
-     * @param string $versionConstraint
-     * @param string $trimmedVersionConstraint
      */
     public function testNormalizeNormalizesTrimsVersionConstraints(string $property, string $versionConstraint, string $trimmedVersionConstraint): void
     {

@@ -45,8 +45,6 @@ final class JsonTest extends Framework\TestCase
 
     /**
      * @dataProvider providerEncoded
-     *
-     * @param string $encoded
      */
     public function testFromEncodedReturnsJson(string $encoded): void
     {

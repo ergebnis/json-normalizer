@@ -100,7 +100,6 @@ final class SchemaNormalizer implements NormalizerInterface
 
     /**
      * @param null|array<mixed>|bool|float|int|\stdClass|string $data
-     * @param \stdClass                                         $schema
      *
      * @throws \InvalidArgumentException
      *
@@ -127,7 +126,6 @@ final class SchemaNormalizer implements NormalizerInterface
 
     /**
      * @param array<mixed> $data
-     * @param \stdClass    $schema
      *
      * @return array<mixed>
      */

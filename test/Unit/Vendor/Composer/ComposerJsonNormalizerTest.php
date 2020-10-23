@@ -222,8 +222,7 @@ JSON
     }
 
     /**
-     * @param class-string        $className
-     * @param NormalizerInterface $normalizer
+     * @param class-string $className
      */
     private static function assertComposesNormalizer(string $className, NormalizerInterface $normalizer): void
     {
@@ -246,8 +245,7 @@ JSON
     }
 
     /**
-     * @param string[]            $classNames
-     * @param NormalizerInterface $normalizer
+     * @param string[] $classNames
      *
      * @throws \ReflectionException
      */
@@ -290,8 +288,6 @@ JSON
     }
 
     /**
-     * @param NormalizerInterface $normalizer
-     *
      * @throws \ReflectionException
      *
      * @return NormalizerInterface[]
