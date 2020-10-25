@@ -258,6 +258,9 @@ JSON
              */
             '1.0 - 2.0' => '1.0 - 2.0',
             '1.0  -  2.0' => '1.0 - 2.0',
+            '1.0-2.0' => '1.0 - 2.0',
+            '1.0- 2.0' => '1.0 - 2.0',
+            '1.0 -2.0' => '1.0 - 2.0',
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#next-significant-release-operators
              */
