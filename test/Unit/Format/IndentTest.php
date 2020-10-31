@@ -33,15 +33,22 @@ final class IndentTest extends Framework\TestCase
 {
     use Helper;
 
+    public function testConstants(): void
+    {
+        $characters = [
+            'space' => ' ',
+            'tab' => "\t",
+        ];
+
+        self::assertSame($characters, Indent::CHARACTERS);
+    }
+
     /**
      * @dataProvider providerInvalidSize
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
-        $style = self::faker()->randomElement([
-            'space',
-            'tab',
-        ]);
+        $style = self::faker()->randomElement(\array_keys(Indent::CHARACTERS));
 
         $this->expectException(Exception\InvalidIndentSizeException::class);
 
@@ -103,7 +110,7 @@ final class IndentTest extends Framework\TestCase
     public function providerSizeStyleAndIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
-            foreach (self::characters() as $style => $character) {
+            foreach (Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size
@@ -162,7 +169,7 @@ final class IndentTest extends Framework\TestCase
     public function providerValidIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
-            foreach (self::characters() as $style => $character) {
+            foreach (Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size
@@ -226,14 +233,12 @@ JSON
      */
     public function providerPureIndentAndSniffedIndent(): \Generator
     {
-        $characters = [
-            'space' => ' ',
-            'tab' => "\t",
+        $sizes = [
+            1,
+            3,
         ];
 
-        $sizes = [1, 3];
-
-        foreach ($characters as $style => $character) {
+        foreach (Indent::CHARACTERS as $style => $character) {
             foreach ($sizes as $size) {
                 $key = \sprintf(
                     '%s-%d',

@@ -18,6 +18,11 @@ use Ergebnis\Json\Normalizer\Json;
 
 final class Indent
 {
+    public const CHARACTERS = [
+        'space' => ' ',
+        'tab' => "\t",
+    ];
+
     /**
      * @var string
      */
@@ -60,21 +65,15 @@ final class Indent
             );
         }
 
-        /** @var array<string, string> $characters */
-        $characters = [
-            'space' => ' ',
-            'tab' => "\t",
-        ];
-
-        if (!\array_key_exists($style, $characters)) {
+        if (!\array_key_exists($style, self::CHARACTERS)) {
             throw Exception\InvalidIndentStyleException::fromStyleAndAllowedStyles(
                 $style,
-                ...\array_keys($characters)
+                ...\array_keys(self::CHARACTERS)
             );
         }
 
         $value = \str_repeat(
-            $characters[$style],
+            self::CHARACTERS[$style],
             $size
         );
 
