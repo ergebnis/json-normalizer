@@ -3,6 +3,7 @@ includes:
 
 parameters:
 	checkMissingIterableValueType: false
+
 	ergebnis:
 		classesAllowedToBeExtended:
 			- Ergebnis\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase
@@ -10,9 +11,13 @@ parameters:
 			- Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer\AbstractComposerTestCase
 			- InvalidArgumentException
 			- RuntimeException
+
 	inferPrivatePropertyTypeFromConstructor: true
+
 	level: max
+
 	paths:
 		- src/
 		- test/
+
 	tmpDir: .build/phpstan/
