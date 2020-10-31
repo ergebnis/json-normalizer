@@ -14,7 +14,7 @@ For a full diff see [`0.13.1...0.14.0`][0.13.1...0.14.0].
 
 ### Added
 
-* Extracted an `Indent::CHARACTERS` constant that exposes a map of indent styles to indent characters ([#383]), by [@localheinz]
+* Extracted an `Indent::CHARACTERS` constant that exposes a map of indent styles to indent characters ([#384]), by [@localheinz]
 
 ## [`0.13.1`][0.13.1]
 
@@ -355,7 +355,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#269]: https://github.com/ergebnis/json-normalizer/pull/269
 [#308]: https://github.com/ergebnis/json-normalizer/pull/308
 [#335]: https://github.com/ergebnis/json-normalizer/pull/335
-[#383]: https://github.com/ergebnis/json-normalizer/pull/383
+[#384]: https://github.com/ergebnis/json-normalizer/pull/384
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis
