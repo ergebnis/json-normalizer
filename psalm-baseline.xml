@@ -117,9 +117,6 @@
     <MixedAssignment occurrences="1">
       <code>$newLineString</code>
     </MixedAssignment>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/Unit/Format/IndentTest.php">
     <MixedArgument occurrences="1">
@@ -136,9 +133,6 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
       <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
     </MixedInferredReturnType>
-    <MoreSpecificReturnType occurrences="1">
-      <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
-    </MoreSpecificReturnType>
     <UnusedVariable occurrences="3">
       <code>$key</code>
       <code>$key</code>
