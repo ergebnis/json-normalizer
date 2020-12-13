@@ -183,8 +183,8 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerPureIndentAndSniffedIndent
      * @dataProvider providerMixedIndentAndSniffedIndent
+     * @dataProvider providerPureIndentAndSniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromArray(string $actualIndent, string $sniffedIndent): void
     {
@@ -206,8 +206,8 @@ JSON
     }
 
     /**
-     * @dataProvider providerPureIndentAndSniffedIndent
      * @dataProvider providerMixedIndentAndSniffedIndent
+     * @dataProvider providerPureIndentAndSniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromObject(string $actualIndent, string $sniffedIndent): void
     {
