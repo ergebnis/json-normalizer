@@ -16,7 +16,10 @@ namespace Ergebnis\Json\Normalizer;
 final class ChainNormalizer implements NormalizerInterface
 {
     /**
-     * @var NormalizerInterface[]
+     * @phpstan-var list<NormalizerInterface>
+     * @psalm-var list<NormalizerInterface>
+     *
+     * @var array<int, NormalizerInterface>
      */
     private $normalizers;
 

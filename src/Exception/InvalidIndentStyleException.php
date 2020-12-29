@@ -21,7 +21,10 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
     private $style = '';
 
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<string>
      */
     private $allowedStyles = [];
 
@@ -45,7 +48,10 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
     }
 
     /**
-     * @return string[]
+     * @phpstan-return list<string>
+     * @psalm-return list<string>
+     *
+     * @return array<int, string>
      */
     public function allowedStyles(): array
     {

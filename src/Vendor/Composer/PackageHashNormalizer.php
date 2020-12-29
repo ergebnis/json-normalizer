@@ -24,7 +24,10 @@ final class PackageHashNormalizer implements NormalizerInterface
     private const PLATFORM_PACKAGE_REGEX = '{^(?:php(?:-64bit|-ipv6|-zts|-debug)?|hhvm|(?:ext|lib)-[^/ ]+)$}i';
 
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
      */
     private static $properties = [
         'conflict',

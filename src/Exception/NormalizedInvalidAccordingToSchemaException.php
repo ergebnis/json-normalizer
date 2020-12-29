@@ -21,7 +21,10 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
     private $schemaUri = '';
 
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
      */
     private $errors = [];
 
@@ -44,7 +47,10 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
     }
 
     /**
-     * @return string[]
+     * @phpstan-return list<string>
+     * @psalm-return list<string>
+     *
+     * @return array<int, string>
      */
     public function errors(): array
     {
