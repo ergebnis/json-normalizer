@@ -23,7 +23,7 @@ use Ergebnis\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase;
 abstract class AbstractComposerTestCase extends AbstractNormalizerTestCase
 {
     /**
-     * @dataProvider providerJsonNotDecodingToObject
+     * @dataProvider provideJsonNotDecodingToObject
      */
     final public function testNormalizeDoesNotModifyWhenJsonDecodedIsNotAnObject(string $encoded): void
     {
@@ -45,7 +45,7 @@ abstract class AbstractComposerTestCase extends AbstractNormalizerTestCase
     /**
      * @return \Generator<array<string>>
      */
-    final public function providerJsonNotDecodingToObject(): \Generator
+    final public function provideJsonNotDecodingToObject(): \Generator
     {
         $faker = self::faker();
 

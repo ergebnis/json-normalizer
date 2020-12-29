@@ -44,7 +44,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidSize
+     * @dataProvider provideInvalidSize
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
@@ -61,7 +61,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function providerInvalidSize(): \Generator
+    public function provideInvalidSize(): \Generator
     {
         $sizes = [
             'int-zero' => 0,
@@ -92,7 +92,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerSizeStyleAndIndentString
+     * @dataProvider provideSizeStyleAndIndentString
      */
     public function testFromSizeAndStyleReturnsIndent(int $size, string $style, string $string): void
     {
@@ -107,7 +107,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array{0: int, 1: string, 2: string}>
      */
-    public function providerSizeStyleAndIndentString(): \Generator
+    public function provideSizeStyleAndIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Indent::CHARACTERS as $style => $character) {
@@ -126,7 +126,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerInvalidIndentString
+     * @dataProvider provideInvalidIndentString
      */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
@@ -138,7 +138,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function providerInvalidIndentString(): \Generator
+    public function provideInvalidIndentString(): \Generator
     {
         $strings = [
             'string-not-whitespace' => self::faker()->sentence,
@@ -154,7 +154,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidIndentString
+     * @dataProvider provideValidIndentString
      */
     public function testFromStringReturnsIndent(string $string): void
     {
@@ -166,7 +166,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function providerValidIndentString(): \Generator
+    public function provideValidIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Indent::CHARACTERS as $style => $character) {
@@ -183,8 +183,8 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerMixedIndentAndSniffedIndent
-     * @dataProvider providerPureIndentAndSniffedIndent
+     * @dataProvider provideMixedIndentAndSniffedIndent
+     * @dataProvider providePureIndentAndSniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromArray(string $actualIndent, string $sniffedIndent): void
     {
@@ -206,8 +206,8 @@ JSON
     }
 
     /**
-     * @dataProvider providerMixedIndentAndSniffedIndent
-     * @dataProvider providerPureIndentAndSniffedIndent
+     * @dataProvider provideMixedIndentAndSniffedIndent
+     * @dataProvider providePureIndentAndSniffedIndent
      */
     public function testFromJsonReturnsIndentSniffedFromObject(string $actualIndent, string $sniffedIndent): void
     {
@@ -231,7 +231,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerPureIndentAndSniffedIndent(): \Generator
+    public function providePureIndentAndSniffedIndent(): \Generator
     {
         $sizes = [
             1,
@@ -262,7 +262,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerMixedIndentAndSniffedIndent(): \Generator
+    public function provideMixedIndentAndSniffedIndent(): \Generator
     {
         $mixedIndents = [
             'space-and-tab' => [

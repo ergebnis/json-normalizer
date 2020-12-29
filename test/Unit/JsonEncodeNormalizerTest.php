@@ -28,7 +28,7 @@ use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
-     * @dataProvider providerJsonEncodeOptions
+     * @dataProvider provideJsonEncodeOptions
      */
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
@@ -60,7 +60,7 @@ JSON
     /**
      * @return \Generator<array<int>>
      */
-    public function providerJsonEncodeOptions(): \Generator
+    public function provideJsonEncodeOptions(): \Generator
     {
         /**
          * Could add more, but the idea counts.

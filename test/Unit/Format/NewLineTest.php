@@ -29,7 +29,7 @@ use PHPUnit\Framework;
 final class NewLineTest extends Framework\TestCase
 {
     /**
-     * @dataProvider providerInvalidNewLineString
+     * @dataProvider provideInvalidNewLineString
      */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
@@ -41,7 +41,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function providerInvalidNewLineString(): \Generator
+    public function provideInvalidNewLineString(): \Generator
     {
         $strings = [
             "\t",
@@ -62,7 +62,7 @@ final class NewLineTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidNewLineString
+     * @dataProvider provideValidNewLineString
      */
     public function testFromStringReturnsNewLine(string $string): void
     {
@@ -74,7 +74,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function providerValidNewLineString(): \Generator
+    public function provideValidNewLineString(): \Generator
     {
         $strings = [
             "\n",
@@ -101,7 +101,7 @@ final class NewLineTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerNewLine
+     * @dataProvider provideNewLine
      */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
@@ -117,7 +117,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerNewLine
+     * @dataProvider provideNewLine
      */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
@@ -135,7 +135,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerNewLine(): \Generator
+    public function provideNewLine(): \Generator
     {
         $values = [
             "\r\n",

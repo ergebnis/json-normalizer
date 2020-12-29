@@ -46,7 +46,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerProperty
+     * @dataProvider provideProperty
      */
     public function testNormalizeIgnoresEmptyConfigHash(string $property): void
     {
@@ -66,7 +66,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerProperty
+     * @dataProvider provideProperty
      */
     public function testNormalizeSortsConfigHashIfPropertyExists(string $property): void
     {
@@ -110,7 +110,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerProperty(): \Generator
+    public function provideProperty(): \Generator
     {
         foreach (self::properties() as $value) {
             yield $value => [

@@ -46,7 +46,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerProperty
+     * @dataProvider provideProperty
      */
     public function testNormalizeIgnoresEmptyPackageHash(string $property): void
     {
@@ -66,7 +66,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerProperty
+     * @dataProvider provideProperty
      */
     public function testNormalizeSortsPackageHashIfPropertyExists(string $property): void
     {
@@ -118,7 +118,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerProperty(): \Generator
+    public function provideProperty(): \Generator
     {
         foreach (self::propertiesWhereKeysOfHashArePackages() as $value) {
             yield $value => [

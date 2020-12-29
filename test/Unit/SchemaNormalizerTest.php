@@ -307,7 +307,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerExpectedEncodedAndSchemaUri
+     * @dataProvider provideExpectedEncodedAndSchemaUri
      */
     public function testNormalizeNormalizes(string $expected, string $encoded, string $schemaUri): void
     {
@@ -327,7 +327,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerExpectedEncodedAndSchemaUri(): \Generator
+    public function provideExpectedEncodedAndSchemaUri(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
