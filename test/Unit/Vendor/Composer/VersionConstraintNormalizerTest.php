@@ -26,7 +26,7 @@ use Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer;
 final class VersionConstraintNormalizerTest extends AbstractComposerTestCase
 {
     /**
-     * @dataProvider providerVersionConstraint
+     * @dataProvider provideVersionConstraint
      */
     public function testNormalizeDoesNotModifyOtherProperty(string $constraint): void
     {
@@ -50,7 +50,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerVersionConstraint(): \Generator
+    public function provideVersionConstraint(): \Generator
     {
         foreach (\array_keys(self::versionConstraints()) as $versionConstraint) {
             yield [
@@ -60,7 +60,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerProperty
+     * @dataProvider provideProperty
      */
     public function testNormalizeIgnoresEmptyPackageHash(string $property): void
     {
@@ -82,7 +82,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerProperty(): \Generator
+    public function provideProperty(): \Generator
     {
         $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
 
@@ -94,7 +94,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerPropertyAndVersionConstraint
+     * @dataProvider providePropertyAndVersionConstraint
      */
     public function testNormalizeNormalizesVersionConstraints(string $property, string $versionConstraint, string $normalizedVersionConstraint): void
     {
@@ -128,7 +128,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerPropertyAndVersionConstraint(): \Generator
+    public function providePropertyAndVersionConstraint(): \Generator
     {
         $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
         $versionConstraints = self::versionConstraints();
@@ -145,7 +145,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerPropertyAndUntrimmedVersionConstraint
+     * @dataProvider providePropertyAndUntrimmedVersionConstraint
      */
     public function testNormalizeNormalizesTrimsVersionConstraints(string $property, string $versionConstraint, string $trimmedVersionConstraint): void
     {
@@ -179,7 +179,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerPropertyAndUntrimmedVersionConstraint(): \Generator
+    public function providePropertyAndUntrimmedVersionConstraint(): \Generator
     {
         $spaces = [
             '',

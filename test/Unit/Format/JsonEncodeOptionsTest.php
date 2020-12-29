@@ -32,7 +32,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     use Helper;
 
     /**
-     * @dataProvider providerInvalidValue
+     * @dataProvider provideInvalidValue
      */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
@@ -44,7 +44,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function providerInvalidValue(): \Generator
+    public function provideInvalidValue(): \Generator
     {
         $values = [
             'int-minus-one' => -1,
@@ -59,7 +59,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerValidValue
+     * @dataProvider provideValidValue
      */
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
@@ -71,7 +71,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function providerValidValue(): \Generator
+    public function provideValidValue(): \Generator
     {
         $values = [
             'int-zero' => 0,
@@ -86,7 +86,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerJsonEncodeOptionsAndEncoded
+     * @dataProvider provideJsonEncodeOptionsAndEncoded
      */
     public function testFromJsonReturnsJsonEncodeOptions(int $value, string $encoded): void
     {
@@ -100,7 +100,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return array<array{0: int, 1: string}>
      */
-    public function providerJsonEncodeOptionsAndEncoded(): array
+    public function provideJsonEncodeOptionsAndEncoded(): array
     {
         return [
             [

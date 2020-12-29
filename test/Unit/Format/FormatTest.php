@@ -124,7 +124,7 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerEncodedWithoutIndent
+     * @dataProvider provideEncodedWithoutIndent
      */
     public function testFromJsonReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
@@ -138,7 +138,7 @@ final class FormatTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function providerEncodedWithoutIndent(): \Generator
+    public function provideEncodedWithoutIndent(): \Generator
     {
         $values = [
             'array-empty' => '[]',
@@ -162,7 +162,7 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerWhitespaceWithoutNewLine
+     * @dataProvider provideWhitespaceWithoutNewLine
      */
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
@@ -186,7 +186,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerWhitespaceWithoutNewLine(): \Generator
+    public function provideWhitespaceWithoutNewLine(): \Generator
     {
         $characters = [
             ' ',
@@ -205,7 +205,7 @@ JSON
     }
 
     /**
-     * @dataProvider providerWhitespaceWithNewLine
+     * @dataProvider provideWhitespaceWithNewLine
      */
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
@@ -229,7 +229,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providerWhitespaceWithNewLine(): \Generator
+    public function provideWhitespaceWithNewLine(): \Generator
     {
         $characters = [
             '',

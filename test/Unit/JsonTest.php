@@ -44,7 +44,7 @@ final class JsonTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider providerEncoded
+     * @dataProvider provideEncoded
      */
     public function testFromEncodedReturnsJson(string $encoded): void
     {
@@ -65,7 +65,7 @@ final class JsonTest extends Framework\TestCase
     /**
      * @return \Generator<array<null|array|bool|float|int|string>>
      */
-    public function providerEncoded(): \Generator
+    public function provideEncoded(): \Generator
     {
         $values = [
             'array-indexed' => [
