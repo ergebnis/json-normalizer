@@ -42,7 +42,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($json->encoded(), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
     }
 
     /**
@@ -62,7 +62,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($json->encoded(), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
     }
 
     /**
@@ -104,7 +104,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame(\json_encode(\json_decode($expected->encoded())), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
     }
 
     /**

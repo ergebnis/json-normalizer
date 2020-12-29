@@ -39,7 +39,7 @@ abstract class AbstractComposerTestCase extends AbstractNormalizerTestCase
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($json->encoded(), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
     }
 
     /**
