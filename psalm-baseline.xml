@@ -60,12 +60,13 @@
     </MixedReturnStatement>
   </file>
   <file src="src/Vendor/Composer/ConfigHashNormalizer.php">
+    <MixedArgument occurrences="2">
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$value</code>
     </MixedAssignment>
-    <UnusedVariable occurrences="1">
-      <code>$value</code>
-    </UnusedVariable>
   </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
     <MixedAssignment occurrences="1">

@@ -141,6 +141,62 @@ JSON
     }
 
     /**
+     * @dataProvider provideProperty
+     */
+    public function testNormalizeSortsConfigHashRecursivelyIfPropertyExists(string $property): void
+    {
+        $json = Json::fromEncoded(
+            <<<JSON
+{
+  "{$property}": {
+    "sort-packages": true,
+    "preferred-install": "dist",
+    "foo": {
+      "qux": "quux",
+      "bar": {
+        "qux": "quz",
+        "baz": "qux"
+      }
+    }
+  },
+  "foo": {
+    "qux": "quux",
+    "bar": "baz"
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<JSON
+{
+  "{$property}": {
+    "foo": {
+      "bar": {
+        "baz": "qux",
+        "qux": "quz"
+      },
+      "qux": "quux"
+    },
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "foo": {
+    "qux": "quux",
+    "bar": "baz"
+  }
+}
+JSON
+        );
+
+        $normalizer = new ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    /**
      * @return \Generator<array<string>>
      */
     public function provideProperty(): \Generator

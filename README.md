@@ -389,7 +389,7 @@ When `composer.json` contains any configuration in the
 * `extra`
 * `scripts-descriptions`
 
-sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
+sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order. If a value is an object, it will continue to sort its properties by name.
 
 :bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
 
