@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`0.14.0...main`][0.14.0...main].
+For a full diff see [`0.14.1...main`][0.14.1...main].
+
+## [`0.14.1`][0.14.1]
+
+For a full diff see [`0.14.0...0.14.1`][0.14.0...0.14.1].
+
+### Fixed
+
+* Adjusted `Vendor\Composer\ConfigHashNormalizer` to continue normalizing properties when a property has an empty value ([#423]), by [@localheinz]
 
 ## [`0.14.0`][0.14.0]
 
@@ -275,6 +283,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.13.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.13.0
 [0.13.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.13.1
 [0.14.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.14.0
+[0.14.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.14.1
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -294,7 +303,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.12.0...0.13.0]: https://github.com/ergebnis/json-normalizer/compare/0.12.0...0.13.0
 [0.13.0...0.13.1]: https://github.com/ergebnis/json-normalizer/compare/0.13.0...0.13.1
 [0.13.1...0.14.0]: https://github.com/ergebnis/json-normalizer/compare/0.13.1...0.14.0
-[0.14.0...main]: https://github.com/ergebnis/json-normalizer/compare/0.14.0...main
+[0.14.0...0.14.1]: https://github.com/ergebnis/json-normalizer/compare/0.14.0...0.14.1
+[0.14.1...main]: https://github.com/ergebnis/json-normalizer/compare/0.14.1...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -356,6 +366,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#308]: https://github.com/ergebnis/json-normalizer/pull/308
 [#335]: https://github.com/ergebnis/json-normalizer/pull/335
 [#384]: https://github.com/ergebnis/json-normalizer/pull/384
+[#423]: https://github.com/ergebnis/json-normalizer/pull/423
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis

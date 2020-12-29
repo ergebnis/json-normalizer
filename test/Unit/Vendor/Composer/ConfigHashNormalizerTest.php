@@ -65,6 +65,39 @@ JSON
         self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
     }
 
+    public function testNormalizeIgnoresEmptyConfigHashButContinuesNormalizing(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {},
+  "extra": {
+    "foo": "bar",
+    "bar": "baz"
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {},
+  "extra": {
+    "bar": "baz",
+    "foo": "bar"
+  }
+}
+JSON
+        );
+
+        $normalizer = new ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
     /**
      * @dataProvider provideProperty
      */
