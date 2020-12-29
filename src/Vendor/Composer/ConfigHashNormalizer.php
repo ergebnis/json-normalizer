@@ -48,20 +48,36 @@ final class ConfigHashNormalizer implements NormalizerInterface
         }
 
         foreach ($objectProperties as $name => $value) {
-            $config = (array) $decoded->{$name};
-
-            if (0 === \count($config)) {
-                continue;
-            }
-
-            \ksort($config);
-
-            $decoded->{$name} = $config;
+            $decoded->{$name} = self::sortByKey($value);
         }
 
         /** @var string $encoded */
         $encoded = \json_encode($decoded);
 
         return Json::fromEncoded($encoded);
+    }
+
+    /**
+     * @param null|array|bool|false|\stdClass|string $value
+     *
+     * @return null|array|bool|false|\stdClass|string
+     */
+    private static function sortByKey($value)
+    {
+        if (!\is_object($value)) {
+            return $value;
+        }
+
+        $sorted = (array) $value;
+
+        if ([] === $sorted) {
+            return $value;
+        }
+
+        \ksort($sorted);
+
+        return \array_map(static function ($value) {
+            return self::sortByKey($value);
+        }, $sorted);
     }
 }
