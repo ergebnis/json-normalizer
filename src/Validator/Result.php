@@ -16,7 +16,10 @@ namespace Ergebnis\Json\Normalizer\Validator;
 final class Result
 {
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
      */
     private $errors;
 
@@ -36,7 +39,10 @@ final class Result
     }
 
     /**
-     * @return string[]
+     * @phpstan-return list<string>
+     * @psalm-return list<string>
+     *
+     * @return array<int, string>
      */
     public function errors(): array
     {

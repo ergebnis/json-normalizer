@@ -19,7 +19,10 @@ use Ergebnis\Json\Normalizer\NormalizerInterface;
 final class VersionConstraintNormalizer implements NormalizerInterface
 {
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
      */
     private static $properties = [
         'conflict',
@@ -30,7 +33,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
     ];
 
     /**
-     * @var array<string, array<string>>
+     * @var array<string, array{0: string, 1: string}>
      */
     private static $map = [
         'and' => [
@@ -87,7 +90,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
         $normalized = $versionConstraint;
 
         foreach (self::$map as [$pattern, $glue]) {
-            /** @var string[] $split */
+            /** @var array<int, string> $split */
             $split = \preg_split(
                 $pattern,
                 $normalized

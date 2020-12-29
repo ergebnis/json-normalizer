@@ -186,7 +186,7 @@ final class SchemaNormalizer implements NormalizerInterface
 
         $normalized = new \stdClass();
 
-        /** @var \stdClass[] $objectProperties */
+        /** @var array<string, \stdClass> $objectProperties */
         $objectProperties = \array_intersect_key(
             \get_object_vars($schema->properties),
             \get_object_vars($data)

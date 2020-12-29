@@ -19,7 +19,10 @@ use Ergebnis\Json\Normalizer\NormalizerInterface;
 final class ConfigHashNormalizer implements NormalizerInterface
 {
     /**
-     * @var string[]
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
      */
     private static $properties = [
         'config',
