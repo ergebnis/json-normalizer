@@ -197,6 +197,49 @@ JSON
     }
 
     /**
+     * @see https://github.com/ergebnis/composer-normalize/issues/644
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
+    public function testNormalizeDoesNotSortPreferredInstall(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "foo/*": "source",
+      "bar/*": "source",
+      "*": "dist"
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "preferred-install": {
+      "foo/*": "source",
+      "bar/*": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    /**
      * @return \Generator<array<string>>
      */
     public function provideProperty(): \Generator
