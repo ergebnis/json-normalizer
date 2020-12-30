@@ -30,6 +30,16 @@ final class ConfigHashNormalizer implements NormalizerInterface
         'scripts-descriptions',
     ];
 
+    /**
+     * @phpstan-var list<string>
+     * @psalm-var list<string>
+     *
+     * @var array<int, string>
+     */
+    private static $propertiesThatShouldNotBeSorted = [
+        'preferred-install',
+    ];
+
     public function normalize(Json $json): Json
     {
         $decoded = $json->decoded();
@@ -48,7 +58,10 @@ final class ConfigHashNormalizer implements NormalizerInterface
         }
 
         foreach ($objectProperties as $name => $value) {
-            $decoded->{$name} = self::sortByKey($value);
+            $decoded->{$name} = self::sortByKey(
+                $name,
+                $value
+            );
         }
 
         /** @var string $encoded */
@@ -62,12 +75,17 @@ final class ConfigHashNormalizer implements NormalizerInterface
      *
      * @return null|array|bool|false|\stdClass|string
      */
-    private static function sortByKey($value)
+    private static function sortByKey(string $name, $value)
     {
+        if (\in_array($name, self::$propertiesThatShouldNotBeSorted, true)) {
+            return $value;
+        }
+
         if (!\is_object($value)) {
             return $value;
         }
 
+        /** @var array<string, mixed> $sorted */
         $sorted = (array) $value;
 
         if ([] === $sorted) {
@@ -76,8 +94,16 @@ final class ConfigHashNormalizer implements NormalizerInterface
 
         \ksort($sorted);
 
-        return \array_map(static function ($value) {
-            return self::sortByKey($value);
-        }, $sorted);
+        $names = \array_keys($sorted);
+
+        return \array_combine(
+            $names,
+            \array_map(static function ($value, string $name) {
+                return self::sortByKey(
+                    $name,
+                    $value
+                );
+            }, $sorted, $names)
+        );
     }
 }
