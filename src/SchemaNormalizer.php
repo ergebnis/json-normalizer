@@ -186,13 +186,13 @@ final class SchemaNormalizer implements NormalizerInterface
 
         $normalized = new \stdClass();
 
-        /** @var array<string, \stdClass> $objectProperties */
-        $objectProperties = \array_intersect_key(
+        /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
+        $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
             \get_object_vars($schema->properties),
             \get_object_vars($data)
         );
 
-        foreach ($objectProperties as $name => $valueSchema) {
+        foreach ($objectPropertiesThatAreDefinedBySchema as $name => $valueSchema) {
             $value = $data->{$name};
 
             $valueSchema = $this->resolveSchema(
