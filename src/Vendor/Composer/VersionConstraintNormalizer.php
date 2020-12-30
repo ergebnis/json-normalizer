@@ -24,7 +24,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
      *
      * @var array<int, string>
      */
-    private static $properties = [
+    private static $propertiesThatShouldBeNormalized = [
         'conflict',
         'provide',
         'replace',
@@ -58,16 +58,16 @@ final class VersionConstraintNormalizer implements NormalizerInterface
             return $json;
         }
 
-        $objectProperties = \array_intersect_key(
+        $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::$properties)
+            \array_flip(self::$propertiesThatShouldBeNormalized)
         );
 
-        if (0 === \count($objectProperties)) {
+        if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
             return $json;
         }
 
-        foreach ($objectProperties as $name => $value) {
+        foreach ($objectPropertiesThatShouldBeNormalized as $name => $value) {
             $packages = (array) $decoded->{$name};
 
             if (0 === \count($packages)) {
