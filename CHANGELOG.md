@@ -6,7 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`1.0.1...main`][1.0.1...main].
+For a full diff see [`1.0.2...main`][1.0.2...main].
+
+## [`1.0.2`][1.0.2]
+
+For a full diff see [`1.0.1...1.0.2`][1.0.1...1.0.2].
+
+### Fixed
+
+* Adjusted `Vendor\Composer\ConfigHashNormalizer` to take into account the full property path, not only the property name ([#429]), by [@localheinz]
 
 ## [`1.0.1`][1.0.1]
 
@@ -302,6 +310,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.14.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.14.1
 [1.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/1.0.0
 [1.0.1]: https://github.com/ergebnis/json-normalizer/releases/tag/1.0.1
+[1.0.2]: https://github.com/ergebnis/json-normalizer/releases/tag/1.0.2
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -324,7 +333,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.14.0...0.14.1]: https://github.com/ergebnis/json-normalizer/compare/0.14.0...0.14.1
 [0.14.1...1.0.0]: https://github.com/ergebnis/json-normalizer/compare/0.14.1...1.0.0
 [1.0.0...1.0.1]: https://github.com/ergebnis/json-normalizer/compare/1.0.0...1.0.0
-[1.0.1...main]: https://github.com/ergebnis/json-normalizer/compare/1.0.1...main
+[1.0.1...1.0.2]: https://github.com/ergebnis/json-normalizer/compare/1.0.1...1.0.2
+[1.0.2...main]: https://github.com/ergebnis/json-normalizer/compare/1.0.2...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -389,6 +399,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#423]: https://github.com/ergebnis/json-normalizer/pull/423
 [#424]: https://github.com/ergebnis/json-normalizer/pull/424
 [#425]: https://github.com/ergebnis/json-normalizer/pull/425
+[#429]: https://github.com/ergebnis/json-normalizer/pull/429
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@ergebnis]: https://github.com/ergebnis

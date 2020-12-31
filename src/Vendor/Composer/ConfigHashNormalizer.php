@@ -27,8 +27,8 @@ final class ConfigHashNormalizer implements NormalizerInterface
     /**
      * @see https://getcomposer.org/doc/06-config.md#preferred-install
      */
-    private const PROPERTIES_THAT_SHOULD_NOT_BE_SORTED = [
-        'preferred-install',
+    private const PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED = [
+        'config.preferred-install',
     ];
 
     public function normalize(Json $json): Json
@@ -66,9 +66,9 @@ final class ConfigHashNormalizer implements NormalizerInterface
      *
      * @return null|array|bool|false|\stdClass|string
      */
-    private static function sortByKey(string $name, $value)
+    private static function sortByKey(string $propertyPath, $value)
     {
-        if (\in_array($name, self::PROPERTIES_THAT_SHOULD_NOT_BE_SORTED, true)) {
+        if (\in_array($propertyPath, self::PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED, true)) {
             return $value;
         }
 
@@ -89,9 +89,13 @@ final class ConfigHashNormalizer implements NormalizerInterface
 
         return \array_combine(
             $names,
-            \array_map(static function ($value, string $name) {
+            \array_map(static function ($value, string $name) use ($propertyPath) {
                 return self::sortByKey(
-                    $name,
+                    \sprintf(
+                        '%s.%s',
+                        $propertyPath,
+                        $name
+                    ),
                     $value
                 );
             }, $sorted, $names)
