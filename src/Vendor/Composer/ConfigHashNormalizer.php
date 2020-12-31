@@ -24,6 +24,9 @@ final class ConfigHashNormalizer implements NormalizerInterface
         'scripts-descriptions',
     ];
 
+    /**
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
     private const PROPERTIES_THAT_SHOULD_NOT_BE_SORTED = [
         'preferred-install',
     ];
