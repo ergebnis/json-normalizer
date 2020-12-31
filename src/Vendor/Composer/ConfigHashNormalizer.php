@@ -18,25 +18,13 @@ use Ergebnis\Json\Normalizer\NormalizerInterface;
 
 final class ConfigHashNormalizer implements NormalizerInterface
 {
-    /**
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
-     *
-     * @var array<int, string>
-     */
-    private static $propertiesThatShouldBeSorted = [
+    private const PROPERTIES_THAT_SHOULD_BE_SORTED = [
         'config',
         'extra',
         'scripts-descriptions',
     ];
 
-    /**
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
-     *
-     * @var array<int, string>
-     */
-    private static $propertiesThatShouldNotBeSorted = [
+    private const PROPERTIES_THAT_SHOULD_NOT_BE_SORTED = [
         'preferred-install',
     ];
 
@@ -50,7 +38,7 @@ final class ConfigHashNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::$propertiesThatShouldBeSorted)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_SORTED)
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
@@ -77,7 +65,7 @@ final class ConfigHashNormalizer implements NormalizerInterface
      */
     private static function sortByKey(string $name, $value)
     {
-        if (\in_array($name, self::$propertiesThatShouldNotBeSorted, true)) {
+        if (\in_array($name, self::PROPERTIES_THAT_SHOULD_NOT_BE_SORTED, true)) {
             return $value;
         }
 
