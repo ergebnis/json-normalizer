@@ -23,13 +23,7 @@ final class PackageHashNormalizer implements NormalizerInterface
      */
     private const PLATFORM_PACKAGE_REGEX = '{^(?:php(?:-64bit|-ipv6|-zts|-debug)?|hhvm|(?:ext|lib)-[^/ ]+)$}i';
 
-    /**
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
-     *
-     * @var array<int, string>
-     */
-    private static $propertiesThatShouldBeNormalized = [
+    private const PROPERTIES_THAT_SHOULD_BE_NORMALIZED = [
         'conflict',
         'provide',
         'replace',
@@ -48,7 +42,7 @@ final class PackageHashNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::$propertiesThatShouldBeNormalized)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED)
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {

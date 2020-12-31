@@ -18,13 +18,7 @@ use Ergebnis\Json\Normalizer\NormalizerInterface;
 
 final class VersionConstraintNormalizer implements NormalizerInterface
 {
-    /**
-     * @phpstan-var list<string>
-     * @psalm-var list<string>
-     *
-     * @var array<int, string>
-     */
-    private static $propertiesThatShouldBeNormalized = [
+    private const PROPERTIES_THAT_SHOULD_BE_NORMALIZED = [
         'conflict',
         'provide',
         'replace',
@@ -32,10 +26,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
         'require-dev',
     ];
 
-    /**
-     * @var array<string, array{0: string, 1: string}>
-     */
-    private static $map = [
+    private const MAP = [
         'and' => [
             '{\s*,\s*}',
             ',',
@@ -60,7 +51,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::$propertiesThatShouldBeNormalized)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED)
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
@@ -89,7 +80,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
     {
         $normalized = $versionConstraint;
 
-        foreach (self::$map as [$pattern, $glue]) {
+        foreach (self::MAP as [$pattern, $glue]) {
             /** @var array<int, string> $split */
             $split = \preg_split(
                 $pattern,
