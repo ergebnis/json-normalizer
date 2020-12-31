@@ -200,7 +200,7 @@ JSON
      * @see https://github.com/ergebnis/composer-normalize/issues/644
      * @see https://getcomposer.org/doc/06-config.md#preferred-install
      */
-    public function testNormalizeDoesNotSortPreferredInstall(): void
+    public function testNormalizeDoesNotSortPreferredInstallInConfig(): void
     {
         $json = Json::fromEncoded(
             <<<'JSON'
@@ -227,6 +227,45 @@ JSON
       "*": "dist"
     },
     "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    public function testNormalizeSortsPreferredInstallInOtherProperty(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "extra": {
+    "something": {
+      "preferred-install": {
+        "foo": "bar",
+        "bar": "baz"
+      }
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "extra": {
+    "something": {
+      "preferred-install": {
+        "bar": "baz",
+        "foo": "bar"
+      }
+    }
   }
 }
 JSON
