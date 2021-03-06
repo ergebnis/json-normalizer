@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`1.0.2...main`][1.0.2...main].
+For a full diff see [`1.0.3...main`][1.0.3...main].
+
+## [`1.0.3`][1.0.3]
+
+For a full diff see [`1.0.2...1.0.3`][1.0.2...1.0.3].
 
 ### Fixed
 
@@ -338,7 +342,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.14.1...1.0.0]: https://github.com/ergebnis/json-normalizer/compare/0.14.1...1.0.0
 [1.0.0...1.0.1]: https://github.com/ergebnis/json-normalizer/compare/1.0.0...1.0.0
 [1.0.1...1.0.2]: https://github.com/ergebnis/json-normalizer/compare/1.0.1...1.0.2
-[1.0.2...main]: https://github.com/ergebnis/json-normalizer/compare/1.0.2...main
+[1.0.2...1.0.3]: https://github.com/ergebnis/json-normalizer/compare/1.0.2...1.0.3
+[1.0.3...main]: https://github.com/ergebnis/json-normalizer/compare/1.0.3...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
