@@ -78,7 +78,9 @@ JSON
     "hhvm": "Okay",
     "lib-baz": "Maybe it helps.",
     "localheinz/php-cs-fixer-config": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
+    "acquia/drupal-environment-detector": "^1.2.0",
     "ext-foo": "Could be useful",
+    "composer-plugin-api": "^2.0.0",
     "php": "Because why not, it's great."
   },
   "foo": {
@@ -97,6 +99,8 @@ JSON
     "hhvm": "Okay",
     "ext-foo": "Could be useful",
     "lib-baz": "Maybe it helps.",
+    "composer-plugin-api": "^2.0.0",
+    "acquia/drupal-environment-detector": "^1.2.0",
     "localheinz/php-cs-fixer-config": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
     "localheinz/test-util": "Provides utilities for tests."
   },
