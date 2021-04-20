@@ -25,7 +25,7 @@ final class ChainNormalizer implements NormalizerInterface
 
     public function __construct(NormalizerInterface ...$normalizers)
     {
-        $this->normalizers = $normalizers;
+        $this->normalizers = \array_values($normalizers);
     }
 
     public function normalize(Json $json): Json
