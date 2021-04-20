@@ -25,7 +25,7 @@ final class Result
 
     private function __construct(string ...$errors)
     {
-        $this->errors = $errors;
+        $this->errors = \array_values($errors);
     }
 
     public static function create(string ...$errors): self

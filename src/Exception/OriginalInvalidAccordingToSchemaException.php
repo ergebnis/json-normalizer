@@ -36,7 +36,7 @@ final class OriginalInvalidAccordingToSchemaException extends \RuntimeException 
         ));
 
         $exception->schemaUri = $schemaUri;
-        $exception->errors = $errors;
+        $exception->errors = \array_values($errors);
 
         return $exception;
     }

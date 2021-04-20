@@ -36,7 +36,7 @@ final class NormalizedInvalidAccordingToSchemaException extends \RuntimeExceptio
         ));
 
         $exception->schemaUri = $schemaUri;
-        $exception->errors = $errors;
+        $exception->errors = \array_values($errors);
 
         return $exception;
     }

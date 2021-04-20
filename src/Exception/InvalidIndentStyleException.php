@@ -37,7 +37,7 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
         ));
 
         $exception->style = $style;
-        $exception->allowedStyles = $allowedStyles;
+        $exception->allowedStyles = \array_values($allowedStyles);
 
         return $exception;
     }
