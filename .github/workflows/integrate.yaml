@@ -9,7 +9,7 @@ on: # yamllint disable-line rule:truthy
       - "main"
 
 env:
-  MIN_COVERED_MSI: 92
+  MIN_COVERED_MSI: 90
   MIN_MSI: 90
   PHP_EXTENSIONS: "mbstring"
 
