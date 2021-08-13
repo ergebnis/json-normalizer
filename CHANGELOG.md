@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`1.0.3...main`][1.0.3...main].
 
+### Fixed
+
+* Updated `justinrainbow/json-schema` ([#517]), by [@dependabot]
+
 ## [`1.0.3`][1.0.3]
 
 For a full diff see [`1.0.2...1.0.3`][1.0.2...1.0.3].
@@ -411,7 +415,9 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#425]: https://github.com/ergebnis/json-normalizer/pull/425
 [#429]: https://github.com/ergebnis/json-normalizer/pull/429
 [#463]: https://github.com/ergebnis/json-normalizer/pull/463
+[#517]: https://github.com/ergebnis/json-normalizer/pull/517
 
 [@BackEndTea]: https://github.com/BackEndTea
+[@dependabot]: https://github.com/dependabot
 [@ergebnis]: https://github.com/ergebnis
 [@localheinz]: https://github.com/localheinz
