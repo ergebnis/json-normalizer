@@ -5,6 +5,7 @@
 [![Prune](https://github.com/ergebnis/json-normalizer/workflows/Prune/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
+[![Triage](https://github.com/ergebnis/json-normalizer/workflows/Triage/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
 [![Type Coverage](https://shepherd.dev/github/ergebnis/json-normalizer/coverage.svg)](https://shepherd.dev/github/ergebnis/json-normalizer)
