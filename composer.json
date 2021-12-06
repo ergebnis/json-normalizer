@@ -1,19 +1,23 @@
 {
   "name": "ergebnis/json-normalizer",
-  "type": "library",
   "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
+  "license": "MIT",
+  "type": "library",
   "keywords": [
     "json",
     "normalizer"
   ],
-  "homepage": "https://github.com/ergebnis/json-normalizer",
-  "license": "MIT",
   "authors": [
     {
       "name": "Andreas Möller",
       "email": "am@localheinz.com"
     }
   ],
+  "homepage": "https://github.com/ergebnis/json-normalizer",
+  "support": {
+    "issues": "https://github.com/ergebnis/json-normalizer/issues",
+    "source": "https://github.com/ergebnis/json-normalizer"
+  },
   "require": {
     "php": "^7.2 || ^8.0",
     "ext-json": "*",
@@ -36,13 +40,6 @@
     "psalm/plugin-phpunit": "~0.16.1",
     "vimeo/psalm": "^4.14.0"
   },
-  "config": {
-    "platform": {
-      "php": "7.2.33"
-    },
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
   "autoload": {
     "psr-4": {
       "Ergebnis\\Json\\Normalizer\\": "src/"
@@ -53,8 +50,11 @@
       "Ergebnis\\Json\\Normalizer\\Test\\": "test/"
     }
   },
-  "support": {
-    "issues": "https://github.com/ergebnis/json-normalizer/issues",
-    "source": "https://github.com/ergebnis/json-normalizer"
+  "config": {
+    "platform": {
+      "php": "7.2.33"
+    },
+    "preferred-install": "dist",
+    "sort-packages": true
   }
 }
