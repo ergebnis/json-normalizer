@@ -22,7 +22,6 @@ final class PackageHashNormalizer implements NormalizerInterface
      * @see https://github.com/composer/composer/blob/2.0.11/src/Composer/Repository/PlatformRepository.php#L33
      */
     private const PLATFORM_PACKAGE_REGEX = '{^(?:php(?:-64bit|-ipv6|-zts|-debug)?|hhvm|(?:ext|lib)-[a-z0-9](?:[_.-]?[a-z0-9]+)*|composer-(?:plugin|runtime)-api)$}iD';
-
     private const PROPERTIES_THAT_SHOULD_BE_NORMALIZED = [
         'conflict',
         'provide',
