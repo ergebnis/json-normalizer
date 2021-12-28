@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`1.0.3...main`][1.0.3...main].
 
+### Changed
+
+- Dropped support for PHP 7.2 ([#564]), by [@dependabot]
+
 ### Fixed
 
 - Updated `justinrainbow/json-schema` ([#517]), by [@dependabot]
@@ -416,6 +420,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#429]: https://github.com/ergebnis/json-normalizer/pull/429
 [#463]: https://github.com/ergebnis/json-normalizer/pull/463
 [#517]: https://github.com/ergebnis/json-normalizer/pull/517
+[#564]: https://github.com/ergebnis/json-normalizer/pull/564
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
