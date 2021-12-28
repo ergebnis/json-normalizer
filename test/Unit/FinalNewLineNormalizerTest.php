@@ -26,7 +26,7 @@ use Ergebnis\Json\Normalizer\Json;
 final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
-     * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Text::provideWhitespace()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
      */
     public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {

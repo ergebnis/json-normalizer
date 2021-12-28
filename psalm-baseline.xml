@@ -75,16 +75,6 @@
       <code>$value</code>
     </UnusedForeachValue>
   </file>
-  <file src="test/DataProvider/Boolean.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;bool&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
-  <file src="test/DataProvider/Text.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
   <file src="test/Unit/Format/FormatTest.php">
     <MixedInferredReturnType occurrences="3">
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
