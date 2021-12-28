@@ -51,7 +51,7 @@ final class VersionConstraintNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED),
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
@@ -84,12 +84,12 @@ final class VersionConstraintNormalizer implements NormalizerInterface
             /** @var array<int, string> $split */
             $split = \preg_split(
                 $pattern,
-                $normalized
+                $normalized,
             );
 
             $normalized = \implode(
                 $glue,
-                $split
+                $split,
             );
         }
 

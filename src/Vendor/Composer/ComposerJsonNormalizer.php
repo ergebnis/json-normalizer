@@ -30,12 +30,12 @@ final class ComposerJsonNormalizer implements Normalizer\NormalizerInterface
             new Normalizer\SchemaNormalizer(
                 $schemaUri,
                 new SchemaStorage(),
-                new Normalizer\Validator\SchemaValidator(new Validator())
+                new Normalizer\Validator\SchemaValidator(new Validator()),
             ),
             new BinNormalizer(),
             new ConfigHashNormalizer(),
             new PackageHashNormalizer(),
-            new VersionConstraintNormalizer()
+            new VersionConstraintNormalizer(),
         );
     }
 

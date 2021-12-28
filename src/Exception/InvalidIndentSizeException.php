@@ -30,7 +30,7 @@ final class InvalidIndentSizeException extends \InvalidArgumentException impleme
         $exception = new self(\sprintf(
             'Size needs to be greater than %d, but %d is not.',
             $minimumSize - 1,
-            $size
+            $size,
         ));
 
         $exception->size = $size;

@@ -44,12 +44,12 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
 
         $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
             $schemaUri,
-            ...$errors
+            ...$errors,
         );
 
         $message = \sprintf(
             'Normalized JSON is not valid according to schema "%s".',
-            $schemaUri
+            $schemaUri,
         );
 
         self::assertSame($message, $exception->getMessage());

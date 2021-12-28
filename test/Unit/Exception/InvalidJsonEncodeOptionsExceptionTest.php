@@ -37,7 +37,7 @@ final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestC
 
         $message = \sprintf(
             '"%s" is not valid options for json_encode().',
-            $jsonEncodeOptions
+            $jsonEncodeOptions,
         );
 
         self::assertSame($message, $exception->getMessage());

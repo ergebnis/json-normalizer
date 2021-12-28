@@ -24,7 +24,7 @@ final class SchemaUriCouldNotBeResolvedException extends \RuntimeException imple
     {
         $exception = new self(\sprintf(
             'Schema URI "%s" could not be resolved.',
-            $schemaUri
+            $schemaUri,
         ));
 
         $exception->schemaUri = $schemaUri;

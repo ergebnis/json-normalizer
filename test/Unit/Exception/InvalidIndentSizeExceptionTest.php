@@ -39,13 +39,13 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
 
         $exception = InvalidIndentSizeException::fromSizeAndMinimumSize(
             $size,
-            $minimumSize
+            $minimumSize,
         );
 
         $message = \sprintf(
             'Size needs to be greater than %d, but %d is not.',
             $minimumSize - 1,
-            $size
+            $size,
         );
 
         self::assertSame($message, $exception->getMessage());

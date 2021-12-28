@@ -44,12 +44,12 @@ final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExcept
 
         $exception = OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
             $schemaUri,
-            ...$errors
+            ...$errors,
         );
 
         $message = \sprintf(
             'Original JSON is not valid according to schema "%s".',
-            $schemaUri
+            $schemaUri,
         );
 
         self::assertSame($message, $exception->getMessage());

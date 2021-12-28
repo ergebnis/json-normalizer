@@ -40,7 +40,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
             Format\JsonEncodeOptions::fromInt($faker->numberBetween(1)),
             Format\Indent::fromString("\t"),
             Format\NewLine::fromString("\r\n"),
-            $faker->boolean
+            $faker->boolean,
         );
 
         $json = Json::fromEncoded(
@@ -79,7 +79,7 @@ JSON
         $formatter
             ->format(
                 Argument::is($normalized),
-                Argument::is($format)
+                Argument::is($format),
             )
             ->shouldBeCalled()
             ->willReturn($formatted);
@@ -87,7 +87,7 @@ JSON
         $normalizer = new FixedFormatNormalizer(
             $composedNormalizer->reveal(),
             $format,
-            $formatter->reveal()
+            $formatter->reveal(),
         );
 
         self::assertSame($formatted, $normalizer->normalize($json));

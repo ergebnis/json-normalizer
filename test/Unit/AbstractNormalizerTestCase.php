@@ -38,14 +38,14 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
             \str_replace(
                 'Ergebnis\\Json\\Normalizer\\Test\\Unit\\',
                 'Ergebnis\\Json\\Normalizer\\',
-                static::class
-            )
+                static::class,
+            ),
         );
 
         if (!\is_string($className)) {
             throw new \RuntimeException(\sprintf(
                 'Unable to deduce source class name from test class name "%s".',
-                static::class
+                static::class,
             ));
         }
 

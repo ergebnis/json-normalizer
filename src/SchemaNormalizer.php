@@ -65,30 +65,30 @@ final class SchemaNormalizer implements NormalizerInterface
 
         $resultBeforeNormalization = $this->schemaValidator->validate(
             $decoded,
-            $schema
+            $schema,
         );
 
         if (!$resultBeforeNormalization->isValid()) {
             throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
                 $this->schemaUri,
-                ...$resultBeforeNormalization->errors()
+                ...$resultBeforeNormalization->errors(),
             );
         }
 
         $normalized = $this->normalizeData(
             $decoded,
-            $schema
+            $schema,
         );
 
         $resultAfterNormalization = $this->schemaValidator->validate(
             $normalized,
-            $schema
+            $schema,
         );
 
         if (!$resultAfterNormalization->isValid()) {
             throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
                 $this->schemaUri,
-                ...$resultAfterNormalization->errors()
+                ...$resultAfterNormalization->errors(),
             );
         }
 
@@ -110,14 +110,14 @@ final class SchemaNormalizer implements NormalizerInterface
         if (\is_array($data)) {
             return $this->normalizeArray(
                 $data,
-                $schema
+                $schema,
             );
         }
 
         if ($data instanceof \stdClass) {
             return $this->normalizeObject(
                 $data,
-                $schema
+                $schema,
             );
         }
 
@@ -133,7 +133,7 @@ final class SchemaNormalizer implements NormalizerInterface
     {
         $schema = $this->resolveSchema(
             $data,
-            $schema
+            $schema,
         );
 
         if (!self::describesType('array', $schema)) {
@@ -153,7 +153,7 @@ final class SchemaNormalizer implements NormalizerInterface
             return \array_map(function ($item, \stdClass $itemSchema) {
                 return $this->normalizeData(
                     $item,
-                    $itemSchema
+                    $itemSchema,
                 );
             }, $data, $itemSchema);
         }
@@ -164,7 +164,7 @@ final class SchemaNormalizer implements NormalizerInterface
         return \array_map(function ($item) use ($itemSchema) {
             return $this->normalizeData(
                 $item,
-                $itemSchema
+                $itemSchema,
             );
         }, $data);
     }
@@ -173,7 +173,7 @@ final class SchemaNormalizer implements NormalizerInterface
     {
         $schema = $this->resolveSchema(
             $data,
-            $schema
+            $schema,
         );
 
         if (!self::describesType('object', $schema)) {
@@ -189,7 +189,7 @@ final class SchemaNormalizer implements NormalizerInterface
         /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
         $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
             \get_object_vars($schema->properties),
-            \get_object_vars($data)
+            \get_object_vars($data),
         );
 
         foreach ($objectPropertiesThatAreDefinedBySchema as $name => $valueSchema) {
@@ -197,12 +197,12 @@ final class SchemaNormalizer implements NormalizerInterface
 
             $valueSchema = $this->resolveSchema(
                 $value,
-                $valueSchema
+                $valueSchema,
             );
 
             $normalized->{$name} = $this->normalizeData(
                 $value,
-                $valueSchema
+                $valueSchema,
             );
 
             unset($data->{$name});
@@ -230,13 +230,13 @@ final class SchemaNormalizer implements NormalizerInterface
             foreach ($schema->oneOf as $oneOfSchema) {
                 $result = $this->schemaValidator->validate(
                     $data,
-                    $oneOfSchema
+                    $oneOfSchema,
                 );
 
                 if ($result->isValid()) {
                     return $this->resolveSchema(
                         $data,
-                        $oneOfSchema
+                        $oneOfSchema,
                     );
                 }
             }
@@ -251,7 +251,7 @@ final class SchemaNormalizer implements NormalizerInterface
 
             return $this->resolveSchema(
                 $data,
-                $referenceSchema
+                $referenceSchema,
             );
         }
 

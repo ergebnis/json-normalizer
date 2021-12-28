@@ -24,7 +24,7 @@ final class InvalidIndentStringException extends \InvalidArgumentException imple
     {
         $exception = new self(\sprintf(
             '"%s" is not a valid indent string',
-            $string
+            $string,
         ));
 
         $exception->string = $string;

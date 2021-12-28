@@ -37,7 +37,7 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 
         $message = \sprintf(
             '"%s" is not a valid new-line character sequence.',
-            $string
+            $string,
         );
 
         self::assertSame($message, $exception->getMessage());

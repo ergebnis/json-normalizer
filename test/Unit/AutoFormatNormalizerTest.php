@@ -70,14 +70,14 @@ JSON
         $formatter
             ->format(
                 Argument::is($normalized),
-                Argument::is($json->format())
+                Argument::is($json->format()),
             )
             ->shouldBeCalled()
             ->willReturn($formatted);
 
         $normalizer = new AutoFormatNormalizer(
             $composedNormalizer->reveal(),
-            $formatter->reveal()
+            $formatter->reveal(),
         );
 
         self::assertSame($formatted, $normalizer->normalize($json));

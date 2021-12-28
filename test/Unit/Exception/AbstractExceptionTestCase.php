@@ -37,14 +37,14 @@ abstract class AbstractExceptionTestCase extends Framework\TestCase
             \str_replace(
                 'Ergebnis\\Json\\Normalizer\\Test\\Unit\\Exception\\',
                 'Ergebnis\\Json\\Normalizer\\Exception\\',
-                static::class
-            )
+                static::class,
+            ),
         );
 
         if (!\is_string($className)) {
             throw new \RuntimeException(\sprintf(
                 'Unable to deduce source class name from test class name "%s".',
-                static::class
+                static::class,
             ));
         }
 

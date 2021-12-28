@@ -57,7 +57,7 @@ final class Format
             JsonEncodeOptions::fromJson($json),
             Indent::fromJson($json),
             NewLine::fromJson($json),
-            self::detectHasFinalNewLine($encoded)
+            self::detectHasFinalNewLine($encoded),
         );
     }
 
