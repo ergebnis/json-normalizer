@@ -85,16 +85,6 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
   </file>
-  <file src="test/Unit/AbstractNormalizerTestCase.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$this-&gt;className()</code>
-    </ArgumentTypeCoercion>
-  </file>
-  <file src="test/Unit/Exception/AbstractExceptionTestCase.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$this-&gt;className()</code>
-    </ArgumentTypeCoercion>
-  </file>
   <file src="test/Unit/Format/FormatTest.php">
     <MixedInferredReturnType occurrences="3">
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
@@ -204,9 +194,6 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$className</code>
-    </ArgumentTypeCoercion>
     <MixedInferredReturnType occurrences="2">
       <code>NormalizerInterface</code>
       <code>NormalizerInterface[]</code>

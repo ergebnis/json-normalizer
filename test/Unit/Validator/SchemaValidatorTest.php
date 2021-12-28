@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Validator;
 
 use Ergebnis\Json\Normalizer\Validator\SchemaValidator;
-use Ergebnis\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Ergebnis\Test\Util\Helper;
 use JsonSchema\Validator;
 use PHPUnit\Framework;
@@ -29,11 +28,6 @@ use PHPUnit\Framework;
 final class SchemaValidatorTest extends Framework\TestCase
 {
     use Helper;
-
-    public function testImplementsSchemaValidatorInterface(): void
-    {
-        self::assertClassImplementsInterface(SchemaValidatorInterface::class, SchemaValidator::class);
-    }
 
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()

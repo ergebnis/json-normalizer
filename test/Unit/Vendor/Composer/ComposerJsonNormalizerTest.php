@@ -226,9 +226,6 @@ JSON
      */
     private static function assertComposesNormalizer(string $className, NormalizerInterface $normalizer): void
     {
-        self::assertClassExists($className);
-        self::assertClassImplementsInterface(NormalizerInterface::class, $className);
-
         $attributeName = 'normalizer';
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
@@ -251,11 +248,6 @@ JSON
      */
     private static function assertComposesNormalizers(array $classNames, NormalizerInterface $normalizer): void
     {
-        foreach ($classNames as $className) {
-            self::assertClassExists($className);
-            self::assertClassImplementsInterface(NormalizerInterface::class, $className);
-        }
-
         $attributeName = 'normalizers';
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
