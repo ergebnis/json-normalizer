@@ -16,7 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format\Indent;
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Test\Util\Helper;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -31,7 +31,7 @@ use PHPUnit\Framework;
  */
 final class IndentTest extends Framework\TestCase
 {
-    use Helper;
+    use Test\Util\Helper;
 
     public function testConstants(): void
     {

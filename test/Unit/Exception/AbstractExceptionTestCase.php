@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Test\Util\Helper;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -21,7 +21,7 @@ use PHPUnit\Framework;
  */
 abstract class AbstractExceptionTestCase extends Framework\TestCase
 {
-    use Helper;
+    use Test\Util\Helper;
 
     final protected function className(): string
     {

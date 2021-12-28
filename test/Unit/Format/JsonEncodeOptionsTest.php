@@ -16,7 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Test\Util\Helper;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -29,7 +29,7 @@ use PHPUnit\Framework;
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
-    use Helper;
+    use Test\Util\Helper;
 
     /**
      * @dataProvider provideInvalidValue

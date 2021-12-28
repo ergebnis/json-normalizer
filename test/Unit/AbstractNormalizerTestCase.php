@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
-use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**
@@ -22,7 +22,7 @@ use PHPUnit\Framework;
  */
 abstract class AbstractNormalizerTestCase extends Framework\TestCase
 {
-    use Helper;
+    use Test\Util\Helper;
 
     final protected function className(): string
     {

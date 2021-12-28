@@ -19,8 +19,8 @@ use Ergebnis\Json\Normalizer\Format\Indent;
 use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
 use Ergebnis\Json\Normalizer\Format\NewLine;
 use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
-use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
 
 /**
@@ -36,7 +36,7 @@ use PHPUnit\Framework;
  */
 final class FormatterTest extends Framework\TestCase
 {
-    use Helper;
+    use Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
