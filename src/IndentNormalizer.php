@@ -20,8 +20,10 @@ final class IndentNormalizer implements NormalizerInterface
     private Format\Indent $indent;
     private Printer\PrinterInterface $printer;
 
-    public function __construct(Format\Indent $indent, Printer\PrinterInterface $printer)
-    {
+    public function __construct(
+        Format\Indent $indent,
+        Printer\PrinterInterface $printer
+    ) {
         $this->indent = $indent;
         $this->printer = $printer;
     }

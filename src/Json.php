@@ -23,8 +23,10 @@ final class Json
     private $decoded;
     private ?Format\Format $format = null;
 
-    private function __construct(string $encoded, $decoded)
-    {
+    private function __construct(
+        string $encoded,
+        $decoded
+    ) {
         $this->encoded = $encoded;
         $this->decoded = $decoded;
     }
@@ -44,7 +46,10 @@ final class Json
     {
         $decoded = \json_decode($encoded);
 
-        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
+        if (
+            null === $decoded
+            && \JSON_ERROR_NONE !== \json_last_error()
+        ) {
             throw Exception\InvalidJsonEncodedException::fromEncoded($encoded);
         }
 

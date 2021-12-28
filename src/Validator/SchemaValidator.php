@@ -24,8 +24,10 @@ final class SchemaValidator implements SchemaValidatorInterface
         $this->validator = $validator;
     }
 
-    public function isValid($data, \stdClass $schema): bool
-    {
+    public function isValid(
+        $data,
+        \stdClass $schema
+    ): bool {
         $this->validator->reset();
 
         $this->validator->check(
@@ -36,8 +38,10 @@ final class SchemaValidator implements SchemaValidatorInterface
         return $this->validator->isValid();
     }
 
-    public function validate($data, \stdClass $schema): Result
-    {
+    public function validate(
+        $data,
+        \stdClass $schema
+    ): Result {
         $this->validator->reset();
 
         $this->validator->check(

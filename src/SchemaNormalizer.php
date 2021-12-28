@@ -94,8 +94,10 @@ final class SchemaNormalizer implements NormalizerInterface
      *
      * @return null|array<mixed>|bool|float|int|\stdClass|string
      */
-    private function normalizeData($data, \stdClass $schema)
-    {
+    private function normalizeData(
+        $data,
+        \stdClass $schema
+    ) {
         if (\is_array($data)) {
             return $this->normalizeArray(
                 $data,
@@ -118,8 +120,10 @@ final class SchemaNormalizer implements NormalizerInterface
      *
      * @return array<mixed>
      */
-    private function normalizeArray(array $data, \stdClass $schema): array
-    {
+    private function normalizeArray(
+        array $data,
+        \stdClass $schema
+    ): array {
         $schema = $this->resolveSchema(
             $data,
             $schema,
@@ -158,8 +162,10 @@ final class SchemaNormalizer implements NormalizerInterface
         }, $data);
     }
 
-    private function normalizeObject(\stdClass $data, \stdClass $schema): \stdClass
-    {
+    private function normalizeObject(
+        \stdClass $data,
+        \stdClass $schema
+    ): \stdClass {
         $schema = $this->resolveSchema(
             $data,
             $schema,
@@ -210,8 +216,10 @@ final class SchemaNormalizer implements NormalizerInterface
         return $normalized;
     }
 
-    private function resolveSchema($data, \stdClass $schema): \stdClass
-    {
+    private function resolveSchema(
+        $data,
+        \stdClass $schema
+    ): \stdClass {
         /**
          * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#oneof
          */
@@ -234,7 +242,10 @@ final class SchemaNormalizer implements NormalizerInterface
         /**
          * @see https://spacetelescope.github.io/understanding-json-schema/structuring.html#reuse
          */
-        if (\property_exists($schema, '$ref') && \is_string($schema->{'$ref'})) {
+        if (
+            \property_exists($schema, '$ref')
+            && \is_string($schema->{'$ref'})
+        ) {
             /** @var \stdClass $referenceSchema */
             $referenceSchema = $this->schemaStorage->resolveRefSchema($schema);
 
@@ -247,8 +258,10 @@ final class SchemaNormalizer implements NormalizerInterface
         return $schema;
     }
 
-    private static function describesType(string $type, \stdClass $schema): bool
-    {
+    private static function describesType(
+        string $type,
+        \stdClass $schema
+    ): bool {
         if (!\property_exists($schema, 'type')) {
             return false;
         }

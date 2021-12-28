@@ -18,8 +18,10 @@ final class InvalidIndentSizeException extends \InvalidArgumentException impleme
     private int $size = 0;
     private int $minimumSize = 0;
 
-    public static function fromSizeAndMinimumSize(int $size, int $minimumSize): self
-    {
+    public static function fromSizeAndMinimumSize(
+        int $size,
+        int $minimumSize
+    ): self {
         $exception = new self(\sprintf(
             'Size needs to be greater than %d, but %d is not.',
             $minimumSize - 1,

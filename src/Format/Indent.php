@@ -50,8 +50,10 @@ final class Indent
      * @throws Exception\InvalidIndentSizeException
      * @throws Exception\InvalidIndentStyleException
      */
-    public static function fromSizeAndStyle(int $size, string $style): self
-    {
+    public static function fromSizeAndStyle(
+        int $size,
+        string $style
+    ): self {
         $minimumSize = 1;
 
         if ($minimumSize > $size) {
