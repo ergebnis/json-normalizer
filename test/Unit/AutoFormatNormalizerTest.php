@@ -17,7 +17,6 @@ use Ergebnis\Json\Normalizer\AutoFormatNormalizer;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\NormalizerInterface;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -58,26 +57,28 @@ JSON
 JSON
         );
 
-        $composedNormalizer = $this->prophesize(NormalizerInterface::class);
+        $composedNormalizer = $this->createMock(NormalizerInterface::class);
 
         $composedNormalizer
-            ->normalize(Argument::is($json))
-            ->shouldBeCalled()
+            ->expects(self::once())
+            ->method('normalize')
+            ->with(self::identicalTo($json))
             ->willReturn($normalized);
 
-        $formatter = $this->prophesize(Format\FormatterInterface::class);
+        $formatter = $this->createMock(Format\FormatterInterface::class);
 
         $formatter
-            ->format(
-                Argument::is($normalized),
-                Argument::is($json->format()),
+            ->expects(self::once())
+            ->method('format')
+            ->with(
+                self::identicalTo($normalized),
+                self::identicalTo($json->format()),
             )
-            ->shouldBeCalled()
             ->willReturn($formatted);
 
         $normalizer = new AutoFormatNormalizer(
-            $composedNormalizer->reveal(),
-            $formatter->reveal(),
+            $composedNormalizer,
+            $formatter,
         );
 
         self::assertSame($formatted, $normalizer->normalize($json));

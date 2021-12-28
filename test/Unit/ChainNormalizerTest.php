@@ -16,7 +16,6 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\NormalizerInterface;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -56,16 +55,17 @@ JSON
                 $previous = $json;
             }
 
-            $normalizer = $this->prophesize(NormalizerInterface::class);
+            $normalizer = $this->createMock(NormalizerInterface::class);
 
             $normalizer
-                ->normalize(Argument::is($previous))
-                ->shouldBeCalled()
+                ->expects(self::once())
+                ->method('normalize')
+                ->with(self::identicalTo($previous))
                 ->willReturn($result);
 
             $previous = $result;
 
-            return $normalizer->reveal();
+            return $normalizer;
         }, $results);
 
         $normalizer = new ChainNormalizer(...$normalizers);

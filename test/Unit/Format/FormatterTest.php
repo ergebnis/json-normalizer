@@ -23,7 +23,6 @@ use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Printer;
 use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -91,18 +90,19 @@ JSON;
             $hasFinalNewLine,
         );
 
-        $printer = $this->prophesize(Printer\PrinterInterface::class);
+        $printer = $this->createMock(Printer\PrinterInterface::class);
 
         $printer
-            ->print(
-                Argument::is($encodedWithJsonEncodeOptions),
-                Argument::is($format->indent()->__toString()),
-                Argument::is($format->newLine()->__toString()),
+            ->expects(self::once())
+            ->method('print')
+            ->with(
+                self::identicalTo($encodedWithJsonEncodeOptions),
+                self::identicalTo($format->indent()->__toString()),
+                self::identicalTo($format->newLine()->__toString()),
             )
-            ->shouldBeCalled()
             ->willReturn($printedWithIndentAndNewLine);
 
-        $formatter = new Formatter($printer->reveal());
+        $formatter = new Formatter($printer);
 
         $formatted = $formatter->format(
             $json,
