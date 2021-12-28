@@ -15,12 +15,12 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\NormalizerInterface;
-use Ergebnis\Json\Normalizer\Test\Unit\AbstractNormalizerTestCase;
+use Ergebnis\Json\Normalizer\Test;
 
 /**
  * @internal
  */
-abstract class AbstractComposerTestCase extends AbstractNormalizerTestCase
+abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTestCase
 {
     /**
      * @dataProvider provideJsonNotDecodingToObject

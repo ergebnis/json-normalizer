@@ -13,10 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
-use Ergebnis\Json\Normalizer\Format\Format;
-use Ergebnis\Json\Normalizer\Format\Indent;
-use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
-use Ergebnis\Json\Normalizer\Format\NewLine;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
@@ -37,11 +34,11 @@ final class FormatTest extends Framework\TestCase
      */
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
-        $jsonEncodeOptions = JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
-        $indent = Indent::fromString('  ');
-        $newLine = NewLine::fromString("\r\n");
+        $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
+        $indent = Format\Indent::fromString('  ');
+        $newLine = Format\NewLine::fromString("\r\n");
 
-        $format = new Format(
+        $format = new Format\Format(
             $jsonEncodeOptions,
             $indent,
             $newLine,
@@ -56,14 +53,14 @@ final class FormatTest extends Framework\TestCase
 
     public function testWithJsonEncodeOptionsClonesFormatAndSetsJsonEncodeOptions(): void
     {
-        $format = new Format(
-            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
-            Indent::fromString('  '),
-            NewLine::fromString("\r\n"),
+        $format = new Format\Format(
+            Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r\n"),
             true,
         );
 
-        $jsonEncodeOptions = JsonEncodeOptions::fromInt(9000);
+        $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt(9000);
 
         $mutated = $format->withJsonEncodeOptions($jsonEncodeOptions);
 
@@ -73,12 +70,12 @@ final class FormatTest extends Framework\TestCase
 
     public function testWithIndentClonesFormatAndSetsIndent(): void
     {
-        $indent = Indent::fromString("\t");
+        $indent = Format\Indent::fromString("\t");
 
-        $format = new Format(
-            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
-            Indent::fromString('  '),
-            NewLine::fromString("\r\n"),
+        $format = new Format\Format(
+            Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r\n"),
             true,
         );
 
@@ -90,12 +87,12 @@ final class FormatTest extends Framework\TestCase
 
     public function testWithNewLineClonesFormatAndSetsNewLine(): void
     {
-        $newLine = NewLine::fromString("\r\n");
+        $newLine = Format\NewLine::fromString("\r\n");
 
-        $format = new Format(
-            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
-            Indent::fromString('  '),
-            NewLine::fromString("\r"),
+        $format = new Format\Format(
+            Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r"),
             true,
         );
 
@@ -110,10 +107,10 @@ final class FormatTest extends Framework\TestCase
      */
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {
-        $format = new Format(
-            JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
-            Indent::fromString('  '),
-            NewLine::fromString("\r\n"),
+        $format = new Format\Format(
+            Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES),
+            Format\Indent::fromString('  '),
+            Format\NewLine::fromString("\r\n"),
             false,
         );
 
@@ -130,7 +127,7 @@ final class FormatTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        $format = Format::fromJson($json);
+        $format = Format\Format::fromJson($json);
 
         self::assertSame('    ', $format->indent()->__toString());
     }
@@ -178,7 +175,7 @@ final class FormatTest extends Framework\TestCase
 JSON
         );
 
-        $format = Format::fromJson($json);
+        $format = Format\Format::fromJson($json);
 
         self::assertFalse($format->hasFinalNewLine());
     }
@@ -221,7 +218,7 @@ JSON
 JSON
         );
 
-        $format = Format::fromJson($json);
+        $format = Format\Format::fromJson($json);
 
         self::assertTrue($format->hasFinalNewLine());
     }

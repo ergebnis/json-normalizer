@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format\NewLine;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
@@ -35,7 +35,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $this->expectException(Exception\InvalidNewLineStringException::class);
 
-        NewLine::fromString($string);
+        Format\NewLine::fromString($string);
     }
 
     /**
@@ -66,7 +66,7 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromStringReturnsNewLine(string $string): void
     {
-        $newLine = NewLine::fromString($string);
+        $newLine = Format\NewLine::fromString($string);
 
         self::assertSame($string, $newLine->__toString());
     }
@@ -95,7 +95,7 @@ final class NewLineTest extends Framework\TestCase
 
         $json = Json::fromEncoded($encoded);
 
-        $newLine = NewLine::fromJson($json);
+        $newLine = Format\NewLine::fromJson($json);
 
         self::assertSame(\PHP_EOL, $newLine->__toString());
     }
@@ -111,7 +111,7 @@ final class NewLineTest extends Framework\TestCase
 JSON
         );
 
-        $newLine = NewLine::fromJson($json);
+        $newLine = Format\NewLine::fromJson($json);
 
         self::assertSame($newLineString, $newLine->__toString());
     }
@@ -127,7 +127,7 @@ JSON
 JSON
         );
 
-        $newLine = NewLine::fromJson($json);
+        $newLine = Format\NewLine::fromJson($json);
 
         self::assertSame($newLineString, $newLine->__toString());
     }

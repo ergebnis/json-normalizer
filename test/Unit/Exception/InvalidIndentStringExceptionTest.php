@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new InvalidIndentStringException();
+        $exception = new Exception\InvalidIndentStringException();
 
         self::assertSame('', $exception->string());
     }
@@ -33,7 +33,7 @@ final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
     {
         $string = self::faker()->word;
 
-        $exception = InvalidIndentStringException::fromString($string);
+        $exception = Exception\InvalidIndentStringException::fromString($string);
 
         $message = \sprintf(
             '"%s" is not a valid indent string',

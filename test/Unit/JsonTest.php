@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format\Format;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
@@ -54,7 +54,7 @@ final class JsonTest extends Framework\TestCase
         self::assertSame($encoded, $json->encoded());
         self::assertSame($encoded, \json_encode($json->decoded()));
 
-        $format = Format::fromJson($json);
+        $format = Format\Format::fromJson($json);
 
         self::assertSame($format->jsonEncodeOptions()->value(), $json->format()->jsonEncodeOptions()->value());
         self::assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());

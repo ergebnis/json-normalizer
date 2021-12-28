@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
@@ -38,7 +38,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
 
-        JsonEncodeOptions::fromInt($value);
+        Format\JsonEncodeOptions::fromInt($value);
     }
 
     /**
@@ -63,7 +63,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
      */
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
-        $jsonEncodeOptions = JsonEncodeOptions::fromInt($value);
+        $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt($value);
 
         self::assertSame($value, $jsonEncodeOptions->value());
     }
@@ -92,7 +92,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        $jsonEncodeOptions = JsonEncodeOptions::fromJson($json);
+        $jsonEncodeOptions = Format\JsonEncodeOptions::fromJson($json);
 
         self::assertSame($value, $jsonEncodeOptions->value());
     }

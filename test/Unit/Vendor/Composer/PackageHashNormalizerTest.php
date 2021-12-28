@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer;
+use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
@@ -38,7 +38,7 @@ final class PackageHashNormalizerTest extends AbstractComposerTestCase
 JSON
         );
 
-        $normalizer = new PackageHashNormalizer();
+        $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -58,7 +58,7 @@ JSON
 JSON
         );
 
-        $normalizer = new PackageHashNormalizer();
+        $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -112,7 +112,7 @@ JSON
 JSON
         );
 
-        $normalizer = new PackageHashNormalizer();
+        $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new InvalidNewLineStringException();
+        $exception = new Exception\InvalidNewLineStringException();
 
         self::assertSame('', $exception->string());
     }
@@ -33,7 +33,7 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
     {
         $string = self::faker()->word;
 
-        $exception = InvalidNewLineStringException::fromString($string);
+        $exception = Exception\InvalidNewLineStringException::fromString($string);
 
         $message = \sprintf(
             '"%s" is not a valid new-line character sequence.',

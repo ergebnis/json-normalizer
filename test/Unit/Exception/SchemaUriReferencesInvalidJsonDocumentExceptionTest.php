@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends Abstract
 {
     public function testDefaults(): void
     {
-        $exception = new SchemaUriReferencesInvalidJsonDocumentException();
+        $exception = new Exception\SchemaUriReferencesInvalidJsonDocumentException();
 
         self::assertSame('', $exception->schemaUri());
     }
@@ -33,7 +33,7 @@ final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends Abstract
     {
         $schemaUri = self::faker()->url;
 
-        $exception = SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with valid JSON syntax.',

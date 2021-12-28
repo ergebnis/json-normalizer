@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Ergebnis\Json\Normalizer\Format\Indent;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\IndentNormalizer;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Printer\PrinterInterface;
@@ -30,7 +30,7 @@ final class IndentNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
-        $indent = Indent::fromString('  ');
+        $indent = Format\Indent::fromString('  ');
 
         $json = Json::fromEncoded(
             <<<'JSON'

@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\NormalizerInterface;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
-use Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer;
-use Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer;
-use Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer;
-use Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer;
-use Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer;
+use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
@@ -42,7 +38,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 {
     public function testComposesNormalizers(): void
     {
-        $normalizer = new ComposerJsonNormalizer('https://getcomposer.org/schema.json');
+        $normalizer = new Vendor\Composer\ComposerJsonNormalizer('https://getcomposer.org/schema.json');
 
         self::assertComposesNormalizer(ChainNormalizer::class, $normalizer);
 
@@ -50,10 +46,10 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 
         $normalizerClassNames = [
             SchemaNormalizer::class,
-            BinNormalizer::class,
-            ConfigHashNormalizer::class,
-            PackageHashNormalizer::class,
-            VersionConstraintNormalizer::class,
+            Vendor\Composer\BinNormalizer::class,
+            Vendor\Composer\ConfigHashNormalizer::class,
+            Vendor\Composer\PackageHashNormalizer::class,
+            Vendor\Composer\VersionConstraintNormalizer::class,
         ];
 
         self::assertComposesNormalizers($normalizerClassNames, $chainNormalizer);
@@ -211,7 +207,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ComposerJsonNormalizer(\sprintf(
+        $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
             \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/composer-schema.json'),
         ));

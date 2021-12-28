@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
 {
     public function testDefaults(): void
     {
-        $exception = new SchemaUriCouldNotBeResolvedException();
+        $exception = new Exception\SchemaUriCouldNotBeResolvedException();
 
         self::assertSame('', $exception->schemaUri());
     }
@@ -33,7 +33,7 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
     {
         $schemaUri = self::faker()->url;
 
-        $exception = SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
             'Schema URI "%s" could not be resolved.',

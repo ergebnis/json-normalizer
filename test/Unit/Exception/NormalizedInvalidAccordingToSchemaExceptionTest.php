@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
 {
     public function testDefaults(): void
     {
-        $exception = new NormalizedInvalidAccordingToSchemaException();
+        $exception = new Exception\NormalizedInvalidAccordingToSchemaException();
 
         self::assertSame('', $exception->schemaUri());
         self::assertSame([], $exception->errors());
@@ -42,7 +42,7 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
             $faker->sentence,
         ];
 
-        $exception = NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+        $exception = Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
             $schemaUri,
             ...$errors,
         );

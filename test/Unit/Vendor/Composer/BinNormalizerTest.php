@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer;
+use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
@@ -38,7 +38,7 @@ final class BinNormalizerTest extends AbstractComposerTestCase
 JSON
         );
 
-        $normalizer = new BinNormalizer();
+        $normalizer = new Vendor\Composer\BinNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -59,7 +59,7 @@ JSON
 JSON
         );
 
-        $normalizer = new BinNormalizer();
+        $normalizer = new Vendor\Composer\BinNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -98,7 +98,7 @@ JSON
 JSON
         );
 
-        $normalizer = new BinNormalizer();
+        $normalizer = new Vendor\Composer\BinNormalizer();
 
         $normalized = $normalizer->normalize($json);
 

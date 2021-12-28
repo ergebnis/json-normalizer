@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodedException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new InvalidJsonEncodedException();
+        $exception = new Exception\InvalidJsonEncodedException();
 
         self::assertSame('', $exception->encoded());
     }
@@ -33,7 +33,7 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
     {
         $encoded = self::faker()->sentence;
 
-        $exception = InvalidJsonEncodedException::fromEncoded($encoded);
+        $exception = Exception\InvalidJsonEncodedException::fromEncoded($encoded);
 
         $message = \sprintf(
             '"%s" is not valid JSON.',
