@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer;
+use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
@@ -40,7 +40,7 @@ final class VersionConstraintNormalizerTest extends AbstractComposerTestCase
 JSON
         );
 
-        $normalizer = new VersionConstraintNormalizer();
+        $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -72,7 +72,7 @@ JSON
 JSON
         );
 
-        $normalizer = new VersionConstraintNormalizer();
+        $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -118,7 +118,7 @@ JSON
 JSON
         );
 
-        $normalizer = new VersionConstraintNormalizer();
+        $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -169,7 +169,7 @@ JSON
 JSON
         );
 
-        $normalizer = new VersionConstraintNormalizer();
+        $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 
         $normalized = $normalizer->normalize($json);
 

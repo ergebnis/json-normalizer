@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidIndentStyleException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new InvalidIndentStyleException();
+        $exception = new Exception\InvalidIndentStyleException();
 
         self::assertSame([], $exception->allowedStyles());
         self::assertSame('', $exception->style());
@@ -39,7 +39,7 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
         /** @var string[] $allowedStyles */
         $allowedStyles = $faker->words;
 
-        $exception = InvalidIndentStyleException::fromStyleAndAllowedStyles(
+        $exception = Exception\InvalidIndentStyleException::fromStyleAndAllowedStyles(
             $style,
             ...$allowedStyles,
         );

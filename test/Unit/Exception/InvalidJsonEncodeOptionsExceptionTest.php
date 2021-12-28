@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestC
 {
     public function testDefaults(): void
     {
-        $exception = new InvalidJsonEncodeOptionsException();
+        $exception = new Exception\InvalidJsonEncodeOptionsException();
 
         self::assertSame(0, $exception->jsonEncodeOptions());
     }
@@ -33,7 +33,7 @@ final class InvalidJsonEncodeOptionsExceptionTest extends AbstractExceptionTestC
     {
         $jsonEncodeOptions = self::faker()->randomNumber();
 
-        $exception = InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
+        $exception = Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($jsonEncodeOptions);
 
         $message = \sprintf(
             '"%s" is not valid options for json_encode().',

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format\Indent;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
@@ -40,7 +40,7 @@ final class IndentTest extends Framework\TestCase
             'tab' => "\t",
         ];
 
-        self::assertSame($characters, Indent::CHARACTERS);
+        self::assertSame($characters, Format\Indent::CHARACTERS);
     }
 
     /**
@@ -48,11 +48,11 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
-        $style = self::faker()->randomElement(\array_keys(Indent::CHARACTERS));
+        $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
 
         $this->expectException(Exception\InvalidIndentSizeException::class);
 
-        Indent::fromSizeAndStyle(
+        Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -85,7 +85,7 @@ final class IndentTest extends Framework\TestCase
 
         $this->expectException(Exception\InvalidIndentStyleException::class);
 
-        Indent::fromSizeAndStyle(
+        Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -96,7 +96,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromSizeAndStyleReturnsIndent(int $size, string $style, string $string): void
     {
-        $indent = Indent::fromSizeAndStyle(
+        $indent = Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -110,7 +110,7 @@ final class IndentTest extends Framework\TestCase
     public function provideSizeStyleAndIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
-            foreach (Indent::CHARACTERS as $style => $character) {
+            foreach (Format\Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size,
@@ -132,7 +132,7 @@ final class IndentTest extends Framework\TestCase
     {
         $this->expectException(Exception\InvalidIndentStringException::class);
 
-        Indent::fromString($string);
+        Format\Indent::fromString($string);
     }
 
     /**
@@ -158,7 +158,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromStringReturnsIndent(string $string): void
     {
-        $indent = Indent::fromString($string);
+        $indent = Format\Indent::fromString($string);
 
         self::assertSame($string, $indent->__toString());
     }
@@ -169,7 +169,7 @@ final class IndentTest extends Framework\TestCase
     public function provideValidIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
-            foreach (Indent::CHARACTERS as $style => $character) {
+            foreach (Format\Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size,
@@ -200,7 +200,7 @@ final class IndentTest extends Framework\TestCase
 JSON
         );
 
-        $indent = Indent::fromJson($json);
+        $indent = Format\Indent::fromJson($json);
 
         self::assertSame($sniffedIndent, $indent->__toString());
     }
@@ -223,7 +223,7 @@ JSON
 JSON
         );
 
-        $indent = Indent::fromJson($json);
+        $indent = Format\Indent::fromJson($json);
 
         self::assertSame($sniffedIndent, $indent->__toString());
     }
@@ -238,7 +238,7 @@ JSON
             3,
         ];
 
-        foreach (Indent::CHARACTERS as $style => $character) {
+        foreach (Format\Indent::CHARACTERS as $style => $character) {
             foreach ($sizes as $size) {
                 $key = \sprintf(
                     '%s-%d',
@@ -291,7 +291,7 @@ JSON
 JSON
         );
 
-        $indent = Indent::fromJson($json);
+        $indent = Format\Indent::fromJson($json);
 
         $default = \str_repeat(
             ' ',

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException;
+use Ergebnis\Json\Normalizer\Exception;
 
 /**
  * @internal
@@ -24,7 +24,7 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends
 {
     public function testDefaults(): void
     {
-        $exception = new SchemaUriReferencesDocumentWithInvalidMediaTypeException();
+        $exception = new Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException();
 
         self::assertSame('', $exception->schemaUri());
     }
@@ -33,7 +33,7 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends
     {
         $schemaUri = self::faker()->url;
 
-        $exception = SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with media type "application/schema+json".',

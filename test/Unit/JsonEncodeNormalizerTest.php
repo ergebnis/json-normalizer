@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
 
@@ -45,7 +45,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $normalizer = new JsonEncodeNormalizer(JsonEncodeOptions::fromInt($jsonEncodeOptions));
+        $normalizer = new JsonEncodeNormalizer(Format\JsonEncodeOptions::fromInt($jsonEncodeOptions));
 
         $normalized = $normalizer->normalize($json);
 

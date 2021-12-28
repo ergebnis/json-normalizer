@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Validator;
 
 use Ergebnis\Json\Normalizer\Test;
-use Ergebnis\Json\Normalizer\Validator\Result;
+use Ergebnis\Json\Normalizer\Validator;
 use PHPUnit\Framework;
 
 /**
@@ -28,7 +28,7 @@ final class ResultTest extends Framework\TestCase
 
     public function testCreateReturnsResultWithoutErrors(): void
     {
-        $result = Result::create();
+        $result = Validator\Result::create();
 
         self::assertTrue($result->isValid());
         self::assertSame([], $result->errors());
@@ -44,7 +44,7 @@ final class ResultTest extends Framework\TestCase
             $faker->sentence,
         ];
 
-        $result = Result::create(...$errors);
+        $result = Validator\Result::create(...$errors);
 
         self::assertFalse($result->isValid());
         self::assertSame($errors, $result->errors());

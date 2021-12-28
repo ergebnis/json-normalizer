@@ -13,11 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
-use Ergebnis\Json\Normalizer\Format\Format;
-use Ergebnis\Json\Normalizer\Format\Formatter;
-use Ergebnis\Json\Normalizer\Format\Indent;
-use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
-use Ergebnis\Json\Normalizer\Format\NewLine;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
@@ -77,10 +73,10 @@ JSON
 }
 JSON;
 
-        $format = new Format(
-            JsonEncodeOptions::fromInt($jsonEncodeOptions),
-            Indent::fromString($indentString),
-            NewLine::fromString($newLineString),
+        $format = new Format\Format(
+            Format\JsonEncodeOptions::fromInt($jsonEncodeOptions),
+            Format\Indent::fromString($indentString),
+            Format\NewLine::fromString($newLineString),
             $hasFinalNewLine,
         );
 
@@ -96,7 +92,7 @@ JSON;
             )
             ->willReturn($printedWithIndentAndNewLine);
 
-        $formatter = new Formatter($printer);
+        $formatter = new Format\Formatter($printer);
 
         $formatted = $formatter->format(
             $json,

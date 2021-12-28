@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer;
+use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
@@ -38,7 +38,7 @@ final class ConfigHashNormalizerTest extends AbstractComposerTestCase
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -58,7 +58,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -91,7 +91,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -133,7 +133,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -189,7 +189,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -232,7 +232,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
@@ -271,7 +271,7 @@ JSON
 JSON
         );
 
-        $normalizer = new ConfigHashNormalizer();
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
