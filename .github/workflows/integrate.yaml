@@ -171,48 +171,6 @@ jobs:
       - name: "Run maglnet/composer-require-checker"
         run: ".phive/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json"
 
-  mutation-tests:
-    name: "Mutation Tests"
-
-    runs-on: "ubuntu-latest"
-
-    strategy:
-      matrix:
-        php-version:
-          - "7.3"
-
-        dependencies:
-          - "locked"
-
-    steps:
-      - name: "Checkout"
-        uses: "actions/checkout@v2.4.0"
-
-      - name: "Install PHP with extensions"
-        uses: "shivammathur/setup-php@2.16.0"
-        with:
-          coverage: "xdebug"
-          extensions: "${{ env.PHP_EXTENSIONS }}"
-          php-version: "${{ matrix.php-version }}"
-
-      - name: "Determine composer cache directory"
-        uses: "./.github/actions/composer/composer/determine-cache-directory"
-
-      - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v2.1.7"
-        with:
-          path: "${{ env.COMPOSER_CACHE_DIR }}"
-          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
-          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
-
-      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
-        uses: "./.github/actions/composer/composer/install"
-        with:
-          dependencies: "${{ matrix.dependencies }}"
-
-      - name: "Run mutation tests with Xdebug and infection/infection"
-        run: "vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=${{ env.MIN_COVERED_MSI }} --min-msi=${{ env.MIN_MSI }}"
-
   static-code-analysis:
     name: "Static Code Analysis"
 

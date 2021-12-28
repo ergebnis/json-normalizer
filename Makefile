@@ -1,6 +1,3 @@
-MIN_COVERED_MSI:=90
-MIN_MSI:=90
-
 .PHONY: it
 it: coding-standards static-code-analysis tests ## Runs the coding-standards, static-code-analysis, and tests targets
 
@@ -23,11 +20,6 @@ dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-
 .PHONY: help
 help: ## Displays this list of targets with descriptions
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}'
-
-.PHONY: mutation-tests
-mutation-tests: vendor ## Runs mutation tests with infection/infection
-	mkdir -p .build/infection
-	vendor/bin/infection --ignore-msi-with-no-mutations --min-covered-msi=${MIN_COVERED_MSI} --min-msi=${MIN_MSI}
 
 .PHONY: static-code-analysis
 static-code-analysis: vendor ## Runs a static code analysis with vimeo/psalm
