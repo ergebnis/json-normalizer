@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.9.2@00c062267d6e3229d91a1939992987e2d46f2393">
+<files psalm-version="4.16.1@aa7e400908833b10c0333861f86cd48c510b60eb">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -14,9 +14,6 @@
     </ImplicitToStringCast>
   </file>
   <file src="src/Json.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>null === $this-&gt;format</code>
-    </DocblockTypeContradiction>
     <MissingParamType occurrences="1">
       <code>$decoded</code>
     </MissingParamType>
@@ -24,9 +21,6 @@
       <code>$decoded</code>
       <code>$this-&gt;decoded</code>
     </MixedAssignment>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$format</code>
-    </PropertyNotSetInConstructor>
   </file>
   <file src="src/SchemaNormalizer.php">
     <MissingParamType occurrences="1">
