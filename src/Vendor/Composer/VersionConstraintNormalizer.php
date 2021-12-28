@@ -25,7 +25,6 @@ final class VersionConstraintNormalizer implements NormalizerInterface
         'require',
         'require-dev',
     ];
-
     private const MAP = [
         'and' => [
             '{\s*,\s*}',
