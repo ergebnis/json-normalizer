@@ -17,25 +17,10 @@ use Ergebnis\Json\Normalizer\Json;
 
 final class Format
 {
-    /**
-     * @var JsonEncodeOptions
-     */
-    private $jsonEncodeOptions;
-
-    /**
-     * @var Indent
-     */
-    private $indent;
-
-    /**
-     * @var NewLine
-     */
-    private $newLine;
-
-    /**
-     * @var bool
-     */
-    private $hasFinalNewLine;
+    private JsonEncodeOptions $jsonEncodeOptions;
+    private Indent $indent;
+    private NewLine $newLine;
+    private bool $hasFinalNewLine;
 
     public function __construct(
         JsonEncodeOptions $jsonEncodeOptions,

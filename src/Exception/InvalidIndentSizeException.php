@@ -15,15 +15,8 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class InvalidIndentSizeException extends \InvalidArgumentException implements ExceptionInterface
 {
-    /**
-     * @var int
-     */
-    private $size = 0;
-
-    /**
-     * @var int
-     */
-    private $minimumSize = 0;
+    private int $size = 0;
+    private int $minimumSize = 0;
 
     public static function fromSizeAndMinimumSize(int $size, int $minimumSize): self
     {

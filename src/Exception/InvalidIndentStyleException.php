@@ -15,10 +15,7 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class InvalidIndentStyleException extends \InvalidArgumentException implements ExceptionInterface
 {
-    /**
-     * @var string
-     */
-    private $style = '';
+    private string $style = '';
 
     /**
      * @phpstan-var list<string>
@@ -26,7 +23,7 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
      *
      * @var array<string>
      */
-    private $allowedStyles = [];
+    private array $allowedStyles = [];
 
     public static function fromStyleAndAllowedStyles(string $style, string ...$allowedStyles): self
     {

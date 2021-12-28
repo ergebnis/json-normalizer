@@ -21,20 +21,9 @@ use JsonSchema\SchemaStorage;
 
 final class SchemaNormalizer implements NormalizerInterface
 {
-    /**
-     * @var string
-     */
-    private $schemaUri;
-
-    /**
-     * @var SchemaStorage
-     */
-    private $schemaStorage;
-
-    /**
-     * @var Validator\SchemaValidatorInterface
-     */
-    private $schemaValidator;
+    private string $schemaUri;
+    private SchemaStorage $schemaStorage;
+    private Validator\SchemaValidatorInterface $schemaValidator;
 
     public function __construct(
         string $schemaUri,

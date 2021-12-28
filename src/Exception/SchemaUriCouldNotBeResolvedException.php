@@ -15,10 +15,7 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class SchemaUriCouldNotBeResolvedException extends \RuntimeException implements ExceptionInterface
 {
-    /**
-     * @var string
-     */
-    private $schemaUri = '';
+    private string $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {

@@ -15,10 +15,7 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class InvalidJsonEncodeOptionsException extends \InvalidArgumentException implements ExceptionInterface
 {
-    /**
-     * @var int
-     */
-    private $jsonEncodeOptions = 0;
+    private int $jsonEncodeOptions = 0;
 
     public static function fromJsonEncodeOptions(int $jsonEncodeOptions): self
     {

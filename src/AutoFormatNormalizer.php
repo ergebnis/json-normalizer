@@ -15,15 +15,8 @@ namespace Ergebnis\Json\Normalizer;
 
 final class AutoFormatNormalizer implements NormalizerInterface
 {
-    /**
-     * @var NormalizerInterface
-     */
-    private $normalizer;
-
-    /**
-     * @var Format\FormatterInterface
-     */
-    private $formatter;
+    private NormalizerInterface $normalizer;
+    private Format\FormatterInterface $formatter;
 
     public function __construct(NormalizerInterface $normalizer, Format\FormatterInterface $formatter)
     {

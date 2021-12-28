@@ -15,10 +15,7 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class OriginalInvalidAccordingToSchemaException extends \RuntimeException implements ExceptionInterface
 {
-    /**
-     * @var string
-     */
-    private $schemaUri = '';
+    private string $schemaUri = '';
 
     /**
      * @phpstan-var list<string>
@@ -26,7 +23,7 @@ final class OriginalInvalidAccordingToSchemaException extends \RuntimeException 
      *
      * @var array<int, string>
      */
-    private $errors = [];
+    private array $errors = [];
 
     public static function fromSchemaUriAndErrors(string $schemaUri, string ...$errors): self
     {

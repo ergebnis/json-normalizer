@@ -18,10 +18,7 @@ use Ergebnis\Json\Normalizer\Json;
 
 final class NewLine
 {
-    /**
-     * @var string
-     */
-    private $string;
+    private string $string;
 
     private function __construct(string $string)
     {

@@ -21,7 +21,7 @@ final class Result
      *
      * @var array<int, string>
      */
-    private $errors;
+    private array $errors;
 
     private function __construct(string ...$errors)
     {
