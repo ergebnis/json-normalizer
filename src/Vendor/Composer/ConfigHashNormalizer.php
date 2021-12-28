@@ -66,8 +66,10 @@ final class ConfigHashNormalizer implements NormalizerInterface
      *
      * @return null|array|bool|false|\stdClass|string
      */
-    private static function sortByKey(string $propertyPath, $value)
-    {
+    private static function sortByKey(
+        string $propertyPath,
+        $value
+    ) {
         if (\in_array($propertyPath, self::PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED, true)) {
             return $value;
         }

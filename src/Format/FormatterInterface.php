@@ -17,5 +17,8 @@ use Ergebnis\Json\Normalizer\Json;
 
 interface FormatterInterface
 {
-    public function format(Json $json, Format $format): Json;
+    public function format(
+        Json $json,
+        Format $format
+    ): Json;
 }

@@ -25,8 +25,10 @@ final class OriginalInvalidAccordingToSchemaException extends \RuntimeException 
      */
     private array $errors = [];
 
-    public static function fromSchemaUriAndErrors(string $schemaUri, string ...$errors): self
-    {
+    public static function fromSchemaUriAndErrors(
+        string $schemaUri,
+        string ...$errors
+    ): self {
         $exception = new self(\sprintf(
             'Original JSON is not valid according to schema "%s".',
             $schemaUri,

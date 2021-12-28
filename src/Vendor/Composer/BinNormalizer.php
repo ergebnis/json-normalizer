@@ -22,7 +22,8 @@ final class BinNormalizer implements NormalizerInterface
     {
         $decoded = $json->decoded();
 
-        if (!\is_object($decoded)
+        if (
+            !\is_object($decoded)
             || !\property_exists($decoded, 'bin')
             || !\is_array($decoded->bin)
         ) {

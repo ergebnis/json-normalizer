@@ -20,10 +20,16 @@ interface SchemaValidatorInterface
      *
      * @param null|array<mixed>|bool|float|int|\stdClass|string $data
      */
-    public function isValid($data, \stdClass $schema): bool;
+    public function isValid(
+        $data,
+        \stdClass $schema
+    ): bool;
 
     /**
      * @param null|array<mixed>|bool|float|int|\stdClass|string $data
      */
-    public function validate($data, \stdClass $schema): Result;
+    public function validate(
+        $data,
+        \stdClass $schema
+    ): Result;
 }

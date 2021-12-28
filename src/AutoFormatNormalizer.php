@@ -18,8 +18,10 @@ final class AutoFormatNormalizer implements NormalizerInterface
     private NormalizerInterface $normalizer;
     private Format\FormatterInterface $formatter;
 
-    public function __construct(NormalizerInterface $normalizer, Format\FormatterInterface $formatter)
-    {
+    public function __construct(
+        NormalizerInterface $normalizer,
+        Format\FormatterInterface $formatter
+    ) {
         $this->normalizer = $normalizer;
         $this->formatter = $formatter;
     }

@@ -25,8 +25,10 @@ final class InvalidIndentStyleException extends \InvalidArgumentException implem
      */
     private array $allowedStyles = [];
 
-    public static function fromStyleAndAllowedStyles(string $style, string ...$allowedStyles): self
-    {
+    public static function fromStyleAndAllowedStyles(
+        string $style,
+        string ...$allowedStyles
+    ): self {
         $exception = new self(\sprintf(
             'Style needs to be one of "%s", but "%s" is not.',
             \implode('", "', $allowedStyles),

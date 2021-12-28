@@ -25,8 +25,10 @@ final class Formatter implements FormatterInterface
         $this->printer = $printer;
     }
 
-    public function format(Json $json, Format $format): Json
-    {
+    public function format(
+        Json $json,
+        Format $format
+    ): Json {
         /** @var string $encoded */
         $encoded = \json_encode(
             $json->decoded(),
