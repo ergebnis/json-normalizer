@@ -11,6 +11,7 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 ### Changed
 
 - Dropped support for PHP 7.2 ([#564]), by [@dependabot]
+- Dropped support for PHP 7.3 ([#573]), by [@dependabot]
 
 ### Fixed
 
@@ -421,6 +422,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#463]: https://github.com/ergebnis/json-normalizer/pull/463
 [#517]: https://github.com/ergebnis/json-normalizer/pull/517
 [#564]: https://github.com/ergebnis/json-normalizer/pull/564
+[#573]: https://github.com/ergebnis/json-normalizer/pull/573
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
