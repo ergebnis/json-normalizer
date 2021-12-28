@@ -29,15 +29,15 @@ $ composer require ergebnis/json-normalizer
 
 This package comes with the following generic normalizers:
 
-* [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
-* [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
-* [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
-* [`Ergebnis\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
-* [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
-* [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
-* [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
-* [`Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
-* [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
+- [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
+- [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
+- [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
+- [`Ergebnis\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
+- [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
+- [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
+- [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
+- [`Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
+- [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
 
 :bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
 
@@ -60,7 +60,7 @@ JSON;
 
 $json = Normalizer\Json::fromEncoded($encoded);
 
-/** @var Normalizer\NormalizerInterface $composedNormalizer*/
+/*- @var Normalizer\NormalizerInterface $composedNormalizer*/
 $normalizer = new Normalizer\AutoFormatNormalizer(
     $composedNormalizer,
     new Normalizer\Format\Formatter(new Printer\Printer())
@@ -71,15 +71,15 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now have the composed normalizer applied, but also retained the original formatting (within certain limits). Before applying the composer normalizer, the `AutoFormatNormalizer` will attempt to detect the following:
 
-* `json_encode()` options
-* indent
-* whether a final new line exists or not
+- `json_encode()` options
+- indent
+- whether a final new line exists or not
 
 After applying the composed normalizer, the `AutoFormatNormalizer` will
 
-* decode with `json_decode()` and encode again with `json_encode()`, passing in the previously detected options
-* indent with the detected indent
-* add a final new line of detected
+- decode with `json_decode()` and encode again with `json_encode()`, passing in the previously detected options
+- indent with the detected indent
+- add a final new line of detected
 
 :bulb: Alternatively, you can use the [`FixedFormatNormalizer`](#fixedformatnormalizer).
 
@@ -206,8 +206,8 @@ JSON;
 
 $json = Normalizer\Json::fromEncoded($encoded);
 
-/** @var Normalizer\NormalizerInterface $composedNormalizer*/
-/** @var Normalizer\Format\Format $format*/
+/*- @var Normalizer\NormalizerInterface $composedNormalizer*/
+/*- @var Normalizer\Format\Format $format*/
 $normalizer = new Normalizer\FixedFormatNormalizer(
     $composedNormalizer,
     $format,
@@ -364,7 +364,7 @@ The normalized version will now be structured according to the JSON schema (in t
 
 This package comes with the following vendor-specific normalizers:
 
-* [`Ergebnis\Json\Normalizer\Vendor\Composer\JsonNormalizer`](#vendorcomposercomposerjsonnormalizer)
+- [`Ergebnis\Json\Normalizer\Vendor\Composer\JsonNormalizer`](#vendorcomposercomposerjsonnormalizer)
 
 #### `Vendor\Composer\ComposerJsonNormalizer`
 
@@ -372,10 +372,10 @@ The `Vendor\Composer\ComposerJsonNormalizer` can be used to normalize a `compose
 
 It composes the following normalizers:
 
-* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
-* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
-* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
-* [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
 
 #### `Vendor\Composer\BinNormalizer`
 
@@ -387,9 +387,9 @@ When `composer.json` contains an array of scripts in the `bin` section, the `Ven
 
 When `composer.json` contains any configuration in the
 
-* `config`
-* `extra`
-* `scripts-descriptions`
+- `config`
+- `extra`
+- `scripts-descriptions`
 
 sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order. If a value is an object, it will continue to sort its properties by name.
 
@@ -399,12 +399,12 @@ sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of th
 
 When `composer.json` contains any configuration in the
 
-* `conflict`
-* `provide`
-* `replace`
-* `require`
-* `require-dev`
-* `suggest`
+- `conflict`
+- `provide`
+- `replace`
+- `require`
+- `require-dev`
+- `suggest`
 
 sections, the `Vendor\Composer\PackageHashNormalizer` will sort the content of these sections.
 
@@ -414,18 +414,18 @@ sections, the `Vendor\Composer\PackageHashNormalizer` will sort the content of t
 
 When `composer.json` contains version constraints in the
 
-* `conflict`
-* `provide`
-* `replace`
-* `require`
-* `require-dev`
+- `conflict`
+- `provide`
+- `replace`
+- `require`
+- `require-dev`
 
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
-* all constraints are trimmed
-* *and* constraints are separated by a single space (` `) or a comma (`,`)
-* *or* constraints are separated by double-pipe with a single space before and after (` || `)
-* *range* constraints are separated by a single space (` `)
+- all constraints are trimmed
+- *and- constraints are separated by a single space (` `) or a comma (`,`)
+- *or- constraints are separated by double-pipe with a single space before and after (` || `)
+- *range- constraints are separated by a single space (` `)
 
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
