@@ -37,7 +37,7 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
 
         $message = \sprintf(
             'Schema URI "%s" could not be resolved.',
-            $schemaUri
+            $schemaUri,
         );
 
         self::assertSame($message, $exception->getMessage());

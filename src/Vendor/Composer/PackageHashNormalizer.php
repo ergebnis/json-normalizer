@@ -42,7 +42,7 @@ final class PackageHashNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED),
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
@@ -95,7 +95,7 @@ final class PackageHashNormalizer implements NormalizerInterface
                         '3-$0',
                         '4-$0',
                     ],
-                    $requirement
+                    $requirement,
                 );
             }
 

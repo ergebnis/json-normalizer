@@ -67,7 +67,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeResolvedException::class);
@@ -98,7 +98,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeReadException::class);
@@ -129,7 +129,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
         );
 
         $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
@@ -160,7 +160,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal()
+            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
         );
 
         $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocumentException::class);
@@ -203,19 +203,19 @@ JSON;
         $schemaValidator
             ->validate(
                 Argument::is($json->decoded()),
-                Argument::is($schemaDecoded)
+                Argument::is($schemaDecoded),
             )
             ->shouldBeCalled()
             ->willReturn(Result::create(
                 $faker->sentence,
                 $faker->sentence,
-                $faker->sentence
+                $faker->sentence,
             ));
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $schemaValidator->reveal()
+            $schemaValidator->reveal(),
         );
 
         $this->expectException(Exception\OriginalInvalidAccordingToSchemaException::class);
@@ -276,20 +276,20 @@ JSON
         $schemaValidator
             ->validate(
                 Argument::is($json->decoded()),
-                Argument::is($schemaDecoded)
+                Argument::is($schemaDecoded),
             )
             ->shouldBeCalled()
             ->will(function () use ($schemaValidator, $normalized, $schemaDecoded, $faker): Result {
                 $schemaValidator
                     ->validate(
                         Argument::exact($normalized->decoded()),
-                        Argument::is($schemaDecoded)
+                        Argument::is($schemaDecoded),
                     )
                     ->shouldBeCalled()
                     ->willReturn(Result::create(
                         $faker->sentence,
                         $faker->sentence,
-                        $faker->sentence
+                        $faker->sentence,
                     ));
 
                 return Result::create();
@@ -298,7 +298,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             $schemaStorage->reveal(),
-            $schemaValidator->reveal()
+            $schemaValidator->reveal(),
         );
 
         $this->expectException(Exception\NormalizedInvalidAccordingToSchemaException::class);
@@ -316,7 +316,7 @@ JSON
         $normalizer = new SchemaNormalizer(
             $schemaUri,
             new SchemaStorage(),
-            new SchemaValidator(new Validator())
+            new SchemaValidator(new Validator()),
         );
 
         $normalized = $normalizer->normalize($json);
@@ -347,40 +347,40 @@ JSON
             $jsonFile = \preg_replace(
                 '/normalized\.json$/',
                 'original.json',
-                $normalizedFile
+                $normalizedFile,
             );
 
             if (!\is_string($jsonFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Unable to deduce JSON file name from normalized file name "%s".',
-                    $normalizedFile
+                    $normalizedFile,
                 ));
             }
 
             if (!\file_exists($jsonFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $jsonFile
+                    $jsonFile,
                 ));
             }
 
             $schemaFile = \preg_replace(
                 '/normalized\.json$/',
                 'schema.json',
-                $normalizedFile
+                $normalizedFile,
             );
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Unable to deduce  file name from normalized file name "%s".',
-                    $normalizedFile
+                    $normalizedFile,
                 ));
             }
 
             if (!\file_exists($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $schemaFile
+                    $schemaFile,
                 ));
             }
 
@@ -388,12 +388,12 @@ JSON
             $json = self::jsonFromFile($jsonFile);
             $schemaUri = \sprintf(
                 'file://%s',
-                $schemaFile
+                $schemaFile,
             );
 
             $key = \substr(
                 $fileInfo->getPath(),
-                \strlen($basePath)
+                \strlen($basePath),
             );
 
             yield $key => [
@@ -411,7 +411,7 @@ JSON
         if (!\is_string($json)) {
             throw new \RuntimeException(\sprintf(
                 'Unable to read content from file "%s".',
-                $file
+                $file,
             ));
         }
 
@@ -420,7 +420,7 @@ JSON
         if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
             throw new \RuntimeException(\sprintf(
                 'File "%s" does not contain valid JSON.',
-                $file
+                $file,
             ));
         }
 
@@ -429,7 +429,7 @@ JSON
         if (!\is_string($encoded)) {
             throw new \RuntimeException(\sprintf(
                 'Unable to re-encode content from file "%s".',
-                $file
+                $file,
             ));
         }
 

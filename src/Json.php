@@ -57,7 +57,7 @@ final class Json
 
         return new self(
             $encoded,
-            $decoded
+            $decoded,
         );
     }
 

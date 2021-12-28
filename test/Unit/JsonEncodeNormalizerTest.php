@@ -51,7 +51,7 @@ JSON
 
         $expected = \json_encode(
             $json->decoded(),
-            $jsonEncodeOptions
+            $jsonEncodeOptions,
         );
 
         self::assertSame($expected, $normalized->encoded());
@@ -84,7 +84,7 @@ JSON
 
                     return $jsonEncodeOptions;
                 },
-                0
+                0,
             );
 
             yield [
@@ -110,7 +110,7 @@ JSON
                     [
                         $element,
                     ],
-                    $combination
+                    $combination,
                 );
             }
         }

@@ -53,14 +53,14 @@ JSON;
         $printer
             ->print(
                 Argument::is($json->encoded()),
-                Argument::is($indent->__toString())
+                Argument::is($indent->__toString()),
             )
             ->shouldBeCalled()
             ->willReturn($indented);
 
         $normalizer = new IndentNormalizer(
             $indent,
-            $printer->reveal()
+            $printer->reveal(),
         );
 
         $normalized = $normalizer->normalize($json);

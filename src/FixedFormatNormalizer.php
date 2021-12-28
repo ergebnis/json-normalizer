@@ -44,7 +44,7 @@ final class FixedFormatNormalizer implements NormalizerInterface
     {
         return $this->formatter->format(
             $this->normalizer->normalize($json),
-            $this->format
+            $this->format,
         );
     }
 }

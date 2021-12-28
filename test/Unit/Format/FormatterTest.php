@@ -75,7 +75,7 @@ JSON
 
         $encodedWithJsonEncodeOptions = \json_encode(
             $json->decoded(),
-            $jsonEncodeOptions
+            $jsonEncodeOptions,
         );
 
         $printedWithIndentAndNewLine = <<<'JSON'
@@ -88,7 +88,7 @@ JSON;
             JsonEncodeOptions::fromInt($jsonEncodeOptions),
             Indent::fromString($indentString),
             NewLine::fromString($newLineString),
-            $hasFinalNewLine
+            $hasFinalNewLine,
         );
 
         $printer = $this->prophesize(Printer\PrinterInterface::class);
@@ -97,7 +97,7 @@ JSON;
             ->print(
                 Argument::is($encodedWithJsonEncodeOptions),
                 Argument::is($format->indent()->__toString()),
-                Argument::is($format->newLine()->__toString())
+                Argument::is($format->newLine()->__toString()),
             )
             ->shouldBeCalled()
             ->willReturn($printedWithIndentAndNewLine);
@@ -106,7 +106,7 @@ JSON;
 
         $formatted = $formatter->format(
             $json,
-            $format
+            $format,
         );
 
         self::assertInstanceOf(Json::class, $formatted);

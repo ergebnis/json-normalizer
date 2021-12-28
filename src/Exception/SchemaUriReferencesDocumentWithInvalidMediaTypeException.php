@@ -24,7 +24,7 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeException extends \Ru
     {
         $exception = new self(\sprintf(
             'Schema URI "%s" does not reference a document with media type "application/schema+json".',
-            $schemaUri
+            $schemaUri,
         ));
 
         $exception->schemaUri = $schemaUri;

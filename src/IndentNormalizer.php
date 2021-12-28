@@ -37,7 +37,7 @@ final class IndentNormalizer implements NormalizerInterface
     {
         $withIndent = $this->printer->print(
             $json->encoded(),
-            $this->indent->__toString()
+            $this->indent->__toString(),
         );
 
         return Json::fromEncoded($withIndent);

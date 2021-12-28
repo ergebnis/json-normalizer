@@ -61,20 +61,20 @@ final class Indent
         if ($minimumSize > $size) {
             throw Exception\InvalidIndentSizeException::fromSizeAndMinimumSize(
                 $size,
-                $minimumSize
+                $minimumSize,
             );
         }
 
         if (!\array_key_exists($style, self::CHARACTERS)) {
             throw Exception\InvalidIndentStyleException::fromStyleAndAllowedStyles(
                 $style,
-                ...\array_keys(self::CHARACTERS)
+                ...\array_keys(self::CHARACTERS),
             );
         }
 
         $value = \str_repeat(
             self::CHARACTERS[$style],
-            $size
+            $size,
         );
 
         return new self($value);
@@ -88,7 +88,7 @@ final class Indent
 
         return self::fromSizeAndStyle(
             4,
-            'space'
+            'space',
         );
     }
 }

@@ -35,7 +35,7 @@ final class AutoFormatNormalizer implements NormalizerInterface
     {
         return $this->formatter->format(
             $this->normalizer->normalize($json),
-            $json->format()
+            $json->format(),
         );
     }
 }

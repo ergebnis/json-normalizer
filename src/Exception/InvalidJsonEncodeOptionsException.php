@@ -24,7 +24,7 @@ final class InvalidJsonEncodeOptionsException extends \InvalidArgumentException 
     {
         $exception = new self(\sprintf(
             '"%s" is not valid options for json_encode().',
-            $jsonEncodeOptions
+            $jsonEncodeOptions,
         ));
 
         $exception->jsonEncodeOptions = $jsonEncodeOptions;

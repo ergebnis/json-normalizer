@@ -33,7 +33,7 @@ final class SchemaValidator implements SchemaValidatorInterface
 
         $this->validator->check(
             $data,
-            $schema
+            $schema,
         );
 
         return $this->validator->isValid();
@@ -45,7 +45,7 @@ final class SchemaValidator implements SchemaValidatorInterface
 
         $this->validator->check(
             $data,
-            $schema
+            $schema,
         );
 
         /** @var array $originalErrors */
@@ -79,7 +79,7 @@ final class SchemaValidator implements SchemaValidatorInterface
             return \sprintf(
                 '%s: %s',
                 $property,
-                $message
+                $message,
             );
         }, $originalErrors);
 

@@ -37,7 +37,7 @@ final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCa
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document that could be read.',
-            $schemaUri
+            $schemaUri,
         );
 
         self::assertSame($message, $exception->getMessage());

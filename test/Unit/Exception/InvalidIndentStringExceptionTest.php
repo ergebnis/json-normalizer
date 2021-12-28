@@ -37,7 +37,7 @@ final class InvalidIndentStringExceptionTest extends AbstractExceptionTestCase
 
         $message = \sprintf(
             '"%s" is not a valid indent string',
-            $string
+            $string,
         );
 
         self::assertSame($message, $exception->getMessage());

@@ -32,7 +32,7 @@ final class OriginalInvalidAccordingToSchemaException extends \RuntimeException 
     {
         $exception = new self(\sprintf(
             'Original JSON is not valid according to schema "%s".',
-            $schemaUri
+            $schemaUri,
         ));
 
         $exception->schemaUri = $schemaUri;

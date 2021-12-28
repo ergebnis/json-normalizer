@@ -24,7 +24,7 @@ final class InvalidJsonEncodedException extends \InvalidArgumentException implem
     {
         $exception = new self(\sprintf(
             '"%s" is not valid JSON.',
-            $encoded
+            $encoded,
         ));
 
         $exception->encoded = $encoded;

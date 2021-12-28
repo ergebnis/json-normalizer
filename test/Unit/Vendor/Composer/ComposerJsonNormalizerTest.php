@@ -213,7 +213,7 @@ JSON
 
         $normalizer = new ComposerJsonNormalizer(\sprintf(
             'file://%s',
-            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/composer-schema.json')
+            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/composer-schema.json'),
         ));
 
         $normalized = $normalizer->normalize($json);
@@ -233,14 +233,14 @@ JSON
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
             'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName
+            $attributeName,
         ));
 
         $composedNormalizer = self::composedNormalizer($normalizer);
 
         self::assertInstanceOf($className, $composedNormalizer, \sprintf(
             'Failed asserting that a normalizer composes a normalizer of type "%s".',
-            $className
+            $className,
         ));
     }
 
@@ -260,7 +260,7 @@ JSON
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
             'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName
+            $attributeName,
         ));
 
         $composedNormalizers = self::composedNormalizers($normalizer);
@@ -272,7 +272,7 @@ JSON
         self::assertSame(
             $classNames,
             $composedNormalizerClassNames,
-            'Failed asserting that a normalizer composes normalizers as expected.'
+            'Failed asserting that a normalizer composes normalizers as expected.',
         );
     }
 

@@ -37,7 +37,7 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 
         $message = \sprintf(
             '"%s" is not valid JSON.',
-            $encoded
+            $encoded,
         );
 
         self::assertSame($message, $exception->getMessage());

@@ -24,7 +24,7 @@ final class SchemaUriReferencesInvalidJsonDocumentException extends \RuntimeExce
     {
         $exception = new self(\sprintf(
             'Schema URI "%s" does not reference a document with valid JSON syntax.',
-            $schemaUri
+            $schemaUri,
         ));
 
         $exception->schemaUri = $schemaUri;

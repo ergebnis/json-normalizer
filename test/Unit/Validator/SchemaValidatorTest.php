@@ -69,7 +69,7 @@ JSON;
         $schemaValidator
             ->check(
                 Argument::is($data),
-                Argument::is($schema)
+                Argument::is($schema),
             )
             ->shouldBeCalled();
 
@@ -126,7 +126,7 @@ JSON;
 
         $result = $validator->validate(
             $data,
-            $schema
+            $schema,
         );
 
         self::assertFalse($result->isValid());
@@ -189,7 +189,7 @@ JSON;
 
         $result = $validator->validate(
             $data,
-            $schema
+            $schema,
         );
 
         self::assertTrue($result->isValid());

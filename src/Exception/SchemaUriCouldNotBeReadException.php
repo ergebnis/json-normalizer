@@ -24,7 +24,7 @@ final class SchemaUriCouldNotBeReadException extends \RuntimeException implement
     {
         $exception = new self(\sprintf(
             'Schema URI "%s" does not reference a document that could be read.',
-            $schemaUri
+            $schemaUri,
         ));
 
         $exception->schemaUri = $schemaUri;

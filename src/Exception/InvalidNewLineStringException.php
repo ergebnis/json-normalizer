@@ -24,7 +24,7 @@ final class InvalidNewLineStringException extends \InvalidArgumentException impl
     {
         $exception = new self(\sprintf(
             '"%s" is not a valid new-line character sequence.',
-            $string
+            $string,
         ));
 
         $exception->string = $string;

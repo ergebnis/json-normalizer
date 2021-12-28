@@ -54,7 +54,7 @@ final class IndentTest extends Framework\TestCase
 
         Indent::fromSizeAndStyle(
             $size,
-            $style
+            $style,
         );
     }
 
@@ -87,7 +87,7 @@ final class IndentTest extends Framework\TestCase
 
         Indent::fromSizeAndStyle(
             $size,
-            $style
+            $style,
         );
     }
 
@@ -98,7 +98,7 @@ final class IndentTest extends Framework\TestCase
     {
         $indent = Indent::fromSizeAndStyle(
             $size,
-            $style
+            $style,
         );
 
         self::assertSame($string, $indent->__toString());
@@ -113,7 +113,7 @@ final class IndentTest extends Framework\TestCase
             foreach (Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
-                    $size
+                    $size,
                 );
 
                 yield [
@@ -172,7 +172,7 @@ final class IndentTest extends Framework\TestCase
             foreach (Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
-                    $size
+                    $size,
                 );
 
                 yield [
@@ -243,12 +243,12 @@ JSON
                 $key = \sprintf(
                     '%s-%d',
                     $style,
-                    $size
+                    $size,
                 );
 
                 $pureIndent = \str_repeat(
                     $character,
-                    $size
+                    $size,
                 );
 
                 yield $key => [
@@ -295,7 +295,7 @@ JSON
 
         $default = \str_repeat(
             ' ',
-            4
+            4,
         );
 
         self::assertSame($default, $indent->__toString());

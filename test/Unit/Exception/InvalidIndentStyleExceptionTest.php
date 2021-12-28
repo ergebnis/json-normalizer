@@ -46,13 +46,13 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
 
         $exception = InvalidIndentStyleException::fromStyleAndAllowedStyles(
             $style,
-            ...$allowedStyles
+            ...$allowedStyles,
         );
 
         $message = \sprintf(
             'Style needs to be one of "%s", but "%s" is not.',
             \implode('", "', $allowedStyles),
-            $style
+            $style,
         );
 
         self::assertSame($message, $exception->getMessage());

@@ -41,7 +41,7 @@ final class ConfigHashNormalizer implements NormalizerInterface
 
         $objectPropertiesThatShouldBeNormalized = \array_intersect_key(
             \get_object_vars($decoded),
-            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_SORTED)
+            \array_flip(self::PROPERTIES_THAT_SHOULD_BE_SORTED),
         );
 
         if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
@@ -51,7 +51,7 @@ final class ConfigHashNormalizer implements NormalizerInterface
         foreach ($objectPropertiesThatShouldBeNormalized as $name => $value) {
             $decoded->{$name} = self::sortByKey(
                 $name,
-                $value
+                $value,
             );
         }
 
@@ -94,11 +94,11 @@ final class ConfigHashNormalizer implements NormalizerInterface
                     \sprintf(
                         '%s.%s',
                         $propertyPath,
-                        $name
+                        $name,
                     ),
-                    $value
+                    $value,
                 );
-            }, $sorted, $names)
+            }, $sorted, $names),
         );
     }
 }
