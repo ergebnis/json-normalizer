@@ -26,7 +26,7 @@ final class Json
     private $decoded;
 
     /**
-     * @var Format\Format
+     * @var null|Format\Format
      */
     private $format;
 
