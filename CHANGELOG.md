@@ -10,7 +10,7 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 
 ### Fixed
 
-* Updated `justinrainbow/json-schema` ([#517]), by [@dependabot]
+- Updated `justinrainbow/json-schema` ([#517]), by [@dependabot]
 
 ## [`1.0.3`][1.0.3]
 
@@ -18,7 +18,7 @@ For a full diff see [`1.0.2...1.0.3`][1.0.2...1.0.3].
 
 ### Fixed
 
-* Adjusted `Vendor\Composer\PackageHashNormalizer` to take into account the newly addded `composer-plugin-api` as platform requirement ([#463]), by [@localheinz]
+- Adjusted `Vendor\Composer\PackageHashNormalizer` to take into account the newly addded `composer-plugin-api` as platform requirement ([#463]), by [@localheinz]
 
 ## [`1.0.2`][1.0.2]
 
@@ -26,7 +26,7 @@ For a full diff see [`1.0.1...1.0.2`][1.0.1...1.0.2].
 
 ### Fixed
 
-* Adjusted `Vendor\Composer\ConfigHashNormalizer` to take into account the full property path, not only the property name ([#429]), by [@localheinz]
+- Adjusted `Vendor\Composer\ConfigHashNormalizer` to take into account the full property path, not only the property name ([#429]), by [@localheinz]
 
 ## [`1.0.1`][1.0.1]
 
@@ -34,7 +34,7 @@ For a full diff see [`1.0.0...1.0.1`][1.0.0...1.0.1].
 
 ### Fixed
 
-* Adjusted `Vendor\Composer\ConfigHashNormalizer` to ignore the `preferred-install` hash ([#425]), by [@localheinz]
+- Adjusted `Vendor\Composer\ConfigHashNormalizer` to ignore the `preferred-install` hash ([#425]), by [@localheinz]
 
 ## [`1.0.0`][1.0.0]
 
@@ -42,7 +42,7 @@ For a full diff see [`0.14.1...1.0.0`][0.14.1...1.0.0].
 
 ### Changed
 
-* Adjusted `Vendor\Composer\ConfigHashNormalizer` to recursively sort hashes by key ([#424]), by [@localheinz]
+- Adjusted `Vendor\Composer\ConfigHashNormalizer` to recursively sort hashes by key ([#424]), by [@localheinz]
 
 ## [`0.14.1`][0.14.1]
 
@@ -50,7 +50,7 @@ For a full diff see [`0.14.0...0.14.1`][0.14.0...0.14.1].
 
 ### Fixed
 
-* Adjusted `Vendor\Composer\ConfigHashNormalizer` to continue normalizing properties when a property has an empty value ([#423]), by [@localheinz]
+- Adjusted `Vendor\Composer\ConfigHashNormalizer` to continue normalizing properties when a property has an empty value ([#423]), by [@localheinz]
 
 ## [`0.14.0`][0.14.0]
 
@@ -58,7 +58,7 @@ For a full diff see [`0.13.1...0.14.0`][0.13.1...0.14.0].
 
 ### Added
 
-* Extracted an `Indent::CHARACTERS` constant that exposes a map of indent styles to indent characters ([#384]), by [@localheinz]
+- Extracted an `Indent::CHARACTERS` constant that exposes a map of indent styles to indent characters ([#384]), by [@localheinz]
 
 ## [`0.13.1`][0.13.1]
 
@@ -66,7 +66,7 @@ For a full diff see [`0.13.0...0.13.1`][0.13.0...0.13.1].
 
 ### Changed
 
-* Dropped support for PHP 7.1 ([#335]), by [@localheinz]
+- Dropped support for PHP 7.1 ([#335]), by [@localheinz]
 
 ## [`0.13.0`][0.13.0]
 
@@ -74,7 +74,7 @@ For a full diff see [`0.12.0...0.13.0`][0.12.0...0.13.0].
 
 ### Added
 
-* Added support for PHP 8.0 ([#308]), by [@localheinz]
+- Added support for PHP 8.0 ([#308]), by [@localheinz]
 
 ## [`0.12.0`][0.12.0]
 
@@ -82,11 +82,11 @@ For a full diff see [`0.11.0...0.12.0`][0.11.0...0.12.0].
 
 ### Added
 
-* Added `SchemaValidator::validate()`, which returns a `Result` composing validation error messages ([#268]), by [@localheinz]
+- Added `SchemaValidator::validate()`, which returns a `Result` composing validation error messages ([#268]), by [@localheinz]
 
 ### Deprecated
 
-* Deprecated `SchemaValidator::isValid()` ([#269]), by [@localheinz]
+- Deprecated `SchemaValidator::isValid()` ([#269]), by [@localheinz]
 
 ## [`0.11.0`][0.11.0]
 
@@ -94,11 +94,11 @@ For a full diff see [`0.10.1...0.11.0`][0.10.1...0.11.0].
 
 ### Added
 
-* Merged in normalizers from [`ergebnis/composer-json-normalizer`](https://github.com/ergebnis/composer-json-normalizer) ([#203]), by [@localheinz]
+- Merged in normalizers from [`ergebnis/composer-json-normalizer`](https://github.com/ergebnis/composer-json-normalizer) ([#203]), by [@localheinz]
 
 ### Removed
 
-* Removed the `ChainUriRetriever` ([#202]), by [@localheinz]
+- Removed the `ChainUriRetriever` ([#202]), by [@localheinz]
 
 ## [`0.10.1`][0.10.1]
 
@@ -106,7 +106,7 @@ For a full diff see [`0.10.0...0.10.1`][0.10.0...0.10.1].
 
 ### Fixed
 
-* Brought back support for PHP 7.1 ([#191]), by [@localheinz]
+- Brought back support for PHP 7.1 ([#191]), by [@localheinz]
 
 ## [`0.10.0`][0.10.0]
 
@@ -114,16 +114,16 @@ For a full diff see [`0.9.0...0.10.0`][0.9.0...0.10.0].
 
 ### Added
 
-* Added a `ChainUriRetriever` which allows specifying multiple URI retrievers ([#102]), by [@localheinz]
-* Added this changelog ([#103]), by [@localheinz]
+- Added a `ChainUriRetriever` which allows specifying multiple URI retrievers ([#102]), by [@localheinz]
+- Added this changelog ([#103]), by [@localheinz]
 
 ### Changed
 
-* Allowing injection of a `UriRetriever` into the `SchemaNormalizer`, and defaulting to a `ChainUriRetriever` which composes `FileGetContents` and `Curl` URI retrievers ([#104]), by [@localheinz]
-* Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109]), by [@localheinz]
-* Dropped nullable return type declaration from `ChainUriRetriever::getContentType()`, defaulting to an empty `string` when `ChainUriRetriever::retrieve()` wasn't invoked yet ([#132]), by [@localheinz]
-* Started using `ergebnis/json-printer` instead of `localheinz/json-printer` ([#176]), by [@localheinz]
-* Renamed vendor namespace `Localheinz` to `Ergebnis` after move to [@ergebnis] ([#181]), by [@localheinz]
+- Allowing injection of a `UriRetriever` into the `SchemaNormalizer`, and defaulting to a `ChainUriRetriever` which composes `FileGetContents` and `Curl` URI retrievers ([#104]), by [@localheinz]
+- Dropped `null` default values of constructor arguments of `AutoFormatNormalizer`, `FixedFormatNormalizer`, `Formatter`, `IndentNormalizer` to expose hard dependencies ([#109]), by [@localheinz]
+- Dropped nullable return type declaration from `ChainUriRetriever::getContentType()`, defaulting to an empty `string` when `ChainUriRetriever::retrieve()` wasn't invoked yet ([#132]), by [@localheinz]
+- Started using `ergebnis/json-printer` instead of `localheinz/json-printer` ([#176]), by [@localheinz]
+- Renamed vendor namespace `Localheinz` to `Ergebnis` after move to [@ergebnis] ([#181]), by [@localheinz]
 
   Run
 
@@ -157,7 +157,7 @@ For a full diff see [`0.9.0...0.10.0`][0.9.0...0.10.0].
 
 ### Fixed
 
-* Dropped support for PHP 7.1 ([#163]), by [@localheinz]
+- Dropped support for PHP 7.1 ([#163]), by [@localheinz]
 
 ## [`0.9.0`][0.9.0]
 
@@ -165,21 +165,21 @@ For a full diff see [`0.8.0...0.9.0`][0.8.0...0.9.0].
 
 ### Added
 
-* Added `JsonEncodeOptions` value object ([#93]), by [@localheinz]
+- Added `JsonEncodeOptions` value object ([#93]), by [@localheinz]
 
 ### Changed
 
-* Turned method on `Format` into named constructor on `Indent` value object ([#94]), by [@localheinz]
-* Turned method on `Format` into named constructor on `JsonEncodeOptions` value object([#95]), by [@localheinz]
-* Turned method on `Format` into named constructor on `NewLine` value object ([#96]), by [@localheinz]
+- Turned method on `Format` into named constructor on `Indent` value object ([#94]), by [@localheinz]
+- Turned method on `Format` into named constructor on `JsonEncodeOptions` value object([#95]), by [@localheinz]
+- Turned method on `Format` into named constructor on `NewLine` value object ([#96]), by [@localheinz]
 
 ### Removed
 
-* Removed capability to create `Json` value object from decoded data ([#88]), by [@localheinz]
-* Removed `IndentInterface` ([#89]), by [@localheinz]
-* Removed `NewLineInterface` ([#90]), by [@localheinz]
-* Removed `FormatInterface` ([#91]), by [@localheinz]
-* Removed `JsonInterface` ([#92]), by [@localheinz]
+- Removed capability to create `Json` value object from decoded data ([#88]), by [@localheinz]
+- Removed `IndentInterface` ([#89]), by [@localheinz]
+- Removed `NewLineInterface` ([#90]), by [@localheinz]
+- Removed `FormatInterface` ([#91]), by [@localheinz]
+- Removed `JsonInterface` ([#92]), by [@localheinz]
 
 ## [`0.8.0`][0.8.0]
 
@@ -187,16 +187,16 @@ For a full diff see [`0.7.0...0.8.0`][0.7.0...0.8.0].
 
 ### Added
 
-* Added named constructor to `Json` value object to allow creation from data ([#86]), by [@localheinz]
+- Added named constructor to `Json` value object to allow creation from data ([#86]), by [@localheinz]
 
 ### Changed
 
-* Renamed `InvalidJsonException` to `InvalidJsonEncodedException` ([#85]), by [@localheinz]
+- Renamed `InvalidJsonException` to `InvalidJsonEncodedException` ([#85]), by [@localheinz]
 
 ### Fixed
 
-* `ExceptionInterface` now extends `Throwable` ([#82]), by [@BackEndTea]
-* Extension `ext/json` is now explicitly required  ([#84]), by [@localheinz]
+- `ExceptionInterface` now extends `Throwable` ([#82]), by [@BackEndTea]
+- Extension `ext/json` is now explicitly required  ([#84]), by [@localheinz]
 
 ## [`0.7.0`][0.7.0]
 
@@ -204,22 +204,22 @@ For a full diff see [`0.6.0...0.7.0`][0.6.0...0.7.0].
 
 ### Added
 
-* Added `Indent` value object ([#73]), by [@localheinz]
-* Added `NewLine` value object ([#76]), by [@localheinz]
-* Added `Json` value object ([#64]), by [@localheinz]
-* Added exceptions ([#79]), by [@localheinz]
+- Added `Indent` value object ([#73]), by [@localheinz]
+- Added `NewLine` value object ([#76]), by [@localheinz]
+- Added `Json` value object ([#64]), by [@localheinz]
+- Added exceptions ([#79]), by [@localheinz]
 
 ### Changed
 
-* Removed the `Sniffer` in favour of a named constructor on `Format` value object ([#77]), by [@localheinz]
+- Removed the `Sniffer` in favour of a named constructor on `Format` value object ([#77]), by [@localheinz]
 
 ### Fixed
 
-* Added more test cases for sniffing JSON without whitespace ([#67]), by [@localheinz]
-* Added missing types in a Docblock ([#68]), by [@localheinz]
-* The `Format` value object now rejects mixed tabs and spaces as indent ([#69]), by [@localheinz]
-* Added more test cases for JSON without indent ([#72]), by [@localheinz]
-* Sniff only pure indents, no mixed spaces and tabs ([#71]), by [@localheinz]
+- Added more test cases for sniffing JSON without whitespace ([#67]), by [@localheinz]
+- Added missing types in a Docblock ([#68]), by [@localheinz]
+- The `Format` value object now rejects mixed tabs and spaces as indent ([#69]), by [@localheinz]
+- Added more test cases for JSON without indent ([#72]), by [@localheinz]
+- Sniff only pure indents, no mixed spaces and tabs ([#71]), by [@localheinz]
 
 ## [`0.6.0`][0.6.0]
 
@@ -227,7 +227,7 @@ For a full diff see [`0.5.2...0.6.0`][0.5.2...0.6.0].
 
 ### Added
 
-* Added sniffing of new-line character sequence ([#55]), by [@localheinz]
+- Added sniffing of new-line character sequence ([#55]), by [@localheinz]
 
 ## [`0.5.2`][0.5.2]
 
@@ -235,7 +235,7 @@ For a full diff see [`0.5.1...0.5.2`][0.5.1...0.5.2].
 
 ### Fixed
 
-* Keep resolving references until there are none left ([#49]), by [@localheinz]
+- Keep resolving references until there are none left ([#49]), by [@localheinz]
 
 ## [`0.5.1`][0.5.1]
 
@@ -243,7 +243,7 @@ For a full diff see [`0.5.0...0.5.1`][0.5.0...0.5.1].
 
 ### Fixed
 
-* Resolve referenced schema in `oneOf` combination ([#47]), by [@localheinz]
+- Resolve referenced schema in `oneOf` combination ([#47]), by [@localheinz]
 
 ## [`0.5.0`][0.5.0]
 
@@ -251,9 +251,9 @@ For a full diff see [`0.4.0...0.5.0`][0.4.0...0.5.0].
 
 ### Added
 
-* Added handling of arrays where schema describes tuple ([#37]), by [@localheinz]
-* Added handling of arrays were schema has reference definition ([#40]), by [@localheinz]
-* Added handling of `oneOf` ([#45]), by [@localheinz]
+- Added handling of arrays where schema describes tuple ([#37]), by [@localheinz]
+- Added handling of arrays were schema has reference definition ([#40]), by [@localheinz]
+- Added handling of `oneOf` ([#45]), by [@localheinz]
 
 ## [`0.4.0`][0.4.0]
 
@@ -261,11 +261,11 @@ For a full diff see [`0.3.0...0.4.0`][0.3.0...0.4.0].
 
 ### Added
 
-* Extracted `Formatter` ([#31]), by [@localheinz]
+- Extracted `Formatter` ([#31]), by [@localheinz]
 
 ### Changed
 
-* Renamed `FormatSniffer` to `Sniffer` ([#30]), by [@localheinz]
+- Renamed `FormatSniffer` to `Sniffer` ([#30]), by [@localheinz]
 
 ## [`0.3.0`][0.3.0]
 
@@ -273,8 +273,8 @@ For a full diff see [`0.2.0...0.3.0`][0.2.0...0.3.0].
 
 ### Changed
 
-* Require PHP 7.1 ([#27]), by [@localheinz]
-* Allow to mutate `Format` value object ([#29]), by [@localheinz]
+- Require PHP 7.1 ([#27]), by [@localheinz]
+- Allow to mutate `Format` value object ([#29]), by [@localheinz]
 
 ## [`0.2.0`][0.2.0]
 
@@ -282,7 +282,7 @@ For a full diff see [`0.1.0...0.2.0`][0.1.0...0.2.0].
 
 ### Added
 
-* Added `FixedFormatNormalizer` ([#17]), by [@localheinz]
+- Added `FixedFormatNormalizer` ([#17]), by [@localheinz]
 
 ## [`0.1.0`][0.1.0]
 
@@ -290,16 +290,16 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 
 ### Added
 
-* Added `IndentNormalizer` ([#1]), by [@localheinz]
-* Added `FinalNewLineNormalizer` ([#2]), by [@localheinz]
-* Added `NoFinalNewLineNormalizer` ([#3]), by [@localheinz]
-* Added `JsonEncodeNormalizer` ([#7]), by [@localheinz]
-* Added `CallableNormalizer` ([#8]), by [@localheinz]
-* Added `ChainNormalizer` ([#9]), by [@localheinz]
-* Added `Format` value object ([#10]), by [@localheinz]
-* Added `FormatSniffer` ([#12]), by [@localheinz]
-* Added `AutoFormatNormalizer` ([#13]), by [@localheinz]
-* Added `SchemaNormalizer` ([#15]), by [@localheinz]
+- Added `IndentNormalizer` ([#1]), by [@localheinz]
+- Added `FinalNewLineNormalizer` ([#2]), by [@localheinz]
+- Added `NoFinalNewLineNormalizer` ([#3]), by [@localheinz]
+- Added `JsonEncodeNormalizer` ([#7]), by [@localheinz]
+- Added `CallableNormalizer` ([#8]), by [@localheinz]
+- Added `ChainNormalizer` ([#9]), by [@localheinz]
+- Added `Format` value object ([#10]), by [@localheinz]
+- Added `FormatSniffer` ([#12]), by [@localheinz]
+- Added `AutoFormatNormalizer` ([#13]), by [@localheinz]
+- Added `SchemaNormalizer` ([#15]), by [@localheinz]
 
 [0.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.1.0
 [0.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.2.0
