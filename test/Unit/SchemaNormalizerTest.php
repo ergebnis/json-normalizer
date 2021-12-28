@@ -25,7 +25,6 @@ use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
 use JsonSchema\Validator;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -57,17 +56,18 @@ JSON
 
         $schemaUri = self::faker()->url;
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema(Argument::is($schemaUri))
-            ->shouldBeCalled()
-            ->willThrow(new UriResolverException());
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willThrowException(new UriResolverException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
+            $schemaStorage,
+            $this->createStub(SchemaValidatorInterface::class),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeResolvedException::class);
@@ -88,17 +88,18 @@ JSON
 
         $schemaUri = self::faker()->url;
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema(Argument::is($schemaUri))
-            ->shouldBeCalled()
-            ->willThrow(new ResourceNotFoundException());
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willThrowException(new ResourceNotFoundException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
+            $schemaStorage,
+            $this->createStub(SchemaValidatorInterface::class),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeReadException::class);
@@ -119,17 +120,18 @@ JSON
 
         $schemaUri = self::faker()->url;
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema(Argument::is($schemaUri))
-            ->shouldBeCalled()
-            ->willThrow(new InvalidSchemaMediaTypeException());
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willThrowException(new InvalidSchemaMediaTypeException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
+            $schemaStorage,
+            $this->createStub(SchemaValidatorInterface::class),
         );
 
         $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
@@ -150,17 +152,18 @@ JSON
 
         $schemaUri = self::faker()->url;
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema($schemaUri)
-            ->shouldBeCalled()
-            ->willThrow(new JsonDecodingException());
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willThrowException(new JsonDecodingException());
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $this->prophesize(SchemaValidatorInterface::class)->reveal(),
+            $schemaStorage,
+            $this->createStub(SchemaValidatorInterface::class),
         );
 
         $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocumentException::class);
@@ -191,21 +194,23 @@ JSON;
 
         $schemaDecoded = \json_decode($schema);
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema(Argument::is($schemaUri))
-            ->shouldBeCalled()
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
             ->willReturn($schemaDecoded);
 
-        $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
+        $schemaValidator = $this->createMock(SchemaValidatorInterface::class);
 
         $schemaValidator
-            ->validate(
-                Argument::is($json->decoded()),
-                Argument::is($schemaDecoded),
+            ->expects(self::once())
+            ->method('validate')
+            ->with(
+                self::identicalTo($json->decoded()),
+                self::identicalTo($schemaDecoded),
             )
-            ->shouldBeCalled()
             ->willReturn(Result::create(
                 $faker->sentence,
                 $faker->sentence,
@@ -214,8 +219,8 @@ JSON;
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $schemaValidator->reveal(),
+            $schemaStorage,
+            $schemaValidator,
         );
 
         $this->expectException(Exception\OriginalInvalidAccordingToSchemaException::class);
@@ -264,41 +269,38 @@ JSON
 
         $schemaDecoded = \json_decode($schema);
 
-        $schemaStorage = $this->prophesize(SchemaStorage::class);
+        $schemaStorage = $this->createMock(SchemaStorage::class);
 
         $schemaStorage
-            ->getSchema(Argument::is($schemaUri))
-            ->shouldBeCalled()
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
             ->willReturn($schemaDecoded);
 
-        $schemaValidator = $this->prophesize(SchemaValidatorInterface::class);
+        $schemaValidator = $this->createMock(SchemaValidatorInterface::class);
 
         $schemaValidator
-            ->validate(
-                Argument::is($json->decoded()),
-                Argument::is($schemaDecoded),
+            ->expects(self::exactly(2))
+            ->method('validate')
+            ->withConsecutive(
+                [
+                    self::identicalTo($json->decoded()),
+                    self::identicalTo($schemaDecoded),
+                ],
+                [
+                    self::equalTo($normalized->decoded()),
+                    self::identicalTo($schemaDecoded),
+                ],
             )
-            ->shouldBeCalled()
-            ->will(function () use ($schemaValidator, $normalized, $schemaDecoded, $faker): Result {
-                $schemaValidator
-                    ->validate(
-                        Argument::exact($normalized->decoded()),
-                        Argument::is($schemaDecoded),
-                    )
-                    ->shouldBeCalled()
-                    ->willReturn(Result::create(
-                        $faker->sentence,
-                        $faker->sentence,
-                        $faker->sentence,
-                    ));
-
-                return Result::create();
-            });
+            ->willReturnOnConsecutiveCalls(
+                Result::create(),
+                Result::create($faker->sentence()),
+            );
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,
-            $schemaStorage->reveal(),
-            $schemaValidator->reveal(),
+            $schemaStorage,
+            $schemaValidator,
         );
 
         $this->expectException(Exception\NormalizedInvalidAccordingToSchemaException::class);

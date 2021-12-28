@@ -17,7 +17,6 @@ use Ergebnis\Json\Normalizer\Format\Indent;
 use Ergebnis\Json\Normalizer\IndentNormalizer;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Printer\PrinterInterface;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -48,19 +47,20 @@ JSON
 }
 JSON;
 
-        $printer = $this->prophesize(PrinterInterface::class);
+        $printer = $this->createMock(PrinterInterface::class);
 
         $printer
-            ->print(
-                Argument::is($json->encoded()),
-                Argument::is($indent->__toString()),
+            ->expects(self::once())
+            ->method('print')
+            ->with(
+                self::identicalTo($json->encoded()),
+                self::identicalTo($indent->__toString()),
             )
-            ->shouldBeCalled()
             ->willReturn($indented);
 
         $normalizer = new IndentNormalizer(
             $indent,
-            $printer->reveal(),
+            $printer,
         );
 
         $normalized = $normalizer->normalize($json);

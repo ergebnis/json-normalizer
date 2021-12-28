@@ -18,7 +18,6 @@ use Ergebnis\Json\Normalizer\Validator\SchemaValidatorInterface;
 use Ergebnis\Test\Util\Helper;
 use JsonSchema\Validator;
 use PHPUnit\Framework;
-use Prophecy\Argument;
 
 /**
  * @internal
@@ -60,25 +59,26 @@ JSON;
         $data = \json_decode($dataJson);
         $schema = \json_decode($schemaJson);
 
-        $schemaValidator = $this->prophesize(Validator::class);
+        $schemaValidator = $this->createMock(Validator::class);
 
         $schemaValidator
-            ->reset()
-            ->shouldBeCalled();
+            ->expects(self::once())
+            ->method('reset');
 
         $schemaValidator
-            ->check(
-                Argument::is($data),
-                Argument::is($schema),
-            )
-            ->shouldBeCalled();
+            ->expects(self::once())
+            ->method('check')
+            ->with(
+                self::identicalTo($data),
+                self::identicalTo($schema),
+            );
 
         $schemaValidator
-            ->isValid()
-            ->shouldBeCalled()
+            ->expects(self::once())
+            ->method('isValid')
             ->willReturn($isValid);
 
-        $validator = new SchemaValidator($schemaValidator->reveal());
+        $validator = new SchemaValidator($schemaValidator);
 
         self::assertSame($isValid, $validator->isValid($data, $schema));
     }
