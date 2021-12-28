@@ -15,20 +15,13 @@ namespace Ergebnis\Json\Normalizer;
 
 final class Json
 {
-    /**
-     * @var string
-     */
-    private $encoded;
+    private string $encoded;
 
     /**
      * @var null|array<mixed>|bool|float|int|\stdClass|string
      */
     private $decoded;
-
-    /**
-     * @var null|Format\Format
-     */
-    private $format;
+    private ?Format\Format $format;
 
     private function __construct(string $encoded, $decoded)
     {

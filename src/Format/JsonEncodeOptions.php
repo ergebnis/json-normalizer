@@ -18,10 +18,7 @@ use Ergebnis\Json\Normalizer\Json;
 
 final class JsonEncodeOptions
 {
-    /**
-     * @var int
-     */
-    private $value;
+    private int $value;
 
     private function __construct(int $value)
     {

@@ -19,10 +19,7 @@ use JsonSchema\Validator;
 
 final class ComposerJsonNormalizer implements Normalizer\NormalizerInterface
 {
-    /**
-     * @var Normalizer\NormalizerInterface
-     */
-    private $normalizer;
+    private Normalizer\NormalizerInterface $normalizer;
 
     public function __construct(string $schemaUri)
     {

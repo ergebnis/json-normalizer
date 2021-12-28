@@ -17,10 +17,7 @@ use JsonSchema\Validator;
 
 final class SchemaValidator implements SchemaValidatorInterface
 {
-    /**
-     * @var Validator
-     */
-    private $validator;
+    private Validator $validator;
 
     public function __construct(Validator $validator)
     {

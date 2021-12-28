@@ -21,7 +21,7 @@ final class ChainNormalizer implements NormalizerInterface
      *
      * @var array<int, NormalizerInterface>
      */
-    private $normalizers;
+    private array $normalizers;
 
     public function __construct(NormalizerInterface ...$normalizers)
     {

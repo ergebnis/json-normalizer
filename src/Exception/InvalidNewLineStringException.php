@@ -15,10 +15,7 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class InvalidNewLineStringException extends \InvalidArgumentException implements ExceptionInterface
 {
-    /**
-     * @var string
-     */
-    private $string = '';
+    private string $string = '';
 
     public static function fromString(string $string): self
     {

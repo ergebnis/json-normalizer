@@ -15,20 +15,9 @@ namespace Ergebnis\Json\Normalizer;
 
 final class FixedFormatNormalizer implements NormalizerInterface
 {
-    /**
-     * @var NormalizerInterface
-     */
-    private $normalizer;
-
-    /**
-     * @var Format\Format
-     */
-    private $format;
-
-    /**
-     * @var Format\FormatterInterface
-     */
-    private $formatter;
+    private NormalizerInterface $normalizer;
+    private Format\Format $format;
+    private Format\FormatterInterface $formatter;
 
     public function __construct(
         NormalizerInterface $normalizer,

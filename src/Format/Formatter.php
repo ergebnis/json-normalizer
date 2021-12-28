@@ -18,10 +18,7 @@ use Ergebnis\Json\Printer;
 
 final class Formatter implements FormatterInterface
 {
-    /**
-     * @var Printer\PrinterInterface
-     */
-    private $printer;
+    private Printer\PrinterInterface $printer;
 
     public function __construct(Printer\PrinterInterface $printer)
     {
