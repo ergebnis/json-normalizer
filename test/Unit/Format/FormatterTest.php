@@ -15,7 +15,6 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Normalizer\Format\Format;
 use Ergebnis\Json\Normalizer\Format\Formatter;
-use Ergebnis\Json\Normalizer\Format\FormatterInterface;
 use Ergebnis\Json\Normalizer\Format\Indent;
 use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
 use Ergebnis\Json\Normalizer\Format\NewLine;
@@ -38,11 +37,6 @@ use PHPUnit\Framework;
 final class FormatterTest extends Framework\TestCase
 {
     use Helper;
-
-    public function testImplementsFormatterInterface(): void
-    {
-        self::assertClassImplementsInterface(FormatterInterface::class, Formatter::class);
-    }
 
     /**
      * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
