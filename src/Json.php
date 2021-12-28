@@ -21,7 +21,7 @@ final class Json
      * @var null|array<mixed>|bool|float|int|\stdClass|string
      */
     private $decoded;
-    private ?Format\Format $format;
+    private ?Format\Format $format = null;
 
     private function __construct(string $encoded, $decoded)
     {
