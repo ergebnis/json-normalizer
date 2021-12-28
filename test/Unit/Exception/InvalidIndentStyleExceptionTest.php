@@ -30,11 +30,6 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
         self::assertSame('', $exception->style());
     }
 
-    public function testExtendsInvalidArgumentException(): void
-    {
-        self::assertClassExtends(\InvalidArgumentException::class, InvalidIndentStyleException::class);
-    }
-
     public function testFromStyleAndAllowedStylesReturnsInvalidIndentStyleException(): void
     {
         $faker = self::faker();
