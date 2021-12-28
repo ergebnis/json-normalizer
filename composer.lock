@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1660ec1b2460602dad645e003c90b536",
+    "content-hash": "cec21922408f56a61892c68ae1fbc86c",
     "packages": [
         {
             "name": "ergebnis/json-printer",
@@ -932,6 +932,72 @@
                 }
             ],
             "time": "2021-02-01T08:25:30+00:00"
+        },
+        {
+            "name": "ergebnis/data-provider",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/data-provider.git",
+                "reference": "b4ad8ac2d75cedbfd675d9aeaf213ce3af5a7faf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/data-provider/zipball/b4ad8ac2d75cedbfd675d9aeaf213ce3af5a7faf",
+                "reference": "b4ad8ac2d75cedbfd675d9aeaf213ce3af5a7faf",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.16.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.16.0",
+                "ergebnis/license": "^1.1.0",
+                "ergebnis/php-cs-fixer-config": "^3.2.1",
+                "phpunit/phpunit": "~9.5.10",
+                "psalm/plugin-phpunit": "~0.16.1",
+                "vimeo/psalm": "^4.13.1"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\DataProvider\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides generic data providers for use with phpunit/phpunit.",
+            "homepage": "https://github.com/ergebnis/data-provider",
+            "keywords": [
+                "data-provider",
+                "phpunit"
+            ],
+            "support": {
+                "issues": "https://github.com/ergebnis/data-provider/issues",
+                "source": "https://github.com/ergebnis/data-provider"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-11-25T19:54:39+00:00"
         },
         {
             "name": "ergebnis/license",
