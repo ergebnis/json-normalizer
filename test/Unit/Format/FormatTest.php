@@ -33,7 +33,7 @@ use PHPUnit\Framework;
 final class FormatTest extends Framework\TestCase
 {
     /**
-     * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
+     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary()
      */
     public function testConstructorSetsValues(bool $hasFinalNewLine): void
     {
@@ -106,7 +106,7 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
+     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary()
      */
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {

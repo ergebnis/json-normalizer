@@ -39,7 +39,7 @@ final class FormatterTest extends Framework\TestCase
     use Test\Util\Helper;
 
     /**
-     * @dataProvider \Ergebnis\Json\Normalizer\Test\DataProvider\Boolean::provideBoolean()
+     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary()
      */
     public function testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine): void
     {
