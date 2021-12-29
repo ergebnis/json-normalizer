@@ -34,12 +34,12 @@ final class OriginalInvalidAccordingToSchemaExceptionTest extends AbstractExcept
     {
         $faker = self::faker();
 
-        $schemaUri = $faker->url;
+        $schemaUri = $faker->url();
 
         $errors = [
-            $faker->sentence,
-            $faker->sentence,
-            $faker->sentence,
+            $faker->sentence(),
+            $faker->sentence(),
+            $faker->sentence(),
         ];
 
         $exception = Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(

@@ -31,7 +31,7 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeExceptionTest extends
 
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $exception = Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($schemaUri);
 

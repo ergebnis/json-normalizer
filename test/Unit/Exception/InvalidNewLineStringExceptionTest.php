@@ -31,7 +31,7 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
 
     public function testFromSizeAndMinimumSizeReturnsInvalidIndentStringException(): void
     {
-        $string = self::faker()->word;
+        $string = self::faker()->word();
 
         $exception = Exception\InvalidNewLineStringException::fromString($string);
 

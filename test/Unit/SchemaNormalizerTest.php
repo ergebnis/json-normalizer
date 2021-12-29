@@ -54,7 +54,7 @@ final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $schemaStorage = $this->createMock(SchemaStorage::class);
 
@@ -86,7 +86,7 @@ JSON
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $schemaStorage = $this->createMock(SchemaStorage::class);
 
@@ -118,7 +118,7 @@ JSON
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $schemaStorage = $this->createMock(SchemaStorage::class);
 
@@ -150,7 +150,7 @@ JSON
 JSON
         );
 
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $schemaStorage = $this->createMock(SchemaStorage::class);
 
@@ -184,7 +184,7 @@ JSON
 JSON
         );
 
-        $schemaUri = $faker->url;
+        $schemaUri = $faker->url();
 
         $schema = <<<'JSON'
 {
@@ -212,9 +212,9 @@ JSON;
                 self::identicalTo($schemaDecoded),
             )
             ->willReturn(Result::create(
-                $faker->sentence,
-                $faker->sentence,
-                $faker->sentence,
+                $faker->sentence(),
+                $faker->sentence(),
+                $faker->sentence(),
             ));
 
         $normalizer = new SchemaNormalizer(
@@ -241,7 +241,7 @@ JSON;
 JSON
         );
 
-        $schemaUri = $faker->url;
+        $schemaUri = $faker->url();
 
         $schema = <<<'JSON'
 {

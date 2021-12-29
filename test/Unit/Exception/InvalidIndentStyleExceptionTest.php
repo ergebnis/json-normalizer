@@ -34,10 +34,10 @@ final class InvalidIndentStyleExceptionTest extends AbstractExceptionTestCase
     {
         $faker = self::faker();
 
-        $style = $faker->word;
+        $style = $faker->word();
 
         /** @var string[] $allowedStyles */
-        $allowedStyles = $faker->words;
+        $allowedStyles = $faker->words();
 
         $exception = Exception\InvalidIndentStyleException::fromStyleAndAllowedStyles(
             $style,

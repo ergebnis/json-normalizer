@@ -81,7 +81,7 @@ final class IndentTest extends Framework\TestCase
         $faker = self::faker();
 
         $size = $faker->numberBetween(1);
-        $style = $faker->sentence;
+        $style = $faker->sentence();
 
         $this->expectException(Exception\InvalidIndentStyleException::class);
 
@@ -141,7 +141,7 @@ final class IndentTest extends Framework\TestCase
     public function provideInvalidIndentString(): \Generator
     {
         $strings = [
-            'string-not-whitespace' => self::faker()->sentence,
+            'string-not-whitespace' => self::faker()->sentence(),
             'string-contains-line-feed' => " \n ",
             'string-mixed-space-and-tab' => " \t",
         ];
