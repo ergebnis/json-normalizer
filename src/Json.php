@@ -37,12 +37,14 @@ final class Json
      */
     public static function fromEncoded(string $encoded): self
     {
-        $decoded = \json_decode($encoded);
-
-        if (
-            null === $decoded
-            && \JSON_ERROR_NONE !== \json_last_error()
-        ) {
+        try {
+            $decoded = \json_decode(
+                $encoded,
+                false,
+                512,
+                \JSON_THROW_ON_ERROR,
+            );
+        } catch (\JsonException $exception) {
             throw Exception\InvalidJsonEncodedException::fromEncoded($encoded);
         }
 
