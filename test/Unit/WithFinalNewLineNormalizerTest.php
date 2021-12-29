@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Ergebnis\Json\Normalizer\FinalNewLineNormalizer;
 use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
 
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\FinalNewLineNormalizer
+ * @covers \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\Json
  */
-final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
+final class WithFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
     /**
      * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
@@ -39,7 +39,7 @@ final class FinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $normalizer = new FinalNewLineNormalizer();
+        $normalizer = new WithFinalNewLineNormalizer();
 
         $normalized = $normalizer->normalize($json);
 

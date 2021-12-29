@@ -32,12 +32,12 @@ This package comes with the following generic normalizers:
 - [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
 - [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
 - [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
-- [`Ergebnis\Json\Normalizer\FinalNewLineNormalizer`](#finalnewlinenormalizer)
 - [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
 - [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 - [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
 - [`Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 - [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
+- [`Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
 
 :bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
 
@@ -150,7 +150,7 @@ $normalizer = new Normalizer\ChainNormalizer(
         $indent,
         new Printer\Printer()
     ),
-    new Normalizer\FinalNewLineNormalizer()
+    new Normalizer\WithFinalNewLineNormalizer()
 );
 
 $normalized = $normalizer->normalize($json);
@@ -159,33 +159,6 @@ $normalized = $normalizer->normalize($json);
 The normalized version will now contain the result of applying all normalizers in a chain, one after another.
 
 :bulb: Be careful with the order of the normalizers, as one normalizer might override changes a previous normalizer applied.
-
-#### `FinalNewLineNormalizer`
-
-When you want to ensure that a JSON file has a single final new line, you can use the `FinalNewLineNormalizer`.
-
-```php
-<?php
-
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-
-
-JSON;
-
-$json = Normalizer\Json::fromEncoded($encoded);
-
-$normalizer = new Normalizer\FinalNewLineNormalizer();
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now have a single final new line.
 
 #### `FixedFormatNormalizer`
 
@@ -359,6 +332,33 @@ $normalized = $normalizer->normalize($json);
 The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
+
+#### `WithFinalNewLineNormalizer`
+
+When you want to ensure that a JSON file has a single final new line, you can use the `WithFinalNewLineNormalizer`.
+
+```php
+<?php
+
+use Ergebnis\Json\Normalizer;
+
+$encoded = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+
+
+JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
+
+$normalizer = new Normalizer\WithFinalNewLineNormalizer();
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now have a single final new line.
 
 ### Vendor-specific normalizers
 
