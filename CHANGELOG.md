@@ -10,9 +10,9 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 
 ### Changed
 
-- Dropped support for PHP 7.2 ([#564]), by [@dependabot]
-- Dropped support for PHP 7.3 ([#573]), by [@dependabot]
-- Renamed `Format::__toString()`, `Indent::__toString()`, and `Json::__toString()` to `Format::toString()`, `Indent::toString()`, and `Json::toString()`, requiring consumers to explicitly invoke methods instead of allowing to cast to `string` ([#589]), by [@dependabot]
+- Dropped support for PHP 7.2 ([#564]), by [@localheinz]
+- Dropped support for PHP 7.3 ([#573]), by [@localheinz]
+- Renamed `Format::__toString()`, `Indent::__toString()`, and `Json::__toString()` to `Format::toString()`, `Indent::toString()`, and `Json::toString()`, requiring consumers to explicitly invoke methods instead of allowing to cast to `string` ([#589]), by [@localheinz]
 
 ### Fixed
 
