@@ -25,11 +25,6 @@ final class NewLine
         $this->string = $string;
     }
 
-    public function __toString(): string
-    {
-        return $this->string;
-    }
-
     /**
      * @throws Exception\InvalidNewLineStringException
      */
@@ -49,5 +44,10 @@ final class NewLine
         }
 
         return self::fromString(\PHP_EOL);
+    }
+
+    public function toString(): string
+    {
+        return $this->string;
     }
 }

@@ -101,7 +101,7 @@ final class IndentTest extends Framework\TestCase
             $style,
         );
 
-        self::assertSame($string, $indent->__toString());
+        self::assertSame($string, $indent->toString());
     }
 
     /**
@@ -160,7 +160,7 @@ final class IndentTest extends Framework\TestCase
     {
         $indent = Format\Indent::fromString($string);
 
-        self::assertSame($string, $indent->__toString());
+        self::assertSame($string, $indent->toString());
     }
 
     /**
@@ -202,7 +202,7 @@ JSON
 
         $indent = Format\Indent::fromJson($json);
 
-        self::assertSame($sniffedIndent, $indent->__toString());
+        self::assertSame($sniffedIndent, $indent->toString());
     }
 
     /**
@@ -225,7 +225,7 @@ JSON
 
         $indent = Format\Indent::fromJson($json);
 
-        self::assertSame($sniffedIndent, $indent->__toString());
+        self::assertSame($sniffedIndent, $indent->toString());
     }
 
     /**
@@ -298,7 +298,7 @@ JSON
             4,
         );
 
-        self::assertSame($default, $indent->__toString());
+        self::assertSame($default, $indent->toString());
     }
 
     /**

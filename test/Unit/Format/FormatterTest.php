@@ -87,8 +87,8 @@ JSON;
             ->method('print')
             ->with(
                 self::identicalTo($encodedWithJsonEncodeOptions),
-                self::identicalTo($format->indent()->__toString()),
-                self::identicalTo($format->newLine()->__toString()),
+                self::identicalTo($format->indent()->toString()),
+                self::identicalTo($format->newLine()->toString()),
             )
             ->willReturn($printedWithIndentAndNewLine);
 

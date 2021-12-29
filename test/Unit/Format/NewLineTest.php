@@ -68,7 +68,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $newLine = Format\NewLine::fromString($string);
 
-        self::assertSame($string, $newLine->__toString());
+        self::assertSame($string, $newLine->toString());
     }
 
     /**
@@ -97,7 +97,7 @@ final class NewLineTest extends Framework\TestCase
 
         $newLine = Format\NewLine::fromJson($json);
 
-        self::assertSame(\PHP_EOL, $newLine->__toString());
+        self::assertSame(\PHP_EOL, $newLine->toString());
     }
 
     /**
@@ -113,7 +113,7 @@ JSON
 
         $newLine = Format\NewLine::fromJson($json);
 
-        self::assertSame($newLineString, $newLine->__toString());
+        self::assertSame($newLineString, $newLine->toString());
     }
 
     /**
@@ -129,7 +129,7 @@ JSON
 
         $newLine = Format\NewLine::fromJson($json);
 
-        self::assertSame($newLineString, $newLine->__toString());
+        self::assertSame($newLineString, $newLine->toString());
     }
 
     /**

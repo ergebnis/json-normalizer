@@ -29,11 +29,6 @@ final class Indent
         $this->string = $string;
     }
 
-    public function __toString(): string
-    {
-        return $this->string;
-    }
-
     /**
      * @throws Exception\InvalidIndentStringException
      */
@@ -88,5 +83,10 @@ final class Indent
             4,
             'space',
         );
+    }
+
+    public function toString(): string
+    {
+        return $this->string;
     }
 }
