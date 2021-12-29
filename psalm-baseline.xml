@@ -21,8 +21,7 @@
     <MissingParamType occurrences="1">
       <code>$data</code>
     </MissingParamType>
-    <MixedArgument occurrences="7">
-      <code>$data</code>
+    <MixedArgument occurrences="6">
       <code>$item</code>
       <code>$item</code>
       <code>$itemSchema</code>
@@ -138,11 +137,10 @@
       <code>$normalizedFile</code>
       <code>$normalizedFile</code>
     </MixedArgument>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment occurrences="4">
       <code>$decoded</code>
       <code>$fileInfo</code>
       <code>$normalizedFile</code>
-      <code>$schemaDecoded</code>
       <code>$schemaDecoded</code>
     </MixedAssignment>
     <MixedInferredReturnType occurrences="1">

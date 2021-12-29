@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
@@ -23,12 +24,12 @@ final class SchemaNormalizer implements NormalizerInterface
 {
     private string $schemaUri;
     private SchemaStorage $schemaStorage;
-    private Validator\SchemaValidatorInterface $schemaValidator;
+    private SchemaValidator\SchemaValidator $schemaValidator;
 
     public function __construct(
         string $schemaUri,
         SchemaStorage $schemaStorage,
-        Validator\SchemaValidatorInterface $schemaValidator
+        SchemaValidator\SchemaValidator $schemaValidator
     ) {
         $this->schemaUri = $schemaUri;
         $this->schemaStorage = $schemaStorage;
@@ -37,8 +38,6 @@ final class SchemaNormalizer implements NormalizerInterface
 
     public function normalize(Json $json): Json
     {
-        $decoded = $json->decoded();
-
         try {
             /** @var \stdClass $schema */
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
@@ -53,38 +52,41 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         $resultBeforeNormalization = $this->schemaValidator->validate(
-            $decoded,
-            $schema,
+            SchemaValidator\Json::fromString($json->encoded()),
+            SchemaValidator\Json::fromString(\json_encode($schema)),
+            SchemaValidator\JsonPointer::empty(),
         );
 
         if (!$resultBeforeNormalization->isValid()) {
             throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
                 $this->schemaUri,
-                ...$resultBeforeNormalization->errors(),
+                ...\array_map(static function (SchemaValidator\ValidationError $error): string {
+                    return $error->message()->toString();
+                }, $resultBeforeNormalization->errors()),
             );
         }
 
-        $normalized = $this->normalizeData(
-            $decoded,
+        $normalized = Json::fromEncoded(\json_encode($this->normalizeData(
+            $json->decoded(),
             $schema,
-        );
+        )));
 
         $resultAfterNormalization = $this->schemaValidator->validate(
-            $normalized,
-            $schema,
+            SchemaValidator\Json::fromString($normalized->encoded()),
+            SchemaValidator\Json::fromString(\json_encode($schema)),
+            SchemaValidator\JsonPointer::empty(),
         );
 
         if (!$resultAfterNormalization->isValid()) {
             throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
                 $this->schemaUri,
-                ...$resultAfterNormalization->errors(),
+                ...\array_map(static function (SchemaValidator\ValidationError $error): string {
+                    return $error->message()->toString();
+                }, $resultAfterNormalization->errors()),
             );
         }
 
-        /** @var string $encoded */
-        $encoded = \json_encode($normalized);
-
-        return Json::fromEncoded($encoded);
+        return $normalized;
     }
 
     /**
@@ -229,8 +231,9 @@ final class SchemaNormalizer implements NormalizerInterface
         ) {
             foreach ($schema->oneOf as $oneOfSchema) {
                 $result = $this->schemaValidator->validate(
-                    $data,
-                    $oneOfSchema,
+                    SchemaValidator\Json::fromString(\json_encode($data)),
+                    SchemaValidator\Json::fromString(\json_encode($oneOfSchema)),
+                    SchemaValidator\JsonPointer::empty(),
                 );
 
                 if ($result->isValid()) {
