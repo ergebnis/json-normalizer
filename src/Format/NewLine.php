@@ -18,23 +18,23 @@ use Ergebnis\Json\Normalizer\Json;
 
 final class NewLine
 {
-    private string $string;
+    private string $value;
 
-    private function __construct(string $string)
+    private function __construct(string $value)
     {
-        $this->string = $string;
+        $this->value = $value;
     }
 
     /**
      * @throws Exception\InvalidNewLineStringException
      */
-    public static function fromString(string $string): self
+    public static function fromString(string $value): self
     {
-        if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $string)) {
-            throw Exception\InvalidNewLineStringException::fromString($string);
+        if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $value)) {
+            throw Exception\InvalidNewLineStringException::fromString($value);
         }
 
-        return new self($string);
+        return new self($value);
     }
 
     public static function fromJson(Json $json): self
@@ -48,6 +48,6 @@ final class NewLine
 
     public function toString(): string
     {
-        return $this->string;
+        return $this->value;
     }
 }
