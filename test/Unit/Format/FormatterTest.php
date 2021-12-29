@@ -73,7 +73,7 @@ JSON
 }
 JSON;
 
-        $format = new Format\Format(
+        $format = Format\Format::create(
             Format\JsonEncodeOptions::fromInt($jsonEncodeOptions),
             Format\Indent::fromString($indentString),
             Format\NewLine::fromString($newLineString),
