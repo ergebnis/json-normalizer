@@ -55,7 +55,7 @@ final class JsonEncodeOptions
         return self::fromInt($jsonEncodeOptions);
     }
 
-    public function value(): int
+    public function toInt(): int
     {
         return $this->value;
     }

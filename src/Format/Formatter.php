@@ -32,7 +32,7 @@ final class Formatter implements FormatterInterface
         /** @var string $encoded */
         $encoded = \json_encode(
             $json->decoded(),
-            $format->jsonEncodeOptions()->value(),
+            $format->jsonEncodeOptions()->toInt(),
         );
 
         $printed = $this->printer->print(

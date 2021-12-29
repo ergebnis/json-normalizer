@@ -27,7 +27,7 @@ final class JsonEncodeNormalizer implements NormalizerInterface
         /** @var string $encodedWithJsonEncodeOptions */
         $encodedWithJsonEncodeOptions = \json_encode(
             $json->decoded(),
-            $this->jsonEncodeOptions->value(),
+            $this->jsonEncodeOptions->toInt(),
         );
 
         return Json::fromEncoded($encodedWithJsonEncodeOptions);
