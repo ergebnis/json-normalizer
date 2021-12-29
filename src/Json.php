@@ -32,14 +32,6 @@ final class Json
     }
 
     /**
-     * Returns the original JSON value.
-     */
-    public function __toString(): string
-    {
-        return $this->encoded;
-    }
-
-    /**
      * @throws Exception\InvalidJsonEncodedException
      */
     public static function fromEncoded(string $encoded): self
@@ -87,5 +79,13 @@ final class Json
         }
 
         return $this->format;
+    }
+
+    /**
+     * Returns the original JSON value.
+     */
+    public function toString(): string
+    {
+        return $this->encoded;
     }
 }

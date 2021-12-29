@@ -129,7 +129,7 @@ final class FormatTest extends Framework\TestCase
 
         $format = Format\Format::fromJson($json);
 
-        self::assertSame('    ', $format->indent()->__toString());
+        self::assertSame('    ', $format->indent()->toString());
     }
 
     /**

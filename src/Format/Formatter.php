@@ -37,14 +37,14 @@ final class Formatter implements FormatterInterface
 
         $printed = $this->printer->print(
             $encoded,
-            (string) $format->indent(),
-            (string) $format->newLine(),
+            $format->indent()->toString(),
+            $format->newLine()->toString(),
         );
 
         if (!$format->hasFinalNewLine()) {
             return Json::fromEncoded($printed);
         }
 
-        return Json::fromEncoded($printed . $format->newLine());
+        return Json::fromEncoded($printed . $format->newLine()->toString());
     }
 }

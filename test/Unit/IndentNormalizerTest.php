@@ -54,7 +54,7 @@ JSON;
             ->method('print')
             ->with(
                 self::identicalTo($json->encoded()),
-                self::identicalTo($indent->__toString()),
+                self::identicalTo($indent->toString()),
             )
             ->willReturn($indented);
 

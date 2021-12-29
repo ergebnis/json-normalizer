@@ -50,15 +50,15 @@ final class JsonTest extends Framework\TestCase
     {
         $json = Json::fromEncoded($encoded);
 
-        self::assertSame($encoded, $json->__toString());
+        self::assertSame($encoded, $json->toString());
         self::assertSame($encoded, $json->encoded());
         self::assertSame($encoded, \json_encode($json->decoded()));
 
         $format = Format\Format::fromJson($json);
 
         self::assertSame($format->jsonEncodeOptions()->value(), $json->format()->jsonEncodeOptions()->value());
-        self::assertSame($format->indent()->__toString(), $json->format()->indent()->__toString());
-        self::assertSame($format->newLine()->__toString(), $json->format()->newLine()->__toString());
+        self::assertSame($format->indent()->toString(), $json->format()->indent()->toString());
+        self::assertSame($format->newLine()->toString(), $json->format()->newLine()->toString());
         self::assertSame($format->hasFinalNewLine(), $json->format()->hasFinalNewLine());
     }
 
