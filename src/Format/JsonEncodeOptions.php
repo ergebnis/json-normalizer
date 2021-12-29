@@ -16,6 +16,9 @@ namespace Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Json;
 
+/**
+ * @psalm-immutable
+ */
 final class JsonEncodeOptions
 {
     private int $value;
