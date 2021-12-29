@@ -24,7 +24,6 @@ final class Json
      * @var null|array<mixed>|bool|float|int|\stdClass|string
      */
     private $decoded;
-    private Format\Format $format;
 
     private function __construct(
         string $encoded,
@@ -32,7 +31,6 @@ final class Json
     ) {
         $this->encoded = $encoded;
         $this->decoded = $decoded;
-        $this->format = Format\Format::fromJson($this);
     }
 
     /**
@@ -73,14 +71,6 @@ final class Json
     public function encoded(): string
     {
         return $this->encoded;
-    }
-
-    /**
-     * Returns the format of the original JSON value.
-     */
-    public function format(): Format\Format
-    {
-        return $this->format;
     }
 
     /**

@@ -21,10 +21,6 @@ use Ergebnis\Json\Normalizer\Vendor;
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  *
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\Indent
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class VersionConstraintNormalizerTest extends AbstractComposerTestCase

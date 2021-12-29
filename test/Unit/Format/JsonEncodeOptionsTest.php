@@ -25,10 +25,6 @@ use PHPUnit\Framework;
  * @covers \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  *
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\Indent
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase

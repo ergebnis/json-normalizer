@@ -28,9 +28,11 @@ final class AutoFormatNormalizer implements NormalizerInterface
 
     public function normalize(Json $json): Json
     {
+        $format = Format\Format::fromJson($json);
+
         return $this->formatter->format(
             $this->normalizer->normalize($json),
-            $json->format(),
+            $format,
         );
     }
 }

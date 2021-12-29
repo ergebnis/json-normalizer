@@ -22,10 +22,7 @@ use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
  *
  * @covers \Ergebnis\Json\Normalizer\JsonEncodeNormalizer
  *
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\Indent
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
