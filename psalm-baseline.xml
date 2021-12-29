@@ -36,14 +36,6 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
-  <file src="src/Validator/SchemaValidator.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>bool</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;validator-&gt;isValid()</code>
-    </MixedReturnStatement>
-  </file>
   <file src="src/Vendor/Composer/ConfigHashNormalizer.php">
     <MixedArgument occurrences="2">
       <code>$value</code>
@@ -152,24 +144,6 @@
       <code>getRealPath</code>
       <code>isFile</code>
     </MixedMethodCall>
-  </file>
-  <file src="test/Unit/Validator/SchemaValidatorTest.php">
-    <MixedArgument occurrences="6">
-      <code>$data</code>
-      <code>$data</code>
-      <code>$data</code>
-      <code>$schema</code>
-      <code>$schema</code>
-      <code>$schema</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="6">
-      <code>$data</code>
-      <code>$data</code>
-      <code>$data</code>
-      <code>$schema</code>
-      <code>$schema</code>
-      <code>$schema</code>
-    </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/AbstractComposerTestCase.php">
     <MixedInferredReturnType occurrences="1">
