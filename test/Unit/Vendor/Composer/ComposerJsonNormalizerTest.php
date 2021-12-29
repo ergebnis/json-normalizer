@@ -27,8 +27,6 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
  * @uses \Ergebnis\Json\Normalizer\Json
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
- * @uses \Ergebnis\Json\Normalizer\Validator\Result
- * @uses \Ergebnis\Json\Normalizer\Validator\SchemaValidator
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer

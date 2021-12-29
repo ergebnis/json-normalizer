@@ -20,6 +20,10 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 - Updated `justinrainbow/json-schema` ([#517]), by [@dependabot]
 - Stopped sorting the newly added `allow-plugins` configuration ([#590]), by [@dependabot]
 
+### Removed
+
+- Removed `Validator\Result`, `Valdiator\SchemaValidator`, and `Validator\SchemaValidatorInterface` ([#597]), by [@dependabot]
+
 ## [`1.0.3`][1.0.3]
 
 For a full diff see [`1.0.2...1.0.3`][1.0.2...1.0.3].
@@ -429,6 +433,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#589]: https://github.com/ergebnis/json-normalizer/pull/589
 [#590]: https://github.com/ergebnis/json-normalizer/pull/590
 [#595]: https://github.com/ergebnis/json-normalizer/pull/595
+[#597]: https://github.com/ergebnis/json-normalizer/pull/597
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
