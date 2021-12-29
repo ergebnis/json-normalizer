@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class NoFinalNewLineNormalizer implements NormalizerInterface
+final class WithoutFinalNewLineNormalizer implements NormalizerInterface
 {
     public function normalize(Json $json): Json
     {
