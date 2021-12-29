@@ -13,6 +13,7 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 - Dropped support for PHP 7.2 ([#564]), by [@localheinz]
 - Dropped support for PHP 7.3 ([#573]), by [@localheinz]
 - Renamed `Format::__toString()`, `Indent::__toString()`, and `Json::__toString()` to `Format::toString()`, `Indent::toString()`, and `Json::toString()`, requiring consumers to explicitly invoke methods instead of allowing to cast to `string` ([#589]), by [@localheinz]
+- Started using the `SchemaValidator` provided by `ergebnis/json-schema-validator` ([#595]), by [@localheinz]
 
 ### Fixed
 
@@ -427,6 +428,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#573]: https://github.com/ergebnis/json-normalizer/pull/573
 [#589]: https://github.com/ergebnis/json-normalizer/pull/589
 [#590]: https://github.com/ergebnis/json-normalizer/pull/590
+[#595]: https://github.com/ergebnis/json-normalizer/pull/595
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
