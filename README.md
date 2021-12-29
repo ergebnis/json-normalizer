@@ -35,9 +35,9 @@ This package comes with the following generic normalizers:
 - [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
 - [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
 - [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
-- [`Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer`](#nofinalnewlinenormalizer)
 - [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
 - [`Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
+- [`Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer`](#withoutfinalnewlinenormalizer)
 
 :bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
 
@@ -254,33 +254,6 @@ The normalized version will now be encoded with `$jsonEncodeOptions`.
 
 :bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
-#### `NoFinalNewLineNormalizer`
-
-When you want to ensure that a JSON file does not have a final new line, you can use the `NoFinalNewLineNormalizer`.
-
-```php
-<?php
-
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-
-
-JSON;
-
-$json = Normalizer\Json::fromEncoded($encoded);
-
-$normalizer = new Normalizer\NoFinalNewLineNormalizer();
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now not have a final new line or any whitespace at the end.
-
 #### `SchemaNormalizer`
 
 When you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
@@ -359,6 +332,33 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now have a single final new line.
+
+#### `WithoutFinalNewLineNormalizer`
+
+When you want to ensure that a JSON file does not have a final new line, you can use the `WithoutFinalNewLineNormalizer`.
+
+```php
+<?php
+
+use Ergebnis\Json\Normalizer;
+
+$encoded = <<<'JSON'
+{
+    "name": "Andreas Möller",
+    "url": "https://localheinz.com"
+}
+
+
+JSON;
+
+$json = Normalizer\Json::fromEncoded($encoded);
+
+$normalizer = new Normalizer\WithoutFinalNewLineNormalizer();
+
+$normalized = $normalizer->normalize($json);
+```
+
+The normalized version will now not have a final new line or any whitespace at the end.
 
 ### Vendor-specific normalizers
 
