@@ -223,7 +223,10 @@ final class SchemaNormalizer implements NormalizerInterface
         /**
          * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#oneof
          */
-        if (\property_exists($schema, 'oneOf') && \is_array($schema->oneOf)) {
+        if (
+            \property_exists($schema, 'oneOf')
+            && \is_array($schema->oneOf)
+        ) {
             foreach ($schema->oneOf as $oneOfSchema) {
                 $result = $this->schemaValidator->validate(
                     $data,
