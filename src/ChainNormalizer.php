@@ -30,10 +30,12 @@ final class ChainNormalizer implements NormalizerInterface
 
     public function normalize(Json $json): Json
     {
-        foreach ($this->normalizers as $normalizer) {
-            $json = $normalizer->normalize($json);
-        }
-
-        return $json;
+        return \array_reduce(
+            $this->normalizers,
+            static function (Json $json, NormalizerInterface $normalizer): Json {
+                return $normalizer->normalize($json);
+            },
+            $json,
+        );
     }
 }
