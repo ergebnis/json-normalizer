@@ -197,6 +197,87 @@ JSON
     }
 
     /**
+     * @see https://getcomposer.org/doc/06-config.md#allow-plugins
+     */
+    public function testNormalizeDoesNotSortAllowPluginsInConfig(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "foo/*": true,
+      "bar/*": false,
+      "*": true
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "allow-plugins": {
+      "foo/*": true,
+      "bar/*": false,
+      "*": true
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    public function testNormalizeSortsAllowPluginsInOtherProperty(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "extra": {
+    "something": {
+      "allowed-plugins": {
+        "foo": true,
+        "bar": false
+      }
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "extra": {
+    "something": {
+      "allowed-plugins": {
+        "bar": false,
+        "foo": true
+      }
+    }
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    /**
      * @see https://github.com/ergebnis/composer-normalize/issues/644
      * @see https://getcomposer.org/doc/06-config.md#preferred-install
      */

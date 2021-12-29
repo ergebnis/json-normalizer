@@ -25,9 +25,11 @@ final class ConfigHashNormalizer implements NormalizerInterface
     ];
 
     /**
+     * @see https://getcomposer.org/doc/06-config.md#allow-plugins
      * @see https://getcomposer.org/doc/06-config.md#preferred-install
      */
     private const PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED = [
+        'config.allow-plugins',
         'config.preferred-install',
     ];
 
