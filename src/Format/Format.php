@@ -15,6 +15,9 @@ namespace Ergebnis\Json\Normalizer\Format;
 
 use Ergebnis\Json\Normalizer\Json;
 
+/**
+ * @psalm-immutable
+ */
 final class Format
 {
     private JsonEncodeOptions $jsonEncodeOptions;
