@@ -35,13 +35,13 @@ final class Indent
     /**
      * @throws Exception\InvalidIndentStringException
      */
-    public static function fromString(string $string): self
+    public static function fromString(string $value): self
     {
-        if (1 !== \preg_match('/^( *|\t+)$/', $string)) {
-            throw Exception\InvalidIndentStringException::fromString($string);
+        if (1 !== \preg_match('/^( *|\t+)$/', $value)) {
+            throw Exception\InvalidIndentStringException::fromString($value);
         }
 
-        return new self($string);
+        return new self($value);
     }
 
     /**
