@@ -27,8 +27,6 @@ final class JsonEncodeOptions
 
     /**
      * @throws Exception\InvalidJsonEncodeOptionsException
-     *
-     * @return JsonEncodeOptions
      */
     public static function fromInt(int $value): self
     {
