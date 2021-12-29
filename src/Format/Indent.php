@@ -22,11 +22,11 @@ final class Indent
         'space' => ' ',
         'tab' => "\t",
     ];
-    private string $string;
+    private string $value;
 
-    private function __construct(string $string)
+    private function __construct(string $value)
     {
-        $this->string = $string;
+        $this->value = $value;
     }
 
     /**
@@ -87,6 +87,6 @@ final class Indent
 
     public function toString(): string
     {
-        return $this->string;
+        return $this->value;
     }
 }
