@@ -21,6 +21,10 @@ use Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer;
  *
  * @covers \Ergebnis\Json\Normalizer\NoFinalNewLineNormalizer
  *
+ * @uses \Ergebnis\Json\Normalizer\Format\Format
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class NoFinalNewLineNormalizerTest extends AbstractNormalizerTestCase

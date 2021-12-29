@@ -21,7 +21,7 @@ final class Json
      * @var null|array<mixed>|bool|float|int|\stdClass|string
      */
     private $decoded;
-    private ?Format\Format $format = null;
+    private Format\Format $format;
 
     private function __construct(
         string $encoded,
@@ -29,6 +29,7 @@ final class Json
     ) {
         $this->encoded = $encoded;
         $this->decoded = $decoded;
+        $this->format = Format\Format::fromJson($this);
     }
 
     /**
@@ -74,10 +75,6 @@ final class Json
      */
     public function format(): Format\Format
     {
-        if (null === $this->format) {
-            $this->format = Format\Format::fromJson($this);
-        }
-
         return $this->format;
     }
 
