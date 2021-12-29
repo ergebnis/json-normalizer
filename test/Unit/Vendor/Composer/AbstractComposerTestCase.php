@@ -50,13 +50,13 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
         $faker = self::faker();
 
         $values = [
-            'array' => $faker->words,
+            'array' => $faker->words(),
             'bool-false' => false,
             'bool-true' => true,
             'float' => $faker->randomFloat(),
             'int' => $faker->randomNumber(),
             'null' => null,
-            'string' => $faker->sentence,
+            'string' => $faker->sentence(),
         ];
 
         foreach ($values as $key => $value) {

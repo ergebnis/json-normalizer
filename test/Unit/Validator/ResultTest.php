@@ -39,9 +39,9 @@ final class ResultTest extends Framework\TestCase
         $faker = self::faker();
 
         $errors = [
-            $faker->sentence,
-            $faker->sentence,
-            $faker->sentence,
+            $faker->sentence(),
+            $faker->sentence(),
+            $faker->sentence(),
         ];
 
         $result = Validator\Result::create(...$errors);

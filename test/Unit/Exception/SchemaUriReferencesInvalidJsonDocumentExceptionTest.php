@@ -31,7 +31,7 @@ final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends Abstract
 
     public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $exception = Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
 

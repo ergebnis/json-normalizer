@@ -31,7 +31,7 @@ final class InvalidJsonEncodedExceptionTest extends AbstractExceptionTestCase
 
     public function testFromEncodedReturnsInvalidJsonEncodedException(): void
     {
-        $encoded = self::faker()->sentence;
+        $encoded = self::faker()->sentence();
 
         $exception = Exception\InvalidJsonEncodedException::fromEncoded($encoded);
 

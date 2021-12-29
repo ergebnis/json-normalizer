@@ -31,7 +31,7 @@ final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTe
 
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
     {
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $exception = Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
 

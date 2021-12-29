@@ -31,7 +31,7 @@ final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCa
 
     public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
     {
-        $schemaUri = self::faker()->url;
+        $schemaUri = self::faker()->url();
 
         $exception = Exception\SchemaUriCouldNotBeReadException::fromSchemaUri($schemaUri);
 
