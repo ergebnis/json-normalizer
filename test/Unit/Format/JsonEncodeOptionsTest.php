@@ -65,7 +65,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt($value);
 
-        self::assertSame($value, $jsonEncodeOptions->value());
+        self::assertSame($value, $jsonEncodeOptions->toInt());
     }
 
     /**
@@ -94,7 +94,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromJson($json);
 
-        self::assertSame($value, $jsonEncodeOptions->value());
+        self::assertSame($value, $jsonEncodeOptions->toInt());
     }
 
     /**
