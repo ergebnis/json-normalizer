@@ -8,11 +8,6 @@
       <code>$callable($json)</code>
     </MixedReturnStatement>
   </file>
-  <file src="src/Format/Formatter.php">
-    <ImplicitToStringCast occurrences="1">
-      <code>$format-&gt;newLine()</code>
-    </ImplicitToStringCast>
-  </file>
   <file src="src/Json.php">
     <MissingParamType occurrences="1">
       <code>$decoded</code>
