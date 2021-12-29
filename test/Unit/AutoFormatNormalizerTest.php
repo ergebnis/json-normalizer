@@ -72,7 +72,7 @@ JSON
             ->method('format')
             ->with(
                 self::identicalTo($normalized),
-                self::identicalTo($json->format()),
+                self::equalTo(Format\Format::fromJson($json)),
             )
             ->willReturn($formatted);
 

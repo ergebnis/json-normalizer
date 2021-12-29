@@ -16,6 +16,7 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 - Started using the `SchemaValidator` provided by `ergebnis/json-schema-validator` ([#595]), by [@localheinz]
 - Renamed `Format\JsonEncodeOptions::value()` to `Format\JsonEncodeOptions::toInt()` ([#603]), by [@localheinz]
 - Extracted `Format\Format::create()` as named constructor and reduced visibility of `__construct`  to `private` ([#608]), by [@localheinz]
+- Stopped composing `Format\Format` into `Json` ([#616]), by [@localheinz]
 
 ### Fixed
 
@@ -438,6 +439,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#597]: https://github.com/ergebnis/json-normalizer/pull/597
 [#603]: https://github.com/ergebnis/json-normalizer/pull/603
 [#608]: https://github.com/ergebnis/json-normalizer/pull/608
+[#616]: https://github.com/ergebnis/json-normalizer/pull/616
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

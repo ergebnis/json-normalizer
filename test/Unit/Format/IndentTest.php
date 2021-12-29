@@ -27,9 +27,6 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyleException
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
