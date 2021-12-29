@@ -335,8 +335,8 @@ exists at `/schema/example.json`.
 <?php
 
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
-use JsonSchema\Validator;
 
 $encoded = <<<'JSON'
 {
@@ -350,7 +350,7 @@ $json = Normalizer\Json::fromEncoded($encoded);
 $normalizer = new Normalizer\SchemaNormalizer(
     'file:///schema/example.json',
     new SchemaStorage(),
-    new Normalizer\Validator\SchemaValidator(new Validator())
+    new SchemaValidator\SchemaValidator()
 );
 
 $normalized = $normalizer->normalize($json);
