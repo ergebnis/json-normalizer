@@ -22,7 +22,7 @@ final class Format
     private NewLine $newLine;
     private bool $hasFinalNewLine;
 
-    public function __construct(
+    private function __construct(
         JsonEncodeOptions $jsonEncodeOptions,
         Indent $indent,
         NewLine $newLine,
@@ -32,6 +32,20 @@ final class Format
         $this->indent = $indent;
         $this->newLine = $newLine;
         $this->hasFinalNewLine = $hasFinalNewLine;
+    }
+
+    public static function create(
+        JsonEncodeOptions $jsonEncodeOptions,
+        Indent $indent,
+        NewLine $newLine,
+        bool $hasFinalNewLine
+    ): self {
+        return new self(
+            $jsonEncodeOptions,
+            $indent,
+            $newLine,
+            $hasFinalNewLine,
+        );
     }
 
     public static function fromJson(Json $json): self

@@ -35,7 +35,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
     {
         $faker = self::faker();
 
-        $format = new Format\Format(
+        $format = Format\Format::create(
             Format\JsonEncodeOptions::fromInt($faker->numberBetween(1)),
             Format\Indent::fromString("\t"),
             Format\NewLine::fromString("\r\n"),
