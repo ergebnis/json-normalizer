@@ -17,6 +17,7 @@ For a full diff see [`1.0.3...main`][1.0.3...main].
 - Renamed `Format\JsonEncodeOptions::value()` to `Format\JsonEncodeOptions::toInt()` ([#603]), by [@localheinz]
 - Extracted `Format\Format::create()` as named constructor and reduced visibility of `__construct`  to `private` ([#608]), by [@localheinz]
 - Stopped composing `Format\Format` into `Json` ([#616]), by [@localheinz]
+- Renamed `FinalNewLineNormalizer` to `WithFinalNewLineNormalizer` ([#618]), by [@localheinz]
 
 ### Fixed
 
@@ -440,6 +441,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#603]: https://github.com/ergebnis/json-normalizer/pull/603
 [#608]: https://github.com/ergebnis/json-normalizer/pull/608
 [#616]: https://github.com/ergebnis/json-normalizer/pull/616
+[#618]: https://github.com/ergebnis/json-normalizer/pull/618
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
