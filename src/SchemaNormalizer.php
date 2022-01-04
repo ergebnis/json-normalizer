@@ -223,6 +223,29 @@ final class SchemaNormalizer implements NormalizerInterface
         \stdClass $schema
     ): \stdClass {
         /**
+         * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#anyof
+         */
+        if (
+            \property_exists($schema, 'anyOf')
+            && \is_array($schema->anyOf)
+        ) {
+            foreach ($schema->anyOf as $anyOfSchema) {
+                $result = $this->schemaValidator->validate(
+                    SchemaValidator\Json::fromString(\json_encode($data)),
+                    SchemaValidator\Json::fromString(\json_encode($anyOfSchema)),
+                    SchemaValidator\JsonPointer::empty(),
+                );
+
+                if ($result->isValid()) {
+                    return $this->resolveSchema(
+                        $data,
+                        $anyOfSchema,
+                    );
+                }
+            }
+        }
+
+        /**
          * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#oneof
          */
         if (

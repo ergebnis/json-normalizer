@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.16.1@aa7e400908833b10c0333861f86cd48c510b60eb">
+<files psalm-version="4.17.0@6f4707aa41c9174353a6434bba3fc8840f981d9c">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -21,7 +21,8 @@
     <MissingParamType occurrences="1">
       <code>$data</code>
     </MissingParamType>
-    <MixedArgument occurrences="6">
+    <MixedArgument occurrences="7">
+      <code>$anyOfSchema</code>
       <code>$item</code>
       <code>$item</code>
       <code>$itemSchema</code>
@@ -29,7 +30,8 @@
       <code>$schema-&gt;properties</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedAssignment occurrences="4">
+    <MixedAssignment occurrences="5">
+      <code>$anyOfSchema</code>
       <code>$itemSchema</code>
       <code>$oneOfSchema</code>
       <code>$value</code>
