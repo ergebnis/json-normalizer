@@ -172,35 +172,33 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema,
         );
 
+        $normalized = new \stdClass();
+
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/object.html#properties
          */
-        if (!\property_exists($schema, 'properties')) {
-            return $data;
-        }
-
-        $normalized = new \stdClass();
-
-        /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
-        $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
-            \get_object_vars($schema->properties),
-            \get_object_vars($data),
-        );
-
-        foreach ($objectPropertiesThatAreDefinedBySchema as $name => $valueSchema) {
-            $value = $data->{$name};
-
-            $valueSchema = $this->resolveSchema(
-                $value,
-                $valueSchema,
+        if (\property_exists($schema, 'properties')) {
+            /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
+            $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
+                \get_object_vars($schema->properties),
+                \get_object_vars($data),
             );
 
-            $normalized->{$name} = $this->normalizeData(
-                $value,
-                $valueSchema,
-            );
+            foreach ($objectPropertiesThatAreDefinedBySchema as $name => $valueSchema) {
+                $value = $data->{$name};
 
-            unset($data->{$name});
+                $valueSchema = $this->resolveSchema(
+                    $value,
+                    $valueSchema,
+                );
+
+                $normalized->{$name} = $this->normalizeData(
+                    $value,
+                    $valueSchema,
+                );
+
+                unset($data->{$name});
+            }
         }
 
         $additionalProperties = \get_object_vars($data);
@@ -208,8 +206,13 @@ final class SchemaNormalizer implements NormalizerInterface
         if (0 < \count($additionalProperties)) {
             \ksort($additionalProperties);
 
+            $valueSchema = new \stdClass();
+
             foreach ($additionalProperties as $name => $value) {
-                $normalized->{$name} = $value;
+                $normalized->{$name} = $this->normalizeData(
+                    $value,
+                    $valueSchema,
+                );
             }
         }
 
