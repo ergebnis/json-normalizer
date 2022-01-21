@@ -6,7 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`2.1.0...main`][2.1.0...main].
+For a full diff see [`2.2.0...main`][2.2.0...main].
+
+## [`2.2.0`][2.2.0]
+
+For a full diff see [`2.1.0...2.2.0`][2.1.0...2.2.0].
+
+### Changed
+
+- Stopped checking whether `type` property in schema is set to `array` or `object` ([#632]), by [@localheinz]
+- Adjusted `SchemaNormalizer` to normalize additional object properties ([#639]), by [@localheinz]
+- Adjusted `SchemaNormalizer` to normalize array values for which schema does not declare item schema ([#641]), by [@localheinz]
 
 ## [`2.1.0`][2.1.0]
 
@@ -15,9 +25,6 @@ For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
 ### Changed
 
 - Adjusted `SchemaNormalizer` to support `anyOf` ([#623]), by [@localheinz]
-- Stopped checking whether `type` property in schema is set to `array` or `object` ([#632]), by [@localheinz]
-- Adjusted `SchemaNormalizer` to normalize additional object properties ([#639]), by [@localheinz]
-- Adjusted `SchemaNormalizer` to normalize array values for which schema does not declare item schema ([#641]), by [@localheinz]
 
 ## [`2.0.0`][2.0.0]
 
@@ -358,6 +365,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [1.0.3]: https://github.com/ergebnis/json-normalizer/releases/tag/1.0.3
 [2.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.0.0
 [2.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.1.0
+[2.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.2.0
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -384,7 +392,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [1.0.2...1.0.3]: https://github.com/ergebnis/json-normalizer/compare/1.0.2...1.0.3
 [1.0.3...2.0.0]: https://github.com/ergebnis/json-normalizer/compare/1.0.3...2.0.0
 [2.0.0...2.1.0]: https://github.com/ergebnis/json-normalizer/compare/2.0.0...2.1.0
-[2.1.0...main]: https://github.com/ergebnis/json-normalizer/compare/2.1.0...main
+[2.1.0...2.2.0]: https://github.com/ergebnis/json-normalizer/compare/2.1.0...2.2.0
+[2.2.0...main]: https://github.com/ergebnis/json-normalizer/compare/2.2.0...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
