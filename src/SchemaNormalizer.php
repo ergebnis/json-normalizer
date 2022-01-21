@@ -203,12 +203,12 @@ final class SchemaNormalizer implements NormalizerInterface
             unset($data->{$name});
         }
 
-        $remainingProperties = \get_object_vars($data);
+        $additionalProperties = \get_object_vars($data);
 
-        if (0 < \count($remainingProperties)) {
-            \ksort($remainingProperties);
+        if (0 < \count($additionalProperties)) {
+            \ksort($additionalProperties);
 
-            foreach ($remainingProperties as $name => $value) {
+            foreach ($additionalProperties as $name => $value) {
                 $normalized->{$name} = $value;
             }
         }
