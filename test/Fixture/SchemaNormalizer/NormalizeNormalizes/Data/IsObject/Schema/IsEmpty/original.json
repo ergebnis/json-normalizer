@@ -2,10 +2,15 @@
     "foo": "hello",
     "bar": [
         {
-            "baz": 9000
+            "baz": 9000,
+            "qux": [
+              "foo",
+              "bar",
+              "baz"
+            ]
         },
         {
-            "baz": 9001
+            "quux": 9001
         }
     ]
 }
