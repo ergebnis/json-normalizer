@@ -142,7 +142,7 @@ final class SchemaNormalizer implements NormalizerInterface
         $itemSchema = $schema->items;
 
         /**
-         * @see https://spacetelescope.github.io/understanding-json-schema/reference/array.html#tuple-validation
+         * @see https://json-schema.org/understanding-json-schema/reference/array.html#tuple-validation
          */
         if (\is_array($itemSchema)) {
             return \array_map(function ($item, \stdClass $itemSchema) {
@@ -154,7 +154,7 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         /**
-         * @see https://spacetelescope.github.io/understanding-json-schema/reference/array.html#list-validation
+         * @see https://json-schema.org/understanding-json-schema/reference/array.html#list-validation
          */
         return \array_map(function ($item) use ($itemSchema) {
             return $this->normalizeData(
@@ -223,7 +223,7 @@ final class SchemaNormalizer implements NormalizerInterface
         \stdClass $schema
     ): \stdClass {
         /**
-         * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#anyof
+         * @see https://json-schema.org/understanding-json-schema/reference/combining.html#anyof
          */
         if (
             \property_exists($schema, 'anyOf')
@@ -246,7 +246,7 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         /**
-         * @see https://spacetelescope.github.io/understanding-json-schema/reference/combining.html#oneof
+         * @see https://json-schema.org/understanding-json-schema/reference/combining.html#oneof
          */
         if (
             \property_exists($schema, 'oneOf')
@@ -269,7 +269,7 @@ final class SchemaNormalizer implements NormalizerInterface
         }
 
         /**
-         * @see https://spacetelescope.github.io/understanding-json-schema/structuring.html#reuse
+         * @see https://json-schema.org/understanding-json-schema/structuring.html#reuse
          */
         if (
             \property_exists($schema, '$ref')
