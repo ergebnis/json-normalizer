@@ -131,25 +131,25 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema,
         );
 
+        $itemSchema = new \stdClass();
+
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/array.html#items
          */
-        if (!\property_exists($schema, 'items')) {
-            return $data;
-        }
+        if (\property_exists($schema, 'items')) {
+            $itemSchema = $schema->items;
 
-        $itemSchema = $schema->items;
-
-        /**
-         * @see https://json-schema.org/understanding-json-schema/reference/array.html#tuple-validation
-         */
-        if (\is_array($itemSchema)) {
-            return \array_map(function ($item, \stdClass $itemSchema) {
-                return $this->normalizeData(
-                    $item,
-                    $itemSchema,
-                );
-            }, $data, $itemSchema);
+            /**
+             * @see https://json-schema.org/understanding-json-schema/reference/array.html#tuple-validation
+             */
+            if (\is_array($itemSchema)) {
+                return \array_map(function ($item, \stdClass $itemSchema) {
+                    return $this->normalizeData(
+                        $item,
+                        $itemSchema,
+                    );
+                }, $data, $itemSchema);
+            }
         }
 
         /**

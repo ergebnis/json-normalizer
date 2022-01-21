@@ -3,7 +3,7 @@
     "bar",
     "baz",
     {
-        "foo": "bar",
-        "baz": "qux"
+        "baz": "qux",
+        "foo": "bar"
     }
 ]
