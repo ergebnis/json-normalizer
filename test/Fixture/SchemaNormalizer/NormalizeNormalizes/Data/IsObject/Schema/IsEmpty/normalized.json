@@ -1,16 +1,16 @@
 {
     "bar": [
         {
-            "baz": 9000,
-            "qux": [
+            "foo": 9000,
+            "bar": [
                 "foo",
                 "bar",
                 "baz"
             ]
         },
         {
-            "quux": 9001
+            "foo": 9001
         }
     ],
-    "foo": "hello"
+    "foo": "bar"
 }
