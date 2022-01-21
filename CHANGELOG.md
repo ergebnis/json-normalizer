@@ -15,6 +15,7 @@ For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
 ### Changed
 
 - Adjusted `SchemaNormalizer` to support `anyOf` ([#623]), by [@localheinz]
+- Stopped checking whether `type` property in schema is set to `array` or `object`  ([#632]), by [@localheinz]
 
 ## [`2.0.0`][2.0.0]
 
@@ -461,6 +462,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#618]: https://github.com/ergebnis/json-normalizer/pull/618
 [#619]: https://github.com/ergebnis/json-normalizer/pull/619
 [#623]: https://github.com/ergebnis/json-normalizer/pull/623
+[#632]: https://github.com/ergebnis/json-normalizer/pull/632
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
