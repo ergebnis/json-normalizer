@@ -15,7 +15,7 @@ For a full diff see [`2.0.0...2.1.0`][2.0.0...2.1.0].
 ### Changed
 
 - Adjusted `SchemaNormalizer` to support `anyOf` ([#623]), by [@localheinz]
-- Stopped checking whether `type` property in schema is set to `array` or `object`  ([#632]), by [@localheinz]
+- Stopped checking whether `type` property in schema is set to `array` or `object` ([#632]), by [@localheinz]
 
 ## [`2.0.0`][2.0.0]
 
