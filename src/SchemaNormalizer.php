@@ -131,10 +131,16 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema,
         );
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/array.html
+         */
         if (!self::describesType('array', $schema)) {
             return $data;
         }
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/array.html#items
+         */
         if (!\property_exists($schema, 'items')) {
             return $data;
         }
@@ -173,10 +179,16 @@ final class SchemaNormalizer implements NormalizerInterface
             $schema,
         );
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/object.html
+         */
         if (!self::describesType('object', $schema)) {
             return $data;
         }
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/object.html#properties
+         */
         if (!\property_exists($schema, 'properties')) {
             return $data;
         }
@@ -287,6 +299,9 @@ final class SchemaNormalizer implements NormalizerInterface
         return $schema;
     }
 
+    /**
+     * @see https://json-schema.org/understanding-json-schema/reference/type.html
+     */
     private static function describesType(
         string $type,
         \stdClass $schema
