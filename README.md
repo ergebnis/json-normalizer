@@ -122,6 +122,14 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now have the callable applied to it.
 
+```diff
+ {
+     "name": "Andreas Möller",
+-    "url": "https://localheinz.com/open-source"
++    "url": "https://localheinz.com/open-source"
+ }
+```
+
 #### `ChainNormalizer`
 
 When you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
@@ -225,6 +233,15 @@ $normalized = $normalizer->normalize($json);
 
 The normalized version will now be indented with 2 spaces.
 
+```diff
+ {
+-    "name": "Andreas Möller",
++  "name": "Andreas Möller",
+-    "url": "https://localheinz.com"
++  "url": "https://localheinz.com"
+}
+```
+
 #### `JsonEncodeNormalizer`
 
 When you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
@@ -251,6 +268,14 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now be encoded with `$jsonEncodeOptions`.
+
+```diff
+ {
+     "name": "Andreas M\u00f6ller",
+-    "url": "https:\/\/localheinz.com"
++    "url": "https://localheinz.com"
+ }
+```
 
 :bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
 
