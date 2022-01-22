@@ -218,8 +218,10 @@ JSON
     /**
      * @param class-string $className
      */
-    private static function assertComposesNormalizer(string $className, NormalizerInterface $normalizer): void
-    {
+    private static function assertComposesNormalizer(
+        string $className,
+        NormalizerInterface $normalizer
+    ): void {
         $attributeName = 'normalizer';
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
@@ -240,8 +242,10 @@ JSON
      *
      * @throws \ReflectionException
      */
-    private static function assertComposesNormalizers(array $classNames, NormalizerInterface $normalizer): void
-    {
+    private static function assertComposesNormalizers(
+        array $classNames,
+        NormalizerInterface $normalizer
+    ): void {
         $attributeName = 'normalizers';
 
         self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(

@@ -211,8 +211,11 @@ JSON;
     /**
      * @dataProvider provideExpectedEncodedAndSchemaUri
      */
-    public function testNormalizeNormalizes(string $expected, string $encoded, string $schemaUri): void
-    {
+    public function testNormalizeNormalizes(
+        string $expected,
+        string $encoded,
+        string $schemaUri
+    ): void {
         $json = Json::fromEncoded($encoded);
 
         $normalizer = new SchemaNormalizer(
