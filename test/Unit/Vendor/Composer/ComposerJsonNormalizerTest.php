@@ -82,6 +82,10 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
   ],
   "config": {
     "sort-packages": true,
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "ergebnis/*": false
+    },
     "preferred-install": "dist"
   },
   "repositories": [
@@ -162,6 +166,10 @@ JSON
     "phpunit/phpunit": "^6.5.5"
   },
   "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "ergebnis/*": false
+    },
     "preferred-install": "dist",
     "sort-packages": true
   },
