@@ -96,8 +96,11 @@ JSON
     /**
      * @dataProvider providePropertyAndVersionConstraint
      */
-    public function testNormalizeNormalizesVersionConstraints(string $property, string $versionConstraint, string $normalizedVersionConstraint): void
-    {
+    public function testNormalizeNormalizesVersionConstraints(
+        string $property,
+        string $versionConstraint,
+        string $normalizedVersionConstraint
+    ): void {
         $json = Json::fromEncoded(
             <<<JSON
 {
@@ -147,8 +150,11 @@ JSON
     /**
      * @dataProvider providePropertyAndUntrimmedVersionConstraint
      */
-    public function testNormalizeNormalizesTrimsVersionConstraints(string $property, string $versionConstraint, string $trimmedVersionConstraint): void
-    {
+    public function testNormalizeNormalizesTrimsVersionConstraints(
+        string $property,
+        string $versionConstraint,
+        string $trimmedVersionConstraint
+    ): void {
         $json = Json::fromEncoded(
             <<<JSON
 {

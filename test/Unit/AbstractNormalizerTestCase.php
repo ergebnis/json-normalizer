@@ -46,8 +46,10 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
         return $className;
     }
 
-    final protected static function assertJsonStringEqualsJsonStringNormalized(string $expected, string $actual): void
-    {
+    final protected static function assertJsonStringEqualsJsonStringNormalized(
+        string $expected,
+        string $actual
+    ): void {
         $printer = new Printer\Printer();
 
         $normalize = static function (string $json) use ($printer): string {

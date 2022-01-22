@@ -94,8 +94,11 @@ final class IndentTest extends Framework\TestCase
     /**
      * @dataProvider provideSizeStyleAndIndentString
      */
-    public function testFromSizeAndStyleReturnsIndent(int $size, string $style, string $string): void
-    {
+    public function testFromSizeAndStyleReturnsIndent(
+        int $size,
+        string $style,
+        string $string
+    ): void {
         $indent = Format\Indent::fromSizeAndStyle(
             $size,
             $style,
@@ -186,8 +189,10 @@ final class IndentTest extends Framework\TestCase
      * @dataProvider provideMixedIndentAndSniffedIndent
      * @dataProvider providePureIndentAndSniffedIndent
      */
-    public function testFromJsonReturnsIndentSniffedFromArray(string $actualIndent, string $sniffedIndent): void
-    {
+    public function testFromJsonReturnsIndentSniffedFromArray(
+        string $actualIndent,
+        string $sniffedIndent
+    ): void {
         $json = Json::fromEncoded(
             <<<JSON
 [
@@ -209,8 +214,10 @@ JSON
      * @dataProvider provideMixedIndentAndSniffedIndent
      * @dataProvider providePureIndentAndSniffedIndent
      */
-    public function testFromJsonReturnsIndentSniffedFromObject(string $actualIndent, string $sniffedIndent): void
-    {
+    public function testFromJsonReturnsIndentSniffedFromObject(
+        string $actualIndent,
+        string $sniffedIndent
+    ): void {
         $json = Json::fromEncoded(
             <<<JSON
 {
