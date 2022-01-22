@@ -263,7 +263,7 @@ Let's assume the following schema
 ```json
 {
     "type": "object",
-    "additionalProperties": false,
+    "additionalProperties": true,
     "properties": {
         "name" : {
             "type" : "string"
@@ -287,7 +287,21 @@ use JsonSchema\SchemaStorage;
 $encoded = <<<'JSON'
 {
     "url": "https://localheinz.com",
-    "name": "Andreas Möller"
+    "name": "Andreas Möller",
+    "open-source-projects": {
+        "ergebnis/composer-normalize":
+            "downloads": {
+                "total": 5,
+                "monthly": 2
+            },
+        },
+        "ergebnis/data-provider": {
+            "downloads": {
+                "total": 2,
+                "monthly": 1
+            }
+        }
+    }
 }
 JSON;
 
@@ -302,7 +316,7 @@ $normalizer = new Normalizer\SchemaNormalizer(
 $normalized = $normalizer->normalize($json);
 ```
 
-The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
+The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered as found in the schema and additional properties will be ordered by name). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
 
