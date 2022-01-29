@@ -203,17 +203,19 @@ final class SchemaNormalizer implements NormalizerInterface
 
         $additionalProperties = \get_object_vars($data);
 
-        if (0 < \count($additionalProperties)) {
-            \ksort($additionalProperties);
+        if ([] === $additionalProperties) {
+            return $normalized;
+        }
 
-            $valueSchema = new \stdClass();
+        \ksort($additionalProperties);
 
-            foreach ($additionalProperties as $name => $value) {
-                $normalized->{$name} = $this->normalizeData(
-                    $value,
-                    $valueSchema,
-                );
-            }
+        $valueSchema = new \stdClass();
+
+        foreach ($additionalProperties as $name => $value) {
+            $normalized->{$name} = $this->normalizeData(
+                $value,
+                $valueSchema,
+            );
         }
 
         return $normalized;
