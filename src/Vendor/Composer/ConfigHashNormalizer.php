@@ -64,9 +64,9 @@ final class ConfigHashNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param null|array|bool|false|\stdClass|string $value
+     * @param null|array|bool|false|object|string $value
      *
-     * @return null|array|bool|false|\stdClass|string
+     * @return null|array|bool|false|object|string
      */
     private static function sortByKey(
         string $propertyPath,

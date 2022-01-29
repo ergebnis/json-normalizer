@@ -39,7 +39,6 @@ final class SchemaNormalizer implements NormalizerInterface
     public function normalize(Json $json): Json
     {
         try {
-            /** @var \stdClass $schema */
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
         } catch (UriResolverException $exception) {
             throw Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($this->schemaUri);
@@ -90,15 +89,15 @@ final class SchemaNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param null|array<mixed>|bool|float|int|\stdClass|string $data
+     * @param null|array<mixed>|bool|float|int|object|string $data
      *
      * @throws \InvalidArgumentException
      *
-     * @return null|array<mixed>|bool|float|int|\stdClass|string
+     * @return null|array<mixed>|bool|float|int|object|string
      */
     private function normalizeData(
         $data,
-        \stdClass $schema
+        object $schema
     ) {
         if (\is_array($data)) {
             return $this->normalizeArray(
@@ -107,7 +106,7 @@ final class SchemaNormalizer implements NormalizerInterface
             );
         }
 
-        if ($data instanceof \stdClass) {
+        if (\is_object($data)) {
             return $this->normalizeObject(
                 $data,
                 $schema,
@@ -124,7 +123,7 @@ final class SchemaNormalizer implements NormalizerInterface
      */
     private function normalizeArray(
         array $data,
-        \stdClass $schema
+        object $schema
     ): array {
         $schema = $this->resolveSchema(
             $data,
@@ -143,7 +142,7 @@ final class SchemaNormalizer implements NormalizerInterface
              * @see https://json-schema.org/understanding-json-schema/reference/array.html#tuple-validation
              */
             if (\is_array($itemSchema)) {
-                return \array_map(function ($item, \stdClass $itemSchema) {
+                return \array_map(function ($item, object $itemSchema) {
                     return $this->normalizeData(
                         $item,
                         $itemSchema,
@@ -164,9 +163,9 @@ final class SchemaNormalizer implements NormalizerInterface
     }
 
     private function normalizeObject(
-        \stdClass $data,
-        \stdClass $schema
-    ): \stdClass {
+        object $data,
+        object $schema
+    ): object {
         $schema = $this->resolveSchema(
             $data,
             $schema,
@@ -181,7 +180,7 @@ final class SchemaNormalizer implements NormalizerInterface
             \property_exists($schema, 'properties')
             && \is_object($schema->properties)
         ) {
-            /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
+            /** @var array<string, object> $objectPropertiesThatAreDefinedBySchema */
             $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
                 \get_object_vars($schema->properties),
                 \get_object_vars($data),
@@ -226,8 +225,8 @@ final class SchemaNormalizer implements NormalizerInterface
 
     private function resolveSchema(
         $data,
-        \stdClass $schema
-    ): \stdClass {
+        object $schema
+    ): object {
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/combining.html#anyof
          */
@@ -281,7 +280,6 @@ final class SchemaNormalizer implements NormalizerInterface
             \property_exists($schema, '$ref')
             && \is_string($schema->{'$ref'})
         ) {
-            /** @var \stdClass $referenceSchema */
             $referenceSchema = $this->schemaStorage->resolveRefSchema($schema);
 
             return $this->resolveSchema(
