@@ -21,6 +21,7 @@
   "require": {
     "php": "^7.4 || ^8.0",
     "ext-json": "*",
+    "ergebnis/json-pointer": "^2.0.0",
     "ergebnis/json-printer": "^3.2.0",
     "ergebnis/json-schema-validator": "^2.0.0",
     "justinrainbow/json-schema": "^5.2.11"

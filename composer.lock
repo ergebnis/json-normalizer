@@ -4,8 +4,77 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d448a1d27e7a38c19ffabac8fe667ff3",
+    "content-hash": "a91c905cbb5b979ec8236adcb1ec2691",
     "packages": [
+        {
+            "name": "ergebnis/json-pointer",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ergebnis/json-pointer.git",
+                "reference": "a8803612fa5e64c15730c8edbaae2ae58ef42317"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/a8803612fa5e64c15730c8edbaae2ae58ef42317",
+                "reference": "a8803612fa5e64c15730c8edbaae2ae58ef42317",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.23.0",
+                "ergebnis/data-provider": "^1.1.0",
+                "ergebnis/license": "^1.2.0",
+                "ergebnis/php-cs-fixer-config": "^4.0.0",
+                "fakerphp/faker": "^1.18.0",
+                "infection/infection": "~0.26.4",
+                "phpunit/phpunit": "^9.5.13",
+                "psalm/plugin-phpunit": "~0.16.1",
+                "vimeo/psalm": "^4.19"
+            },
+            "type": "library",
+            "extra": {
+                "composer-normalize": {
+                    "indent-size": 2,
+                    "indent-style": "space"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ergebnis\\Json\\Pointer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Möller",
+                    "email": "am@localheinz.com"
+                }
+            ],
+            "description": "Provides JSON pointer as a value object.",
+            "homepage": "https://github.com/ergebnis/json-pointer",
+            "keywords": [
+                "RFC6901",
+                "json",
+                "pointer"
+            ],
+            "support": {
+                "issues": "https://github.com/ergebnis/json-pointer/issues",
+                "source": "https://github.com/ergebnis/json-pointer"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/localheinz",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-29T18:31:34+00:00"
+        },
         {
             "name": "ergebnis/json-printer",
             "version": "3.2.0",
