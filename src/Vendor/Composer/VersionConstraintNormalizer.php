@@ -53,14 +53,14 @@ final class VersionConstraintNormalizer implements NormalizerInterface
             \array_flip(self::PROPERTIES_THAT_SHOULD_BE_NORMALIZED),
         );
 
-        if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
+        if ([] === $objectPropertiesThatShouldBeNormalized) {
             return $json;
         }
 
         foreach ($objectPropertiesThatShouldBeNormalized as $name => $value) {
             $packages = (array) $decoded->{$name};
 
-            if (0 === \count($packages)) {
+            if ([] === $packages) {
                 continue;
             }
 
