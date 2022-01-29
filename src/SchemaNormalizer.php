@@ -177,7 +177,10 @@ final class SchemaNormalizer implements NormalizerInterface
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/object.html#properties
          */
-        if (\property_exists($schema, 'properties')) {
+        if (
+            \property_exists($schema, 'properties')
+            && \is_object($schema->properties)
+        ) {
             /** @var array<string, \stdClass> $objectPropertiesThatAreDefinedBySchema */
             $objectPropertiesThatAreDefinedBySchema = \array_intersect_key(
                 \get_object_vars($schema->properties),
