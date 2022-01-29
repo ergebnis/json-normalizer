@@ -46,7 +46,7 @@ final class ConfigHashNormalizer implements NormalizerInterface
             \array_flip(self::PROPERTIES_THAT_SHOULD_BE_SORTED),
         );
 
-        if (0 === \count($objectPropertiesThatShouldBeNormalized)) {
+        if ([] === $objectPropertiesThatShouldBeNormalized) {
             return $json;
         }
 
