@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`2.2.0...main`][2.2.0...main].
 
+### Changed
+
+- Required `ergebnis/json-schema-validator:^3.0.0` ([#666]), by [@dependabot]
+
 ## [`2.2.0`][2.2.0]
 
 For a full diff see [`2.1.0...2.2.0`][2.1.0...2.2.0].
@@ -476,6 +480,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#632]: https://github.com/ergebnis/json-normalizer/pull/632
 [#639]: https://github.com/ergebnis/json-normalizer/pull/639
 [#641]: https://github.com/ergebnis/json-normalizer/pull/641
+[#666]: https://github.com/ergebnis/json-normalizer/pull/666
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
