@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class FixedFormatNormalizer implements NormalizerInterface
+final class FixedFormatNormalizer implements Normalizer
 {
-    private NormalizerInterface $normalizer;
+    private Normalizer $normalizer;
     private Format\Format $format;
     private Format\FormatterInterface $formatter;
 
     public function __construct(
-        NormalizerInterface $normalizer,
+        Normalizer $normalizer,
         Format\Format $format,
         Format\FormatterInterface $formatter
     ) {

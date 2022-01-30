@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Test;
 
 /**
@@ -34,7 +34,7 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
 
         $reflection = new \ReflectionClass($className);
 
-        /** @var NormalizerInterface $normalizer */
+        /** @var Normalizer $normalizer */
         $normalizer = $reflection->newInstanceWithoutConstructor();
 
         $normalized = $normalizer->normalize($json);

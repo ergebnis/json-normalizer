@@ -154,8 +154,8 @@
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <MixedInferredReturnType occurrences="2">
-      <code>NormalizerInterface</code>
-      <code>NormalizerInterface[]</code>
+      <code>Normalizer</code>
+      <code>Normalizer[]</code>
     </MixedInferredReturnType>
     <MixedReturnStatement occurrences="2">
       <code>$property-&gt;getValue($normalizer)</code>

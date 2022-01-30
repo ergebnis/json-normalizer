@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-interface NormalizerInterface
+interface Normalizer
 {
     /**
      * @throws Exception\SchemaUriCouldNotBeResolved

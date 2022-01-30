@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class JsonEncodeNormalizer implements NormalizerInterface
+final class JsonEncodeNormalizer implements Normalizer
 {
     private Format\JsonEncodeOptions $jsonEncodeOptions;
 

@@ -15,7 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Vendor;
 
@@ -220,7 +220,7 @@ JSON
      */
     private static function assertComposesNormalizer(
         string $className,
-        NormalizerInterface $normalizer
+        Normalizer $normalizer
     ): void {
         $attributeName = 'normalizer';
 
@@ -244,7 +244,7 @@ JSON
      */
     private static function assertComposesNormalizers(
         array $classNames,
-        NormalizerInterface $normalizer
+        Normalizer $normalizer
     ): void {
         $attributeName = 'normalizers';
 
@@ -266,7 +266,7 @@ JSON
         );
     }
 
-    private static function composedNormalizer(NormalizerInterface $normalizer): NormalizerInterface
+    private static function composedNormalizer(Normalizer $normalizer): Normalizer
     {
         $reflection = new \ReflectionObject($normalizer);
 
@@ -278,11 +278,11 @@ JSON
     }
 
     /**
-     * @throws \ReflectionException
+     *@throws \ReflectionException
      *
-     * @return NormalizerInterface[]
+     * @return Normalizer[]
      */
-    private static function composedNormalizers(NormalizerInterface $normalizer): array
+    private static function composedNormalizers(Normalizer $normalizer): array
     {
         $reflection = new \ReflectionObject($normalizer);
 

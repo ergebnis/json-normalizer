@@ -15,7 +15,7 @@ namespace Ergebnis\Json\Normalizer;
 
 use Ergebnis\Json\Printer;
 
-final class IndentNormalizer implements NormalizerInterface
+final class IndentNormalizer implements Normalizer
 {
     private Format\Indent $indent;
     private Printer\PrinterInterface $printer;

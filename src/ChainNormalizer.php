@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class ChainNormalizer implements NormalizerInterface
+final class ChainNormalizer implements Normalizer
 {
     /**
-     * @phpstan-var list<NormalizerInterface>
-     * @psalm-var list<NormalizerInterface>
+     * @phpstan-var list<Normalizer>
+     * @psalm-var list<Normalizer>
      *
-     * @var array<int, NormalizerInterface>
+     * @var array<int, Normalizer>
      */
     private array $normalizers;
 
-    public function __construct(NormalizerInterface ...$normalizers)
+    public function __construct(Normalizer ...$normalizers)
     {
         $this->normalizers = \array_values($normalizers);
     }
@@ -32,7 +32,7 @@ final class ChainNormalizer implements NormalizerInterface
     {
         return \array_reduce(
             $this->normalizers,
-            static function (Json $json, NormalizerInterface $normalizer): Json {
+            static function (Json $json, Normalizer $normalizer): Json {
                 return $normalizer->normalize($json);
             },
             $json,
