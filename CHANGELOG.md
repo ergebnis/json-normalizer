@@ -17,7 +17,7 @@ For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
 - Required `ergebnis/json-schema-validator:^3.0.0` ([#666]), by [@dependabot]
 - Renamed `Exception\ExceptionInterface` to `Exception\Exception` ([#667]), by [@dependabot]
 - Removed `Exception` suffix from all exceptions ([#668]), by [@dependabot]
-- Renamed `NormalizerInterface` to `Nornmalizer` ([#669]), by [@dependabot]
+- Renamed `NormalizerInterface` to `Normalizer` ([#669]), by [@dependabot]
 
 ## [`2.2.0`][2.2.0]
 
