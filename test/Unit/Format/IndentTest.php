@@ -24,9 +24,9 @@ use PHPUnit\Framework;
  *
  * @covers \Ergebnis\Json\Normalizer\Format\Indent
  *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStringException
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyleException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
@@ -50,7 +50,7 @@ final class IndentTest extends Framework\TestCase
     {
         $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
 
-        $this->expectException(Exception\InvalidIndentSizeException::class);
+        $this->expectException(Exception\InvalidIndentSize::class);
 
         Format\Indent::fromSizeAndStyle(
             $size,
@@ -83,7 +83,7 @@ final class IndentTest extends Framework\TestCase
         $size = $faker->numberBetween(1);
         $style = $faker->sentence();
 
-        $this->expectException(Exception\InvalidIndentStyleException::class);
+        $this->expectException(Exception\InvalidIndentStyle::class);
 
         Format\Indent::fromSizeAndStyle(
             $size,
@@ -133,7 +133,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
-        $this->expectException(Exception\InvalidIndentStringException::class);
+        $this->expectException(Exception\InvalidIndentString::class);
 
         Format\Indent::fromString($string);
     }

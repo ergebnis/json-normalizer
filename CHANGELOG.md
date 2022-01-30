@@ -16,6 +16,7 @@ For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
 
 - Required `ergebnis/json-schema-validator:^3.0.0` ([#666]), by [@dependabot]
 - Renamed `Exception\ExceptionInterface` to `Exception\Exception` ([#667]), by [@dependabot]
+- Removed `Exception` suffix from all exceptions ([#668]), by [@dependabot]
 
 ## [`2.2.0`][2.2.0]
 
@@ -489,6 +490,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#641]: https://github.com/ergebnis/json-normalizer/pull/641
 [#666]: https://github.com/ergebnis/json-normalizer/pull/666
 [#667]: https://github.com/ergebnis/json-normalizer/pull/667
+[#668]: https://github.com/ergebnis/json-normalizer/pull/668
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

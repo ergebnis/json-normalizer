@@ -42,13 +42,13 @@ final class SchemaNormalizer implements NormalizerInterface
         try {
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
         } catch (UriResolverException $exception) {
-            throw Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($this->schemaUri);
+            throw Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($this->schemaUri);
         } catch (ResourceNotFoundException $exception) {
-            throw Exception\SchemaUriCouldNotBeReadException::fromSchemaUri($this->schemaUri);
+            throw Exception\SchemaUriCouldNotBeRead::fromSchemaUri($this->schemaUri);
         } catch (InvalidSchemaMediaTypeException $exception) {
-            throw Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::fromSchemaUri($this->schemaUri);
+            throw Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($this->schemaUri);
         } catch (JsonDecodingException $exception) {
-            throw Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($this->schemaUri);
+            throw Exception\SchemaUriReferencesInvalidJsonDocument::fromSchemaUri($this->schemaUri);
         }
 
         $resultBeforeNormalization = $this->schemaValidator->validate(
@@ -58,7 +58,7 @@ final class SchemaNormalizer implements NormalizerInterface
         );
 
         if (!$resultBeforeNormalization->isValid()) {
-            throw Exception\OriginalInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+            throw Exception\OriginalInvalidAccordingToSchema::fromSchemaUriAndErrors(
                 $this->schemaUri,
                 ...\array_map(static function (SchemaValidator\ValidationError $error): string {
                     return $error->message()->toString();
@@ -78,7 +78,7 @@ final class SchemaNormalizer implements NormalizerInterface
         );
 
         if (!$resultAfterNormalization->isValid()) {
-            throw Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+            throw Exception\NormalizedInvalidAccordingToSchema::fromSchemaUriAndErrors(
                 $this->schemaUri,
                 ...\array_map(static function (SchemaValidator\ValidationError $error): string {
                     return $error->message()->toString();

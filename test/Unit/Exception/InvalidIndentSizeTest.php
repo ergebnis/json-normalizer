@@ -18,13 +18,13 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentSizeException
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
  */
-final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
+final class InvalidIndentSizeTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\InvalidIndentSizeException();
+        $exception = new Exception\InvalidIndentSize();
 
         self::assertSame(0, $exception->minimumSize());
         self::assertSame(0, $exception->size());
@@ -37,7 +37,7 @@ final class InvalidIndentSizeExceptionTest extends AbstractExceptionTestCase
         $size = $faker->numberBetween(1);
         $minimumSize = $faker->numberBetween(1);
 
-        $exception = Exception\InvalidIndentSizeException::fromSizeAndMinimumSize(
+        $exception = Exception\InvalidIndentSize::fromSizeAndMinimumSize(
             $size,
             $minimumSize,
         );

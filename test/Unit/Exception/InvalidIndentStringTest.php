@@ -18,13 +18,13 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
  */
-final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
+final class InvalidIndentStringTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\InvalidNewLineStringException();
+        $exception = new Exception\InvalidIndentString();
 
         self::assertSame('', $exception->string());
     }
@@ -33,10 +33,10 @@ final class InvalidNewLineStringExceptionTest extends AbstractExceptionTestCase
     {
         $string = self::faker()->word();
 
-        $exception = Exception\InvalidNewLineStringException::fromString($string);
+        $exception = Exception\InvalidIndentString::fromString($string);
 
         $message = \sprintf(
-            '"%s" is not a valid new-line character sequence.',
+            '"%s" is not a valid indent string',
             $string,
         );
 

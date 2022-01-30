@@ -23,7 +23,7 @@ use PHPUnit\Framework;
  *
  * @covers \Ergebnis\Json\Normalizer\Format\NewLine
  *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineStringException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineString
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class NewLineTest extends Framework\TestCase
@@ -33,7 +33,7 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
-        $this->expectException(Exception\InvalidNewLineStringException::class);
+        $this->expectException(Exception\InvalidNewLineString::class);
 
         Format\NewLine::fromString($string);
     }

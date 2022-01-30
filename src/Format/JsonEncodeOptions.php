@@ -29,12 +29,12 @@ final class JsonEncodeOptions
     }
 
     /**
-     * @throws Exception\InvalidJsonEncodeOptionsException
+     * @throws Exception\InvalidJsonEncodeOptions
      */
     public static function fromInt(int $value): self
     {
         if (0 > $value) {
-            throw Exception\InvalidJsonEncodeOptionsException::fromJsonEncodeOptions($value);
+            throw Exception\InvalidJsonEncodeOptions::fromJsonEncodeOptions($value);
         }
 
         return new self($value);

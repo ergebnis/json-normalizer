@@ -28,12 +28,12 @@ use JsonSchema\SchemaStorage;
  *
  * @covers \Ergebnis\Json\Normalizer\SchemaNormalizer
  *
- * @uses \Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException
- * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchemaException
- * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException
- * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException
- * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
- * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
+ * @uses \Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeRead
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolved
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
@@ -65,7 +65,7 @@ JSON
             new SchemaValidator\SchemaValidator(),
         );
 
-        $this->expectException(Exception\SchemaUriCouldNotBeResolvedException::class);
+        $this->expectException(Exception\SchemaUriCouldNotBeResolved::class);
 
         $normalizer->normalize($json);
     }
@@ -97,7 +97,7 @@ JSON
             new SchemaValidator\SchemaValidator(),
         );
 
-        $this->expectException(Exception\SchemaUriCouldNotBeReadException::class);
+        $this->expectException(Exception\SchemaUriCouldNotBeRead::class);
 
         $normalizer->normalize($json);
     }
@@ -129,7 +129,7 @@ JSON
             new SchemaValidator\SchemaValidator(),
         );
 
-        $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException::class);
+        $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class);
 
         $normalizer->normalize($json);
     }
@@ -161,7 +161,7 @@ JSON
             new SchemaValidator\SchemaValidator(),
         );
 
-        $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocumentException::class);
+        $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocument::class);
 
         $normalizer->normalize($json);
     }
@@ -203,7 +203,7 @@ JSON;
             new SchemaValidator\SchemaValidator(),
         );
 
-        $this->expectException(Exception\OriginalInvalidAccordingToSchemaException::class);
+        $this->expectException(Exception\OriginalInvalidAccordingToSchema::class);
 
         $normalizer->normalize($json);
     }

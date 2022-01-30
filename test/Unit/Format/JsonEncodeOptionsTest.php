@@ -24,7 +24,7 @@ use PHPUnit\Framework;
  *
  * @covers \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptionsException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
@@ -36,7 +36,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
      */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
-        $this->expectException(Exception\InvalidJsonEncodeOptionsException::class);
+        $this->expectException(Exception\InvalidJsonEncodeOptions::class);
 
         Format\JsonEncodeOptions::fromInt($value);
     }

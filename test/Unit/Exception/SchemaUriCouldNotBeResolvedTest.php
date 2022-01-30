@@ -18,25 +18,25 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocumentException
+ * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolved
  */
-final class SchemaUriReferencesInvalidJsonDocumentExceptionTest extends AbstractExceptionTestCase
+final class SchemaUriCouldNotBeResolvedTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\SchemaUriReferencesInvalidJsonDocumentException();
+        $exception = new Exception\SchemaUriCouldNotBeResolved();
 
         self::assertSame('', $exception->schemaUri());
     }
 
-    public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
+    public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
     {
         $schemaUri = self::faker()->url();
 
-        $exception = Exception\SchemaUriReferencesInvalidJsonDocumentException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
-            'Schema URI "%s" does not reference a document with valid JSON syntax.',
+            'Schema URI "%s" could not be resolved.',
             $schemaUri,
         );
 

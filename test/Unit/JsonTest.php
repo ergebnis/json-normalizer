@@ -23,7 +23,7 @@ use PHPUnit\Framework;
  *
  * @covers \Ergebnis\Json\Normalizer\Json
  *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodedException
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncoded
  */
 final class JsonTest extends Framework\TestCase
 {
@@ -33,7 +33,7 @@ final class JsonTest extends Framework\TestCase
     {
         $string = self::faker()->realText();
 
-        $this->expectException(Exception\InvalidJsonEncodedException::class);
+        $this->expectException(Exception\InvalidJsonEncoded::class);
 
         Json::fromEncoded($string);
     }
