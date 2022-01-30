@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidNewLineStringException extends \InvalidArgumentException implements Exception
+final class InvalidIndentString extends \InvalidArgumentException implements Exception
 {
     private string $string = '';
 
     public static function fromString(string $string): self
     {
         $exception = new self(\sprintf(
-            '"%s" is not a valid new-line character sequence.',
+            '"%s" is not a valid indent string',
             $string,
         ));
 

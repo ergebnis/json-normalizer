@@ -18,19 +18,19 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchemaException
+ * @covers \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
  */
-final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExceptionTestCase
+final class OriginalInvalidAccordingToSchemaTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\NormalizedInvalidAccordingToSchemaException();
+        $exception = new Exception\OriginalInvalidAccordingToSchema();
 
-        self::assertSame('', $exception->schemaUri());
         self::assertSame([], $exception->errors());
+        self::assertSame('', $exception->schemaUri());
     }
 
-    public function testFromSchemaUriReturnsNormalizedInvalidAccordingToSchemaException(): void
+    public function testFromSchemaUriAndErrorsReturnsOriginalInvalidAccordingToSchemaException(): void
     {
         $faker = self::faker();
 
@@ -42,13 +42,13 @@ final class NormalizedInvalidAccordingToSchemaExceptionTest extends AbstractExce
             $faker->sentence(),
         ];
 
-        $exception = Exception\NormalizedInvalidAccordingToSchemaException::fromSchemaUriAndErrors(
+        $exception = Exception\OriginalInvalidAccordingToSchema::fromSchemaUriAndErrors(
             $schemaUri,
             ...$errors,
         );
 
         $message = \sprintf(
-            'Normalized JSON is not valid according to schema "%s".',
+            'Original JSON is not valid according to schema "%s".',
             $schemaUri,
         );
 

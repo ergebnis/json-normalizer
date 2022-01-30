@@ -33,20 +33,20 @@ final class Indent
     }
 
     /**
-     * @throws Exception\InvalidIndentStringException
+     * @throws Exception\InvalidIndentString
      */
     public static function fromString(string $value): self
     {
         if (1 !== \preg_match('/^( *|\t+)$/', $value)) {
-            throw Exception\InvalidIndentStringException::fromString($value);
+            throw Exception\InvalidIndentString::fromString($value);
         }
 
         return new self($value);
     }
 
     /**
-     * @throws Exception\InvalidIndentSizeException
-     * @throws Exception\InvalidIndentStyleException
+     * @throws Exception\InvalidIndentSize
+     * @throws Exception\InvalidIndentStyle
      */
     public static function fromSizeAndStyle(
         int $size,
@@ -55,14 +55,14 @@ final class Indent
         $minimumSize = 1;
 
         if ($minimumSize > $size) {
-            throw Exception\InvalidIndentSizeException::fromSizeAndMinimumSize(
+            throw Exception\InvalidIndentSize::fromSizeAndMinimumSize(
                 $size,
                 $minimumSize,
             );
         }
 
         if (!\array_key_exists($style, self::CHARACTERS)) {
-            throw Exception\InvalidIndentStyleException::fromStyleAndAllowedStyles(
+            throw Exception\InvalidIndentStyle::fromStyleAndAllowedStyles(
                 $style,
                 ...\array_keys(self::CHARACTERS),
             );

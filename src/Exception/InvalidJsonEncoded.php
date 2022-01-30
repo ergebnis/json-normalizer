@@ -13,24 +13,24 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class SchemaUriCouldNotBeResolvedException extends \RuntimeException implements Exception
+final class InvalidJsonEncoded extends \InvalidArgumentException implements Exception
 {
-    private string $schemaUri = '';
+    private string $encoded = '';
 
-    public static function fromSchemaUri(string $schemaUri): self
+    public static function fromEncoded(string $encoded): self
     {
         $exception = new self(\sprintf(
-            'Schema URI "%s" could not be resolved.',
-            $schemaUri,
+            '"%s" is not valid JSON.',
+            $encoded,
         ));
 
-        $exception->schemaUri = $schemaUri;
+        $exception->encoded = $encoded;
 
         return $exception;
     }
 
-    public function schemaUri(): string
+    public function encoded(): string
     {
-        return $this->schemaUri;
+        return $this->encoded;
     }
 }

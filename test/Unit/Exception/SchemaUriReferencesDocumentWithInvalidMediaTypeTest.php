@@ -18,25 +18,25 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeReadException
+ * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
  */
-final class SchemaUriCouldNotBeReadExceptionTest extends AbstractExceptionTestCase
+final class SchemaUriReferencesDocumentWithInvalidMediaTypeTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\SchemaUriCouldNotBeReadException();
+        $exception = new Exception\SchemaUriReferencesDocumentWithInvalidMediaType();
 
         self::assertSame('', $exception->schemaUri());
     }
 
-    public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
+    public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
         $schemaUri = self::faker()->url();
 
-        $exception = Exception\SchemaUriCouldNotBeReadException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
-            'Schema URI "%s" does not reference a document that could be read.',
+            'Schema URI "%s" does not reference a document with media type "application/schema+json".',
             $schemaUri,
         );
 

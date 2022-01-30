@@ -34,7 +34,7 @@ final class Json
     }
 
     /**
-     * @throws Exception\InvalidJsonEncodedException
+     * @throws Exception\InvalidJsonEncoded
      */
     public static function fromEncoded(string $encoded): self
     {
@@ -46,7 +46,7 @@ final class Json
                 \JSON_THROW_ON_ERROR,
             );
         } catch (\JsonException $exception) {
-            throw Exception\InvalidJsonEncodedException::fromEncoded($encoded);
+            throw Exception\InvalidJsonEncoded::fromEncoded($encoded);
         }
 
         return new self(

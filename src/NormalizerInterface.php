@@ -16,12 +16,12 @@ namespace Ergebnis\Json\Normalizer;
 interface NormalizerInterface
 {
     /**
-     * @throws Exception\SchemaUriCouldNotBeResolvedException
-     * @throws Exception\SchemaUriCouldNotBeReadException
-     * @throws Exception\SchemaUriReferencesDocumentWithInvalidMediaTypeException
-     * @throws Exception\SchemaUriReferencesInvalidJsonDocumentException
-     * @throws Exception\OriginalInvalidAccordingToSchemaException
-     * @throws Exception\NormalizedInvalidAccordingToSchemaException
+     * @throws Exception\SchemaUriCouldNotBeResolved
+     * @throws Exception\SchemaUriCouldNotBeRead
+     * @throws Exception\SchemaUriReferencesDocumentWithInvalidMediaType
+     * @throws Exception\SchemaUriReferencesInvalidJsonDocument
+     * @throws Exception\OriginalInvalidAccordingToSchema
+     * @throws Exception\NormalizedInvalidAccordingToSchema
      */
     public function normalize(Json $json): Json;
 }

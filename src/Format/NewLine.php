@@ -29,12 +29,12 @@ final class NewLine
     }
 
     /**
-     * @throws Exception\InvalidNewLineStringException
+     * @throws Exception\InvalidNewLineString
      */
     public static function fromString(string $value): self
     {
         if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $value)) {
-            throw Exception\InvalidNewLineStringException::fromString($value);
+            throw Exception\InvalidNewLineString::fromString($value);
         }
 
         return new self($value);

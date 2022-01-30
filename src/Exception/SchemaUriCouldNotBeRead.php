@@ -13,24 +13,24 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidJsonEncodedException extends \InvalidArgumentException implements Exception
+final class SchemaUriCouldNotBeRead extends \RuntimeException implements Exception
 {
-    private string $encoded = '';
+    private string $schemaUri = '';
 
-    public static function fromEncoded(string $encoded): self
+    public static function fromSchemaUri(string $schemaUri): self
     {
         $exception = new self(\sprintf(
-            '"%s" is not valid JSON.',
-            $encoded,
+            'Schema URI "%s" does not reference a document that could be read.',
+            $schemaUri,
         ));
 
-        $exception->encoded = $encoded;
+        $exception->schemaUri = $schemaUri;
 
         return $exception;
     }
 
-    public function encoded(): string
+    public function schemaUri(): string
     {
-        return $this->encoded;
+        return $this->schemaUri;
     }
 }

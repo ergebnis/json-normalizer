@@ -18,25 +18,25 @@ use Ergebnis\Json\Normalizer\Exception;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolvedException
+ * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeRead
  */
-final class SchemaUriCouldNotBeResolvedExceptionTest extends AbstractExceptionTestCase
+final class SchemaUriCouldNotBeReadTest extends AbstractExceptionTestCase
 {
     public function testDefaults(): void
     {
-        $exception = new Exception\SchemaUriCouldNotBeResolvedException();
+        $exception = new Exception\SchemaUriCouldNotBeRead();
 
         self::assertSame('', $exception->schemaUri());
     }
 
-    public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
+    public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
     {
         $schemaUri = self::faker()->url();
 
-        $exception = Exception\SchemaUriCouldNotBeResolvedException::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriCouldNotBeRead::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
-            'Schema URI "%s" could not be resolved.',
+            'Schema URI "%s" does not reference a document that could be read.',
             $schemaUri,
         );
 

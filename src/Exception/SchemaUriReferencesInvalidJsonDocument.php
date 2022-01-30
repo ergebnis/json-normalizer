@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class SchemaUriCouldNotBeReadException extends \RuntimeException implements Exception
+final class SchemaUriReferencesInvalidJsonDocument extends \RuntimeException implements Exception
 {
     private string $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {
         $exception = new self(\sprintf(
-            'Schema URI "%s" does not reference a document that could be read.',
+            'Schema URI "%s" does not reference a document with valid JSON syntax.',
             $schemaUri,
         ));
 

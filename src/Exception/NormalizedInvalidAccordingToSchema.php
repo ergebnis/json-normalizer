@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class NormalizedInvalidAccordingToSchemaException extends \RuntimeException implements Exception
+final class NormalizedInvalidAccordingToSchema extends \RuntimeException implements Exception
 {
     private string $schemaUri = '';
 

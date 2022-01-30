@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class SchemaUriReferencesDocumentWithInvalidMediaTypeException extends \RuntimeException implements Exception
+final class SchemaUriCouldNotBeResolved extends \RuntimeException implements Exception
 {
     private string $schemaUri = '';
 
     public static function fromSchemaUri(string $schemaUri): self
     {
         $exception = new self(\sprintf(
-            'Schema URI "%s" does not reference a document with media type "application/schema+json".',
+            'Schema URI "%s" could not be resolved.',
             $schemaUri,
         ));
 
