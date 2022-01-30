@@ -17,12 +17,12 @@ final class FixedFormatNormalizer implements Normalizer
 {
     private Normalizer $normalizer;
     private Format\Format $format;
-    private Format\FormatterInterface $formatter;
+    private Format\Formatter $formatter;
 
     public function __construct(
         Normalizer $normalizer,
         Format\Format $format,
-        Format\FormatterInterface $formatter
+        Format\Formatter $formatter
     ) {
         $this->normalizer = $normalizer;
         $this->format = $format;

@@ -65,7 +65,7 @@ JSON
             ->with(self::identicalTo($json))
             ->willReturn($normalized);
 
-        $formatter = $this->createMock(Format\FormatterInterface::class);
+        $formatter = $this->createMock(Format\Formatter::class);
 
         $formatter
             ->expects(self::once())
