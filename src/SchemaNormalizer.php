@@ -21,7 +21,7 @@ use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
 
-final class SchemaNormalizer implements NormalizerInterface
+final class SchemaNormalizer implements Normalizer
 {
     private string $schemaUri;
     private SchemaStorage $schemaStorage;

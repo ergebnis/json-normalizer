@@ -16,7 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Normalizer\FixedFormatNormalizer;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
 /**
  * @internal
@@ -66,7 +66,7 @@ JSON
 JSON
         );
 
-        $composedNormalizer = $this->createMock(NormalizerInterface::class);
+        $composedNormalizer = $this->createMock(Normalizer::class);
 
         $composedNormalizer
             ->expects(self::once())

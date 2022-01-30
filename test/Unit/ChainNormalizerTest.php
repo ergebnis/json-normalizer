@@ -15,7 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
 /**
  * @internal
@@ -48,14 +48,14 @@ JSON
 
         $last = \end($results);
 
-        $normalizers = \array_map(function ($result) use ($json): NormalizerInterface {
+        $normalizers = \array_map(function ($result) use ($json): Normalizer {
             static $previous = null;
 
             if (null === $previous) {
                 $previous = $json;
             }
 
-            $normalizer = $this->createMock(NormalizerInterface::class);
+            $normalizer = $this->createMock(Normalizer::class);
 
             $normalizer
                 ->expects(self::once())

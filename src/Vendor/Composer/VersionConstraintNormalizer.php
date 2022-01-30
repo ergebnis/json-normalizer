@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
-final class VersionConstraintNormalizer implements NormalizerInterface
+final class VersionConstraintNormalizer implements Normalizer
 {
     private const PROPERTIES_THAT_SHOULD_BE_NORMALIZED = [
         'conflict',

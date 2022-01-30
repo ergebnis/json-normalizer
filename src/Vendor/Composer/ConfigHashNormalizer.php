@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
-final class ConfigHashNormalizer implements NormalizerInterface
+final class ConfigHashNormalizer implements Normalizer
 {
     private const PROPERTIES_THAT_SHOULD_BE_SORTED = [
         'config',

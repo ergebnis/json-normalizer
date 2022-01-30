@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class CallableNormalizer implements NormalizerInterface
+final class CallableNormalizer implements Normalizer
 {
     /**
      * @var callable

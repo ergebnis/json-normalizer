@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
-final class PackageHashNormalizer implements NormalizerInterface
+final class PackageHashNormalizer implements Normalizer
 {
     /**
      * @see https://github.com/composer/composer/blob/2.0.11/src/Composer/Repository/PlatformRepository.php#L33

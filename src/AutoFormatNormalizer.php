@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
-final class AutoFormatNormalizer implements NormalizerInterface
+final class AutoFormatNormalizer implements Normalizer
 {
-    private NormalizerInterface $normalizer;
+    private Normalizer $normalizer;
     private Format\FormatterInterface $formatter;
 
     public function __construct(
-        NormalizerInterface $normalizer,
+        Normalizer $normalizer,
         Format\FormatterInterface $formatter
     ) {
         $this->normalizer = $normalizer;

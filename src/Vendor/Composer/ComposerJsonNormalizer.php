@@ -17,9 +17,9 @@ use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
 
-final class ComposerJsonNormalizer implements Normalizer\NormalizerInterface
+final class ComposerJsonNormalizer implements Normalizer\Normalizer
 {
-    private Normalizer\NormalizerInterface $normalizer;
+    private Normalizer\Normalizer $normalizer;
 
     public function __construct(string $schemaUri)
     {

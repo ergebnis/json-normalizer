@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\NormalizerInterface;
+use Ergebnis\Json\Normalizer\Normalizer;
 
-final class BinNormalizer implements NormalizerInterface
+final class BinNormalizer implements Normalizer
 {
     public function normalize(Json $json): Json
     {
