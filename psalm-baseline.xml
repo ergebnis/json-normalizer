@@ -155,7 +155,7 @@
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <MixedInferredReturnType occurrences="2">
       <code>Normalizer</code>
-      <code>Normalizer[]</code>
+      <code>array&lt;int, Normalizer&gt;</code>
     </MixedInferredReturnType>
     <MixedReturnStatement occurrences="2">
       <code>$property-&gt;getValue($normalizer)</code>
@@ -179,9 +179,5 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
-    <MixedReturnTypeCoercion occurrences="2">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedReturnTypeCoercion>
   </file>
 </files>

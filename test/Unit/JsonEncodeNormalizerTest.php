@@ -96,7 +96,7 @@ JSON
     /**
      * @see https://docstore.mik.ua/orelly/webprog/pcook/ch04_25.htm
      *
-     * @param int[] $elements
+     * @param array<int, int> $elements
      *
      * @return array<array<int>>
      */

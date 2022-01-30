@@ -309,7 +309,7 @@ JSON
     }
 
     /**
-     * @return int[]
+     * @return array<string, int>
      */
     private static function sizes(): array
     {
@@ -320,7 +320,7 @@ JSON
     }
 
     /**
-     * @return string[]
+     * @return array<string, string>
      */
     private static function characters(): array
     {

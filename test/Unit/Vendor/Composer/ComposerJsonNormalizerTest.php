@@ -238,7 +238,7 @@ JSON
     }
 
     /**
-     * @param string[] $classNames
+     * @param array<int, string> $classNames
      *
      * @throws \ReflectionException
      */
@@ -280,7 +280,7 @@ JSON
     /**
      *@throws \ReflectionException
      *
-     * @return Normalizer[]
+     * @return array<int, Normalizer>
      */
     private static function composedNormalizers(Normalizer $normalizer): array
     {
