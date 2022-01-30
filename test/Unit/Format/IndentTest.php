@@ -318,15 +318,4 @@ JSON
             'int-greater-than-one' => self::faker()->numberBetween(2, 5),
         ];
     }
-
-    /**
-     * @return array<string, string>
-     */
-    private static function characters(): array
-    {
-        return [
-            'space' => ' ',
-            'tab' => "\t",
-        ];
-    }
 }
