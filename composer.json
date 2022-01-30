@@ -23,7 +23,7 @@
     "ext-json": "*",
     "ergebnis/json-pointer": "^2.1.0",
     "ergebnis/json-printer": "^3.2.0",
-    "ergebnis/json-schema-validator": "^2.0.0",
+    "ergebnis/json-schema-validator": "^3.0.0",
     "justinrainbow/json-schema": "^5.2.11"
   },
   "require-dev": {
