@@ -13,6 +13,6 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-interface ExceptionInterface extends \Throwable
+interface Exception extends \Throwable
 {
 }

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class SchemaUriReferencesInvalidJsonDocumentException extends \RuntimeException implements ExceptionInterface
+final class SchemaUriReferencesInvalidJsonDocumentException extends \RuntimeException implements Exception
 {
     private string $schemaUri = '';
 

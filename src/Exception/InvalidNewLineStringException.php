@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidNewLineStringException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidNewLineStringException extends \InvalidArgumentException implements Exception
 {
     private string $string = '';
 
