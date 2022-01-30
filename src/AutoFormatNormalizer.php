@@ -16,11 +16,11 @@ namespace Ergebnis\Json\Normalizer;
 final class AutoFormatNormalizer implements Normalizer
 {
     private Normalizer $normalizer;
-    private Format\FormatterInterface $formatter;
+    private Format\Formatter $formatter;
 
     public function __construct(
         Normalizer $normalizer,
-        Format\FormatterInterface $formatter
+        Format\Formatter $formatter
     ) {
         $this->normalizer = $normalizer;
         $this->formatter = $formatter;
