@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
@@ -53,7 +54,7 @@ final class SchemaNormalizer implements NormalizerInterface
         $resultBeforeNormalization = $this->schemaValidator->validate(
             SchemaValidator\Json::fromString($json->encoded()),
             SchemaValidator\Json::fromString(\json_encode($schema)),
-            SchemaValidator\JsonPointer::empty(),
+            Pointer\JsonPointer::document(),
         );
 
         if (!$resultBeforeNormalization->isValid()) {
@@ -73,7 +74,7 @@ final class SchemaNormalizer implements NormalizerInterface
         $resultAfterNormalization = $this->schemaValidator->validate(
             SchemaValidator\Json::fromString($normalized->encoded()),
             SchemaValidator\Json::fromString(\json_encode($schema)),
-            SchemaValidator\JsonPointer::empty(),
+            Pointer\JsonPointer::document(),
         );
 
         if (!$resultAfterNormalization->isValid()) {
@@ -238,7 +239,7 @@ final class SchemaNormalizer implements NormalizerInterface
                 $result = $this->schemaValidator->validate(
                     SchemaValidator\Json::fromString(\json_encode($data)),
                     SchemaValidator\Json::fromString(\json_encode($anyOfSchema)),
-                    SchemaValidator\JsonPointer::empty(),
+                    Pointer\JsonPointer::document(),
                 );
 
                 if ($result->isValid()) {
@@ -261,7 +262,7 @@ final class SchemaNormalizer implements NormalizerInterface
                 $result = $this->schemaValidator->validate(
                     SchemaValidator\Json::fromString(\json_encode($data)),
                     SchemaValidator\Json::fromString(\json_encode($oneOfSchema)),
-                    SchemaValidator\JsonPointer::empty(),
+                    Pointer\JsonPointer::document(),
                 );
 
                 if ($result->isValid()) {
