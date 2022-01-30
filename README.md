@@ -63,7 +63,7 @@ $json = Normalizer\Json::fromEncoded($encoded);
 /* @var Normalizer\Normalizer $composedNormalizer */
 $normalizer = new Normalizer\AutoFormatNormalizer(
     $composedNormalizer,
-    new Normalizer\Format\Formatter(new Printer\Printer())
+    new Normalizer\Format\DefaultFormatter(new Printer\Printer())
 );
 
 $normalized = $normalizer->normalize($json);
@@ -184,7 +184,7 @@ $json = Normalizer\Json::fromEncoded($encoded);
 $normalizer = new Normalizer\FixedFormatNormalizer(
     $composedNormalizer,
     $format,
-    new Normalizer\Format\Formatter(new Printer\Printer())
+    new Normalizer\Format\DefaultFormatter(new Printer\Printer())
 );
 
 $normalized = $normalizer->normalize($json);

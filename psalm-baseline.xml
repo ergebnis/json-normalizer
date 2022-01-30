@@ -63,20 +63,20 @@
       <code>$value</code>
     </UnusedForeachValue>
   </file>
-  <file src="test/Unit/Format/FormatTest.php">
-    <MixedInferredReturnType occurrences="3">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
-  <file src="test/Unit/Format/FormatterTest.php">
+  <file src="test/Unit/Format/DefaultFormatterTest.php">
     <MixedArgument occurrences="1">
       <code>$newLineString</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$newLineString</code>
     </MixedAssignment>
+  </file>
+  <file src="test/Unit/Format/FormatTest.php">
+    <MixedInferredReturnType occurrences="3">
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
+    </MixedInferredReturnType>
   </file>
   <file src="test/Unit/Format/IndentTest.php">
     <MixedArgument occurrences="1">
