@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidIndentSizeException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidIndentSizeException extends \InvalidArgumentException implements Exception
 {
     private int $size = 0;
     private int $minimumSize = 0;

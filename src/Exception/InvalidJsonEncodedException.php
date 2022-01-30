@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidJsonEncodedException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidJsonEncodedException extends \InvalidArgumentException implements Exception
 {
     private string $encoded = '';
 

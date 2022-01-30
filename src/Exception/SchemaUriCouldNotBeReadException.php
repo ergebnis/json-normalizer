@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class SchemaUriCouldNotBeReadException extends \RuntimeException implements ExceptionInterface
+final class SchemaUriCouldNotBeReadException extends \RuntimeException implements Exception
 {
     private string $schemaUri = '';
 

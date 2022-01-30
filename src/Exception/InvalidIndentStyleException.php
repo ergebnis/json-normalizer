@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Exception;
 
-final class InvalidIndentStyleException extends \InvalidArgumentException implements ExceptionInterface
+final class InvalidIndentStyleException extends \InvalidArgumentException implements Exception
 {
     private string $style = '';
 
