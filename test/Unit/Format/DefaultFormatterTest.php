@@ -22,7 +22,7 @@ use PHPUnit\Framework;
 /**
  * @internal
  *
- * @covers \Ergebnis\Json\Normalizer\Format\Formatter
+ * @covers \Ergebnis\Json\Normalizer\Format\DefaultFormatter
  *
  * @uses \Ergebnis\Json\Normalizer\Format\Format
  * @uses \Ergebnis\Json\Normalizer\Format\Indent
@@ -30,7 +30,7 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  * @uses \Ergebnis\Json\Normalizer\Json
  */
-final class FormatterTest extends Framework\TestCase
+final class DefaultFormatterTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
@@ -92,7 +92,7 @@ JSON;
             )
             ->willReturn($printedWithIndentAndNewLine);
 
-        $formatter = new Format\Formatter($printer);
+        $formatter = new Format\DefaultFormatter($printer);
 
         $formatted = $formatter->format(
             $json,

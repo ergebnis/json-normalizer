@@ -18,6 +18,7 @@ For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
 - Renamed `Exception\ExceptionInterface` to `Exception\Exception` ([#667]), by [@dependabot]
 - Removed `Exception` suffix from all exceptions ([#668]), by [@dependabot]
 - Renamed `NormalizerInterface` to `Normalizer` ([#669]), by [@dependabot]
+- Renamed `Format\Formatter` to `Format\DefaultFormatter` ([#672]), by [@dependabot]
 
 ## [`2.2.0`][2.2.0]
 
@@ -493,6 +494,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#667]: https://github.com/ergebnis/json-normalizer/pull/667
 [#668]: https://github.com/ergebnis/json-normalizer/pull/668
 [#669]: https://github.com/ergebnis/json-normalizer/pull/669
+[#672]: https://github.com/ergebnis/json-normalizer/pull/672
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

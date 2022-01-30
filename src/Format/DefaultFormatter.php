@@ -16,7 +16,7 @@ namespace Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Printer;
 
-final class Formatter implements FormatterInterface
+final class DefaultFormatter implements FormatterInterface
 {
     private Printer\PrinterInterface $printer;
 
