@@ -217,7 +217,7 @@ JSON
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     private static function propertiesWhereValuesOfHashAreVersionConstraints(): array
     {
@@ -233,7 +233,7 @@ JSON
     /**
      * @see https://getcomposer.org/doc/articles/versions.md
      *
-     * @return string[]
+     * @return array<string, string>
      */
     private static function versionConstraints(): array
     {

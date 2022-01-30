@@ -372,7 +372,7 @@ JSON
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     private static function properties(): array
     {

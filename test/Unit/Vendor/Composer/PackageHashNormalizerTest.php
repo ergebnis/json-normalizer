@@ -132,7 +132,7 @@ JSON
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     private static function propertiesWhereKeysOfHashArePackages(): array
     {
