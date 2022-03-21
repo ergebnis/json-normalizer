@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.0.0...main`][3.0.0...main].
 
+### Changed
+
+- Required `ergebnis/json-pointer:^3.0.0` and `ergebnis/json-schema-validator:^3.1.0` ([#697]), by [@localheinz]
+
 ## [`3.0.0`][3.0.0]
 
 For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
@@ -497,6 +501,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#669]: https://github.com/ergebnis/json-normalizer/pull/669
 [#672]: https://github.com/ergebnis/json-normalizer/pull/672
 [#673]: https://github.com/ergebnis/json-normalizer/pull/673
+[#697]: https://github.com/ergebnis/json-normalizer/pull/697
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
