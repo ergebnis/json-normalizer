@@ -24,15 +24,6 @@ final class ConfigHashNormalizer implements Normalizer
         'scripts-descriptions',
     ];
 
-    /**
-     * @see https://getcomposer.org/doc/06-config.md#allow-plugins
-     * @see https://getcomposer.org/doc/06-config.md#preferred-install
-     */
-    private const PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED = [
-        'config.allow-plugins',
-        'config.preferred-install',
-    ];
-
     public function normalize(Json $json): Json
     {
         $decoded = $json->decoded();
@@ -72,10 +63,6 @@ final class ConfigHashNormalizer implements Normalizer
         string $propertyPath,
         $value
     ) {
-        if (\in_array($propertyPath, self::PROPERTY_PATHS_THAT_SHOULD_NOT_BE_SORTED, true)) {
-            return $value;
-        }
-
         if (!\is_object($value)) {
             return $value;
         }
@@ -87,7 +74,16 @@ final class ConfigHashNormalizer implements Normalizer
             return $value;
         }
 
-        \ksort($sorted);
+        // @see https://getcomposer.org/doc/06-config.md#allow-plugins
+        // @see https://getcomposer.org/doc/06-config.md#preferred-install
+        \uksort($sorted, static function (string $a, string $b) {
+            // '*' = ASCII 42 (ie, before all letters, numbers, and dash)
+            // '~' = ASCII 126 (ie, after all letters, numbers, and dash)
+            $a = \str_replace('*', '~', $a);
+            $b = \str_replace('*', '~', $b);
+
+            return \strcmp($a, $b);
+        });
 
         $names = \array_keys($sorted);
 
