@@ -74,15 +74,11 @@ final class ConfigHashNormalizer implements Normalizer
             return $value;
         }
 
-        // @see https://getcomposer.org/doc/06-config.md#allow-plugins
-        // @see https://getcomposer.org/doc/06-config.md#preferred-install
-        \uksort($sorted, static function (string $a, string $b) {
-            // '*' = ASCII 42 (ie, before all letters, numbers, and dash)
-            // '~' = ASCII 126 (ie, after all letters, numbers, and dash)
-            $a = \str_replace('*', '~', $a);
-            $b = \str_replace('*', '~', $b);
-
-            return \strcmp($a, $b);
+        \uksort($sorted, static function (string $a, string $b): int {
+            return \strcmp(
+                self::normalizeKey($a),
+                self::normalizeKey($b),
+            );
         });
 
         $names = \array_keys($sorted);
@@ -99,6 +95,24 @@ final class ConfigHashNormalizer implements Normalizer
                     $value,
                 );
             }, $sorted, $names),
+        );
+    }
+
+    /**
+     * Replaces characters in keys to ensure the correct order.
+     *
+     * - '*' = ASCII 42 (i.e., before all letters, numbers, and dash)
+     * - '~' = ASCII 126 (i.e., after all letters, numbers, and dash)
+     *
+     * @see https://getcomposer.org/doc/06-config.md#allow-plugins
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
+    private static function normalizeKey(string $key): string
+    {
+        return \str_replace(
+            '*',
+            '~',
+            $key,
         );
     }
 }
