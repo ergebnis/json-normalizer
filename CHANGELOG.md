@@ -6,21 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`3.0.1...main`][3.0.1...main].
-
-## [`3.0.1`][3.0.1]
-
-For a full diff see [`3.0.0...3.0.1`][3.0.0...3.0.1].
-
-### Fixed
-
-- Adjusted `ConfigHashNormalizer` to sort keys correctly ([#723]), by [@fredded]
-
-### Changed
-
-- Required `ergebnis/json-pointer:^3.0.0` and `ergebnis/json-schema-validator:^3.1.0` ([#697]), by [@localheinz]
-- Required `ergebnis/json-pointer:^3.1.0` ([#698]), by [@dependabot]
-- Required `justinrainbow/json-schema:^5.2.12` ([#705]), by [@dependabot]
+For a full diff see [`3.0.0...main`][3.0.0...main].
 
 ## [`3.0.0`][3.0.0]
 
@@ -29,11 +15,18 @@ For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
 ### Changed
 
 - Required `ergebnis/json-schema-validator:^3.0.0` ([#666]), by [@dependabot]
-- Renamed `Exception\ExceptionInterface` to `Exception\Exception` ([#667]), by [@dependabot]
-- Removed `Exception` suffix from all exceptions ([#668]), by [@dependabot]
-- Renamed `NormalizerInterface` to `Normalizer` ([#669]), by [@dependabot]
-- Renamed `Format\Formatter` to `Format\DefaultFormatter` ([#672]), by [@dependabot]
-- Renamed `Format\FormatterInterface` to `Format\Formatter` ([#673]), by [@dependabot]
+- Renamed `Exception\ExceptionInterface` to `Exception\Exception` ([#667]), by [@localheinz]
+- Removed `Exception` suffix from all exceptions ([#668]), by [@localheinz]
+- Renamed `NormalizerInterface` to `Normalizer` ([#669]), by [@localheinz]
+- Renamed `Format\Formatter` to `Format\DefaultFormatter` ([#672]), by [@localheinz]
+- Renamed `Format\FormatterInterface` to `Format\Formatter` ([#673]), by [@localheinz]
+- Required `ergebnis/json-pointer:^3.0.0` and `ergebnis/json-schema-validator:^3.1.0` ([#697]), by [@localheinz]
+- Required `ergebnis/json-pointer:^3.1.0` ([#698]), by [@dependabot]
+- Required `justinrainbow/json-schema:^5.2.12` ([#705]), by [@dependabot]
+
+### Fixed
+
+- Adjusted `ConfigHashNormalizer` to sort keys correctly ([#723]), by [@fredded]
 
 ## [`2.2.0`][2.2.0]
 
@@ -423,8 +416,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.0.0...2.1.0]: https://github.com/ergebnis/json-normalizer/compare/2.0.0...2.1.0
 [2.1.0...2.2.0]: https://github.com/ergebnis/json-normalizer/compare/2.1.0...2.2.0
 [2.2.0...3.0.0]: https://github.com/ergebnis/json-normalizer/compare/2.2.0...3.0.0
-[3.0.0...3.0.1]: https://github.com/ergebnis/json-normalizer/compare/3.0.0...3.0.1
-[3.0.1...main]: https://github.com/ergebnis/json-normalizer/compare/3.0.1...main
+[3.0.0...main]: https://github.com/ergebnis/json-normalizer/compare/3.0.0...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
