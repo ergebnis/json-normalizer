@@ -81,20 +81,20 @@ final class ConfigHashNormalizer implements Normalizer
             );
         });
 
-        $names = \array_keys($sorted);
+        $keys = \array_keys($sorted);
 
         return \array_combine(
-            $names,
-            \array_map(static function ($value, string $name) use ($propertyPath) {
+            $keys,
+            \array_map(static function ($value, string $key) use ($propertyPath) {
                 return self::sortByKey(
                     \sprintf(
                         '%s.%s',
                         $propertyPath,
-                        $name,
+                        $key,
                     ),
                     $value,
                 );
-            }, $sorted, $names),
+            }, $sorted, $keys),
         );
     }
 
