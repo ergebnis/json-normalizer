@@ -199,7 +199,7 @@ JSON
     /**
      * @see https://getcomposer.org/doc/06-config.md#allow-plugins
      */
-    public function testNormalizeDoesNotSortAllowPluginsInConfig(): void
+    public function testNormalizeCorrectlySortsAllowPluginsInConfigWithoutWildcards(): void
     {
         $json = Json::fromEncoded(
             <<<'JSON'
@@ -207,9 +207,9 @@ JSON
   "config": {
     "sort-packages": true,
     "allow-plugins": {
-      "foo/*": true,
-      "bar/*": false,
-      "*": true
+      "foo/bar": true,
+      "bar/qux": false,
+      "foo/baz": false
     }
   }
 }
@@ -221,50 +221,11 @@ JSON
 {
   "config": {
     "allow-plugins": {
-      "foo/*": true,
-      "bar/*": false,
-      "*": true
+      "bar/qux": false,
+      "foo/bar": true,
+      "foo/baz": false
     },
     "sort-packages": true
-  }
-}
-JSON
-        );
-
-        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
-
-        $normalized = $normalizer->normalize($json);
-
-        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
-    }
-
-    public function testNormalizeSortsAllowPluginsInOtherProperty(): void
-    {
-        $json = Json::fromEncoded(
-            <<<'JSON'
-{
-  "extra": {
-    "something": {
-      "allowed-plugins": {
-        "foo": true,
-        "bar": false
-      }
-    }
-  }
-}
-JSON
-        );
-
-        $expected = Json::fromEncoded(
-            <<<'JSON'
-{
-  "extra": {
-    "something": {
-      "allowed-plugins": {
-        "bar": false,
-        "foo": true
-      }
-    }
   }
 }
 JSON
@@ -281,7 +242,7 @@ JSON
      * @see https://github.com/ergebnis/composer-normalize/issues/644
      * @see https://getcomposer.org/doc/06-config.md#preferred-install
      */
-    public function testNormalizeDoesNotSortPreferredInstallInConfig(): void
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardAtEnd(): void
     {
         $json = Json::fromEncoded(
             <<<'JSON'
@@ -289,8 +250,8 @@ JSON
   "config": {
     "sort-packages": true,
     "preferred-install": {
-      "foo/*": "source",
-      "bar/*": "source",
+      "foo/package-one": "source",
+      "bar/another-package": "source",
       "*": "dist"
     }
   }
@@ -303,8 +264,8 @@ JSON
 {
   "config": {
     "preferred-install": {
-      "foo/*": "source",
-      "bar/*": "source",
+      "bar/another-package": "source",
+      "foo/package-one": "source",
       "*": "dist"
     },
     "sort-packages": true
@@ -320,17 +281,21 @@ JSON
         self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
     }
 
-    public function testNormalizeSortsPreferredInstallInOtherProperty(): void
+    /**
+     * @see https://github.com/ergebnis/composer-normalize/issues/644
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardAtStart(): void
     {
         $json = Json::fromEncoded(
             <<<'JSON'
 {
-  "extra": {
-    "something": {
-      "preferred-install": {
-        "foo": "bar",
-        "bar": "baz"
-      }
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "*": "dist",
+      "foo/package-one": "source",
+      "bar/another-package": "source"
     }
   }
 }
@@ -340,13 +305,189 @@ JSON
         $expected = Json::fromEncoded(
             <<<'JSON'
 {
-  "extra": {
-    "something": {
-      "preferred-install": {
-        "bar": "baz",
-        "foo": "bar"
-      }
+  "config": {
+    "preferred-install": {
+      "bar/another-package": "source",
+      "foo/package-one": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
     }
+
+    /**
+     * @see https://github.com/ergebnis/composer-normalize/issues/644
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardInTheMiddle(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "foo/package-two": "source",
+      "foo/package-one": "source",
+      "*": "dist",
+      "bar/another-package-2": "source",
+      "bar/another-package-1": "source"
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "preferred-install": {
+      "bar/another-package-1": "source",
+      "bar/another-package-2": "source",
+      "foo/package-one": "source",
+      "foo/package-two": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    /**
+     * @see https://github.com/ergebnis/composer-normalize/issues/644
+     * @see https://getcomposer.org/doc/06-config.md#preferred-install
+     */
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWithVendorWildcardAtEnd(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "foo/package-two": "dist",
+      "foo/package-one": "dist",
+      "*": "dist",
+      "foo/*": "source"
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "preferred-install": {
+      "foo/package-one": "dist",
+      "foo/package-two": "dist",
+      "foo/*": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWhenMoreSpecificAfterWildcard(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "foo/*": "source",
+      "foo/package-two": "dist",
+      "foo/package-one": "dist",
+      "*": "dist"
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "preferred-install": {
+      "foo/package-one": "dist",
+      "foo/package-two": "dist",
+      "foo/*": "source",
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
+JSON
+        );
+
+        $normalizer = new Vendor\Composer\ConfigHashNormalizer();
+
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+    }
+
+    public function testNormalizeCorrectlySortsPreferredInstallInConfigWhenMoreSpecificWildcardAfterWildcard(): void
+    {
+        $json = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "sort-packages": true,
+    "preferred-install": {
+      "foo/something-longer-but-alphabetically-after-package-*": "source",
+      "foo/*": "dist",
+      "foo/package-*": "source",
+      "foo/package-one": "dist",
+      "*": "dist"
+    }
+  }
+}
+JSON
+        );
+
+        $expected = Json::fromEncoded(
+            <<<'JSON'
+{
+  "config": {
+    "preferred-install": {
+      "foo/package-one": "dist",
+      "foo/package-*": "source",
+      "foo/something-longer-but-alphabetically-after-package-*": "source",
+      "foo/*": "dist",
+      "*": "dist"
+    },
+    "sort-packages": true
   }
 }
 JSON
