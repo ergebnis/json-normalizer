@@ -20,6 +20,7 @@ For a full diff see [`3.0.0...3.0.1`][3.0.0...3.0.1].
 
 - Required `ergebnis/json-pointer:^3.0.0` and `ergebnis/json-schema-validator:^3.1.0` ([#697]), by [@localheinz]
 - Required `ergebnis/json-pointer:^3.1.0` ([#698]), by [@dependabot]
+- Required `justinrainbow/json-schema:^5.2.12` ([#705]), by [@dependabot]
 
 ## [`3.0.0`][3.0.0]
 
@@ -514,6 +515,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#673]: https://github.com/ergebnis/json-normalizer/pull/673
 [#697]: https://github.com/ergebnis/json-normalizer/pull/697
 [#698]: https://github.com/ergebnis/json-normalizer/pull/698
+[#705]: https://github.com/ergebnis/json-normalizer/pull/705
 [#723]: https://github.com/ergebnis/json-normalizer/pull/723
 
 [@BackEndTea]: https://github.com/BackEndTea
