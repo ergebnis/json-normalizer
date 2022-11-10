@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
+use Composer\Semver\Semver;
 use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 
@@ -28,7 +29,7 @@ final class VersionConstraintNormalizer implements Normalizer
     private const MAP = [
         'and' => [
             '{\s*,\s*}',
-            ',',
+            ' ',
         ],
         'or' => [
             '{\s*\|\|?\s*}',
@@ -77,7 +78,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = $versionConstraint;
+        $normalized = \trim($versionConstraint);
 
         foreach (self::MAP as [$pattern, $glue]) {
             /** @var array<int, string> $split */
@@ -92,6 +93,70 @@ final class VersionConstraintNormalizer implements Normalizer
             );
         }
 
-        return \trim($normalized);
+        $split = \explode(' ', $normalized);
+
+        foreach ($split as &$part) {
+            // Replace wildcard version range with tilde operator
+            $part = \preg_replace('{^(\d+(?:\.\d+)*)\.\*$}', '~$1.0', $part);
+
+            // Prefer caret operator when equivalent tilde operator was used
+            $part = \preg_replace('{^~(\d+(?:\.\d+)?)$}', '^$1', $part);
+
+            // Assert minimum number of version number parts for the caret operator
+            $part = \preg_replace('{^(\^\d+)$}', '$1.0', $part);
+        }
+
+        $normalized = \implode(' ', $split);
+
+        // Sort
+        $sorter = static function (string $a, string $b): int {
+            $a = \trim($a, '<>=!~^');
+            $b = \trim($b, '<>=!~^');
+
+            return \strcmp($a, $b);
+        };
+
+        $orGroups = \explode(' || ', $normalized);
+
+        foreach ($orGroups as &$or) {
+            $ranges = \explode(' - ', $or);
+
+            foreach ($ranges as &$range) {
+                $andGroups = \explode(' ', $range);
+                \usort($andGroups, $sorter);
+                $range = \implode(' ', $andGroups);
+            }
+
+            \usort($ranges, $sorter);
+            $or = \implode(' - ', $ranges);
+        }
+
+        \usort($orGroups, $sorter);
+
+        do {
+            $hasChanged = false;
+
+            for ($i = 0, $iMax = \count($orGroups) - 1; $i < $iMax; ++$i) {
+                $a = $orGroups[$i];
+                $b = $orGroups[$i + 1];
+
+                $regex = '{^[~^]\d+(?:\.\d+)*$}';
+
+                if (\preg_match($regex, $a) && \preg_match($regex, $b)) {
+                    if (Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                        // Remove overlapping constraints
+                        $hasChanged = true;
+                        $orGroups[$i + 1] = null;
+                        $orGroups = \array_values(\array_filter($orGroups));
+
+                        break;
+                    }
+                }
+            }
+        } while ($hasChanged);
+
+        $normalized = \implode(' || ', $orGroups);
+
+        return $normalized;
     }
 }

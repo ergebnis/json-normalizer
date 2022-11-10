@@ -437,9 +437,14 @@ When `composer.json` contains version constraints in the
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 - all constraints are trimmed
-- *and- constraints are separated by a single space (` `) or a comma (`,`)
+- *and- constraints are separated by a single space (` `)
 - *or- constraints are separated by double-pipe with a single space before and after (` || `)
-- *range- constraints are separated by a single space (` `)
+- *range- constraints are separated by a hyphen and a single space before and after (` - `)
+- overlapping constraints are removed (`^1.0 || ^1.1 || ^2.0` -> `^1.0 || ^2.0`)
+- tilde operators are preferred over wildcard version ranges (`1.0.*` -> `~1.0.0`)
+- caret operators are preferred over tilde operators (`~1` -> `^1.0`, `~1.3` -> `^1.3`)
+- version numbers have a minimum number of parts (`^1` -> `^1.0`)
+- version numbers are sorted in ascending order (`^2.0 || ^1.4` -> `^1.4 || ^2.0`)
 
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 

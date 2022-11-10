@@ -244,6 +244,7 @@ JSON
             'dev-main' => 'dev-main',
             'dev-my-feature' => 'dev-my-feature',
             'dev-main#bf2eeff' => 'dev-main#bf2eeff',
+            '2.x-dev' => '2.x-dev',
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#exact-version-constraint
              */
@@ -253,11 +254,11 @@ JSON
              */
             '>=1.0' => '>=1.0',
             '>=1.0 <2.0' => '>=1.0 <2.0',
-            '>=1.0,<2.0' => '>=1.0,<2.0',
+            '>=1.0,<2.0' => '>=1.0 <2.0',
             '>=1.0  <2.0' => '>=1.0 <2.0',
-            '>=1.0 , <2.0' => '>=1.0,<2.0',
+            '>=1.0 , <2.0' => '>=1.0 <2.0',
             '>=1.0 <1.1 || >=1.2' => '>=1.0 <1.1 || >=1.2',
-            '>=1.0,<1.1 || >=1.2' => '>=1.0,<1.1 || >=1.2',
+            '>=1.0,<1.1 || >=1.2' => '>=1.0 <1.1 || >=1.2',
             '>=1.0  <1.1||>=1.2' => '>=1.0 <1.1 || >=1.2',
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-
@@ -265,13 +266,29 @@ JSON
             '1.0 - 2.0' => '1.0 - 2.0',
             '1.0  -  2.0' => '1.0 - 2.0',
             /**
+             * @see https://getcomposer.org/doc/articles/versions.md#wildcard-version-range-
+             */
+            '1.2.*' => '~1.2.0', // prefer tilde operator when equivalent
+            '3.*' => '^3.0', // prefer caret operator when equivalent
+            /**
              * @see https://getcomposer.org/doc/articles/versions.md#next-significant-release-operators
              */
-            '~1.2' => '~1.2',
+            '~1.2' => '^1.2', // prefer caret operator when equivalent
+            '~1.2.3' => '~1.2.3',
+            '~1.2.3 || ~1.2.5' => '~1.2.3', // remove overlapping / duplicate
+            '~2.4.6 || ~1.3.5' => '~1.3.5 || ~2.4.6', // sort
+            '~5' => '^5.0', // minimum number of parts to version string, prefer caret when equivalent
             /**
              * @see https://getcomposer.org/doc/articles/versions.md#caret-version-range-
              */
             '^1.2.3' => '^1.2.3',
+            '^4.5' => '^4.5',
+            '^7.0 || ^7.1 || ^7.2 || ^8.0' => '^7.0 || ^8.0', // remove overlapping / duplicate
+            '^6.5 || ^7.0 || ^7.1 || ^7.2 || ^8.0' => '^6.5 || ^7.0 || ^8.0', // remove overlapping / duplicate
+            '^1.3 || ~1.5.7' => '^1.3', // remove overlapping / duplicate
+            '^2.4 || ^1.2' => '^1.2 || ^2.4', // sort
+            '^1' => '^1.0', // minimum number of parts to version string
+            '^2.3.1|^3.0' => '^2.3.1 || ^3.0', // single to double pipes
         ];
     }
 }
