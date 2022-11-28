@@ -64,7 +64,7 @@ final class VersionConstraintNormalizer implements Normalizer
                 continue;
             }
 
-            $decoded->{$name} = \array_map(function (string $versionConstraint): string {
+            $decoded->{$name} = \array_map(static function (string $versionConstraint): string {
                 return self::normalizeVersionConstraint($versionConstraint);
             }, $packages);
         }
