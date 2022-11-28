@@ -19,6 +19,7 @@ final class OriginalInvalidAccordingToSchema extends \RuntimeException implement
 
     /**
      * @phpstan-var list<string>
+     *
      * @psalm-var list<string>
      *
      * @var array<int, string>
@@ -47,6 +48,7 @@ final class OriginalInvalidAccordingToSchema extends \RuntimeException implement
 
     /**
      * @phpstan-return list<string>
+     *
      * @psalm-return list<string>
      *
      * @return array<int, string>
