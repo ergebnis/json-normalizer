@@ -21,11 +21,8 @@ use Ergebnis\Json\Normalizer\Json;
  */
 final class NewLine
 {
-    private string $value;
-
-    private function __construct(string $value)
+    private function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     /**

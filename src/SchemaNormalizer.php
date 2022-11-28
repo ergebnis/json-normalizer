@@ -23,18 +23,11 @@ use JsonSchema\SchemaStorage;
 
 final class SchemaNormalizer implements Normalizer
 {
-    private string $schemaUri;
-    private SchemaStorage $schemaStorage;
-    private SchemaValidator\SchemaValidator $schemaValidator;
-
     public function __construct(
-        string $schemaUri,
-        SchemaStorage $schemaStorage,
-        SchemaValidator\SchemaValidator $schemaValidator
+        private string $schemaUri,
+        private SchemaStorage $schemaStorage,
+        private SchemaValidator\SchemaValidator $schemaValidator,
     ) {
-        $this->schemaUri = $schemaUri;
-        $this->schemaStorage = $schemaStorage;
-        $this->schemaValidator = $schemaValidator;
     }
 
     public function normalize(Json $json): Json
@@ -98,7 +91,7 @@ final class SchemaNormalizer implements Normalizer
      */
     private function normalizeData(
         $data,
-        object $schema
+        object $schema,
     ) {
         if (\is_array($data)) {
             return $this->normalizeArray(
@@ -124,7 +117,7 @@ final class SchemaNormalizer implements Normalizer
      */
     private function normalizeArray(
         array $data,
-        object $schema
+        object $schema,
     ): array {
         $schema = $this->resolveSchema(
             $data,
@@ -165,7 +158,7 @@ final class SchemaNormalizer implements Normalizer
 
     private function normalizeObject(
         object $data,
-        object $schema
+        object $schema,
     ): object {
         $schema = $this->resolveSchema(
             $data,
@@ -226,7 +219,7 @@ final class SchemaNormalizer implements Normalizer
 
     private function resolveSchema(
         $data,
-        object $schema
+        object $schema,
     ): object {
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/combining.html#anyof

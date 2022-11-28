@@ -25,11 +25,9 @@ final class Indent
         'space' => ' ',
         'tab' => "\t",
     ];
-    private string $value;
 
-    private function __construct(string $value)
+    private function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     /**
@@ -50,7 +48,7 @@ final class Indent
      */
     public static function fromSizeAndStyle(
         int $size,
-        string $style
+        string $style,
     ): self {
         $minimumSize = 1;
 

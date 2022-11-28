@@ -220,7 +220,7 @@ JSON
      */
     private static function assertComposesNormalizer(
         string $className,
-        Normalizer $normalizer
+        Normalizer $normalizer,
     ): void {
         $attributeName = 'normalizer';
 
@@ -244,7 +244,7 @@ JSON
      */
     private static function assertComposesNormalizers(
         array $classNames,
-        Normalizer $normalizer
+        Normalizer $normalizer,
     ): void {
         $attributeName = 'normalizers';
 
@@ -256,7 +256,7 @@ JSON
         $composedNormalizers = self::composedNormalizers($normalizer);
 
         $composedNormalizerClassNames = \array_map(static function ($normalizer): string {
-            return \get_class($normalizer);
+            return $normalizer::class;
         }, $composedNormalizers);
 
         self::assertSame(

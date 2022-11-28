@@ -99,7 +99,7 @@ JSON
     public function testNormalizeNormalizesVersionConstraints(
         string $property,
         string $versionConstraint,
-        string $normalizedVersionConstraint
+        string $normalizedVersionConstraint,
     ): void {
         $json = Json::fromEncoded(
             <<<JSON
@@ -153,7 +153,7 @@ JSON
     public function testNormalizeNormalizesTrimsVersionConstraints(
         string $property,
         string $versionConstraint,
-        string $trimmedVersionConstraint
+        string $trimmedVersionConstraint,
     ): void {
         $json = Json::fromEncoded(
             <<<JSON

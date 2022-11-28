@@ -21,11 +21,8 @@ use Ergebnis\Json\Normalizer\Json;
  */
 final class JsonEncodeOptions
 {
-    private int $value;
-
-    private function __construct(int $value)
+    private function __construct(private int $value)
     {
-        $this->value = $value;
     }
 
     /**
@@ -44,7 +41,7 @@ final class JsonEncodeOptions
     {
         $jsonEncodeOptions = 0;
 
-        if (false === \strpos($json->encoded(), '\/')) {
+        if (!\str_contains($json->encoded(), '\/')) {
             $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
         }
 

@@ -15,15 +15,10 @@ namespace Ergebnis\Json\Normalizer;
 
 final class AutoFormatNormalizer implements Normalizer
 {
-    private Normalizer $normalizer;
-    private Format\Formatter $formatter;
-
     public function __construct(
-        Normalizer $normalizer,
-        Format\Formatter $formatter
+        private Normalizer $normalizer,
+        private Format\Formatter $formatter,
     ) {
-        $this->normalizer = $normalizer;
-        $this->formatter = $formatter;
     }
 
     public function normalize(Json $json): Json
