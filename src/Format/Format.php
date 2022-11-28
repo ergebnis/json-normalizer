@@ -29,7 +29,7 @@ final class Format
         JsonEncodeOptions $jsonEncodeOptions,
         Indent $indent,
         NewLine $newLine,
-        bool $hasFinalNewLine
+        bool $hasFinalNewLine,
     ) {
         $this->jsonEncodeOptions = $jsonEncodeOptions;
         $this->indent = $indent;
@@ -41,7 +41,7 @@ final class Format
         JsonEncodeOptions $jsonEncodeOptions,
         Indent $indent,
         NewLine $newLine,
-        bool $hasFinalNewLine
+        bool $hasFinalNewLine,
     ): self {
         return new self(
             $jsonEncodeOptions,

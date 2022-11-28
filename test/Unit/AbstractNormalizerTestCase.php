@@ -48,7 +48,7 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
 
     final protected static function assertJsonStringEqualsJsonStringNormalized(
         string $expected,
-        string $actual
+        string $actual,
     ): void {
         $printer = new Printer\Printer();
 

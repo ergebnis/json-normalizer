@@ -61,7 +61,7 @@ final class ConfigHashNormalizer implements Normalizer
      */
     private static function sortByKey(
         string $propertyPath,
-        $value
+        $value,
     ) {
         if (!\is_object($value)) {
             return $value;

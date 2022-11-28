@@ -22,7 +22,7 @@ final class IndentNormalizer implements Normalizer
 
     public function __construct(
         Format\Indent $indent,
-        Printer\PrinterInterface $printer
+        Printer\PrinterInterface $printer,
     ) {
         $this->indent = $indent;
         $this->printer = $printer;

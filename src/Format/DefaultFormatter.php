@@ -27,7 +27,7 @@ final class DefaultFormatter implements Formatter
 
     public function format(
         Json $json,
-        Format $format
+        Format $format,
     ): Json {
         /** @var string $encoded */
         $encoded = \json_encode(

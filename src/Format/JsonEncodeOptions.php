@@ -44,7 +44,7 @@ final class JsonEncodeOptions
     {
         $jsonEncodeOptions = 0;
 
-        if (false === \strpos($json->encoded(), '\/')) {
+        if (!\str_contains($json->encoded(), '\/')) {
             $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
         }
 

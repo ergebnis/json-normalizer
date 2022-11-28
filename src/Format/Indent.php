@@ -50,7 +50,7 @@ final class Indent
      */
     public static function fromSizeAndStyle(
         int $size,
-        string $style
+        string $style,
     ): self {
         $minimumSize = 1;
 

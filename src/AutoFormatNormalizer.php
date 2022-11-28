@@ -20,7 +20,7 @@ final class AutoFormatNormalizer implements Normalizer
 
     public function __construct(
         Normalizer $normalizer,
-        Format\Formatter $formatter
+        Format\Formatter $formatter,
     ) {
         $this->normalizer = $normalizer;
         $this->formatter = $formatter;

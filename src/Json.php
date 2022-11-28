@@ -27,7 +27,7 @@ final class Json
 
     private function __construct(
         string $encoded,
-        $decoded
+        $decoded,
     ) {
         $this->encoded = $encoded;
         $this->decoded = $decoded;

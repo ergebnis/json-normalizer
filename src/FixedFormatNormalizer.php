@@ -22,7 +22,7 @@ final class FixedFormatNormalizer implements Normalizer
     public function __construct(
         Normalizer $normalizer,
         Format\Format $format,
-        Format\Formatter $formatter
+        Format\Formatter $formatter,
     ) {
         $this->normalizer = $normalizer;
         $this->format = $format;

@@ -214,7 +214,7 @@ JSON;
     public function testNormalizeNormalizes(
         string $expected,
         string $encoded,
-        string $schemaUri
+        string $schemaUri,
     ): void {
         $json = Json::fromEncoded($encoded);
 

@@ -90,7 +90,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
      */
     public function testFromJsonReturnsJsonEncodeOptions(
         int $value,
-        string $encoded
+        string $encoded,
     ): void {
         $json = Json::fromEncoded($encoded);
 
