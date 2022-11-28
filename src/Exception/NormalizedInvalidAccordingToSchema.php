@@ -19,6 +19,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
 
     /**
      * @phpstan-var list<string>
+     *
      * @psalm-var list<string>
      *
      * @var array<int, string>
@@ -47,6 +48,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
 
     /**
      * @phpstan-return list<string>
+     *
      * @psalm-return list<string>
      *
      * @return array<int, string>
