@@ -4,35 +4,35 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0686a7047142a1928e05d388247d33b8",
+    "content-hash": "caf5e3b1ff6186d677438c5f0779461e",
     "packages": [
         {
             "name": "ergebnis/json-pointer",
-            "version": "3.1.0",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-pointer.git",
-                "reference": "f762a112784ab0ffc81d6aca4ff5308fed6d287d"
+                "reference": "861516ff5afa1aa8905fdf3361315909523a1bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/f762a112784ab0ffc81d6aca4ff5308fed6d287d",
-                "reference": "f762a112784ab0ffc81d6aca4ff5308fed6d287d",
+                "url": "https://api.github.com/repos/ergebnis/json-pointer/zipball/861516ff5afa1aa8905fdf3361315909523a1bf8",
+                "reference": "861516ff5afa1aa8905fdf3361315909523a1bf8",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.24.1",
+                "ergebnis/composer-normalize": "^2.28.3",
                 "ergebnis/data-provider": "^1.2.0",
-                "ergebnis/license": "^1.2.0",
-                "ergebnis/php-cs-fixer-config": "^4.4.0",
-                "fakerphp/faker": "^1.19.0",
-                "infection/infection": "~0.26.6",
-                "phpunit/phpunit": "^9.5.19",
-                "psalm/plugin-phpunit": "~0.16.1",
-                "vimeo/psalm": "^4.22"
+                "ergebnis/license": "^2.1.0",
+                "ergebnis/php-cs-fixer-config": "^5.0.0",
+                "fakerphp/faker": "^1.20.0",
+                "infection/infection": "~0.26.16",
+                "phpunit/phpunit": "^9.5.26",
+                "psalm/plugin-phpunit": "~0.18.3",
+                "vimeo/psalm": "^4.30"
             },
             "type": "library",
             "extra": {
@@ -67,13 +67,7 @@
                 "issues": "https://github.com/ergebnis/json-pointer/issues",
                 "source": "https://github.com/ergebnis/json-pointer"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/localheinz",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-03-21T13:24:23+00:00"
+            "time": "2022-11-28T17:03:31+00:00"
         },
         {
             "name": "ergebnis/json-printer",
