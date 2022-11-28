@@ -34,13 +34,13 @@ final class SchemaNormalizer implements Normalizer
     {
         try {
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
-        } catch (UriResolverException $exception) {
+        } catch (UriResolverException) {
             throw Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($this->schemaUri);
-        } catch (ResourceNotFoundException $exception) {
+        } catch (ResourceNotFoundException) {
             throw Exception\SchemaUriCouldNotBeRead::fromSchemaUri($this->schemaUri);
-        } catch (InvalidSchemaMediaTypeException $exception) {
+        } catch (InvalidSchemaMediaTypeException) {
             throw Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($this->schemaUri);
-        } catch (JsonDecodingException $exception) {
+        } catch (JsonDecodingException) {
             throw Exception\SchemaUriReferencesInvalidJsonDocument::fromSchemaUri($this->schemaUri);
         }
 

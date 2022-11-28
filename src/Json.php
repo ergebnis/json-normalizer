@@ -39,7 +39,7 @@ final class Json
                 512,
                 \JSON_THROW_ON_ERROR,
             );
-        } catch (\JsonException $exception) {
+        } catch (\JsonException) {
             throw Exception\InvalidJsonEncoded::fromEncoded($encoded);
         }
 
