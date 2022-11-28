@@ -20,21 +20,12 @@ use Ergebnis\Json\Normalizer\Json;
  */
 final class Format
 {
-    private JsonEncodeOptions $jsonEncodeOptions;
-    private Indent $indent;
-    private NewLine $newLine;
-    private bool $hasFinalNewLine;
-
     private function __construct(
-        JsonEncodeOptions $jsonEncodeOptions,
-        Indent $indent,
-        NewLine $newLine,
-        bool $hasFinalNewLine,
+        private JsonEncodeOptions $jsonEncodeOptions,
+        private Indent $indent,
+        private NewLine $newLine,
+        private bool $hasFinalNewLine,
     ) {
-        $this->jsonEncodeOptions = $jsonEncodeOptions;
-        $this->indent = $indent;
-        $this->newLine = $newLine;
-        $this->hasFinalNewLine = $hasFinalNewLine;
     }
 
     public static function create(

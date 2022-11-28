@@ -15,18 +15,11 @@ namespace Ergebnis\Json\Normalizer;
 
 final class FixedFormatNormalizer implements Normalizer
 {
-    private Normalizer $normalizer;
-    private Format\Format $format;
-    private Format\Formatter $formatter;
-
     public function __construct(
-        Normalizer $normalizer,
-        Format\Format $format,
-        Format\Formatter $formatter,
+        private Normalizer $normalizer,
+        private Format\Format $format,
+        private Format\Formatter $formatter,
     ) {
-        $this->normalizer = $normalizer;
-        $this->format = $format;
-        $this->formatter = $formatter;
     }
 
     public function normalize(Json $json): Json

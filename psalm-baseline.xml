@@ -9,12 +9,11 @@
     </MixedReturnStatement>
   </file>
   <file src="src/Json.php">
-    <MissingParamType occurrences="1">
+    <MixedArgument occurrences="1">
       <code>$decoded</code>
-    </MissingParamType>
-    <MixedAssignment occurrences="2">
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
       <code>$decoded</code>
-      <code>$this-&gt;decoded</code>
     </MixedAssignment>
   </file>
   <file src="src/SchemaNormalizer.php">

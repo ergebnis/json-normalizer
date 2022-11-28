@@ -23,18 +23,11 @@ use JsonSchema\SchemaStorage;
 
 final class SchemaNormalizer implements Normalizer
 {
-    private string $schemaUri;
-    private SchemaStorage $schemaStorage;
-    private SchemaValidator\SchemaValidator $schemaValidator;
-
     public function __construct(
-        string $schemaUri,
-        SchemaStorage $schemaStorage,
-        SchemaValidator\SchemaValidator $schemaValidator,
+        private string $schemaUri,
+        private SchemaStorage $schemaStorage,
+        private SchemaValidator\SchemaValidator $schemaValidator,
     ) {
-        $this->schemaUri = $schemaUri;
-        $this->schemaStorage = $schemaStorage;
-        $this->schemaValidator = $schemaValidator;
     }
 
     public function normalize(Json $json): Json

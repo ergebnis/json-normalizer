@@ -17,15 +17,10 @@ use Ergebnis\Json\Printer;
 
 final class IndentNormalizer implements Normalizer
 {
-    private Format\Indent $indent;
-    private Printer\PrinterInterface $printer;
-
     public function __construct(
-        Format\Indent $indent,
-        Printer\PrinterInterface $printer,
+        private Format\Indent $indent,
+        private Printer\PrinterInterface $printer,
     ) {
-        $this->indent = $indent;
-        $this->printer = $printer;
     }
 
     public function normalize(Json $json): Json

@@ -15,11 +15,8 @@ namespace Ergebnis\Json\Normalizer;
 
 final class JsonEncodeNormalizer implements Normalizer
 {
-    private Format\JsonEncodeOptions $jsonEncodeOptions;
-
-    public function __construct(Format\JsonEncodeOptions $jsonEncodeOptions)
+    public function __construct(private Format\JsonEncodeOptions $jsonEncodeOptions)
     {
-        $this->jsonEncodeOptions = $jsonEncodeOptions;
     }
 
     public function normalize(Json $json): Json
