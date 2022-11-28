@@ -19,6 +19,7 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
 
     /**
      * @phpstan-var list<string>
+     *
      * @psalm-var list<string>
      *
      * @var array<string>
@@ -48,6 +49,7 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
 
     /**
      * @phpstan-return list<string>
+     *
      * @psalm-return list<string>
      *
      * @return array<int, string>

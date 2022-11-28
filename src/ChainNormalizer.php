@@ -17,6 +17,7 @@ final class ChainNormalizer implements Normalizer
 {
     /**
      * @phpstan-var list<Normalizer>
+     *
      * @psalm-var list<Normalizer>
      *
      * @var array<int, Normalizer>
