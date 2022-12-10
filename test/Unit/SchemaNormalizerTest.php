@@ -286,8 +286,8 @@ JSON;
                 ));
             }
 
-            $normalized = self::jsonFromFile($normalizedFile);
-            $original = self::jsonFromFile($originalFile);
+            $normalized = Json::fromString(\json_encode(Json::fromFile($normalizedFile)->decoded()));
+            $original = Json::fromString(\json_encode(Json::fromFile($originalFile)->decoded()));
             $schemaUri = \sprintf(
                 'file://%s',
                 $schemaFile,
@@ -306,10 +306,5 @@ JSON;
                 ),
             ];
         }
-    }
-
-    private static function jsonFromFile(string $file): Json
-    {
-        return Json::fromString(\json_encode(Json::fromFile($file)->decoded()));
     }
 }
