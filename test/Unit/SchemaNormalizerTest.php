@@ -229,7 +229,7 @@ JSON;
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string, 1: string, 2: string}>
      */
     public function provideExpectedEncodedAndSchemaUri(): \Generator
     {
