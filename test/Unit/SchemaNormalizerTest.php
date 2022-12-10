@@ -223,7 +223,10 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertEquals($scenario->normalized(), $normalized);
+        self::assertEquals($scenario->normalized(), $normalized, \sprintf(
+            'Failed asserting that original JSON is normalized as expected in scenario "%s".',
+            $scenario->key(),
+        ));
     }
 
     /**
@@ -300,6 +303,7 @@ JSON;
 
             yield $key => [
                 Test\Util\SchemaNormalizer\Scenario::create(
+                    $key,
                     $normalized,
                     $original,
                     $schemaUri,

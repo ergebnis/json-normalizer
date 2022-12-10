@@ -23,6 +23,7 @@ use Ergebnis\Json\Json;
 final class Scenario
 {
     private function __construct(
+        private string $key,
         private Json $normalized,
         private Json $original,
         private string $schemaUri,
@@ -30,15 +31,22 @@ final class Scenario
     }
 
     public static function create(
+        string $key,
         Json $normalized,
         Json $original,
         string $schemaUri,
     ): self {
         return new self(
+            $key,
             $normalized,
             $original,
             $schemaUri,
         );
+    }
+
+    public function key(): string
+    {
+        return $this->key;
     }
 
     public function normalized(): Json
