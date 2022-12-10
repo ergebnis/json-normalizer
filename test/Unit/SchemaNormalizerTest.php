@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
@@ -208,30 +209,27 @@ JSON;
     }
 
     /**
-     * @dataProvider provideExpectedEncodedAndSchemaUri
+     * @dataProvider provideScenario
      */
-    public function testNormalizeNormalizes(
-        string $expected,
-        string $encoded,
-        string $schemaUri,
-    ): void {
-        $json = Json::fromString($encoded);
+    public function testNormalizeNormalizes(Test\Util\SchemaNormalizer\Scenario $scenario): void
+    {
+        $json = Json::fromString($scenario->json());
 
         $normalizer = new SchemaNormalizer(
-            $schemaUri,
+            $scenario->schemaUri(),
             new SchemaStorage(),
             new SchemaValidator\SchemaValidator(),
         );
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($expected, $normalized->encoded());
+        self::assertSame($scenario->expected(), $normalized->encoded());
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string, 2: string}>
+     * @return \Generator<string, array{0: Test\Util\SchemaNormalizer\Scenario}>
      */
-    public function provideExpectedEncodedAndSchemaUri(): \Generator
+    public function provideScenario(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
@@ -301,9 +299,11 @@ JSON;
             );
 
             yield $key => [
-                $expected,
-                $json,
-                $schemaUri,
+                Test\Util\SchemaNormalizer\Scenario::create(
+                    $expected,
+                    $json,
+                    $schemaUri,
+                ),
             ];
         }
     }
