@@ -1,23 +1,23 @@
 {
-    "$ref": "#/definitions/urls",
-    "definitions": {
-        "urls": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/url"
-            }
+  "$ref": "#/definitions/urls",
+  "definitions": {
+    "urls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/url"
+      }
+    },
+    "url": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
         },
         "url": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "additionalProperties": false
+          "type": "string"
         }
+      },
+      "additionalProperties": false
     }
+  }
 }

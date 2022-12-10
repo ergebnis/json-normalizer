@@ -1,31 +1,31 @@
 {
-    "oneOf": [
-        {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "urls": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "additionalProperties": false
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         },
-        {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "additionalProperties": false
+        "urls": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
-    ]
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
 }

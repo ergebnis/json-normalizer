@@ -1,8 +1,8 @@
 {
-    "$ref": "#/definitions/string",
-    "definitions": {
-        "string": {
-            "type": "string"
-        }
+  "$ref": "#/definitions/string",
+  "definitions": {
+    "string": {
+      "type": "string"
     }
+  }
 }

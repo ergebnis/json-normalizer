@@ -1,8 +1,8 @@
 {
-    "$ref": "#/definitions/number",
-    "definitions": {
-        "number": {
-            "type": "number"
-        }
+  "$ref": "#/definitions/number",
+  "definitions": {
+    "number": {
+      "type": "number"
     }
+  }
 }

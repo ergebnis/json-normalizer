@@ -1,9 +1,9 @@
 {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string"
-        }
-    },
-    "additionalProperties": true
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
 }

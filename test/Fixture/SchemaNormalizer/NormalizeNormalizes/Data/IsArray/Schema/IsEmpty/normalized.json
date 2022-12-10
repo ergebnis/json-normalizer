@@ -1,9 +1,9 @@
 [
-    "foo",
-    "bar",
-    "baz",
-    {
-        "baz": "qux",
-        "foo": "bar"
-    }
+  "foo",
+  "bar",
+  "baz",
+  {
+    "baz": "qux",
+    "foo": "bar"
+  }
 ]

@@ -1,8 +1,8 @@
 {
-    "$ref": "#/definitions/boolean",
-    "definitions": {
-        "boolean": {
-            "type": "boolean"
-        }
+  "$ref": "#/definitions/boolean",
+  "definitions": {
+    "boolean": {
+      "type": "boolean"
     }
+  }
 }

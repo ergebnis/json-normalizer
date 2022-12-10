@@ -1,32 +1,32 @@
 {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string"
-        },
-        "urls": {
-            "$ref": "#/definitions/urls"
-        }
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
     },
-    "additionalProperties": false,
-    "definitions": {
-        "urls": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/url"
-            }
+    "urls": {
+      "$ref": "#/definitions/urls"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "urls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/url"
+      }
+    },
+    "url": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
         },
         "url": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "url": {
-                    "type": "string"
-                }
-            },
-            "additionalProperties": false
+          "type": "string"
         }
+      },
+      "additionalProperties": false
     }
+  }
 }

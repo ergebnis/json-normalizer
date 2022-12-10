@@ -1,26 +1,26 @@
 {
-    "type": [
-        "object"
-    ],
-    "properties": {
-        "name": {
-            "type": "string"
-        },
-        "urls": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "type": {
-                        "type": "string"
-                    },
-                    "url": {
-                        "type": "string"
-                    }
-                },
-                "additionalProperties": false
-            }
-        }
+  "type": [
+    "object"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
     },
-    "additionalProperties": false
+    "urls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
 }

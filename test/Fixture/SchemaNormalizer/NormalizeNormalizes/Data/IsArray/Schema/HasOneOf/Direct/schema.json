@@ -1,22 +1,22 @@
 {
-    "type": "array",
-    "items": {
-        "oneOf": [
-            {
-                "type": "object",
-                "additionalProperties": false,
-                "properties": {
-                    "type": {
-                        "type": "string"
-                    },
-                    "url": {
-                        "type": "string"
-                    }
-                }
-            },
-            {
-                "type": "string"
-            }
-        ]
-    }
+  "type": "array",
+  "items": {
+    "oneOf": [
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      {
+        "type": "string"
+      }
+    ]
+  }
 }

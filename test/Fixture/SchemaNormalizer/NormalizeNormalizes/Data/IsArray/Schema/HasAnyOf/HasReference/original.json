@@ -1,11 +1,11 @@
 [
-    {
-        "url": "https://localheinz.com",
-        "type": "Website"
-    },
-    "https://github.com/localheinz",
-    {
-        "url": "https://twitter.com/localheinz",
-        "type": "Twitter"
-    }
+  {
+    "url": "https://localheinz.com",
+    "type": "Website"
+  },
+  "https://github.com/localheinz",
+  {
+    "url": "https://twitter.com/localheinz",
+    "type": "Twitter"
+  }
 ]
