@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
+
 final class AutoFormatNormalizer implements Normalizer
 {
     public function __construct(

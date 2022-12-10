@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class WithoutFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -30,7 +28,7 @@ final class WithoutFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
      */
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
     "name": "Andreas Möller",

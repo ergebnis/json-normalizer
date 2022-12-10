@@ -13,21 +13,19 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class ConfigHashNormalizerTest extends AbstractComposerTestCase
 {
     public function testNormalizeDoesNotModifyOtherProperty(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "foo": {
@@ -50,7 +48,7 @@ JSON
      */
     public function testNormalizeIgnoresEmptyConfigHash(string $property): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
   "{$property}": {}
@@ -67,7 +65,7 @@ JSON
 
     public function testNormalizeIgnoresEmptyConfigHashButContinuesNormalizing(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {},
@@ -79,7 +77,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {},
@@ -103,7 +101,7 @@ JSON
      */
     public function testNormalizeSortsConfigHashIfPropertyExists(string $property): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -118,7 +116,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -145,7 +143,7 @@ JSON
      */
     public function testNormalizeSortsConfigHashRecursivelyIfPropertyExists(string $property): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -167,7 +165,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -201,7 +199,7 @@ JSON
      */
     public function testNormalizeCorrectlySortsAllowPluginsInConfigWithoutWildcards(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -216,7 +214,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -244,7 +242,7 @@ JSON
      */
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardAtEnd(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -259,7 +257,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -287,7 +285,7 @@ JSON
      */
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardAtStart(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -302,7 +300,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -330,7 +328,7 @@ JSON
      */
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWithCatchAllWildcardInTheMiddle(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -347,7 +345,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -377,7 +375,7 @@ JSON
      */
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWithVendorWildcardAtEnd(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -393,7 +391,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -418,7 +416,7 @@ JSON
 
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWhenMoreSpecificAfterWildcard(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -434,7 +432,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -459,7 +457,7 @@ JSON
 
     public function testNormalizeCorrectlySortsPreferredInstallInConfigWhenMoreSpecificWildcardAfterWildcard(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "config": {
@@ -476,7 +474,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "config": {

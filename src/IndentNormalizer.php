@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Printer;
 
 final class IndentNormalizer implements Normalizer
@@ -30,6 +31,6 @@ final class IndentNormalizer implements Normalizer
             $this->indent->toString(),
         );
 
-        return Json::fromEncoded($withIndent);
+        return Json::fromString($withIndent);
     }
 }

@@ -48,6 +48,7 @@ When you want to normalize a JSON file with an implementation of `NormalizerInte
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -58,7 +59,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 /* @var Normalizer\Normalizer $composedNormalizer */
 $normalizer = new Normalizer\AutoFormatNormalizer(
@@ -90,6 +91,7 @@ When you want to normalize a JSON file with a `callable`, you can use the `Calla
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -99,9 +101,9 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
-$callable = function (Normalizer\Json $json): Normalizer\Json {
+$callable = function (Json $json): Json {
     $decoded = $json->decoded();
 
     foreach (get_object_vars($decoded) as $name => $value) {
@@ -112,7 +114,7 @@ $callable = function (Normalizer\Json $json): Normalizer\Json {
         $decoded->{$name} .= '/open-source/';
     }
 
-    return Normalizer\Json::fromEncoded(json_encode($decoded));
+    return Json::fromString(json_encode($decoded));
 };
 
 $normalizer = new Normalizer\CallableNormalizer($callable);
@@ -129,6 +131,7 @@ When you want to apply multiple normalizers in a chain, you can use the `ChainNo
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -139,7 +142,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -167,6 +170,7 @@ When you want to normalize a JSON file with an implementation of `NormalizerInte
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -177,7 +181,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 /* @var Normalizer\Normalizer $composedNormalizer */
 /* @var Normalizer\Format\Format $format */
@@ -201,6 +205,7 @@ When you need to adjust the indentation of a JSON file, you can use the `IndentN
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -211,7 +216,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 
@@ -232,6 +237,7 @@ When you need to adjust the encoding of a JSON file, you can use the `JsonEncode
 ```php
 <?php
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -241,7 +247,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
@@ -305,7 +311,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\SchemaNormalizer(
     'file:///schema/example.json',
@@ -338,7 +344,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\WithFinalNewLineNormalizer();
 
@@ -365,7 +371,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\WithoutFinalNewLineNormalizer();
 

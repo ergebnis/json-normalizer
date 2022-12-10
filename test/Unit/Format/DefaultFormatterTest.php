@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
@@ -28,7 +28,6 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Format\Indent
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\Format\NewLine
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class DefaultFormatterTest extends Framework\TestCase
 {
@@ -49,7 +48,7 @@ final class DefaultFormatterTest extends Framework\TestCase
             "\r",
         ]);
 
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas M\u00f6ller",

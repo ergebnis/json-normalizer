@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\FixedFormatNormalizer;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 
 /**
@@ -27,7 +27,6 @@ use Ergebnis\Json\Normalizer\Normalizer;
  * @uses \Ergebnis\Json\Normalizer\Format\Indent
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\Format\NewLine
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -42,7 +41,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
             $faker->boolean(),
         );
 
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "status": "original"
@@ -50,7 +49,7 @@ final class FixedFormatNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $normalized = Json::fromEncoded(
+        $normalized = Json::fromString(
             <<<'JSON'
 {
     "status": "normalized"
@@ -58,7 +57,7 @@ JSON
 JSON
         );
 
-        $formatted = Json::fromEncoded(
+        $formatted = Json::fromString(
             <<<'JSON'
 {
     "status": "formatted"

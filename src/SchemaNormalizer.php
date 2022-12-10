@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
@@ -59,7 +60,7 @@ final class SchemaNormalizer implements Normalizer
             );
         }
 
-        $normalized = Json::fromEncoded(\json_encode($this->normalizeData(
+        $normalized = Json::fromString(\json_encode($this->normalizeData(
             $json->decoded(),
             $schema,
         )));

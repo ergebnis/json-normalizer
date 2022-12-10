@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
@@ -24,7 +24,6 @@ use PHPUnit\Framework;
  * @covers \Ergebnis\Json\Normalizer\Format\NewLine
  *
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineString
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class NewLineTest extends Framework\TestCase
 {
@@ -93,7 +92,7 @@ final class NewLineTest extends Framework\TestCase
     {
         $encoded = '{"foo": "bar"}';
 
-        $json = Json::fromEncoded($encoded);
+        $json = Json::fromString($encoded);
 
         $newLine = Format\NewLine::fromJson($json);
 
@@ -105,7 +104,7 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 ["foo",{$newLineString}"bar"]
 JSON
@@ -121,7 +120,7 @@ JSON
      */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {"foo": 9000,{$newLineString}"bar": 123}
 JSON
