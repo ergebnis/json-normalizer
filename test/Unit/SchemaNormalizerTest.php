@@ -213,7 +213,7 @@ JSON;
      */
     public function testNormalizeNormalizes(Test\Util\SchemaNormalizer\Scenario $scenario): void
     {
-        $json = Json::fromString($scenario->json());
+        $json = Json::fromString($scenario->original());
 
         $normalizer = new SchemaNormalizer(
             $scenario->schemaUri(),
@@ -246,23 +246,23 @@ JSON;
 
             $normalizedFile = $fileInfo->getRealPath();
 
-            $jsonFile = \preg_replace(
+            $originalFile = \preg_replace(
                 '/normalized\.json$/',
                 'original.json',
                 $normalizedFile,
             );
 
-            if (!\is_string($jsonFile)) {
+            if (!\is_string($originalFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce JSON file name from normalized file name "%s".',
+                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
                     $normalizedFile,
                 ));
             }
 
-            if (!\file_exists($jsonFile)) {
+            if (!\file_exists($originalFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $jsonFile,
+                    $originalFile,
                 ));
             }
 
@@ -274,7 +274,7 @@ JSON;
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce file name from normalized file name "%s".',
+                    'Unable to deduce schema JSON file name from normalized JSON file name "%s".',
                     $normalizedFile,
                 ));
             }
@@ -287,7 +287,7 @@ JSON;
             }
 
             $normalized = self::jsonFromFile($normalizedFile);
-            $json = self::jsonFromFile($jsonFile);
+            $original = self::jsonFromFile($originalFile);
             $schemaUri = \sprintf(
                 'file://%s',
                 $schemaFile,
@@ -301,7 +301,7 @@ JSON;
             yield $key => [
                 Test\Util\SchemaNormalizer\Scenario::create(
                     $normalized,
-                    $json,
+                    $original,
                     $schemaUri,
                 ),
             ];

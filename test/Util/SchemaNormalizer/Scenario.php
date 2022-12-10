@@ -22,19 +22,19 @@ final class Scenario
 {
     private function __construct(
         private string $normalized,
-        private string $json,
+        private string $original,
         private string $schemaUri,
     ) {
     }
 
     public static function create(
         string $normalized,
-        string $json,
+        string $original,
         string $schemaUri,
     ): self {
         return new self(
             $normalized,
-            $json,
+            $original,
             $schemaUri,
         );
     }
@@ -44,9 +44,9 @@ final class Scenario
         return $this->normalized;
     }
 
-    public function json(): string
+    public function original(): string
     {
-        return $this->json;
+        return $this->original;
     }
 
     public function schemaUri(): string
