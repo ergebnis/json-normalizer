@@ -46,8 +46,8 @@ final class SchemaNormalizer implements Normalizer
         }
 
         $resultBeforeNormalization = $this->schemaValidator->validate(
-            SchemaValidator\Json::fromString($json->encoded()),
-            SchemaValidator\Json::fromString(\json_encode($schema)),
+            $json,
+            Json::fromString(\json_encode($schema)),
             Pointer\JsonPointer::document(),
         );
 
@@ -66,8 +66,8 @@ final class SchemaNormalizer implements Normalizer
         )));
 
         $resultAfterNormalization = $this->schemaValidator->validate(
-            SchemaValidator\Json::fromString($normalized->encoded()),
-            SchemaValidator\Json::fromString(\json_encode($schema)),
+            $normalized,
+            Json::fromString(\json_encode($schema)),
             Pointer\JsonPointer::document(),
         );
 
@@ -231,8 +231,8 @@ final class SchemaNormalizer implements Normalizer
         ) {
             foreach ($schema->anyOf as $anyOfSchema) {
                 $result = $this->schemaValidator->validate(
-                    SchemaValidator\Json::fromString(\json_encode($data)),
-                    SchemaValidator\Json::fromString(\json_encode($anyOfSchema)),
+                    Json::fromString(\json_encode($data)),
+                    Json::fromString(\json_encode($anyOfSchema)),
                     Pointer\JsonPointer::document(),
                 );
 
@@ -254,8 +254,8 @@ final class SchemaNormalizer implements Normalizer
         ) {
             foreach ($schema->oneOf as $oneOfSchema) {
                 $result = $this->schemaValidator->validate(
-                    SchemaValidator\Json::fromString(\json_encode($data)),
-                    SchemaValidator\Json::fromString(\json_encode($oneOfSchema)),
+                    Json::fromString(\json_encode($data)),
+                    Json::fromString(\json_encode($oneOfSchema)),
                     Pointer\JsonPointer::document(),
                 );
 

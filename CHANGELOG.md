@@ -11,6 +11,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 ### Changed
 
 - Dropped support for PHP 7.4 ([#757]), by [@localheinz]
+- Required `ergebnis/json-schema-validator:^4.0.0` ([#771]), by [@localheinz]
 
 ### Removed
 
