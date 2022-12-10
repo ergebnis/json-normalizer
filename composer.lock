@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "ergebnis/json",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json.git",
-                "reference": "b3e8d074dda98aeaaaeabecb4d397176709d9562"
+                "reference": "d66ea30060856d0729a4aa319a02752519ca63a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json/zipball/b3e8d074dda98aeaaaeabecb4d397176709d9562",
-                "reference": "b3e8d074dda98aeaaaeabecb4d397176709d9562",
+                "url": "https://api.github.com/repos/ergebnis/json/zipball/d66ea30060856d0729a4aa319a02752519ca63a0",
+                "reference": "d66ea30060856d0729a4aa319a02752519ca63a0",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "issues": "https://github.com/ergebnis/json/issues",
                 "source": "https://github.com/ergebnis/json"
             },
-            "time": "2022-12-10T14:19:08+00:00"
+            "time": "2022-12-10T22:38:50+00:00"
         },
         {
             "name": "ergebnis/json-pointer",
