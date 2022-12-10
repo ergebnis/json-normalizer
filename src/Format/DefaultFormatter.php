@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Format;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Printer;
 
 final class DefaultFormatter implements Formatter
@@ -39,9 +39,9 @@ final class DefaultFormatter implements Formatter
         );
 
         if (!$format->hasFinalNewLine()) {
-            return Json::fromEncoded($printed);
+            return Json::fromString($printed);
         }
 
-        return Json::fromEncoded($printed . $format->newLine()->toString());
+        return Json::fromString($printed . $format->newLine()->toString());
     }
 }

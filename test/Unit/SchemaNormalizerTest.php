@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
@@ -34,13 +34,12 @@ use JsonSchema\SchemaStorage;
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolved
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -72,7 +71,7 @@ JSON
 
     public function testNormalizeThrowsSchemaUriCouldNotBeReadExceptionWhenSchemaUriReferencesUnreadableResource(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -104,7 +103,7 @@ JSON
 
     public function testNormalizeThrowsSchemaUriReferencesDocumentWithInvalidMediaTypeExceptionWhenSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -136,7 +135,7 @@ JSON
 
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -170,7 +169,7 @@ JSON
     {
         $faker = self::faker();
 
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas Möller",
@@ -216,7 +215,7 @@ JSON;
         string $encoded,
         string $schemaUri,
     ): void {
-        $json = Json::fromEncoded($encoded);
+        $json = Json::fromString($encoded);
 
         $normalizer = new SchemaNormalizer(
             $schemaUri,

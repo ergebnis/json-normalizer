@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
+
 final class WithFinalNewLineNormalizer implements Normalizer
 {
     public function normalize(Json $json): Json
     {
         $withFinalNewLine = \rtrim($json->encoded()) . \PHP_EOL;
 
-        return Json::fromEncoded($withFinalNewLine);
+        return Json::fromString($withFinalNewLine);
     }
 }

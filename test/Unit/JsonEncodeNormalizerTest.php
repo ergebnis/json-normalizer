@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
 
 /**
@@ -23,7 +23,6 @@ use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
  * @covers \Ergebnis\Json\Normalizer\JsonEncodeNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
 {
@@ -32,7 +31,7 @@ final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
      */
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "name": "Andreas M\u00f6ller",

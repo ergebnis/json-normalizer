@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 
 final class VersionConstraintNormalizer implements Normalizer
@@ -72,7 +72,7 @@ final class VersionConstraintNormalizer implements Normalizer
         /** @var string $encoded */
         $encoded = \json_encode($decoded);
 
-        return Json::fromEncoded($encoded);
+        return Json::fromString($encoded);
     }
 
     private static function normalizeVersionConstraint(string $versionConstraint): string

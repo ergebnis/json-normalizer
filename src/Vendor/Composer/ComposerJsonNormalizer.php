@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
@@ -36,7 +37,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
         );
     }
 
-    public function normalize(Normalizer\Json $json): Normalizer\Json
+    public function normalize(Json $json): Json
     {
         if (!\is_object($json->decoded())) {
             return $json;

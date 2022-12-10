@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
+
 final class WithoutFinalNewLineNormalizer implements Normalizer
 {
     public function normalize(Json $json): Json
     {
         $withoutFinalNewLine = \rtrim($json->encoded());
 
-        return Json::fromEncoded($withoutFinalNewLine);
+        return Json::fromString($withoutFinalNewLine);
     }
 }

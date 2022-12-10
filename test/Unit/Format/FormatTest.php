@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use PHPUnit\Framework;
 
 /**
@@ -25,7 +25,6 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Format\Indent
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\Format\NewLine
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class FormatTest extends Framework\TestCase
 {
@@ -125,7 +124,7 @@ final class FormatTest extends Framework\TestCase
      */
     public function testFromJsonReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
-        $json = Json::fromEncoded($encoded);
+        $json = Json::fromString($encoded);
 
         $format = Format\Format::fromJson($json);
 
@@ -163,7 +162,7 @@ final class FormatTest extends Framework\TestCase
      */
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
     "foo": 9000,
@@ -206,7 +205,7 @@ JSON
      */
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
     "foo": 9000,

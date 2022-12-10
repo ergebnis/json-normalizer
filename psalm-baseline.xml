@@ -8,14 +8,6 @@
       <code>$callable($json)</code>
     </MixedReturnStatement>
   </file>
-  <file src="src/Json.php">
-    <MixedArgument occurrences="1">
-      <code>$decoded</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$decoded</code>
-    </MixedAssignment>
-  </file>
   <file src="src/SchemaNormalizer.php">
     <MissingParamType occurrences="1">
       <code>$data</code>
@@ -114,11 +106,6 @@
   <file src="test/Unit/JsonEncodeNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
       <code>\Generator&lt;array&lt;int&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
-  <file src="test/Unit/JsonTest.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;null|array|bool|float|int|string&gt;&gt;</code>
     </MixedInferredReturnType>
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">

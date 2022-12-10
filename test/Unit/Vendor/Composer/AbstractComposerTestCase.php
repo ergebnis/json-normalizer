@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Test;
 
@@ -27,7 +27,7 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
      */
     final public function testNormalizeDoesNotModifyWhenJsonDecodedIsNotAnObject(string $encoded): void
     {
-        $json = Json::fromEncoded($encoded);
+        $json = Json::fromString($encoded);
 
         /** @var class-string $className */
         $className = static::className();

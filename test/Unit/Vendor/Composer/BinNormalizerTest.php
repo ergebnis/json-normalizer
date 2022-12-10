@@ -13,21 +13,19 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class BinNormalizerTest extends AbstractComposerTestCase
 {
     public function testNormalizeDoesNotModifyOtherProperty(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "foo": {
@@ -47,7 +45,7 @@ JSON
 
     public function testNormalizeDoesNotModifyBinIfPropertyExistsAsString(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "bin": "foo.php",
@@ -68,7 +66,7 @@ JSON
 
     public function testNormalizeSortsBinIfPropertyExistsAsArray(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "bin": [
@@ -83,7 +81,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "bin": [

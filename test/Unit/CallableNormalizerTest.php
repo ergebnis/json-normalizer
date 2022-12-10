@@ -13,21 +13,19 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\CallableNormalizer;
-use Ergebnis\Json\Normalizer\Json;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\CallableNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class CallableNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughCallable(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "status": "original"
@@ -35,7 +33,7 @@ final class CallableNormalizerTest extends AbstractNormalizerTestCase
 JSON
         );
 
-        $normalized = Json::fromEncoded(
+        $normalized = Json::fromString(
             <<<'JSON'
 {
     "status": "normalized"

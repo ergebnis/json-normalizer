@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\ChainNormalizer;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Vendor;
@@ -25,7 +25,6 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
- * @uses \Ergebnis\Json\Normalizer\Json
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
@@ -61,7 +60,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 
     public function testNormalizeNormalizes(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "name": "foo/bar",
@@ -133,7 +132,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<'JSON'
 {
   "name": "foo/bar",

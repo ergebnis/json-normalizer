@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
@@ -27,7 +27,6 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
 {
@@ -193,7 +192,7 @@ final class IndentTest extends Framework\TestCase
         string $actualIndent,
         string $sniffedIndent,
     ): void {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 [
 "foo",
@@ -218,7 +217,7 @@ JSON
         string $actualIndent,
         string $sniffedIndent,
     ): void {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
 "foo": 9000,
@@ -292,7 +291,7 @@ JSON
 
     public function testFromJsonReturnsIndentWithDefaultsWhenIndentCouldNotBeSniffed(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {"foo":9000,"bar":123,"baz":{"qux":"quux"}}
 JSON

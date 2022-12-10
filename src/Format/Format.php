@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Format;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 
 /**
  * @psalm-immutable
