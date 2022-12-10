@@ -223,7 +223,7 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertEquals($scenario->normalized(), $normalized);
     }
 
     /**
