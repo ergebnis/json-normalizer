@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "294b06e83d8c763b6179b74faab12494",
+    "content-hash": "ef7a4fbad806d4ecbf6e78709ecffd19",
     "packages": [
         {
             "name": "ergebnis/json",
@@ -190,20 +190,21 @@
         },
         {
             "name": "ergebnis/json-schema-validator",
-            "version": "3.2.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/json-schema-validator.git",
-                "reference": "dba66b66ff9ec6fa94003eb420b0d08a5d48069e"
+                "reference": "a6166272ac5691a9bc791f185841e5f92a6d4723"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-schema-validator/zipball/dba66b66ff9ec6fa94003eb420b0d08a5d48069e",
-                "reference": "dba66b66ff9ec6fa94003eb420b0d08a5d48069e",
+                "url": "https://api.github.com/repos/ergebnis/json-schema-validator/zipball/a6166272ac5691a9bc791f185841e5f92a6d4723",
+                "reference": "a6166272ac5691a9bc791f185841e5f92a6d4723",
                 "shasum": ""
             },
             "require": {
-                "ergebnis/json-pointer": "^3.1.0",
+                "ergebnis/json": "^1.0.0",
+                "ergebnis/json-pointer": "^3.2.0",
                 "ext-json": "*",
                 "justinrainbow/json-schema": "^5.2.12",
                 "php": "^8.0"
@@ -212,12 +213,12 @@
                 "ergebnis/composer-normalize": "^2.21.0",
                 "ergebnis/data-provider": "^1.2.0",
                 "ergebnis/license": "^2.1.0",
-                "ergebnis/php-cs-fixer-config": "~4.11.0",
+                "ergebnis/php-cs-fixer-config": "~5.0.0",
                 "fakerphp/faker": "^1.20.0",
                 "infection/infection": "~0.26.16",
-                "phpunit/phpunit": "~9.5.26",
-                "psalm/plugin-phpunit": "~0.18.3",
-                "vimeo/psalm": "^4.30"
+                "phpunit/phpunit": "~9.5.27",
+                "psalm/plugin-phpunit": "~0.18.4",
+                "vimeo/psalm": "^5.1.0"
             },
             "type": "library",
             "extra": {
@@ -252,7 +253,7 @@
                 "issues": "https://github.com/ergebnis/json-schema-validator/issues",
                 "source": "https://github.com/ergebnis/json-schema-validator"
             },
-            "time": "2022-11-28T11:23:54+00:00"
+            "time": "2022-12-10T14:50:15+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
