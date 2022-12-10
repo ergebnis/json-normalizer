@@ -274,7 +274,7 @@ JSON;
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce  file name from normalized file name "%s".',
+                    'Unable to deduce file name from normalized file name "%s".',
                     $normalizedFile,
                 ));
             }
