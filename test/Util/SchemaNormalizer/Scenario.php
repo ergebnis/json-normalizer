@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Util\SchemaNormalizer;
 
+use Ergebnis\Json\Json;
+
 /**
  * @internal
  *
@@ -21,15 +23,15 @@ namespace Ergebnis\Json\Normalizer\Test\Util\SchemaNormalizer;
 final class Scenario
 {
     private function __construct(
-        private string $normalized,
-        private string $original,
+        private Json $normalized,
+        private Json $original,
         private string $schemaUri,
     ) {
     }
 
     public static function create(
-        string $normalized,
-        string $original,
+        Json $normalized,
+        Json $original,
         string $schemaUri,
     ): self {
         return new self(
@@ -39,12 +41,12 @@ final class Scenario
         );
     }
 
-    public function normalized(): string
+    public function normalized(): Json
     {
         return $this->normalized;
     }
 
-    public function original(): string
+    public function original(): Json
     {
         return $this->original;
     }

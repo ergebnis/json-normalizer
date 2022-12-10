@@ -213,7 +213,7 @@ JSON;
      */
     public function testNormalizeNormalizes(Test\Util\SchemaNormalizer\Scenario $scenario): void
     {
-        $json = Json::fromString($scenario->original());
+        $json = $scenario->original();
 
         $normalizer = new SchemaNormalizer(
             $scenario->schemaUri(),
@@ -223,7 +223,7 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($scenario->normalized(), $normalized->encoded());
+        self::assertSame($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**
@@ -308,7 +308,7 @@ JSON;
         }
     }
 
-    private static function jsonFromFile(string $file): string
+    private static function jsonFromFile(string $file): Json
     {
         $json = \file_get_contents($file);
 
@@ -337,6 +337,6 @@ JSON;
             ));
         }
 
-        return $encoded;
+        return Json::fromString($encoded);
     }
 }
