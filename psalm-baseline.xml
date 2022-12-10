@@ -117,8 +117,7 @@
       <code>$normalizedFile</code>
       <code>$normalizedFile</code>
     </MixedArgument>
-    <MixedAssignment occurrences="4">
-      <code>$decoded</code>
+    <MixedAssignment occurrences="3">
       <code>$fileInfo</code>
       <code>$normalizedFile</code>
       <code>$schemaDecoded</code>

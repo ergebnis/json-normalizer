@@ -310,33 +310,6 @@ JSON;
 
     private static function jsonFromFile(string $file): Json
     {
-        $json = \file_get_contents($file);
-
-        if (!\is_string($json)) {
-            throw new \RuntimeException(\sprintf(
-                'Unable to read content from file "%s".',
-                $file,
-            ));
-        }
-
-        $decoded = \json_decode($json);
-
-        if (null === $decoded && \JSON_ERROR_NONE !== \json_last_error()) {
-            throw new \RuntimeException(\sprintf(
-                'File "%s" does not contain valid JSON.',
-                $file,
-            ));
-        }
-
-        $encoded = \json_encode($decoded);
-
-        if (!\is_string($encoded)) {
-            throw new \RuntimeException(\sprintf(
-                'Unable to re-encode content from file "%s".',
-                $file,
-            ));
-        }
-
-        return Json::fromString($encoded);
+        return Json::fromString(\json_encode(Json::fromFile($file)->decoded()));
     }
 }
