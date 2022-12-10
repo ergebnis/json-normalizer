@@ -48,6 +48,8 @@ When you want to normalize a JSON file with an implementation of `NormalizerInte
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
@@ -91,6 +93,8 @@ When you want to normalize a JSON file with a `callable`, you can use the `Calla
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
@@ -131,6 +135,8 @@ When you want to apply multiple normalizers in a chain, you can use the `ChainNo
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
@@ -170,6 +176,8 @@ When you want to normalize a JSON file with an implementation of `NormalizerInte
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
@@ -205,6 +213,8 @@ When you need to adjust the indentation of a JSON file, you can use the `IndentN
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
@@ -236,6 +246,8 @@ When you need to adjust the encoding of a JSON file, you can use the `JsonEncode
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
@@ -286,6 +298,8 @@ exists at `/schema/example.json`.
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
@@ -333,6 +347,8 @@ When you want to ensure that a JSON file has a single final new line, you can us
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -359,6 +375,8 @@ When you want to ensure that a JSON file does not have a final new line, you can
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 use Ergebnis\Json\Normalizer;
 
