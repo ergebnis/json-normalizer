@@ -21,27 +21,27 @@ namespace Ergebnis\Json\Normalizer\Test\Util\SchemaNormalizer;
 final class Scenario
 {
     private function __construct(
-        private string $expected,
+        private string $normalized,
         private string $json,
         private string $schemaUri,
     ) {
     }
 
     public static function create(
-        string $expected,
+        string $normalized,
         string $json,
         string $schemaUri,
     ): self {
         return new self(
-            $expected,
+            $normalized,
             $json,
             $schemaUri,
         );
     }
 
-    public function expected(): string
+    public function normalized(): string
     {
-        return $this->expected;
+        return $this->normalized;
     }
 
     public function json(): string

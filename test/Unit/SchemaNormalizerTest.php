@@ -223,7 +223,7 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($scenario->expected(), $normalized->encoded());
+        self::assertSame($scenario->normalized(), $normalized->encoded());
     }
 
     /**
@@ -286,7 +286,7 @@ JSON;
                 ));
             }
 
-            $expected = self::jsonFromFile($normalizedFile);
+            $normalized = self::jsonFromFile($normalizedFile);
             $json = self::jsonFromFile($jsonFile);
             $schemaUri = \sprintf(
                 'file://%s',
@@ -300,7 +300,7 @@ JSON;
 
             yield $key => [
                 Test\Util\SchemaNormalizer\Scenario::create(
-                    $expected,
+                    $normalized,
                     $json,
                     $schemaUri,
                 ),
