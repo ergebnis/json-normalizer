@@ -84,11 +84,11 @@ final class SchemaNormalizer implements Normalizer
     }
 
     /**
-     * @param null|array<mixed>|bool|float|int|object|string $data
+     * @param null|array<int, mixed>|bool|float|int|object|string $data
      *
      * @throws \InvalidArgumentException
      *
-     * @return null|array<mixed>|bool|float|int|object|string
+     * @return null|array<int, mixed>|bool|float|int|object|string
      */
     private function normalizeData(
         $data,
@@ -112,9 +112,9 @@ final class SchemaNormalizer implements Normalizer
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array<int, mixed> $data
      *
-     * @return array<mixed>
+     * @return array<int, mixed>
      */
     private function normalizeArray(
         array $data,
