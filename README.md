@@ -313,7 +313,7 @@ $encoded = <<<'JSON'
             "downloads": {
                 "total": 5,
                 "monthly": 2
-            },
+            }
         },
         "ergebnis/data-provider": {
             "downloads": {
