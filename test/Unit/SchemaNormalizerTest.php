@@ -286,8 +286,8 @@ JSON;
                 ));
             }
 
-            $normalized = Json::fromString(\json_encode(Json::fromFile($normalizedFile)->decoded()));
-            $original = Json::fromString(\json_encode(Json::fromFile($originalFile)->decoded()));
+            $normalized = Json::fromFile($normalizedFile);
+            $original = Json::fromFile($originalFile);
             $schemaUri = \sprintf(
                 'file://%s',
                 $schemaFile,
