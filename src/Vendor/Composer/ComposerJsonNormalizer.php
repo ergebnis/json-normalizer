@@ -33,7 +33,6 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 Pointer\Specification::never(),
             ),
             new BinNormalizer(),
-            new ConfigHashNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(),
         );
