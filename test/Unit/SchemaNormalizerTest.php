@@ -286,13 +286,6 @@ JSON;
                 ));
             }
 
-            $normalized = Json::fromFile($normalizedFile);
-            $original = Json::fromFile($originalFile);
-            $schemaUri = \sprintf(
-                'file://%s',
-                $schemaFile,
-            );
-
             $key = \substr(
                 $fileInfo->getPath(),
                 \strlen($basePath),
@@ -301,9 +294,12 @@ JSON;
             yield $key => [
                 Test\Util\SchemaNormalizer\Scenario::create(
                     $key,
-                    $normalized,
-                    $original,
-                    $schemaUri,
+                    Json::fromFile($normalizedFile),
+                    Json::fromFile($originalFile),
+                    \sprintf(
+                        'file://%s',
+                        $schemaFile,
+                    ),
                 ),
             ];
         }
