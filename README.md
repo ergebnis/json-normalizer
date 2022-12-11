@@ -301,6 +301,7 @@ exists at `/schema/example.json`.
 declare(strict_types=1);
 
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
 
@@ -309,16 +310,16 @@ $encoded = <<<'JSON'
     "url": "https://localheinz.com",
     "name": "Andreas Möller",
     "open-source-projects": {
-        "ergebnis/composer-normalize":
-            "downloads": {
-                "total": 5,
-                "monthly": 2
-            }
-        },
         "ergebnis/data-provider": {
             "downloads": {
                 "total": 2,
                 "monthly": 1
+            }
+        },
+        "ergebnis/composer-normalize": {
+            "downloads": {
+                "total": 5,
+                "monthly": 2
             }
         }
     }
@@ -330,13 +331,59 @@ $json = Json::fromString($encoded);
 $normalizer = new Normalizer\SchemaNormalizer(
     'file:///schema/example.json',
     new SchemaStorage(),
-    new SchemaValidator\SchemaValidator()
+    new SchemaValidator\SchemaValidator(),
+    Pointer\Specification::never()
 );
 
 $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered as found in the schema and additional properties will be ordered by name). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
+
+If you have properties that you do not want to be reordered, you can use a `Pointer\Specification` to specify which properties should not be reordered.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
+use Ergebnis\Json\SchemaValidator;
+use JsonSchema\SchemaStorage;
+
+$encoded = <<<'JSON'
+{
+    "url": "https://localheinz.com",
+    "name": "Andreas Möller",
+    "open-source-projects": {
+        "ergebnis/data-provider": {
+            "downloads": {
+                "total": 2,
+                "monthly": 1
+            }
+        },
+        "ergebnis/composer-normalize": {
+            "downloads": {
+                "total": 5,
+                "monthly": 2
+            }
+        }
+    }
+}
+JSON;
+
+$json = Json::fromString($encoded);
+
+$normalizer = new Normalizer\SchemaNormalizer(
+    'file:///schema/example.json',
+    new SchemaStorage(),
+    new SchemaValidator\SchemaValidator(),
+    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/open-source-projects'))
+);
+
+$normalized = $normalizer->normalize($json);
+```
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
 
