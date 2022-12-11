@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Util\SchemaNormalizer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Pointer;
 
 /**
  * @internal
@@ -27,6 +28,7 @@ final class Scenario
         private Json $normalized,
         private Json $original,
         private string $schemaUri,
+        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
     ) {
     }
 
@@ -35,12 +37,14 @@ final class Scenario
         Json $normalized,
         Json $original,
         string $schemaUri,
+        Pointer\Specification $jsonPointerSpecification,
     ): self {
         return new self(
             $key,
             $normalized,
             $original,
             $schemaUri,
+            $jsonPointerSpecification,
         );
     }
 
@@ -62,5 +66,10 @@ final class Scenario
     public function schemaUri(): string
     {
         return $this->schemaUri;
+    }
+
+    public function specificationForPointerToDataThatShouldNotBeSorted(): Pointer\Specification
+    {
+        return $this->specificationForPointerToDataThatShouldNotBeSorted;
     }
 }

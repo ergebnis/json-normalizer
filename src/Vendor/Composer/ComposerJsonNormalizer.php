@@ -15,6 +15,7 @@ namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
 
@@ -29,6 +30,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 $schemaUri,
                 new SchemaStorage(),
                 new SchemaValidator\SchemaValidator(),
+                Pointer\Specification::never(),
             ),
             new BinNormalizer(),
             new ConfigHashNormalizer(),

@@ -17,6 +17,7 @@ use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
 use JsonSchema\Exception\JsonDecodingException;
@@ -63,6 +64,7 @@ JSON
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeResolved::class);
@@ -95,6 +97,7 @@ JSON
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
         );
 
         $this->expectException(Exception\SchemaUriCouldNotBeRead::class);
@@ -127,6 +130,7 @@ JSON
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
         );
 
         $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class);
@@ -159,6 +163,7 @@ JSON
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
         );
 
         $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocument::class);
@@ -201,6 +206,7 @@ JSON;
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
         );
 
         $this->expectException(Exception\OriginalInvalidAccordingToSchema::class);
@@ -209,7 +215,8 @@ JSON;
     }
 
     /**
-     * @dataProvider provideScenario
+     * @dataProvider provideScenarioWithCustomJsonPointerSpecification
+     * @dataProvider provideScenarioWithDefaultJsonPointerSpecification
      */
     public function testNormalizeNormalizes(Test\Util\SchemaNormalizer\Scenario $scenario): void
     {
@@ -219,6 +226,7 @@ JSON;
             $scenario->schemaUri(),
             new SchemaStorage(),
             new SchemaValidator\SchemaValidator(),
+            $scenario->specificationForPointerToDataThatShouldNotBeSorted(),
         );
 
         $normalized = $normalizer->normalize($json);
@@ -229,11 +237,11 @@ JSON;
     /**
      * @return \Generator<string, array{0: Test\Util\SchemaNormalizer\Scenario}>
      */
-    public function provideScenario(): \Generator
+    public function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes'));
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithDefaultJsonPointerSpecification'));
 
         foreach ($iterator as $fileInfo) {
             if (!$fileInfo->isFile()) {
@@ -300,6 +308,118 @@ JSON;
                         'file://%s',
                         $schemaFile,
                     ),
+                    Pointer\Specification::never(),
+                ),
+            ];
+        }
+    }
+
+    /**
+     * @return \Generator<string, array{0: Test\Util\SchemaNormalizer\Scenario}>
+     */
+    public function provideScenarioWithCustomJsonPointerSpecification(): \Generator
+    {
+        $basePath = __DIR__ . '/../';
+
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithCustomJsonPointerSpecification'));
+
+        foreach ($iterator as $fileInfo) {
+            if (!$fileInfo->isFile()) {
+                continue;
+            }
+
+            if ('normalized.json' !== $fileInfo->getBasename()) {
+                continue;
+            }
+
+            $normalizedFile = $fileInfo->getRealPath();
+
+            $originalFile = \preg_replace(
+                '/normalized\.json$/',
+                'original.json',
+                $normalizedFile,
+            );
+
+            if (!\is_string($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
+                    $normalizedFile,
+                ));
+            }
+
+            if (!\file_exists($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $originalFile,
+                ));
+            }
+
+            $schemaFile = \preg_replace(
+                '/normalized\.json$/',
+                'schema.json',
+                $normalizedFile,
+            );
+
+            if (!\is_string($schemaFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce schema JSON file name from normalized JSON file name "%s".',
+                    $normalizedFile,
+                ));
+            }
+
+            if (!\file_exists($schemaFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $schemaFile,
+                ));
+            }
+
+            $jsonPointerSpecificationFile = \preg_replace(
+                '/normalized\.json$/',
+                'specification-for-pointer-to-data-that-should-not-be-sorted.php',
+                $normalizedFile,
+            );
+
+            if (!\is_string($jsonPointerSpecificationFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce JSON pointer specification file name from normalized JSON file name "%s".',
+                    $normalizedFile,
+                ));
+            }
+
+            if (!\file_exists($jsonPointerSpecificationFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $jsonPointerSpecificationFile,
+                ));
+            }
+
+            $specificationForPointerToDataThatShouldBeSorted = include $jsonPointerSpecificationFile;
+
+            if (!$specificationForPointerToDataThatShouldBeSorted instanceof Pointer\Specification) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to return an instance of "%s", got "%s" instead.',
+                    $jsonPointerSpecificationFile,
+                    Pointer\Specification::class,
+                    \get_debug_type($specificationForPointerToDataThatShouldBeSorted),
+                ));
+            }
+
+            $key = \substr(
+                $fileInfo->getPath(),
+                \strlen($basePath),
+            );
+
+            yield $key => [
+                Test\Util\SchemaNormalizer\Scenario::create(
+                    $key,
+                    Json::fromFile($normalizedFile),
+                    Json::fromFile($originalFile),
+                    \sprintf(
+                        'file://%s',
+                        $schemaFile,
+                    ),
+                    $specificationForPointerToDataThatShouldBeSorted,
                 ),
             ];
         }
