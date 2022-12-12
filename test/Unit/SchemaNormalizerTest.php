@@ -244,6 +244,7 @@ JSON;
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithDefaultJsonPointerSpecification'));
 
         foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
             if (!$fileInfo->isFile()) {
                 continue;
             }
@@ -324,6 +325,7 @@ JSON;
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithCustomJsonPointerSpecification'));
 
         foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
             if (!$fileInfo->isFile()) {
                 continue;
             }

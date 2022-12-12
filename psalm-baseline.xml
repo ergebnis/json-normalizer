@@ -103,39 +103,11 @@
     </MixedInferredReturnType>
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">
-    <MixedArgument occurrences="14">
-      <code>$fileInfo-&gt;getPath()</code>
-      <code>$fileInfo-&gt;getPath()</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment occurrences="3">
       <code>$fileInfo</code>
       <code>$fileInfo</code>
-      <code>$normalizedFile</code>
-      <code>$normalizedFile</code>
       <code>$schemaDecoded</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="8">
-      <code>getBasename</code>
-      <code>getBasename</code>
-      <code>getPath</code>
-      <code>getPath</code>
-      <code>getRealPath</code>
-      <code>getRealPath</code>
-      <code>isFile</code>
-      <code>isFile</code>
-    </MixedMethodCall>
   </file>
   <file src="test/Unit/Vendor/Composer/AbstractComposerTestCase.php">
     <MixedInferredReturnType occurrences="1">
