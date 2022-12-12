@@ -534,6 +534,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#776]: https://github.com/ergebnis/json-normalizer/pull/776
 [#777]: https://github.com/ergebnis/json-normalizer/pull/777
 [#778]: https://github.com/ergebnis/json-normalizer/pull/778
+[#779]: https://github.com/ergebnis/json-normalizer/pull/779
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
