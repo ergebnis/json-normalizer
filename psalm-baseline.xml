@@ -142,16 +142,6 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
   </file>
-  <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
-    <MixedInferredReturnType occurrences="2">
-      <code>Normalizer</code>
-      <code>array&lt;int, Normalizer&gt;</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="2">
-      <code>$property-&gt;getValue($normalizer)</code>
-      <code>$property-&gt;getValue($normalizer)</code>
-    </MixedReturnStatement>
-  </file>
   <file src="test/Unit/Vendor/Composer/PackageHashNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>

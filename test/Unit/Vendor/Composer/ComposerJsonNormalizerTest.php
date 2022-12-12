@@ -14,9 +14,6 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\ChainNormalizer;
-use Ergebnis\Json\Normalizer\Normalizer;
-use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
@@ -32,30 +29,6 @@ use Ergebnis\Json\Normalizer\Vendor;
  */
 final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 {
-    public function testComposesNormalizers(): void
-    {
-        $normalizer = new Vendor\Composer\ComposerJsonNormalizer('https://getcomposer.org/schema.json');
-
-        self::assertComposesNormalizer(ChainNormalizer::class, $normalizer);
-
-        $chainNormalizer = self::composedNormalizer($normalizer);
-
-        $normalizerClassNames = [
-            SchemaNormalizer::class,
-            Vendor\Composer\BinNormalizer::class,
-            Vendor\Composer\PackageHashNormalizer::class,
-            Vendor\Composer\VersionConstraintNormalizer::class,
-        ];
-
-        self::assertComposesNormalizers($normalizerClassNames, $chainNormalizer);
-
-        $chainedNormalizers = self::composedNormalizers($chainNormalizer);
-
-        $schemaNormalizer = \array_shift($chainedNormalizers);
-
-        self::assertInstanceOf(SchemaNormalizer::class, $schemaNormalizer);
-    }
-
     public function testNormalizeNormalizes(): void
     {
         $json = Json::fromString(
@@ -210,83 +183,5 @@ JSON
         $normalized = $normalizer->normalize($json);
 
         self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
-    }
-
-    /**
-     * @param class-string $className
-     */
-    private static function assertComposesNormalizer(
-        string $className,
-        Normalizer $normalizer,
-    ): void {
-        $attributeName = 'normalizer';
-
-        self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
-            'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName,
-        ));
-
-        $composedNormalizer = self::composedNormalizer($normalizer);
-
-        self::assertInstanceOf($className, $composedNormalizer, \sprintf(
-            'Failed asserting that a normalizer composes a normalizer of type "%s".',
-            $className,
-        ));
-    }
-
-    /**
-     * @param array<int, string> $classNames
-     *
-     * @throws \ReflectionException
-     */
-    private static function assertComposesNormalizers(
-        array $classNames,
-        Normalizer $normalizer,
-    ): void {
-        $attributeName = 'normalizers';
-
-        self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
-            'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName,
-        ));
-
-        $composedNormalizers = self::composedNormalizers($normalizer);
-
-        $composedNormalizerClassNames = \array_map(static function ($normalizer): string {
-            return $normalizer::class;
-        }, $composedNormalizers);
-
-        self::assertSame(
-            $classNames,
-            $composedNormalizerClassNames,
-            'Failed asserting that a normalizer composes normalizers as expected.',
-        );
-    }
-
-    private static function composedNormalizer(Normalizer $normalizer): Normalizer
-    {
-        $reflection = new \ReflectionObject($normalizer);
-
-        $property = $reflection->getProperty('normalizer');
-
-        $property->setAccessible(true);
-
-        return $property->getValue($normalizer);
-    }
-
-    /**
-     *@throws \ReflectionException
-     *
-     * @return array<int, Normalizer>
-     */
-    private static function composedNormalizers(Normalizer $normalizer): array
-    {
-        $reflection = new \ReflectionObject($normalizer);
-
-        $property = $reflection->getProperty('normalizers');
-
-        $property->setAccessible(true);
-
-        return $property->getValue($normalizer);
     }
 }
