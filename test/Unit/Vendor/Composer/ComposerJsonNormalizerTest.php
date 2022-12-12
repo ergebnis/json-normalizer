@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
@@ -29,151 +30,12 @@ use Ergebnis\Json\Normalizer\Vendor;
  */
 final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 {
-    public function testNormalizeNormalizes(): void
+    /**
+     * @dataProvider provideScenario
+     */
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario $scenario): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
-{
-  "name": "foo/bar",
-  "description": "In der Fantasie geht alles",
-  "type": "library",
-  "license": "MIT",
-  "keywords": [
-    "null",
-    "helmut",
-    "körschgen"
-  ],
-  "authors": [
-    {
-      "role": "Lieutenant",
-      "homepage": "http://example.org",
-      "name": "Helmut Körschgen"
-    }
-  ],
-  "config": {
-    "sort-packages": true,
-    "preferred-install": "dist"
-  },
-  "repositories": [
-    {
-      "url": "git@github.com:localheinz/test-util",
-      "type": "vcs"
-    }
-  ],
-  "require": {
-    "localheinz/json-printer": "^1.0.0",
-    "php": "^7.0"
-  },
-  "require-dev": {
-    "localheinz/test-util": "0.6.1",
-    "phpunit/phpunit": "^6.5.5",
-    "localheinz/php-cs-fixer-config": "~1.0.0|~1.11.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "": "/foo",
-      "Helmut\\Foo\\Bar\\": "src/"
-    }
-  },
-  "scripts": {
-    "foo": "foo.sh",
-    "bar": "bar.sh",
-    "post-install-cmd": "@foo",
-    "pre-install-cmd": [
-      "@foo",
-      "@bar"
-    ]
-  },
-  "scripts-descriptions": {
-    "foo": "Executes foo.sh",
-    "bar": "Executes bar.sh",
-    "post-install-cmd": "Runs foo",
-    "pre-install-cmd": "Runs foo and bar"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Helmut\\Foo\\Bar\\Test\\": "test/"
-    }
-  },
-  "bin": [
-    "scripts/null-null.php",
-    "hasenbein.php"
-  ]
-}
-JSON
-        );
-
-        $expected = Json::fromString(
-            <<<'JSON'
-{
-  "name": "foo/bar",
-  "type": "library",
-  "description": "In der Fantasie geht alles",
-  "keywords": [
-    "null",
-    "helmut",
-    "körschgen"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Helmut Körschgen",
-      "homepage": "http://example.org",
-      "role": "Lieutenant"
-    }
-  ],
-  "require": {
-    "php": "^7.0",
-    "localheinz/json-printer": "^1.0.0"
-  },
-  "require-dev": {
-    "localheinz/php-cs-fixer-config": "~1.0.0 || ~1.11.0",
-    "localheinz/test-util": "0.6.1",
-    "phpunit/phpunit": "^6.5.5"
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "autoload": {
-    "psr-4": {
-      "": "/foo",
-      "Helmut\\Foo\\Bar\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Helmut\\Foo\\Bar\\Test\\": "test/"
-    }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:localheinz/test-util"
-    }
-  ],
-  "bin": [
-    "hasenbein.php",
-    "scripts/null-null.php"
-  ],
-  "scripts": {
-    "pre-install-cmd": [
-      "@foo",
-      "@bar"
-    ],
-    "post-install-cmd": "@foo",
-    "bar": "bar.sh",
-    "foo": "foo.sh"
-  },
-  "scripts-descriptions": {
-    "bar": "Executes bar.sh",
-    "foo": "Executes foo.sh",
-    "post-install-cmd": "Runs foo",
-    "pre-install-cmd": "Runs foo and bar"
-  }
-}
-JSON
-        );
+        $json = $scenario->original();
 
         $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
@@ -182,6 +44,62 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($scenario->normalized()->encoded(), $normalized->encoded());
+    }
+
+    /**
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario}>
+     */
+    public function provideScenario(): \Generator
+    {
+        $basePath = __DIR__ . '/../';
+
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizes'));
+
+        foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
+            if (!$fileInfo->isFile()) {
+                continue;
+            }
+
+            if ('normalized.json' !== $fileInfo->getBasename()) {
+                continue;
+            }
+
+            $normalizedFile = $fileInfo->getRealPath();
+
+            $originalFile = \preg_replace(
+                '/normalized\.json$/',
+                'original.json',
+                $normalizedFile,
+            );
+
+            if (!\is_string($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
+                    $normalizedFile,
+                ));
+            }
+
+            if (!\file_exists($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $originalFile,
+                ));
+            }
+
+            $key = \substr(
+                $fileInfo->getPath(),
+                \strlen($basePath),
+            );
+
+            yield $key => [
+                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario::create(
+                    $key,
+                    Json::fromFile($normalizedFile),
+                    Json::fromFile($originalFile),
+                ),
+            ];
+        }
     }
 }

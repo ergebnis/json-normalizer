@@ -114,6 +114,11 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
   </file>
+  <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
+    <MixedAssignment occurrences="1">
+      <code>$fileInfo</code>
+    </MixedAssignment>
+  </file>
   <file src="test/Unit/Vendor/Composer/PackageHashNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>

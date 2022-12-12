@@ -1,0 +1,67 @@
+{
+  "name": "foo/bar",
+  "description": "In der Fantasie geht alles",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "null",
+    "helmut",
+    "körschgen"
+  ],
+  "authors": [
+    {
+      "role": "Lieutenant",
+      "homepage": "http://example.org",
+      "name": "Helmut Körschgen"
+    }
+  ],
+  "config": {
+    "sort-packages": true,
+    "preferred-install": "dist"
+  },
+  "repositories": [
+    {
+      "url": "git@github.com:localheinz/test-util",
+      "type": "vcs"
+    }
+  ],
+  "require": {
+    "localheinz/json-printer": "^1.0.0",
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "localheinz/test-util": "0.6.1",
+    "phpunit/phpunit": "^6.5.5",
+    "localheinz/php-cs-fixer-config": "~1.0.0|~1.11.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "": "/foo",
+      "Helmut\\Foo\\Bar\\": "src/"
+    }
+  },
+  "scripts": {
+    "foo": "foo.sh",
+    "bar": "bar.sh",
+    "post-install-cmd": "@foo",
+    "pre-install-cmd": [
+      "@foo",
+      "@bar"
+    ]
+  },
+  "scripts-descriptions": {
+    "foo": "Executes foo.sh",
+    "bar": "Executes bar.sh",
+    "post-install-cmd": "Runs foo",
+    "pre-install-cmd": "Runs foo and bar"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Helmut\\Foo\\Bar\\Test\\": "test/"
+    }
+  },
+  "bin": [
+    "scripts/null-null.php",
+    "hasenbein.php"
+  ]
+}
