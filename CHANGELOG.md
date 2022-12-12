@@ -17,7 +17,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 ### Removed
 
 - Started using `ergebnis/json` and removed `Json` and `Exception\InvalidJsonEncoded` ([#772]), by [@localheinz]
-- Removed `Normalizer\Vendor\Composer\ConfigHashNormalizer` ([#775]), by [@localheinz]
+- Removed `Vendor\Composer\ConfigHashNormalizer` ([#775]), by [@localheinz]
 
 ## [`3.0.0`][3.0.0]
 
