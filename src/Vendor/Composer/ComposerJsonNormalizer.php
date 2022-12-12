@@ -34,6 +34,9 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/allow-plugins')),
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/preferred-install')),
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/installer-paths')),
+                    Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
+                        return 1 === \preg_match('{^\/extra\/patches\/([^/])+$}', $jsonPointer->toJsonString());
+                    }),
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
             ),
