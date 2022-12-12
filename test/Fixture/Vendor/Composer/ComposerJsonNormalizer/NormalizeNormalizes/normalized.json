@@ -1,13 +1,13 @@
 {
   "name": "foo/bar",
-  "type": "library",
   "description": "In der Fantasie geht alles",
+  "license": "MIT",
+  "type": "library",
   "keywords": [
     "null",
     "helmut",
     "körschgen"
   ],
-  "license": "MIT",
   "authors": [
     {
       "name": "Helmut Körschgen",
@@ -24,10 +24,12 @@
     "localheinz/test-util": "0.6.1",
     "phpunit/phpunit": "^6.5.5"
   },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:localheinz/test-util"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "": "/foo",
@@ -39,16 +41,14 @@
       "Helmut\\Foo\\Bar\\Test\\": "test/"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:localheinz/test-util"
-    }
-  ],
   "bin": [
     "hasenbein.php",
     "scripts/null-null.php"
   ],
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
   "scripts": {
     "pre-install-cmd": [
       "@foo",
