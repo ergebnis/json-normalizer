@@ -27,7 +27,6 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
- * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  */
@@ -44,7 +43,6 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
         $normalizerClassNames = [
             SchemaNormalizer::class,
             Vendor\Composer\BinNormalizer::class,
-            Vendor\Composer\ConfigHashNormalizer::class,
             Vendor\Composer\PackageHashNormalizer::class,
             Vendor\Composer\VersionConstraintNormalizer::class,
         ];

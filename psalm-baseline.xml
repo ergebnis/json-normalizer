@@ -32,15 +32,6 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
-  <file src="src/Vendor/Composer/ConfigHashNormalizer.php">
-    <MixedArgument occurrences="2">
-      <code>$value</code>
-      <code>$value</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$value</code>
-    </MixedAssignment>
-  </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
     <MixedAssignment occurrences="1">
       <code>$value</code>
@@ -160,11 +151,6 @@
       <code>$property-&gt;getValue($normalizer)</code>
       <code>$property-&gt;getValue($normalizer)</code>
     </MixedReturnStatement>
-  </file>
-  <file src="test/Unit/Vendor/Composer/ConfigHashNormalizerTest.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
   </file>
   <file src="test/Unit/Vendor/Composer/PackageHashNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
