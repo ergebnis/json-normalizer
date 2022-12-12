@@ -39,7 +39,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 
         $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
-            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/composer-schema.json'),
+            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/schema.json'),
         ));
 
         $normalized = $normalizer->normalize($json);
