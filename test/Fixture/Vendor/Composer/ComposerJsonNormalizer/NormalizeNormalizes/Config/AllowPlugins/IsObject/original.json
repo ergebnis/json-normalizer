@@ -17,6 +17,7 @@
   "config": {
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
+      "infection/extension-installer": true,
       "composer/*": false
     }
   }
