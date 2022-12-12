@@ -39,11 +39,11 @@ This package comes with the following generic normalizers:
 - [`Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
 - [`Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer`](#withoutfinalnewlinenormalizer)
 
-:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
+:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\Normalizer`.
 
 #### `AutoFormatNormalizer`
 
-When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `Normalizer`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
 
 ```php
 <?php
@@ -171,7 +171,7 @@ The normalized version will now contain the result of applying all normalizers i
 
 #### `FixedFormatNormalizer`
 
-When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but apply a fixed formatting, you can use the `FixedFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `Normalizer`, but apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
 <?php
