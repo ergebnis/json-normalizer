@@ -18,6 +18,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `scripts.auto-scripts` ([#776]), by [@localheinz]
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `extra.installer-paths` ([#777]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `config.allow-plugins` ([#778]), by [@localheinz]
 
 ### Removed
 
@@ -531,6 +532,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#775]: https://github.com/ergebnis/json-normalizer/pull/775
 [#776]: https://github.com/ergebnis/json-normalizer/pull/776
 [#777]: https://github.com/ergebnis/json-normalizer/pull/777
+[#778]: https://github.com/ergebnis/json-normalizer/pull/778
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

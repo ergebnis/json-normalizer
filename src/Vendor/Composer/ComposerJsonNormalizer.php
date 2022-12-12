@@ -31,6 +31,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 new SchemaStorage(),
                 new SchemaValidator\SchemaValidator(),
                 Pointer\Specification::anyOf(
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/allow-plugins')),
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/installer-paths')),
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
