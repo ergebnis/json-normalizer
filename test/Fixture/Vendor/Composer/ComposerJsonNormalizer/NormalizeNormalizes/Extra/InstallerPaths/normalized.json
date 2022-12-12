@@ -1,0 +1,56 @@
+{
+  "name": "ergebnis/json-normalizer",
+  "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "json",
+    "normalizer"
+  ],
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
+    }
+  ],
+  "homepage": "https://getcomposer.org/doc/faqs/how-do-i-install-a-package-to-a-custom-path-for-my-framework.md",
+  "extra": {
+    "installer-paths": {
+      "app/core": [
+        "type:drupal-core"
+      ],
+      "app/libraries/jquery.easing": [
+        "bower-asset/jquery-easing-original"
+      ],
+      "app/libraries/slick": [
+        "bower-asset/slick-carousel"
+      ],
+      "app/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
+      "app/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "app/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "app/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "app/profiles/custom/{$name}": [
+        "type:drupal-custom-profile"
+      ],
+      "app/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "app/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    }
+  }
+}
