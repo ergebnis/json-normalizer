@@ -97,6 +97,11 @@
       <code>\Generator&lt;array&lt;string&gt;&gt;</code>
     </MixedInferredReturnType>
   </file>
+  <file src="test/Unit/FormatNormalizerTest.php">
+    <MixedAssignment occurrences="1">
+      <code>$fileInfo</code>
+    </MixedAssignment>
+  </file>
   <file src="test/Unit/JsonEncodeNormalizerTest.php">
     <MixedInferredReturnType occurrences="1">
       <code>\Generator&lt;array&lt;int&gt;&gt;</code>
