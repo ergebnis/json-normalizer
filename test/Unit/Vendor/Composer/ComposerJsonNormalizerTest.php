@@ -50,7 +50,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
     /**
      * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario}>
      */
-    public function provideScenario(): \Generator
+    public static function provideScenario(): \Generator
     {
         $basePath = __DIR__ . '/../';
 

@@ -237,7 +237,7 @@ JSON;
     /**
      * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
      */
-    public function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
+    public static function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
@@ -318,7 +318,7 @@ JSON;
     /**
      * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
      */
-    public function provideScenarioWithCustomJsonPointerSpecification(): \Generator
+    public static function provideScenarioWithCustomJsonPointerSpecification(): \Generator
     {
         $basePath = __DIR__ . '/../';
 

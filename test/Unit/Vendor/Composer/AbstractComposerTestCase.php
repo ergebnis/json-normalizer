@@ -45,7 +45,7 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
     /**
      * @return \Generator<array<string>>
      */
-    final public function provideJsonNotDecodingToObject(): \Generator
+    final public static function provideJsonNotDecodingToObject(): \Generator
     {
         $faker = self::faker();
 

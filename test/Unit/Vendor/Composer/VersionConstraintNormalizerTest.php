@@ -48,7 +48,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideVersionConstraint(): \Generator
+    public static function provideVersionConstraint(): \Generator
     {
         foreach (\array_keys(self::versionConstraints()) as $versionConstraint) {
             yield [
@@ -80,7 +80,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideProperty(): \Generator
+    public static function provideProperty(): \Generator
     {
         $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
 
@@ -129,7 +129,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providePropertyAndVersionConstraint(): \Generator
+    public static function providePropertyAndVersionConstraint(): \Generator
     {
         $properties = self::propertiesWhereValuesOfHashAreVersionConstraints();
         $versionConstraints = self::versionConstraints();
@@ -183,7 +183,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providePropertyAndUntrimmedVersionConstraint(): \Generator
+    public static function providePropertyAndUntrimmedVersionConstraint(): \Generator
     {
         $spaces = [
             '',

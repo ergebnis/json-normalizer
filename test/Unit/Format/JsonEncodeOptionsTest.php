@@ -43,7 +43,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideInvalidValue(): \Generator
+    public static function provideInvalidValue(): \Generator
     {
         $values = [
             'int-minus-one' => -1,
@@ -70,7 +70,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideValidValue(): \Generator
+    public static function provideValidValue(): \Generator
     {
         $values = [
             'int-zero' => 0,
@@ -101,7 +101,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return array<array{0: int, 1: string}>
      */
-    public function provideJsonEncodeOptionsAndEncoded(): array
+    public static function provideJsonEncodeOptionsAndEncoded(): array
     {
         return [
             [

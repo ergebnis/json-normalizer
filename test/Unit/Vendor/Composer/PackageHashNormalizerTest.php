@@ -120,7 +120,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideProperty(): \Generator
+    public static function provideProperty(): \Generator
     {
         foreach (self::propertiesWhereKeysOfHashArePackages() as $value) {
             yield $value => [

@@ -134,7 +134,7 @@ final class FormatTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideEncodedWithoutIndent(): \Generator
+    public static function provideEncodedWithoutIndent(): \Generator
     {
         $values = [
             'array-empty' => '[]',
@@ -182,7 +182,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideWhitespaceWithoutNewLine(): \Generator
+    public static function provideWhitespaceWithoutNewLine(): \Generator
     {
         $characters = [
             ' ',
@@ -225,7 +225,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideWhitespaceWithNewLine(): \Generator
+    public static function provideWhitespaceWithNewLine(): \Generator
     {
         $characters = [
             '',

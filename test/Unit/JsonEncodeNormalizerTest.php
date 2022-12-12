@@ -59,7 +59,7 @@ JSON
     /**
      * @return \Generator<array<int>>
      */
-    public function provideJsonEncodeOptions(): \Generator
+    public static function provideJsonEncodeOptions(): \Generator
     {
         /**
          * Could add more, but the idea counts.

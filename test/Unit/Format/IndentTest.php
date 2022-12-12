@@ -60,7 +60,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideInvalidSize(): \Generator
+    public static function provideInvalidSize(): \Generator
     {
         $sizes = [
             'int-zero' => 0,
@@ -109,7 +109,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array{0: int, 1: string, 2: string}>
      */
-    public function provideSizeStyleAndIndentString(): \Generator
+    public static function provideSizeStyleAndIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -140,7 +140,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideInvalidIndentString(): \Generator
+    public static function provideInvalidIndentString(): \Generator
     {
         $strings = [
             'string-not-whitespace' => self::faker()->sentence(),
@@ -168,7 +168,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideValidIndentString(): \Generator
+    public static function provideValidIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -237,7 +237,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providePureIndentAndSniffedIndent(): \Generator
+    public static function providePureIndentAndSniffedIndent(): \Generator
     {
         $sizes = [
             1,
@@ -268,7 +268,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideMixedIndentAndSniffedIndent(): \Generator
+    public static function provideMixedIndentAndSniffedIndent(): \Generator
     {
         $mixedIndents = [
             'space-and-tab' => [

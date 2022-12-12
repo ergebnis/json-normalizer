@@ -40,7 +40,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideInvalidNewLineString(): \Generator
+    public static function provideInvalidNewLineString(): \Generator
     {
         $strings = [
             "\t",
@@ -73,7 +73,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideValidNewLineString(): \Generator
+    public static function provideValidNewLineString(): \Generator
     {
         $strings = [
             "\n",
@@ -134,7 +134,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideNewLine(): \Generator
+    public static function provideNewLine(): \Generator
     {
         $values = [
             "\r\n",
