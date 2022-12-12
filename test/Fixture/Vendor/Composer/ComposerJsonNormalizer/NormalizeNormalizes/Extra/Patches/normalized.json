@@ -21,8 +21,8 @@
         "baz": "https://www.drupal.org/files/issues/2019-01-01/baz.patch"
       },
       "drupal/foo": {
-        "baz": "https://www.drupal.org/files/issues/2019-01-01/baz.patch",
-        "foo": "https://www.drupal.org/files/issues/2020-12-13/foo.patch"
+        "foo": "https://www.drupal.org/files/issues/2020-12-13/foo.patch",
+        "baz": "https://www.drupal.org/files/issues/2019-01-01/baz.patch"
       }
     }
   }
