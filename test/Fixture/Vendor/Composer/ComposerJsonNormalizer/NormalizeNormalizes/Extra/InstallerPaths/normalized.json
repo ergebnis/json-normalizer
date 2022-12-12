@@ -19,16 +19,16 @@
       "app/core": [
         "type:drupal-core"
       ],
+      "app/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
       "app/libraries/jquery.easing": [
         "bower-asset/jquery-easing-original"
       ],
       "app/libraries/slick": [
         "bower-asset/slick-carousel"
-      ],
-      "app/libraries/{$name}": [
-        "type:drupal-library",
-        "type:bower-asset",
-        "type:npm-asset"
       ],
       "app/modules/contrib/{$name}": [
         "type:drupal-module"

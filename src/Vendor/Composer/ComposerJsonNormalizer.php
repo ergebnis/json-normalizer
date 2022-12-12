@@ -30,7 +30,10 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 $schemaUri,
                 new SchemaStorage(),
                 new SchemaValidator\SchemaValidator(),
-                Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
+                Pointer\Specification::anyOf(
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/installer-paths')),
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
+                ),
             ),
             new BinNormalizer(),
             new PackageHashNormalizer(),
