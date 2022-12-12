@@ -16,8 +16,10 @@
   "homepage": "https://getcomposer.org/doc/06-config.md#preferred-install",
   "config": {
     "preferred-install": {
-      "foo/package-one": "source",
-      "bar/another-package": "source",
+      "foo/something-longer-but-alphabetically-after-package-*": "source",
+      "foo/*": "dist",
+      "foo/package-*": "source",
+      "foo/package-one": "dist",
       "*": "dist"
     }
   }
