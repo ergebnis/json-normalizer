@@ -15,10 +15,10 @@
   ],
   "scripts": {
     "auto-scripts": {
-      "assets:install %PUBLIC_DIR%": "symfony-cmd",
-      "bazinga:js-translation:dump assets --merge-domains --format=json": "symfony-cmd",
       "cache:clear": "symfony-cmd",
-      "doctrine:migrations:migrate -v": "symfony-cmd"
+      "doctrine:migrations:migrate -v": "symfony-cmd",
+      "bazinga:js-translation:dump assets --merge-domains --format=json": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
     }
   }
 }

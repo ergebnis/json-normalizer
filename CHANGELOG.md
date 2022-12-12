@@ -14,6 +14,10 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Required `ergebnis/json-schema-validator:^4.0.0` ([#771]), by [@localheinz]
 - Allowed configuring the `Normalizer\SchemaNormalizer` to exclude properties from being sorted ([#774]), by [@localheinz]
 
+### Fixed
+
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `scripts.auto-scripts` ([#776]), by [@localheinz]
+
 ### Removed
 
 - Started using `ergebnis/json` and removed `Json` and `Exception\InvalidJsonEncoded` ([#772]), by [@localheinz]
@@ -524,6 +528,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#772]: https://github.com/ergebnis/json-normalizer/pull/772
 [#774]: https://github.com/ergebnis/json-normalizer/pull/774
 [#775]: https://github.com/ergebnis/json-normalizer/pull/775
+[#776]: https://github.com/ergebnis/json-normalizer/pull/776
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
