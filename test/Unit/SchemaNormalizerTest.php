@@ -218,7 +218,7 @@ JSON;
      * @dataProvider provideScenarioWithCustomJsonPointerSpecification
      * @dataProvider provideScenarioWithDefaultJsonPointerSpecification
      */
-    public function testNormalizeNormalizes(Test\Util\SchemaNormalizer\Scenario $scenario): void
+    public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\Scenario $scenario): void
     {
         $json = $scenario->original();
 
@@ -235,7 +235,7 @@ JSON;
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Util\SchemaNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
      */
     public function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
     {
@@ -301,7 +301,7 @@ JSON;
             );
 
             yield $key => [
-                Test\Util\SchemaNormalizer\Scenario::create(
+                Test\Fixture\SchemaNormalizer\Scenario::create(
                     $key,
                     Json::fromFile($normalizedFile),
                     Json::fromFile($originalFile),
@@ -316,7 +316,7 @@ JSON;
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Util\SchemaNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
      */
     public function provideScenarioWithCustomJsonPointerSpecification(): \Generator
     {
@@ -413,7 +413,7 @@ JSON;
             );
 
             yield $key => [
-                Test\Util\SchemaNormalizer\Scenario::create(
+                Test\Fixture\SchemaNormalizer\Scenario::create(
                     $key,
                     Json::fromFile($normalizedFile),
                     Json::fromFile($originalFile),

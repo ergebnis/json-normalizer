@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Util\SchemaNormalizer;
+namespace Ergebnis\Json\Normalizer\Test\Fixture\SchemaNormalizer;
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Pointer;
