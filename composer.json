@@ -19,7 +19,7 @@
     "source": "https://github.com/ergebnis/json-normalizer"
   },
   "require": {
-    "php": "^8.0",
+    "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
     "ext-json": "*",
     "ergebnis/json": "^1.0.1",
     "ergebnis/json-pointer": "^3.2.0",
