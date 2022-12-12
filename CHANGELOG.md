@@ -19,6 +19,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `scripts.auto-scripts` ([#776]), by [@localheinz]
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `extra.installer-paths` ([#777]), by [@localheinz]
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `config.allow-plugins` ([#778]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `config.preferred-install` ([#779]), by [@localheinz]
 
 ### Removed
 
