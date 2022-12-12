@@ -59,9 +59,5 @@
     "psr-4": {
       "Helmut\\Foo\\Bar\\Test\\": "test/"
     }
-  },
-  "bin": [
-    "scripts/null-null.php",
-    "hasenbein.php"
-  ]
+  }
 }

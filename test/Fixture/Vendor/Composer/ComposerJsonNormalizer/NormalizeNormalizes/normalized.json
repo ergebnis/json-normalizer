@@ -41,10 +41,6 @@
       "Helmut\\Foo\\Bar\\Test\\": "test/"
     }
   },
-  "bin": [
-    "hasenbein.php",
-    "scripts/null-null.php"
-  ],
   "config": {
     "preferred-install": "dist",
     "sort-packages": true
