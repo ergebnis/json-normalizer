@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\ChainNormalizer;
-use Ergebnis\Json\Normalizer\Json;
-use Ergebnis\Json\Normalizer\Normalizer;
-use Ergebnis\Json\Normalizer\SchemaNormalizer;
+use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
@@ -25,271 +23,83 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
- * @uses \Ergebnis\Json\Normalizer\Json
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
- * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  */
 final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 {
-    public function testComposesNormalizers(): void
+    /**
+     * @dataProvider provideScenario
+     */
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario $scenario): void
     {
-        $normalizer = new Vendor\Composer\ComposerJsonNormalizer('https://getcomposer.org/schema.json');
-
-        self::assertComposesNormalizer(ChainNormalizer::class, $normalizer);
-
-        $chainNormalizer = self::composedNormalizer($normalizer);
-
-        $normalizerClassNames = [
-            SchemaNormalizer::class,
-            Vendor\Composer\BinNormalizer::class,
-            Vendor\Composer\ConfigHashNormalizer::class,
-            Vendor\Composer\PackageHashNormalizer::class,
-            Vendor\Composer\VersionConstraintNormalizer::class,
-        ];
-
-        self::assertComposesNormalizers($normalizerClassNames, $chainNormalizer);
-
-        $chainedNormalizers = self::composedNormalizers($chainNormalizer);
-
-        $schemaNormalizer = \array_shift($chainedNormalizers);
-
-        self::assertInstanceOf(SchemaNormalizer::class, $schemaNormalizer);
-    }
-
-    public function testNormalizeNormalizes(): void
-    {
-        $json = Json::fromEncoded(
-            <<<'JSON'
-{
-  "name": "foo/bar",
-  "description": "In der Fantasie geht alles",
-  "type": "library",
-  "license": "MIT",
-  "keywords": [
-    "null",
-    "helmut",
-    "körschgen"
-  ],
-  "authors": [
-    {
-      "role": "Lieutenant",
-      "homepage": "http://example.org",
-      "name": "Helmut Körschgen"
-    }
-  ],
-  "config": {
-    "sort-packages": true,
-    "preferred-install": "dist"
-  },
-  "repositories": [
-    {
-      "url": "git@github.com:localheinz/test-util",
-      "type": "vcs"
-    }
-  ],
-  "require": {
-    "localheinz/json-printer": "^1.0.0",
-    "php": "^7.0"
-  },
-  "require-dev": {
-    "localheinz/test-util": "0.6.1",
-    "phpunit/phpunit": "^6.5.5",
-    "localheinz/php-cs-fixer-config": "~1.0.0|~1.11.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "": "/foo",
-      "Helmut\\Foo\\Bar\\": "src/"
-    }
-  },
-  "scripts": {
-    "foo": "foo.sh",
-    "bar": "bar.sh",
-    "post-install-cmd": "@foo",
-    "pre-install-cmd": [
-      "@foo",
-      "@bar"
-    ]
-  },
-  "scripts-descriptions": {
-    "foo": "Executes foo.sh",
-    "bar": "Executes bar.sh",
-    "post-install-cmd": "Runs foo",
-    "pre-install-cmd": "Runs foo and bar"
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Helmut\\Foo\\Bar\\Test\\": "test/"
-    }
-  },
-  "bin": [
-    "scripts/null-null.php",
-    "hasenbein.php"
-  ]
-}
-JSON
-        );
-
-        $expected = Json::fromEncoded(
-            <<<'JSON'
-{
-  "name": "foo/bar",
-  "type": "library",
-  "description": "In der Fantasie geht alles",
-  "keywords": [
-    "null",
-    "helmut",
-    "körschgen"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Helmut Körschgen",
-      "homepage": "http://example.org",
-      "role": "Lieutenant"
-    }
-  ],
-  "require": {
-    "php": "^7.0",
-    "localheinz/json-printer": "^1.0.0"
-  },
-  "require-dev": {
-    "localheinz/php-cs-fixer-config": "~1.0.0 || ~1.11.0",
-    "localheinz/test-util": "0.6.1",
-    "phpunit/phpunit": "^6.5.5"
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true
-  },
-  "autoload": {
-    "psr-4": {
-      "": "/foo",
-      "Helmut\\Foo\\Bar\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Helmut\\Foo\\Bar\\Test\\": "test/"
-    }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:localheinz/test-util"
-    }
-  ],
-  "bin": [
-    "hasenbein.php",
-    "scripts/null-null.php"
-  ],
-  "scripts": {
-    "pre-install-cmd": [
-      "@foo",
-      "@bar"
-    ],
-    "post-install-cmd": "@foo",
-    "bar": "bar.sh",
-    "foo": "foo.sh"
-  },
-  "scripts-descriptions": {
-    "bar": "Executes bar.sh",
-    "foo": "Executes foo.sh",
-    "post-install-cmd": "Runs foo",
-    "pre-install-cmd": "Runs foo and bar"
-  }
-}
-JSON
-        );
+        $json = $scenario->original();
 
         $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
-            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/composer-schema.json'),
+            \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/schema.json'),
         ));
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+        self::assertJsonStringEqualsJsonStringNormalized($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**
-     * @param class-string $className
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario}>
      */
-    private static function assertComposesNormalizer(
-        string $className,
-        Normalizer $normalizer,
-    ): void {
-        $attributeName = 'normalizer';
-
-        self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
-            'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName,
-        ));
-
-        $composedNormalizer = self::composedNormalizer($normalizer);
-
-        self::assertInstanceOf($className, $composedNormalizer, \sprintf(
-            'Failed asserting that a normalizer composes a normalizer of type "%s".',
-            $className,
-        ));
-    }
-
-    /**
-     * @param array<int, string> $classNames
-     *
-     * @throws \ReflectionException
-     */
-    private static function assertComposesNormalizers(
-        array $classNames,
-        Normalizer $normalizer,
-    ): void {
-        $attributeName = 'normalizers';
-
-        self::assertObjectHasAttribute($attributeName, $normalizer, \sprintf(
-            'Failed asserting that a normalizer has an attribute "%s".',
-            $attributeName,
-        ));
-
-        $composedNormalizers = self::composedNormalizers($normalizer);
-
-        $composedNormalizerClassNames = \array_map(static function ($normalizer): string {
-            return $normalizer::class;
-        }, $composedNormalizers);
-
-        self::assertSame(
-            $classNames,
-            $composedNormalizerClassNames,
-            'Failed asserting that a normalizer composes normalizers as expected.',
-        );
-    }
-
-    private static function composedNormalizer(Normalizer $normalizer): Normalizer
+    public static function provideScenario(): \Generator
     {
-        $reflection = new \ReflectionObject($normalizer);
+        $basePath = __DIR__ . '/../';
 
-        $property = $reflection->getProperty('normalizer');
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizes'));
 
-        $property->setAccessible(true);
+        foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
+            if (!$fileInfo->isFile()) {
+                continue;
+            }
 
-        return $property->getValue($normalizer);
-    }
+            if ('normalized.json' !== $fileInfo->getBasename()) {
+                continue;
+            }
 
-    /**
-     *@throws \ReflectionException
-     *
-     * @return array<int, Normalizer>
-     */
-    private static function composedNormalizers(Normalizer $normalizer): array
-    {
-        $reflection = new \ReflectionObject($normalizer);
+            $normalizedFile = $fileInfo->getRealPath();
 
-        $property = $reflection->getProperty('normalizers');
+            $originalFile = \preg_replace(
+                '/normalized\.json$/',
+                'original.json',
+                $normalizedFile,
+            );
 
-        $property->setAccessible(true);
+            if (!\is_string($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
+                    $normalizedFile,
+                ));
+            }
 
-        return $property->getValue($normalizer);
+            if (!\file_exists($originalFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $originalFile,
+                ));
+            }
+
+            $key = \substr(
+                $fileInfo->getPath(),
+                \strlen($basePath),
+            );
+
+            yield $key => [
+                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario::create(
+                    $key,
+                    Json::fromFile($normalizedFile),
+                    Json::fromFile($originalFile),
+                ),
+            ];
+        }
     }
 }

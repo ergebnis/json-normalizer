@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
@@ -25,7 +25,6 @@ use PHPUnit\Framework;
  * @covers \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  *
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
@@ -44,7 +43,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideInvalidValue(): \Generator
+    public static function provideInvalidValue(): \Generator
     {
         $values = [
             'int-minus-one' => -1,
@@ -71,7 +70,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideValidValue(): \Generator
+    public static function provideValidValue(): \Generator
     {
         $values = [
             'int-zero' => 0,
@@ -92,7 +91,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         int $value,
         string $encoded,
     ): void {
-        $json = Json::fromEncoded($encoded);
+        $json = Json::fromString($encoded);
 
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromJson($json);
 
@@ -102,7 +101,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return array<array{0: int, 1: string}>
      */
-    public function provideJsonEncodeOptionsAndEncoded(): array
+    public static function provideJsonEncodeOptionsAndEncoded(): array
     {
         return [
             [

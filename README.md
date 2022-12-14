@@ -39,15 +39,18 @@ This package comes with the following generic normalizers:
 - [`Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
 - [`Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer`](#withoutfinalnewlinenormalizer)
 
-:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\NormalizerInterface`.
+:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\Normalizer`.
 
 #### `AutoFormatNormalizer`
 
-When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `Normalizer`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
 
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -58,7 +61,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 /* @var Normalizer\Normalizer $composedNormalizer */
 $normalizer = new Normalizer\AutoFormatNormalizer(
@@ -90,6 +93,9 @@ When you want to normalize a JSON file with a `callable`, you can use the `Calla
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -99,9 +105,9 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
-$callable = function (Normalizer\Json $json): Normalizer\Json {
+$callable = function (Json $json): Json {
     $decoded = $json->decoded();
 
     foreach (get_object_vars($decoded) as $name => $value) {
@@ -112,7 +118,7 @@ $callable = function (Normalizer\Json $json): Normalizer\Json {
         $decoded->{$name} .= '/open-source/';
     }
 
-    return Normalizer\Json::fromEncoded(json_encode($decoded));
+    return Json::fromString(json_encode($decoded));
 };
 
 $normalizer = new Normalizer\CallableNormalizer($callable);
@@ -129,6 +135,9 @@ When you want to apply multiple normalizers in a chain, you can use the `ChainNo
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -139,7 +148,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -162,11 +171,14 @@ The normalized version will now contain the result of applying all normalizers i
 
 #### `FixedFormatNormalizer`
 
-When you want to normalize a JSON file with an implementation of `NormalizerInterface`, but apply a fixed formatting, you can use the `FixedFormatNormalizer`.
+When you want to normalize a JSON file with an implementation of `Normalizer`, but apply a fixed formatting, you can use the `FixedFormatNormalizer`.
 
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -177,7 +189,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 /* @var Normalizer\Normalizer $composedNormalizer */
 /* @var Normalizer\Format\Format $format */
@@ -201,6 +213,9 @@ When you need to adjust the indentation of a JSON file, you can use the `IndentN
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 
@@ -211,7 +226,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $indent = Normalizer\Format\Indent::fromString('  ');
 
@@ -232,6 +247,9 @@ When you need to adjust the encoding of a JSON file, you can use the `JsonEncode
 ```php
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -241,7 +259,7 @@ $encoded = <<<'JSON'
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
@@ -280,7 +298,10 @@ exists at `/schema/example.json`.
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
 
@@ -289,34 +310,80 @@ $encoded = <<<'JSON'
     "url": "https://localheinz.com",
     "name": "Andreas Möller",
     "open-source-projects": {
-        "ergebnis/composer-normalize":
-            "downloads": {
-                "total": 5,
-                "monthly": 2
-            },
-        },
         "ergebnis/data-provider": {
             "downloads": {
                 "total": 2,
                 "monthly": 1
+            }
+        },
+        "ergebnis/composer-normalize": {
+            "downloads": {
+                "total": 5,
+                "monthly": 2
             }
         }
     }
 }
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\SchemaNormalizer(
     'file:///schema/example.json',
     new SchemaStorage(),
-    new SchemaValidator\SchemaValidator()
+    new SchemaValidator\SchemaValidator(),
+    Pointer\Specification::never()
 );
 
 $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered as found in the schema and additional properties will be ordered by name). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
+
+If you have properties that you do not want to be reordered, you can use a `Pointer\Specification` to specify which properties should not be reordered.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
+use Ergebnis\Json\SchemaValidator;
+use JsonSchema\SchemaStorage;
+
+$encoded = <<<'JSON'
+{
+    "url": "https://localheinz.com",
+    "name": "Andreas Möller",
+    "open-source-projects": {
+        "ergebnis/data-provider": {
+            "downloads": {
+                "total": 2,
+                "monthly": 1
+            }
+        },
+        "ergebnis/composer-normalize": {
+            "downloads": {
+                "total": 5,
+                "monthly": 2
+            }
+        }
+    }
+}
+JSON;
+
+$json = Json::fromString($encoded);
+
+$normalizer = new Normalizer\SchemaNormalizer(
+    'file:///schema/example.json',
+    new SchemaStorage(),
+    new SchemaValidator\SchemaValidator(),
+    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/open-source-projects'))
+);
+
+$normalized = $normalizer->normalize($json);
+```
 
 :bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
 
@@ -326,6 +393,8 @@ When you want to ensure that a JSON file has a single final new line, you can us
 
 ```php
 <?php
+
+declare(strict_types=1);
 
 use Ergebnis\Json\Normalizer;
 
@@ -338,7 +407,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\WithFinalNewLineNormalizer();
 
@@ -354,6 +423,8 @@ When you want to ensure that a JSON file does not have a final new line, you can
 ```php
 <?php
 
+declare(strict_types=1);
+
 use Ergebnis\Json\Normalizer;
 
 $encoded = <<<'JSON'
@@ -365,7 +436,7 @@ $encoded = <<<'JSON'
 
 JSON;
 
-$json = Normalizer\Json::fromEncoded($encoded);
+$json = Json::fromString($encoded);
 
 $normalizer = new Normalizer\WithoutFinalNewLineNormalizer();
 
@@ -387,7 +458,6 @@ The `Vendor\Composer\ComposerJsonNormalizer` can be used to normalize a `compose
 It composes the following normalizers:
 
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
 
@@ -396,18 +466,6 @@ It composes the following normalizers:
 When `composer.json` contains an array of scripts in the `bin` section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
 
 :bulb: Find out more about the `bin` section at [Composer: The composer.json schema](https://getcomposer.org/doc/04-schema.md#bin).
-
-#### `Vendor\Composer\ConfigHashNormalizer`
-
-When `composer.json` contains any configuration in the
-
-- `config`
-- `extra`
-- `scripts-descriptions`
-
-sections, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order. If a value is an object, it will continue to sort its properties by name.
-
-:bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
 
 #### `Vendor\Composer\PackageHashNormalizer`
 

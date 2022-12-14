@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\Exception\InvalidSchemaMediaTypeException;
@@ -27,6 +28,7 @@ final class SchemaNormalizer implements Normalizer
         private string $schemaUri,
         private SchemaStorage $schemaStorage,
         private SchemaValidator\SchemaValidator $schemaValidator,
+        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
     ) {
     }
 
@@ -45,8 +47,8 @@ final class SchemaNormalizer implements Normalizer
         }
 
         $resultBeforeNormalization = $this->schemaValidator->validate(
-            SchemaValidator\Json::fromString($json->encoded()),
-            SchemaValidator\Json::fromString(\json_encode($schema)),
+            $json,
+            Json::fromString(\json_encode($schema)),
             Pointer\JsonPointer::document(),
         );
 
@@ -59,14 +61,15 @@ final class SchemaNormalizer implements Normalizer
             );
         }
 
-        $normalized = Json::fromEncoded(\json_encode($this->normalizeData(
+        $normalized = Json::fromString(\json_encode($this->normalizeData(
             $json->decoded(),
             $schema,
+            Pointer\JsonPointer::document(),
         )));
 
         $resultAfterNormalization = $this->schemaValidator->validate(
-            SchemaValidator\Json::fromString($normalized->encoded()),
-            SchemaValidator\Json::fromString(\json_encode($schema)),
+            $normalized,
+            Json::fromString(\json_encode($schema)),
             Pointer\JsonPointer::document(),
         );
 
@@ -83,20 +86,22 @@ final class SchemaNormalizer implements Normalizer
     }
 
     /**
-     * @param null|array<mixed>|bool|float|int|object|string $data
+     * @param null|array<int, mixed>|bool|float|int|object|string $data
      *
      * @throws \InvalidArgumentException
      *
-     * @return null|array<mixed>|bool|float|int|object|string
+     * @return null|array<int, mixed>|bool|float|int|object|string
      */
     private function normalizeData(
         $data,
         object $schema,
+        Pointer\JsonPointer $pointerToData,
     ) {
         if (\is_array($data)) {
             return $this->normalizeArray(
                 $data,
                 $schema,
+                $pointerToData,
             );
         }
 
@@ -104,6 +109,7 @@ final class SchemaNormalizer implements Normalizer
             return $this->normalizeObject(
                 $data,
                 $schema,
+                $pointerToData,
             );
         }
 
@@ -111,13 +117,14 @@ final class SchemaNormalizer implements Normalizer
     }
 
     /**
-     * @param array<mixed> $data
+     * @param array<int, mixed> $data
      *
-     * @return array<mixed>
+     * @return array<int, mixed>
      */
     private function normalizeArray(
         array $data,
         object $schema,
+        Pointer\JsonPointer $pointerToData,
     ): array {
         $schema = $this->resolveSchema(
             $data,
@@ -136,29 +143,32 @@ final class SchemaNormalizer implements Normalizer
              * @see https://json-schema.org/understanding-json-schema/reference/array.html#tuple-validation
              */
             if (\is_array($itemSchema)) {
-                return \array_map(function ($item, object $itemSchema) {
+                return \array_map(function (int $key, $item, object $itemSchema) use ($pointerToData) {
                     return $this->normalizeData(
                         $item,
                         $itemSchema,
+                        $pointerToData->append(Pointer\ReferenceToken::fromInt($key)),
                     );
-                }, $data, $itemSchema);
+                }, \array_keys($data), $data, $itemSchema);
             }
         }
 
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/array.html#list-validation
          */
-        return \array_map(function ($item) use ($itemSchema) {
+        return \array_map(function (int $key, $item) use ($itemSchema, $pointerToData) {
             return $this->normalizeData(
                 $item,
                 $itemSchema,
+                $pointerToData->append(Pointer\ReferenceToken::fromInt($key)),
             );
-        }, $data);
+        }, \array_keys($data), $data);
     }
 
     private function normalizeObject(
         object $data,
         object $schema,
+        Pointer\JsonPointer $pointerToData,
     ): object {
         $schema = $this->resolveSchema(
             $data,
@@ -167,11 +177,18 @@ final class SchemaNormalizer implements Normalizer
 
         $normalized = new \stdClass();
 
+        $dataShouldBeSorted = true;
+
+        if ($this->specificationForPointerToDataThatShouldNotBeSorted->isSatisfiedBy($pointerToData)) {
+            $dataShouldBeSorted = false;
+        }
+
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/object.html#properties
          */
         if (
-            \property_exists($schema, 'properties')
+            $dataShouldBeSorted
+            && \property_exists($schema, 'properties')
             && \is_object($schema->properties)
         ) {
             /** @var array<string, object> $objectPropertiesThatAreDefinedBySchema */
@@ -191,6 +208,7 @@ final class SchemaNormalizer implements Normalizer
                 $normalized->{$name} = $this->normalizeData(
                     $value,
                     $valueSchema,
+                    $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
                 );
 
                 unset($data->{$name});
@@ -203,7 +221,9 @@ final class SchemaNormalizer implements Normalizer
             return $normalized;
         }
 
-        \ksort($additionalProperties);
+        if ($dataShouldBeSorted) {
+            \ksort($additionalProperties);
+        }
 
         $valueSchema = new \stdClass();
 
@@ -211,6 +231,7 @@ final class SchemaNormalizer implements Normalizer
             $normalized->{$name} = $this->normalizeData(
                 $value,
                 $valueSchema,
+                $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
             );
         }
 
@@ -230,8 +251,8 @@ final class SchemaNormalizer implements Normalizer
         ) {
             foreach ($schema->anyOf as $anyOfSchema) {
                 $result = $this->schemaValidator->validate(
-                    SchemaValidator\Json::fromString(\json_encode($data)),
-                    SchemaValidator\Json::fromString(\json_encode($anyOfSchema)),
+                    Json::fromString(\json_encode($data)),
+                    Json::fromString(\json_encode($anyOfSchema)),
                     Pointer\JsonPointer::document(),
                 );
 
@@ -253,8 +274,8 @@ final class SchemaNormalizer implements Normalizer
         ) {
             foreach ($schema->oneOf as $oneOfSchema) {
                 $result = $this->schemaValidator->validate(
-                    SchemaValidator\Json::fromString(\json_encode($data)),
-                    SchemaValidator\Json::fromString(\json_encode($oneOfSchema)),
+                    Json::fromString(\json_encode($data)),
+                    Json::fromString(\json_encode($oneOfSchema)),
                     Pointer\JsonPointer::document(),
                 );
 

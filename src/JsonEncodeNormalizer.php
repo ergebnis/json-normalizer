@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Json;
+
 final class JsonEncodeNormalizer implements Normalizer
 {
     public function __construct(private Format\JsonEncodeOptions $jsonEncodeOptions)
@@ -27,6 +29,6 @@ final class JsonEncodeNormalizer implements Normalizer
             $this->jsonEncodeOptions->toInt(),
         );
 
-        return Json::fromEncoded($encodedWithJsonEncodeOptions);
+        return Json::fromString($encodedWithJsonEncodeOptions);
     }
 }

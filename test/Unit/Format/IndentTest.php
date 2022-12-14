@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
@@ -27,7 +27,6 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
  * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class IndentTest extends Framework\TestCase
 {
@@ -61,7 +60,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<int>>
      */
-    public function provideInvalidSize(): \Generator
+    public static function provideInvalidSize(): \Generator
     {
         $sizes = [
             'int-zero' => 0,
@@ -110,7 +109,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array{0: int, 1: string, 2: string}>
      */
-    public function provideSizeStyleAndIndentString(): \Generator
+    public static function provideSizeStyleAndIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -141,7 +140,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideInvalidIndentString(): \Generator
+    public static function provideInvalidIndentString(): \Generator
     {
         $strings = [
             'string-not-whitespace' => self::faker()->sentence(),
@@ -169,7 +168,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<array<string>>
      */
-    public function provideValidIndentString(): \Generator
+    public static function provideValidIndentString(): \Generator
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -193,7 +192,7 @@ final class IndentTest extends Framework\TestCase
         string $actualIndent,
         string $sniffedIndent,
     ): void {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 [
 "foo",
@@ -218,7 +217,7 @@ JSON
         string $actualIndent,
         string $sniffedIndent,
     ): void {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
 "foo": 9000,
@@ -238,7 +237,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function providePureIndentAndSniffedIndent(): \Generator
+    public static function providePureIndentAndSniffedIndent(): \Generator
     {
         $sizes = [
             1,
@@ -269,7 +268,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideMixedIndentAndSniffedIndent(): \Generator
+    public static function provideMixedIndentAndSniffedIndent(): \Generator
     {
         $mixedIndents = [
             'space-and-tab' => [
@@ -292,7 +291,7 @@ JSON
 
     public function testFromJsonReturnsIndentWithDefaultsWhenIndentCouldNotBeSniffed(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {"foo":9000,"bar":123,"baz":{"qux":"quux"}}
 JSON

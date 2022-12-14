@@ -13,22 +13,20 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\ChainNormalizer;
-use Ergebnis\Json\Normalizer\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\ChainNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class ChainNormalizerTest extends AbstractNormalizerTestCase
 {
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
     "status": "original"
@@ -37,7 +35,7 @@ JSON
         );
 
         $results = \array_map(static function (int $step): Json {
-            return Json::fromEncoded(
+            return Json::fromString(
                 <<<JSON
 {
     "status": "normalized at step {$step}"

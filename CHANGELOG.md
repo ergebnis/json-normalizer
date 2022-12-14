@@ -11,6 +11,21 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 ### Changed
 
 - Dropped support for PHP 7.4 ([#757]), by [@localheinz]
+- Required `ergebnis/json-schema-validator:^4.0.0` ([#771]), by [@localheinz]
+- Allowed configuring the `Normalizer\SchemaNormalizer` to exclude properties from being sorted ([#774]), by [@localheinz]
+
+### Fixed
+
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `scripts.auto-scripts` ([#776]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `extra.installer-paths` ([#777]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `config.allow-plugins` ([#778]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `config.preferred-install` ([#779]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting children of `extra.patches` ([#780]), by [@localheinz]
+
+### Removed
+
+- Started using `ergebnis/json` and removed `Json` and `Exception\InvalidJsonEncoded` ([#772]), by [@localheinz]
+- Removed `Vendor\Composer\ConfigHashNormalizer` ([#775]), by [@localheinz]
 
 ## [`3.0.0`][3.0.0]
 
@@ -514,6 +529,14 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#705]: https://github.com/ergebnis/json-normalizer/pull/705
 [#723]: https://github.com/ergebnis/json-normalizer/pull/723
 [#757]: https://github.com/ergebnis/json-normalizer/pull/757
+[#772]: https://github.com/ergebnis/json-normalizer/pull/772
+[#774]: https://github.com/ergebnis/json-normalizer/pull/774
+[#775]: https://github.com/ergebnis/json-normalizer/pull/775
+[#776]: https://github.com/ergebnis/json-normalizer/pull/776
+[#777]: https://github.com/ergebnis/json-normalizer/pull/777
+[#778]: https://github.com/ergebnis/json-normalizer/pull/778
+[#779]: https://github.com/ergebnis/json-normalizer/pull/779
+[#780]: https://github.com/ergebnis/json-normalizer/pull/780
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

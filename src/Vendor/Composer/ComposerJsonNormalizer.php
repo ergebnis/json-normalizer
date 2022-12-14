@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
 use JsonSchema\SchemaStorage;
 
@@ -28,15 +30,23 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 $schemaUri,
                 new SchemaStorage(),
                 new SchemaValidator\SchemaValidator(),
+                Pointer\Specification::anyOf(
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/allow-plugins')),
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/preferred-install')),
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/installer-paths')),
+                    Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
+                        return 1 === \preg_match('{^\/extra\/patches\/([^/])+$}', $jsonPointer->toJsonString());
+                    }),
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
+                ),
             ),
             new BinNormalizer(),
-            new ConfigHashNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(),
         );
     }
 
-    public function normalize(Normalizer\Json $json): Normalizer\Json
+    public function normalize(Json $json): Json
     {
         if (!\is_object($json->decoded())) {
             return $json;

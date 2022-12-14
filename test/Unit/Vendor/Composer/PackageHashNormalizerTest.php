@@ -13,21 +13,19 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
-use Ergebnis\Json\Normalizer\Json;
+use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Json
  */
 final class PackageHashNormalizerTest extends AbstractComposerTestCase
 {
     public function testNormalizeDoesNotModifyOtherProperty(): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<'JSON'
 {
   "foo": {
@@ -50,7 +48,7 @@ JSON
      */
     public function testNormalizeIgnoresEmptyPackageHash(string $property): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
   "{$property}": {}
@@ -70,7 +68,7 @@ JSON
      */
     public function testNormalizeSortsPackageHashIfPropertyExists(string $property): void
     {
-        $json = Json::fromEncoded(
+        $json = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -91,7 +89,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromEncoded(
+        $expected = Json::fromString(
             <<<JSON
 {
   "{$property}": {
@@ -122,7 +120,7 @@ JSON
     /**
      * @return \Generator<array<string>>
      */
-    public function provideProperty(): \Generator
+    public static function provideProperty(): \Generator
     {
         foreach (self::propertiesWhereKeysOfHashArePackages() as $value) {
             yield $value => [
