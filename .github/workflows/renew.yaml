@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v3.2.0"
         with:
           token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
 
@@ -43,7 +43,7 @@ jobs:
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.7.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3"
+        uses: "actions/cache@v3.0.11"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -67,7 +67,7 @@ jobs:
             php-${{ matrix.php-version }}-php-cs-fixer-
 
       - name: "Run friendsofphp/php-cs-fixer"
-        run: "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --diff --verbose"
+        run: "vendor/bin/php-cs-fixer fix --ansi --config=.php-cs-fixer.php --diff --verbose"
 
       - name: "Commit modified files"
         uses: "stefanzweifel/git-auto-commit-action@v4.16.0"
