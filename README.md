@@ -19,8 +19,8 @@ Provides generic and vendor-specific normalizers for normalizing JSON documents.
 
 Run
 
-```
-$ composer require ergebnis/json-normalizer
+```shell
+composer require ergebnis/json-normalizer
 ```
 
 ## Usage
