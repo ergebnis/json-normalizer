@@ -1,0 +1,7 @@
+[normalized.json]
+indent_size = 2
+indent_style = space
+
+[original.json]
+indent_size = 2
+indent_style = tab
