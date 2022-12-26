@@ -50,6 +50,9 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
         string $expected,
         string $actual,
     ): void {
+        self::assertJson($expected);
+        self::assertJson($actual);
+
         $printer = new Printer\Printer();
 
         $normalize = static function (string $json) use ($printer): string {
