@@ -14,7 +14,8 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
+use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
@@ -26,132 +27,70 @@ use Ergebnis\Json\Normalizer\Vendor;
  */
 final class PackageHashNormalizerTest extends AbstractComposerTestCase
 {
-    public function testNormalizeDoesNotModifyOtherProperty(): void
+    /**
+     * @dataProvider provideScenario
+     */
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\Scenario $scenario): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
-{
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+        $json = $scenario->original();
 
         $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringIdenticalToJsonString($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**
-     * @dataProvider provideProperty
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
      */
-    public function testNormalizeIgnoresEmptyPackageHash(string $property): void
+    public static function provideScenario(): \Generator
     {
-        $json = Json::fromString(
-            <<<JSON
-{
-  "{$property}": {}
-}
-JSON
-        );
+        $basePath = __DIR__ . '/../../../';
 
-        $expected = \json_encode(
-            \json_decode($json->encoded()),
-            0,
-        );
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/PackageHashNormalizer/NormalizeNormalizes'));
 
-        $normalizer = new Vendor\Composer\PackageHashNormalizer();
+        foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
+            if (!$fileInfo->isFile()) {
+                continue;
+            }
 
-        $normalized = $normalizer->normalize($json);
+            if ('original.json' !== $fileInfo->getBasename()) {
+                continue;
+            }
 
-        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
-    }
+            $originalFile = $fileInfo->getRealPath();
 
-    /**
-     * @dataProvider provideProperty
-     */
-    public function testNormalizeSortsPackageHashIfPropertyExists(string $property): void
-    {
-        $json = Json::fromString(
-            <<<JSON
-{
-  "{$property}": {
-    "localheinz/test-util": "Provides utilities for tests.",
-    "hhvm": "Okay",
-    "lib-baz": "Maybe it helps.",
-    "localheinz/php-cs-fixer-config": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
-    "acquia/drupal-environment-detector": "^1.2.0",
-    "ext-foo": "Could be useful",
-    "composer-plugin-api": "^2.0.0",
-    "php": "Because why not, it's great."
-  },
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
+            );
 
-        $expected = \json_encode(
-            \json_decode(
-                <<<JSON
-{
-  "{$property}": {
-    "php": "Because why not, it's great.",
-    "hhvm": "Okay",
-    "ext-foo": "Could be useful",
-    "lib-baz": "Maybe it helps.",
-    "composer-plugin-api": "^2.0.0",
-    "acquia/drupal-environment-detector": "^1.2.0",
-    "localheinz/php-cs-fixer-config": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
-    "localheinz/test-util": "Provides utilities for tests."
-  },
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-            ),
-            Format\JsonEncodeOptions::default()->toInt(),
-        );
+            if (!\is_string($normalizedFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
+                    $originalFile,
+                ));
+            }
 
-        $normalizer = new Vendor\Composer\PackageHashNormalizer();
+            if (!\file_exists($normalizedFile)) {
+                $normalizedFile = $originalFile;
+            }
 
-        $normalized = $normalizer->normalize($json);
+            $key = \substr(
+                $fileInfo->getPath(),
+                \strlen($basePath),
+            );
 
-        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
-    }
-
-    /**
-     * @return \Generator<string, array{0: string}>
-     */
-    public static function provideProperty(): \Generator
-    {
-        foreach (self::propertiesWhereKeysOfHashArePackages() as $value) {
-            yield $value => [
-                $value,
+            yield $key => [
+                Test\Fixture\Vendor\Composer\Scenario::create(
+                    $key,
+                    Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
+                ),
             ];
         }
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    private static function propertiesWhereKeysOfHashArePackages(): array
-    {
-        return [
-            'conflict',
-            'provide',
-            'replace',
-            'require',
-            'require-dev',
-            'suggest',
-        ];
     }
 }
