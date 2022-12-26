@@ -249,42 +249,42 @@ JSON;
                 continue;
             }
 
-            if ('normalized.json' !== $fileInfo->getBasename()) {
+            if ('original.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $normalizedFile = $fileInfo->getRealPath();
+            $originalFile = $fileInfo->getRealPath();
 
-            $originalFile = \preg_replace(
-                '/normalized\.json$/',
-                'original.json',
-                $normalizedFile,
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
             );
 
-            if (!\is_string($originalFile)) {
+            if (!\is_string($normalizedFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
-                ));
-            }
-
-            if (!\file_exists($originalFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
+                    'Unable to deduce normalzied JSON file name from original JSON file name "%s".',
                     $originalFile,
                 ));
             }
 
+            if (!\file_exists($normalizedFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $normalizedFile,
+                ));
+            }
+
             $schemaFile = \preg_replace(
-                '/normalized\.json$/',
+                '/original\.json$/',
                 'schema.json',
-                $normalizedFile,
+                $originalFile,
             );
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce schema JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
+                    'Unable to deduce schema JSON file name from original JSON file name "%s".',
+                    $originalFile,
                 ));
             }
 
@@ -330,42 +330,42 @@ JSON;
                 continue;
             }
 
-            if ('normalized.json' !== $fileInfo->getBasename()) {
+            if ('original.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $normalizedFile = $fileInfo->getRealPath();
+            $originalFile = $fileInfo->getRealPath();
 
-            $originalFile = \preg_replace(
-                '/normalized\.json$/',
-                'original.json',
-                $normalizedFile,
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
             );
 
-            if (!\is_string($originalFile)) {
+            if (!\is_string($normalizedFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
-                ));
-            }
-
-            if (!\file_exists($originalFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
                     $originalFile,
                 ));
             }
 
+            if (!\file_exists($normalizedFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $normalizedFile,
+                ));
+            }
+
             $schemaFile = \preg_replace(
-                '/normalized\.json$/',
+                '/original\.json$/',
                 'schema.json',
-                $normalizedFile,
+                $originalFile,
             );
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce schema JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
+                    'Unable to deduce schema JSON file name from original JSON file name "%s".',
+                    $originalFile,
                 ));
             }
 
@@ -377,15 +377,15 @@ JSON;
             }
 
             $jsonPointerSpecificationFile = \preg_replace(
-                '/normalized\.json$/',
+                '/original\.json$/',
                 'specification-for-pointer-to-data-that-should-not-be-sorted.php',
-                $normalizedFile,
+                $originalFile,
             );
 
             if (!\is_string($jsonPointerSpecificationFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce JSON pointer specification file name from normalized JSON file name "%s".',
-                    $normalizedFile,
+                    'Unable to deduce JSON pointer specification file name from original JSON file name "%s".',
+                    $originalFile,
                 ));
             }
 

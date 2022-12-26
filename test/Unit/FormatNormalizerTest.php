@@ -61,42 +61,42 @@ final class FormatNormalizerTest extends AbstractNormalizerTestCase
                 continue;
             }
 
-            if ('normalized.json' !== $fileInfo->getBasename()) {
+            if ('original.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $normalizedFile = $fileInfo->getRealPath();
+            $originalFile = $fileInfo->getRealPath();
 
-            $originalFile = \preg_replace(
-                '/normalized\.json$/',
-                'original.json',
-                $normalizedFile,
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
             );
 
-            if (!\is_string($originalFile)) {
+            if (!\is_string($normalizedFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
-                ));
-            }
-
-            if (!\file_exists($originalFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
                     $originalFile,
                 ));
             }
 
+            if (!\file_exists($normalizedFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $normalizedFile,
+                ));
+            }
+
             $formatFile = \preg_replace(
-                '/normalized\.json$/',
+                '/original\.json$/',
                 'format.php',
-                $normalizedFile,
+                $originalFile,
             );
 
             if (!\is_string($formatFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce format  file name from normalized JSON file name "%s".',
-                    $normalizedFile,
+                    'Unable to deduce format file name from original JSON file name "%s".',
+                    $originalFile,
                 ));
             }
 
