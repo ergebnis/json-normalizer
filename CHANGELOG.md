@@ -31,6 +31,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Started using `ergebnis/json` and removed `Json` and `Exception\InvalidJsonEncoded` ([#772]), by [@localheinz]
 - Removed `Vendor\Composer\ConfigHashNormalizer` ([#775]), by [@localheinz]
 - Removed `AutoFormatNormalizer` ([#793]), by [@localheinz]
+- Removed `FixedFormatNormalizer` ([#794]), by [@localheinz]
 
 ## [`3.0.0`][3.0.0]
 
@@ -544,6 +545,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#780]: https://github.com/ergebnis/json-normalizer/pull/780
 [#781]: https://github.com/ergebnis/json-normalizer/pull/781
 [#793]: https://github.com/ergebnis/json-normalizer/pull/793
+[#794]: https://github.com/ergebnis/json-normalizer/pull/794
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
