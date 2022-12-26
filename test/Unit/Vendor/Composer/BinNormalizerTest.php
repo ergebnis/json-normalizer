@@ -40,7 +40,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($json->encoded(), $normalized->encoded());
     }
 
     public function testNormalizeDoesNotModifyBinIfPropertyExistsAsString(): void
@@ -61,7 +61,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($json->encoded(), $normalized->encoded());
     }
 
     public function testNormalizeSortsBinIfPropertyExistsAsArray(): void
@@ -81,7 +81,7 @@ JSON
 JSON
         );
 
-        $expected = Json::fromString(
+        $expected = \json_encode(\json_decode(
             <<<'JSON'
 {
   "bin": [
@@ -94,12 +94,12 @@ JSON
   }
 }
 JSON
-        );
+        ));
 
         $normalizer = new Vendor\Composer\BinNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
 }

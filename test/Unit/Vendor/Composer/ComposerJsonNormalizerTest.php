@@ -44,7 +44,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**

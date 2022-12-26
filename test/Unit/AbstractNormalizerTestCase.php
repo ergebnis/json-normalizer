@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Normalizer\Test;
-use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
 /**
@@ -46,25 +45,12 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
         return $className;
     }
 
-    final protected static function assertJsonStringEqualsJsonStringNormalized(
+    final protected static function assertJsonStringIdenticalToJsonString(
         string $expected,
         string $actual,
     ): void {
         self::assertJson($expected);
         self::assertJson($actual);
-
-        $printer = new Printer\Printer();
-
-        $normalize = static function (string $json) use ($printer): string {
-            self::assertJson($json);
-
-            $normalized = \json_encode(\json_decode($json));
-
-            self::assertIsString($normalized);
-
-            return $printer->print($normalized);
-        };
-
-        self::assertSame($normalize($expected), $normalize($actual));
+        self::assertSame($expected, $actual);
     }
 }

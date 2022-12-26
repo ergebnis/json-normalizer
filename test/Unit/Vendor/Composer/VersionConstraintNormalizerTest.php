@@ -42,7 +42,7 @@ JSON
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($json->encoded(), $normalized->encoded());
     }
 
     /**
@@ -70,11 +70,13 @@ JSON
 JSON
         );
 
+        $expected = \json_encode(\json_decode($json->encoded()));
+
         $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
 
     /**
