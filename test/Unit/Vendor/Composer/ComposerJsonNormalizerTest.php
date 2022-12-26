@@ -96,8 +96,8 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
             yield $key => [
                 Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario::create(
                     $key,
-                    Json::fromFile($normalizedFile),
                     Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
                 ),
             ];
         }

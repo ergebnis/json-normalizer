@@ -24,20 +24,20 @@ final class Scenario
 {
     private function __construct(
         private string $key,
-        private Json $normalized,
         private Json $original,
+        private Json $normalized,
     ) {
     }
 
     public static function create(
         string $key,
-        Json $normalized,
         Json $original,
+        Json $normalized,
     ): self {
         return new self(
             $key,
-            $normalized,
             $original,
+            $normalized,
         );
     }
 
@@ -46,13 +46,13 @@ final class Scenario
         return $this->key;
     }
 
-    public function normalized(): Json
-    {
-        return $this->normalized;
-    }
-
     public function original(): Json
     {
         return $this->original;
+    }
+
+    public function normalized(): Json
+    {
+        return $this->normalized;
     }
 }
