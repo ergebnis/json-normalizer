@@ -29,7 +29,6 @@ composer require ergebnis/json-normalizer
 
 This package comes with the following generic normalizers:
 
-- [`Ergebnis\Json\Normalizer\AutoFormatNormalizer`](#autoformatnormalizer)
 - [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
 - [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
 - [`Ergebnis\Json\Normalizer\FixedFormatNormalizer`](#fixedformatnormalizer)
@@ -159,8 +158,6 @@ $normalized = $normalizer->normalize($json);
 ```
 
 The normalized version will now have the composed normalizer applied, but also the formatting applied according to `$format`.
-
-:bulb: Alternatively, you can use the [`AutoFormatNormalizer`](#autoformatnormalizer).
 
 #### `FormatNormalizer`
 
