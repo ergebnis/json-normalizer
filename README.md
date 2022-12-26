@@ -42,51 +42,6 @@ This package comes with the following generic normalizers:
 
 :bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\Normalizer`.
 
-#### `AutoFormatNormalizer`
-
-When you want to normalize a JSON file with an implementation of `Normalizer`, but retain the original formatting, you can use the `AutoFormatNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-use Ergebnis\Json\Printer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-/* @var Normalizer\Normalizer $composedNormalizer */
-$normalizer = new Normalizer\AutoFormatNormalizer(
-    $composedNormalizer,
-    new Normalizer\Format\DefaultFormatter(new Printer\Printer())
-);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now have the composed normalizer applied, but also retained the original formatting (within certain limits). Before applying the composer normalizer, the `AutoFormatNormalizer` will attempt to detect the following:
-
-- `json_encode()` options
-- indent
-- whether a final new line exists or not
-
-After applying the composed normalizer, the `AutoFormatNormalizer` will
-
-- decode with `json_decode()` and encode again with `json_encode()`, passing in the previously detected options
-- indent with the detected indent
-- add a final new line of detected
-
-:bulb: Alternatively, you can use the [`FixedFormatNormalizer`](#fixedformatnormalizer).
-
 #### `CallableNormalizer`
 
 When you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
