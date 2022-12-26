@@ -23,11 +23,15 @@ final class BinNormalizer implements Normalizer
     {
         $decoded = $json->decoded();
 
-        if (
-            !\is_object($decoded)
-            || !\property_exists($decoded, 'bin')
-            || !\is_array($decoded->bin)
-        ) {
+        if (!\is_object($decoded)) {
+            return $json;
+        }
+
+        if (!\property_exists($decoded, 'bin')) {
+            return $json;
+        }
+
+        if (!\is_array($decoded->bin)) {
             return $json;
         }
 
