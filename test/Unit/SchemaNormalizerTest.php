@@ -36,6 +36,7 @@ use JsonSchema\SchemaStorage;
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolved
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {

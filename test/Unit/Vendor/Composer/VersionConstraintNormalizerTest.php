@@ -20,6 +20,8 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
 final class VersionConstraintNormalizerTest extends AbstractComposerTestCase
 {
@@ -70,7 +72,10 @@ JSON
 JSON
         );
 
-        $expected = \json_encode(\json_decode($json->encoded()));
+        $expected = \json_encode(
+            \json_decode($json->encoded()),
+            0,
+        );
 
         $normalizer = new Vendor\Composer\VersionConstraintNormalizer();
 

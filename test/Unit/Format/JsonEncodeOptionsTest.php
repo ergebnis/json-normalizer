@@ -30,6 +30,15 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
+    public function testDefaultReturnsJsonEncodeOptions(): void
+    {
+        $jsonEncodeOptions = Format\JsonEncodeOptions::default();
+
+        $expected = 0;
+
+        self::assertSame($expected, $jsonEncodeOptions->toInt());
+    }
+
     /**
      * @dataProvider provideInvalidValue
      */

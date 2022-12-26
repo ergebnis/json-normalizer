@@ -25,6 +25,11 @@ final class JsonEncodeOptions
     {
     }
 
+    public static function default(): self
+    {
+        return new self(0);
+    }
+
     /**
      * @throws Exception\InvalidJsonEncodeOptions
      */

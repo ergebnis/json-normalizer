@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Normalizer;
 
 final class BinNormalizer implements Normalizer
@@ -37,7 +38,10 @@ final class BinNormalizer implements Normalizer
         $decoded->bin = $bin;
 
         /** @var string $encoded */
-        $encoded = \json_encode($decoded);
+        $encoded = \json_encode(
+            $decoded,
+            Format\JsonEncodeOptions::default()->toInt(),
+        );
 
         return Json::fromString($encoded);
     }
