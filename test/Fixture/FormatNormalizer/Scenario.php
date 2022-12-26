@@ -25,23 +25,23 @@ final class Scenario
 {
     private function __construct(
         private string $key,
-        private Json $normalized,
-        private Json $original,
         private Normalizer\Format\Format $format,
+        private Json $original,
+        private Json $normalized,
     ) {
     }
 
     public static function create(
         string $key,
-        Json $normalized,
-        Json $original,
         Normalizer\Format\Format $format,
+        Json $original,
+        Json $normalized,
     ): self {
         return new self(
             $key,
-            $normalized,
-            $original,
             $format,
+            $original,
+            $normalized,
         );
     }
 
@@ -50,9 +50,9 @@ final class Scenario
         return $this->key;
     }
 
-    public function normalized(): Json
+    public function format(): Normalizer\Format\Format
     {
-        return $this->normalized;
+        return $this->format;
     }
 
     public function original(): Json
@@ -60,8 +60,8 @@ final class Scenario
         return $this->original;
     }
 
-    public function format(): Normalizer\Format\Format
+    public function normalized(): Json
     {
-        return $this->format;
+        return $this->normalized;
     }
 }

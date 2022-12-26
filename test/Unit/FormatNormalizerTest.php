@@ -126,9 +126,9 @@ final class FormatNormalizerTest extends AbstractNormalizerTestCase
             yield $key => [
                 Test\Fixture\FormatNormalizer\Scenario::create(
                     $key,
-                    Json::fromFile($normalizedFile),
-                    Json::fromFile($originalFile),
                     $format,
+                    Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
                 ),
             ];
         }

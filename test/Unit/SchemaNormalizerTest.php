@@ -303,13 +303,13 @@ JSON;
             yield $key => [
                 Test\Fixture\SchemaNormalizer\Scenario::create(
                     $key,
-                    Json::fromFile($normalizedFile),
-                    Json::fromFile($originalFile),
                     \sprintf(
                         'file://%s',
                         $schemaFile,
                     ),
                     Pointer\Specification::never(),
+                    Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
                 ),
             ];
         }
@@ -415,13 +415,13 @@ JSON;
             yield $key => [
                 Test\Fixture\SchemaNormalizer\Scenario::create(
                     $key,
-                    Json::fromFile($normalizedFile),
-                    Json::fromFile($originalFile),
                     \sprintf(
                         'file://%s',
                         $schemaFile,
                     ),
                     $specificationForPointerToDataThatShouldBeSorted,
+                    Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
                 ),
             ];
         }
