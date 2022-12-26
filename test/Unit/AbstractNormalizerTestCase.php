@@ -24,7 +24,7 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    final protected function className(): string
+    final protected static function className(): string
     {
         $className = \preg_replace(
             '/Test$/',
