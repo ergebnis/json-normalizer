@@ -231,7 +231,7 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**

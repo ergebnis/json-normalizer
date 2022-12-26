@@ -1,17 +1,1 @@
-{
-  "name": "Andreas Möller",
-  "urls": [
-    {
-      "type": "Website",
-      "url": "https://localheinz.com"
-    },
-    {
-      "type": "GitHub",
-      "url": "https://github.com/localheinz"
-    },
-    {
-      "type": "Twitter",
-      "url": "https://twitter.com/localheinz"
-    }
-  ]
-}
+{"name":"Andreas M\u00f6ller","urls":[{"type":"Website","url":"https:\/\/localheinz.com"},{"type":"GitHub","url":"https:\/\/github.com\/localheinz"},{"type":"Twitter","url":"https:\/\/twitter.com\/localheinz"}]}
