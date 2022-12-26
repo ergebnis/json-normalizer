@@ -52,7 +52,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
      */
     public static function provideScenario(): \Generator
     {
-        $basePath = __DIR__ . '/../';
+        $basePath = __DIR__ . '/../../../';
 
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizes'));
 
