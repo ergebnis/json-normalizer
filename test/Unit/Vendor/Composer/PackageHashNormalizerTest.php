@@ -118,7 +118,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string}>
      */
     public static function provideProperty(): \Generator
     {

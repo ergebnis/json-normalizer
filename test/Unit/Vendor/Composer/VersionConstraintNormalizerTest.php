@@ -46,7 +46,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideVersionConstraint(): \Generator
     {
@@ -78,7 +78,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideProperty(): \Generator
     {
@@ -127,7 +127,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string, 1: string, 2: string}>
      */
     public static function providePropertyAndVersionConstraint(): \Generator
     {
@@ -181,7 +181,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string, 1: string, 2: string}>
      */
     public static function providePropertyAndUntrimmedVersionConstraint(): \Generator
     {

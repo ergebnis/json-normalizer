@@ -57,7 +57,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<int, array{0: int}>
      */
     public static function provideJsonEncodeOptions(): \Generator
     {

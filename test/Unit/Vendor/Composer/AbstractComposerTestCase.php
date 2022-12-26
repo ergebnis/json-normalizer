@@ -43,7 +43,7 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string}>
      */
     final public static function provideJsonNotDecodingToObject(): \Generator
     {

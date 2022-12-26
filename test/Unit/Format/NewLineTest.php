@@ -38,7 +38,7 @@ final class NewLineTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideInvalidNewLineString(): \Generator
     {
@@ -71,7 +71,7 @@ final class NewLineTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideValidNewLineString(): \Generator
     {
@@ -132,7 +132,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideNewLine(): \Generator
     {

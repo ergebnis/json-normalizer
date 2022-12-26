@@ -41,7 +41,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<string, array{0: int}>
      */
     public static function provideInvalidValue(): \Generator
     {
@@ -68,7 +68,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<string, array{0: int}>
      */
     public static function provideValidValue(): \Generator
     {
