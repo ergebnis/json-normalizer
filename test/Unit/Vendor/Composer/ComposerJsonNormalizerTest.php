@@ -34,7 +34,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
     /**
      * @dataProvider provideScenario
      */
-    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario $scenario): void
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\Scenario $scenario): void
     {
         $json = $scenario->original();
 
@@ -49,7 +49,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
      */
     public static function provideScenario(): \Generator
     {
@@ -95,7 +95,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
             );
 
             yield $key => [
-                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario::create(
+                Test\Fixture\Vendor\Composer\Scenario::create(
                     $key,
                     Json::fromFile($originalFile),
                     Json::fromFile($normalizedFile),

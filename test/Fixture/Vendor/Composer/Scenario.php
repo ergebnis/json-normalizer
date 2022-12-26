@@ -11,7 +11,7 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer;
+namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer;
 
 use Ergebnis\Json\Json;
 
