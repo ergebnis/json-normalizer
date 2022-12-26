@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`3.0.0...main`][3.0.0...main].
 
+### Added
+
+- Added `FormatNormalizer` ([#781]), by [@localheinz]
+
 ### Changed
 
 - Dropped support for PHP 7.4 ([#757]), by [@localheinz]
@@ -537,6 +541,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#778]: https://github.com/ergebnis/json-normalizer/pull/778
 [#779]: https://github.com/ergebnis/json-normalizer/pull/779
 [#780]: https://github.com/ergebnis/json-normalizer/pull/780
+[#781]: https://github.com/ergebnis/json-normalizer/pull/781
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
