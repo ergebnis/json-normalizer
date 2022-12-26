@@ -102,7 +102,10 @@ final class PackageHashNormalizer implements Normalizer
         };
 
         \uksort($packages, static function (string $a, string $b) use ($prefix): int {
-            return \strnatcmp($prefix($a), $prefix($b));
+            return \strnatcmp(
+                $prefix($a),
+                $prefix($b),
+            );
         });
 
         return $packages;
