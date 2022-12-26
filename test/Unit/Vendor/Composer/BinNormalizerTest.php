@@ -20,6 +20,8 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
 final class BinNormalizerTest extends AbstractComposerTestCase
 {
@@ -81,8 +83,9 @@ JSON
 JSON
         );
 
-        $expected = \json_encode(\json_decode(
-            <<<'JSON'
+        $expected = \json_encode(
+            \json_decode(
+                <<<'JSON'
 {
   "bin": [
     "another-script.php",
@@ -94,7 +97,9 @@ JSON
   }
 }
 JSON
-        ));
+            ),
+            0,
+        );
 
         $normalizer = new Vendor\Composer\BinNormalizer();
 

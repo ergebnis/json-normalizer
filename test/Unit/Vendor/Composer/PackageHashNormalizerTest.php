@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Vendor;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
 final class PackageHashNormalizerTest extends AbstractComposerTestCase
 {
@@ -56,7 +59,10 @@ JSON
 JSON
         );
 
-        $expected = \json_encode(\json_decode($json->encoded()));
+        $expected = \json_encode(
+            \json_decode($json->encoded()),
+            0,
+        );
 
         $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
@@ -91,8 +97,9 @@ JSON
 JSON
         );
 
-        $expected = \json_encode(\json_decode(
-            <<<JSON
+        $expected = \json_encode(
+            \json_decode(
+                <<<JSON
 {
   "{$property}": {
     "php": "Because why not, it's great.",
@@ -110,7 +117,9 @@ JSON
   }
 }
 JSON
-        ));
+            ),
+            Format\JsonEncodeOptions::default()->toInt(),
+        );
 
         $normalizer = new Vendor\Composer\PackageHashNormalizer();
 
