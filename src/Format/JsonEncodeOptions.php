@@ -27,7 +27,7 @@ final class JsonEncodeOptions
 
     public static function default(): self
     {
-        return new self(0);
+        return new self(\JSON_PRETTY_PRINT);
     }
 
     /**

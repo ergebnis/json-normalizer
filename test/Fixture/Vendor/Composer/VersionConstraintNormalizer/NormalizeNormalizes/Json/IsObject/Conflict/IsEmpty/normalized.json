@@ -1,1 +1,7 @@
-{"conflict":{},"foo":{"qux":"quux","bar":"baz"}}
+{
+    "conflict": {},
+    "foo": {
+        "qux": "quux",
+        "bar": "baz"
+    }
+}
