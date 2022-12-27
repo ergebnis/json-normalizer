@@ -6,5 +6,10 @@
     "keywords": [
         "foo",
         "bar"
-    ]
+    ],
+    "extra": {
+        "foo": {
+            "value": 3.1415
+        }
+    }
 }

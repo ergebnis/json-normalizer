@@ -12,5 +12,10 @@
   "foo": {
     "qux": "quux",
     "bar": "baz"
+  },
+  "extra": {
+    "foo": {
+      "value": 3.14150000
+    }
   }
 }
