@@ -27,7 +27,7 @@ final class JsonEncodeOptions
 
     public static function default(): self
     {
-        return new self(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES);
+        return new self(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
     }
 
     /**

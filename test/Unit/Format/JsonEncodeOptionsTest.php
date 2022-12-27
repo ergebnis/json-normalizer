@@ -34,7 +34,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     {
         $jsonEncodeOptions = Format\JsonEncodeOptions::default();
 
-        $expected = \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES;
+        $expected = \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE;
 
         self::assertSame($expected, $jsonEncodeOptions->toInt());
     }
