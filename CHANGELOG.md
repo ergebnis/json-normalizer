@@ -18,6 +18,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Required `ergebnis/json-schema-validator:^4.0.0` ([#771]), by [@localheinz]
 - Allowed configuring the `Normalizer\SchemaNormalizer` to exclude properties from being sorted ([#774]), by [@localheinz]
 - Adjusted `Vendor\Composer\BinNormalizer`, `Vendor\Composer\PackageHashNormalizer`, `Vendor\Composer\VersionConstraintNormalizer`, and `SchemaNormalizer` to encode JSON with `JSON_PRETTY_PRINT` flag ([#795]), by [@localheinz]
+- Adjusted `Vendor\Composer\BinNormalizer`, `Vendor\Composer\PackageHashNormalizer`, `Vendor\Composer\VersionConstraintNormalizer`, and `SchemaNormalizer` to encode JSON with `JSON_UNESCAPED_SLASHES` flag ([#801]), by [@localheinz]
 
 ### Fixed
 
@@ -548,6 +549,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#793]: https://github.com/ergebnis/json-normalizer/pull/793
 [#794]: https://github.com/ergebnis/json-normalizer/pull/794
 [#795]: https://github.com/ergebnis/json-normalizer/pull/795
+[#801]: https://github.com/ergebnis/json-normalizer/pull/801
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
