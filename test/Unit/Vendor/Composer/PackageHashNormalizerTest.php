@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format\JsonEncodeOptions;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
 
