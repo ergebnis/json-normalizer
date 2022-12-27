@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -29,8 +30,10 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  */
-final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
+final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideScenario
      */
@@ -83,10 +86,7 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
             }
 
             if (!\file_exists($normalizedFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
-                ));
+                $normalizedFile = $originalFile;
             }
 
             $key = \substr(
