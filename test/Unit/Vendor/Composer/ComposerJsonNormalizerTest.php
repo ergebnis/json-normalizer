@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -23,17 +24,20 @@ use Ergebnis\Json\Normalizer\Vendor;
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  */
-final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
+final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideScenario
      */
-    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario $scenario): void
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\Scenario $scenario): void
     {
         $json = $scenario->original();
 
@@ -44,15 +48,15 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
      */
     public static function provideScenario(): \Generator
     {
-        $basePath = __DIR__ . '/../';
+        $basePath = __DIR__ . '/../../../';
 
         $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizes'));
 
@@ -62,30 +66,27 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
                 continue;
             }
 
-            if ('normalized.json' !== $fileInfo->getBasename()) {
+            if ('original.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $normalizedFile = $fileInfo->getRealPath();
+            $originalFile = $fileInfo->getRealPath();
 
-            $originalFile = \preg_replace(
-                '/normalized\.json$/',
-                'original.json',
-                $normalizedFile,
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
             );
 
-            if (!\is_string($originalFile)) {
+            if (!\is_string($normalizedFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce original JSON file name from normalized JSON file name "%s".',
-                    $normalizedFile,
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
+                    $originalFile,
                 ));
             }
 
-            if (!\file_exists($originalFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
-                    $originalFile,
-                ));
+            if (!\file_exists($normalizedFile)) {
+                $normalizedFile = $originalFile;
             }
 
             $key = \substr(
@@ -94,10 +95,10 @@ final class ComposerJsonNormalizerTest extends AbstractComposerTestCase
             );
 
             yield $key => [
-                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\Scenario::create(
+                Test\Fixture\Vendor\Composer\Scenario::create(
                     $key,
-                    Json::fromFile($normalizedFile),
                     Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
                 ),
             ];
         }

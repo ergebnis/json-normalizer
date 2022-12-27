@@ -25,42 +25,32 @@ final class Scenario
 {
     private function __construct(
         private string $key,
-        private Json $normalized,
-        private Json $original,
         private string $schemaUri,
         private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private Json $original,
+        private Json $normalized,
     ) {
     }
 
     public static function create(
         string $key,
-        Json $normalized,
-        Json $original,
         string $schemaUri,
         Pointer\Specification $jsonPointerSpecification,
+        Json $original,
+        Json $normalized,
     ): self {
         return new self(
             $key,
-            $normalized,
-            $original,
             $schemaUri,
             $jsonPointerSpecification,
+            $original,
+            $normalized,
         );
     }
 
     public function key(): string
     {
         return $this->key;
-    }
-
-    public function normalized(): Json
-    {
-        return $this->normalized;
-    }
-
-    public function original(): Json
-    {
-        return $this->original;
     }
 
     public function schemaUri(): string
@@ -71,5 +61,15 @@ final class Scenario
     public function specificationForPointerToDataThatShouldNotBeSorted(): Pointer\Specification
     {
         return $this->specificationForPointerToDataThatShouldNotBeSorted;
+    }
+
+    public function original(): Json
+    {
+        return $this->original;
+    }
+
+    public function normalized(): Json
+    {
+        return $this->normalized;
     }
 }

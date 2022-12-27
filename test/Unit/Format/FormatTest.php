@@ -132,7 +132,7 @@ final class FormatTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string}>
      */
     public static function provideEncodedWithoutIndent(): \Generator
     {
@@ -180,7 +180,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideWhitespaceWithoutNewLine(): \Generator
     {
@@ -223,7 +223,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideWhitespaceWithNewLine(): \Generator
     {

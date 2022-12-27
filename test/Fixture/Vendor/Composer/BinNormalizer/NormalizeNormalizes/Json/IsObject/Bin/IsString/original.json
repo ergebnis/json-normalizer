@@ -1,0 +1,7 @@
+{
+  "bin": "foo.php",
+  "keywords": [
+    "foo",
+    "bar"
+  ]
+}

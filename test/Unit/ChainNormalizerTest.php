@@ -16,13 +16,14 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Normalizer;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\ChainNormalizer
  */
-final class ChainNormalizerTest extends AbstractNormalizerTestCase
+final class ChainNormalizerTest extends Framework\TestCase
 {
     public function testNormalizePassesJsonThroughNormalizers(): void
     {

@@ -14,92 +14,85 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
-final class BinNormalizerTest extends AbstractComposerTestCase
+final class BinNormalizerTest extends Framework\TestCase
 {
-    public function testNormalizeDoesNotModifyOtherProperty(): void
+    use Test\Util\Helper;
+
+    /**
+     * @dataProvider provideScenario
+     */
+    public function testNormalizeNormalizes(Test\Fixture\Vendor\Composer\Scenario $scenario): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
-{
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+        $json = $scenario->original();
 
         $normalizer = new Vendor\Composer\BinNormalizer();
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
-    public function testNormalizeDoesNotModifyBinIfPropertyExistsAsString(): void
+    /**
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
+     */
+    public static function provideScenario(): \Generator
     {
-        $json = Json::fromString(
-            <<<'JSON'
-{
-  "bin": "foo.php",
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+        $basePath = __DIR__ . '/../../../';
 
-        $normalizer = new Vendor\Composer\BinNormalizer();
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../../../Fixture/Vendor/Composer/BinNormalizer/NormalizeNormalizes'));
 
-        $normalized = $normalizer->normalize($json);
+        foreach ($iterator as $fileInfo) {
+            /** @var \SplFileInfo $fileInfo */
+            if (!$fileInfo->isFile()) {
+                continue;
+            }
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
-    }
+            if ('original.json' !== $fileInfo->getBasename()) {
+                continue;
+            }
 
-    public function testNormalizeSortsBinIfPropertyExistsAsArray(): void
-    {
-        $json = Json::fromString(
-            <<<'JSON'
-{
-  "bin": [
-    "script.php",
-    "another-script.php"
-  ],
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+            $originalFile = $fileInfo->getRealPath();
 
-        $expected = Json::fromString(
-            <<<'JSON'
-{
-  "bin": [
-    "another-script.php",
-    "script.php"
-  ],
-  "foo": {
-    "qux": "quux",
-    "bar": "baz"
-  }
-}
-JSON
-        );
+            $normalizedFile = \preg_replace(
+                '/original\.json$/',
+                'normalized.json',
+                $originalFile,
+            );
 
-        $normalizer = new Vendor\Composer\BinNormalizer();
+            if (!\is_string($normalizedFile)) {
+                throw new \RuntimeException(\sprintf(
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
+                    $originalFile,
+                ));
+            }
 
-        $normalized = $normalizer->normalize($json);
+            if (!\file_exists($normalizedFile)) {
+                $normalizedFile = $originalFile;
+            }
 
-        self::assertJsonStringEqualsJsonStringNormalized($expected->encoded(), $normalized->encoded());
+            $key = \substr(
+                $fileInfo->getPath(),
+                \strlen($basePath),
+            );
+
+            yield $key => [
+                Test\Fixture\Vendor\Composer\Scenario::create(
+                    $key,
+                    Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
+                ),
+            ];
+        }
     }
 }

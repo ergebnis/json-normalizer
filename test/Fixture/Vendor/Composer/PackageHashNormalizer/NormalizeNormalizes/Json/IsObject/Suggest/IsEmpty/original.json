@@ -1,0 +1,7 @@
+{
+  "suggest": {},
+  "foo": {
+    "qux": "quux",
+    "bar": "baz"
+  }
+}

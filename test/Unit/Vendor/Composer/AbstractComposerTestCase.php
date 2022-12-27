@@ -16,12 +16,15 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Test;
+use PHPUnit\Framework;
 
 /**
  * @internal
  */
-abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTestCase
+abstract class AbstractComposerTestCase extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideJsonNotDecodingToObject
      */
@@ -39,11 +42,11 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringEqualsJsonStringNormalized($json->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($json->encoded(), $normalized->encoded());
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string}>
      */
     final public static function provideJsonNotDecodingToObject(): \Generator
     {
@@ -70,5 +73,27 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
                 $encoded,
             ];
         }
+    }
+
+    final protected static function className(): string
+    {
+        $className = \preg_replace(
+            '/Test$/',
+            '',
+            \str_replace(
+                'Ergebnis\\Json\\Normalizer\\Test\\Unit\\',
+                'Ergebnis\\Json\\Normalizer\\',
+                static::class,
+            ),
+        );
+
+        if (!\is_string($className)) {
+            throw new \RuntimeException(\sprintf(
+                'Unable to deduce source class name from test class name "%s".',
+                static::class,
+            ));
+        }
+
+        return $className;
     }
 }

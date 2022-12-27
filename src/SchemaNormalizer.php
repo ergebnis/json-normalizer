@@ -61,11 +61,14 @@ final class SchemaNormalizer implements Normalizer
             );
         }
 
-        $normalized = Json::fromString(\json_encode($this->normalizeData(
-            $json->decoded(),
-            $schema,
-            Pointer\JsonPointer::document(),
-        )));
+        $normalized = Json::fromString(\json_encode(
+            $this->normalizeData(
+                $json->decoded(),
+                $schema,
+                Pointer\JsonPointer::document(),
+            ),
+            Format\JsonEncodeOptions::default()->toInt(),
+        ));
 
         $resultAfterNormalization = $this->schemaValidator->validate(
             $normalized,

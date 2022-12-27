@@ -30,6 +30,15 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
+    public function testDefaultReturnsJsonEncodeOptions(): void
+    {
+        $jsonEncodeOptions = Format\JsonEncodeOptions::default();
+
+        $expected = 0;
+
+        self::assertSame($expected, $jsonEncodeOptions->toInt());
+    }
+
     /**
      * @dataProvider provideInvalidValue
      */
@@ -41,7 +50,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<string, array{0: int}>
      */
     public static function provideInvalidValue(): \Generator
     {
@@ -68,7 +77,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<string, array{0: int}>
      */
     public static function provideValidValue(): \Generator
     {

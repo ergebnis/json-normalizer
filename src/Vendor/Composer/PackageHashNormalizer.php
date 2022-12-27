@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Normalizer;
 
 final class PackageHashNormalizer implements Normalizer
@@ -60,7 +61,10 @@ final class PackageHashNormalizer implements Normalizer
         }
 
         /** @var string $encoded */
-        $encoded = \json_encode($decoded);
+        $encoded = \json_encode(
+            $decoded,
+            Format\JsonEncodeOptions::default()->toInt(),
+        );
 
         return Json::fromString($encoded);
     }
@@ -102,7 +106,10 @@ final class PackageHashNormalizer implements Normalizer
         };
 
         \uksort($packages, static function (string $a, string $b) use ($prefix): int {
-            return \strnatcmp($prefix($a), $prefix($b));
+            return \strnatcmp(
+                $prefix($a),
+                $prefix($b),
+            );
         });
 
         return $packages;

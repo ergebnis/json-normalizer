@@ -1,0 +1,7 @@
+{
+  "require-dev": {},
+  "foo": {
+    "qux": "quux",
+    "bar": "baz"
+  }
+}

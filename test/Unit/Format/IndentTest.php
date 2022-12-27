@@ -58,7 +58,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<string, array{0: int}>
      */
     public static function provideInvalidSize(): \Generator
     {
@@ -107,7 +107,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array{0: int, 1: string, 2: string}>
+     * @return \Generator<int, array{0: int, 1: string, 2: string}>
      */
     public static function provideSizeStyleAndIndentString(): \Generator
     {
@@ -138,7 +138,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string}>
      */
     public static function provideInvalidIndentString(): \Generator
     {
@@ -166,7 +166,7 @@ final class IndentTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<int, array{0: string}>
      */
     public static function provideValidIndentString(): \Generator
     {
@@ -235,7 +235,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string, 1: string}>
      */
     public static function providePureIndentAndSniffedIndent(): \Generator
     {
@@ -266,7 +266,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<string>>
+     * @return \Generator<string, array{0: string, 1: string}>
      */
     public static function provideMixedIndentAndSniffedIndent(): \Generator
     {

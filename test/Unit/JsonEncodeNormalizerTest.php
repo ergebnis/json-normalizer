@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -24,7 +25,7 @@ use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
  *
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
-final class JsonEncodeNormalizerTest extends AbstractNormalizerTestCase
+final class JsonEncodeNormalizerTest extends Framework\TestCase
 {
     /**
      * @dataProvider provideJsonEncodeOptions
@@ -57,7 +58,7 @@ JSON
     }
 
     /**
-     * @return \Generator<array<int>>
+     * @return \Generator<int, array{0: int}>
      */
     public static function provideJsonEncodeOptions(): \Generator
     {

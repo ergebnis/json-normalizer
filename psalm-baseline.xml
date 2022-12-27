@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.3.0@b6faa3e96b8eb50ec71384c53799b8a107236bb6">
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType occurrences="1">
       <code>Json</code>
@@ -56,13 +56,6 @@
       <code>$newLineString</code>
     </MixedAssignment>
   </file>
-  <file src="test/Unit/Format/FormatTest.php">
-    <MixedInferredReturnType occurrences="3">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
   <file src="test/Unit/Format/IndentTest.php">
     <MixedArgument occurrences="1">
       <code>$style</code>
@@ -70,42 +63,16 @@
     <MixedAssignment occurrences="1">
       <code>$style</code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="6">
-      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array{0: int, 1: string, 2: string}&gt;</code>
-    </MixedInferredReturnType>
     <UnusedVariable occurrences="3">
       <code>$key</code>
       <code>$key</code>
       <code>$style</code>
     </UnusedVariable>
   </file>
-  <file src="test/Unit/Format/JsonEncodeOptionsTest.php">
-    <MixedInferredReturnType occurrences="2">
-      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
-  <file src="test/Unit/Format/NewLineTest.php">
-    <MixedInferredReturnType occurrences="3">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
-  </file>
   <file src="test/Unit/FormatNormalizerTest.php">
     <MixedAssignment occurrences="1">
       <code>$fileInfo</code>
     </MixedAssignment>
-  </file>
-  <file src="test/Unit/JsonEncodeNormalizerTest.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;int&gt;&gt;</code>
-    </MixedInferredReturnType>
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">
     <MixedAssignment occurrences="3">
@@ -114,10 +81,10 @@
       <code>$schemaDecoded</code>
     </MixedAssignment>
   </file>
-  <file src="test/Unit/Vendor/Composer/AbstractComposerTestCase.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
+  <file src="test/Unit/Vendor/Composer/BinNormalizerTest.php">
+    <MixedAssignment occurrences="1">
+      <code>$fileInfo</code>
+    </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <MixedAssignment occurrences="1">
@@ -125,16 +92,13 @@
     </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/PackageHashNormalizerTest.php">
-    <MixedInferredReturnType occurrences="1">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$fileInfo</code>
+    </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/VersionConstraintNormalizerTest.php">
-    <MixedInferredReturnType occurrences="4">
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-      <code>\Generator&lt;array&lt;string&gt;&gt;</code>
-    </MixedInferredReturnType>
+    <MixedAssignment occurrences="1">
+      <code>$fileInfo</code>
+    </MixedAssignment>
   </file>
 </files>

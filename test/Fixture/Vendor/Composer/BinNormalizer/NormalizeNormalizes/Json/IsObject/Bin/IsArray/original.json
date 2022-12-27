@@ -1,0 +1,10 @@
+{
+  "bin": [
+    "script.php",
+    "another-script.php"
+  ],
+  "keywords": [
+    "foo",
+    "bar"
+  ]
+}
