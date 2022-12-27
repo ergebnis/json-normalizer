@@ -18,6 +18,7 @@ use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\FormatNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -29,7 +30,7 @@ use Ergebnis\Json\Printer;
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\Format\NewLine
  */
-final class FormatNormalizerTest extends AbstractNormalizerTestCase
+final class FormatNormalizerTest extends Framework\TestCase
 {
     /**
      * @dataProvider provideScenario

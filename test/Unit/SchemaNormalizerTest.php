@@ -24,6 +24,7 @@ use JsonSchema\Exception\JsonDecodingException;
 use JsonSchema\Exception\ResourceNotFoundException;
 use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -38,7 +39,7 @@ use JsonSchema\SchemaStorage;
  * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
-final class SchemaNormalizerTest extends AbstractNormalizerTestCase
+final class SchemaNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 

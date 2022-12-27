@@ -17,6 +17,7 @@ use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\IndentNormalizer;
 use Ergebnis\Json\Printer\PrinterInterface;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -25,7 +26,7 @@ use Ergebnis\Json\Printer\PrinterInterface;
  *
  * @uses \Ergebnis\Json\Normalizer\Format\Indent
  */
-final class IndentNormalizerTest extends AbstractNormalizerTestCase
+final class IndentNormalizerTest extends Framework\TestCase
 {
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {

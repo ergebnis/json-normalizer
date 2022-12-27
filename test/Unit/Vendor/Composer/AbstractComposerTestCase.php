@@ -16,11 +16,12 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Test;
+use PHPUnit\Framework;
 
 /**
  * @internal
  */
-abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTestCase
+abstract class AbstractComposerTestCase extends Framework\TestCase
 {
     use Test\Util\Helper;
 

@@ -15,13 +15,14 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer
  */
-final class WithoutFinalNewLineNormalizerTest extends AbstractNormalizerTestCase
+final class WithoutFinalNewLineNormalizerTest extends Framework\TestCase
 {
     /**
      * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
