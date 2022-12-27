@@ -44,13 +44,4 @@ abstract class AbstractNormalizerTestCase extends Framework\TestCase
 
         return $className;
     }
-
-    final protected static function assertJsonStringIdenticalToJsonString(
-        string $expected,
-        string $actual,
-    ): void {
-        self::assertJson($expected);
-        self::assertJson($actual);
-        self::assertSame($expected, $actual);
-    }
 }

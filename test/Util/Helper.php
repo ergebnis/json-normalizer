@@ -35,4 +35,13 @@ trait Helper
 
         return $fakers[$locale];
     }
+
+    final protected static function assertJsonStringIdenticalToJsonString(
+        string $expected,
+        string $actual,
+    ): void {
+        self::assertJson($expected);
+        self::assertJson($actual);
+        self::assertSame($expected, $actual);
+    }
 }
