@@ -1,1 +1,7 @@
-{"require":{},"foo":{"qux":"quux","bar":"baz"}}
+{
+    "require": {},
+    "foo": {
+        "qux": "quux",
+        "bar": "baz"
+    }
+}

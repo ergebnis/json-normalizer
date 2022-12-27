@@ -1,1 +1,10 @@
-{"bin":["another-script.php","script.php"],"keywords":["foo","bar"]}
+{
+    "bin": [
+        "another-script.php",
+        "script.php"
+    ],
+    "keywords": [
+        "foo",
+        "bar"
+    ]
+}

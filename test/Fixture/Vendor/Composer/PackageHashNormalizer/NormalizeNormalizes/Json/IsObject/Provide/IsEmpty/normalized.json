@@ -1,1 +1,7 @@
-{"provide":{},"foo":{"qux":"quux","bar":"baz"}}
+{
+    "provide": {},
+    "foo": {
+        "qux": "quux",
+        "bar": "baz"
+    }
+}
