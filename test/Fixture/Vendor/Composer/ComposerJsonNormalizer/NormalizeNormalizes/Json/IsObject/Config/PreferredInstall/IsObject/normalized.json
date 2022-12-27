@@ -1,5 +1,5 @@
 {
-    "name": "ergebnis\/json-normalizer",
+    "name": "ergebnis/json-normalizer",
     "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
     "license": "MIT",
     "type": "library",
@@ -13,13 +13,13 @@
             "email": "am@localheinz.com"
         }
     ],
-    "homepage": "https:\/\/getcomposer.org\/doc\/06-config.md#preferred-install",
+    "homepage": "https://getcomposer.org/doc/06-config.md#preferred-install",
     "config": {
         "preferred-install": {
-            "foo\/something-longer-but-alphabetically-after-package-*": "source",
-            "foo\/*": "dist",
-            "foo\/package-*": "source",
-            "foo\/package-one": "dist",
+            "foo/something-longer-but-alphabetically-after-package-*": "source",
+            "foo/*": "dist",
+            "foo/package-*": "source",
+            "foo/package-one": "dist",
             "*": "dist"
         }
     }

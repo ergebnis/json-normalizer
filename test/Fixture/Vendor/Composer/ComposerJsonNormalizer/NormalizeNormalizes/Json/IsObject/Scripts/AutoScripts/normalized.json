@@ -1,5 +1,5 @@
 {
-    "name": "ergebnis\/json-normalizer",
+    "name": "ergebnis/json-normalizer",
     "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
     "license": "MIT",
     "type": "library",
