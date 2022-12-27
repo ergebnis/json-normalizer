@@ -71,4 +71,26 @@ abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTest
             ];
         }
     }
+
+    final protected static function className(): string
+    {
+        $className = \preg_replace(
+            '/Test$/',
+            '',
+            \str_replace(
+                'Ergebnis\\Json\\Normalizer\\Test\\Unit\\',
+                'Ergebnis\\Json\\Normalizer\\',
+                static::class,
+            ),
+        );
+
+        if (!\is_string($className)) {
+            throw new \RuntimeException(\sprintf(
+                'Unable to deduce source class name from test class name "%s".',
+                static::class,
+            ));
+        }
+
+        return $className;
+    }
 }
