@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
+use PHPUnit\Framework;
 
 /**
  * @internal
@@ -24,8 +25,10 @@ use Ergebnis\Json\Normalizer\Vendor;
  *
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  */
-final class PackageHashNormalizerTest extends AbstractComposerTestCase
+final class PackageHashNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideScenario
      */
