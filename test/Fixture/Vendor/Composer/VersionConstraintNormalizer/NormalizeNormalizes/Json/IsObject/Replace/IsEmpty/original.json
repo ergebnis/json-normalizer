@@ -1,0 +1,7 @@
+{
+  "replace": {},
+  "foo": {
+    "qux": "quux",
+    "bar": "baz"
+  }
+}
