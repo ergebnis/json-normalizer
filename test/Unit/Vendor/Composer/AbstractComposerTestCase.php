@@ -22,6 +22,8 @@ use Ergebnis\Json\Normalizer\Test;
  */
 abstract class AbstractComposerTestCase extends Test\Unit\AbstractNormalizerTestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideJsonNotDecodingToObject
      */

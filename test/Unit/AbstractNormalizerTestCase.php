@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
-use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -21,5 +20,4 @@ use PHPUnit\Framework;
  */
 abstract class AbstractNormalizerTestCase extends Framework\TestCase
 {
-    use Test\Util\Helper;
 }

@@ -40,6 +40,8 @@ use JsonSchema\SchemaStorage;
  */
 final class SchemaNormalizerTest extends AbstractNormalizerTestCase
 {
+    use Test\Util\Helper;
+
     public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
         $json = Json::fromString(
