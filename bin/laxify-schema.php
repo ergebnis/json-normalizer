@@ -8,7 +8,7 @@ declare(strict_types=1);
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
  *
- * @see https://github.com/ergebnis/composer-normalize
+ * @see https://github.com/ergebnis/json-normalizer
  */
 
 use Ergebnis\Json\Normalizer\Format;
@@ -27,5 +27,5 @@ $schema->required = [];
 
 \file_put_contents($schemaFile, \json_encode(
     $schema,
-    Format\JsonEncodeOptions::default()->toInt()
+    Format\JsonEncodeOptions::default()->toInt(),
 ));
