@@ -72,7 +72,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
             ),
-            $this->binNormalizer(),
+            self::binNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(),
             new Normalizer\WithFinalNewLineNormalizer(),
@@ -84,7 +84,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
         return $this->normalizer->normalize($json);
     }
 
-    private function binNormalizer(): Normalizer\Normalizer
+    private static function binNormalizer(): Normalizer\Normalizer
     {
         return new class() implements Normalizer\Normalizer {
             public function normalize(Json $json): Json
