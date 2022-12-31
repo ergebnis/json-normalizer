@@ -23,12 +23,12 @@ use PHPUnit\Framework;
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
  * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
- * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  * @uses \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
  */
