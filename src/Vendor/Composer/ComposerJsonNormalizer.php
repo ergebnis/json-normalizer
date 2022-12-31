@@ -80,10 +80,6 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
 
     public function normalize(Json $json): Json
     {
-        if (!\is_object($json->decoded())) {
-            return $json;
-        }
-
         return $this->normalizer->normalize($json);
     }
 }

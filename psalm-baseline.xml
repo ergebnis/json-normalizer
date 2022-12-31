@@ -82,7 +82,8 @@
     </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
-    <MixedAssignment occurrences="1">
+    <MixedAssignment occurrences="2">
+      <code>$fileInfo</code>
       <code>$fileInfo</code>
     </MixedAssignment>
   </file>
