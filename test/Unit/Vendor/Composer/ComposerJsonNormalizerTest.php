@@ -21,12 +21,12 @@ use PHPUnit\Framework;
 /**
  * @internal
  *
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
  * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
- * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  */
