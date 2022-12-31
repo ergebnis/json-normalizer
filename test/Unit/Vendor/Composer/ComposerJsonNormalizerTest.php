@@ -30,6 +30,7 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
+ * @uses \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
  */
 final class ComposerJsonNormalizerTest extends Framework\TestCase
 {

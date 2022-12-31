@@ -75,6 +75,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
             $this->binNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(),
+            new Normalizer\WithFinalNewLineNormalizer(),
         );
     }
 

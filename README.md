@@ -417,6 +417,7 @@ It composes the following normalizers:
 
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
 
 #### `bin`
 

@@ -21,6 +21,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Adjusted `Vendor\Composer\BinNormalizer`, `Vendor\Composer\PackageHashNormalizer`, `Vendor\Composer\VersionConstraintNormalizer`, and `SchemaNormalizer` to encode JSON with `JSON_UNESCAPED_SLASHES` flag ([#801]), by [@localheinz]
 - Adjusted `Vendor\Composer\BinNormalizer`, `Vendor\Composer\PackageHashNormalizer`, `Vendor\Composer\VersionConstraintNormalizer`, and `SchemaNormalizer` to encode JSON with `JSON_UNESCAPED_UNICODE` flag ([#802]), by [@localheinz]
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to reject JSON when it is not an object ([#804]), by [@localheinz]
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to compose `WithFinalNewLineNormalizer` ([#806]), by [@localheinz]
 
 ### Fixed
 
