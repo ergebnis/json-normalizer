@@ -87,9 +87,4 @@
       <code>$fileInfo</code>
     </MixedAssignment>
   </file>
-  <file src="test/Unit/Vendor/Composer/VersionConstraintNormalizerTest.php">
-    <MixedAssignment occurrences="1">
-      <code>$fileInfo</code>
-    </MixedAssignment>
-  </file>
 </files>

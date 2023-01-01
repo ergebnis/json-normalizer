@@ -24,6 +24,7 @@ use PHPUnit\Framework;
  *
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
  *
  * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
  * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
