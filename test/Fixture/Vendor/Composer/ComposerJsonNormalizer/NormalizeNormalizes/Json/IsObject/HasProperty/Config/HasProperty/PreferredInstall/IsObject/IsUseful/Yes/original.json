@@ -17,9 +17,9 @@
   "config": {
     "preferred-install": {
       "foo/something-longer-but-alphabetically-after-package-*": "source",
-      "foo/*": "dist",
-      "foo/package-*": "source",
       "foo/package-one": "dist",
+      "foo/package-*": "source",
+      "foo/*": "dist",
       "*": "dist"
     }
   }
