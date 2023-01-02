@@ -40,7 +40,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     /**
      * @dataProvider provideScenarioWhereJsonIsInvalidAccordingToSchema
      */
-    public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\Scenario $scenario): void
+    public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsInvalidAccordingToSchema $scenario): void
     {
         $json = $scenario->original();
 
@@ -55,7 +55,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsInvalidAccordingToSchema}>
      */
     public static function provideScenarioWhereJsonIsInvalidAccordingToSchema(): \Generator
     {
@@ -75,36 +75,15 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
 
             $originalFile = $fileInfo->getRealPath();
 
-            $normalizedFile = \preg_replace(
-                '/original\.json$/',
-                'normalized.json',
-                $originalFile,
-            );
-
-            if (!\is_string($normalizedFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
-                    $originalFile,
-                ));
-            }
-
-            if (!\file_exists($normalizedFile)) {
-                throw new \RuntimeException(\sprintf(
-                    'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
-                ));
-            }
-
             $key = \substr(
                 $fileInfo->getPath(),
                 \strlen($basePath),
             );
 
             yield $key => [
-                Test\Fixture\Vendor\Composer\Scenario::create(
+                Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsInvalidAccordingToSchema::create(
                     $key,
                     Json::fromFile($originalFile),
-                    Json::fromFile($normalizedFile),
                 ),
             ];
         }
