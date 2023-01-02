@@ -222,7 +222,7 @@ JSON;
      * @dataProvider provideScenarioWithCustomJsonPointerSpecification
      * @dataProvider provideScenarioWithDefaultJsonPointerSpecification
      */
-    public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\Scenario $scenario): void
+    public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->original();
 
@@ -239,13 +239,13 @@ JSON;
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithDefaultJsonPointerSpecification'));
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizesJson/WithDefaultJsonPointerSpecification'));
 
         foreach ($iterator as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
@@ -305,7 +305,7 @@ JSON;
             );
 
             yield $key => [
-                Test\Fixture\SchemaNormalizer\Scenario::create(
+                Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     \sprintf(
                         'file://%s',
@@ -320,13 +320,13 @@ JSON;
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenarioWithCustomJsonPointerSpecification(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizes/WithCustomJsonPointerSpecification'));
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/SchemaNormalizer/NormalizeNormalizesJson/WithCustomJsonPointerSpecification'));
 
         foreach ($iterator as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
@@ -417,7 +417,7 @@ JSON;
             );
 
             yield $key => [
-                Test\Fixture\SchemaNormalizer\Scenario::create(
+                Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     \sprintf(
                         'file://%s',

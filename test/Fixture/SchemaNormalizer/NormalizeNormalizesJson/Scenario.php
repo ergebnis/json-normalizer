@@ -11,19 +11,22 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer;
+namespace Ergebnis\Json\Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Pointer;
 
 /**
  * @internal
  *
  * @psalm-immutable
  */
-final class ScenarioWhereJsonIsValidAccordingToSchema
+final class Scenario
 {
     private function __construct(
         private string $key,
+        private string $schemaUri,
+        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
         private Json $original,
         private Json $normalized,
     ) {
@@ -31,11 +34,15 @@ final class ScenarioWhereJsonIsValidAccordingToSchema
 
     public static function create(
         string $key,
+        string $schemaUri,
+        Pointer\Specification $jsonPointerSpecification,
         Json $original,
         Json $normalized,
     ): self {
         return new self(
             $key,
+            $schemaUri,
+            $jsonPointerSpecification,
             $original,
             $normalized,
         );
@@ -44,6 +51,16 @@ final class ScenarioWhereJsonIsValidAccordingToSchema
     public function key(): string
     {
         return $this->key;
+    }
+
+    public function schemaUri(): string
+    {
+        return $this->schemaUri;
+    }
+
+    public function specificationForPointerToDataThatShouldNotBeSorted(): Pointer\Specification
+    {
+        return $this->specificationForPointerToDataThatShouldNotBeSorted;
     }
 
     public function original(): Json

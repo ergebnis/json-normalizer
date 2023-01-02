@@ -11,10 +11,9 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Fixture\FormatNormalizer;
+namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
 
 /**
  * @internal
@@ -25,23 +24,17 @@ final class Scenario
 {
     private function __construct(
         private string $key,
-        private Normalizer\Format\Format $format,
         private Json $original,
-        private Json $normalized,
     ) {
     }
 
     public static function create(
         string $key,
-        Normalizer\Format\Format $format,
         Json $original,
-        Json $normalized,
     ): self {
         return new self(
             $key,
-            $format,
             $original,
-            $normalized,
         );
     }
 
@@ -50,18 +43,8 @@ final class Scenario
         return $this->key;
     }
 
-    public function format(): Normalizer\Format\Format
-    {
-        return $this->format;
-    }
-
     public function original(): Json
     {
         return $this->original;
-    }
-
-    public function normalized(): Json
-    {
-        return $this->normalized;
     }
 }

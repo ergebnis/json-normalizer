@@ -35,7 +35,7 @@ final class FormatNormalizerTest extends Framework\TestCase
     /**
      * @dataProvider provideScenario
      */
-    public function testNormalizeNormalizes(Test\Fixture\FormatNormalizer\Scenario $scenario): void
+    public function testNormalizeNormalizes(Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $normalizer = new FormatNormalizer(
             new Printer\Printer(),
@@ -48,13 +48,13 @@ final class FormatNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\FormatNormalizer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public function provideScenario(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
-        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/FormatNormalizer/NormalizeNormalizes'));
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator(__DIR__ . '/../Fixture/FormatNormalizer/NormalizeNormalizesJson'));
 
         foreach ($iterator as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
@@ -125,7 +125,7 @@ final class FormatNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\FormatNormalizer\Scenario::create(
+                Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     $format,
                     Json::fromFile($originalFile),
