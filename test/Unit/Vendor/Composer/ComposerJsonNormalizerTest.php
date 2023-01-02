@@ -92,7 +92,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     /**
      * @dataProvider provideScenarioWhereJsonIsValidAccordingToSchema
      */
-    public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\Scenario $scenario): void
+    public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsValidAccordingToSchema $scenario): void
     {
         $json = $scenario->original();
 
@@ -107,7 +107,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\Scenario}>
+     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsValidAccordingToSchema}>
      */
     public static function provideScenarioWhereJsonIsValidAccordingToSchema(): \Generator
     {
@@ -153,7 +153,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\Vendor\Composer\Scenario::create(
+                Test\Fixture\Vendor\Composer\ScenarioWhereJsonIsValidAccordingToSchema::create(
                     $key,
                     Json::fromFile($originalFile),
                     Json::fromFile($normalizedFile),

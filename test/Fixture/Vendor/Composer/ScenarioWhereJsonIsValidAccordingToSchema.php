@@ -20,7 +20,7 @@ use Ergebnis\Json\Json;
  *
  * @psalm-immutable
  */
-final class Scenario
+final class ScenarioWhereJsonIsValidAccordingToSchema
 {
     private function __construct(
         private string $key,
