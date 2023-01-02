@@ -1,0 +1,12 @@
+{
+    "require-dev": {
+        "php": "8.0.26",
+        "hhvm": "Okay",
+        "ext-foo": "Could be useful",
+        "lib-baz": "Maybe helps. it",
+        "composer-plugin-api": "^2.0.0",
+        "acquia/drupal-environment-detector": "^1.2.0",
+        "ergebnis/php-cs-fixer-config": "Provides a and configuration factory for friendsofphp/php-cs-fixer. multiple rule sets",
+        "ergebnis/test-util": "Provides for tests. utilities"
+    }
+}

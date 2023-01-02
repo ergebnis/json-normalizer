@@ -30,6 +30,11 @@ mutation-tests: vendor ## Runs mutation tests with infection/infection
 refactoring: vendor ## Runs automated refactoring with rector/rector
 	vendor/bin/rector process --config=rector.php
 
+.PHONY: schema
+schema: vendor ## Updates the schema
+	wget --output-document=test/Fixture/Vendor/Composer/schema.json https://getcomposer.org/schema.json
+	php bin/laxify-schema.php
+
 .PHONY: security-analysis
 security-analysis: vendor ## Runs a security analysis with composer
 	composer audit

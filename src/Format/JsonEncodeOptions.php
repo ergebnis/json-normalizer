@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2018-2022 Andreas Möller
+ * Copyright (c) 2018-2023 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
@@ -27,7 +27,7 @@ final class JsonEncodeOptions
 
     public static function default(): self
     {
-        return new self(0);
+        return new self(\JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE);
     }
 
     /**

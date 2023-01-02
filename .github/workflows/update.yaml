@@ -1,0 +1,70 @@
+# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
+
+name: "Update"
+
+on: # yamllint disable-line rule:truthy
+  schedule:
+    - cron: "0 9 * * *"
+
+jobs:
+  schema:
+    name: "Schema"
+
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        php-version:
+          - "8.0"
+
+        dependencies:
+          - "locked"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3"
+
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@2.23.0"
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php-version }}"
+
+      - name: "Download schema"
+        run: "wget --output-document=test/Fixture/Vendor/Composer/schema.json https://getcomposer.org/schema.json"
+
+      - name: "Show diff"
+        run: "git diff test/Fixture/Vendor/Composer/schema.json"
+
+      - name: "Determine composer cache directory"
+        uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.7.0"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v3.2.2"
+        with:
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
+
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "ergebnis/.github/actions/composer/install@1.7.0"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
+
+      - name: "Laxify schema"
+        run: "php bin/laxify-schema.php"
+
+      - name: "Open pull request updating schema"
+        uses: "gr2m/create-or-update-pull-request-action@v1"
+        with:
+          author: "ergebnis-bot <bot@ergebn.is>"
+          branch: "feature/schema"
+          body: |
+            This PR
+
+            - [x] updates `schema.json`
+          commit-message: "Enhancement: Update schema.json"
+          path: "resource/"
+          title: "Enhancement: Update `schema.json`"
+        env:
+          GITHUB_TOKEN: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"

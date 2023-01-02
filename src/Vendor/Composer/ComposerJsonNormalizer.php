@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2018-2022 Andreas Möller
+ * Copyright (c) 2018-2023 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
@@ -72,18 +72,48 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
             ),
-            new BinNormalizer(),
+            self::binNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(),
+            new Normalizer\WithFinalNewLineNormalizer(),
         );
     }
 
     public function normalize(Json $json): Json
     {
-        if (!\is_object($json->decoded())) {
-            return $json;
-        }
-
         return $this->normalizer->normalize($json);
+    }
+
+    private static function binNormalizer(): Normalizer\Normalizer
+    {
+        return new class() implements Normalizer\Normalizer {
+            public function normalize(Json $json): Json
+            {
+                /** @var object $decoded */
+                $decoded = $json->decoded();
+
+                if (!\property_exists($decoded, 'bin')) {
+                    return $json;
+                }
+
+                if (!\is_array($decoded->bin)) {
+                    return $json;
+                }
+
+                $bin = $decoded->bin;
+
+                \sort($bin);
+
+                $decoded->bin = $bin;
+
+                /** @var string $encoded */
+                $encoded = \json_encode(
+                    $decoded,
+                    Normalizer\Format\JsonEncodeOptions::default()->toInt(),
+                );
+
+                return Json::fromString($encoded);
+            }
+        };
     }
 }
