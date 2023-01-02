@@ -89,7 +89,10 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             }
 
             if (!\file_exists($normalizedFile)) {
-                $normalizedFile = $originalFile;
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $normalizedFile,
+                ));
             }
 
             $key = \substr(
@@ -159,7 +162,10 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             }
 
             if (!\file_exists($normalizedFile)) {
-                $normalizedFile = $originalFile;
+                throw new \RuntimeException(\sprintf(
+                    'Expected "%s" to exist, but it does not.',
+                    $normalizedFile,
+                ));
             }
 
             $key = \substr(
