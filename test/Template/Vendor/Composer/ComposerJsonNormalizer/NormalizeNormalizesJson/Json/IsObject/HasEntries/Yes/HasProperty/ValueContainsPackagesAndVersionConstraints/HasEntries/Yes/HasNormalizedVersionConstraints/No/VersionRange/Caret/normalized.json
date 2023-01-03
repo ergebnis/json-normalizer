@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#caret-version-range-",
+    "value-contains-packages-and-version-constraints": {
+        "version-range-caret/01-major-trimmed": "^1",
+        "version-range-caret/02-major-untrimmed": "^1",
+        "version-range-caret/03-major-minor-trimmed": "^1.2",
+        "version-range-caret/04-major-minor-untrimmed": "^1.2",
+        "version-range-caret/05-major-minor-patch-trimmed": "^1.2.3",
+        "version-range-caret/06-major-minor-patch-untrimmed": "^1.2.3"
+    }
+}

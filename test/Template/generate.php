@@ -16,7 +16,7 @@ use Symfony\Component\Finder;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$sourceDirectory = __DIR__ . '/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/ValueContainsVersionConstraint';
+$sourceDirectory = __DIR__ . '/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/ValueContainsPackagesAndVersionConstraints';
 
 $targetDirectoryFrom = static function (string $directory): string {
     $testDirectory = __DIR__ . '/..';
@@ -91,7 +91,7 @@ foreach ($propertyToDirectory as $property => $directory) {
         $filesystem->dumpFile(
             $targetFile,
             \str_replace(
-                '"value-contains-version-constraint"',
+                '"value-contains-packages-and-version-constraints"',
                 \sprintf(
                     '"%s"',
                     $property,
