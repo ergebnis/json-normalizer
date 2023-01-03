@@ -15,6 +15,7 @@ branches:
       required_status_checks:
         checks:
           - context: "Code Coverage (8.0, locked)"
+          - context: "Code Generation (8.0, locked)"
           - context: "Coding Standards (8.0, locked)"
           - context: "Dependency Analysis (8.0, locked)"
           - context: "Mutation Tests (8.0, locked)"

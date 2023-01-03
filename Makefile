@@ -6,6 +6,10 @@ code-coverage: vendor ## Collects coverage from running unit tests with phpunit/
 	mkdir -p .build/phpunit
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text
 
+.PHONY: code-generation
+code-generation: vendor ## Generates code
+	php test/Template/generate.php
+
 .PHONY: coding-standards
 coding-standards: vendor ## Lints YAML files with yamllint, normalizes composer.json with ergebnis/composer-normalize, and fixes code style issues with friendsofphp/php-cs-fixer
 	yamllint -c .yamllint.yaml --strict .
@@ -22,7 +26,7 @@ help: ## Displays this list of targets with descriptions
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: mutation-tests
-mutation-tests: vendor ## Runs mutation tests with infection/infection
+mutation-tests: vendor code-generation ## Runs mutation tests with infection/infection
 	mkdir -p .build/infection
 	vendor/bin/infection --configuration=infection.json
 
@@ -52,7 +56,7 @@ static-code-analysis-baseline: vendor ## Generates a baseline for static code an
 	vendor/bin/psalm --config=psalm.xml --set-baseline=psalm-baseline.xml
 
 .PHONY: tests
-tests: vendor ## Runs unit tests with phpunit/phpunit
+tests: vendor code-generation ## Runs unit tests with phpunit/phpunit
 	mkdir -p .build/phpunit
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml
 
