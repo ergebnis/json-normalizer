@@ -65,6 +65,57 @@ jobs:
           files: ".build/phpunit/logs/clover.xml"
           token: "${{ secrets.CODECOV_TOKEN }}"
 
+  code-generation:
+    name: "Code Generation"
+
+    runs-on: "ubuntu-latest"
+
+    strategy:
+      matrix:
+        php-version:
+          - "8.0"
+
+        dependencies:
+          - "locked"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v3.2.0"
+
+      - name: "Set up PHP"
+        uses: "shivammathur/setup-php@2.23.0"
+        with:
+          coverage: "xdebug"
+          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          php-version: "${{ matrix.php-version }}"
+
+      - name: "Set up problem matchers for PHP"
+        run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
+
+      - name: "Set up problem matchers for phpunit/phpunit"
+        run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
+
+      - name: "Determine composer cache directory"
+        uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.7.0"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v3.2.2"
+        with:
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
+
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "ergebnis/.github/actions/composer/install@1.7.0"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
+
+      - name: "Generate code"
+        run: "php test/Template/generate.php"
+
+      - name: "Run git diff to determine whether generated code has been modified"
+        run: "git diff --exit-code"
+
   coding-standards:
     name: "Coding Standards"
 
