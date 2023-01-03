@@ -436,7 +436,7 @@ When `composer.json` contains any configuration in the
 - `require-dev`
 - `suggest`
 
-sections, the `Vendor\Composer\PackageHashNormalizer` will sort the content of these sections.
+sections, the `Vendor\Composer\PackageHashNormalizer` will sort the packages in these sections.
 
 :bulb: This transfers the behaviour from using the `--sort-packages` or `sort-packages` configuration flag to other sections. Find out more about the `--sort-packages` flag and configuration at [Composer: Config](https://getcomposer.org/doc/06-config.md#sort-packages) and [Composer: Command Line Interface / Commands](https://getcomposer.org/doc/03-cli.md#require).
 
