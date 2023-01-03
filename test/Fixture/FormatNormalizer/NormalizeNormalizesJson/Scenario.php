@@ -11,10 +11,10 @@ declare(strict_types=1);
  * @see https://github.com/ergebnis/json-normalizer
  */
 
-namespace Ergebnis\Json\Normalizer\Test\Fixture\SchemaNormalizer;
+namespace Ergebnis\Json\Normalizer\Test\Fixture\FormatNormalizer\NormalizeNormalizesJson;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Pointer;
+use Ergebnis\Json\Normalizer;
 
 /**
  * @internal
@@ -25,8 +25,7 @@ final class Scenario
 {
     private function __construct(
         private string $key,
-        private string $schemaUri,
-        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private Normalizer\Format\Format $format,
         private Json $original,
         private Json $normalized,
     ) {
@@ -34,15 +33,13 @@ final class Scenario
 
     public static function create(
         string $key,
-        string $schemaUri,
-        Pointer\Specification $jsonPointerSpecification,
+        Normalizer\Format\Format $format,
         Json $original,
         Json $normalized,
     ): self {
         return new self(
             $key,
-            $schemaUri,
-            $jsonPointerSpecification,
+            $format,
             $original,
             $normalized,
         );
@@ -53,14 +50,9 @@ final class Scenario
         return $this->key;
     }
 
-    public function schemaUri(): string
+    public function format(): Normalizer\Format\Format
     {
-        return $this->schemaUri;
-    }
-
-    public function specificationForPointerToDataThatShouldNotBeSorted(): Pointer\Specification
-    {
-        return $this->specificationForPointerToDataThatShouldNotBeSorted;
+        return $this->format;
     }
 
     public function original(): Json
