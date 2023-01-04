@@ -126,7 +126,22 @@ final class VersionConstraintNormalizer implements Normalizer
             $ranges = \explode(' - ', $or);
 
             foreach ($ranges as &$range) {
-                $andGroups = \explode(' ', $range);
+                if (\str_contains($range, ' as ')) {
+                    $andGroups = [];
+                    $temp = \explode(' ', $range);
+
+                    while (!empty($temp)) {
+                        if ('as' === $temp[0]) {
+                            \array_shift($temp);
+                            $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
+                        } else {
+                            $andGroups[] = \array_shift($temp);
+                        }
+                    }
+                } else {
+                    $andGroups = \explode(' ', $range);
+                }
+
                 \usort($andGroups, $sorter);
                 $range = \implode(' ', $andGroups);
             }
