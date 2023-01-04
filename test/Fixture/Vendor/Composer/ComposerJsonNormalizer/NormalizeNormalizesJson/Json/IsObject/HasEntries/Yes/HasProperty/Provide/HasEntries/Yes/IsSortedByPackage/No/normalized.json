@@ -1,0 +1,12 @@
+{
+    "provide": {
+        "php": "*",
+        "hhvm": "*",
+        "ext-foo": "*",
+        "lib-baz": "*",
+        "composer-plugin-api": "*",
+        "acquia/drupal-environment-detector": "*",
+        "ergebnis/php-cs-fixer-config": "*",
+        "ergebnis/test-util": "*"
+    }
+}
