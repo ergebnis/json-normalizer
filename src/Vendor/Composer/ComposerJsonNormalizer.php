@@ -41,7 +41,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      */
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/config/allow-plugins')),
                     /**
-                     * First matching preferred installation method method wins.
+                     * First matching preferred installation method wins.
                      *
                      * @see https://github.com/composer/composer/blob/2.4.4/src/Composer/Factory.php#L512-L528
                      * @see https://github.com/composer/composer/blob/2.4.4/src/Composer/Downloader/DownloadManager.php#L421-L423
