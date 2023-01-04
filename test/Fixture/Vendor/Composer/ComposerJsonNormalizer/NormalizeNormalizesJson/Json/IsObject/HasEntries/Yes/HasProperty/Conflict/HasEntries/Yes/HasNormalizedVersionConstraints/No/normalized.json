@@ -6,7 +6,7 @@
         "version-range-08/lower-and-upper-with-comma-or-lower-untrimmed": ">=1.0 <1.1 || >=1.2",
         "version-range-09/lower-and-upper-with-comma-or-surrounded-by-space-double-lower-trimmed": ">=1.0 <1.1 || >=1.2",
         "version-range-09/lower-and-upper-with-comma-or-surrounded-by-space-double-lower-untrimmed": ">=1.0 <1.1 || >=1.2",
-        "version-range-10/lower-and-upper-with-comma-or-surrounded-by-space-single-lower-trimmed": ">=1.0 <1.1 || >=1.2 ||",
+        "version-range-10/lower-and-upper-with-comma-or-surrounded-by-space-single-lower-trimmed": ">=1.0 <1.1 || >=1.2",
         "version-range-10/lower-and-upper-with-comma-or-surrounded-by-space-single-lower-untrimmed": ">=1.0 <1.1 || >=1.2",
         "version-range-11/lower-and-upper-with-comma-surrounded-by-space-double-or-lower-trimmed": ">=1.0 <1.1 || >=1.2",
         "version-range-11/lower-and-upper-with-comma-surrounded-by-space-double-or-lower-untrimmed": ">=1.0 <1.1 || >=1.2",

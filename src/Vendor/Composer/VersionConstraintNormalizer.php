@@ -175,6 +175,7 @@ final class VersionConstraintNormalizer implements Normalizer
         } while ($hasChanged);
 
         $normalized = \implode(' || ', $orGroups);
+        $normalized = \trim($normalized, '| ');
 
         return $normalized;
     }

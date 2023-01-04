@@ -15,7 +15,7 @@
         "version-range-07/lower-and-upper-with-comma": ">=1.0 <2.0",
         "version-range-08/lower-and-upper-with-comma-or-lower": ">=1.0 <1.1 || >=1.2",
         "version-range-09/lower-and-upper-with-comma-or-surrounded-by-space-double-lower": ">=1.0 <1.1 || >=1.2",
-        "version-range-10/lower-and-upper-with-comma-or-surrounded-by-space-single-lower": ">=1.0 <1.1 || >=1.2 ||",
+        "version-range-10/lower-and-upper-with-comma-or-surrounded-by-space-single-lower": ">=1.0 <1.1 || >=1.2",
         "version-range-11/lower-and-upper-with-comma-surrounded-by-space-double-or-lower": ">=1.0 <1.1 || >=1.2",
         "version-range-12/lower-and-upper-with-comma-surrounded-by-space-single": ">=1.0 <2.0",
         "version-range-13/lower-and-upper-with-comma-surrounded-by-space-single-or-lower": ">=1.0 <1.1 || >=1.2",
