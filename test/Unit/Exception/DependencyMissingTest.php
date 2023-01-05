@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
 use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Test;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Exception\DependencyMissing
  */
-final class DependencyMissingTest extends AbstractExceptionTestCase
+final class DependencyMissingTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testForReturnsDependencyMissing(): void
     {
         $faker = self::faker();

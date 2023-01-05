@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
 use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Test;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeRead
  */
-final class SchemaUriCouldNotBeReadTest extends AbstractExceptionTestCase
+final class SchemaUriCouldNotBeReadTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testDefaults(): void
     {
         $exception = new Exception\SchemaUriCouldNotBeRead();
