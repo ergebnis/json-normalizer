@@ -14,6 +14,7 @@
     "static",
     "string",
     "true",
-    "void"
+    "void",
+    "Composer\\Semver\\VersionParser"
   ]
 }

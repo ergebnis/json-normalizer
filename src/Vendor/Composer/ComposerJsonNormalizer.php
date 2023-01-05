@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
+use Composer\Semver;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Pointer;
@@ -23,8 +24,18 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
 {
     private Normalizer\Normalizer $normalizer;
 
+    /**
+     * @throws Normalizer\Exception\DependencyMissing
+     */
     public function __construct(string $schemaUri)
     {
+        if (!\class_exists(Semver\VersionParser::class)) {
+            throw Normalizer\Exception\DependencyMissing::for(
+                self::class,
+                'composer/semver',
+            );
+        }
+
         $this->normalizer = new Normalizer\ChainNormalizer(
             new Normalizer\SchemaNormalizer(
                 $schemaUri,
@@ -74,7 +85,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
             ),
             self::binNormalizer(),
             new PackageHashNormalizer(),
-            new VersionConstraintNormalizer(),
+            new VersionConstraintNormalizer(new Semver\VersionParser()),
             new Normalizer\WithFinalNewLineNormalizer(),
         );
     }

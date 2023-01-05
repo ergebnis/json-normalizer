@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
+use Composer\Semver;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Normalizer;
@@ -41,6 +42,10 @@ final class VersionConstraintNormalizer implements Normalizer
         ],
     ];
 
+    public function __construct(private Semver\VersionParser $versionParser)
+    {
+    }
+
     public function normalize(Json $json): Json
     {
         $decoded = $json->decoded();
@@ -65,8 +70,8 @@ final class VersionConstraintNormalizer implements Normalizer
                 continue;
             }
 
-            $decoded->{$name} = \array_map(static function (string $versionConstraint): string {
-                return self::normalizeVersionConstraint($versionConstraint);
+            $decoded->{$name} = \array_map(function (string $versionConstraint): string {
+                return $this->normalizeVersionConstraint($versionConstraint);
             }, $packages);
         }
 
@@ -79,9 +84,19 @@ final class VersionConstraintNormalizer implements Normalizer
         return Json::fromString($encoded);
     }
 
-    private static function normalizeVersionConstraint(string $versionConstraint): string
+    private function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = $versionConstraint;
+        $normalized = \trim(\str_replace(
+            '  ',
+            ' ',
+            $versionConstraint,
+        ));
+
+        try {
+            $this->versionParser->parseConstraints($normalized);
+        } catch (\UnexpectedValueException) {
+            return $normalized;
+        }
 
         foreach (self::MAP as [$pattern, $glue]) {
             /** @var array<int, string> $split */
