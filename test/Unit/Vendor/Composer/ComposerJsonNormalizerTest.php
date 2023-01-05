@@ -147,15 +147,33 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
                 ));
             }
 
-            $key = \substr(
+            $relativePath = \substr(
                 $fileInfo->getPath(),
                 \strlen($basePath),
             );
 
-            yield $key => [
+            $keyNotNormalized = \sprintf(
+                '%s (not normalized)',
+                $relativePath,
+            );
+
+            yield $keyNotNormalized => [
                 Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
-                    $key,
+                    $keyNotNormalized,
                     Json::fromFile($originalFile),
+                    Json::fromFile($normalizedFile),
+                ),
+            ];
+
+            $keyAlreadyNormalized = \sprintf(
+                '%s (already-normalized)',
+                $relativePath,
+            );
+
+            yield $keyAlreadyNormalized => [
+                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
+                    $keyAlreadyNormalized,
+                    Json::fromFile($normalizedFile),
                     Json::fromFile($normalizedFile),
                 ),
             ];
