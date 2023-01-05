@@ -1,15 +1,15 @@
 {
   "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
   "require": {
-    "version-range-combination-and-or-exact-version/01-comma-without-spaces-trimmed": "1,2.3||3.4.5",
-    "version-range-combination-and-or-exact-version/02-comma-without-spaces-untrimmed": " 1,2.3||3.4.5 ",
-    "version-range-combination-and-or-exact-version/03-comma-with-space-single-trimmed": "1 , 2.3 || 3.4.5",
-    "version-range-combination-and-or-exact-version/04-comma-with-space-single-untrimmed": " 1 , 2.3 || 3.4.5 ",
-    "version-range-combination-and-or-exact-version/05-comma-with-space-double-trimmed": "1  ,  2.3  ||  3.4.5",
-    "version-range-combination-and-or-exact-version/06-comma-with-space-double-untrimmed": " 1  ,  2.3  ||  3.4.5 ",
-    "version-range-combination-and-or-exact-version/07-space-single-trimmed": "1 2.3 || 3.4.5",
-    "version-range-combination-and-or-exact-version/08-space-single-untrimmed": " 1 2.3 || 3.4.5 ",
-    "version-range-combination-and-or-exact-version/09-space-double-trimmed": "1  2.3  ||  3.4.5",
-    "version-range-combination-and-or-exact-version/10-space-double-untrimmed": " 1  2.3  ||  3.4.5 "
+    "combination-and-or-exact-version/01-comma-without-spaces-trimmed": "1,2.3||3.4.5",
+    "combination-and-or-exact-version/02-comma-without-spaces-untrimmed": " 1,2.3||3.4.5 ",
+    "combination-and-or-exact-version/03-comma-with-space-single-trimmed": "1 , 2.3 || 3.4.5",
+    "combination-and-or-exact-version/04-comma-with-space-single-untrimmed": " 1 , 2.3 || 3.4.5 ",
+    "combination-and-or-exact-version/05-comma-with-space-double-trimmed": "1  ,  2.3  ||  3.4.5",
+    "combination-and-or-exact-version/06-comma-with-space-double-untrimmed": " 1  ,  2.3  ||  3.4.5 ",
+    "combination-and-or-exact-version/07-space-single-trimmed": "1 2.3 || 3.4.5",
+    "combination-and-or-exact-version/08-space-single-untrimmed": " 1 2.3 || 3.4.5 ",
+    "combination-and-or-exact-version/09-space-double-trimmed": "1  2.3  ||  3.4.5",
+    "combination-and-or-exact-version/10-space-double-untrimmed": " 1  2.3  ||  3.4.5 "
   }
 }
