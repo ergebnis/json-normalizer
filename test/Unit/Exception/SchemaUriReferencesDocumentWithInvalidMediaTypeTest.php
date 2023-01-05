@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
 use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Test;
+use PHPUnit\Framework;
 
 /**
  * @internal
  *
  * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
  */
-final class SchemaUriReferencesDocumentWithInvalidMediaTypeTest extends AbstractExceptionTestCase
+final class SchemaUriReferencesDocumentWithInvalidMediaTypeTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testDefaults(): void
     {
         $exception = new Exception\SchemaUriReferencesDocumentWithInvalidMediaType();
