@@ -41,6 +41,9 @@
     "symfony/finder": "^5.0.0 || ^6.0.0",
     "vimeo/psalm": "^5.4.0"
   },
+  "suggest": {
+    "composer/semver": "If you want to use ComposerJsonNormalizer or VersionConstraintNormalizer"
+  },
   "autoload": {
     "psr-4": {
       "Ergebnis\\Json\\Normalizer\\": "src/"
