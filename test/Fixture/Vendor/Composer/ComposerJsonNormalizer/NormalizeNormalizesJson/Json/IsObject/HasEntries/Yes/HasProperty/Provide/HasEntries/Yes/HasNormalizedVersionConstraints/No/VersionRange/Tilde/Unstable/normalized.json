@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#tilde-version-range-",
+    "provide": {
+        "version-range-tilde-unstable/01-major-trimmed": "^0.0",
+        "version-range-tilde-unstable/02-major-untrimmed": "^0.0",
+        "version-range-tilde-unstable/03-major-minor-trimmed": "^0.1",
+        "version-range-tilde-unstable/04-major-minor-untrimmed": "^0.1",
+        "version-range-tilde-unstable/05-major-minor-patch-trimmed": "~0.1.2",
+        "version-range-tilde-unstable/06-major-minor-patch-untrimmed": "~0.1.2"
+    }
+}

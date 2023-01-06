@@ -1,0 +1,11 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+  "conflict": {
+    "version-range-less-than-or-equal-unstable/01-major-trimmed": "<=0",
+    "version-range-less-than-or-equal-unstable/02-major-untrimmed": " <=0 ",
+    "version-range-less-than-or-equal-unstable/03-major-minor-trimmed": " <=0.1 ",
+    "version-range-less-than-or-equal-unstable/04-major-minor-untrimmed": " <=0.1 ",
+    "version-range-less-than-or-equal-unstable/05-major-minor-patch-trimmed": "<=0.1.2",
+    "version-range-less-than-or-equal-unstable/06-major-minor-patch-untrimmed": " <=0.1.2 "
+  }
+}

@@ -15,6 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\CallableNormalizer;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -24,6 +25,8 @@ use PHPUnit\Framework;
  */
 final class CallableNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testNormalizePassesJsonThroughCallable(): void
     {
         $json = Json::fromString(
@@ -34,7 +37,7 @@ final class CallableNormalizerTest extends Framework\TestCase
 JSON
         );
 
-        $normalized = Json::fromString(
+        $expected = Json::fromString(
             <<<'JSON'
 {
     "status": "normalized"
@@ -42,12 +45,14 @@ JSON
 JSON
         );
 
-        $callable = static function () use ($normalized): Json {
-            return $normalized;
+        $callable = static function () use ($expected): Json {
+            return $expected;
         };
 
         $normalizer = new CallableNormalizer($callable);
 
-        self::assertSame($normalized, $normalizer->normalize($json));
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringIdenticalToJsonString($expected->encoded(), $normalized->encoded());
     }
 }

@@ -1,0 +1,17 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-",
+  "require-dev": {
+    "version-range-hyphenated-stable/01-major-surrounded-by-space-single-trimmed": "1 - 2",
+    "version-range-hyphenated-stable/02-major-surrounded-by-space-single-untrimmed": " 1 - 2 ",
+    "version-range-hyphenated-stable/03-major-surrounded-by-space-double-trimmed": "1  -  2",
+    "version-range-hyphenated-stable/04-major-surrounded-by-space-double-untrimmed": " 1  -  2 ",
+    "version-range-hyphenated-stable/05-major-minor-surrounded-by-space-single-trimmed": "1.2 - 2.3",
+    "version-range-hyphenated-stable/06-major-minor-surrounded-by-space-single-untrimmed": " 1.2 - 2.3 ",
+    "version-range-hyphenated-stable/07-major-minor-surrounded-by-space-double-trimmed": "1.2  -  2.3",
+    "version-range-hyphenated-stable/08-major-minor-surrounded-by-space-double-untrimmed": " 1.2  -  2.3 ",
+    "version-range-hyphenated-stable/09-major-minor-patch-surrounded-by-space-single-trimmed": "1.2.3 - 2.3.4",
+    "version-range-hyphenated-stable/10-major-minor-patch-surrounded-by-space-single-untrimmed": " 1.2.3 - 2.3.4 ",
+    "version-range-hyphenated-stable/11-major-minor-patch-surrounded-by-space-double-trimmed": "1.2.3  -  2.3.4",
+    "version-range-hyphenated-stable/12-major-minor-patch-surrounded-by-space-double-untrimmed": " 1.2.3  -  2.3.4"
+  }
+}

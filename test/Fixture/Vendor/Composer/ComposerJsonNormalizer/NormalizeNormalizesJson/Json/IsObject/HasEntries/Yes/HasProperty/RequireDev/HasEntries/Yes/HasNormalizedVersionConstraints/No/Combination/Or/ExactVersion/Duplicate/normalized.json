@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "require-dev": {
+        "combination-or-exact-version-duplicate/01-without-spaces-trimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4",
+        "combination-or-exact-version-duplicate/02-without-spaces-untrimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4",
+        "combination-or-exact-version-duplicate/03-with-single-space-trimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4",
+        "combination-or-exact-version-duplicate/04-with-single-space-untrimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4",
+        "combination-or-exact-version-duplicate/05-with-double-space-trimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4",
+        "combination-or-exact-version-duplicate/06-with-double-space-untrimmed": "0 || 0 || 1.2 || 1.2 || 2.3.4 || 2.3.4"
+    }
+}

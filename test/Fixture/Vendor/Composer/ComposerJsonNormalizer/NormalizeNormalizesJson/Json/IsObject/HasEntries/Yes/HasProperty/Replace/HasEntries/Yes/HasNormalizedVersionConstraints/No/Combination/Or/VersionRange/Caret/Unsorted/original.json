@@ -1,0 +1,11 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+  "replace": {
+    "combination-or-version-range-caret-unsorted/01-without-spaces-trimmed": "^2.3.4||^1.2||^0",
+    "combination-or-version-range-caret-unsorted/02-without-spaces-untrimmed": " ^2.3.4||^1.2||^0 ",
+    "combination-or-version-range-caret-unsorted/03-with-single-space-trimmed": " ^2.3.4 || ^1.2 || ^0 ",
+    "combination-or-version-range-caret-unsorted/04-with-single-space-untrimmed": " ^2.3.4 || ^1.2 || ^0 ",
+    "combination-or-version-range-caret-unsorted/05-with-double-space-trimmed": "^2.3.4  ||  ^1.2  ||  ^0",
+    "combination-or-version-range-caret-unsorted/06-with-double-space-untrimmed": " ^2.3.4  ||  ^1.2  ||  ^0 "
+  }
+}
