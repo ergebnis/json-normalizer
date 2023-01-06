@@ -553,7 +553,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    {
      "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
      "require": {
-  +    "foo/bar": "^2.0 || ^1.4"
+  -    "foo/bar": "^2.0 || ^1.4"
   +    "foo/bar": "^1.4 || ^2.0"
    }
   ```
