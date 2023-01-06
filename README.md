@@ -478,7 +478,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 - version constraints separated by a single (`|`) or double-pipe (`||`) and any number of spaces before and after - treated as a logical or - are separated by a double pipe with a single space before and after (` || `)
 
- ```diff
+  ```diff
    {
      "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
      "require": {
