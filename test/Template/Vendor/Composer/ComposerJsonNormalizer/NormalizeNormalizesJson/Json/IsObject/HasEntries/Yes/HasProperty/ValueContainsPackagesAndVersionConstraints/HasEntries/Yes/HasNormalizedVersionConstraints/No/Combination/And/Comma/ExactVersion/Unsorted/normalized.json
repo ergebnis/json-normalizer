@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "value-contains-packages-and-version-constraints": {
+        "combination-and-comma-exact-version-unsorted/01-without-spaces-trimmed": "2.3.4,1.2,0",
+        "combination-and-comma-exact-version-unsorted/02-without-spaces-untrimmed": "2.3.4,1.2,0",
+        "combination-and-comma-exact-version-unsorted/03-with-space-single-trimmed": "2.3.4,1.2,0",
+        "combination-and-comma-exact-version-unsorted/04-with-space-single-untrimmed": "2.3.4,1.2,0",
+        "combination-and-comma-exact-version-unsorted/05-with-space-double-trimmed": "2.3.4,1.2,0",
+        "combination-and-comma-exact-version-unsorted/06-with-space-double-untrimmed": "2.3.4,1.2,0"
+    }
+}

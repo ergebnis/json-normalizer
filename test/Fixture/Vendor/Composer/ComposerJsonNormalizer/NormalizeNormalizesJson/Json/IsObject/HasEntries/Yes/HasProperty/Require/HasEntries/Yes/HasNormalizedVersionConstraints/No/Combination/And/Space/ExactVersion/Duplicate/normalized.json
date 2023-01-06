@@ -1,0 +1,9 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "require": {
+        "combination-and-space-exact-version-duplicate/01-with-space-single-trimmed": "0 0 1.2 1.2 2.3.4 2.3.4",
+        "combination-and-space-exact-version-duplicate/02-with-space-single-untrimmed": "0 0 1.2 1.2 2.3.4 2.3.4",
+        "combination-and-space-exact-version-duplicate/03-with-space-double-trimmed": "0 0 1.2 1.2 2.3.4 2.3.4",
+        "combination-and-space-exact-version-duplicate/04-with-space-double-untrimmed": "0 0 1.2 1.2 2.3.4 2.3.4"
+    }
+}
