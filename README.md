@@ -452,15 +452,111 @@ When `composer.json` contains version constraints in the
 
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
-- all constraints are trimmed
-- *and- constraints are separated by a single space (` `)
-- *or- constraints are separated by double-pipe with a single space before and after (` || `)
-- *range- constraints are separated by a hyphen and a single space before and after (` - `)
-- overlapping constraints are removed (`^1.0 || ^1.1 || ^2.0` -> `^1.0 || ^2.0`)
-- tilde operators are preferred over wildcard version ranges (`1.0.*` -> `~1.0.0`)
-- caret operators are preferred over tilde operators (`~1` -> `^1.0`, `~1.3` -> `^1.3`)
-- version numbers have a minimum number of parts (`^1` -> `^1.0`)
-- version numbers are sorted in ascending order (`^2.0 || ^1.4` -> `^1.4 || ^2.0`)
+- all version constraints are trimmed
+
+ ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "php": " ^8.2 "
+  +    "php": "^8.2"
+   }
+  ```
+
+- version constraints separated by a space (` `) or comma (`,`) - treated as a logical and - are separated by a space (` `) instead
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "1.2.3,2.3.4",
+  -    "foo/baz": "2.3.4   3.4.5"
+  +    "foo/bar": "1.2.3 2.3.4",
+  +    "foo/baz": "2.3.4 3.4.5"
+   }
+  ```
+
+- version constraints separated by a single (`|`) or double-pipe (`||`) and any number of spaces before and after - treated as a logical or - are separated by a double pipe with a single space before and after (` || `)
+
+ ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "php": "^8.1|^8.2",
+  -    "foo/bar": "^1.2.3  ||  ^2.3.4"
+  +    "php": "^8.1 || ^8.2",
+  +    "foo/bar": "^1.2.3 || ^2.3.4"
+   }
+  ```
+
+- hyphenated version constraints separated by dash (` - `) and any positive number of spaces before and after are separated by a dash with a single space before and after (` - `)
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-",
+     "require": {
+  -    "foo/bar": "1.2.3  -  2.3.4"
+  +    "foo/bar": "1.2.3 - 2.3.4"
+   }
+  ```
+
+- overlapping constraints are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "^1.0 || ^1.1 || ^2.0"
+  +    "foo/bar": "^1.0 || ^2.0"
+   }
+  ```
+
+- tilde operators (`~`) are preferred over wildcard (`*`) version ranges
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+       "foo/bar": "*",
+  -    "foo/baz": "1.0.*"
+  +    "foo/baz": "~1.0.0"
+   }
+  ```
+
+- caret operators are preferred over tilde operators
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "~1",
+  -    "foo/baz": "~1.3"
+  +    "foo/bar": "^1.0",
+  +    "foo/baz": "^1.3"
+   }
+  ```
+
+- version numbers have a minimum number of parts
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "^1"
+  +    "foo/bar": "^1.0"
+   }
+  ```
+
+- version numbers are sorted in ascending order
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  +    "foo/bar": "^2.0 || ^1.4"
+  +    "foo/bar": "^1.4 || ^2.0"
+   }
+  ```
 
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
