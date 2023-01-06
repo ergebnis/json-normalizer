@@ -454,7 +454,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 - all version constraints are trimmed
 
- ```diff
+  ```diff
    {
      "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
      "require": {
