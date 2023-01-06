@@ -1,3 +1,8 @@
 /.build/
 /.notes/
+/test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Conflict/
+/test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Provide/
+/test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Replace/
+/test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Require/
+/test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/RequireDev/
 /vendor/
