@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "value-contains-packages-and-version-constraints": {
+        "combination-or-version-range-tilde/01-without-spaces-trimmed": "~0 || ~1.2 || ~2.3.4",
+        "combination-or-version-range-tilde/02-without-spaces-untrimmed": "~0 || ~1.2 || ~2.3.4",
+        "combination-or-version-range-tilde/03-with-single-space-trimmed": "~0 || ~1.2 || ~2.3.4",
+        "combination-or-version-range-tilde/04-with-single-space-untrimmed": "~0 || ~1.2 || ~2.3.4",
+        "combination-or-version-range-tilde/05-with-double-space-trimmed": "~0 || ~1.2 || ~2.3.4",
+        "combination-or-version-range-tilde/06-with-double-space-untrimmed": "~0 || ~1.2 || ~2.3.4"
+    }
+}
