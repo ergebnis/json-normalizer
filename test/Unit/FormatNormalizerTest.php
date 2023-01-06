@@ -32,6 +32,8 @@ use PHPUnit\Framework;
  */
 final class FormatNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideScenario
      */
@@ -44,7 +46,7 @@ final class FormatNormalizerTest extends Framework\TestCase
 
         $normalized = $normalizer->normalize($scenario->original());
 
-        self::assertSame($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
     }
 
     /**

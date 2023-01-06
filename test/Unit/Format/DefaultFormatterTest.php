@@ -104,6 +104,6 @@ JSON;
 
         $expected = $printedWithIndentAndNewLine . $suffix;
 
-        self::assertSame($expected, $formatted->encoded());
+        self::assertJsonStringIdenticalToJsonString($expected, $formatted->encoded());
     }
 }

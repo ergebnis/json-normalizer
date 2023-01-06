@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Normalizer;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -25,6 +26,8 @@ use PHPUnit\Framework;
  */
 final class ChainNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
         $json = Json::fromString(
@@ -69,6 +72,8 @@ JSON
 
         $normalizer = new ChainNormalizer(...$normalizers);
 
-        self::assertSame($last, $normalizer->normalize($json));
+        $normalized = $normalizer->normalize($json);
+
+        self::assertJsonStringIdenticalToJsonString($last->encoded(), $normalized->encoded());
     }
 }

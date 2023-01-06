@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\IndentNormalizer;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer\PrinterInterface;
 use PHPUnit\Framework;
 
@@ -28,6 +29,8 @@ use PHPUnit\Framework;
  */
 final class IndentNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testNormalizeUsesPrinterToNormalizeJsonWithIndent(): void
     {
         $indent = Format\Indent::fromString('  ');
@@ -65,6 +68,6 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertSame($indented, $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($indented, $normalized->encoded());
     }
 }

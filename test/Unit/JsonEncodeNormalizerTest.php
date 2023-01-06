@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
+use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
 /**
@@ -27,6 +28,8 @@ use PHPUnit\Framework;
  */
 final class JsonEncodeNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider provideJsonEncodeOptions
      */
@@ -54,7 +57,7 @@ JSON
             $jsonEncodeOptions,
         );
 
-        self::assertSame($expected, $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
 
     /**

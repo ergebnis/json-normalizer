@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
@@ -24,6 +25,8 @@ use PHPUnit\Framework;
  */
 final class WithoutFinalNewLineNormalizerTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     /**
      * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
      */
@@ -44,6 +47,6 @@ JSON
 
         $expected = \rtrim($json->encoded());
 
-        self::assertSame($expected, $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
 }
