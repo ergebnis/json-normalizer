@@ -175,7 +175,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
                 $regex = '{^[~^]\d+(?:\.\d+)*$}';
 
-                if (\preg_match($regex, $a) && \preg_match($regex, $b)) {
+                if (1 === \preg_match($regex, $a) && 1 === \preg_match($regex, $b)) {
                     if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
                         // Remove overlapping constraints
                         $hasChanged = true;
