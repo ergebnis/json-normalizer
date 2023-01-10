@@ -453,7 +453,20 @@ When `composer.json` contains version constraints in the
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 - all constraints are trimmed
-- *and- constraints are separated by a single space (` `) or a comma (`,`)
+
+- version constraints separated by a space (` `) or comma (`,`) - treated as a logical and - are separated by a space (` `) instead
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "1.2.3,2.3.4",
+  -    "foo/baz": "2.3.4   3.4.5"
+  +    "foo/bar": "1.2.3 2.3.4",
+  +    "foo/baz": "2.3.4 3.4.5"
+   }
+  ```
+
 - *or- constraints are separated by double-pipe with a single space before and after (` || `)
 - *range- constraints are separated by a single space (` `)
 
