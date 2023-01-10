@@ -122,6 +122,9 @@ final class VersionConstraintNormalizer implements Normalizer
 
             // Assert minimum number of version number parts for the caret operator
             $part = \preg_replace('{^(\^\d+)$}', '$1.0', $part);
+
+            // Trim extra version number parts for caret operator
+            $part = \preg_replace('{^(\^\d+\.\d+)\.0$}', '$1', $part);
         }
 
         $normalized = \implode(' ', $split);

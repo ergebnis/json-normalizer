@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "localheinz/json-printer": "^1.0.0"
+        "localheinz/json-printer": "^1.0"
     },
     "require-dev": {
         "localheinz/php-cs-fixer-config": "~1.0.0 || ~1.11.0",

@@ -546,6 +546,17 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
   +    "foo/bar": "^1.0"
    }
   ```
+- patch number is trimmed when zero for caret operator
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "^1.0.0"
+  +    "foo/bar": "^1.0"
+       "foo/baz": "^1.2.3"
+   }
+  ```
 
 - version numbers are sorted in ascending order
 
