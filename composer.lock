@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56efe4374b87df68b45a9400e26565ea",
+    "content-hash": "5e4bdf47b980f459130fadf8db6d1db6",
     "packages": [
         {
             "name": "ergebnis/json",
@@ -1854,16 +1854,16 @@
         },
         {
             "name": "infection/infection",
-            "version": "0.26.17",
+            "version": "0.26.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/infection.git",
-                "reference": "4420d3c25eb985817336a44eb3bd87fc01f7ea4c"
+                "reference": "ec533cd367eef0e52ee7b3435feabf9b61eeb7d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/infection/zipball/4420d3c25eb985817336a44eb3bd87fc01f7ea4c",
-                "reference": "4420d3c25eb985817336a44eb3bd87fc01f7ea4c",
+                "url": "https://api.github.com/repos/infection/infection/zipball/ec533cd367eef0e52ee7b3435feabf9b61eeb7d5",
+                "reference": "ec533cd367eef0e52ee7b3435feabf9b61eeb7d5",
                 "shasum": ""
             },
             "require": {
@@ -1966,7 +1966,7 @@
             ],
             "support": {
                 "issues": "https://github.com/infection/infection/issues",
-                "source": "https://github.com/infection/infection/tree/0.26.17"
+                "source": "https://github.com/infection/infection/tree/0.26.18"
             },
             "funding": [
                 {
@@ -1978,7 +1978,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2023-01-19T17:26:32+00:00"
+            "time": "2023-01-20T23:10:11+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2502,16 +2502,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.11",
+            "version": "1.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "60f3d68481eef216199eae7a2603cd5fe124d464"
+                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/60f3d68481eef216199eae7a2603cd5fe124d464",
-                "reference": "60f3d68481eef216199eae7a2603cd5fe124d464",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e5fcc96289cf737304286a9b505fbed091f02e58",
+                "reference": "e5fcc96289cf737304286a9b505fbed091f02e58",
                 "shasum": ""
             },
             "require": {
@@ -2541,7 +2541,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.11"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.14"
             },
             "funding": [
                 {
@@ -2557,7 +2557,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-12T14:04:13+00:00"
+            "time": "2023-01-19T10:47:09+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3243,16 +3243,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.7",
+            "version": "0.15.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "a43370e1f4c47aaa96c0f85bf9db73db1be7552f"
+                "reference": "000bfb6f7974449399f39e1a210458395b75c887"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/a43370e1f4c47aaa96c0f85bf9db73db1be7552f",
-                "reference": "a43370e1f4c47aaa96c0f85bf9db73db1be7552f",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/000bfb6f7974449399f39e1a210458395b75c887",
+                "reference": "000bfb6f7974449399f39e1a210458395b75c887",
                 "shasum": ""
             },
             "require": {
@@ -3287,7 +3287,7 @@
             "description": "Instant Upgrade and Automated Refactoring of any PHP code",
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.7"
+                "source": "https://github.com/rectorphp/rector/tree/0.15.10"
             },
             "funding": [
                 {
@@ -3295,7 +3295,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-13T21:14:19+00:00"
+            "time": "2023-01-21T14:30:16+00:00"
         },
         {
             "name": "sanmai/later",
@@ -4386,16 +4386,16 @@
         },
         {
             "name": "spatie/array-to-xml",
-            "version": "2.17.0",
+            "version": "2.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/array-to-xml.git",
-                "reference": "df0f116f26f6d3f84041e94d46811ee6b64fe7d5"
+                "reference": "5cbec9c6ab17e320c58a259f0cebe88bde4a7c46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/df0f116f26f6d3f84041e94d46811ee6b64fe7d5",
-                "reference": "df0f116f26f6d3f84041e94d46811ee6b64fe7d5",
+                "url": "https://api.github.com/repos/spatie/array-to-xml/zipball/5cbec9c6ab17e320c58a259f0cebe88bde4a7c46",
+                "reference": "5cbec9c6ab17e320c58a259f0cebe88bde4a7c46",
                 "shasum": ""
             },
             "require": {
@@ -4434,7 +4434,7 @@
                 "xml"
             ],
             "support": {
-                "source": "https://github.com/spatie/array-to-xml/tree/2.17.0"
+                "source": "https://github.com/spatie/array-to-xml/tree/2.17.1"
             },
             "funding": [
                 {
@@ -4446,7 +4446,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-13T09:08:39+00:00"
+            "time": "2022-12-26T08:22:07+00:00"
         },
         {
             "name": "symfony/console",
@@ -5936,16 +5936,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "5.4.0",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "62db5d4f6a7ae0a20f7cc5a4952d730272fc0863"
+                "reference": "b63061a27f2683ec0f3509012bb22daab3b65b61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/62db5d4f6a7ae0a20f7cc5a4952d730272fc0863",
-                "reference": "62db5d4f6a7ae0a20f7cc5a4952d730272fc0863",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/b63061a27f2683ec0f3509012bb22daab3b65b61",
+                "reference": "b63061a27f2683ec0f3509012bb22daab3b65b61",
                 "shasum": ""
             },
             "require": {
@@ -5968,11 +5968,10 @@
                 "netresearch/jsonmapper": "^1.0 || ^2.0 || ^3.0 || ^4.0",
                 "nikic/php-parser": "^4.13",
                 "php": "^7.4 || ~8.0.0 || ~8.1.0 || ~8.2.0",
-                "sebastian/diff": "^4.0",
+                "sebastian/diff": "^4.0 || ^5.0",
                 "spatie/array-to-xml": "^2.17.0",
                 "symfony/console": "^4.1.6 || ^5.0 || ^6.0",
-                "symfony/filesystem": "^5.4 || ^6.0",
-                "symfony/polyfill-php80": "^1.25"
+                "symfony/filesystem": "^5.4 || ^6.0"
             },
             "provide": {
                 "psalm/psalm": "self.version"
@@ -6035,9 +6034,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/5.4.0"
+                "source": "https://github.com/vimeo/psalm/tree/5.5.0"
             },
-            "time": "2022-12-19T21:31:12+00:00"
+            "time": "2023-01-23T01:50:35+00:00"
         },
         {
             "name": "webmozart/assert",
