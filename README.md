@@ -452,7 +452,16 @@ When `composer.json` contains version constraints in the
 
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
-- all constraints are trimmed
+- all version constraints are trimmed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "php": " ^8.2 "
+  +    "php": "^8.2"
+   }
+  ```
 
 - version constraints separated by a space (` `) or comma (`,`) - treated as a logical and - are separated by a space (` `) instead
 
@@ -467,8 +476,29 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- *or- constraints are separated by double-pipe with a single space before and after (` || `)
-- *range- constraints are separated by a single space (` `)
+- version constraints separated by a single- (`|`) or double-pipe (`||`) and any number of spaces before and after - treated as a logical or - are separated by a double pipe with a single space before and after (` || `)
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "php": "^8.1|^8.2",
+  -    "foo/bar": "^1.2.3  ||  ^2.3.4"
+  +    "php": "^8.1 || ^8.2",
+  +    "foo/bar": "^1.2.3 || ^2.3.4"
+   }
+  ```
+
+- hyphenated version constraints separated by dash (` - `) and any positive number of spaces before and after are separated by a dash with a single space before and after (` - `)
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-",
+     "require": {
+  -    "foo/bar": "1.2.3  -  2.3.4"
+  +    "foo/bar": "1.2.3 - 2.3.4"
+   }
+  ```
 
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
