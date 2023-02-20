@@ -52,7 +52,7 @@ final class FormatNormalizerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario}>
      */
-    public function provideScenario(): \Generator
+    public static function provideScenario(): \Generator
     {
         $basePath = __DIR__ . '/../';
 
