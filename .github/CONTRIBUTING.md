@@ -6,7 +6,6 @@ For details, take a look at the following workflow configuration files:
 
 - [`workflows/integrate.yaml`](workflows/integrate.yaml)
 - [`workflows/merge.yaml`](workflows/merge.yaml)
-- [`workflows/prune.yaml`](workflows/prune.yaml)
 - [`workflows/release.yaml`](workflows/release.yaml)
 - [`workflows/renew.yaml`](workflows/renew.yaml)
 - [`workflows/triage.yaml`](workflows/triage.yaml)
@@ -48,6 +47,18 @@ make dependency-analysis
 
 to run a dependency analysis.
 
+## Mutation Tests
+
+We are using [`infection/infection`](https://github.com/infection/infection) to ensure a minimum quality of the tests.
+
+Enable `Xdebug` and run
+
+```sh
+make mutation-tests
+```
+
+to run mutation tests.
+
 ## Refactoring
 
 We are using [`rector/rector`](https://github.com/rectorphp/rector) to automatically refactor code.
@@ -84,7 +95,7 @@ make static-code-analysis
 
 to run a static code analysis.
 
-We are also using the baseline features of [`vimeo/psalm`](https://psalm.dev/docs/running_psalm/dealing_with_code_issues/#using-a-baseline-file).
+We are also using the baseline feature of [`vimeo/psalm`](https://psalm.dev/docs/running_psalm/dealing_with_code_issues/#using-a-baseline-file).
 
 Run
 
@@ -92,9 +103,9 @@ Run
 make static-code-analysis-baseline
 ```
 
-to regenerate the baseline [`../psalm-baseline.xml`](../psalm-baseline.xml).
+to regenerate the baseline in [`../psalm-baseline.xml`](../psalm-baseline.xml).
 
-:exclamation: Ideally, the baselines should shrink over time.
+:exclamation: Ideally, the baseline should shrink over time.
 
 ## Tests
 
@@ -107,18 +118,6 @@ make tests
 ```
 
 to run all the tests.
-
-## Mutation Tests
-
-We are using [`infection/infection`](https://github.com/infection/infection) to ensure a minimum quality of the tests.
-
-Enable `Xdebug` and run
-
-```sh
-make mutation-tests
-```
-
-to run mutation tests.
 
 ## Extra lazy?
 
