@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+<files psalm-version="5.6.0@e784128902dfe01d489c4123d69918a9f3c1eac5">
   <file src="src/CallableNormalizer.php">
-    <MixedInferredReturnType occurrences="1">
+    <MixedInferredReturnType>
       <code>Json</code>
     </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
+    <MixedReturnStatement>
       <code>$callable($json)</code>
     </MixedReturnStatement>
   </file>
   <file src="src/SchemaNormalizer.php">
-    <MissingParamType occurrences="1">
+    <MissingParamType>
       <code>$data</code>
     </MissingParamType>
-    <MixedArgument occurrences="7">
+    <MixedArgument>
       <code>$anyOfSchema</code>
       <code>$item</code>
       <code>$item</code>
@@ -21,10 +21,10 @@
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedArgumentTypeCoercion>
       <code>$json-&gt;decoded()</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment>
       <code>$anyOfSchema</code>
       <code>$itemSchema</code>
       <code>$oneOfSchema</code>
@@ -33,56 +33,56 @@
     </MixedAssignment>
   </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
-    <UnusedForeachValue occurrences="1">
+    <UnusedForeachValue>
       <code>$value</code>
     </UnusedForeachValue>
   </file>
   <file src="src/Vendor/Composer/VersionConstraintNormalizer.php">
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
-    <UnusedForeachValue occurrences="1">
+    <UnusedForeachValue>
       <code>$value</code>
     </UnusedForeachValue>
   </file>
   <file src="test/Unit/Format/DefaultFormatterTest.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$newLineString</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$newLineString</code>
     </MixedAssignment>
   </file>
   <file src="test/Unit/Format/IndentTest.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$style</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$style</code>
     </MixedAssignment>
-    <UnusedVariable occurrences="3">
+    <UnusedVariable>
       <code>$key</code>
       <code>$key</code>
       <code>$style</code>
     </UnusedVariable>
   </file>
   <file src="test/Unit/FormatNormalizerTest.php">
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$fileInfo</code>
     </MixedAssignment>
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">
-    <MixedAssignment occurrences="3">
+    <MixedAssignment>
       <code>$fileInfo</code>
       <code>$fileInfo</code>
       <code>$schemaDecoded</code>
     </MixedAssignment>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
-    <MixedAssignment occurrences="2">
+    <MixedAssignment>
       <code>$fileInfo</code>
       <code>$fileInfo</code>
     </MixedAssignment>
