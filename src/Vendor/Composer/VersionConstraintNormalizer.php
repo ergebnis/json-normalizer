@@ -30,7 +30,7 @@ final class VersionConstraintNormalizer implements Normalizer
     private const MAP = [
         'and' => [
             '{\s*,\s*}',
-            ',',
+            ' ',
         ],
         'or' => [
             '{\s*\|\|?\s*}',
