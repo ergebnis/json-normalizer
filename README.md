@@ -500,6 +500,17 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- version numbers are sorted in ascending order
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "^2.0 || ^1.4"
+  +    "foo/bar": "^1.4 || ^2.0"
+   }
+  ```
+
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
 ## Changelog
