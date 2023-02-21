@@ -23,6 +23,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to reject JSON when it is not an object ([#804]), by [@localheinz]
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to compose `WithFinalNewLineNormalizer` ([#806]), by [@localheinz]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to skip normalization of version constraints when they can not be parsed by `Composer\Semver\VersionParser` ([#813]), by [@fredden] and [@localheinz]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to sort versions in ascending order ([#816]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to normalize version constraints separators in `and` constraints from space (` `) or comma (`,`) to space (` `) ([#819]), by [@fredden]
 
 ### Fixed
@@ -560,6 +561,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#804]: https://github.com/ergebnis/json-normalizer/pull/804
 [#805]: https://github.com/ergebnis/json-normalizer/pull/805
 [#813]: https://github.com/ergebnis/json-normalizer/pull/813
+[#816]: https://github.com/ergebnis/json-normalizer/pull/816
 [#819]: https://github.com/ergebnis/json-normalizer/pull/819
 
 [@BackEndTea]: https://github.com/BackEndTea
