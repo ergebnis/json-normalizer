@@ -182,6 +182,28 @@ final class VersionConstraintNormalizer implements Normalizer
 
         \usort($orGroups, $sort);
 
+        do {
+            $hasChanged = false;
+
+            for ($i = 0, $iMax = \count($orGroups) - 1; $i < $iMax; ++$i) {
+                $a = $orGroups[$i];
+                $b = $orGroups[$i + 1];
+
+                $regex = '{^[~^]\d+(?:\.\d+)*$}';
+
+                if (1 === \preg_match($regex, $a) && 1 === \preg_match($regex, $b)) {
+                    if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                        // Remove overlapping constraints
+                        $hasChanged = true;
+                        $orGroups[$i + 1] = null;
+                        $orGroups = \array_values(\array_filter($orGroups));
+
+                        break;
+                    }
+                }
+            }
+        } while ($hasChanged);
+
         return \implode(' || ', $orGroups);
     }
 }

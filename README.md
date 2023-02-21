@@ -500,6 +500,17 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- overlapping constraints are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "^1.0 || ^1.1 || ^2.0"
+  +    "foo/bar": "^1.0 || ^2.0"
+   }
+  ```
+
 - version numbers are sorted in ascending order
 
   ```diff
