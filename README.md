@@ -2,7 +2,6 @@
 
 [![Integrate](https://github.com/ergebnis/json-normalizer/workflows/Integrate/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Merge](https://github.com/ergebnis/json-normalizer/workflows/Merge/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Prune](https://github.com/ergebnis/json-normalizer/workflows/Prune/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Triage](https://github.com/ergebnis/json-normalizer/workflows/Triage/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
@@ -13,6 +12,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-normalizer/v/stable)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
+[![Monthly Downloads](http://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
 
 Provides generic and vendor-specific normalizers for normalizing JSON documents.
 
@@ -496,4 +496,4 @@ The algorithm for sorting packages in the [`Vendor\Composer\PackageHashNormalize
 
 ## Curious what I am up to?
 
-Follow me on [Twitter](https://twitter.com/localheinz)!
+Follow me on [Twitter](https://twitter.com/intent/follow?screen_name=localheinz)!

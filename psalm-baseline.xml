@@ -48,6 +48,26 @@
       <code>$value</code>
     </UnusedForeachValue>
   </file>
+  <file src="test/Fixture/FormatNormalizer/NormalizeNormalizesJson/Scenario.php">
+    <PossiblyUnusedMethod>
+      <code>key</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Fixture/SchemaNormalizer/NormalizeNormalizesJson/Scenario.php">
+    <PossiblyUnusedMethod>
+      <code>key</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Scenario.php">
+    <PossiblyUnusedMethod>
+      <code>key</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeRejectsJson/Scenario.php">
+    <PossiblyUnusedMethod>
+      <code>key</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/Format/DefaultFormatterTest.php">
     <MixedArgument>
       <code>$newLineString</code>
