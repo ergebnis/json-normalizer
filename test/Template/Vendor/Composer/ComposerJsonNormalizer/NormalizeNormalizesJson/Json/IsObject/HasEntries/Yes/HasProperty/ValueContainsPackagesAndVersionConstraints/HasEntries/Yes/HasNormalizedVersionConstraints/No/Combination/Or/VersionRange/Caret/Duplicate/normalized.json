@@ -7,6 +7,7 @@
         "combination-or-version-range-caret-duplicate/04-with-single-space-untrimmed": "^0 || ^1.2 || ^2.3.4",
         "combination-or-version-range-caret-duplicate/05-with-double-space-trimmed": "^0 || ^1.2 || ^2.3.4",
         "combination-or-version-range-caret-duplicate/06-with-double-space-untrimmed": "^0 || ^1.2 || ^2.3.4",
-        "combination-or-version-range-caret-duplicate/07-mix-major-minor-overlaps": "^0.1 || ^0.2 || ^0.3 || ^1.0 || ^2.8 || ^3.4"
+        "combination-or-version-range-caret-duplicate/07-mix-major-minor-overlaps": "^0.1 || ^0.2 || ^0.3 || ^1.0 || ^2.8 || ^3.4",
+        "combination-or-version-range-caret-duplicate/08-out-of-order": "^1.0 || ^2.2 || ^3.4 || ^4.1.6"
     }
 }
