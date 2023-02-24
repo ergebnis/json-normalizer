@@ -96,34 +96,44 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function normalizeVersionConstraintSeparators(string $versionConstraint): string
     {
-        /**
-         * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
-         *
-         * @var array<int, string> $orConstraints
-         */
-        $orConstraints = \preg_split(
-            '{\s*\|\|?\s*}',
-            $versionConstraint,
-        );
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
         return \implode(
             ' || ',
             \array_map(static function (string $orConstraint): string {
-                /**
-                 * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
-                 *
-                 * @var array<int, string> $andConstraints
-                 */
-                $andConstraints = \preg_split(
-                    '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
-                    $orConstraint,
-                );
+                $andConstraints = self::splitIntoAndConstraints($orConstraint);
 
                 return \implode(
                     ' ',
                     $andConstraints,
                 );
             }, $orConstraints),
+        );
+    }
+
+    /**
+     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
+     *
+     * @return array<int, string>
+     */
+    private static function splitIntoOrConstraints(string $versionConstraint): array
+    {
+        return \preg_split(
+            '{\s*\|\|?\s*}',
+            $versionConstraint,
+        );
+    }
+
+    /**
+     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
+     *
+     * @return array<int, string>
+     */
+    private static function splitIntoAndConstraints(string $orConstraint): array
+    {
+        return \preg_split(
+            '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
+            $orConstraint,
         );
     }
 
