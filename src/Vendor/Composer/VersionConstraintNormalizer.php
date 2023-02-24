@@ -86,7 +86,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = self::trimVersionConstraint($versionConstraint);
+        $normalized = self::trim($versionConstraint);
 
         try {
             $this->versionParser->parseConstraints($normalized);
@@ -150,7 +150,7 @@ final class VersionConstraintNormalizer implements Normalizer
         return \implode(' || ', $orGroups);
     }
 
-    private static function trimVersionConstraint(string $versionConstraint): string
+    private static function trim(string $versionConstraint): string
     {
         return \trim(\str_replace(
             '  ',
