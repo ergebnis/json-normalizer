@@ -81,8 +81,9 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
+        $normalized = self::sortOrConstraints($normalized);
 
-        return self::sortOrConstraints($normalized);
+        return self::removeOverlappingConstraints($normalized);
     }
 
     private static function trimOuter(string $versionConstraint): string
@@ -169,5 +170,34 @@ final class VersionConstraintNormalizer implements Normalizer
             '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
             $orConstraint,
         );
+    }
+
+    private static function removeOverlappingConstraints(string $versionConstraint): string
+    {
+        $orGroups = \explode(' || ', $versionConstraint);
+
+        do {
+            $hasChanged = false;
+
+            for ($i = 0, $iMax = \count($orGroups) - 1; $i < $iMax; ++$i) {
+                $a = $orGroups[$i];
+                $b = $orGroups[$i + 1];
+
+                $regex = '{^[~^]\d+(?:\.\d+)*$}';
+
+                if (1 === \preg_match($regex, $a) && 1 === \preg_match($regex, $b)) {
+                    if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                        // Remove overlapping constraints
+                        $hasChanged = true;
+                        $orGroups[$i + 1] = null;
+                        $orGroups = \array_values(\array_filter($orGroups));
+
+                        break;
+                    }
+                }
+            }
+        } while ($hasChanged);
+
+        return \implode(' || ', $orGroups);
     }
 }
