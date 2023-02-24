@@ -112,15 +112,15 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function normalizeOr(string $versionConstraint): string
     {
-        /** @var array<int, string> $versionConstraints */
-        $versionConstraints = \preg_split(
+        /** @var array<int, string> $orConstraints */
+        $orConstraints = \preg_split(
             '/\s*\|\|?\s*/',
             $versionConstraint,
         );
 
         return \implode(
             ' || ',
-            $versionConstraints,
+            $orConstraints,
         );
     }
 
