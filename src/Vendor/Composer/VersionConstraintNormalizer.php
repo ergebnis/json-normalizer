@@ -135,7 +135,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function sortOrGroups(string $versionConstraint): string
     {
-        $sorter = static function (string $a, string $b): int {
+        $sort = static function (string $a, string $b): int {
             $a = \trim($a, '<>=!~^');
             $b = \trim($b, '<>=!~^');
 
@@ -144,10 +144,10 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $orGroups = \explode(' || ', $versionConstraint);
 
-        $orGroups = \array_map(static function (string $or) use ($sorter): string {
+        $orGroups = \array_map(static function (string $or) use ($sort): string {
             $ranges = \explode(' - ', $or);
 
-            $ranges = \array_map(static function (string $range) use ($sorter): string {
+            $ranges = \array_map(static function (string $range) use ($sort): string {
                 if (\str_contains($range, ' as ')) {
                     $andGroups = [];
 
@@ -166,17 +166,17 @@ final class VersionConstraintNormalizer implements Normalizer
                     $andGroups = \explode(' ', $range);
                 }
 
-                \usort($andGroups, $sorter);
+                \usort($andGroups, $sort);
 
                 return \implode(' ', $andGroups);
             }, $ranges);
 
-            \usort($ranges, $sorter);
+            \usort($ranges, $sort);
 
             return \implode(' - ', $ranges);
         }, $orGroups);
 
-        \usort($orGroups, $sorter);
+        \usort($orGroups, $sort);
 
         return \implode(' || ', $orGroups);
     }
