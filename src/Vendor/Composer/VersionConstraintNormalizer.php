@@ -27,12 +27,6 @@ final class VersionConstraintNormalizer implements Normalizer
         'require',
         'require-dev',
     ];
-    private const MAP = [
-        'range' => [
-            '{\s+}',
-            ' ',
-        ],
-    ];
 
     public function __construct(private Semver\VersionParser $versionParser)
     {
@@ -88,19 +82,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $normalized = self::normalizeAnd($normalized);
         $normalized = self::normalizeOr($normalized);
-
-        foreach (self::MAP as [$pattern, $glue]) {
-            /** @var array<int, string> $split */
-            $split = \preg_split(
-                $pattern,
-                $normalized,
-            );
-
-            $normalized = \implode(
-                $glue,
-                $split,
-            );
-        }
+        $normalized = self::trimInner($normalized);
 
         // Sort
         $sorter = static function (string $a, string $b): int {
@@ -178,6 +160,20 @@ final class VersionConstraintNormalizer implements Normalizer
 
         return \implode(
             ' || ',
+            $versionConstraints,
+        );
+    }
+
+    private static function trimInner(string $versionConstraint): string
+    {
+        /** @var array<int, string> $versionConstraints */
+        $versionConstraints = \preg_split(
+            '{\s+}',
+            $versionConstraint,
+        );
+
+        return \implode(
+            ' ',
             $versionConstraints,
         );
     }
