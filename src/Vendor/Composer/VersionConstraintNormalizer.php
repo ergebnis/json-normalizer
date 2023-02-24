@@ -144,7 +144,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $orGroups = \explode(' || ', $versionConstraint);
 
-        foreach ($orGroups as &$or) {
+        $orGroups = \array_map(static function (string $or) use ($sorter): string {
             $ranges = \explode(' - ', $or);
 
             foreach ($ranges as &$range) {
@@ -169,8 +169,9 @@ final class VersionConstraintNormalizer implements Normalizer
             }
 
             \usort($ranges, $sorter);
-            $or = \implode(' - ', $ranges);
-        }
+
+            return \implode(' - ', $ranges);
+        }, $orGroups);
 
         \usort($orGroups, $sorter);
 
