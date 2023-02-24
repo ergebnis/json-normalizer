@@ -114,7 +114,8 @@ final class VersionConstraintNormalizer implements Normalizer
         );
     }
 
-    private static function replaceWildcardWithTilde(string $versionConstraint): string {
+    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    {
         $split = \explode(' ', $versionConstraint);
 
         foreach ($split as &$part) {
@@ -124,7 +125,8 @@ final class VersionConstraintNormalizer implements Normalizer
         return \implode(' ', $split);
     }
 
-    private static function replaceTildeWithCaret(string $versionConstraint): string {
+    private static function replaceTildeWithCaret(string $versionConstraint): string
+    {
         $split = \explode(' ', $versionConstraint);
 
         foreach ($split as &$part) {
@@ -134,7 +136,8 @@ final class VersionConstraintNormalizer implements Normalizer
         return \implode(' ', $split);
     }
 
-    private static function assertCorrectNumberOfParts(string $versionConstraint): string {
+    private static function assertCorrectNumberOfParts(string $versionConstraint): string
+    {
         $split = \explode(' ', $versionConstraint);
 
         foreach ($split as &$part) {
