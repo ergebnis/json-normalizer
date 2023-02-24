@@ -84,47 +84,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::normalizeOr($normalized);
         $normalized = self::trimInner($normalized);
 
-        // Sort
-        $sorter = static function (string $a, string $b): int {
-            $a = \trim($a, '<>=!~^');
-            $b = \trim($b, '<>=!~^');
-
-            return \strcmp($a, $b);
-        };
-
-        $orGroups = \explode(' || ', $normalized);
-
-        foreach ($orGroups as &$or) {
-            $ranges = \explode(' - ', $or);
-
-            foreach ($ranges as &$range) {
-                if (\str_contains($range, ' as ')) {
-                    $andGroups = [];
-                    $temp = \explode(' ', $range);
-
-                    while ([] !== $temp) {
-                        if ('as' === $temp[0]) {
-                            \array_shift($temp);
-                            $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
-                        } else {
-                            $andGroups[] = \array_shift($temp);
-                        }
-                    }
-                } else {
-                    $andGroups = \explode(' ', $range);
-                }
-
-                \usort($andGroups, $sorter);
-                $range = \implode(' ', $andGroups);
-            }
-
-            \usort($ranges, $sorter);
-            $or = \implode(' - ', $ranges);
-        }
-
-        \usort($orGroups, $sorter);
-
-        return \implode(' || ', $orGroups);
+        return self::sortOrGroups($normalized);
     }
 
     private static function trimOuter(string $versionConstraint): string
@@ -171,5 +131,49 @@ final class VersionConstraintNormalizer implements Normalizer
             ' ',
             $versionConstraint,
         );
+    }
+
+    private static function sortOrGroups(string $versionConstraint): string
+    {
+        $sorter = static function (string $a, string $b): int {
+            $a = \trim($a, '<>=!~^');
+            $b = \trim($b, '<>=!~^');
+
+            return \strcmp($a, $b);
+        };
+
+        $orGroups = \explode(' || ', $versionConstraint);
+
+        foreach ($orGroups as &$or) {
+            $ranges = \explode(' - ', $or);
+
+            foreach ($ranges as &$range) {
+                if (\str_contains($range, ' as ')) {
+                    $andGroups = [];
+                    $temp = \explode(' ', $range);
+
+                    while ([] !== $temp) {
+                        if ('as' === $temp[0]) {
+                            \array_shift($temp);
+                            $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
+                        } else {
+                            $andGroups[] = \array_shift($temp);
+                        }
+                    }
+                } else {
+                    $andGroups = \explode(' ', $range);
+                }
+
+                \usort($andGroups, $sorter);
+                $range = \implode(' ', $andGroups);
+            }
+
+            \usort($ranges, $sorter);
+            $or = \implode(' - ', $ranges);
+        }
+
+        \usort($orGroups, $sorter);
+
+        return \implode(' || ', $orGroups);
     }
 }
