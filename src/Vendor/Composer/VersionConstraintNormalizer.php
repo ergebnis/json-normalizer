@@ -146,9 +146,9 @@ final class VersionConstraintNormalizer implements Normalizer
             );
         };
 
-        $orGroups = \explode(' || ', $versionConstraint);
+        $orConstraints = \explode(' || ', $versionConstraint);
 
-        $orGroups = \array_map(static function (string $or) use ($sort): string {
+        $orConstraints = \array_map(static function (string $or) use ($sort): string {
             $ranges = \explode(' - ', $or);
 
             $ranges = \array_map(static function (string $range) use ($sort): string {
@@ -178,10 +178,10 @@ final class VersionConstraintNormalizer implements Normalizer
             \usort($ranges, $sort);
 
             return \implode(' - ', $ranges);
-        }, $orGroups);
+        }, $orConstraints);
 
-        \usort($orGroups, $sort);
+        \usort($orConstraints, $sort);
 
-        return \implode(' || ', $orGroups);
+        return \implode(' || ', $orConstraints);
     }
 }
