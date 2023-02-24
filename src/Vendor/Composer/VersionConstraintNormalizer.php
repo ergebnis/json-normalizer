@@ -147,7 +147,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $orGroups = \array_map(static function (string $or) use ($sorter): string {
             $ranges = \explode(' - ', $or);
 
-            foreach ($ranges as &$range) {
+            $ranges = \array_map(static function (string $range) use ($sorter): string {
                 if (\str_contains($range, ' as ')) {
                     $andGroups = [];
                     $temp = \explode(' ', $range);
@@ -165,8 +165,9 @@ final class VersionConstraintNormalizer implements Normalizer
                 }
 
                 \usort($andGroups, $sorter);
-                $range = \implode(' ', $andGroups);
-            }
+
+                return \implode(' ', $andGroups);
+            }, $ranges);
 
             \usort($ranges, $sorter);
 
