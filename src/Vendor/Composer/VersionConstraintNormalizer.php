@@ -80,8 +80,7 @@ final class VersionConstraintNormalizer implements Normalizer
             return $normalized;
         }
 
-        $normalized = self::normalizeAnd($normalized);
-        $normalized = self::normalizeOr($normalized);
+        $normalized = self::normalizeVersionConstraintSeparators($normalized);
         $normalized = self::trimInner($normalized);
 
         return self::sortOrConstraints($normalized);
@@ -96,26 +95,13 @@ final class VersionConstraintNormalizer implements Normalizer
         ));
     }
 
-    private static function normalizeAnd(string $versionConstraint): string
+    private static function normalizeVersionConstraintSeparators(string $versionConstraint): string
     {
-        /** @var array<int, string> $andConstraints */
-        $andConstraints = \preg_split(
-            '/\s*,\s*/',
-            $versionConstraint,
-        );
-
-        return \implode(
-            ' ',
-            $andConstraints,
-        );
-    }
-
-    /**
-     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
-     */
-    private static function normalizeOr(string $versionConstraint): string
-    {
-        /** @var array<int, string> $orConstraints */
+        /**
+         * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
+         *
+         * @var array<int, string> $orConstraints
+         */
         $orConstraints = \preg_split(
             '{\s*\|\|?\s*}',
             $versionConstraint,
@@ -123,7 +109,22 @@ final class VersionConstraintNormalizer implements Normalizer
 
         return \implode(
             ' || ',
-            $orConstraints,
+            \array_map(static function (string $orConstraint): string {
+                /**
+                 * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
+                 *
+                 * @var array<int, string> $andConstraints
+                 */
+                $andConstraints = \preg_split(
+                    '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
+                    $orConstraint,
+                );
+
+                return \implode(
+                    ' ',
+                    $andConstraints,
+                );
+            }, $orConstraints),
         );
     }
 
