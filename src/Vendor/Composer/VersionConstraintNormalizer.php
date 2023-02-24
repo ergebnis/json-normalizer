@@ -27,20 +27,6 @@ final class VersionConstraintNormalizer implements Normalizer
         'require',
         'require-dev',
     ];
-    private const MAP = [
-        'and' => [
-            '{\s*,\s*}',
-            ' ',
-        ],
-        'or' => [
-            '{\s*\|\|?\s*}',
-            ' || ',
-        ],
-        'range' => [
-            '{\s+}',
-            ' ',
-        ],
-    ];
 
     public function __construct(private Semver\VersionParser $versionParser)
     {
@@ -86,11 +72,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = \trim(\str_replace(
-            '  ',
-            ' ',
-            $versionConstraint,
-        ));
+        $normalized = self::trimOuter($versionConstraint);
 
         try {
             $this->versionParser->parseConstraints($normalized);
@@ -98,58 +80,124 @@ final class VersionConstraintNormalizer implements Normalizer
             return $normalized;
         }
 
-        foreach (self::MAP as [$pattern, $glue]) {
-            /** @var array<int, string> $split */
-            $split = \preg_split(
-                $pattern,
-                $normalized,
-            );
+        $normalized = self::normalizeAnd($normalized);
+        $normalized = self::normalizeOr($normalized);
+        $normalized = self::trimInner($normalized);
+        $normalized = self::replaceWildcardWithTilde($normalized);
+        $normalized = self::replaceTildeWithCaret($normalized);
+        $normalized = self::assertCorrectNumberOfParts($normalized);
 
-            $normalized = \implode(
-                $glue,
-                $split,
-            );
-        }
+        return self::sortOrGroups($normalized);
+    }
 
-        $split = \explode(' ', $normalized);
+    private static function trimOuter(string $versionConstraint): string
+    {
+        return \trim(\str_replace(
+            '  ',
+            ' ',
+            $versionConstraint,
+        ));
+    }
+
+    private static function normalizeAnd(string $versionConstraint): string
+    {
+        /** @var array<int, string> $versionConstraints */
+        $versionConstraints = \preg_split(
+            '/\s*,\s*/',
+            $versionConstraint,
+        );
+
+        return \implode(
+            ' ',
+            $versionConstraints,
+        );
+    }
+
+    private static function replaceWildcardWithTilde(string $versionConstraint): string {
+        $split = \explode(' ', $versionConstraint);
 
         foreach ($split as &$part) {
-            // Replace wildcard version range with tilde operator
             $part = \preg_replace('{^(\d+(?:\.\d+)*)\.\*$}', '~$1.0', $part);
+        }
 
-            // Prefer caret operator when equivalent tilde operator was used
+        return \implode(' ', $split);
+    }
+
+    private static function replaceTildeWithCaret(string $versionConstraint): string {
+        $split = \explode(' ', $versionConstraint);
+
+        foreach ($split as &$part) {
             $part = \preg_replace('{^~(\d+(?:\.\d+)?)$}', '^$1', $part);
+        }
 
+        return \implode(' ', $split);
+    }
+
+    private static function assertCorrectNumberOfParts(string $versionConstraint): string {
+        $split = \explode(' ', $versionConstraint);
+
+        foreach ($split as &$part) {
             // Assert minimum number of version number parts for the caret operator
             $part = \preg_replace('{^(\^\d+)$}', '$1.0', $part);
 
             // Trim extra version number parts for caret operator
-            $part = \preg_replace('{^(\^\d+\.\d+)\.0$}', '$1', $part);
+            $part = \preg_replace('{^(\^[1-9]\d*\.\d+)\.0$}', '$1', $part);
         }
 
-        $normalized = \implode(' ', $split);
+        return \implode(' ', $split);
+    }
 
-        // Sort
-        $sorter = static function (string $a, string $b): int {
-            $a = \trim($a, '<>=!~^');
-            $b = \trim($b, '<>=!~^');
+    private static function normalizeOr(string $versionConstraint): string
+    {
+        /** @var array<int, string> $versionConstraints */
+        $versionConstraints = \preg_split(
+            '/\s*\|\|?\s*/',
+            $versionConstraint,
+        );
 
-            return \strcmp($a, $b);
+        return \implode(
+            ' || ',
+            $versionConstraints,
+        );
+    }
+
+    private static function trimInner(string $versionConstraint): string
+    {
+        return \preg_replace(
+            '/\s+/',
+            ' ',
+            $versionConstraint,
+        );
+    }
+
+    private static function sortOrGroups(string $versionConstraint): string
+    {
+        $normalize = static function (string $versionConstraint): string {
+            return \trim($versionConstraint, '<>=!~^');
         };
 
-        $orGroups = \explode(' || ', $normalized);
+        $sort = static function (string $a, string $b) use ($normalize): int {
+            return \strcmp(
+                $normalize($a),
+                $normalize($b),
+            );
+        };
 
-        foreach ($orGroups as &$or) {
+        $orGroups = \explode(' || ', $versionConstraint);
+
+        $orGroups = \array_map(static function (string $or) use ($sort): string {
             $ranges = \explode(' - ', $or);
 
-            foreach ($ranges as &$range) {
+            $ranges = \array_map(static function (string $range) use ($sort): string {
                 if (\str_contains($range, ' as ')) {
                     $andGroups = [];
+
                     $temp = \explode(' ', $range);
 
-                    while (!empty($temp)) {
+                    while ([] !== $temp) {
                         if ('as' === $temp[0]) {
                             \array_shift($temp);
+
                             $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
                         } else {
                             $andGroups[] = \array_shift($temp);
@@ -159,15 +207,17 @@ final class VersionConstraintNormalizer implements Normalizer
                     $andGroups = \explode(' ', $range);
                 }
 
-                \usort($andGroups, $sorter);
-                $range = \implode(' ', $andGroups);
-            }
+                \usort($andGroups, $sort);
 
-            \usort($ranges, $sorter);
-            $or = \implode(' - ', $ranges);
-        }
+                return \implode(' ', $andGroups);
+            }, $ranges);
 
-        \usort($orGroups, $sorter);
+            \usort($ranges, $sort);
+
+            return \implode(' - ', $ranges);
+        }, $orGroups);
+
+        \usort($orGroups, $sort);
 
         do {
             $hasChanged = false;
