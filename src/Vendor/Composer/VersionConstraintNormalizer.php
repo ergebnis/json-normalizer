@@ -28,10 +28,6 @@ final class VersionConstraintNormalizer implements Normalizer
         'require-dev',
     ];
     private const MAP = [
-        'and' => [
-            '{\s*,\s*}',
-            ' ',
-        ],
         'or' => [
             '{\s*\|\|?\s*}',
             ' || ',
@@ -93,6 +89,8 @@ final class VersionConstraintNormalizer implements Normalizer
         } catch (\UnexpectedValueException) {
             return $normalized;
         }
+
+        $normalized = self::normalizeAnd($normalized);
 
         foreach (self::MAP as [$pattern, $glue]) {
             /** @var array<int, string> $split */
@@ -157,5 +155,19 @@ final class VersionConstraintNormalizer implements Normalizer
             ' ',
             $versionConstraint,
         ));
+    }
+
+    private static function normalizeAnd(string $versionConstraint): string
+    {
+        /** @var array<int, string> $versionConstraints */
+        $versionConstraints = \preg_split(
+            '{\s*,\s*}',
+            $versionConstraint,
+        );
+
+        return \implode(
+            ' ',
+            $versionConstraints,
+        );
     }
 }
