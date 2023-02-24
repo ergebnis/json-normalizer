@@ -150,7 +150,7 @@ final class VersionConstraintNormalizer implements Normalizer
             );
         };
 
-        $orConstraints = \explode(' || ', $versionConstraint);
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
         $orConstraints = \array_map(static function (string $versionConstraint) use ($sort): string {
             $ranges = \explode(' - ', $versionConstraint);
