@@ -28,10 +28,6 @@ final class VersionConstraintNormalizer implements Normalizer
         'require-dev',
     ];
     private const MAP = [
-        'or' => [
-            '{\s*\|\|?\s*}',
-            ' || ',
-        ],
         'range' => [
             '{\s+}',
             ' ',
@@ -91,6 +87,7 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         $normalized = self::normalizeAnd($normalized);
+        $normalized = self::normalizeOr($normalized);
 
         foreach (self::MAP as [$pattern, $glue]) {
             /** @var array<int, string> $split */
@@ -167,6 +164,20 @@ final class VersionConstraintNormalizer implements Normalizer
 
         return \implode(
             ' ',
+            $versionConstraints,
+        );
+    }
+
+    private static function normalizeOr(string $versionConstraint): string
+    {
+        /** @var array<int, string> $versionConstraints */
+        $versionConstraints = \preg_split(
+            '{\s*\|\|?\s*}',
+            $versionConstraint,
+        );
+
+        return \implode(
+            ' || ',
             $versionConstraints,
         );
     }
