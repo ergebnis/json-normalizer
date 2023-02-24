@@ -83,8 +83,9 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::normalizeAnd($normalized);
         $normalized = self::normalizeOr($normalized);
         $normalized = self::trimInner($normalized);
+        $normalized = self::sortOrGroups($normalized);
 
-        return self::sortOrGroups($normalized);
+        return self::removeOverlappingConstraints($normalized);
     }
 
     private static function trimOuter(string $versionConstraint): string
@@ -181,6 +182,13 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orGroups);
 
         \usort($orGroups, $sort);
+
+        return \implode(' || ', $orGroups);
+    }
+
+    private static function removeOverlappingConstraints(string $versionConstraint): string
+    {
+        $orGroups = \explode(' || ', $versionConstraint);
 
         do {
             $hasChanged = false;
