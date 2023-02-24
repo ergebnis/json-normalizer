@@ -150,11 +150,13 @@ final class VersionConstraintNormalizer implements Normalizer
             $ranges = \array_map(static function (string $range) use ($sorter): string {
                 if (\str_contains($range, ' as ')) {
                     $andGroups = [];
+
                     $temp = \explode(' ', $range);
 
                     while ([] !== $temp) {
                         if ('as' === $temp[0]) {
                             \array_shift($temp);
+
                             $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
                         } else {
                             $andGroups[] = \array_shift($temp);
