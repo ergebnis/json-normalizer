@@ -84,7 +84,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::normalizeOr($normalized);
         $normalized = self::trimInner($normalized);
 
-        return self::sortOrGroups($normalized);
+        return self::sortOrConstraints($normalized);
     }
 
     private static function trimOuter(string $versionConstraint): string
@@ -133,7 +133,7 @@ final class VersionConstraintNormalizer implements Normalizer
         );
     }
 
-    private static function sortOrGroups(string $versionConstraint): string
+    private static function sortOrConstraints(string $versionConstraint): string
     {
         $normalize = static function (string $versionConstraint): string {
             return \trim($versionConstraint, '<>=!~^');
