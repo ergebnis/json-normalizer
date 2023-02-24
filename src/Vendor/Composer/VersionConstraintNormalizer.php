@@ -135,9 +135,13 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function sortOrGroups(string $versionConstraint): string
     {
-        $sort = static function (string $a, string $b): int {
-            $a = \trim($a, '<>=!~^');
-            $b = \trim($b, '<>=!~^');
+        $normalize = static function (string $versionConstraint): string {
+            return \trim($versionConstraint, '<>=!~^');
+        };
+
+        $sort = static function (string $a, string $b) use ($normalize): int {
+            $a = $normalize($a);
+            $b = $normalize($b);
 
             return \strcmp($a, $b);
         };
