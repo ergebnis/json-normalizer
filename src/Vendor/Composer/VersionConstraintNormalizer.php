@@ -140,10 +140,10 @@ final class VersionConstraintNormalizer implements Normalizer
         };
 
         $sort = static function (string $a, string $b) use ($normalize): int {
-            $a = $normalize($a);
-            $b = $normalize($b);
-
-            return \strcmp($a, $b);
+            return \strcmp(
+                $normalize($a),
+                $normalize($b),
+            );
         };
 
         $orGroups = \explode(' || ', $versionConstraint);
