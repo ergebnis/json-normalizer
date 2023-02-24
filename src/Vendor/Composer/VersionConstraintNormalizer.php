@@ -80,13 +80,11 @@ final class VersionConstraintNormalizer implements Normalizer
             return $normalized;
         }
 
-        $normalized = self::normalizeAnd($normalized);
-        $normalized = self::normalizeOr($normalized);
-        $normalized = self::trimInner($normalized);
+        $normalized = self::normalizeVersionConstraintSeparators($normalized);
         $normalized = self::replaceWildcardWithTilde($normalized);
         $normalized = self::replaceTildeWithCaret($normalized);
         $normalized = self::assertCorrectNumberOfParts($normalized);
-        $normalized = self::sortOrGroups($normalized);
+        $normalized = self::sortOrConstraints($normalized);
 
         return self::removeOverlappingConstraints($normalized);
     }
@@ -100,17 +98,80 @@ final class VersionConstraintNormalizer implements Normalizer
         ));
     }
 
-    private static function normalizeAnd(string $versionConstraint): string
+    private static function normalizeVersionConstraintSeparators(string $versionConstraint): string
     {
-        /** @var array<int, string> $versionConstraints */
-        $versionConstraints = \preg_split(
-            '/\s*,\s*/',
-            $versionConstraint,
-        );
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
         return \implode(
-            ' ',
-            $versionConstraints,
+            ' || ',
+            \array_map(static function (string $orConstraint): string {
+                $andConstraints = self::splitIntoAndConstraints($orConstraint);
+
+                return \implode(
+                    ' ',
+                    $andConstraints,
+                );
+            }, $orConstraints),
+        );
+    }
+
+    private static function sortOrConstraints(string $versionConstraint): string
+    {
+        $normalize = static function (string $versionConstraint): string {
+            return \trim($versionConstraint, '<>=!~^');
+        };
+
+        $sort = static function (string $a, string $b) use ($normalize): int {
+            return \strcmp(
+                $normalize($a),
+                $normalize($b),
+            );
+        };
+
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
+
+        $orConstraints = \array_map(static function (string $orConstraint) use ($sort): string {
+            $andConstraints = self::splitIntoAndConstraints($orConstraint);
+
+            \usort($andConstraints, $sort);
+
+            return \implode(
+                ' ',
+                $andConstraints,
+            );
+        }, $orConstraints);
+
+        \usort($orConstraints, $sort);
+
+        return \implode(
+            ' || ',
+            $orConstraints,
+        );
+    }
+
+    /**
+     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
+     *
+     * @return array<int, string>
+     */
+    private static function splitIntoOrConstraints(string $versionConstraint): array
+    {
+        return \preg_split(
+            '{\s*\|\|?\s*}',
+            $versionConstraint,
+        );
+    }
+
+    /**
+     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
+     *
+     * @return array<int, string>
+     */
+    private static function splitIntoAndConstraints(string $orConstraint): array
+    {
+        return \preg_split(
+            '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
+            $orConstraint,
         );
     }
 
@@ -149,81 +210,6 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         return \implode(' ', $split);
-    }
-
-    private static function normalizeOr(string $versionConstraint): string
-    {
-        /** @var array<int, string> $versionConstraints */
-        $versionConstraints = \preg_split(
-            '/\s*\|\|?\s*/',
-            $versionConstraint,
-        );
-
-        return \implode(
-            ' || ',
-            $versionConstraints,
-        );
-    }
-
-    private static function trimInner(string $versionConstraint): string
-    {
-        return \preg_replace(
-            '/\s+/',
-            ' ',
-            $versionConstraint,
-        );
-    }
-
-    private static function sortOrGroups(string $versionConstraint): string
-    {
-        $normalize = static function (string $versionConstraint): string {
-            return \trim($versionConstraint, '<>=!~^');
-        };
-
-        $sort = static function (string $a, string $b) use ($normalize): int {
-            return \strcmp(
-                $normalize($a),
-                $normalize($b),
-            );
-        };
-
-        $orGroups = \explode(' || ', $versionConstraint);
-
-        $orGroups = \array_map(static function (string $or) use ($sort): string {
-            $ranges = \explode(' - ', $or);
-
-            $ranges = \array_map(static function (string $range) use ($sort): string {
-                if (\str_contains($range, ' as ')) {
-                    $andGroups = [];
-
-                    $temp = \explode(' ', $range);
-
-                    while ([] !== $temp) {
-                        if ('as' === $temp[0]) {
-                            \array_shift($temp);
-
-                            $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
-                        } else {
-                            $andGroups[] = \array_shift($temp);
-                        }
-                    }
-                } else {
-                    $andGroups = \explode(' ', $range);
-                }
-
-                \usort($andGroups, $sort);
-
-                return \implode(' ', $andGroups);
-            }, $ranges);
-
-            \usort($ranges, $sort);
-
-            return \implode(' - ', $ranges);
-        }, $orGroups);
-
-        \usort($orGroups, $sort);
-
-        return \implode(' || ', $orGroups);
     }
 
     private static function removeOverlappingConstraints(string $versionConstraint): string
