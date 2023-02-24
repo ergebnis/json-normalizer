@@ -98,15 +98,15 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function normalizeAnd(string $versionConstraint): string
     {
-        /** @var array<int, string> $versionConstraints */
-        $versionConstraints = \preg_split(
+        /** @var array<int, string> $andConstraints */
+        $andConstraints = \preg_split(
             '/\s*,\s*/',
             $versionConstraint,
         );
 
         return \implode(
             ' ',
-            $versionConstraints,
+            $andConstraints,
         );
     }
 
