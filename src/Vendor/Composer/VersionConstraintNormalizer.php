@@ -110,11 +110,14 @@ final class VersionConstraintNormalizer implements Normalizer
         );
     }
 
+    /**
+     * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
+     */
     private static function normalizeOr(string $versionConstraint): string
     {
         /** @var array<int, string> $orConstraints */
         $orConstraints = \preg_split(
-            '/\s*\|\|?\s*/',
+            '{\s*\|\|?\s*}',
             $versionConstraint,
         );
 
