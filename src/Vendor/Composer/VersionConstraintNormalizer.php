@@ -166,15 +166,10 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function trimInner(string $versionConstraint): string
     {
-        /** @var array<int, string> $versionConstraints */
-        $versionConstraints = \preg_split(
+        return \preg_replace(
             '{\s+}',
-            $versionConstraint,
-        );
-
-        return \implode(
             ' ',
-            $versionConstraints,
+            $versionConstraint,
         );
     }
 }
