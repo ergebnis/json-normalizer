@@ -140,7 +140,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         /** @var array<int, string> $versionConstraints */
         $versionConstraints = \preg_split(
-            '{\s*,\s*}',
+            '/\s*,\s*/',
             $versionConstraint,
         );
 
@@ -154,7 +154,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         /** @var array<int, string> $versionConstraints */
         $versionConstraints = \preg_split(
-            '{\s*\|\|?\s*}',
+            '/\s*\|\|?\s*/',
             $versionConstraint,
         );
 
@@ -167,7 +167,7 @@ final class VersionConstraintNormalizer implements Normalizer
     private static function trimInner(string $versionConstraint): string
     {
         return \preg_replace(
-            '{\s+}',
+            '/\s+/',
             ' ',
             $versionConstraint,
         );
