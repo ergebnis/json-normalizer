@@ -153,35 +153,11 @@ final class VersionConstraintNormalizer implements Normalizer
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
         $orConstraints = \array_map(static function (string $orConstraint) use ($sort): string {
-            $ranges = \explode(' - ', $orConstraint);
+            $andConstraints = self::splitIntoAndConstraints($orConstraint);
 
-            $ranges = \array_map(static function (string $range) use ($sort): string {
-                if (\str_contains($range, ' as ')) {
-                    $andConstraints = [];
+            \usort($andConstraints, $sort);
 
-                    $temp = \explode(' ', $range);
-
-                    while ([] !== $temp) {
-                        if ('as' === $temp[0]) {
-                            \array_shift($temp);
-
-                            $andConstraints[\count($andConstraints) - 1] .= ' as ' . \array_shift($temp);
-                        } else {
-                            $andConstraints[] = \array_shift($temp);
-                        }
-                    }
-                } else {
-                    $andConstraints = \explode(' ', $range);
-                }
-
-                \usort($andConstraints, $sort);
-
-                return \implode(' ', $andConstraints);
-            }, $ranges);
-
-            \usort($ranges, $sort);
-
-            return \implode(' - ', $ranges);
+            return \implode(' ', $andConstraints);
         }, $orConstraints);
 
         \usort($orConstraints, $sort);
