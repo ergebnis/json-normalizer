@@ -131,12 +131,18 @@ final class VersionConstraintNormalizer implements Normalizer
 
             \usort($andConstraints, $sort);
 
-            return \implode(' ', $andConstraints);
+            return \implode(
+                ' ',
+                $andConstraints,
+            );
         }, $orConstraints);
 
         \usort($orConstraints, $sort);
 
-        return \implode(' || ', $orConstraints);
+        return \implode(
+            ' || ',
+            $orConstraints,
+        );
     }
 
     /**
