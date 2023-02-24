@@ -81,7 +81,6 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
-        $normalized = self::trimInner($normalized);
 
         return self::sortOrConstraints($normalized);
     }
@@ -125,15 +124,6 @@ final class VersionConstraintNormalizer implements Normalizer
                     $andConstraints,
                 );
             }, $orConstraints),
-        );
-    }
-
-    private static function trimInner(string $versionConstraint): string
-    {
-        return \preg_replace(
-            '/\s+/',
-            ' ',
-            $versionConstraint,
         );
     }
 
