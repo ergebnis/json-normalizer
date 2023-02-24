@@ -129,7 +129,7 @@ final class VersionConstraintNormalizer implements Normalizer
                     $andGroups = [];
                     $temp = \explode(' ', $range);
 
-                    while (!empty($temp)) {
+                    while ([] !== $temp) {
                         if ('as' === $temp[0]) {
                             \array_shift($temp);
                             $andGroups[\count($andGroups) - 1] .= ' as ' . \array_shift($temp);
