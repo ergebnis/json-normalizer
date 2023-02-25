@@ -160,7 +160,7 @@ final class VersionConstraintNormalizer implements Normalizer
             }
         } while ($hasChanged);
 
-        return \implode(' || ', $orConstraints);
+        return self::joinOrConstraints(...$orConstraints);
     }
 
     /**
