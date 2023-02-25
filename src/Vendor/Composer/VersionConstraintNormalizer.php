@@ -148,7 +148,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeOverlappingConstraints(string $versionConstraint): string
     {
-        $orConstraints = \explode(' || ', $versionConstraint);
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
         do {
             $hasChanged = false;
