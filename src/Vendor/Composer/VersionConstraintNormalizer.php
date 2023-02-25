@@ -155,14 +155,16 @@ final class VersionConstraintNormalizer implements Normalizer
                     continue;
                 }
 
-                if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                    // Remove overlapping constraints
-                    $hasChanged = true;
-                    $orConstraints[$i + 1] = null;
-                    $orConstraints = \array_values(\array_filter($orConstraints));
-
-                    break;
+                if (!Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                    continue;
                 }
+
+                // Remove overlapping constraints
+                $hasChanged = true;
+                $orConstraints[$i + 1] = null;
+                $orConstraints = \array_values(\array_filter($orConstraints));
+
+                break;
             }
         } while ($hasChanged);
 
