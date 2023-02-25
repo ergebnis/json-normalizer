@@ -148,14 +148,14 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeOverlappingConstraints(string $versionConstraint): string
     {
-        $orGroups = \explode(' || ', $versionConstraint);
+        $orConstraints = \explode(' || ', $versionConstraint);
 
         do {
             $hasChanged = false;
 
-            for ($i = 0, $iMax = \count($orGroups) - 1; $i < $iMax; ++$i) {
-                $a = $orGroups[$i];
-                $b = $orGroups[$i + 1];
+            for ($i = 0, $iMax = \count($orConstraints) - 1; $i < $iMax; ++$i) {
+                $a = $orConstraints[$i];
+                $b = $orConstraints[$i + 1];
 
                 $regex = '{^[~^]\d+(?:\.\d+)*$}';
 
@@ -163,8 +163,8 @@ final class VersionConstraintNormalizer implements Normalizer
                     if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
                         // Remove overlapping constraints
                         $hasChanged = true;
-                        $orGroups[$i + 1] = null;
-                        $orGroups = \array_values(\array_filter($orGroups));
+                        $orConstraints[$i + 1] = null;
+                        $orConstraints = \array_values(\array_filter($orConstraints));
 
                         break;
                     }
@@ -172,7 +172,7 @@ final class VersionConstraintNormalizer implements Normalizer
             }
         } while ($hasChanged);
 
-        return \implode(' || ', $orGroups);
+        return \implode(' || ', $orConstraints);
     }
 
     /**
