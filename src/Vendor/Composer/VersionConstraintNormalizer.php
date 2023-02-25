@@ -138,14 +138,14 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
+        $regex = '{^[~^]\d+(?:\.\d+)*$}';
+
         do {
             $hasChanged = false;
 
             for ($i = 0, $iMax = \count($orConstraints) - 1; $i < $iMax; ++$i) {
                 $a = $orConstraints[$i];
                 $b = $orConstraints[$i + 1];
-
-                $regex = '{^[~^]\d+(?:\.\d+)*$}';
 
                 if (1 !== \preg_match($regex, $a)) {
                     continue;
