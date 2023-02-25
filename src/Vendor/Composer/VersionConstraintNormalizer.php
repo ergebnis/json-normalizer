@@ -99,17 +99,14 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
-        return \implode(
-            ' || ',
-            \array_map(static function (string $orConstraint): string {
-                $andConstraints = self::splitIntoAndConstraints($orConstraint);
+        return self::joinOrConstraints(...\array_map(static function (string $orConstraint): string {
+            $andConstraints = self::splitIntoAndConstraints($orConstraint);
 
-                return \implode(
-                    ' ',
-                    $andConstraints,
-                );
-            }, $orConstraints),
-        );
+            return \implode(
+                ' ',
+                $andConstraints,
+            );
+        }, $orConstraints));
     }
 
     private static function sortOrConstraints(string $versionConstraint): string
@@ -140,10 +137,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
         \usort($orConstraints, $sort);
 
-        return \implode(
-            ' || ',
-            $orConstraints,
-        );
+        return self::joinOrConstraints(...$orConstraints);
     }
 
     private static function removeOverlappingConstraints(string $versionConstraint): string
@@ -185,6 +179,14 @@ final class VersionConstraintNormalizer implements Normalizer
         return \preg_split(
             '{\s*\|\|?\s*}',
             $versionConstraint,
+        );
+    }
+
+    private static function joinOrConstraints(string ...$orConstraints): string
+    {
+        return \implode(
+            ' || ',
+            $orConstraints,
         );
     }
 
