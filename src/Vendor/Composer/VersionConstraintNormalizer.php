@@ -151,15 +151,17 @@ final class VersionConstraintNormalizer implements Normalizer
                     continue;
                 }
 
-                if (1 === \preg_match($regex, $b)) {
-                    if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                        // Remove overlapping constraints
-                        $hasChanged = true;
-                        $orConstraints[$i + 1] = null;
-                        $orConstraints = \array_values(\array_filter($orConstraints));
+                if (1 !== \preg_match($regex, $b)) {
+                    continue;
+                }
 
-                        break;
-                    }
+                if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                    // Remove overlapping constraints
+                    $hasChanged = true;
+                    $orConstraints[$i + 1] = null;
+                    $orConstraints = \array_values(\array_filter($orConstraints));
+
+                    break;
                 }
             }
         } while ($hasChanged);
