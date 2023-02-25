@@ -102,10 +102,7 @@ final class VersionConstraintNormalizer implements Normalizer
         return self::joinOrConstraints(...\array_map(static function (string $orConstraint): string {
             $andConstraints = self::splitIntoAndConstraints($orConstraint);
 
-            return \implode(
-                ' ',
-                $andConstraints,
-            );
+            return self::joinAndConstraints(...$andConstraints);
         }, $orConstraints));
     }
 
@@ -129,10 +126,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
             \usort($andConstraints, $sort);
 
-            return \implode(
-                ' ',
-                $andConstraints,
-            );
+            return self::joinAndConstraints(...$andConstraints);
         }, $orConstraints);
 
         \usort($orConstraints, $sort);
@@ -200,6 +194,14 @@ final class VersionConstraintNormalizer implements Normalizer
         return \preg_split(
             '{(?<!^|as|[=>< ,]) *(?<!-)[, ](?!-) *(?!,|as|$)}',
             $orConstraint,
+        );
+    }
+
+    private static function joinAndConstraints(string ...$andConstraints): string
+    {
+        return \implode(
+            ' ',
+            $andConstraints,
         );
     }
 }
