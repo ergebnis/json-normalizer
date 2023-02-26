@@ -26,6 +26,7 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to sort versions in ascending order ([#816]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to normalize version constraints separators in `and` constraints from space (` `) or comma (`,`) to space (` `) ([#819]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove overlapping version constraints in `or` version constraints ([#850]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove duplicate version constraints ([#856]), by [@localheinz]
 
 ### Fixed
 
@@ -565,6 +566,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#816]: https://github.com/ergebnis/json-normalizer/pull/816
 [#819]: https://github.com/ergebnis/json-normalizer/pull/819
 [#850]: https://github.com/ergebnis/json-normalizer/pull/850
+[#856]: https://github.com/ergebnis/json-normalizer/pull/856
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

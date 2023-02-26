@@ -81,6 +81,7 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
+        $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::sortOrConstraints($normalized);
 
         return self::removeOverlappingConstraints($normalized);
@@ -104,6 +105,17 @@ final class VersionConstraintNormalizer implements Normalizer
 
             return self::joinAndConstraints(...$andConstraints);
         }, $orConstraints));
+    }
+
+    private static function removeDuplicateVersionConstraints(string $versionConstraint): string
+    {
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
+
+        return self::joinOrConstraints(...\array_unique(\array_map(static function (string $orConstraint): string {
+            $andConstraints = self::splitIntoAndConstraints($orConstraint);
+
+            return self::joinAndConstraints(...\array_unique($andConstraints));
+        }, $orConstraints)));
     }
 
     private static function sortOrConstraints(string $versionConstraint): string
