@@ -72,7 +72,8 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = self::trimOuter($versionConstraint);
+        $normalized = self::trim($versionConstraint);
+        $normalized = self::removeExtraSpaces($normalized);
 
         try {
             $this->versionParser->parseConstraints($normalized);
@@ -87,13 +88,18 @@ final class VersionConstraintNormalizer implements Normalizer
         return self::removeOverlappingVersionConstraints($normalized);
     }
 
-    private static function trimOuter(string $versionConstraint): string
+    private static function trim(string $versionConstraint): string
     {
-        return \trim(\str_replace(
+        return \trim($versionConstraint);
+    }
+
+    private static function removeExtraSpaces(string $versionConstraint): string
+    {
+        return \str_replace(
             '  ',
             ' ',
             $versionConstraint,
-        ));
+        );
     }
 
     private static function normalizeVersionConstraintSeparators(string $versionConstraint): string
