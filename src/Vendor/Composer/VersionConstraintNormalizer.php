@@ -154,10 +154,10 @@ final class VersionConstraintNormalizer implements Normalizer
                     continue;
                 }
 
-                if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                    $orConstraints[$j] = null;
-                } elseif (Semver\Semver::satisfies(\ltrim($a, '^~'), $b)) {
+                if (Semver\Semver::satisfies(\ltrim($a, '^~'), $b)) {
                     $orConstraints[$i] = null;
+                } elseif (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                    $orConstraints[$j] = null;
                 }
             }
         }
