@@ -83,9 +83,9 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
         $normalized = self::removeDuplicateVersionConstraints($normalized);
-        $normalized = self::sortVersionConstraints($normalized);
+        $normalized = self::removeOverlappingVersionConstraints($normalized);
 
-        return self::removeOverlappingVersionConstraints($normalized);
+        return self::sortVersionConstraints($normalized);
     }
 
     private static function trim(string $versionConstraint): string
@@ -124,6 +124,49 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints)));
     }
 
+    private static function removeOverlappingVersionConstraints(string $versionConstraint): string
+    {
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
+
+        $regex = '{^[~^]\d+(?:\.\d+)*$}';
+
+        $count = \count($orConstraints);
+
+        for ($i = 0; $i < $count; ++$i) {
+            $a = $orConstraints[$i];
+
+            if (!\is_string($a)) {
+                continue;
+            }
+
+            if (1 !== \preg_match($regex, $a)) {
+                continue;
+            }
+
+            for ($j = $i + 1; $j < $count; ++$j) {
+                $b = $orConstraints[$j];
+
+                if (!\is_string($b)) {
+                    continue;
+                }
+
+                if (1 !== \preg_match($regex, $b)) {
+                    continue;
+                }
+
+                if (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                    $orConstraints[$j] = null;
+                } elseif (Semver\Semver::satisfies(\ltrim($a, '^~'), $b)) {
+                    $orConstraints[$i] = null;
+                }
+            }
+        }
+
+        return self::joinOrConstraints(...\array_filter($orConstraints, static function (?string $orConstraint): bool {
+            return \is_string($orConstraint);
+        }));
+    }
+
     private static function sortVersionConstraints(string $versionConstraint): string
     {
         $normalize = static function (string $versionConstraint): string {
@@ -148,43 +191,6 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints);
 
         \usort($orConstraints, $sort);
-
-        return self::joinOrConstraints(...$orConstraints);
-    }
-
-    private static function removeOverlappingVersionConstraints(string $versionConstraint): string
-    {
-        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
-
-        $regex = '{^[~^]\d+(?:\.\d+)*$}';
-
-        do {
-            $hasChanged = false;
-
-            for ($i = 0, $iMax = \count($orConstraints) - 1; $i < $iMax; ++$i) {
-                $a = $orConstraints[$i];
-                $b = $orConstraints[$i + 1];
-
-                if (1 !== \preg_match($regex, $a)) {
-                    continue;
-                }
-
-                if (1 !== \preg_match($regex, $b)) {
-                    continue;
-                }
-
-                if (!Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                    continue;
-                }
-
-                // Remove overlapping constraints
-                $hasChanged = true;
-                $orConstraints[$i + 1] = null;
-                $orConstraints = \array_values(\array_filter($orConstraints));
-
-                break;
-            }
-        } while ($hasChanged);
 
         return self::joinOrConstraints(...$orConstraints);
     }
