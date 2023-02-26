@@ -423,7 +423,6 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.1.0
 [2.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.2.0
 [3.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.0
-[3.0.1]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.1
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
