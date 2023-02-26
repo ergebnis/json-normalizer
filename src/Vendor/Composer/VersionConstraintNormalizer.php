@@ -84,7 +84,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::sortVersionConstraints($normalized);
 
-        return self::removeOverlappingConstraints($normalized);
+        return self::removeOverlappingVersionConstraints($normalized);
     }
 
     private static function trimOuter(string $versionConstraint): string
@@ -146,7 +146,7 @@ final class VersionConstraintNormalizer implements Normalizer
         return self::joinOrConstraints(...$orConstraints);
     }
 
-    private static function removeOverlappingConstraints(string $versionConstraint): string
+    private static function removeOverlappingVersionConstraints(string $versionConstraint): string
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
