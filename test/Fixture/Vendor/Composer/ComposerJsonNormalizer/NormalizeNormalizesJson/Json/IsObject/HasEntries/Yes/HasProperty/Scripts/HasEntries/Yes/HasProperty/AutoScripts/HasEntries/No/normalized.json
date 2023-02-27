@@ -13,6 +13,7 @@
             "email": "am@localheinz.com"
         }
     ],
+    "homepage": "https://github.com/symfony/flex/blob/v2.2.3/src/Flex.php#L517-L519",
     "scripts": {
         "auto-scripts": {}
     }
