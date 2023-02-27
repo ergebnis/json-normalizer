@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`3.0.0...main`][3.0.0...main].
+For a full diff see [`4.0.0...main`][4.0.0...main].
+
+## [`4.0.0`][4.0.0]
+
+For a full diff see [`3.0.0...4.0.0`][3.0.0...4.0.0].
 
 ### Added
 
@@ -25,6 +29,8 @@ For a full diff see [`3.0.0...main`][3.0.0...main].
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to skip normalization of version constraints when they can not be parsed by `Composer\Semver\VersionParser` ([#813]), by [@fredden] and [@localheinz]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to sort versions in ascending order ([#816]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to normalize version constraints separators in `and` constraints from space (` `) or comma (`,`) to space (` `) ([#819]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove overlapping version constraints in `or` version constraints ([#850]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove duplicate version constraints ([#856]), by [@localheinz]
 
 ### Fixed
 
@@ -421,7 +427,6 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.1.0
 [2.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.2.0
 [3.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.0
-[3.0.1]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.1
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -450,7 +455,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.0.0...2.1.0]: https://github.com/ergebnis/json-normalizer/compare/2.0.0...2.1.0
 [2.1.0...2.2.0]: https://github.com/ergebnis/json-normalizer/compare/2.1.0...2.2.0
 [2.2.0...3.0.0]: https://github.com/ergebnis/json-normalizer/compare/2.2.0...3.0.0
-[3.0.0...main]: https://github.com/ergebnis/json-normalizer/compare/3.0.0...main
+[3.0.0...4.0.0]: https://github.com/ergebnis/json-normalizer/compare/3.0.0...4.0.0
+[4.0.0...main]: https://github.com/ergebnis/json-normalizer/compare/4.0.0...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -563,6 +569,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#813]: https://github.com/ergebnis/json-normalizer/pull/813
 [#816]: https://github.com/ergebnis/json-normalizer/pull/816
 [#819]: https://github.com/ergebnis/json-normalizer/pull/819
+[#850]: https://github.com/ergebnis/json-normalizer/pull/850
+[#856]: https://github.com/ergebnis/json-normalizer/pull/856
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
