@@ -12,7 +12,7 @@ For a full diff see [`4.0.1...main`][4.0.1...main].
 
 For a full diff see [`4.0.0...4.0.1`][4.0.0...4.0.1].
 
-## Fixed
+### Fixed
 
 - Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `repositories` ([#858]), by [@localheinz]
 - Reverted inlining `Vendor\Composer\BinNormalizer` ([#860]), by [@localheinz]
