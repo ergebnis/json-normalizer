@@ -1,11 +1,11 @@
 {
     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
     "value-contains-packages-and-version-constraints": {
-        "combination-or-exact-version-unsorted/01-without-spaces-trimmed": "0 || 1.2 || 12.3.4 || 2.3.4",
-        "combination-or-exact-version-unsorted/02-without-spaces-untrimmed": "0 || 1.2 || 12.3.4 || 2.3.4",
-        "combination-or-exact-version-unsorted/03-with-single-space-trimmed": "0 || 1.2 || 12.3.4 || 2.3.4",
-        "combination-or-exact-version-unsorted/04-with-single-space-untrimmed": "0 || 1.2 || 12.3.4 || 2.3.4",
-        "combination-or-exact-version-unsorted/05-with-double-space-trimmed": "0 || 1.2 || 12.3.4 || 2.3.4",
-        "combination-or-exact-version-unsorted/06-with-double-space-untrimmed": "0 || 1.2 || 12.3.4 || 2.3.4"
+        "combination-or-exact-version-unsorted/01-without-spaces-trimmed": "0 || 1.2 || 2.3.4 || 12.3.4",
+        "combination-or-exact-version-unsorted/02-without-spaces-untrimmed": "0 || 1.2 || 2.3.4 || 12.3.4",
+        "combination-or-exact-version-unsorted/03-with-single-space-trimmed": "0 || 1.2 || 2.3.4 || 12.3.4",
+        "combination-or-exact-version-unsorted/04-with-single-space-untrimmed": "0 || 1.2 || 2.3.4 || 12.3.4",
+        "combination-or-exact-version-unsorted/05-with-double-space-trimmed": "0 || 1.2 || 2.3.4 || 12.3.4",
+        "combination-or-exact-version-unsorted/06-with-double-space-untrimmed": "0 || 1.2 || 2.3.4 || 12.3.4"
     }
 }
