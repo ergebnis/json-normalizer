@@ -18,6 +18,7 @@
         "platform": {
             "php": "8.0.25"
         },
+        "allow-plugins": {},
         "preferred-install": "dist",
         "sort-packages": true
     }
