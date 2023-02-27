@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`4.0.1...main`][4.0.1...main].
+For a full diff see [`4.0.2...main`][4.0.2...main].
+
+## [`4.0.2`][4.0.2]
+
+For a full diff see [`4.0.1...4.0.2`][4.0.0...4.0.2].
 
 ### Fixed
 
@@ -443,6 +447,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [3.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.0
 [4.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.0.0
 [4.0.1]: https://github.com/ergebnis/json-normalizer/releases/tag/4.0.1
+[4.0.2]: https://github.com/ergebnis/json-normalizer/releases/tag/4.0.2
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -473,7 +478,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.2.0...3.0.0]: https://github.com/ergebnis/json-normalizer/compare/2.2.0...3.0.0
 [3.0.0...4.0.0]: https://github.com/ergebnis/json-normalizer/compare/3.0.0...4.0.0
 [4.0.0...4.0.1]: https://github.com/ergebnis/json-normalizer/compare/4.0.0...4.0.1
-[4.0.1...main]: https://github.com/ergebnis/json-normalizer/compare/4.0.1...main
+[4.0.1...4.0.2]: https://github.com/ergebnis/json-normalizer/compare/4.0.1...4.0.2
+[4.0.2...main]: https://github.com/ergebnis/json-normalizer/compare/4.0.2...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
