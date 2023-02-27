@@ -416,6 +416,7 @@ The `Vendor\Composer\ComposerJsonNormalizer` can be used to normalize a `compose
 It composes the following normalizers:
 
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
@@ -425,6 +426,12 @@ It composes the following normalizers:
 When `composer.json` contains an array of scripts in the `bin` section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
 
 :bulb: Find out more about the `bin` section at [Composer: The composer.json schema](https://getcomposer.org/doc/04-schema.md#bin).
+
+#### `Vendor\Composer\ConfigHashNormalizer`
+
+When `composer.json` contains configuration in the `config` section, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
+
+:bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
 
 #### `Vendor\Composer\PackageHashNormalizer`
 
