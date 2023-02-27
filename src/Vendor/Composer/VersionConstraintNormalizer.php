@@ -174,7 +174,7 @@ final class VersionConstraintNormalizer implements Normalizer
         };
 
         $sort = static function (string $a, string $b) use ($normalize): int {
-            return \strcmp(
+            return \strnatcmp(
                 $normalize($a),
                 $normalize($b),
             );

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.0.1...main`][4.0.1...main].
 
+### Fixed
+
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to sort versions naturally ([#863]), by [@localheinz]
+
 ## [`4.0.1`][4.0.1]
 
 For a full diff see [`4.0.0...4.0.1`][4.0.0...4.0.1].
@@ -587,6 +591,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#858]: https://github.com/ergebnis/json-normalizer/pull/858
 [#860]: https://github.com/ergebnis/json-normalizer/pull/860
 [#861]: https://github.com/ergebnis/json-normalizer/pull/861
+[#863]: https://github.com/ergebnis/json-normalizer/pull/863
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
