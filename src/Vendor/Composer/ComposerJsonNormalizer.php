@@ -76,6 +76,13 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                         return 1 === \preg_match('{^\/extra\/patches\/([^/])+$}', $jsonPointer->toJsonString());
                     }),
                     /**
+                     * Repositories need to be iterated in a specific order, but can be an array or an object.
+                     *
+                     * @see https://getcomposer.org/doc/04-schema.md#repositories
+                     * @see https://github.com/composer/composer/blob/2.5.4/res/composer-schema.json#L187-L207
+                     */
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/repositories')),
+                    /**
                      * Commands need to executed in a specific order.
                      *
                      * @see https://github.com/symfony/flex/blob/v2.2.3/src/Flex.php#L517-L519
