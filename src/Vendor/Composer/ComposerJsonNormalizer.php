@@ -76,6 +76,13 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                         return 1 === \preg_match('{^\/extra\/patches\/([^/])+$}', $jsonPointer->toJsonString());
                     }),
                     /**
+                     * Repositories need to be iterated in a specific order, but can be an array or an object.
+                     *
+                     * @see https://getcomposer.org/doc/04-schema.md#repositories
+                     * @see https://github.com/composer/composer/blob/2.5.4/res/composer-schema.json#L187-L207
+                     */
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/repositories')),
+                    /**
                      * Commands need to executed in a specific order.
                      *
                      * @see https://github.com/symfony/flex/blob/v2.2.3/src/Flex.php#L517-L519
@@ -83,7 +90,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
             ),
-            self::binNormalizer(),
+            new BinNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(new Semver\VersionParser()),
             new Normalizer\WithFinalNewLineNormalizer(),
@@ -93,38 +100,5 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
     public function normalize(Json $json): Json
     {
         return $this->normalizer->normalize($json);
-    }
-
-    private static function binNormalizer(): Normalizer\Normalizer
-    {
-        return new class() implements Normalizer\Normalizer {
-            public function normalize(Json $json): Json
-            {
-                /** @var object $decoded */
-                $decoded = $json->decoded();
-
-                if (!\property_exists($decoded, 'bin')) {
-                    return $json;
-                }
-
-                if (!\is_array($decoded->bin)) {
-                    return $json;
-                }
-
-                $bin = $decoded->bin;
-
-                \sort($bin);
-
-                $decoded->bin = $bin;
-
-                /** @var string $encoded */
-                $encoded = \json_encode(
-                    $decoded,
-                    Normalizer\Format\JsonEncodeOptions::default()->toInt(),
-                );
-
-                return Json::fromString($encoded);
-            }
-        };
     }
 }

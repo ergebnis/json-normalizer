@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.0.0...main`][4.0.0...main].
 
+## Fixed
+
+- Adjusted `Vendor\Composer\ComposerJsonNormalizer` to stop sorting `repositories` ([#858]), by [@localheinz]
+- Reverted inlining `Vendor\Composer\BinNormalizer` ([#860]), by [@localheinz]
+
 ## [`4.0.0`][4.0.0]
 
 For a full diff see [`3.0.0...4.0.0`][3.0.0...4.0.0].
@@ -427,6 +432,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [2.1.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.1.0
 [2.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/2.2.0
 [3.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/3.0.0
+[4.0.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.0.0
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -571,6 +577,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#819]: https://github.com/ergebnis/json-normalizer/pull/819
 [#850]: https://github.com/ergebnis/json-normalizer/pull/850
 [#856]: https://github.com/ergebnis/json-normalizer/pull/856
+[#858]: https://github.com/ergebnis/json-normalizer/pull/858
+[#860]: https://github.com/ergebnis/json-normalizer/pull/860
 
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot

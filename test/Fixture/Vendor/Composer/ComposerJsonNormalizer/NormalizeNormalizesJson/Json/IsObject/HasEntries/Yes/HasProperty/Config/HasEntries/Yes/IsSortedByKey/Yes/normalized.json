@@ -13,15 +13,12 @@
             "email": "am@localheinz.com"
         }
     ],
-    "homepage": "https://getcomposer.org/doc/04-schema.md#repositories",
-    "repositories": {
-        "foo": {
-            "type": "composer",
-            "url": "http://packages.foo.com"
+    "homepage": "https://getcomposer.org/doc/06-config.md",
+    "config": {
+        "platform": {
+            "php": "8.0.25"
         },
-        "bar": {
-            "type": "composer",
-            "url": "http://packages.bar.com"
-        }
+        "preferred-install": "dist",
+        "sort-packages": true
     }
 }
