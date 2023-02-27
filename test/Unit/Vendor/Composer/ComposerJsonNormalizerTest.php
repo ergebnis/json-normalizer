@@ -22,6 +22,7 @@ use PHPUnit\Framework;
 /**
  * @internal
  *
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
  * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
