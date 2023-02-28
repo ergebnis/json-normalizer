@@ -91,6 +91,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                 ),
             ),
             new BinNormalizer(),
+            new ConfigHashNormalizer(),
             new PackageHashNormalizer(),
             new VersionConstraintNormalizer(new Semver\VersionParser()),
             new Normalizer\WithFinalNewLineNormalizer(),
