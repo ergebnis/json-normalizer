@@ -22,6 +22,10 @@
     "bar": {
       "type": "composer",
       "url": "http://packages.bar.com"
+    },
+    "0": {
+      "type": "composer",
+      "url": "http://packages.zero.com"
     }
   }
 }
