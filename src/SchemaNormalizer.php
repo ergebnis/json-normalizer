@@ -190,8 +190,7 @@ final class SchemaNormalizer implements Normalizer
          * @see https://json-schema.org/understanding-json-schema/reference/object.html#properties
          */
         if (
-            $dataShouldBeSorted
-            && \property_exists($schema, 'properties')
+            \property_exists($schema, 'properties')
             && \is_object($schema->properties)
         ) {
             /** @var array<string, object> $objectPropertiesThatAreDefinedBySchema */
@@ -228,14 +227,12 @@ final class SchemaNormalizer implements Normalizer
             \ksort($additionalProperties);
         }
 
-        $valueSchema = new \stdClass();
-
         foreach ($additionalProperties as $name => $value) {
-            $normalized->{$name} = $this->normalizeData(
-                $value,
-                $valueSchema,
-                $pointerToData->append(Pointer\ReferenceToken::fromString((string) $name)),
-            );
+            $normalized->{$name} = $this->normalizeArray(
+                [$value],
+                $schema,
+                $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
+            )[0];
         }
 
         return $normalized;

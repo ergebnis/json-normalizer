@@ -19,7 +19,6 @@
       <code>$itemSchema</code>
       <code>$oneOfSchema</code>
       <code>$value</code>
-      <code>$value</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$json->decoded()]]></code>
@@ -31,9 +30,6 @@
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
-    <RedundantCast>
-      <code>(string) $name</code>
-    </RedundantCast>
   </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
     <MixedAssignment>
