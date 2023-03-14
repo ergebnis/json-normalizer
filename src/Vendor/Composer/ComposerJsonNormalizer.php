@@ -66,7 +66,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      * @see https://github.com/composer/installers/blob/v2.2.0/src/Composer/Installers/BaseInstaller.php#L116-L126
                      */
                     Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
-                        return 1 === \preg_match('{^\/extra\/installer-paths\/[^/]+$}', $jsonPointer->toJsonString());
+                        return 1 === \preg_match('{^/extra/installer-paths/[^/]+$}', $jsonPointer->toJsonString());
                     }),
                     /**
                      * Patches need to be installed in a specific order.
@@ -75,7 +75,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      * @see https://github.com/cweagans/composer-patches/blob/1.7.2/src/Patches.php#L315-L329
                      */
                     Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
-                        return 1 === \preg_match('{^\/extra\/patches\/[^/]+\/[^/]+\/[^/]+$}', $jsonPointer->toJsonString());
+                        return 1 === \preg_match('{^/extra/patches/[^/]+/[^/]+/[^/]+$}', $jsonPointer->toJsonString());
                     }),
                     /**
                      * Repositories need to be iterated in a specific order, but can be an array or an object.
@@ -90,7 +90,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      * @see https://github.com/symfony/flex/blob/v2.2.3/src/Flex.php#L517-L519
                      */
                     Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
-                        return 1 === \preg_match('{^\/scripts\/auto-scripts\/[^/]+$}', $jsonPointer->toJsonString());
+                        return 1 === \preg_match('{^/scripts/auto-scripts/[^/]+$}', $jsonPointer->toJsonString());
                     }),
                 ),
             ),
