@@ -32,6 +32,18 @@
         "inline-alias/29-main-referencing-commit-as-major-minor-patch-space-single-trimmed": "dev-main#bf2eeff as 1.2.3",
         "inline-alias/30-main-referencing-commit-as-major-minor-patch-space-single-untrimmed": "dev-main#bf2eeff as 1.2.3",
         "inline-alias/31-main-referencing-commit-as-major-minor-patch-space-double-trimmed": "dev-main#bf2eeff as 1.2.3",
-        "inline-alias/32-main-referencing-commit-as-major-minor-patch-space-double-untrimmed": "dev-main#bf2eeff as 1.2.3"
+        "inline-alias/32-main-referencing-commit-as-major-minor-patch-space-double-untrimmed": "dev-main#bf2eeff as 1.2.3",
+        "inline-alias/33-specific-version-aliased-to-another-version-trimmed": "1.4.5 as 1.2.3",
+        "inline-alias/34-specific-version-aliased-to-another-version-untrimmed": "1.4.5 as 1.2.3",
+        "inline-alias/35-specific-version-aliased-to-another-version-triple-spaced-trimmed": "1.4.5 as 1.2.3",
+        "inline-alias/36-specific-version-aliased-to-another-version-triple-spaced-untrimmed": "1.4.5 as 1.2.3",
+        "inline-alias/37-version-like-branch-as-version-trimmed": "2.0.x-dev as 2.6.94",
+        "inline-alias/38-version-like-branch-as-version-untrimmed": "2.0.x-dev as 2.6.94",
+        "inline-alias/39-version-like-branch-as-version-quad-spaced-trimmed": "2.0.x-dev as 2.6.94",
+        "inline-alias/40-version-like-branch-as-version-quad-spaced-untrimmed": "2.0.x-dev as 2.6.94",
+        "inline-alias/41-same-version-as-itself-trimmed": "1.2.3",
+        "inline-alias/42-same-version-as-itself-untrimmed": "1.2.3",
+        "inline-alias/43-same-version-as-itself-double-spaced-trimmed": "1.2.3",
+        "inline-alias/44-same-version-as-itself-double-spaced-untrimmed": "1.2.3"
     }
 }
