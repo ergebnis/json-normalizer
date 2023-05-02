@@ -231,7 +231,7 @@ final class SchemaNormalizer implements Normalizer
             $normalized->{$name} = $this->normalizeArray(
                 [$value],
                 $schema,
-                $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
+                $pointerToData->append(Pointer\ReferenceToken::fromString((string) $name)),
             )[0];
         }
 
