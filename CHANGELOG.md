@@ -10,8 +10,8 @@ For a full diff see [`4.0.2...main`][4.0.2...main].
 
 ### Changed
 
-- Adjusted `VersionConstraintNormalizer` to remove extra spaces in inline aliases ([#889]), by [@fredden]
-- Adjusted `VersionConstraintNormalizer` to remove useless inline aliases ([#889]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove extra spaces in inline aliases ([#889]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove useless inline aliases ([#889]), by [@fredden]
 
 ### Fixed
 
