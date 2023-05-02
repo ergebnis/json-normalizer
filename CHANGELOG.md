@@ -607,6 +607,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#860]: https://github.com/ergebnis/json-normalizer/pull/860
 [#861]: https://github.com/ergebnis/json-normalizer/pull/861
 [#863]: https://github.com/ergebnis/json-normalizer/pull/863
+[#868]: https://github.com/ergebnis/json-normalizer/pull/868
+[#889]: https://github.com/ergebnis/json-normalizer/pull/889
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
