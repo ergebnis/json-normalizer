@@ -16,6 +16,7 @@ For a full diff see [`4.0.2...main`][4.0.2...main].
 ### Fixed
 
 - Adjusted `SchemaNormalizer` to account for objects with string and integer-like properties ([#868]), by [@alexis-saransig-lullabot] and [@fredden]
+- Adjusted `SchemaNormalizer` to account for objects where schema describes additional properties ([#873]), by [@fredden] and [@localheinz]
 
 ## [`4.0.2`][4.0.2]
 
@@ -608,6 +609,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#861]: https://github.com/ergebnis/json-normalizer/pull/861
 [#863]: https://github.com/ergebnis/json-normalizer/pull/863
 [#868]: https://github.com/ergebnis/json-normalizer/pull/868
+[#873]: https://github.com/ergebnis/json-normalizer/pull/873
 [#889]: https://github.com/ergebnis/json-normalizer/pull/889
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
