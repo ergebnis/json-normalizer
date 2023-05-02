@@ -546,6 +546,28 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- extra spaces in inline aliases are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
+     "require": {
+  -    "foo/bar": "dev-2.x  as  2.0"
+  +    "foo/bar": "dev-2.x as 2.0"
+   }
+  ```
+
+- useless inline aliases are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
+     "require": {
+  -    "foo/bar": "2.0 as 2.0"
+  +    "foo/bar": "2.0"
+   }
+  ```
+
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
 ## Changelog
