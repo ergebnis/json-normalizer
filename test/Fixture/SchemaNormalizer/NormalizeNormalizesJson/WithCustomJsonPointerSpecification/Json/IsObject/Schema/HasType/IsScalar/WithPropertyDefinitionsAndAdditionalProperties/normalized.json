@@ -2,8 +2,8 @@
     "foo": {},
     "bar": {
         "baz": {
-            "quuz": "corge",
-            "qux": "quux"
+            "qux": "quux",
+            "quuz": "corge"
         },
         "grault": {
             "fred": "plugh",
