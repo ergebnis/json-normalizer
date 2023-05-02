@@ -96,17 +96,11 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeExtraSpaces(string $versionConstraint): string
     {
-        $result = \str_replace(
-            '  ',
+        return \preg_replace(
+            '/ +/',
             ' ',
             $versionConstraint,
         );
-
-        if (\str_contains($result, '  ')) {
-            $result = self::removeExtraSpaces($result);
-        }
-
-        return $result;
     }
 
     private static function normalizeVersionConstraintSeparators(string $versionConstraint): string
