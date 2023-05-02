@@ -10,7 +10,7 @@ For a full diff see [`4.0.2...main`][4.0.2...main].
 
 ## [`4.0.2`][4.0.2]
 
-For a full diff see [`4.0.1...4.0.2`][4.0.0...4.0.2].
+For a full diff see [`4.0.1...4.0.2`][4.0.1...4.0.2].
 
 ### Fixed
 
