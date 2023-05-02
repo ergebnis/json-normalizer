@@ -26,6 +26,11 @@ composer require ergebnis/json-normalizer
 
 ## Usage
 
+This package comes with
+
+- [generic normalizers](#generic-normalizers)
+- [vendor-specific normalizers](#vendor-specific-normalizers)
+
 ### Generic normalizers
 
 This package comes with the following generic normalizers:
