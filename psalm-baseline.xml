@@ -19,6 +19,7 @@
       <code>$itemSchema</code>
       <code>$oneOfSchema</code>
       <code>$value</code>
+      <code>$value</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$json->decoded()]]></code>
