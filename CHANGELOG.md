@@ -8,6 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.0.2...main`][4.0.2...main].
 
+### Changed
+
+- Adjusted `VersionConstraintNormalizer` to remove extra spaces in inline aliases ([#889]), by [@fredden]
+- Adjusted `VersionConstraintNormalizer` to remove useless inline aliases ([#889]), by [@fredden]
+
 ### Fixed
 
 - Adjusted `SchemaNormalizer` to account for objects with string and integer-like properties ([#868]), by [@alexis-saransig-lullabot] and [@fredden]
