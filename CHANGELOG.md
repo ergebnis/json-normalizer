@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.0.2...main`][4.0.2...main].
 
+### Fixed
+
+- Adjusted `SchemaNormalizer` to account for objects with string and integer-like properties ([#868]), by [@alexis-saransig-lullabot] and [@fredden]
+
 ## [`4.0.2`][4.0.2]
 
 For a full diff see [`4.0.1...4.0.2`][4.0.1...4.0.2].
@@ -599,6 +603,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#861]: https://github.com/ergebnis/json-normalizer/pull/861
 [#863]: https://github.com/ergebnis/json-normalizer/pull/863
 
+[@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
 [@dependabot]: https://github.com/dependabot
 [@ergebnis]: https://github.com/ergebnis
