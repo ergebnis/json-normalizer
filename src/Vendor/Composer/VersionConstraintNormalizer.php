@@ -176,13 +176,17 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeUselessInlineAliases(string $normalized): string
     {
-        return \preg_replace_callback('{(\S+)\s+as\s+(\S+)}', static function (array $matches): string {
-            if ($matches[1] === $matches[2]) {
-                return $matches[1];
-            }
+        return \preg_replace_callback(
+            '{(\S+)\s+as\s+(\S+)}',
+            static function (array $matches): string {
+                if ($matches[1] === $matches[2]) {
+                    return $matches[1];
+                }
 
-            return $matches[0];
-        }, $normalized);
+                return $matches[0];
+            },
+            $normalized,
+        );
     }
 
     private static function sortVersionConstraints(string $versionConstraint): string
