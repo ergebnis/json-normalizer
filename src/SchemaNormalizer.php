@@ -230,6 +230,16 @@ final class SchemaNormalizer implements Normalizer
 
         $valueSchema = new \stdClass();
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/object.html#additional-properties
+         */
+        if (
+            \property_exists($schema, 'additionalProperties')
+            && \is_object($schema->additionalProperties)
+        ) {
+            $valueSchema = $schema->additionalProperties;
+        }
+
         foreach ($additionalProperties as $name => $value) {
             $normalized->{$name} = $this->normalizeData(
                 $value,
