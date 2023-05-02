@@ -84,7 +84,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
         $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::removeOverlappingVersionConstraints($normalized);
-        $normalized = self::removeUselssInlineAliases($normalized);
+        $normalized = self::removeUselessInlineAliases($normalized);
 
         return self::sortVersionConstraints($normalized);
     }
@@ -174,7 +174,7 @@ final class VersionConstraintNormalizer implements Normalizer
         }));
     }
 
-    private static function removeUselssInlineAliases(string $normalized): string
+    private static function removeUselessInlineAliases(string $normalized): string
     {
         return \preg_replace_callback('{(\S+)\s+as\s+(\S+)}', static function (array $matches): string {
             if ($matches[1] === $matches[2]) {
