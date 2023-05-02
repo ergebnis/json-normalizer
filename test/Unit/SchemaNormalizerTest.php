@@ -267,7 +267,7 @@ JSON;
 
             if (!\is_string($normalizedFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalzied JSON file name from original JSON file name "%s".',
+                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
                     $originalFile,
                 ));
             }
