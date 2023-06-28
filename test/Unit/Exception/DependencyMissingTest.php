@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\DependencyMissing
- */
+#[Framework\Attributes\CoversClass(Exception\DependencyMissing::class)]
 final class DependencyMissingTest extends Framework\TestCase
 {
     use Test\Util\Helper;

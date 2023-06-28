@@ -26,7 +26,7 @@ $license = License\Type\MIT::markdown(
 
 $license->save();
 
-$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php80($license->header()), [
+$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php81($license->header()), [
     'mb_str_functions' => false,
     'no_unset_on_property' => false,
     'static_lambda' => false,
@@ -36,11 +36,10 @@ $config->getFinder()
     ->exclude([
         '.build/',
         '.github/',
-        '.notes/',
+        '.note/',
     ])
     ->ignoreDotFiles(false)
-    ->in(__DIR__)
-    ->name('.php-cs-fixer.php');
+    ->in(__DIR__);
 
 $config->setCacheFile(__DIR__ . '/.build/php-cs-fixer/.php-cs-fixer.cache');
 

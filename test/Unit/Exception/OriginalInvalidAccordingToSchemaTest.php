@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
- */
+#[Framework\Attributes\CoversClass(Exception\OriginalInvalidAccordingToSchema::class)]
 final class OriginalInvalidAccordingToSchemaTest extends Framework\TestCase
 {
     use Test\Util\Helper;

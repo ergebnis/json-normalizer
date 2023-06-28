@@ -17,17 +17,15 @@ use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer;
 
 /**
- * @internal
- *
  * @psalm-immutable
  */
 final class Scenario
 {
     private function __construct(
-        private string $key,
-        private Normalizer\Format\Format $format,
-        private Json $original,
-        private Json $normalized,
+        private readonly string $key,
+        private readonly Normalizer\Format\Format $format,
+        private readonly Json $original,
+        private readonly Json $normalized,
     ) {
     }
 

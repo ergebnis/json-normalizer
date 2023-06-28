@@ -15,22 +15,22 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
         with:
           token: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
@@ -43,7 +43,7 @@ jobs:
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -58,7 +58,7 @@ jobs:
         run: "mkdir -p .build/php-cs-fixer"
 
       - name: "Cache cache directory for friendsofphp/php-cs-fixer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: ".build/php-cs-fixer"
           key: "php-${{ matrix.php-version }}-php-cs-fixer-${{ github.ref_name }}"

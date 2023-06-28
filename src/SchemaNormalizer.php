@@ -25,10 +25,10 @@ use JsonSchema\SchemaStorage;
 final class SchemaNormalizer implements Normalizer
 {
     public function __construct(
-        private string $schemaUri,
-        private SchemaStorage $schemaStorage,
-        private SchemaValidator\SchemaValidator $schemaValidator,
-        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private readonly string $schemaUri,
+        private readonly SchemaStorage $schemaStorage,
+        private readonly SchemaValidator\SchemaValidator $schemaValidator,
+        private readonly Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
     ) {
     }
 
@@ -230,11 +230,21 @@ final class SchemaNormalizer implements Normalizer
 
         $valueSchema = new \stdClass();
 
+        /**
+         * @see https://json-schema.org/understanding-json-schema/reference/object.html#additional-properties
+         */
+        if (
+            \property_exists($schema, 'additionalProperties')
+            && \is_object($schema->additionalProperties)
+        ) {
+            $valueSchema = $schema->additionalProperties;
+        }
+
         foreach ($additionalProperties as $name => $value) {
             $normalized->{$name} = $this->normalizeData(
                 $value,
                 $valueSchema,
-                $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
+                $pointerToData->append(Pointer\ReferenceToken::fromString((string) $name)),
             );
         }
 

@@ -17,11 +17,18 @@
     "repositories": {
         "foo": {
             "type": "composer",
-            "url": "http://packages.foo.com"
+            "url": "http://packages.foo.com",
+            "only": [
+                "foo/*"
+            ]
         },
         "bar": {
             "type": "composer",
             "url": "http://packages.bar.com"
+        },
+        "0": {
+            "type": "composer",
+            "url": "http://packages.zero.com"
         }
     }
 }

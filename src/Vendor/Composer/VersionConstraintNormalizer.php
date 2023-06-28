@@ -28,7 +28,7 @@ final class VersionConstraintNormalizer implements Normalizer
         'require-dev',
     ];
 
-    public function __construct(private Semver\VersionParser $versionParser)
+    public function __construct(private readonly Semver\VersionParser $versionParser)
     {
     }
 
@@ -87,6 +87,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::assertCorrectNumberOfParts($normalized);
         $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::removeOverlappingVersionConstraints($normalized);
+        $normalized = self::removeUselessInlineAliases($normalized);
 
         return self::sortVersionConstraints($normalized);
     }
@@ -98,8 +99,8 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeExtraSpaces(string $versionConstraint): string
     {
-        return \str_replace(
-            '  ',
+        return \preg_replace(
+            '/ +/',
             ' ',
             $versionConstraint,
         );
@@ -205,6 +206,21 @@ final class VersionConstraintNormalizer implements Normalizer
         return self::joinOrConstraints(...\array_filter($orConstraints, static function (?string $orConstraint): bool {
             return \is_string($orConstraint);
         }));
+    }
+
+    private static function removeUselessInlineAliases(string $normalized): string
+    {
+        return \preg_replace_callback(
+            '{(\S+)\s+as\s+(\S+)}',
+            static function (array $matches): string {
+                if ($matches[1] === $matches[2]) {
+                    return $matches[1];
+                }
+
+                return $matches[0];
+            },
+            $normalized,
+        );
     }
 
     private static function sortVersionConstraints(string $versionConstraint): string

@@ -18,18 +18,11 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Format\NewLine
- *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineString
- */
+#[Framework\Attributes\CoversClass(Format\NewLine::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidNewLineString::class)]
 final class NewLineTest extends Framework\TestCase
 {
-    /**
-     * @dataProvider provideInvalidNewLineString
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidNewLineString')]
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
         $this->expectException(Exception\InvalidNewLineString::class);
@@ -60,9 +53,7 @@ final class NewLineTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideValidNewLineString
-     */
+    #[Framework\Attributes\DataProvider('provideValidNewLineString')]
     public function testFromStringReturnsNewLine(string $string): void
     {
         $newLine = Format\NewLine::fromString($string);
@@ -99,9 +90,7 @@ final class NewLineTest extends Framework\TestCase
         self::assertSame(\PHP_EOL, $newLine->toString());
     }
 
-    /**
-     * @dataProvider provideNewLine
-     */
+    #[Framework\Attributes\DataProvider('provideNewLine')]
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
         $json = Json::fromString(
@@ -115,9 +104,7 @@ JSON
         self::assertSame($newLineString, $newLine->toString());
     }
 
-    /**
-     * @dataProvider provideNewLine
-     */
+    #[Framework\Attributes\DataProvider('provideNewLine')]
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
         $json = Json::fromString(

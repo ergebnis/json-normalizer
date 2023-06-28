@@ -14,16 +14,13 @@ branches:
         required_approving_review_count: 1
       required_status_checks:
         checks:
-          - context: "Code Coverage (8.0, locked)"
-          - context: "Coding Standards (8.0, locked)"
-          - context: "Dependency Analysis (8.0, locked)"
-          - context: "Mutation Tests (8.0, locked)"
-          - context: "Refactoring (8.0, locked)"
-          - context: "Security Analysis (8.0, locked)"
-          - context: "Static Code Analysis (8.0, locked)"
-          - context: "Tests (8.0, highest)"
-          - context: "Tests (8.0, locked)"
-          - context: "Tests (8.0, lowest)"
+          - context: "Code Coverage (8.1, locked)"
+          - context: "Coding Standards (8.1, locked)"
+          - context: "Dependency Analysis (8.1, locked)"
+          - context: "Mutation Tests (8.1, locked)"
+          - context: "Refactoring (8.1, locked)"
+          - context: "Security Analysis (8.1, locked)"
+          - context: "Static Code Analysis (8.1, locked)"
           - context: "Tests (8.1, highest)"
           - context: "Tests (8.1, locked)"
           - context: "Tests (8.1, lowest)"
@@ -79,11 +76,13 @@ repository:
   description: ":page_with_curl: Provides generic and vendor-specific normalizers for normalizing JSON documents."
   enable_automated_security_fixes: true
   enable_vulnerability_alerts: true
+  has_discussions: false
   has_downloads: true
   has_issues: true
   has_pages: false
   has_projects: false
   has_wiki: false
+  is_template: false
   name: "json-normalizer"
   private: false
 

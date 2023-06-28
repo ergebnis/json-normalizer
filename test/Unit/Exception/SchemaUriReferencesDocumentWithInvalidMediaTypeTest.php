@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
- */
+#[Framework\Attributes\CoversClass(Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class)]
 final class SchemaUriReferencesDocumentWithInvalidMediaTypeTest extends Framework\TestCase
 {
     use Test\Util\Helper;

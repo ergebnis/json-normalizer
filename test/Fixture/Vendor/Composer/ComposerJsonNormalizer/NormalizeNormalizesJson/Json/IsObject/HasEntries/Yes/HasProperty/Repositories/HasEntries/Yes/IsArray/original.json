@@ -16,8 +16,9 @@
   "homepage": "https://getcomposer.org/doc/04-schema.md#repositories",
   "repositories": [
     {
-      "type": "composer",
-      "url": "http://packages.example.com"
+      "url": "http://packages.example.com",
+      "only": [ "example/*" ],
+      "type": "composer"
     },
     {
       "type": "composer",

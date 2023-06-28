@@ -16,12 +16,17 @@
   "homepage": "https://getcomposer.org/doc/04-schema.md#repositories",
   "repositories": {
     "foo": {
-      "type": "composer",
-      "url": "http://packages.foo.com"
+      "url": "http://packages.foo.com",
+      "only": [ "foo/*" ],
+      "type": "composer"
     },
     "bar": {
       "type": "composer",
       "url": "http://packages.bar.com"
+    },
+    "0": {
+      "type": "composer",
+      "url": "http://packages.zero.com"
     }
   }
 }

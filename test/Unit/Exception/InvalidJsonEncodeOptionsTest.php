@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptions
- */
+#[Framework\Attributes\CoversClass(Exception\InvalidJsonEncodeOptions::class)]
 final class InvalidJsonEncodeOptionsTest extends Framework\TestCase
 {
     use Test\Util\Helper;

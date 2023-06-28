@@ -15,17 +15,17 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
           php-version: "${{ matrix.php-version }}"
@@ -40,7 +40,7 @@ jobs:
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"

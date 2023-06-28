@@ -17,20 +17,20 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "xdebug"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
@@ -39,11 +39,14 @@ jobs:
       - name: "Set up problem matchers for phpunit/phpunit"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -60,7 +63,7 @@ jobs:
         run: "vendor/bin/phpunit --colors=always --configuration=test/Unit/phpunit.xml --coverage-clover=.build/phpunit/logs/clover.xml"
 
       - name: "Send code coverage report to codecov.io"
-        uses: "codecov/codecov-action@v3.1.1"
+        uses: "codecov/codecov-action@v3.1.4"
         with:
           files: ".build/phpunit/logs/clover.xml"
           token: "${{ secrets.CODECOV_TOKEN }}"
@@ -73,14 +76,14 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Lint YAML files"
         uses: "ibiqlik/action-yamllint@v3.1.1"
@@ -90,10 +93,10 @@ jobs:
           strict: true
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
           tools: "phive"
 
@@ -107,7 +110,7 @@ jobs:
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -127,10 +130,10 @@ jobs:
         run: ".phive/composer-normalize --ansi --dry-run"
 
       - name: "Create cache directory for friendsofphp/php-cs-fixer"
-        run: "mkdir -p .build/php-cs-fixer"
+        run: "mkdir -p .build/php-cs-fixer/"
 
       - name: "Cache cache directory for friendsofphp/php-cs-fixer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: ".build/php-cs-fixer"
           key: "php-${{ matrix.php-version }}-php-cs-fixer-${{ github.ref_name }}"
@@ -149,31 +152,34 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
           tools: "phive"
 
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -200,30 +206,33 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "xdebug"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -247,30 +256,33 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, intl, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -282,10 +294,10 @@ jobs:
           dependencies: "${{ matrix.dependencies }}"
 
       - name: "Create cache directory for rector/rector"
-        run: "mkdir -p .build/rector"
+        run: "mkdir -p .build/rector/"
 
       - name: "Cache cache directory for rector/rector"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: ".build/rector"
           key: "php-${{ matrix.php-version }}-rector-${{ github.ref_name }}"
@@ -304,20 +316,20 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
@@ -325,6 +337,21 @@ jobs:
 
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi --strict"
+
+      - name: "Determine composer cache directory"
+        uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v3.3.1"
+        with:
+          path: "${{ env.COMPOSER_CACHE_DIR }}"
+          key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
+
+      - name: "Install ${{ matrix.dependencies }} dependencies with composer"
+        uses: "ergebnis/.github/actions/composer/install@1.8.0"
+        with:
+          dependencies: "${{ matrix.dependencies }}"
 
       - name: "Check installed packages for security vulnerability advisories"
         run: "composer audit --ansi"
@@ -337,30 +364,33 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
+          - "8.1"
 
         dependencies:
           - "locked"
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, curl, dom, json, mbstring, pcntl, phar, posix, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, opcache, pcntl, phar, posix, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"
@@ -372,7 +402,7 @@ jobs:
           dependencies: "${{ matrix.dependencies }}"
 
       - name: "Create cache directory for vimeo/psalm"
-        run: "mkdir -p .build/psalm"
+        run: "mkdir -p .build/psalm/"
 
       - name: "Run vimeo/psalm"
         run: "vendor/bin/psalm --config=psalm.xml --output-format=github --shepherd --show-info=false --stats --threads=4"
@@ -385,7 +415,6 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - "8.0"
           - "8.1"
           - "8.2"
 
@@ -396,13 +425,13 @@ jobs:
 
     steps:
       - name: "Checkout"
-        uses: "actions/checkout@v3.3.0"
+        uses: "actions/checkout@v3.5.3"
 
       - name: "Set up PHP"
-        uses: "shivammathur/setup-php@2.24.0"
+        uses: "shivammathur/setup-php@2.25.4"
         with:
           coverage: "none"
-          extensions: "none, ctype, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
+          extensions: "none, ctype, curl, dom, json, mbstring, phar, simplexml, tokenizer, xml, xmlwriter"
           php-version: "${{ matrix.php-version }}"
 
       - name: "Set up problem matchers for PHP"
@@ -411,11 +440,14 @@ jobs:
       - name: "Set up problem matchers for phpunit/phpunit"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
 
+      - name: "Validate composer.json and composer.lock"
+        run: "composer validate --ansi --strict"
+
       - name: "Determine composer cache directory"
         uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.8.0"
 
       - name: "Cache dependencies installed with composer"
-        uses: "actions/cache@v3.2.6"
+        uses: "actions/cache@v3.3.1"
         with:
           path: "${{ env.COMPOSER_CACHE_DIR }}"
           key: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-${{ hashFiles('composer.lock') }}"

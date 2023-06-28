@@ -17,18 +17,16 @@ use Ergebnis\Json\Json;
 use Ergebnis\Json\Pointer;
 
 /**
- * @internal
- *
  * @psalm-immutable
  */
 final class Scenario
 {
     private function __construct(
-        private string $key,
-        private string $schemaUri,
-        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
-        private Json $original,
-        private Json $normalized,
+        private readonly string $key,
+        private readonly string $schemaUri,
+        private readonly Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private readonly Json $original,
+        private readonly Json $normalized,
     ) {
     }
 

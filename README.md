@@ -4,7 +4,6 @@
 [![Merge](https://github.com/ergebnis/json-normalizer/workflows/Merge/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Triage](https://github.com/ergebnis/json-normalizer/workflows/Triage/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Update](https://github.com/ergebnis/json-normalizer/workflows/Update/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
@@ -25,6 +24,11 @@ composer require ergebnis/json-normalizer
 ```
 
 ## Usage
+
+This package comes with
+
+- [generic normalizers](#generic-normalizers)
+- [vendor-specific normalizers](#vendor-specific-normalizers)
 
 ### Generic normalizers
 
@@ -588,6 +592,28 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- extra spaces in inline aliases are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
+     "require": {
+  -    "foo/bar": "dev-2.x  as  2.0"
+  +    "foo/bar": "dev-2.x as 2.0"
+   }
+  ```
+
+- useless inline aliases are removed
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
+     "require": {
+  -    "foo/bar": "2.0 as 2.0"
+  +    "foo/bar": "2.0"
+   }
+  ```
+
 :bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
 ## Changelog
@@ -601,6 +627,10 @@ Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 ## Code of Conduct
 
 Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
+
+## Security Policy
+
+Please have a look at [`SECURITY.md`](.github/SECURITY.md).
 
 ## License
 

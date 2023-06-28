@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.7.7@e028ba46ba0d7f9a78bc3201c251e137383e145f">
+<files psalm-version="5.13.1@086b94371304750d1c673315321a55d15fc59015">
   <file src="src/CallableNormalizer.php">
     <MixedInferredReturnType>
       <code>Json</code>
@@ -31,6 +31,9 @@
       <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
+    <RedundantCast>
+      <code>(string) $name</code>
+    </RedundantCast>
   </file>
   <file src="src/Vendor/Composer/PackageHashNormalizer.php">
     <MixedAssignment>
@@ -76,6 +79,13 @@
       <code>$newLineString</code>
     </MixedAssignment>
   </file>
+  <file src="test/Unit/Format/FormatTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideEncodedWithoutIndent</code>
+      <code>provideWhitespaceWithNewLine</code>
+      <code>provideWhitespaceWithoutNewLine</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/Format/IndentTest.php">
     <MixedArgument>
       <code>$style</code>
@@ -83,16 +93,46 @@
     <MixedAssignment>
       <code>$style</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>provideInvalidIndentString</code>
+      <code>provideInvalidSize</code>
+      <code>provideMixedIndentAndSniffedIndent</code>
+      <code>providePureIndentAndSniffedIndent</code>
+      <code>provideSizeStyleAndIndentString</code>
+      <code>provideValidIndentString</code>
+    </PossiblyUnusedMethod>
     <UnusedVariable>
       <code>$key</code>
       <code>$key</code>
       <code>$style</code>
     </UnusedVariable>
   </file>
+  <file src="test/Unit/Format/JsonEncodeOptionsTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideInvalidValue</code>
+      <code>provideJsonEncodeOptionsAndEncoded</code>
+      <code>provideValidValue</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Unit/Format/NewLineTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideInvalidNewLineString</code>
+      <code>provideNewLine</code>
+      <code>provideValidNewLineString</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="test/Unit/FormatNormalizerTest.php">
     <MixedAssignment>
       <code>$fileInfo</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>provideScenario</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="test/Unit/JsonEncodeNormalizerTest.php">
+    <PossiblyUnusedMethod>
+      <code>provideJsonEncodeOptions</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/SchemaNormalizerTest.php">
     <MixedAssignment>
@@ -100,11 +140,19 @@
       <code>$fileInfo</code>
       <code>$schemaDecoded</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>provideScenarioWithCustomJsonPointerSpecification</code>
+      <code>provideScenarioWithDefaultJsonPointerSpecification</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Unit/Vendor/Composer/ComposerJsonNormalizerTest.php">
     <MixedAssignment>
       <code>$fileInfo</code>
       <code>$fileInfo</code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>provideScenarioWhereJsonIsInvalidAccordingToSchema</code>
+      <code>provideScenarioWhereJsonIsValidAccordingToSchema</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

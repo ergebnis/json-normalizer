@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
- */
+#[Framework\Attributes\CoversClass(Exception\InvalidIndentSize::class)]
 final class InvalidIndentSizeTest extends Framework\TestCase
 {
     use Test\Util\Helper;

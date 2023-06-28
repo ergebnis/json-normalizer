@@ -13,23 +13,18 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
+use Ergebnis\DataProvider;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer
- */
+#[Framework\Attributes\CoversClass(WithoutFinalNewLineNormalizer::class)]
 final class WithoutFinalNewLineNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    /**
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
-     */
+    #[Framework\Attributes\DataProviderExternal(DataProvider\StringProvider::class, 'blank')]
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {
         $json = Json::fromString(

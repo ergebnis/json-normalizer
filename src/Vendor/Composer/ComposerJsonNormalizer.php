@@ -22,7 +22,7 @@ use JsonSchema\SchemaStorage;
 
 final class ComposerJsonNormalizer implements Normalizer\Normalizer
 {
-    private Normalizer\Normalizer $normalizer;
+    private readonly Normalizer\Normalizer $normalizer;
 
     /**
      * @throws Normalizer\Exception\DependencyMissing
@@ -73,7 +73,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      * @see https://github.com/cweagans/composer-patches/blob/1.7.2/src/Patches.php#L315-L329
                      */
                     Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
-                        return 1 === \preg_match('{^\/extra\/patches\/([^/])+$}', $jsonPointer->toJsonString());
+                        return 1 === \preg_match('{^/extra/patches/([^/])+$}', $jsonPointer->toJsonString());
                     }),
                     /**
                      * Repositories need to be iterated in a specific order, but can be an array or an object.
