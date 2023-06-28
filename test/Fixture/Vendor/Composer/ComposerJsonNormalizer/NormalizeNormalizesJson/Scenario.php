@@ -16,16 +16,14 @@ namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNorm
 use Ergebnis\Json\Json;
 
 /**
- * @internal
- *
  * @psalm-immutable
  */
 final class Scenario
 {
     private function __construct(
-        private string $key,
-        private Json $original,
-        private Json $normalized,
+        private readonly string $key,
+        private readonly Json $original,
+        private readonly Json $normalized,
     ) {
     }
 

@@ -19,15 +19,10 @@ use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Format\Indent
- *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
- */
+#[Framework\Attributes\CoversClass(Format\Indent::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidIndentSize::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidIndentString::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidIndentStyle::class)]
 final class IndentTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -42,9 +37,7 @@ final class IndentTest extends Framework\TestCase
         self::assertSame($characters, Format\Indent::CHARACTERS);
     }
 
-    /**
-     * @dataProvider provideInvalidSize
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidSize')]
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
         $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
@@ -90,9 +83,7 @@ final class IndentTest extends Framework\TestCase
         );
     }
 
-    /**
-     * @dataProvider provideSizeStyleAndIndentString
-     */
+    #[Framework\Attributes\DataProvider('provideSizeStyleAndIndentString')]
     public function testFromSizeAndStyleReturnsIndent(
         int $size,
         string $style,
@@ -127,9 +118,7 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideInvalidIndentString
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidIndentString')]
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
         $this->expectException(Exception\InvalidIndentString::class);
@@ -155,9 +144,7 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideValidIndentString
-     */
+    #[Framework\Attributes\DataProvider('provideValidIndentString')]
     public function testFromStringReturnsIndent(string $string): void
     {
         $indent = Format\Indent::fromString($string);
@@ -184,10 +171,8 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideMixedIndentAndSniffedIndent
-     * @dataProvider providePureIndentAndSniffedIndent
-     */
+    #[Framework\Attributes\DataProvider('provideMixedIndentAndSniffedIndent')]
+    #[Framework\Attributes\DataProvider('providePureIndentAndSniffedIndent')]
     public function testFromJsonReturnsIndentSniffedFromArray(
         string $actualIndent,
         string $sniffedIndent,
@@ -209,10 +194,8 @@ JSON
         self::assertSame($sniffedIndent, $indent->toString());
     }
 
-    /**
-     * @dataProvider provideMixedIndentAndSniffedIndent
-     * @dataProvider providePureIndentAndSniffedIndent
-     */
+    #[Framework\Attributes\DataProvider('provideMixedIndentAndSniffedIndent')]
+    #[Framework\Attributes\DataProvider('providePureIndentAndSniffedIndent')]
     public function testFromJsonReturnsIndentSniffedFromObject(
         string $actualIndent,
         string $sniffedIndent,

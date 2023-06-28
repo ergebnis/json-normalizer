@@ -14,34 +14,31 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
+use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Format;
+use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
+use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
- * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
- * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
- * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
- * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
- * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
- * @uses \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
- * @uses \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
- */
+#[Framework\Attributes\CoversClass(Vendor\Composer\BinNormalizer::class)]
+#[Framework\Attributes\CoversClass(Vendor\Composer\ComposerJsonNormalizer::class)]
+#[Framework\Attributes\CoversClass(Vendor\Composer\ConfigHashNormalizer::class)]
+#[Framework\Attributes\CoversClass(Vendor\Composer\PackageHashNormalizer::class)]
+#[Framework\Attributes\CoversClass(Vendor\Composer\VersionConstraintNormalizer::class)]
+#[Framework\Attributes\UsesClass(ChainNormalizer::class)]
+#[Framework\Attributes\UsesClass(Exception\OriginalInvalidAccordingToSchema::class)]
+#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
+#[Framework\Attributes\UsesClass(SchemaNormalizer::class)]
+#[Framework\Attributes\UsesClass(Vendor\Composer\VersionConstraintNormalizer::class)]
+#[Framework\Attributes\UsesClass(WithFinalNewLineNormalizer::class)]
 final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    /**
-     * @dataProvider provideScenarioWhereJsonIsInvalidAccordingToSchema
-     */
+    #[Framework\Attributes\DataProvider('provideScenarioWhereJsonIsInvalidAccordingToSchema')]
     public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario $scenario): void
     {
         $json = $scenario->original();
@@ -91,9 +88,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideScenarioWhereJsonIsValidAccordingToSchema
-     */
+    #[Framework\Attributes\DataProvider('provideScenarioWhereJsonIsValidAccordingToSchema')]
     public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->original();

@@ -19,8 +19,8 @@ use Ergebnis\Json\Printer;
 final class FormatNormalizer implements Normalizer
 {
     public function __construct(
-        private Printer\PrinterInterface $printer,
-        private Format\Format $format,
+        private readonly Printer\PrinterInterface $printer,
+        private readonly Format\Format $format,
     ) {
     }
 

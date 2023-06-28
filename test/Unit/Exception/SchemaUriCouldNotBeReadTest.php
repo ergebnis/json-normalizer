@@ -17,11 +17,7 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeRead
- */
+#[Framework\Attributes\CoversClass(Exception\SchemaUriCouldNotBeRead::class)]
 final class SchemaUriCouldNotBeReadTest extends Framework\TestCase
 {
     use Test\Util\Helper;

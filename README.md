@@ -4,7 +4,6 @@
 [![Merge](https://github.com/ergebnis/json-normalizer/workflows/Merge/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Triage](https://github.com/ergebnis/json-normalizer/workflows/Triage/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 [![Update](https://github.com/ergebnis/json-normalizer/workflows/Update/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
@@ -581,6 +580,10 @@ Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
 ## Code of Conduct
 
 Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
+
+## Security Policy
+
+Please have a look at [`SECURITY.md`](.github/SECURITY.md).
 
 ## License
 

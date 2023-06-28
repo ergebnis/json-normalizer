@@ -22,7 +22,7 @@ use JsonSchema\SchemaStorage;
 
 final class ComposerJsonNormalizer implements Normalizer\Normalizer
 {
-    private Normalizer\Normalizer $normalizer;
+    private readonly Normalizer\Normalizer $normalizer;
 
     /**
      * @throws Normalizer\Exception\DependencyMissing

@@ -28,7 +28,7 @@ final class VersionConstraintNormalizer implements Normalizer
         'require-dev',
     ];
 
-    public function __construct(private Semver\VersionParser $versionParser)
+    public function __construct(private readonly Semver\VersionParser $versionParser)
     {
     }
 

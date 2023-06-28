@@ -3,7 +3,7 @@ it: refactoring coding-standards security-analysis static-code-analysis tests ##
 
 .PHONY: code-coverage
 code-coverage: vendor ## Collects coverage from running unit tests with phpunit/phpunit
-	mkdir -p .build/phpunit
+	mkdir -p .build/phpunit/
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml --coverage-text
 
 .PHONY: coding-standards
@@ -23,16 +23,17 @@ help: ## Displays this list of targets with descriptions
 
 .PHONY: mutation-tests
 mutation-tests: vendor ## Runs mutation tests with infection/infection
-	mkdir -p .build/infection
+	mkdir -p .build/infection/
 	vendor/bin/infection --configuration=infection.json
 
 .PHONY: phive
 phive: .phive ## Installs dependencies with phive
-	mkdir -p .build/phive
+	mkdir -p .build/phive/
 	PHIVE_HOME=.build/phive phive install --trust-gpg-keys 0xC00543248C87FB13,0x033E5F8D801A2F8D
 
 .PHONY: refactoring
 refactoring: vendor ## Runs automated refactoring with rector/rector
+	mkdir -p .build/rector/
 	vendor/bin/rector process --config=rector.php
 
 .PHONY: schema
@@ -46,19 +47,19 @@ security-analysis: vendor ## Runs a security analysis with composer
 
 .PHONY: static-code-analysis
 static-code-analysis: vendor ## Runs a static code analysis with vimeo/psalm
-	mkdir -p .build/psalm
+	mkdir -p .build/psalm/
 	vendor/bin/psalm --config=psalm.xml --clear-cache
 	vendor/bin/psalm --config=psalm.xml --show-info=false --stats --threads=4
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: vendor ## Generates a baseline for static code analysis with vimeo/psalm
-	mkdir -p .build/psalm
+	mkdir -p .build/psalm/
 	vendor/bin/psalm --config=psalm.xml --clear-cache
 	vendor/bin/psalm --config=psalm.xml --set-baseline=psalm-baseline.xml
 
 .PHONY: tests
 tests: vendor ## Runs unit tests with phpunit/phpunit
-	mkdir -p .build/phpunit
+	mkdir -p .build/phpunit/
 	vendor/bin/phpunit --configuration=test/Unit/phpunit.xml
 
 vendor: composer.json composer.lock
