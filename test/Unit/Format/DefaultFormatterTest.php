@@ -13,29 +13,23 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
+use Ergebnis\DataProvider;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Format\DefaultFormatter
- *
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\Indent
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
- */
+#[Framework\Attributes\CoversClass(Format\DefaultFormatter::class)]
+#[Framework\Attributes\UsesClass(Format\Format::class)]
+#[Framework\Attributes\UsesClass(Format\Indent::class)]
+#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
+#[Framework\Attributes\UsesClass(Format\NewLine::class)]
 final class DefaultFormatterTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    /**
-     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary()
-     */
+    #[Framework\Attributes\DataProviderExternal(DataProvider\BoolProvider::class, 'arbitrary')]
     public function testFormatEncodesWithJsonEncodeOptionsIndentsAndPossiblySuffixesWithFinalNewLine(bool $hasFinalNewLine): void
     {
         $faker = self::faker();

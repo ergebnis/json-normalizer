@@ -20,23 +20,16 @@ use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\FormatNormalizer
- *
- * @uses \Ergebnis\Json\Normalizer\Format\Format
- * @uses \Ergebnis\Json\Normalizer\Format\Indent
- * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- * @uses \Ergebnis\Json\Normalizer\Format\NewLine
- */
+#[Framework\Attributes\CoversClass(FormatNormalizer::class)]
+#[Framework\Attributes\UsesClass(Format\Format::class)]
+#[Framework\Attributes\UsesClass(Format\Indent::class)]
+#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
+#[Framework\Attributes\UsesClass(Format\NewLine::class)]
 final class FormatNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    /**
-     * @dataProvider provideScenario
-     */
+    #[Framework\Attributes\DataProvider('provideScenario')]
     public function testNormalizeNormalizes(Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $normalizer = new FormatNormalizer(

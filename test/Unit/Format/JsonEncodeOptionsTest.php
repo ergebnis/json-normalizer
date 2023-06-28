@@ -19,13 +19,8 @@ use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-/**
- * @internal
- *
- * @covers \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
- *
- * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptions
- */
+#[Framework\Attributes\CoversClass(Format\JsonEncodeOptions::class)]
+#[Framework\Attributes\UsesClass(Exception\InvalidJsonEncodeOptions::class)]
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -39,9 +34,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         self::assertSame($expected, $jsonEncodeOptions->toInt());
     }
 
-    /**
-     * @dataProvider provideInvalidValue
-     */
+    #[Framework\Attributes\DataProvider('provideInvalidValue')]
     public function testFromIntRejectsInvalidValue(int $value): void
     {
         $this->expectException(Exception\InvalidJsonEncodeOptions::class);
@@ -66,9 +59,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideValidValue
-     */
+    #[Framework\Attributes\DataProvider('provideValidValue')]
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt($value);
@@ -93,9 +84,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         }
     }
 
-    /**
-     * @dataProvider provideJsonEncodeOptionsAndEncoded
-     */
+    #[Framework\Attributes\DataProvider('provideJsonEncodeOptionsAndEncoded')]
     public function testFromJsonReturnsJsonEncodeOptions(
         int $value,
         string $encoded,

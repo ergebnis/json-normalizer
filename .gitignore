@@ -1,5 +1,5 @@
 /.build/
-/.notes/
+/.note/
 /.phive/
 /test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Conflict/
 /test/Fixture/Vendor/Composer/ComposerJsonNormalizer/NormalizeNormalizesJson/Json/IsObject/HasEntries/Yes/HasProperty/Provide/

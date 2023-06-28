@@ -21,7 +21,7 @@ use Ergebnis\Json\Normalizer\Exception;
  */
 final class NewLine
 {
-    private function __construct(private string $value)
+    private function __construct(private readonly string $value)
     {
     }
 
