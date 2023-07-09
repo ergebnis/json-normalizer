@@ -82,6 +82,8 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
+        $normalized = self::replaceWildcardWithTilde($normalized);
+        $normalized = self::replaceTildeWithCaret($normalized);
         $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::removeOverlappingVersionConstraints($normalized);
         $normalized = self::removeUselessInlineAliases($normalized);
@@ -112,6 +114,28 @@ final class VersionConstraintNormalizer implements Normalizer
 
             return self::joinAndConstraints(...$andConstraints);
         }, $orConstraints));
+    }
+
+    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    {
+        $split = \explode(' ', $versionConstraint);
+
+        foreach ($split as &$part) {
+            $part = \preg_replace('{^(\d+(?:\.\d+)*)\.\*$}', '~$1.0', $part);
+        }
+
+        return \implode(' ', $split);
+    }
+
+    private static function replaceTildeWithCaret(string $versionConstraint): string
+    {
+        $split = \explode(' ', $versionConstraint);
+
+        foreach ($split as &$part) {
+            $part = \preg_replace('{^~(\d+(?:\.\d+)?)$}', '^$1', $part);
+        }
+
+        return \implode(' ', $split);
     }
 
     private static function removeDuplicateVersionConstraints(string $versionConstraint): string

@@ -11,6 +11,7 @@ For a full diff see [`4.1.0...main`][4.1.0...main].
 ### Changed
 
 - Dropped support for PHP 8.0 ([#917]), by [@localheinz]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to prefer tilde operators (`~`) over wildcard operators (`*`), and caret operators (`^`) over tilde operators (`~`) ([#756]), by [@fredden]
 
 ## [`4.1.0`][4.1.0]
 
@@ -592,6 +593,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#698]: https://github.com/ergebnis/json-normalizer/pull/698
 [#705]: https://github.com/ergebnis/json-normalizer/pull/705
 [#723]: https://github.com/ergebnis/json-normalizer/pull/723
+[#756]: https://github.com/ergebnis/json-normalizer/pull/756
 [#757]: https://github.com/ergebnis/json-normalizer/pull/757
 [#772]: https://github.com/ergebnis/json-normalizer/pull/772
 [#774]: https://github.com/ergebnis/json-normalizer/pull/774

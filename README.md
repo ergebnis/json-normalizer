@@ -534,6 +534,31 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- tilde operators (`~`) are preferred over wildcard (`*`) version ranges
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+       "foo/bar": "*",
+  -    "foo/baz": "1.0.*"
+  +    "foo/baz": "~1.0.0"
+   }
+  ```
+
+- caret operators are preferred over tilde operators
+
+  ```diff
+   {
+     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+     "require": {
+  -    "foo/bar": "~1",
+  -    "foo/baz": "~1.3"
+  +    "foo/bar": "^1.0",
+  +    "foo/baz": "^1.3"
+   }
+  ```
+
 - version numbers are sorted in ascending order
 
   ```diff
