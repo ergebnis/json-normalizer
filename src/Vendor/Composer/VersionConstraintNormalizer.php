@@ -84,7 +84,6 @@ final class VersionConstraintNormalizer implements Normalizer
         $normalized = self::normalizeVersionConstraintSeparators($normalized);
         $normalized = self::replaceWildcardWithTilde($normalized);
         $normalized = self::replaceTildeWithCaret($normalized);
-        $normalized = self::assertCorrectNumberOfParts($normalized);
         $normalized = self::removeDuplicateVersionConstraints($normalized);
         $normalized = self::removeOverlappingVersionConstraints($normalized);
         $normalized = self::removeUselessInlineAliases($normalized);
@@ -134,21 +133,6 @@ final class VersionConstraintNormalizer implements Normalizer
 
         foreach ($split as &$part) {
             $part = \preg_replace('{^~(\d+(?:\.\d+)?)$}', '^$1', $part);
-        }
-
-        return \implode(' ', $split);
-    }
-
-    private static function assertCorrectNumberOfParts(string $versionConstraint): string
-    {
-        $split = \explode(' ', $versionConstraint);
-
-        foreach ($split as &$part) {
-            // Assert minimum number of version number parts for the caret operator
-            $part = \preg_replace('{^(\^\d+)$}', '$1.0', $part);
-
-            // Trim extra version number parts for caret operator
-            $part = \preg_replace('{^(\^[1-9]\d*\.\d+)\.0$}', '$1', $part);
         }
 
         return \implode(' ', $split);
