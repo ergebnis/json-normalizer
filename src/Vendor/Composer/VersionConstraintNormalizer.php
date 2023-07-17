@@ -118,24 +118,44 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function replaceWildcardWithTilde(string $versionConstraint): string
     {
-        $split = \explode(' ', $versionConstraint);
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
 
         foreach ($split as &$part) {
-            $part = \preg_replace('{^(\d+(?:\.\d+)*)\.\*$}', '~$1.0', $part);
+            $part = \preg_replace(
+                '{^(\d+(?:\.\d+)*)\.\*$}',
+                '~$1.0',
+                $part,
+            );
         }
 
-        return \implode(' ', $split);
+        return \implode(
+            ' ',
+            $split,
+        );
     }
 
     private static function replaceTildeWithCaret(string $versionConstraint): string
     {
-        $split = \explode(' ', $versionConstraint);
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
 
         foreach ($split as &$part) {
-            $part = \preg_replace('{^~(\d+(?:\.\d+)?)$}', '^$1', $part);
+            $part = \preg_replace(
+                '{^~(\d+(?:\.\d+)?)$}',
+                '^$1',
+                $part,
+            );
         }
 
-        return \implode(' ', $split);
+        return \implode(
+            ' ',
+            $split,
+        );
     }
 
     private static function removeDuplicateVersionConstraints(string $versionConstraint): string

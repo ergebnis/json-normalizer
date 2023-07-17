@@ -32,7 +32,10 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
     ): self {
         $exception = new self(\sprintf(
             'Style needs to be one of "%s", but "%s" is not.',
-            \implode('", "', $allowedStyles),
+            \implode(
+                '", "',
+                $allowedStyles,
+            ),
             $style,
         ));
 
