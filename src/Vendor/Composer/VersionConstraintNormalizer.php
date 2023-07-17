@@ -57,6 +57,15 @@ final class VersionConstraintNormalizer implements Normalizer
             }
 
             $decoded->{$name} = \array_map(function (string $versionConstraint): string {
+                $versionConstraint = self::trim($versionConstraint);
+                $versionConstraint = self::removeExtraSpaces($versionConstraint);
+
+                try {
+                    $this->versionParser->parseConstraints($versionConstraint);
+                } catch (\UnexpectedValueException) {
+                    return $versionConstraint;
+                }
+
                 return $this->normalizeVersionConstraint($versionConstraint);
             }, $packages);
         }
@@ -72,23 +81,14 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
-        $normalized = self::trim($versionConstraint);
-        $normalized = self::removeExtraSpaces($normalized);
+        $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
+        $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
+        $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
+        $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
+        $versionConstraint = self::removeOverlappingVersionConstraints($versionConstraint);
+        $versionConstraint = self::removeUselessInlineAliases($versionConstraint);
 
-        try {
-            $this->versionParser->parseConstraints($normalized);
-        } catch (\UnexpectedValueException) {
-            return $normalized;
-        }
-
-        $normalized = self::normalizeVersionConstraintSeparators($normalized);
-        $normalized = self::replaceWildcardWithTilde($normalized);
-        $normalized = self::replaceTildeWithCaret($normalized);
-        $normalized = self::removeDuplicateVersionConstraints($normalized);
-        $normalized = self::removeOverlappingVersionConstraints($normalized);
-        $normalized = self::removeUselessInlineAliases($normalized);
-
-        return self::sortVersionConstraints($normalized);
+        return self::sortVersionConstraints($versionConstraint);
     }
 
     private static function trim(string $versionConstraint): string
