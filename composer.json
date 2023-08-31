@@ -28,7 +28,7 @@
     "justinrainbow/json-schema": "^5.2.12"
   },
   "require-dev": {
-    "composer/semver": "^3.2.1",
+    "composer/semver": "^3.4.0",
     "ergebnis/data-provider": "^3.0.0",
     "ergebnis/license": "^2.1.0",
     "ergebnis/php-cs-fixer-config": "^5.14.0",
