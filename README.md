@@ -13,7 +13,7 @@
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Monthly Downloads](http://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
 
-Provides generic and vendor-specific normalizers for normalizing JSON documents.
+This package provides generic and vendor-specific normalizers for normalizing [JSON documents](https://www.json.org).
 
 ## Installation
 
@@ -596,30 +596,40 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 ## Changelog
 
-Please have a look at [`CHANGELOG.md`](CHANGELOG.md).
+The maintainers of this package record notable changes to this project in a [changelog](CHANGELOG.md).
 
 ## Contributing
 
-Please have a look at [`CONTRIBUTING.md`](.github/CONTRIBUTING.md).
+The maintainers of this package suggest following the [contribution guide](.github/CONTRIBUTING.md).
 
 ## Code of Conduct
 
-Please have a look at [`CODE_OF_CONDUCT.md`](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
+The maintainers of this package ask contributors to follow the [code of conduct](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
+
+## General Support Policy
+
+The maintainers of this package provide limited support.
+
+You can support the maintenance of this package by [sponsoring @localheinz](https://github.com/sponsors/localheinz) or [requesting an invoice for services related to this package](mailto:am@localheinz.com?subject=ergebnis/json-normalizer:%20Requesting%20invoice%20for%20services).
+
+## PHP Version Support Policy
+
+This package supports PHP versions with [active support](https://www.php.net/supported-versions.php).
+
+The maintainers of this package add support for a PHP version following its initial release and drop support for a PHP version when it has reached its end of active support.
 
 ## Security Policy
 
-Please have a look at [`SECURITY.md`](.github/SECURITY.md).
+This package has a [security policy](.github/SECURITY.md).
 
 ## License
 
-This package is licensed using the MIT License.
-
-Please have a look at [`LICENSE.md`](LICENSE.md).
+This package uses the [MIT license](LICENSE.md).
 
 ## Credits
 
 The algorithm for sorting packages in the [`Vendor\Composer\PackageHashNormalizer`](src/Vendor/Composer/PackageHashNormalizer.php) has been adopted from [`Composer\Json\JsonManipulator::sortPackages()`](https://github.com/composer/composer/blob/1.6.2/src/Composer/Json/JsonManipulator.php#L110-L146) (originally licensed under MIT by [Nils Adermann](https://github.com/naderman) and [Jordi Boggiano](https://github.com/seldaek)), which I initially contributed to `composer/composer` with [`composer/composer#3549`](https://github.com/composer/composer/pull/3549) and [`composer/composer#3872`](https://github.com/composer/composer/pull/3872).
 
-## Curious what I am up to?
+## Social
 
-Follow me on [Twitter](https://twitter.com/intent/follow?screen_name=localheinz)!
+Follow [@localheinz](https://twitter.com/intent/follow?screen_name=localheinz) and [@ergebnis](https://twitter.com/intent/follow?screen_name=ergebnis) on Twitter.
