@@ -26,11 +26,15 @@ $license = License\Type\MIT::markdown(
 
 $license->save();
 
-$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php81($license->header()), [
-    'mb_str_functions' => false,
-    'no_unset_on_property' => false,
-    'static_lambda' => false,
-]);
+$ruleSet = PhpCsFixer\Config\RuleSet\Php81::create()
+    ->withHeader($license->header())
+    ->withRules(PhpCsFixer\Config\Rules::fromArray([
+        'mb_str_functions' => false,
+        'no_unset_on_property' => false,
+        'static_lambda' => false,
+    ]));
+
+$config = PhpCsFixer\Config\Factory::fromRuleSet($ruleSet);
 
 $config->getFinder()
     ->exclude([
