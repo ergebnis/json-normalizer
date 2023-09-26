@@ -36,7 +36,7 @@ final class InvalidIndentStyleTest extends Framework\TestCase
 
         $style = $faker->word();
 
-        /** @var string[] $allowedStyles */
+        /** @var array<string> $allowedStyles */
         $allowedStyles = $faker->words();
 
         $exception = Exception\InvalidIndentStyle::fromStyleAndAllowedStyles(
