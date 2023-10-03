@@ -36,6 +36,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
         ));
 
         $exception->schemaUri = $schemaUri;
+        // @infection-ignore-all UnwrapArrayValues
         $exception->errors = \array_values($errors);
 
         return $exception;

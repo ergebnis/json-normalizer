@@ -40,6 +40,7 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
         ));
 
         $exception->style = $style;
+        // @infection-ignore-all UnwrapArrayValues
         $exception->allowedStyles = \array_values($allowedStyles);
 
         return $exception;

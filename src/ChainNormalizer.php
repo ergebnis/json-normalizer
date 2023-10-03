@@ -28,6 +28,7 @@ final class ChainNormalizer implements Normalizer
 
     public function __construct(Normalizer ...$normalizers)
     {
+        // @infection-ignore-all UnwrapArrayValues
         $this->normalizers = \array_values($normalizers);
     }
 

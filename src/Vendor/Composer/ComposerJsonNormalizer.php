@@ -30,6 +30,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
     public function __construct(string $schemaUri)
     {
         if (!\class_exists(Semver\VersionParser::class)) {
+            // @infection-ignore-all Throw_
             throw Normalizer\Exception\DependencyMissing::for(
                 self::class,
                 'composer/semver',

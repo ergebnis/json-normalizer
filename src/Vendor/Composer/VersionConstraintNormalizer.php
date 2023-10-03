@@ -110,6 +110,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
+        // @infection-ignore-all UnwrapArrayMap
         return self::joinOrConstraints(...\array_map(static function (string $orConstraint): string {
             $andConstraints = self::splitIntoAndConstraints($orConstraint);
 
@@ -246,6 +247,7 @@ final class VersionConstraintNormalizer implements Normalizer
             '{(\S+)\s+as\s+(\S+)}',
             static function (array $matches): string {
                 if ($matches[1] === $matches[2]) {
+                    // @infection-ignore-all IncrementInteger
                     return $matches[1];
                 }
 

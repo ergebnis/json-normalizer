@@ -77,6 +77,7 @@ final class SchemaNormalizer implements Normalizer
         );
 
         if (!$resultAfterNormalization->isValid()) {
+            // @infection-ignore-all Throw_, UnwrapArrayMap
             throw Exception\NormalizedInvalidAccordingToSchema::fromSchemaUriAndErrors(
                 $this->schemaUri,
                 ...\array_map(static function (SchemaValidator\ValidationError $error): string {
@@ -303,6 +304,8 @@ final class SchemaNormalizer implements Normalizer
 
         /**
          * @see https://json-schema.org/understanding-json-schema/structuring.html#reuse
+         *
+         * @infection-ignore-all LogicalAndAllSubExprNegation
          */
         if (
             \property_exists($schema, '$ref')

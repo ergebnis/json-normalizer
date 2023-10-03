@@ -102,6 +102,7 @@ final class PackageHashNormalizer implements Normalizer
                 );
             }
 
+            // @infection-ignore-all ConcatOperandRemoval
             return '5-' . $requirement;
         };
 

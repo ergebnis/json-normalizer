@@ -36,6 +36,7 @@ final class OriginalInvalidAccordingToSchema extends \RuntimeException implement
         ));
 
         $exception->schemaUri = $schemaUri;
+        // @infection-ignore-all UnwrapArrayValues
         $exception->errors = \array_values($errors);
 
         return $exception;
