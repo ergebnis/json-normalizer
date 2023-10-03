@@ -16,9 +16,10 @@
     "homepage": "https://getcomposer.org/doc/06-config.md#allow-plugins",
     "config": {
         "allow-plugins": {
+            "composer/package-versions-deprecated": true,
             "composer/*": false,
-            "infection/extension-installer": true,
-            "composer/package-versions-deprecated": true
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true
         }
     }
 }

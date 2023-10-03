@@ -435,6 +435,8 @@ When `composer.json` contains an array of scripts in the `bin` section, the `Ven
 
 When `composer.json` contains configuration in the `config` section, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
 
+The `allow-plugins` and `preferred-install` keys have special handling as they both support wildcards. When no wildcards are used, these are sorted in ascending order. When wildcards are in use, then the list will be sorted if possible (ie, when the wildcards are only at the end of package names). Due to internal implementation details of the wildcard feature within Composer, sorting keys when there are wildcards part-way through is not feasible.
+
 :bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
 
 #### `Vendor\Composer\PackageHashNormalizer`
