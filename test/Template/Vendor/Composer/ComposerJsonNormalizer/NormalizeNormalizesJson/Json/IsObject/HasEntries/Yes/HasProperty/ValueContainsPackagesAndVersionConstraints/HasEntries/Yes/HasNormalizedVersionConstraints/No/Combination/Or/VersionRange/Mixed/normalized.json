@@ -1,0 +1,9 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "value-contains-packages-and-version-constraints": {
+        "combination-or-version-range-mixed/01": "^1.2",
+        "combination-or-version-range-mixed/02": "^1.2",
+        "combination-or-version-range-mixed/03": "^1.2",
+        "combination-or-version-range-mixed/04": "1.2.1 || ~1.2.3"
+    }
+}

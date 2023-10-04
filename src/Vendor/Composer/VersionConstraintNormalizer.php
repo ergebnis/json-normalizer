@@ -173,7 +173,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
 
-        $regex = '{^[~^]\d+(?:\.\d+)*$}';
+        $regex = '{^[~^]?\d+(?:\.\d+)*$}';
 
         $count = \count($orConstraints);
 
