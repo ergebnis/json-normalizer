@@ -85,10 +85,10 @@ final class VersionConstraintNormalizer implements Normalizer
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
-        $versionConstraint = self::removeOverlappingVersionConstraints($versionConstraint);
         $versionConstraint = self::removeUselessInlineAliases($versionConstraint);
+        $versionConstraint = self::sortVersionConstraints($versionConstraint);
 
-        return self::sortVersionConstraints($versionConstraint);
+        return self::removeOverlappingVersionConstraints($versionConstraint);
     }
 
     private static function trim(string $versionConstraint): string
@@ -199,10 +199,16 @@ final class VersionConstraintNormalizer implements Normalizer
                     continue;
                 }
 
-                if (Semver\Semver::satisfies(\ltrim($a, '^~'), $b)) {
-                    $orConstraints[$i] = null;
-                } elseif (Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                    $orConstraints[$j] = null;
+                if (Semver\Semver::satisfies(\ltrim($a, '^~'), $b) || Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
+                    if ('^' === $a[0]) {
+                        $orConstraints[$j] = null;
+                    } elseif ('^' === $b[0]) {
+                        $orConstraints[$i] = null;
+                    } elseif ('~' === $a[0]) {
+                        $orConstraints[$j] = null;
+                    } elseif ('~' === $b[0]) {
+                        $orConstraints[$i] = null;
+                    }
                 }
             }
         }
