@@ -13,14 +13,12 @@
       "email": "am@localheinz.com"
     }
   ],
-  "homepage": "https://getcomposer.org/doc/06-config.md#preferred-install",
+  "homepage": "https://getcomposer.org/doc/06-config.md#allow-plugins",
   "config": {
-    "preferred-install": {
-      "foo/something-longer-but-alphabetically-after-package-*": "source",
-      "foo/package-one": "dist",
-      "foo/package-*": "source",
-      "foo/*": "dist",
-      "*": "dist"
+    "allow-plugins": {
+      "infection/extension-installer": true,
+      "ergebnis/composer-normalize": true,
+      "composer/package-versions-deprecated": true
     }
   }
 }
