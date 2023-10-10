@@ -427,42 +427,40 @@ It composes the following normalizers:
 
 #### `Vendor\Composer\BinNormalizer`
 
-When `composer.json` contains an array of scripts in the `bin` section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
-
-:bulb: Find out more about the `bin` section at [Composer: The composer.json schema](https://getcomposer.org/doc/04-schema.md#bin).
+When `composer.json` contains an array of scripts in the [`bin`](https://getcomposer.org/doc/04-schema.md#bin) section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
 
 #### `Vendor\Composer\ConfigHashNormalizer`
 
-When `composer.json` contains configuration in the `config` section, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
+When `composer.json` contains configuration in the [`config`](https://getcomposer.org/doc/06-config.md#config) section, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
 
-The `allow-plugins` and `preferred-install` keys have special handling as they both support wildcards. When no wildcards are used, these are sorted in ascending order. When wildcards are in use, then the list will be sorted if possible (ie, when the wildcards are only at the end of package names). Due to internal implementation details of the wildcard feature within Composer, sorting keys when there are wildcards part-way through is not feasible.
+The [`allow-plugins`](https://getcomposer.org/doc/06-config.md#allow-plugins) and [`preferred-install`](https://getcomposer.org/doc/06-config.md#preferred-install) configuration options support keys with wildcards and require special handling.
 
-:bulb: Find out more about the `config` section at [Composer: The composer.json schema](https://getcomposer.org/doc/06-config.md).
+When these keys do not use wildcards, then these keys are sorted in ascending order. When these keys use wildcards, these keys are sorted when the wildcards are at the end of package names. Due to internal implementation details of the wildcard feature within `composer`, sorting keys with wildcards in the middle is not feasible.
 
 #### `Vendor\Composer\PackageHashNormalizer`
 
 When `composer.json` contains any configuration in the
 
-- `conflict`
-- `provide`
-- `replace`
-- `require`
-- `require-dev`
-- `suggest`
+- [`conflict`](https://getcomposer.org/doc/04-schema.md#conflict)
+- [`provide`](https://getcomposer.org/doc/04-schema.md#provide)
+- [`replace`](https://getcomposer.org/doc/04-schema.md#replace)
+- [`require`](https://getcomposer.org/doc/04-schema.md#require)
+- [`require-dev`](https://getcomposer.org/doc/04-schema.md#require-dev)
+- [`suggest`](https://getcomposer.org/doc/04-schema.md#suggest)
 
 sections, the `Vendor\Composer\PackageHashNormalizer` will sort the packages in these sections.
 
-:bulb: This transfers the behaviour from using the `--sort-packages` or `sort-packages` configuration flag in `require` and `require-dev` to other sections. Find out more about the `--sort-packages` flag and configuration at [Composer: Config](https://getcomposer.org/doc/06-config.md#sort-packages) and [Composer: Command Line Interface / Commands](https://getcomposer.org/doc/03-cli.md#require).
+:bulb: This transfers the behaviour from using the [`--sort-packages`](https://getcomposer.org/doc/03-cli.md#require) or [`sort-packages`](https://getcomposer.org/doc/06-config.md#sort-packages) configuration flag in `require` and `require-dev` to other sections.
 
 #### `Vendor\Composer\VersionConstraintNormalizer`
 
 When `composer.json` contains version constraints in the
 
-- `conflict`
-- `provide`
-- `replace`
-- `require`
-- `require-dev`
+- [`conflict`](https://getcomposer.org/doc/04-schema.md#conflict)
+- [`provide`](https://getcomposer.org/doc/04-schema.md#provide)
+- [`replace`](https://getcomposer.org/doc/04-schema.md#replace)
+- [`require`](https://getcomposer.org/doc/04-schema.md#require)
+- [`require-dev`](https://getcomposer.org/doc/04-schema.md#require-dev)
 
 sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
@@ -503,7 +501,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- hyphenated version constraints separated by dash (` - `) and any positive number of spaces before and after are separated by a dash with a single space before and after (` - `)
+- [hyphenated version ranges](https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-) separated by dash (` - `) and any positive number of spaces before and after are separated by a dash with a single space before and after (` - `)
 
   ```diff
    {
@@ -536,7 +534,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- tilde operators (`~`) are preferred over wildcard (`*`) version ranges
+- [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-) are preferred over [wildcard (`*`) version ranges](https://getcomposer.org/doc/articles/versions.md#wildcard-version-range-)
 
   ```diff
    {
@@ -548,7 +546,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- caret operators are preferred over tilde operators
+- [caret version ranges (`^`)](https://getcomposer.org/doc/articles/versions.md#caret-version-range-) are preferred over [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-)
 
   ```diff
    {
@@ -572,7 +570,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- extra spaces in inline aliases are removed
+- extra spaces in [inline aliases](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias) are removed
 
   ```diff
    {
@@ -583,7 +581,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- useless inline aliases are removed
+- useless [inline aliases]()https://getcomposer.org/doc/articles/aliases.md#require-inline-alias are removed
 
   ```diff
    {
@@ -593,8 +591,6 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
   +    "foo/bar": "2.0"
    }
   ```
-
-:bulb: Find out more about version constraints at [Composer: Version and Constraints](https://getcomposer.org/doc/articles/versions.md).
 
 ## Changelog
 
