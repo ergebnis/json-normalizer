@@ -21,7 +21,7 @@
     "security": "https://github.com/ergebnis/json-normalizer/blob/main/.github/SECURITY.md"
   },
   "require": {
-    "php": "~8.1.0 || ~8.2.0",
+    "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
     "ext-json": "*",
     "ergebnis/json": "^1.0.1",
     "ergebnis/json-pointer": "^3.2.0",
