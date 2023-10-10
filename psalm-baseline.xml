@@ -21,9 +21,6 @@
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$json->decoded()]]></code>
-    </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code>$anyOfSchema</code>
       <code>$itemSchema</code>
