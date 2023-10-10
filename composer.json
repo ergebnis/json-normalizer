@@ -23,7 +23,7 @@
   "require": {
     "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
     "ext-json": "*",
-    "ergebnis/json": "^1.0.1",
+    "ergebnis/json": "^1.1.0",
     "ergebnis/json-pointer": "^3.2.0",
     "ergebnis/json-printer": "^3.4.0",
     "ergebnis/json-schema-validator": "^4.0.0",
