@@ -14,6 +14,7 @@ For a full diff see [`4.2.0...main`][4.2.0...main].
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove overlapping individual versions too ([#982]), by [@fredden]
 - Added support for PHP 8.3 ([#988]), by [@localheinz]
 - Required `ergebnis/json-printer:^3.4.0` ([#989]), by [@dependabot]
+- Required `ergebnis/json:^1.1.0` ([#991]), by [@dependabot]
 
 ## [`4.2.0`][4.2.0]
 
@@ -641,6 +642,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#982]: https://github.com/ergebnis/json-normalizer/pull/982
 [#988]: https://github.com/ergebnis/json-normalizer/pull/988
 [#989]: https://github.com/ergebnis/json-normalizer/pull/989
+[#991]: https://github.com/ergebnis/json-normalizer/pull/991
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
