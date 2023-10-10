@@ -11,6 +11,7 @@ For a full diff see [`4.2.0...main`][4.2.0...main].
 ### Changed
 
 - Sort `allow-plugins` and `preferred-install` as sensibly as is feasible ([#980]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove overlapping individual versions too ([#982]), by [@fredden]
 
 ## [`4.2.0`][4.2.0]
 
@@ -635,6 +636,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#889]: https://github.com/ergebnis/json-normalizer/pull/889
 [#917]: https://github.com/ergebnis/json-normalizer/pull/917
 [#980]: https://github.com/ergebnis/json-normalizer/pull/980
+[#982]: https://github.com/ergebnis/json-normalizer/pull/982
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
