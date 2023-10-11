@@ -7,6 +7,7 @@
     "acquia/drupal-environment-detector": "*",
     "ext-foo": "*",
     "composer-plugin-api": "*",
+    "0-test/sort-order": "*",
     "php": "*"
   }
 }

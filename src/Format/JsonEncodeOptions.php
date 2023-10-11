@@ -47,7 +47,7 @@ final class JsonEncodeOptions
         $jsonEncodeOptions = 0;
 
         if (!\str_contains($json->encoded(), '\/')) {
-            $jsonEncodeOptions |= \JSON_UNESCAPED_SLASHES;
+            $jsonEncodeOptions = \JSON_UNESCAPED_SLASHES;
         }
 
         if (1 !== \preg_match('/(\\\\+)u([0-9a-f]{4})/i', $json->encoded())) {

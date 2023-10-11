@@ -30,7 +30,7 @@ final class NewLine
      */
     public static function fromString(string $value): self
     {
-        if (1 !== \preg_match('/^(?>\r\n|\n|\r)$/', $value)) {
+        if ("\n" !== $value && "\r" !== $value && "\r\n" !== $value) {
             throw Exception\InvalidNewLineString::fromString($value);
         }
 

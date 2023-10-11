@@ -50,7 +50,7 @@ final class VersionConstraintNormalizer implements Normalizer
         }
 
         foreach ($objectPropertiesThatShouldBeNormalized as $name => $value) {
-            $packages = (array) $decoded->{$name};
+            $packages = (array) $value;
 
             if ([] === $packages) {
                 continue;

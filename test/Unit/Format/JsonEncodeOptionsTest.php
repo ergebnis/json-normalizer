@@ -112,7 +112,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
             [
                 \JSON_UNESCAPED_SLASHES,
                 '{
-  "name": "Andreas M\u00f6ller",
+  "name": "Andreas M\u00F6ller",
   "url": "https://github.com/ergebnis/json-normalizer"
 }',
             ],

@@ -23,6 +23,7 @@ use Ergebnis\Json\Normalizer\Vendor;
 use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
+#[Framework\Attributes\CoversClass(SchemaNormalizer::class)]
 #[Framework\Attributes\CoversClass(Vendor\Composer\BinNormalizer::class)]
 #[Framework\Attributes\CoversClass(Vendor\Composer\ComposerJsonNormalizer::class)]
 #[Framework\Attributes\CoversClass(Vendor\Composer\ConfigHashNormalizer::class)]

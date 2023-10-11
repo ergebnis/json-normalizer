@@ -5,6 +5,7 @@
         "ext-foo": "*",
         "lib-baz": "*",
         "composer-plugin-api": "*",
+        "0-test/sort-order": "*",
         "acquia/drupal-environment-detector": "*",
         "ergebnis/php-cs-fixer-config": "*",
         "ergebnis/test-util": "*"

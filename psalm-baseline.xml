@@ -36,17 +36,11 @@
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
-    <UnusedForeachValue>
-      <code>$value</code>
-    </UnusedForeachValue>
   </file>
   <file src="src/Vendor/Composer/VersionConstraintNormalizer.php">
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
-    <UnusedForeachValue>
-      <code>$value</code>
-    </UnusedForeachValue>
   </file>
   <file src="test/Fixture/FormatNormalizer/NormalizeNormalizesJson/Scenario.php">
     <PossiblyUnusedMethod>
