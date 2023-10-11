@@ -59,6 +59,10 @@ labels:
     color: "0e8a16"
     description: ""
 
+  - name: "hacktoberfest-accepted"
+    color: "ec4237"
+    description: ""
+
   - name: "question"
     color: "cc317c"
     description: ""
