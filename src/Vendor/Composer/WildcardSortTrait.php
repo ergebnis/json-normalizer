@@ -27,12 +27,13 @@ trait WildcardSortTrait
     private static function sortPropertyWithWildcard(
         array &$config,
         string $property,
+        bool $sortByKey = true,
     ): void {
         if (!\array_key_exists($property, $config)) {
             return;
         }
 
-        if (!\is_object($config[$property])) {
+        if (!\is_object($config[$property]) && !\is_array($config[$property])) {
             return;
         }
 
@@ -42,7 +43,9 @@ trait WildcardSortTrait
             return;
         }
 
-        foreach (\array_keys($value) as $package) {
+        $packages = $sortByKey ? \array_keys($value) : \array_values($value);
+
+        foreach ($packages as $package) {
             /** @var string $package */
             if (\str_contains(\rtrim($package, '*'), '*')) {
                 // We cannot reliably sort allow-plugins when there's a wildcard other than at the end of the string.
@@ -59,13 +62,20 @@ trait WildcardSortTrait
             );
         };
 
-        /** @var array<string, mixed> $value */
-        \uksort($value, static function (string $a, string $b) use ($normalize): int {
+        $callback = static function (string $a, string $b) use ($normalize): int {
             return \strcmp(
                 $normalize($a),
                 $normalize($b),
             );
-        });
+        };
+
+        if ($sortByKey) {
+            /** @var array<string, mixed> $value */
+            \uksort($value, $callback);
+        } else {
+            /** @var array<mixed, string> $value */
+            \usort($value, $callback);
+        }
 
         $config[$property] = $value;
     }
