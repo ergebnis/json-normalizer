@@ -19,7 +19,6 @@ use Ergebnis\Json\Normalizer\Normalizer;
 
 final class RepositoriesHashNormalizer implements Normalizer
 {
-    use WildcardSortTrait;
     private const PROPERTIES_WITH_WILDCARDS = [
         /**
          * @see https://getcomposer.org/doc/articles/repository-priorities.md#filtering-packages
@@ -27,6 +26,12 @@ final class RepositoriesHashNormalizer implements Normalizer
         'exclude',
         'only',
     ];
+    private readonly WildcardSorter $wildcardSorter;
+
+    public function __construct()
+    {
+        $this->wildcardSorter = new WildcardSorter();
+    }
 
     public function normalize(Json $json): Json
     {
@@ -44,7 +49,7 @@ final class RepositoriesHashNormalizer implements Normalizer
             return $json;
         }
 
-        /** @var array<string, mixed> $FIXME */
+        /** @var array<string, mixed> $repositories */
         $repositories = (array) $decoded->repositories;
 
         if ([] === $repositories) {
@@ -55,7 +60,7 @@ final class RepositoriesHashNormalizer implements Normalizer
             $repository = (array) $repository;
 
             foreach (self::PROPERTIES_WITH_WILDCARDS as $property) {
-                self::sortPropertyWithWildcard(
+                $this->wildcardSorter->sortPropertyWithWildcard(
                     $repository,
                     $property,
                     false,

@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
-trait WildcardSortTrait
+/**
+ * @internal
+ */
+final class WildcardSorter
 {
     /**
      * When sorting with wildcards, special care needs to be taken.
@@ -24,7 +27,7 @@ trait WildcardSortTrait
      * @see https://github.com/composer/composer/blob/2.6.5/src/Composer/Package/BasePackage.php#L252-L257
      * @see https://github.com/composer/composer/blob/2.6.5/src/Composer/Plugin/PluginManager.php#L687-L691
      */
-    private static function sortPropertyWithWildcard(
+    public function sortPropertyWithWildcard(
         array &$config,
         string $property,
         bool $sortByKey = true,

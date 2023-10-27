@@ -47,7 +47,7 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
-  <file src="src/Vendor/Composer/WildcardSortTrait.php">
+  <file src="src/Vendor/Composer/WildcardSorter.php">
     <MixedAssignment>
       <code>$package</code>
     </MixedAssignment>
