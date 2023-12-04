@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.3.0...main`][4.3.0...main].
 
+### Changed
+
+- Started removing `v` prefixes from version constraints ([#1027]), by [@fredden]
+
 ## [`4.3.0`][4.3.0]
 
 For a full diff see [`4.2.0...4.3.0`][4.2.0...4.3.0].
@@ -651,6 +655,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#989]: https://github.com/ergebnis/json-normalizer/pull/989
 [#991]: https://github.com/ergebnis/json-normalizer/pull/991
 [#992]: https://github.com/ergebnis/json-normalizer/pull/992
+[#1027]: https://github.com/ergebnis/json-normalizer/pull/1027
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+    "value-contains-packages-and-version-constraints": {
+        "leading-v-not-equal-to-unstable/01-major-trimmed": "!=0",
+        "leading-v-not-equal-to-unstable/02-major-untrimmed": "!=0",
+        "leading-v-not-equal-to-unstable/03-major-minor-trimmed": "!=0.1",
+        "leading-v-not-equal-to-unstable/04-major-minor-untrimmed": "!=0.1",
+        "leading-v-not-equal-to-unstable/05-major-minor-patch-trimmed": "!=0.1.2",
+        "leading-v-not-equal-to-unstable/06-major-minor-patch-untrimmed": "!=0.1.2"
+    }
+}

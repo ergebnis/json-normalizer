@@ -1,0 +1,11 @@
+{
+    "homepage": "https://getcomposer.org/doc/articles/versions.md#caret-version-range-",
+    "value-contains-packages-and-version-constraints": {
+        "leading-v-caret-stable/01-major-trimmed": "^1",
+        "leading-v-caret-stable/02-major-untrimmed": "^1",
+        "leading-v-caret-stable/03-major-minor-trimmed": "^1.2",
+        "leading-v-caret-stable/04-major-minor-untrimmed": "^1.2",
+        "leading-v-caret-stable/05-major-minor-patch-trimmed": "^1.2.3",
+        "leading-v-caret-stable/06-major-minor-patch-untrimmed": "^1.2.3"
+    }
+}
