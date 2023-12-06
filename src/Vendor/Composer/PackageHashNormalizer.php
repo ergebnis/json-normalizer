@@ -51,7 +51,7 @@ final class PackageHashNormalizer implements Normalizer
 
         foreach ($objectPropertiesThatShouldBeNormalized as $name => $value) {
             /** @var array<string, string> $packages */
-            $packages = (array) $decoded->{$name};
+            $packages = (array) $value;
 
             if ([] === $packages) {
                 continue;

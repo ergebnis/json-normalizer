@@ -43,6 +43,7 @@ final class IndentTest extends Framework\TestCase
         $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
 
         $this->expectException(Exception\InvalidIndentSize::class);
+        $this->expectExceptionMessage(\sprintf('Size needs to be greater than %d, but %d is not.', 0, $size));
 
         Format\Indent::fromSizeAndStyle(
             $size,
@@ -76,6 +77,7 @@ final class IndentTest extends Framework\TestCase
         $style = $faker->sentence();
 
         $this->expectException(Exception\InvalidIndentStyle::class);
+        $this->expectExceptionMessage(\sprintf('Style needs to be one of "space", "tab", but "%s" is not.', $style));
 
         Format\Indent::fromSizeAndStyle(
             $size,

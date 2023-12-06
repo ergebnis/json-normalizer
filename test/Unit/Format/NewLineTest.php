@@ -26,6 +26,7 @@ final class NewLineTest extends Framework\TestCase
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
         $this->expectException(Exception\InvalidNewLineString::class);
+        $this->expectExceptionMessage(\sprintf('"%s" is not a valid new-line character sequence.', $string));
 
         Format\NewLine::fromString($string);
     }
