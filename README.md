@@ -13,7 +13,7 @@
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Monthly Downloads](http://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
 
-This project provides a `composer` package with generic and vendor-specific normalizers for normalizing [JSON documents](https://www.json.org).
+This project provides a [`composer`](https://getcomposer.org) package with generic and vendor-specific normalizers for normalizing [JSON documents](https://www.json.org).
 
 ## Installation
 
@@ -602,7 +602,7 @@ The maintainers of this project suggest following the [contribution guide](.gith
 
 ## Code of Conduct
 
-The maintainers of this project ask contributors to follow the [code of conduct](.github/CODE_OF_CONDUCT.md).
+The maintainers of this project ask contributors to follow the [code of conduct](https://github.com/ergebnis/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## General Support Policy
 
@@ -614,7 +614,7 @@ You can support the maintenance of this project by [sponsoring @localheinz](http
 
 This project supports PHP versions with [active and security support](https://www.php.net/supported-versions.php).
 
-The maintainers of this project add support for a PHP version following its initial release and drop support for a PHP version when it has reached its end of security support.
+The maintainers of this project add support for a PHP version following its initial release and drop support for a PHP version when it has reached the end of security support.
 
 ## Security Policy
 
