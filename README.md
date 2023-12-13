@@ -422,6 +422,7 @@ It composes the following normalizers:
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
+- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\RepositoriesHashNormalizer`](#vendorcomposerrepositorieshashnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
 - [`Ergebnis\Composer\Json\Normalizer\Vendor\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
 
@@ -451,6 +452,14 @@ When `composer.json` contains any configuration in the
 sections, the `Vendor\Composer\PackageHashNormalizer` will sort the packages in these sections.
 
 :bulb: This transfers the behaviour from using the [`--sort-packages`](https://getcomposer.org/doc/03-cli.md#require) or [`sort-packages`](https://getcomposer.org/doc/06-config.md#sort-packages) configuration flag in `require` and `require-dev` to other sections.
+
+#### `Vendor\Composer\RepositoriesHashNormalizer`
+
+When `composer.json` contains any configuration in the
+
+- [`repositories`](https://getcomposer.org/doc/04-schema.md#repositories)
+
+section, the `Vendor\Composer\RepositoriesHashNormalizer` will sort the repositories listed in the [`exclude` and `only` properties of repositories](https://getcomposer.org/doc/articles/repository-priorities.md#filtering-packages).
 
 #### `Vendor\Composer\VersionConstraintNormalizer`
 

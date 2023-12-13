@@ -17,7 +17,6 @@
   "repositories": [
     {
       "url": "http://packages.example.com",
-      "only": [ "example/*" ],
       "type": "composer"
     },
     {

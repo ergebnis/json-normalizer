@@ -37,9 +37,19 @@
       <code>$value</code>
     </MixedAssignment>
   </file>
+  <file src="src/Vendor/Composer/RepositoriesHashNormalizer.php">
+    <MixedAssignment>
+      <code>$repository</code>
+    </MixedAssignment>
+  </file>
   <file src="src/Vendor/Composer/VersionConstraintNormalizer.php">
     <MixedAssignment>
       <code>$value</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Vendor/Composer/WildcardSorter.php">
+    <MixedAssignment>
+      <code>$package</code>
     </MixedAssignment>
   </file>
   <file src="test/Fixture/FormatNormalizer/NormalizeNormalizesJson/Scenario.php">

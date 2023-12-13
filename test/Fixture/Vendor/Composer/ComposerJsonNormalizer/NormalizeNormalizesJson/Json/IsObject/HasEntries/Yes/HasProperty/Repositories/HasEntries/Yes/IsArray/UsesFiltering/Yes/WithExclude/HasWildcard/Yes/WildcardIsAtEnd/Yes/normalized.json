@@ -14,21 +14,14 @@
         }
     ],
     "homepage": "https://getcomposer.org/doc/04-schema.md#repositories",
-    "repositories": {
-        "foo": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "http://packages.foo.com",
-            "only": [
-                "foo/*"
+            "exclude": [
+                "vendor-one/*",
+                "vendor-two/*"
             ]
-        },
-        "bar": {
-            "type": "composer",
-            "url": "http://packages.bar.com"
-        },
-        "0": {
-            "type": "composer",
-            "url": "http://packages.zero.com"
         }
-    }
+    ]
 }
