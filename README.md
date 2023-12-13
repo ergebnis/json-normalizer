@@ -581,7 +581,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- useless [inline aliases]()https://getcomposer.org/doc/articles/aliases.md#require-inline-alias are removed
+- useless [inline aliases](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias) are removed
 
   ```diff
    {
