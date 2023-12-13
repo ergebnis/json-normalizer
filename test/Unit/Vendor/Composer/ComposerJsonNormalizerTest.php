@@ -33,7 +33,6 @@ use PHPUnit\Framework;
 #[Framework\Attributes\UsesClass(Exception\OriginalInvalidAccordingToSchema::class)]
 #[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
 #[Framework\Attributes\UsesClass(SchemaNormalizer::class)]
-#[Framework\Attributes\UsesClass(Vendor\Composer\VersionConstraintNormalizer::class)]
 #[Framework\Attributes\UsesClass(WithFinalNewLineNormalizer::class)]
 final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
