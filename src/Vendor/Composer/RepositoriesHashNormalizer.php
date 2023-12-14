@@ -57,6 +57,13 @@ final class RepositoriesHashNormalizer implements Normalizer
         }
 
         foreach ($repositories as &$repository) {
+            /**
+             * @see https://getcomposer.org/doc/05-repositories.md#disabling-packagist-org
+             */
+            if (!\is_array($repository) && !\is_object($repository)) {
+                continue;
+            }
+
             $repository = (array) $repository;
 
             foreach (self::PROPERTIES_WITH_WILDCARDS as $property) {
