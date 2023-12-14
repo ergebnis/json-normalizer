@@ -64,7 +64,7 @@ jobs:
 
             - [x] updates `schema.json`
           commit-message: "Enhancement: Update schema.json"
-          path: "resource/"
+          path: "test/Fixture/Vendor/Composer/"
           title: "Enhancement: Update `schema.json`"
         env:
           GITHUB_TOKEN: "${{ secrets.ERGEBNIS_BOT_TOKEN }}"
