@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.4.0...main`][4.4.0...main].
 
+### Fixed
+
+- Stopped sorting an item in `repositories` when it disables packagist ([#1039]), by [@localheinz]
+
 ## [`4.4.0`][4.4.0]
 
 For a full diff see [`4.3.0...4.4.0`][4.3.0...4.4.0].
@@ -664,6 +668,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#992]: https://github.com/ergebnis/json-normalizer/pull/992
 [#1001]: https://github.com/ergebnis/json-normalizer/pull/1001
 [#1027]: https://github.com/ergebnis/json-normalizer/pull/1027
+[#1039]: https://github.com/ergebnis/json-normalizer/pull/1039
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
