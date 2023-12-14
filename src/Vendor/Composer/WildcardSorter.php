@@ -36,7 +36,7 @@ final class WildcardSorter
             return;
         }
 
-        if (!\is_object($config[$property]) && !\is_array($config[$property])) {
+        if (!\is_array($config[$property]) && !\is_object($config[$property])) {
             return;
         }
 

@@ -45,7 +45,7 @@ final class RepositoriesHashNormalizer implements Normalizer
             return $json;
         }
 
-        if (!\is_object($decoded->repositories) && !\is_array($decoded->repositories)) {
+        if (!\is_array($decoded->repositories) && !\is_object($decoded->repositories)) {
             return $json;
         }
 
