@@ -601,19 +601,6 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-
-- leading `v` prefixes in version constraints are removed
-
-  ```diff
-   {
-     "require": {
-  -    "foo/bar": "^v1.2",
-  -    "foo/baz": "v1.3.7"
-  +    "foo/bar": "^1.2",
-  +    "foo/baz": "1.3.7"
-   }
-  ```
-
 ## Changelog
 
 The maintainers of this project record notable changes to this project in a [changelog](CHANGELOG.md).

@@ -82,7 +82,6 @@ final class VersionConstraintNormalizer implements Normalizer
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
-        $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -170,27 +169,6 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints)));
     }
 
-    private static function removeLeadingVersionPrefix(string $versionConstraint): string
-    {
-        $split = \explode(
-            ' ',
-            $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
-                '$1$2',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
-        );
-    }
-
     private static function removeOverlappingVersionConstraints(string $versionConstraint): string
     {
         $orConstraints = self::splitIntoOrConstraints($versionConstraint);
@@ -258,7 +236,23 @@ final class VersionConstraintNormalizer implements Normalizer
     private static function sortVersionConstraints(string $versionConstraint): string
     {
         $normalize = static function (string $versionConstraint): string {
-            return \trim($versionConstraint, '<>=!~^');
+            $split = \explode(
+                ' ',
+                $versionConstraint,
+            );
+
+            foreach ($split as &$part) {
+                $part = \preg_replace(
+                    '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
+                    '$1$2',
+                    $part,
+                );
+            }
+
+            return \implode(
+                ' ',
+                $split,
+            );
         };
 
         $sort = static function (string $a, string $b) use ($normalize): int {
