@@ -82,7 +82,6 @@ final class VersionConstraintNormalizer implements Normalizer
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
-        $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -168,27 +167,6 @@ final class VersionConstraintNormalizer implements Normalizer
 
             return self::joinAndConstraints(...\array_unique($andConstraints));
         }, $orConstraints)));
-    }
-
-    private static function removeLeadingVersionPrefix(string $versionConstraint): string
-    {
-        $split = \explode(
-            ' ',
-            $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
-                '$1$2',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
-        );
     }
 
     private static function removeOverlappingVersionConstraints(string $versionConstraint): string
