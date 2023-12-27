@@ -5,6 +5,11 @@
     "ergebnis/whitespace-around-version": " * ",
     "ergebnis/overlapping-version-constraints-1": "3.4.5 || ^1.0 || ^1.1 || ^1.2",
     "ergebnis/overlapping-version-constraints-2": "^1.0 || ^2.0 || ^1.1 || ^2.1",
-    "ergebnis/separator-mixing": "^1.0 | ^1.1 || ^1.2,<1.2.7 >=1.2.4 || ^1.4"
+    "leading-v-exact-version-stable/overlapping-version-constraints-1": "3.4.5 || ^v1.0 || ^V1.1 || ^1.2",
+    "leading-v-exact-version-stable/overlapping-version-constraints-2": "^v1.0 || ^v2.0 || ^V1.1 || ^V2.1",
+    "leading-v-exact-version-stable/separator-mixing-1": "^1.0 | ^1.1 || ^1.2,<1.2.7 >=1.2.4 || ^1.4",
+    "leading-v-exact-version-stable/separator-mixing-2": "^1.0 | ^v1.1 || ^V1.2,<1.2.7 >=1.2.4 || ^1.4",
+    "leading-v-hyphenated-stable/01-major-surrounded-by-space-single-trimmed-1": "v1 - 2",
+    "leading-v-hyphenated-stable/01-major-surrounded-by-space-single-trimmed-2": "0.1.1 - v0.1.2"
   }
 }

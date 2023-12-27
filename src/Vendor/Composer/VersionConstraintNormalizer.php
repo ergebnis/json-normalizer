@@ -178,7 +178,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $count = \count($orConstraints);
 
         for ($i = 0; $i < $count; ++$i) {
-            $a = $orConstraints[$i];
+            $a = \preg_replace('/[vV](\d)/', '$1', $orConstraints[$i] ?? '');
 
             if (!\is_string($a)) {
                 continue;
@@ -189,7 +189,7 @@ final class VersionConstraintNormalizer implements Normalizer
             }
 
             for ($j = $i + 1; $j < $count; ++$j) {
-                $b = $orConstraints[$j];
+                $b = \preg_replace('/[vV](\d)/', '$1', $orConstraints[$j] ?? '');
 
                 if (!\is_string($b)) {
                     continue;
@@ -241,8 +241,8 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $sort = static function (string $a, string $b) use ($normalize): int {
             return \strnatcmp(
-                $normalize($a),
-                $normalize($b),
+                $normalize(\preg_replace('/[vV](\d)/', '$1', $a)),
+                $normalize(\preg_replace('/[vV](\d)/', '$1', $b)),
             );
         };
 
