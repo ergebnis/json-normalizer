@@ -122,6 +122,21 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function replaceWildcardXWithAsterisk(string $versionConstraint): string
     {
+        // '1.x.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+)\.[xX]\.[xX]$}',
+            '$1.*',
+        );
+
+        // '1.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+)\.[xX]$}',
+            '$1.*',
+        );
+
+        // 'x' -> '*'
         return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
             '{^[xX]$}',

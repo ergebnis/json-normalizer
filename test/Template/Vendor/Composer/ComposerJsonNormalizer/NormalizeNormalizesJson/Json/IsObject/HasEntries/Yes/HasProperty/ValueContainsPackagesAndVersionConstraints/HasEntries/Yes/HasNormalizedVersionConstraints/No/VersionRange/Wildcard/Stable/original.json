@@ -8,6 +8,10 @@
     "version-range-wildcard-stable/05-major-minor-patch-trimmed": "1.2.*",
     "version-range-wildcard-stable/06-major-minor-patch-untrimmed": " 1.2.* ",
     "version-range-wildcard-stable/07-major-minor-patch-lower-x": "1.2.x",
-    "version-range-wildcard-stable/08-major-minor-patch-upper-X": "1.2.X"
+    "version-range-wildcard-stable/08-major-minor-patch-upper-X": "1.2.X",
+    "version-range-wildcard-stable/09-major-minor-patch-lower-x": "1.x.x",
+    "version-range-wildcard-stable/10-major-minor-patch-upper-X": "1.X.X",
+    "version-range-wildcard-stable/11-major-minor-patch-mixed-xX": "1.x.X",
+    "version-range-wildcard-stable/12-major-minor-patch-mixed-Xx": "1.X.x"
   }
 }
