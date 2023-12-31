@@ -614,6 +614,20 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- use of `x` or `X` for wildcards is replaced with `*`
+
+  ```diff
+   {
+     "require": {
+  -    "foo/bar": "1.x",
+  -    "foo/baz": "2.3.X",
+  -    "foo/qux": "x"
+  +    "foo/bar": "^1.0",
+  +    "foo/baz": "~2.3.0",
+  +    "foo/qux": "*"
+   }
+  ```
+
 ## Changelog
 
 The maintainers of this project record notable changes to this project in a [changelog](CHANGELOG.md).

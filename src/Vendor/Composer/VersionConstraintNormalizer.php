@@ -85,6 +85,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
+        $versionConstraint = self::replaceWildcardXWithAsterisk($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -119,6 +120,27 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints));
     }
 
+    private static function replaceWildcardXWithAsterisk(string $versionConstraint): string
+    {
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
+
+        foreach ($split as &$part) {
+            $part = \preg_replace(
+                '{^[xX]$}',
+                '*',
+                $part,
+            );
+        }
+
+        return \implode(
+            ' ',
+            $split,
+        );
+    }
+
     private static function replaceWildcardWithTilde(string $versionConstraint): string
     {
         $split = \explode(
@@ -128,7 +150,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
         foreach ($split as &$part) {
             $part = \preg_replace(
-                '{^(\d+(?:\.\d+)*)\.\*$}',
+                '{^(\d+(?:\.\d+)*)\.[*xX]$}',
                 '~$1.0',
                 $part,
             );
