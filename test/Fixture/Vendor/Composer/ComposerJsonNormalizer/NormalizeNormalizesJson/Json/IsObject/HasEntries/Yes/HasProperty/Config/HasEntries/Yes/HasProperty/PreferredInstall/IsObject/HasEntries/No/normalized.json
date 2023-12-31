@@ -13,8 +13,5 @@
             "email": "am@localheinz.com"
         }
     ],
-    "homepage": "https://getcomposer.org/doc/06-config.md#preferred-install",
-    "config": {
-        "preferred-install": {}
-    }
+    "homepage": "https://getcomposer.org/doc/06-config.md#preferred-install"
 }

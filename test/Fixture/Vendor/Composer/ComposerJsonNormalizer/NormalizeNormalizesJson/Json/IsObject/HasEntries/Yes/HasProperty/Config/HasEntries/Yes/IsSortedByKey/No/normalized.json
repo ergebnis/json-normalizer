@@ -15,7 +15,6 @@
     ],
     "homepage": "https://getcomposer.org/doc/06-config.md",
     "config": {
-        "allow-plugins": {},
         "platform": {
             "php": "8.0.25"
         },
