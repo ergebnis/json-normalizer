@@ -83,6 +83,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
+        $versionConstraint = self::assertDevPrefixSuffixPosition($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -183,6 +184,36 @@ final class VersionConstraintNormalizer implements Normalizer
                 '$1$2',
                 $part,
             );
+        }
+
+        return \implode(
+            ' ',
+            $split,
+        );
+    }
+
+    private static function assertDevPrefixSuffixPosition(string $versionConstraint): string
+    {
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
+
+        foreach ($split as &$part) {
+            if (\str_starts_with($part, 'dev-')) {
+                $branch = \substr($part, 4);
+            } elseif (\str_ends_with($part, '-dev')) {
+                $branch = \substr($part, 0, -4);
+            } else {
+                continue;
+            }
+
+            // @see https://github.com/composer/semver/blob/3.4.0/src/VersionParser.php#L216
+            if (\preg_match('{^v?\d+(\.(?:\d+|[xX*]))?(\.(?:\d+|[xX*]))?(\.(?:\d+|[xX*]))?$}i', $branch)) {
+                $part = $branch . '-dev';
+            } else {
+                $part = 'dev-' . $branch;
+            }
         }
 
         return \implode(
