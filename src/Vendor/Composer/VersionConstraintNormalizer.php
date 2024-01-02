@@ -179,7 +179,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
         foreach ($split as &$part) {
             $part = \preg_replace(
-                '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
+                '{^(|[!<>]=|[~<>^])v(\d+.*(?<!-dev))$}',
                 '$1$2',
                 $part,
             );
