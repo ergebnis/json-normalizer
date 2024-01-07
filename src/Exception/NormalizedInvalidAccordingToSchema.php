@@ -18,7 +18,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
     private string $schemaUri = '';
 
     /**
-     * @var array<int, string>
+     * @var list<string>
      */
     private array $errors = [];
 
@@ -43,7 +43,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
     }
 
     /**
-     * @return array<int, string>
+     * @return list<string>
      */
     public function errors(): array
     {

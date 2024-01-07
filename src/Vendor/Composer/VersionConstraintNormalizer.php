@@ -286,7 +286,7 @@ final class VersionConstraintNormalizer implements Normalizer
     /**
      * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     private static function splitIntoOrConstraints(string $versionConstraint): array
     {
@@ -307,7 +307,7 @@ final class VersionConstraintNormalizer implements Normalizer
     /**
      * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     private static function splitIntoAndConstraints(string $orConstraint): array
     {

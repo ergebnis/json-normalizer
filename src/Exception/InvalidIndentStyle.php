@@ -47,7 +47,7 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
     }
 
     /**
-     * @return array<int, string>
+     * @return list<string>
      */
     public function allowedStyles(): array
     {
