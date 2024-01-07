@@ -18,10 +18,6 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
     private string $style = '';
 
     /**
-     * @phpstan-var list<string>
-     *
-     * @psalm-var list<string>
-     *
      * @var list<string>
      */
     private array $allowedStyles = [];
@@ -51,10 +47,6 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
     }
 
     /**
-     * @phpstan-return list<string>
-     *
-     * @psalm-return list<string>
-     *
      * @return array<int, string>
      */
     public function allowedStyles(): array

@@ -18,10 +18,6 @@ final class OriginalInvalidAccordingToSchema extends \RuntimeException implement
     private string $schemaUri = '';
 
     /**
-     * @phpstan-var list<string>
-     *
-     * @psalm-var list<string>
-     *
      * @var array<int, string>
      */
     private array $errors = [];
@@ -47,10 +43,6 @@ final class OriginalInvalidAccordingToSchema extends \RuntimeException implement
     }
 
     /**
-     * @phpstan-return list<string>
-     *
-     * @psalm-return list<string>
-     *
      * @return array<int, string>
      */
     public function errors(): array
