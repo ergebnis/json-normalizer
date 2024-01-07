@@ -97,7 +97,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     }
 
     /**
-     * @return array<array{0: int, 1: string}>
+     * @return list<array{0: int, 1: string}>
      */
     public static function provideJsonEncodeOptionsAndEncoded(): array
     {

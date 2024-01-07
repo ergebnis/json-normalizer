@@ -22,7 +22,7 @@ final class InvalidIndentStyle extends \InvalidArgumentException implements Exce
      *
      * @psalm-var list<string>
      *
-     * @var array<string>
+     * @var list<string>
      */
     private array $allowedStyles = [];
 
