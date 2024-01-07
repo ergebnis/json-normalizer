@@ -94,7 +94,7 @@ JSON
      *
      * @param array<int, int> $elements
      *
-     * @return array<array<int>>
+     * @return list<list<int>>
      */
     private static function combinations(array $elements): array
     {
