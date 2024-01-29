@@ -19,8 +19,11 @@ use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Format\JsonEncodeOptions::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidJsonEncodeOptions::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ *
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidJsonEncodeOptions
+ */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -34,7 +37,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         self::assertSame($expected, $jsonEncodeOptions->toInt());
     }
 
-    #[Framework\Attributes\DataProvider('provideInvalidValue')]
+    /**
+     * @dataProvider provideInvalidValue
+     */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
         $this->expectException(Exception\InvalidJsonEncodeOptions::class);
@@ -45,7 +50,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: int}>
      */
-    public static function provideInvalidValue(): \Generator
+    public static function provideInvalidValue(): iterable
     {
         $values = [
             'int-minus-one' => -1,
@@ -59,7 +64,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidValue')]
+    /**
+     * @dataProvider provideValidValue
+     */
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt($value);
@@ -70,7 +77,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: int}>
      */
-    public static function provideValidValue(): \Generator
+    public static function provideValidValue(): iterable
     {
         $values = [
             'int-zero' => 0,
@@ -84,7 +91,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideJsonEncodeOptionsAndEncoded')]
+    /**
+     * @dataProvider provideJsonEncodeOptionsAndEncoded
+     */
     public function testFromJsonReturnsJsonEncodeOptions(
         int $value,
         string $encoded,
@@ -99,9 +108,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     /**
      * @return list<array{0: int, 1: string}>
      */
-    public static function provideJsonEncodeOptionsAndEncoded(): array
+    public static function provideJsonEncodeOptionsAndEncoded(): iterable
     {
-        return [
+        yield from [
             [
                 0,
                 <<<'JSON'

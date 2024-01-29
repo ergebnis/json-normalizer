@@ -17,7 +17,9 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidIndentString::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
+ */
 final class InvalidIndentStringTest extends Framework\TestCase
 {
     use Test\Util\Helper;

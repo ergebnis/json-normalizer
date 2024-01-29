@@ -22,10 +22,10 @@ use Ergebnis\Json\Normalizer;
 final class Scenario
 {
     private function __construct(
-        private readonly string $key,
-        private readonly Normalizer\Format\Format $format,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        private string $key,
+        private Normalizer\Format\Format $format,
+        private Json $original,
+        private Json $normalized,
     ) {
     }
 

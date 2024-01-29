@@ -21,7 +21,7 @@
     "security": "https://github.com/ergebnis/json-normalizer/blob/main/.github/SECURITY.md"
   },
   "require": {
-    "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+    "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
     "ext-json": "*",
     "ergebnis/json": "^1.2.0",
     "ergebnis/json-pointer": "^3.4.0",
@@ -36,13 +36,10 @@
     "ergebnis/php-cs-fixer-config": "^6.20.0",
     "ergebnis/phpunit-slow-test-detector": "^2.9.0",
     "fakerphp/faker": "^1.23.1",
-    "infection/infection": "~0.27.9",
-    "phpunit/phpunit": "^10.5.9",
+    "infection/infection": "~0.26.19",
+    "phpunit/phpunit": "^9.6.16",
     "psalm/plugin-phpunit": "~0.18.4",
     "rector/rector": "~0.19.4",
-    "roave/backward-compatibility-check": "^8.6.0",
-    "symfony/filesystem": "^6.4.0",
-    "symfony/finder": "^6.4.0",
     "vimeo/psalm": "^5.20.0"
   },
   "suggest": {
@@ -65,6 +62,9 @@
     },
     "audit": {
       "abandoned": "report"
+    },
+    "platform": {
+      "php": "8.0.30"
     },
     "preferred-install": "dist",
     "sort-packages": true

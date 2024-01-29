@@ -22,11 +22,11 @@ use Ergebnis\Json\Pointer;
 final class Scenario
 {
     private function __construct(
-        private readonly string $key,
-        private readonly string $schemaUri,
-        private readonly Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        private string $key,
+        private string $schemaUri,
+        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private Json $original,
+        private Json $normalized,
     ) {
     }
 

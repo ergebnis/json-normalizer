@@ -21,7 +21,7 @@ use Ergebnis\Json\Normalizer\Exception;
  */
 final class JsonEncodeOptions
 {
-    private function __construct(private readonly int $value)
+    private function __construct(private int $value)
     {
     }
 

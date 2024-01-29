@@ -19,7 +19,9 @@ use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(ChainNormalizer::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\ChainNormalizer
+ */
 final class ChainNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;

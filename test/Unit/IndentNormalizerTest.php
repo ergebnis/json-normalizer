@@ -20,8 +20,11 @@ use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer\PrinterInterface;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(IndentNormalizer::class)]
-#[Framework\Attributes\UsesClass(Format\Indent::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\IndentNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ */
 final class IndentNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;

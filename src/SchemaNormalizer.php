@@ -25,10 +25,10 @@ use JsonSchema\SchemaStorage;
 final class SchemaNormalizer implements Normalizer
 {
     public function __construct(
-        private readonly string $schemaUri,
-        private readonly SchemaStorage $schemaStorage,
-        private readonly SchemaValidator\SchemaValidator $schemaValidator,
-        private readonly Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        private string $schemaUri,
+        private SchemaStorage $schemaStorage,
+        private SchemaValidator\SchemaValidator $schemaValidator,
+        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
     ) {
     }
 
