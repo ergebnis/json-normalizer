@@ -19,6 +19,6 @@ interface Formatter
 {
     public function format(
         Json $json,
-        Format $format,
+        Format $format
     ): Json;
 }

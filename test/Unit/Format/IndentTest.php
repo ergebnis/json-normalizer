@@ -96,7 +96,7 @@ final class IndentTest extends Framework\TestCase
     public function testFromSizeAndStyleReturnsIndent(
         int $size,
         string $style,
-        string $string,
+        string $string
     ): void {
         $indent = Format\Indent::fromSizeAndStyle(
             $size,
@@ -190,7 +190,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromJsonReturnsIndentSniffedFromArray(
         string $actualIndent,
-        string $sniffedIndent,
+        string $sniffedIndent
     ): void {
         $json = Json::fromString(
             <<<JSON
@@ -215,7 +215,7 @@ JSON
      */
     public function testFromJsonReturnsIndentSniffedFromObject(
         string $actualIndent,
-        string $sniffedIndent,
+        string $sniffedIndent
     ): void {
         $json = Json::fromString(
             <<<JSON

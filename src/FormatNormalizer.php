@@ -18,10 +18,15 @@ use Ergebnis\Json\Printer;
 
 final class FormatNormalizer implements Normalizer
 {
+    private Format\Format $format;
+    private Printer\PrinterInterface $printer;
+
     public function __construct(
-        private Printer\PrinterInterface $printer,
-        private Format\Format $format,
+        Printer\PrinterInterface $printer,
+        Format\Format $format
     ) {
+        $this->printer = $printer;
+        $this->format = $format;
     }
 
     public function normalize(Json $json): Json

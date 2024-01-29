@@ -27,9 +27,11 @@ final class VersionConstraintNormalizer implements Normalizer
         'require',
         'require-dev',
     ];
+    private Semver\VersionParser $versionParser;
 
-    public function __construct(private Semver\VersionParser $versionParser)
+    public function __construct(Semver\VersionParser $versionParser)
     {
+        $this->versionParser = $versionParser;
     }
 
     public function normalize(Json $json): Json
@@ -62,7 +64,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
                 try {
                     $this->versionParser->parseConstraints($versionConstraint);
-                } catch (\UnexpectedValueException) {
+                } catch (\UnexpectedValueException $exception) {
                     return $versionConstraint;
                 }
 
