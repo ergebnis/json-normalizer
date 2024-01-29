@@ -12,6 +12,7 @@ For a full diff see [`4.4.1...main`][4.4.1...main].
 
 - Required `ergebnis/json:^1.2.0` ([#1073]), by [@localheinz]
 - Required `ergebnis/json-printer:^3.5.0` ([#1074]), by [@localheinz]
+- Required `ergebnis/json-pointer:^3.4.0` ([#1075]), by [@localheinz]
 
 ## [`4.4.1`][4.4.1]
 
@@ -681,6 +682,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1039]: https://github.com/ergebnis/json-normalizer/pull/1039
 [#1073]: https://github.com/ergebnis/json-normalizer/pull/1073
 [#1074]: https://github.com/ergebnis/json-normalizer/pull/1074
+[#1075]: https://github.com/ergebnis/json-normalizer/pull/1075
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
