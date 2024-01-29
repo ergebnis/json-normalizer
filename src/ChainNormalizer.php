@@ -20,7 +20,7 @@ final class ChainNormalizer implements Normalizer
     /**
      * @var array<int, Normalizer>
      */
-    private readonly array $normalizers;
+    private array $normalizers;
 
     public function __construct(Normalizer ...$normalizers)
     {

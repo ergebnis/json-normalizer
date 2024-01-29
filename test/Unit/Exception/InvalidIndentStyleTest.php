@@ -17,7 +17,9 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidIndentStyle::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
+ */
 final class InvalidIndentStyleTest extends Framework\TestCase
 {
     use Test\Util\Helper;

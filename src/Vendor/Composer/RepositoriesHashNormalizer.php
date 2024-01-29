@@ -26,7 +26,7 @@ final class RepositoriesHashNormalizer implements Normalizer
         'exclude',
         'only',
     ];
-    private readonly WildcardSorter $wildcardSorter;
+    private WildcardSorter $wildcardSorter;
 
     public function __construct()
     {

@@ -29,7 +29,7 @@ final class ConfigHashNormalizer implements Normalizer
          */
         'preferred-install',
     ];
-    private readonly WildcardSorter $wildcardSorter;
+    private WildcardSorter $wildcardSorter;
 
     public function __construct()
     {

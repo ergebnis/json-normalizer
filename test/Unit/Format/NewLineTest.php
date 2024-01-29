@@ -18,11 +18,16 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Format;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Format\NewLine::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidNewLineString::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Format\NewLine
+ *
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidNewLineString
+ */
 final class NewLineTest extends Framework\TestCase
 {
-    #[Framework\Attributes\DataProvider('provideInvalidNewLineString')]
+    /**
+     * @dataProvider provideInvalidNewLineString
+     */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
         $this->expectException(Exception\InvalidNewLineString::class);
@@ -34,7 +39,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideInvalidNewLineString(): \Generator
+    public static function provideInvalidNewLineString(): iterable
     {
         $strings = [
             "\t",
@@ -54,7 +59,9 @@ final class NewLineTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidNewLineString')]
+    /**
+     * @dataProvider provideValidNewLineString
+     */
     public function testFromStringReturnsNewLine(string $string): void
     {
         $newLine = Format\NewLine::fromString($string);
@@ -65,7 +72,7 @@ final class NewLineTest extends Framework\TestCase
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideValidNewLineString(): \Generator
+    public static function provideValidNewLineString(): iterable
     {
         $strings = [
             "\n",
@@ -91,7 +98,9 @@ final class NewLineTest extends Framework\TestCase
         self::assertSame(\PHP_EOL, $newLine->toString());
     }
 
-    #[Framework\Attributes\DataProvider('provideNewLine')]
+    /**
+     * @dataProvider provideNewLine
+     */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
         $json = Json::fromString(
@@ -105,7 +114,9 @@ JSON
         self::assertSame($newLineString, $newLine->toString());
     }
 
-    #[Framework\Attributes\DataProvider('provideNewLine')]
+    /**
+     * @dataProvider provideNewLine
+     */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
         $json = Json::fromString(
@@ -122,7 +133,7 @@ JSON
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideNewLine(): \Generator
+    public static function provideNewLine(): iterable
     {
         $values = [
             "\r\n",

@@ -21,9 +21,9 @@ use Ergebnis\Json\Json;
 final class Scenario
 {
     private function __construct(
-        private readonly string $key,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        private string $key,
+        private Json $original,
+        private Json $normalized,
     ) {
     }
 

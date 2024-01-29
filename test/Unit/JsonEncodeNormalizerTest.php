@@ -19,13 +19,18 @@ use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(JsonEncodeNormalizer::class)]
-#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\JsonEncodeNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ */
 final class JsonEncodeNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProvider('provideJsonEncodeOptions')]
+    /**
+     * @dataProvider provideJsonEncodeOptions
+     */
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
         $json = Json::fromString(
@@ -56,7 +61,7 @@ JSON
     /**
      * @return \Generator<int, array{0: int}>
      */
-    public static function provideJsonEncodeOptions(): \Generator
+    public static function provideJsonEncodeOptions(): iterable
     {
         /**
          * Could add more, but the idea counts.

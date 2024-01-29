@@ -18,7 +18,7 @@ use Ergebnis\Json\Printer;
 
 final class DefaultFormatter implements Formatter
 {
-    public function __construct(private readonly Printer\PrinterInterface $printer)
+    public function __construct(private Printer\PrinterInterface $printer)
     {
     }
 
