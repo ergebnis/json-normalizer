@@ -104,31 +104,39 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
         return [
             [
                 0,
-                '{
+                <<<'EOD'
+{
   "name": "Andreas M\u00f6ller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}',
+}
+EOD,
             ],
             [
                 \JSON_UNESCAPED_SLASHES,
-                '{
+                <<<'EOD'
+{
   "name": "Andreas M\u00F6ller",
   "url": "https://github.com/ergebnis/json-normalizer"
-}',
+}
+EOD,
             ],
             [
                 \JSON_UNESCAPED_UNICODE,
-                '{
+                <<<'EOD'
+{
   "name": "Andreas Möller",
   "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}',
+}
+EOD,
             ],
             [
                 \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
-                '{
+                <<<'EOD'
+{
   "name": "Andreas Möller",
   "url": "https://github.com/ergebnis/json-normalizer"
-}',
+}
+EOD,
             ],
         ];
     }
