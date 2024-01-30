@@ -15,7 +15,7 @@ For a full diff see [`4.4.1...main`][4.4.1...main].
 - Required `ergebnis/json-pointer:^3.4.0` ([#1075]), by [@localheinz]
 - Required `ergebnis/json-schema-validator:^4.2.0` ([#1076]), by [@localheinz]
 - Added support for PHP 8.3 ([#1077]), by [@localheinz]
-- Added support for PHP 7.7 ([#1079]), by [@localheinz]
+- Added support for PHP 7.4 ([#1079]), by [@localheinz]
 
 ## [`4.4.1`][4.4.1]
 
