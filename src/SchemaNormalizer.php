@@ -24,25 +24,34 @@ use JsonSchema\SchemaStorage;
 
 final class SchemaNormalizer implements Normalizer
 {
+    private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted;
+    private SchemaValidator\SchemaValidator $schemaValidator;
+    private SchemaStorage $schemaStorage;
+    private string $schemaUri;
+
     public function __construct(
-        private string $schemaUri,
-        private SchemaStorage $schemaStorage,
-        private SchemaValidator\SchemaValidator $schemaValidator,
-        private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        string $schemaUri,
+        SchemaStorage $schemaStorage,
+        SchemaValidator\SchemaValidator $schemaValidator,
+        Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted
     ) {
+        $this->schemaUri = $schemaUri;
+        $this->schemaStorage = $schemaStorage;
+        $this->schemaValidator = $schemaValidator;
+        $this->specificationForPointerToDataThatShouldNotBeSorted = $specificationForPointerToDataThatShouldNotBeSorted;
     }
 
     public function normalize(Json $json): Json
     {
         try {
             $schema = $this->schemaStorage->getSchema($this->schemaUri);
-        } catch (UriResolverException) {
+        } catch (UriResolverException $exception) {
             throw Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($this->schemaUri);
-        } catch (ResourceNotFoundException) {
+        } catch (ResourceNotFoundException $exception) {
             throw Exception\SchemaUriCouldNotBeRead::fromSchemaUri($this->schemaUri);
-        } catch (InvalidSchemaMediaTypeException) {
+        } catch (InvalidSchemaMediaTypeException $exception) {
             throw Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($this->schemaUri);
-        } catch (JsonDecodingException) {
+        } catch (JsonDecodingException $exception) {
             throw Exception\SchemaUriReferencesInvalidJsonDocument::fromSchemaUri($this->schemaUri);
         }
 
@@ -98,7 +107,7 @@ final class SchemaNormalizer implements Normalizer
     private function normalizeData(
         $data,
         object $schema,
-        Pointer\JsonPointer $pointerToData,
+        Pointer\JsonPointer $pointerToData
     ) {
         if (\is_array($data)) {
             return $this->normalizeArray(
@@ -127,7 +136,7 @@ final class SchemaNormalizer implements Normalizer
     private function normalizeArray(
         array $data,
         object $schema,
-        Pointer\JsonPointer $pointerToData,
+        Pointer\JsonPointer $pointerToData
     ): array {
         $schema = $this->resolveSchema(
             $data,
@@ -171,7 +180,7 @@ final class SchemaNormalizer implements Normalizer
     private function normalizeObject(
         object $data,
         object $schema,
-        Pointer\JsonPointer $pointerToData,
+        Pointer\JsonPointer $pointerToData
     ): object {
         $schema = $this->resolveSchema(
             $data,
@@ -253,7 +262,7 @@ final class SchemaNormalizer implements Normalizer
 
     private function resolveSchema(
         $data,
-        object $schema,
+        object $schema
     ): object {
         /**
          * @see https://json-schema.org/understanding-json-schema/reference/combining.html#anyof

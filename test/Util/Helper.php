@@ -38,7 +38,7 @@ trait Helper
 
     final protected static function assertJsonStringIdenticalToJsonString(
         string $expected,
-        string $actual,
+        string $actual
     ): void {
         self::assertJson($expected);
         self::assertJson($actual);

@@ -15,6 +15,7 @@ For a full diff see [`4.4.1...main`][4.4.1...main].
 - Required `ergebnis/json-pointer:^3.4.0` ([#1075]), by [@localheinz]
 - Required `ergebnis/json-schema-validator:^4.2.0` ([#1076]), by [@localheinz]
 - Added support for PHP 8.3 ([#1077]), by [@localheinz]
+- Added support for PHP 7.7 ([#1079]), by [@localheinz]
 
 ## [`4.4.1`][4.4.1]
 
@@ -688,6 +689,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1075]: https://github.com/ergebnis/json-normalizer/pull/1075
 [#1076]: https://github.com/ergebnis/json-normalizer/pull/1076
 [#1077]: https://github.com/ergebnis/json-normalizer/pull/1077
+[#1079]: https://github.com/ergebnis/json-normalizer/pull/1079
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

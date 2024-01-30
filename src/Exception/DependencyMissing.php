@@ -17,7 +17,7 @@ final class DependencyMissing extends \RuntimeException implements Exception
 {
     public static function for(
         string $className,
-        string $packageName,
+        string $packageName
     ): self {
         return new self(\sprintf(
             <<<'TXT'

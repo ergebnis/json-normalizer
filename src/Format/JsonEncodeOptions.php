@@ -21,8 +21,11 @@ use Ergebnis\Json\Normalizer\Exception;
  */
 final class JsonEncodeOptions
 {
-    private function __construct(private int $value)
+    private int $value;
+
+    private function __construct(int $value)
     {
+        $this->value = $value;
     }
 
     public static function default(): self
@@ -46,7 +49,7 @@ final class JsonEncodeOptions
     {
         $jsonEncodeOptions = 0;
 
-        if (!\str_contains($json->encoded(), '\/')) {
+        if (false === \strpos($json->encoded(), '\/')) {
             $jsonEncodeOptions = \JSON_UNESCAPED_SLASHES;
         }
 
