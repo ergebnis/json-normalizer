@@ -4,13 +4,13 @@
 
 The following versions of `ergebnis/json-normalizer` have active support:
 
-- `^4.4.1`
+- `^4.5.0`
 
 ## Unsupported Versions
 
 The following versions of `ergebnis/json-normalizer` have reached their end of life:
 
-- `<4.4.1`
+- `<4.5.0`
 
 ## Reporting a Vulnerability
 
