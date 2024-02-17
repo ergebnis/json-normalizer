@@ -85,6 +85,7 @@ final class VersionConstraintNormalizer implements Normalizer
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
+        $versionConstraint = self::replaceWildcardXWithAsterisk($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -119,45 +120,45 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints));
     }
 
-    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    private static function replaceWildcardXWithAsterisk(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        // '1.x.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
+            '{^(\d+)\.[xX]\.[xX]$}',
+            '$1.*',
         );
 
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(\d+(?:\.\d+)*)\.\*$}',
-                '~$1.0',
-                $part,
-            );
-        }
+        // '1.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+)\.[xX]$}',
+            '$1.*',
+        );
 
-        return \implode(
-            ' ',
-            $split,
+        // 'x' -> '*'
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^[xX]$}',
+            '*',
+        );
+    }
+
+    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    {
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+(?:\.\d+)*)\.[*xX]$}',
+            '~$1.0',
         );
     }
 
     private static function replaceTildeWithCaret(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^~(\d+(?:\.\d+)?)$}',
-                '^$1',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
+            '{^~(\d+(?:\.\d+)?)$}',
+            '^$1',
         );
     }
 
@@ -174,22 +175,10 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeLeadingVersionPrefix(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
-                '$1$2',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
+            '{^(|[!<>]=|[~<>^])v(\d+.*)$}',
+            '$1$2',
         );
     }
 
@@ -324,6 +313,30 @@ final class VersionConstraintNormalizer implements Normalizer
         return \implode(
             ' ',
             $andConstraints,
+        );
+    }
+
+    /**
+     * @param non-empty-string $find
+     */
+    private static function applyRegularExpressionReplacementToVersionsInTurn(string $versionConstraint, string $find, string $replace): string
+    {
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
+
+        foreach ($split as &$part) {
+            $part = \preg_replace(
+                $find,
+                $replace,
+                $part,
+            );
+        }
+
+        return \implode(
+            ' ',
+            $split,
         );
     }
 }

@@ -3,7 +3,15 @@
     "value-contains-packages-and-version-constraints": {
         "version-range-wildcard-stable/01-major-minor-trimmed": "^1.0",
         "version-range-wildcard-stable/02-major-minor-untrimmed": "^1.0",
-        "version-range-wildcard-stable/03-major-minor-patch-trimmed": "~1.2.0",
-        "version-range-wildcard-stable/04-major-minor-patch-untrimmed": "~1.2.0"
+        "version-range-wildcard-stable/03-major-minor-lower-x": "^1.0",
+        "version-range-wildcard-stable/04-major-minor-upper-X": "^1.0",
+        "version-range-wildcard-stable/05-major-minor-patch-trimmed": "~1.2.0",
+        "version-range-wildcard-stable/06-major-minor-patch-untrimmed": "~1.2.0",
+        "version-range-wildcard-stable/07-major-minor-patch-lower-x": "~1.2.0",
+        "version-range-wildcard-stable/08-major-minor-patch-upper-X": "~1.2.0",
+        "version-range-wildcard-stable/09-major-minor-patch-lower-x": "^1.0",
+        "version-range-wildcard-stable/10-major-minor-patch-upper-X": "^1.0",
+        "version-range-wildcard-stable/11-major-minor-patch-mixed-xX": "^1.0",
+        "version-range-wildcard-stable/12-major-minor-patch-mixed-Xx": "^1.0"
     }
 }
