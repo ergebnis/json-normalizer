@@ -601,7 +601,6 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-
 - leading `v` prefixes in version constraints are removed
 
   ```diff
