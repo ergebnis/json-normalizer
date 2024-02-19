@@ -191,9 +191,13 @@ final class VersionConstraintNormalizer implements Normalizer
         );
 
         foreach ($split as &$part) {
-            if (\str_starts_with($part, 'dev-')) {
+            if (\strlen($part) <= 4) {
+                continue;
+            }
+
+            if (\strpos($part, 'dev-') === 0) {
                 $branch = \substr($part, 4);
-            } elseif (\str_ends_with($part, '-dev')) {
+            } elseif (\substr($part, -4) === '-dev') {
                 $branch = \substr($part, 0, -4);
             } else {
                 continue;
