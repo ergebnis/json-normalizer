@@ -14,14 +14,19 @@ branches:
         required_approving_review_count: 1
       required_status_checks:
         checks:
-          - context: "Backward-Compatibility Analysis (8.1, locked)"
-          - context: "Code Coverage (8.1, locked)"
-          - context: "Coding Standards (8.1, locked)"
-          - context: "Dependency Analysis (8.1, locked)"
-          - context: "Mutation Tests (8.1, locked)"
-          - context: "Refactoring (8.1, locked)"
-          - context: "Security Analysis (8.1, locked)"
-          - context: "Static Code Analysis (8.1, locked)"
+          - context: "Code Coverage (7.4, locked)"
+          - context: "Coding Standards (7.4, locked)"
+          - context: "Dependency Analysis (7.4, locked)"
+          - context: "Mutation Tests (7.4, locked)"
+          - context: "Refactoring (7.4, locked)"
+          - context: "Security Analysis (7.4, locked)"
+          - context: "Static Code Analysis (7.4, locked)"
+          - context: "Tests (7.4, highest)"
+          - context: "Tests (7.4, locked)"
+          - context: "Tests (7.4, lowest)"
+          - context: "Tests (8.0, highest)"
+          - context: "Tests (8.0, locked)"
+          - context: "Tests (8.0, lowest)"
           - context: "Tests (8.1, highest)"
           - context: "Tests (8.1, locked)"
           - context: "Tests (8.1, lowest)"
@@ -77,7 +82,7 @@ repository:
   archived: false
   default_branch: "main"
   delete_branch_on_merge: true
-  description: ":page_with_curl: Provides generic and vendor-specific normalizers for normalizing JSON documents."
+  description: "📃 Provides a composer package with generic and vendor-specific normalizers for normalizing JSON documents."
   enable_automated_security_fixes: true
   enable_vulnerability_alerts: true
   has_discussions: false

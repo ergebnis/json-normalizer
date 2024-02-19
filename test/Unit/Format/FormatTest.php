@@ -18,13 +18,18 @@ use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Format;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Format\Format::class)]
-#[Framework\Attributes\UsesClass(Format\Indent::class)]
-#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
-#[Framework\Attributes\UsesClass(Format\NewLine::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Format\Format
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\Format\NewLine
+ */
 final class FormatTest extends Framework\TestCase
 {
-    #[Framework\Attributes\DataProviderExternal(DataProvider\BoolProvider::class, 'arbitrary')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary
+     */
     public function testCreateReturnsFormat(bool $hasFinalNewLine): void
     {
         $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt(\JSON_UNESCAPED_UNICODE | \JSON_UNESCAPED_SLASHES);
@@ -95,7 +100,9 @@ final class FormatTest extends Framework\TestCase
         self::assertSame($newLine, $mutated->newLine());
     }
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\BoolProvider::class, 'arbitrary')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary
+     */
     public function testWithHasFinalNewLineClonesFormatAndSetsFinalNewLine(bool $hasFinalNewLine): void
     {
         $format = Format\Format::create(
@@ -111,7 +118,9 @@ final class FormatTest extends Framework\TestCase
         self::assertSame($hasFinalNewLine, $mutated->hasFinalNewLine());
     }
 
-    #[Framework\Attributes\DataProvider('provideEncodedWithoutIndent')]
+    /**
+     * @dataProvider provideEncodedWithoutIndent
+     */
     public function testFromJsonReturnsFormatWithDefaultIndentIfJsonIsWithoutIndent(string $encoded): void
     {
         $json = Json::fromString($encoded);
@@ -124,7 +133,7 @@ final class FormatTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideEncodedWithoutIndent(): \Generator
+    public static function provideEncodedWithoutIndent(): iterable
     {
         $values = [
             'array-empty' => '[]',
@@ -147,7 +156,9 @@ final class FormatTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideWhitespaceWithoutNewLine')]
+    /**
+     * @dataProvider provideWhitespaceWithoutNewLine
+     */
     public function testFromFormatReturnsFormatWithoutFinalNewLineIfThereIsNoFinalNewLine(string $actualWhitespace): void
     {
         $json = Json::fromString(
@@ -170,7 +181,7 @@ JSON
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideWhitespaceWithoutNewLine(): \Generator
+    public static function provideWhitespaceWithoutNewLine(): iterable
     {
         $characters = [
             ' ',
@@ -188,7 +199,9 @@ JSON
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideWhitespaceWithNewLine')]
+    /**
+     * @dataProvider provideWhitespaceWithNewLine
+     */
     public function testFromFormatReturnsFormatWithFinalNewLineIfThereIsAtLeastOneFinalNewLine(string $actualWhitespace): void
     {
         $json = Json::fromString(
@@ -211,7 +224,7 @@ JSON
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideWhitespaceWithNewLine(): \Generator
+    public static function provideWhitespaceWithNewLine(): iterable
     {
         $characters = [
             '',

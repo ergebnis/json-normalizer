@@ -18,7 +18,9 @@ use Ergebnis\Json\Normalizer\CallableNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(CallableNormalizer::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\CallableNormalizer
+ */
 final class CallableNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;

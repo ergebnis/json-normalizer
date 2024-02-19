@@ -18,17 +18,13 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
     private string $schemaUri = '';
 
     /**
-     * @phpstan-var list<string>
-     *
-     * @psalm-var list<string>
-     *
-     * @var array<int, string>
+     * @var list<string>
      */
     private array $errors = [];
 
     public static function fromSchemaUriAndErrors(
         string $schemaUri,
-        string ...$errors,
+        string ...$errors
     ): self {
         $exception = new self(\sprintf(
             'Normalized JSON is not valid according to schema "%s".',
@@ -47,11 +43,7 @@ final class NormalizedInvalidAccordingToSchema extends \RuntimeException impleme
     }
 
     /**
-     * @phpstan-return list<string>
-     *
-     * @psalm-return list<string>
-     *
-     * @return array<int, string>
+     * @return list<string>
      */
     public function errors(): array
     {

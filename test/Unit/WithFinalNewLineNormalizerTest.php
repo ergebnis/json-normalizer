@@ -19,12 +19,16 @@ use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(WithFinalNewLineNormalizer::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
+ */
 final class WithFinalNewLineNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProviderExternal(DataProvider\StringProvider::class, 'blank')]
+    /**
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank
+     */
     public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {
         $json = Json::fromString(

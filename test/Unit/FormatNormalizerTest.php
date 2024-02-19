@@ -20,16 +20,21 @@ use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(FormatNormalizer::class)]
-#[Framework\Attributes\UsesClass(Format\Format::class)]
-#[Framework\Attributes\UsesClass(Format\Indent::class)]
-#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
-#[Framework\Attributes\UsesClass(Format\NewLine::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\FormatNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Format\Format
+ * @uses \Ergebnis\Json\Normalizer\Format\Indent
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\Format\NewLine
+ */
 final class FormatNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProvider('provideScenario')]
+    /**
+     * @dataProvider provideScenario
+     */
     public function testNormalizeNormalizes(Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $normalizer = new FormatNormalizer(
@@ -45,7 +50,7 @@ final class FormatNormalizerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario}>
      */
-    public static function provideScenario(): \Generator
+    public static function provideScenario(): iterable
     {
         $basePath = __DIR__ . '/../';
 

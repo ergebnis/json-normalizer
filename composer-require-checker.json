@@ -1,6 +1,17 @@
 {
   "symbol-whitelist": [
+    "array",
+    "bool",
+    "callable",
     "Composer\\Semver\\Semver",
-    "Composer\\Semver\\VersionParser"
+    "Composer\\Semver\\VersionParser",
+    "false",
+    "int",
+    "null",
+    "object",
+    "self",
+    "string",
+    "true",
+    "void"
   ]
 }

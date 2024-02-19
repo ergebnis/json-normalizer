@@ -18,13 +18,16 @@ use Ergebnis\Json\Printer;
 
 final class DefaultFormatter implements Formatter
 {
-    public function __construct(private readonly Printer\PrinterInterface $printer)
+    private Printer\PrinterInterface $printer;
+
+    public function __construct(Printer\PrinterInterface $printer)
     {
+        $this->printer = $printer;
     }
 
     public function format(
         Json $json,
-        Format $format,
+        Format $format
     ): Json {
         /** @var string $encoded */
         $encoded = \json_encode(

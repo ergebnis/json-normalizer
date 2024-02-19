@@ -21,19 +21,28 @@ use Ergebnis\Json\Normalizer;
  */
 final class Scenario
 {
+    private Json $normalized;
+    private Json $original;
+    private Normalizer\Format\Format $format;
+    private string $key;
+
     private function __construct(
-        private readonly string $key,
-        private readonly Normalizer\Format\Format $format,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        string $key,
+        Normalizer\Format\Format $format,
+        Json $original,
+        Json $normalized
     ) {
+        $this->key = $key;
+        $this->format = $format;
+        $this->original = $original;
+        $this->normalized = $normalized;
     }
 
     public static function create(
         string $key,
         Normalizer\Format\Format $format,
         Json $original,
-        Json $normalized,
+        Json $normalized
     ): self {
         return new self(
             $key,

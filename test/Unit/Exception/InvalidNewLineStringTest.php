@@ -17,7 +17,9 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidNewLineString::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidNewLineString
+ */
 final class InvalidNewLineStringTest extends Framework\TestCase
 {
     use Test\Util\Helper;

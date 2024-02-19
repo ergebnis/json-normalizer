@@ -17,7 +17,9 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\SchemaUriReferencesInvalidJsonDocument::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
+ */
 final class SchemaUriReferencesInvalidJsonDocumentTest extends Framework\TestCase
 {
     use Test\Util\Helper;

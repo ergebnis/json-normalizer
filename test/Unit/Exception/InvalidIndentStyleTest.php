@@ -17,7 +17,9 @@ use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Exception\InvalidIndentStyle::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
+ */
 final class InvalidIndentStyleTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -36,7 +38,7 @@ final class InvalidIndentStyleTest extends Framework\TestCase
 
         $style = $faker->word();
 
-        /** @var array<string> $allowedStyles */
+        /** @var list<string> $allowedStyles */
         $allowedStyles = $faker->words();
 
         $exception = Exception\InvalidIndentStyle::fromStyleAndAllowedStyles(

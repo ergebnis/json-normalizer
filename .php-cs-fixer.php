@@ -18,7 +18,7 @@ $license = License\Type\MIT::markdown(
     __DIR__ . '/LICENSE.md',
     License\Range::since(
         License\Year::fromString('2018'),
-        new \DateTimeZone('UTC'),
+        new DateTimeZone('UTC'),
     ),
     License\Holder::fromString('Andreas Möller'),
     License\Url::fromString('https://github.com/ergebnis/json-normalizer'),
@@ -26,7 +26,7 @@ $license = License\Type\MIT::markdown(
 
 $license->save();
 
-$ruleSet = PhpCsFixer\Config\RuleSet\Php81::create()
+$ruleSet = PhpCsFixer\Config\RuleSet\Php74::create()
     ->withHeader($license->header())
     ->withRules(PhpCsFixer\Config\Rules::fromArray([
         'mb_str_functions' => false,

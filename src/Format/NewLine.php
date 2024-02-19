@@ -21,8 +21,11 @@ use Ergebnis\Json\Normalizer\Exception;
  */
 final class NewLine
 {
-    private function __construct(private readonly string $value)
+    private string $value;
+
+    private function __construct(string $value)
     {
+        $this->value = $value;
     }
 
     /**

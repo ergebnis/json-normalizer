@@ -21,13 +21,24 @@ use Ergebnis\Json\Pointer;
  */
 final class Scenario
 {
+    private Json $normalized;
+    private Json $original;
+    private Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted;
+    private string $schemaUri;
+    private string $key;
+
     private function __construct(
-        private readonly string $key,
-        private readonly string $schemaUri,
-        private readonly Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        string $key,
+        string $schemaUri,
+        Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        Json $original,
+        Json $normalized
     ) {
+        $this->key = $key;
+        $this->schemaUri = $schemaUri;
+        $this->specificationForPointerToDataThatShouldNotBeSorted = $specificationForPointerToDataThatShouldNotBeSorted;
+        $this->original = $original;
+        $this->normalized = $normalized;
     }
 
     public static function create(
@@ -35,7 +46,7 @@ final class Scenario
         string $schemaUri,
         Pointer\Specification $jsonPointerSpecification,
         Json $original,
-        Json $normalized,
+        Json $normalized
     ): self {
         return new self(
             $key,

@@ -6,7 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
-For a full diff see [`4.4.1...main`][4.4.1...main].
+For a full diff see [`4.5.0...main`][4.5.0...main].
+
+### Changed
+
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to replace `x` and `X` wildcards with `*` ([#1052]), by [@fredden]
+
+## [`4.5.0`][4.5.0]
+
+For a full diff see [`4.4.1...4.5.0`][4.4.1...4.5.0].
+
+### Changed
+
+- Required `ergebnis/json:^1.2.0` ([#1073]), by [@localheinz]
+- Required `ergebnis/json-printer:^3.5.0` ([#1074]), by [@localheinz]
+- Required `ergebnis/json-pointer:^3.4.0` ([#1075]), by [@localheinz]
+- Required `ergebnis/json-schema-validator:^4.2.0` ([#1076]), by [@localheinz]
+- Added support for PHP 8.3 ([#1077]), by [@localheinz]
+- Added support for PHP 7.4 ([#1079]), by [@localheinz]
 
 ## [`4.4.1`][4.4.1]
 
@@ -505,6 +522,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [4.2.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.2.0
 [4.3.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.3.0
 [4.4.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.4.0
+[4.4.1]: https://github.com/ergebnis/json-normalizer/releases/tag/4.4.1
+[4.5.0]: https://github.com/ergebnis/json-normalizer/releases/tag/4.5.0
 
 [5d8b3e2...0.1.0]: https://github.com/ergebnis/json-normalizer/compare/5d8b3e2...0.1.0
 [0.1.0...0.2.0]: https://github.com/ergebnis/json-normalizer/compare/0.1.0...0.2.0
@@ -541,7 +560,8 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [4.2.0...4.3.0]: https://github.com/ergebnis/json-normalizer/compare/4.2.0...4.3.0
 [4.3.0...4.4.0]: https://github.com/ergebnis/json-normalizer/compare/4.4.0...main
 [4.4.0...4.4.1]: https://github.com/ergebnis/json-normalizer/compare/4.4.0...4.4.1
-[4.4.1...main]: https://github.com/ergebnis/json-normalizer/compare/4.4.1...main
+[4.4.1...4.5.0]: https://github.com/ergebnis/json-normalizer/compare/4.4.1...4.5.0
+[4.5.0...main]: https://github.com/ergebnis/json-normalizer/compare/4.5.0...main
 
 [#1]: https://github.com/ergebnis/json-normalizer/pull/1
 [#2]: https://github.com/ergebnis/json-normalizer/pull/2
@@ -674,6 +694,13 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1001]: https://github.com/ergebnis/json-normalizer/pull/1001
 [#1027]: https://github.com/ergebnis/json-normalizer/pull/1027
 [#1039]: https://github.com/ergebnis/json-normalizer/pull/1039
+[#1052]: https://github.com/ergebnis/json-normalizer/pull/1052
+[#1073]: https://github.com/ergebnis/json-normalizer/pull/1073
+[#1074]: https://github.com/ergebnis/json-normalizer/pull/1074
+[#1075]: https://github.com/ergebnis/json-normalizer/pull/1075
+[#1076]: https://github.com/ergebnis/json-normalizer/pull/1076
+[#1077]: https://github.com/ergebnis/json-normalizer/pull/1077
+[#1079]: https://github.com/ergebnis/json-normalizer/pull/1079
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

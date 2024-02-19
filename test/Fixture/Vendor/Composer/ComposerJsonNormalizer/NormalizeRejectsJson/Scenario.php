@@ -20,15 +20,20 @@ use Ergebnis\Json\Json;
  */
 final class Scenario
 {
+    private Json $original;
+    private string $key;
+
     private function __construct(
-        private readonly string $key,
-        private readonly Json $original,
+        string $key,
+        Json $original
     ) {
+        $this->key = $key;
+        $this->original = $original;
     }
 
     public static function create(
         string $key,
-        Json $original,
+        Json $original
     ): self {
         return new self(
             $key,

@@ -14,33 +14,34 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\ChainNormalizer;
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Normalizer\Vendor;
-use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(SchemaNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\BinNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\ComposerJsonNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\ConfigHashNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\PackageHashNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\RepositoriesHashNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\VersionConstraintNormalizer::class)]
-#[Framework\Attributes\CoversClass(Vendor\Composer\WildcardSorter::class)]
-#[Framework\Attributes\UsesClass(ChainNormalizer::class)]
-#[Framework\Attributes\UsesClass(Exception\OriginalInvalidAccordingToSchema::class)]
-#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
-#[Framework\Attributes\UsesClass(SchemaNormalizer::class)]
-#[Framework\Attributes\UsesClass(WithFinalNewLineNormalizer::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\SchemaNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\BinNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ComposerJsonNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\PackageHashNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\RepositoriesHashNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer
+ * @covers \Ergebnis\Json\Normalizer\Vendor\Composer\WildcardSorter
+ *
+ * @uses \Ergebnis\Json\Normalizer\ChainNormalizer
+ * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ * @uses \Ergebnis\Json\Normalizer\SchemaNormalizer
+ * @uses \Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer
+ */
 final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    #[Framework\Attributes\DataProvider('provideScenarioWhereJsonIsInvalidAccordingToSchema')]
+    /**
+     * @dataProvider provideScenarioWhereJsonIsInvalidAccordingToSchema
+     */
     public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario $scenario): void
     {
         $json = $scenario->original();
@@ -58,7 +59,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario}>
      */
-    public static function provideScenarioWhereJsonIsInvalidAccordingToSchema(): \Generator
+    public static function provideScenarioWhereJsonIsInvalidAccordingToSchema(): iterable
     {
         $basePath = __DIR__ . '/../../../';
 
@@ -90,7 +91,9 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideScenarioWhereJsonIsValidAccordingToSchema')]
+    /**
+     * @dataProvider provideScenarioWhereJsonIsValidAccordingToSchema
+     */
     public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->original();
@@ -108,7 +111,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario}>
      */
-    public static function provideScenarioWhereJsonIsValidAccordingToSchema(): \Generator
+    public static function provideScenarioWhereJsonIsValidAccordingToSchema(): iterable
     {
         $basePath = __DIR__ . '/../../../';
 

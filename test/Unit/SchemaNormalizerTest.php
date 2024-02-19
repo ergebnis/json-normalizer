@@ -15,7 +15,6 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\SchemaNormalizer;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Pointer;
@@ -27,14 +26,17 @@ use JsonSchema\Exception\UriResolverException;
 use JsonSchema\SchemaStorage;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(SchemaNormalizer::class)]
-#[Framework\Attributes\UsesClass(Exception\NormalizedInvalidAccordingToSchema::class)]
-#[Framework\Attributes\UsesClass(Exception\OriginalInvalidAccordingToSchema::class)]
-#[Framework\Attributes\UsesClass(Exception\SchemaUriCouldNotBeRead::class)]
-#[Framework\Attributes\UsesClass(Exception\SchemaUriCouldNotBeResolved::class)]
-#[Framework\Attributes\UsesClass(Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class)]
-#[Framework\Attributes\UsesClass(Exception\SchemaUriReferencesInvalidJsonDocument::class)]
-#[Framework\Attributes\UsesClass(Format\JsonEncodeOptions::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\SchemaNormalizer
+ *
+ * @uses \Ergebnis\Json\Normalizer\Exception\NormalizedInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Exception\OriginalInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeRead
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriCouldNotBeResolved
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType
+ * @uses \Ergebnis\Json\Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument
+ * @uses \Ergebnis\Json\Normalizer\Format\JsonEncodeOptions
+ */
 final class SchemaNormalizerTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -214,8 +216,10 @@ JSON;
         $normalizer->normalize($json);
     }
 
-    #[Framework\Attributes\DataProvider('provideScenarioWithCustomJsonPointerSpecification')]
-    #[Framework\Attributes\DataProvider('provideScenarioWithDefaultJsonPointerSpecification')]
+    /**
+     * @dataProvider provideScenarioWithCustomJsonPointerSpecification
+     * @dataProvider provideScenarioWithDefaultJsonPointerSpecification
+     */
     public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->original();
@@ -235,7 +239,7 @@ JSON;
     /**
      * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
-    public static function provideScenarioWithDefaultJsonPointerSpecification(): \Generator
+    public static function provideScenarioWithDefaultJsonPointerSpecification(): iterable
     {
         $basePath = __DIR__ . '/../';
 
@@ -316,7 +320,7 @@ JSON;
     /**
      * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
-    public static function provideScenarioWithCustomJsonPointerSpecification(): \Generator
+    public static function provideScenarioWithCustomJsonPointerSpecification(): iterable
     {
         $basePath = __DIR__ . '/../';
 

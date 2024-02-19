@@ -601,7 +601,6 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-
 - leading `v` prefixes in version constraints are removed
 
   ```diff
@@ -611,6 +610,20 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
   -    "foo/baz": "v1.3.7"
   +    "foo/bar": "^1.2",
   +    "foo/baz": "1.3.7"
+   }
+  ```
+
+- use of `x` or `X` for wildcards is replaced with `*`
+
+  ```diff
+   {
+     "require": {
+  -    "foo/bar": "1.x",
+  -    "foo/baz": "2.3.X",
+  -    "foo/qux": "x"
+  +    "foo/bar": "^1.0",
+  +    "foo/baz": "~2.3.0",
+  +    "foo/qux": "*"
    }
   ```
 

@@ -27,9 +27,11 @@ final class VersionConstraintNormalizer implements Normalizer
         'require',
         'require-dev',
     ];
+    private Semver\VersionParser $versionParser;
 
-    public function __construct(private readonly Semver\VersionParser $versionParser)
+    public function __construct(Semver\VersionParser $versionParser)
     {
+        $this->versionParser = $versionParser;
     }
 
     public function normalize(Json $json): Json
@@ -62,7 +64,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
                 try {
                     $this->versionParser->parseConstraints($versionConstraint);
-                } catch (\UnexpectedValueException) {
+                } catch (\UnexpectedValueException $exception) {
                     return $versionConstraint;
                 }
 
@@ -84,6 +86,7 @@ final class VersionConstraintNormalizer implements Normalizer
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
         $versionConstraint = self::assertDevPrefixSuffixPosition($versionConstraint);
+        $versionConstraint = self::replaceWildcardXWithAsterisk($versionConstraint);
         $versionConstraint = self::replaceWildcardWithTilde($versionConstraint);
         $versionConstraint = self::replaceTildeWithCaret($versionConstraint);
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
@@ -118,45 +121,45 @@ final class VersionConstraintNormalizer implements Normalizer
         }, $orConstraints));
     }
 
-    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    private static function replaceWildcardXWithAsterisk(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        // '1.x.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
+            '{^(\d+)\.[xX]\.[xX]$}',
+            '$1.*',
         );
 
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(\d+(?:\.\d+)*)\.\*$}',
-                '~$1.0',
-                $part,
-            );
-        }
+        // '1.x' -> '1.*'
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+)\.[xX]$}',
+            '$1.*',
+        );
 
-        return \implode(
-            ' ',
-            $split,
+        // 'x' -> '*'
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^[xX]$}',
+            '*',
+        );
+    }
+
+    private static function replaceWildcardWithTilde(string $versionConstraint): string
+    {
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^(\d+(?:\.\d+)*)\.[*xX]$}',
+            '~$1.0',
         );
     }
 
     private static function replaceTildeWithCaret(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^~(\d+(?:\.\d+)?)$}',
-                '^$1',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
+            '{^~(\d+(?:\.\d+)?)$}',
+            '^$1',
         );
     }
 
@@ -173,22 +176,10 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function removeLeadingVersionPrefix(string $versionConstraint): string
     {
-        $split = \explode(
-            ' ',
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-        );
-
-        foreach ($split as &$part) {
-            $part = \preg_replace(
-                '{^(|[!<>]=|[~<>^])v(\d+.*(?<!-dev))$}',
-                '$1$2',
-                $part,
-            );
-        }
-
-        return \implode(
-            ' ',
-            $split,
+            '{^(|[!<>]=|[~<>^])v(\d+.*(?<!-dev))$}',
+            '$1$2',
         );
     }
 
@@ -317,7 +308,7 @@ final class VersionConstraintNormalizer implements Normalizer
     /**
      * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L257
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     private static function splitIntoOrConstraints(string $versionConstraint): array
     {
@@ -338,7 +329,7 @@ final class VersionConstraintNormalizer implements Normalizer
     /**
      * @see https://github.com/composer/semver/blob/3.3.2/src/VersionParser.php#L264
      *
-     * @return array<int, string>
+     * @return list<string>
      */
     private static function splitIntoAndConstraints(string $orConstraint): array
     {
@@ -353,6 +344,30 @@ final class VersionConstraintNormalizer implements Normalizer
         return \implode(
             ' ',
             $andConstraints,
+        );
+    }
+
+    /**
+     * @param non-empty-string $find
+     */
+    private static function applyRegularExpressionReplacementToVersionsInTurn(string $versionConstraint, string $find, string $replace): string
+    {
+        $split = \explode(
+            ' ',
+            $versionConstraint,
+        );
+
+        foreach ($split as &$part) {
+            $part = \preg_replace(
+                $find,
+                $replace,
+                $part,
+            );
+        }
+
+        return \implode(
+            ' ',
+            $split,
         );
     }
 }

@@ -20,17 +20,24 @@ use Ergebnis\Json\Json;
  */
 final class Scenario
 {
+    private Json $normalized;
+    private Json $original;
+    private string $key;
+
     private function __construct(
-        private readonly string $key,
-        private readonly Json $original,
-        private readonly Json $normalized,
+        string $key,
+        Json $original,
+        Json $normalized
     ) {
+        $this->key = $key;
+        $this->original = $original;
+        $this->normalized = $normalized;
     }
 
     public static function create(
         string $key,
         Json $original,
-        Json $normalized,
+        Json $normalized
     ): self {
         return new self(
             $key,

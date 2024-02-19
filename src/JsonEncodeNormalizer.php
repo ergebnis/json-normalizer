@@ -17,8 +17,11 @@ use Ergebnis\Json\Json;
 
 final class JsonEncodeNormalizer implements Normalizer
 {
-    public function __construct(private readonly Format\JsonEncodeOptions $jsonEncodeOptions)
+    private Format\JsonEncodeOptions $jsonEncodeOptions;
+
+    public function __construct(Format\JsonEncodeOptions $jsonEncodeOptions)
     {
+        $this->jsonEncodeOptions = $jsonEncodeOptions;
     }
 
     public function normalize(Json $json): Json

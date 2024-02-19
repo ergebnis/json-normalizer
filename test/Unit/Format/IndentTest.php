@@ -19,10 +19,13 @@ use Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Normalizer\Test;
 use PHPUnit\Framework;
 
-#[Framework\Attributes\CoversClass(Format\Indent::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidIndentSize::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidIndentString::class)]
-#[Framework\Attributes\UsesClass(Exception\InvalidIndentStyle::class)]
+/**
+ * @covers \Ergebnis\Json\Normalizer\Format\Indent
+ *
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentSize
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentString
+ * @uses \Ergebnis\Json\Normalizer\Exception\InvalidIndentStyle
+ */
 final class IndentTest extends Framework\TestCase
 {
     use Test\Util\Helper;
@@ -37,7 +40,9 @@ final class IndentTest extends Framework\TestCase
         self::assertSame($characters, Format\Indent::CHARACTERS);
     }
 
-    #[Framework\Attributes\DataProvider('provideInvalidSize')]
+    /**
+     * @dataProvider provideInvalidSize
+     */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
         $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
@@ -54,7 +59,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: int}>
      */
-    public static function provideInvalidSize(): \Generator
+    public static function provideInvalidSize(): iterable
     {
         $sizes = [
             'int-zero' => 0,
@@ -85,11 +90,13 @@ final class IndentTest extends Framework\TestCase
         );
     }
 
-    #[Framework\Attributes\DataProvider('provideSizeStyleAndIndentString')]
+    /**
+     * @dataProvider provideSizeStyleAndIndentString
+     */
     public function testFromSizeAndStyleReturnsIndent(
         int $size,
         string $style,
-        string $string,
+        string $string
     ): void {
         $indent = Format\Indent::fromSizeAndStyle(
             $size,
@@ -102,7 +109,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<int, array{0: int, 1: string, 2: string}>
      */
-    public static function provideSizeStyleAndIndentString(): \Generator
+    public static function provideSizeStyleAndIndentString(): iterable
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -120,7 +127,9 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideInvalidIndentString')]
+    /**
+     * @dataProvider provideInvalidIndentString
+     */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
         $this->expectException(Exception\InvalidIndentString::class);
@@ -131,7 +140,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<string, array{0: string}>
      */
-    public static function provideInvalidIndentString(): \Generator
+    public static function provideInvalidIndentString(): iterable
     {
         $strings = [
             'string-not-whitespace' => self::faker()->sentence(),
@@ -146,7 +155,9 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideValidIndentString')]
+    /**
+     * @dataProvider provideValidIndentString
+     */
     public function testFromStringReturnsIndent(string $string): void
     {
         $indent = Format\Indent::fromString($string);
@@ -157,7 +168,7 @@ final class IndentTest extends Framework\TestCase
     /**
      * @return \Generator<int, array{0: string}>
      */
-    public static function provideValidIndentString(): \Generator
+    public static function provideValidIndentString(): iterable
     {
         foreach (self::sizes() as $key => $size) {
             foreach (Format\Indent::CHARACTERS as $style => $character) {
@@ -173,11 +184,13 @@ final class IndentTest extends Framework\TestCase
         }
     }
 
-    #[Framework\Attributes\DataProvider('provideMixedIndentAndSniffedIndent')]
-    #[Framework\Attributes\DataProvider('providePureIndentAndSniffedIndent')]
+    /**
+     * @dataProvider provideMixedIndentAndSniffedIndent
+     * @dataProvider providePureIndentAndSniffedIndent
+     */
     public function testFromJsonReturnsIndentSniffedFromArray(
         string $actualIndent,
-        string $sniffedIndent,
+        string $sniffedIndent
     ): void {
         $json = Json::fromString(
             <<<JSON
@@ -196,11 +209,13 @@ JSON
         self::assertSame($sniffedIndent, $indent->toString());
     }
 
-    #[Framework\Attributes\DataProvider('provideMixedIndentAndSniffedIndent')]
-    #[Framework\Attributes\DataProvider('providePureIndentAndSniffedIndent')]
+    /**
+     * @dataProvider provideMixedIndentAndSniffedIndent
+     * @dataProvider providePureIndentAndSniffedIndent
+     */
     public function testFromJsonReturnsIndentSniffedFromObject(
         string $actualIndent,
-        string $sniffedIndent,
+        string $sniffedIndent
     ): void {
         $json = Json::fromString(
             <<<JSON
@@ -222,7 +237,7 @@ JSON
     /**
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function providePureIndentAndSniffedIndent(): \Generator
+    public static function providePureIndentAndSniffedIndent(): iterable
     {
         $sizes = [
             1,
@@ -253,7 +268,7 @@ JSON
     /**
      * @return \Generator<string, array{0: string, 1: string}>
      */
-    public static function provideMixedIndentAndSniffedIndent(): \Generator
+    public static function provideMixedIndentAndSniffedIndent(): iterable
     {
         $mixedIndents = [
             'space-and-tab' => [
