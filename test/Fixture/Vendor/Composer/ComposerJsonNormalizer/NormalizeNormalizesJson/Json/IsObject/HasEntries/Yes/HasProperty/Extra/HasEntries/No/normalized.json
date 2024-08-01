@@ -13,6 +13,5 @@
             "email": "am@localheinz.com"
         }
     ],
-    "homepage": "https://getcomposer.org/doc/04-schema.md#extra",
-    "extra": {}
+    "homepage": "https://getcomposer.org/doc/04-schema.md#extra"
 }
