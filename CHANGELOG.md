@@ -11,6 +11,7 @@ For a full diff see [`4.5.0...main`][4.5.0...main].
 ### Changed
 
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to replace `x` and `X` wildcards with `*` ([#1052]), by [@fredden]
+- Allowed installation on PHP 8.4 ([#1171]), by [@localheinz]
 
 ## [`4.5.0`][4.5.0]
 
@@ -701,6 +702,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1076]: https://github.com/ergebnis/json-normalizer/pull/1076
 [#1077]: https://github.com/ergebnis/json-normalizer/pull/1077
 [#1079]: https://github.com/ergebnis/json-normalizer/pull/1079
+[#1171]: https://github.com/ergebnis/json-normalizer/pull/1171
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
