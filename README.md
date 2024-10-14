@@ -627,6 +627,19 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- empty sections (which are defined as optional in the schema) are automatically removed
+
+  ```diff
+   {
+      "require": {
+          "foo/bar": "^2.3.4"
+      }
+  -   "config": {
+  -       "preferred-install": {}
+  -   }
+   }
+  ```
+
 ## Changelog
 
 The maintainers of this project record notable changes to this project in a [changelog](CHANGELOG.md).
