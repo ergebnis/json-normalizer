@@ -12,6 +12,7 @@ For a full diff see [`4.8.0...main`][4.8.0...main].
 
 - Adjusted `SchemaNormalizer` to allow pruning empty sections when the schema declares them as not required ([#1053]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to correctly use `dev-` prefixes and `-dev` suffixes ([#1055]), by [@fredden]
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to normalize and (if necessary) combine version constraints refering to extensions ([#1185]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to normalize version constraints that are combined with `*` to `*` ([#1186]), by [@fredden]
 
 ## [`4.8.0`][4.8.0]
@@ -737,6 +738,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1077]: https://github.com/ergebnis/json-normalizer/pull/1077
 [#1079]: https://github.com/ergebnis/json-normalizer/pull/1079
 [#1171]: https://github.com/ergebnis/json-normalizer/pull/1171
+[#1185]: https://github.com/ergebnis/json-normalizer/pull/1185
 [#1186]: https://github.com/ergebnis/json-normalizer/pull/1186
 [#1195]: https://github.com/ergebnis/json-normalizer/pull/1195
 [#1198]: https://github.com/ergebnis/json-normalizer/pull/1198
