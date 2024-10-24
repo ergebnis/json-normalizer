@@ -28,17 +28,20 @@ final class SchemaNormalizer implements Normalizer
     private SchemaValidator\SchemaValidator $schemaValidator;
     private SchemaStorage $schemaStorage;
     private string $schemaUri;
+    private bool $pruneEmpty;
 
     public function __construct(
         string $schemaUri,
         SchemaStorage $schemaStorage,
         SchemaValidator\SchemaValidator $schemaValidator,
-        Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted
+        Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
+        bool $pruneEmpty = false
     ) {
         $this->schemaUri = $schemaUri;
         $this->schemaStorage = $schemaStorage;
         $this->schemaValidator = $schemaValidator;
         $this->specificationForPointerToDataThatShouldNotBeSorted = $specificationForPointerToDataThatShouldNotBeSorted;
+        $this->pruneEmpty = $pruneEmpty;
     }
 
     public function normalize(Json $json): Json
@@ -223,6 +226,14 @@ final class SchemaNormalizer implements Normalizer
                     $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
                 );
 
+                if (
+                    $this->pruneEmpty
+                    && [] === (array) $normalized->{$name}
+                    && self::isKeyOptionalInSchema($schema, $name)
+                ) {
+                    unset($normalized->{$name});
+                }
+
                 unset($data->{$name});
             }
         }
@@ -326,5 +337,18 @@ final class SchemaNormalizer implements Normalizer
         }
 
         return $schema;
+    }
+
+    private static function isKeyOptionalInSchema(object $schema, string $name): bool
+    {
+        if (
+            \property_exists($schema, 'required')
+            && \is_array($schema->required)
+            && \in_array($name, $schema->required, true)
+        ) {
+            return false;
+        }
+
+        return true;
     }
 }
