@@ -25,9 +25,6 @@
         <include>
             <directory suffix=".php">../../src/</directory>
         </include>
-        <exclude>
-            <directory suffix=".php">../../src/Subscriber/</directory>
-        </exclude>
     </coverage>
     <extensions>
         <extension class="Ergebnis\PHPUnit\SlowTestDetector\Extension"/>
