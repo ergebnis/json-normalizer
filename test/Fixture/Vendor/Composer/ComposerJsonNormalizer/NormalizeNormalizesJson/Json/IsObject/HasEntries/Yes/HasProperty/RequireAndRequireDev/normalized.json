@@ -1,6 +1,5 @@
 {
     "description": "This test exists to cover certain mutants from infection/infection",
-    "require": {},
     "require-dev": {
         "ergebnis/overlapping-version-constraints-1": "^1.0 || 3.4.5",
         "ergebnis/overlapping-version-constraints-2": "^1.0 || ^2.0",
