@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.7.0...main`][4.7.0...main].
 
+### Changed
+
+- Allowed installation of `justinrainbow/json-schema:^6.0.0` ([#1199]), by [@localheinz]
+
 ## [`4.7.0`][4.7.0]
 
 For a full diff see [`4.6.0...4.7.0`][4.6.0...4.7.0].
@@ -720,6 +724,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1079]: https://github.com/ergebnis/json-normalizer/pull/1079
 [#1171]: https://github.com/ergebnis/json-normalizer/pull/1171
 [#1195]: https://github.com/ergebnis/json-normalizer/pull/1195
+[#1199]: https://github.com/ergebnis/json-normalizer/pull/1199
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
