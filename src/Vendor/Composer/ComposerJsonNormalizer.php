@@ -89,6 +89,7 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                      */
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
+                true,
             ),
             new BinNormalizer(),
             new ConfigHashNormalizer(),
