@@ -1,0 +1,11 @@
+{
+  "homepage": "https://github.com/ergebnis/composer-normalize/issues/1388",
+  "value-contains-packages-and-version-constraints": {
+    "ext-extension name": "1",
+    "ext-Extension Name": "2",
+    "ext-EXTENSION NAME": "3",
+    "ext-extension-name": "4",
+    "ext-Extension-Name": "5",
+    "ext-EXTENSION-NAME": "6"
+  }
+}
