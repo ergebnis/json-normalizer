@@ -197,6 +197,10 @@ final class VersionConstraintNormalizer implements Normalizer
                 continue;
             }
 
+            if ('*' === $a) {
+                return $a;
+            }
+
             if (1 !== \preg_match($regex, $a)) {
                 continue;
             }
