@@ -6,6 +6,23 @@
         "branch/03-main-referencing-commit-trimmed": "dev-main#bf2eeff",
         "branch/04-main-referencing-commit-untrimmed": "dev-main#bf2eeff",
         "branch/05-my-feature-trimmed": "dev-my-feature",
-        "branch/06-my-feature-untrimmed": "dev-my-feature"
+        "branch/06-my-feature-untrimmed": "dev-my-feature",
+        "branch/07-main-suffix": "dev-main",
+        "branch/08-numeric-branch-lower-suffix-major": "1.x-dev",
+        "branch/09-numeric-branch-lower-suffix-major-minor": "1.2.x-dev",
+        "branch/10-numeric-branch-lower-prefix-major": "1.x-dev",
+        "branch/11-numeric-branch-lower-prefix-major-minor": "1.2.x-dev",
+        "branch/12-numeric-branch-upper-suffix-major": "1.X-dev",
+        "branch/13-numeric-branch-upper-suffix-major-minor": "1.2.X-dev",
+        "branch/14-numeric-branch-upper-prefix-major": "1.X-dev",
+        "branch/15-numeric-branch-upper-prefix-major-minor": "1.2.X-dev",
+        "branch/16-numeric-branch-starts-with-v-lower-suffix-major": "v1.x-dev",
+        "branch/17-numeric-branch-starts-with-v-lower-suffix-major-minor": "v1.2.x-dev",
+        "branch/18-numeric-branch-starts-with-v-lower-prefix-major": "v1.x-dev",
+        "branch/19-numeric-branch-starts-with-v-lower-prefix-major-minor": "v1.2.x-dev",
+        "branch/20-numeric-branch-starts-with-v-upper-suffix-major": "v1.X-dev",
+        "branch/21-numeric-branch-starts-with-v-upper-suffix-major-minor": "v1.2.X-dev",
+        "branch/22-numeric-branch-starts-with-v-upper-prefix-major": "v1.X-dev",
+        "branch/23-numeric-branch-starts-with-v-upper-prefix-major-minor": "v1.2.X-dev"
     }
 }
