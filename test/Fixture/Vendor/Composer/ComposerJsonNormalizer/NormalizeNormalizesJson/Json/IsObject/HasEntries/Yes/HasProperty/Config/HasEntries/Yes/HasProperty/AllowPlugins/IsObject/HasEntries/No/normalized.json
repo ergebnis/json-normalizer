@@ -13,8 +13,5 @@
             "email": "am@localheinz.com"
         }
     ],
-    "homepage": "https://getcomposer.org/doc/06-config.md#allow-plugins",
-    "config": {
-        "allow-plugins": {}
-    }
+    "homepage": "https://getcomposer.org/doc/06-config.md#allow-plugins"
 }
