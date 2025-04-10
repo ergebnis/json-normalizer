@@ -7,7 +7,7 @@
     beStrictAboutResourceUsageDuringSmallTests="true"
     beStrictAboutTestsThatDoNotTestAnything="true"
     beStrictAboutTodoAnnotatedTests="true"
-    bootstrap="../../vendor/autoload.php"
+    bootstrap="bootstrap.php"
     colors="true"
     columns="max"
     cacheResult="true"
@@ -25,9 +25,6 @@
         <include>
             <directory suffix=".php">../../src/</directory>
         </include>
-        <exclude>
-            <directory suffix=".php">../../src/Subscriber/</directory>
-        </exclude>
     </coverage>
     <extensions>
         <extension class="Ergebnis\PHPUnit\SlowTestDetector\Extension"/>

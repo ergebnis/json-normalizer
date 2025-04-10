@@ -1,0 +1,161 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#1 \\$json of method Ergebnis\\\\Json\\\\Printer\\\\PrinterInterface\\:\\:print\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: src/FormatNormalizer.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:resolveSchema\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:normalizeData\\(\\) expects array\\<int, mixed\\>\\|bool\\|float\\|int\\|object\\|string\\|null, mixed given\\.$#"
+			count: 3
+			path: src/SchemaNormalizer.php
+
+		-
+			message: "#^Parameter \\#1 \\$encoded of static method Ergebnis\\\\Json\\\\Json\\:\\:fromString\\(\\) expects string, string\\|false given\\.$#"
+			count: 7
+			path: src/SchemaNormalizer.php
+
+		-
+			message: "#^Variable property access on object\\.$#"
+			count: 3
+			path: src/SchemaNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$conflict\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$provide\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$replace\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$require\\-dev\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$require\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$suggest\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Anonymous function should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Variable property access on object\\.$#"
+			count: 1
+			path: src/Vendor/Composer/PackageHashNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$conflict\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$provide\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$replace\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$require\\-dev\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Access to an undefined property object\\:\\:\\$require\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:removeExtraSpaces\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:removeUselessInlineAliases\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:splitIntoAndConstraints\\(\\) should return array\\<int, string\\> but returns array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:splitIntoOrConstraints\\(\\) should return array\\<int, string\\> but returns array\\<int, string\\>\\|false\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: string given\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Variable property access on object\\.$#"
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
+			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\WildcardSorter\\:\\:sortPropertyWithWildcard\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Vendor/Composer/WildcardSorter.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Ergebnis\\\\\\\\Json\\\\\\\\Json' and Ergebnis\\\\Json\\\\Json will always evaluate to true\\.$#"
+			count: 1
+			path: test/Unit/Format/DefaultFormatterTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of static method Ergebnis\\\\Json\\\\Normalizer\\\\Format\\\\NewLine\\:\\:fromString\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: test/Unit/Format/DefaultFormatterTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{space\\: ' ', tab\\: \"\\\\t\"\\} and array\\{space\\: ' ', tab\\: \"\\\\t\"\\} will always evaluate to true\\.$#"
+			count: 1
+			path: test/Unit/Format/IndentTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$style of static method Ergebnis\\\\Json\\\\Normalizer\\\\Format\\\\Indent\\:\\:fromSizeAndStyle\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: test/Unit/Format/IndentTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$expected of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\JsonEncodeNormalizerTest\\:\\:assertJsonStringIdenticalToJsonString\\(\\) expects string, string\\|false given\\.$#"
+			count: 1
+			path: test/Unit/JsonEncodeNormalizerTest.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between '' and non\\-empty\\-string will always evaluate to false\\.$#"
+			count: 1
+			path: test/Unit/bootstrap.php

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * Copyright (c) 2018-2024 Andreas Möller
+ * Copyright (c) 2018-2025 Andreas Möller
  *
  * For the full copyright and license information, please view
  * the LICENSE.md file that was distributed with this source code.
@@ -23,6 +23,8 @@ return static function (Config\RectorConfig $rectorConfig): void {
     $rectorConfig->paths([
         __DIR__ . '/src/',
         __DIR__ . '/test/',
+        __DIR__ . '/.php-cs-fixer.php',
+        __DIR__ . '/rector.php',
     ]);
 
     $rectorConfig->phpVersion(ValueObject\PhpVersion::PHP_74);
