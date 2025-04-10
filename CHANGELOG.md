@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.8.0...main`][4.8.0...main].
 
+### Changed
+
+- Adjusted `SchemaNormalizer` to allow pruning empty sections when the schema declares them as not required ([#1053]), by [@fredden]
+
 ## [`4.8.0`][4.8.0]
 
 For a full diff see [`4.7.0...4.8.0`][4.7.0...4.8.0].
@@ -722,6 +726,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1027]: https://github.com/ergebnis/json-normalizer/pull/1027
 [#1039]: https://github.com/ergebnis/json-normalizer/pull/1039
 [#1052]: https://github.com/ergebnis/json-normalizer/pull/1052
+[#1053]: https://github.com/ergebnis/json-normalizer/pull/1053
 [#1073]: https://github.com/ergebnis/json-normalizer/pull/1073
 [#1074]: https://github.com/ergebnis/json-normalizer/pull/1074
 [#1075]: https://github.com/ergebnis/json-normalizer/pull/1075
