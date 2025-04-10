@@ -4,6 +4,7 @@
         "version-range-wildcard-any/01-trimmed": "*",
         "version-range-wildcard-any/02-untrimmed": "*",
         "version-range-wildcard-any/03-lower-x": "*",
-        "version-range-wildcard-any/04-upper-X": "*"
+        "version-range-wildcard-any/04-upper-X": "*",
+        "version-range-wildcard-any/05-overlap": "*"
     }
 }
