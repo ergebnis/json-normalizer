@@ -203,7 +203,9 @@ final class VersionConstraintNormalizer implements Normalizer
                 continue;
             }
 
-            // @see https://github.com/composer/semver/blob/3.4.0/src/VersionParser.php#L216
+            /**
+             * @see https://github.com/composer/semver/blob/3.4.0/src/VersionParser.php#L216
+             */
             if (1 === \preg_match('{^v?\d+(\.(?:\d+|[xX*]))?(\.(?:\d+|[xX*]))?(\.(?:\d+|[xX*]))?$}i', $branch)) {
                 $part = $branch . '-dev';
             } else {
