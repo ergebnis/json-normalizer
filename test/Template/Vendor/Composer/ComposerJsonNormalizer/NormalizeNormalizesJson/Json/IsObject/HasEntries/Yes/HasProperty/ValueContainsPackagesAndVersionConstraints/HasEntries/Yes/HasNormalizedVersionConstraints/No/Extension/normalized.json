@@ -1,0 +1,6 @@
+{
+    "homepage": "https://github.com/ergebnis/composer-normalize/issues/1388",
+    "value-contains-packages-and-version-constraints": {
+        "ext-extension-name": "1 || 2 || 3 || 4 || 5 || 6"
+    }
+}

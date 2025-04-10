@@ -57,6 +57,7 @@ final class PackageHashNormalizer implements Normalizer
                 continue;
             }
 
+            $packages = self::mergeDuplicateExtensions($packages);
             $decoded->{$name} = self::sortPackages($packages);
         }
 
@@ -111,6 +112,40 @@ final class PackageHashNormalizer implements Normalizer
                 $prefix($b),
             );
         });
+
+        return $packages;
+    }
+
+    /**
+     * This code is adopted from composer/composer (originally licensed under MIT by Nils Adermann <naderman@naderman.de>
+     * and Jordi Boggiano <j.boggiano@seld.be>).
+     *
+     * @see https://github.com/composer/composer/blob/2.8.1/src/Composer/Repository/PlatformRepository.php#L682
+     *
+     * @param array<string, string> $packages
+     *
+     * @return array<string, string>
+     */
+    private static function mergeDuplicateExtensions($packages): array
+    {
+        foreach ($packages as $name => $value) {
+            if (!isset($name[4]) || \strtolower(\substr($name, 0, 4)) !== 'ext-') {
+                continue;
+            }
+
+            $newName = \str_replace(' ', '-', \strtolower($name));
+
+            if ($name === $newName) {
+                continue;
+            }
+
+            if (isset($packages[$newName])) {
+                $value .= '||' . $packages[$newName];
+            }
+
+            $packages[$newName] = $value;
+            unset($packages[$name]);
+        }
 
         return $packages;
     }
