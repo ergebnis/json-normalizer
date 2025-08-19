@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.9.0...main`][4.9.0...main].
 
+### Changed
+
+- Allowed installation on PHP 8.5 ([#1225]), by [@localheinz]
+
 ## [`4.9.0`][4.9.0]
 
 For a full diff see [`4.8.0...4.9.0`][4.8.0...4.9.0].
@@ -748,6 +752,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1186]: https://github.com/ergebnis/json-normalizer/pull/1186
 [#1195]: https://github.com/ergebnis/json-normalizer/pull/1195
 [#1198]: https://github.com/ergebnis/json-normalizer/pull/1198
+[#1225]: https://github.com/ergebnis/json-normalizer/pull/1225
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
