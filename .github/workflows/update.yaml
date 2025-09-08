@@ -37,10 +37,10 @@ jobs:
         run: "git diff test/Fixture/Vendor/Composer/schema.json"
 
       - name: "Determine composer root version"
-        uses: "ergebnis/.github/actions/composer/determine-root-version@1.9.3"
+        uses: "ergebnis/.github/actions/composer/determine-root-version@1.10.0"
 
       - name: "Determine composer cache directory"
-        uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.9.3"
+        uses: "ergebnis/.github/actions/composer/determine-cache-directory@1.10.0"
 
       - name: "Cache dependencies installed with composer"
         uses: "actions/cache@v4.2.4"
@@ -50,7 +50,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-composer-${{ matrix.dependencies }}-"
 
       - name: "Install ${{ matrix.dependencies }} dependencies with composer"
-        uses: "ergebnis/.github/actions/composer/install@1.9.3"
+        uses: "ergebnis/.github/actions/composer/install@1.10.0"
         with:
           dependencies: "${{ matrix.dependencies }}"
 
