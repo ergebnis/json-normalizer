@@ -83,6 +83,8 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private function normalizeVersionConstraint(string $versionConstraint): string
     {
+        [$stabilityModifier, $versionConstraint] = self::extractStabilityModifiers($versionConstraint);
+
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
         $versionConstraint = self::assertDevPrefixSuffixPosition($versionConstraint);
@@ -92,8 +94,27 @@ final class VersionConstraintNormalizer implements Normalizer
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
         $versionConstraint = self::removeUselessInlineAliases($versionConstraint);
         $versionConstraint = self::sortVersionConstraints($versionConstraint);
+        $versionConstraint = self::removeOverlappingVersionConstraints($versionConstraint);
 
-        return self::removeOverlappingVersionConstraints($versionConstraint);
+        return self::trim($stabilityModifier . ' ' . self::trim($versionConstraint));
+    }
+
+    /**
+     * @return array<int, string> $items
+     */
+    private static function extractStabilityModifiers(string $versionConstraint): array
+    {
+        $allowedStabilityModifiers = ['@stable', '@RC', '@beta', '@alpha', '@dev'];
+        $modifierUsed = '';
+
+        foreach ($allowedStabilityModifiers as $modifier) {
+            if (\strpos($versionConstraint, $modifier) !== false) {
+                $modifierUsed = $modifier;
+                $versionConstraint = \str_replace($modifier, '', $versionConstraint);
+            }
+        }
+
+        return [$modifierUsed, $versionConstraint];
     }
 
     private static function trim(string $versionConstraint): string
@@ -294,6 +315,14 @@ final class VersionConstraintNormalizer implements Normalizer
         };
 
         $sort = static function (string $a, string $b) use ($normalize): int {
+            if ('@' === $a[0] && '@' !== $b[0]) {
+                return -1;
+            }
+
+            if ('@' !== $a[0] && '@' === $b[0]) {
+                return 1;
+            }
+
             return \strnatcmp(
                 $normalize($a),
                 $normalize($b),
