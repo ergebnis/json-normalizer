@@ -626,6 +626,18 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- stability modifiers are listed first to show they apply to the package and not a particular version constraint
+
+  ```diff
+   {
+     "require": {
+  -    "foo/bar": "^1.0@dev",
+  -    "foo/baz": "^1.0 || ^2.3@RC || ^4.5"
+  +    "foo/bar": "@dev ^1.0",
+  +    "foo/baz": "@RC ^1.0 || ^2.3 || ^4.5"
+   }
+  ```
+
 - empty sections (which are defined as optional in the schema) are automatically removed
 
   ```diff
