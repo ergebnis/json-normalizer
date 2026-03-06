@@ -554,16 +554,17 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
-- [caret version ranges (`^`)](https://getcomposer.org/doc/articles/versions.md#caret-version-range-) are preferred over [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-)
+- [caret version ranges (`^`)](https://getcomposer.org/doc/articles/versions.md#caret-version-range-) are preferred over [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-) where both are equivalent
 
   ```diff
    {
      "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
      "require": {
   -    "foo/bar": "~1",
-  -    "foo/baz": "~1.3"
+  -    "foo/baz": "~1.3",
   +    "foo/bar": "^1",
-  +    "foo/baz": "^1.3"
+  +    "foo/baz": "^1.3",
+       "foo/qux": "~0.1"
    }
   ```
 
