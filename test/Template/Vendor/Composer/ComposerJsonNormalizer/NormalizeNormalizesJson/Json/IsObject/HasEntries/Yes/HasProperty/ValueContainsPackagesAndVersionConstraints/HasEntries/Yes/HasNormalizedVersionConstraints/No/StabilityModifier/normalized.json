@@ -1,0 +1,18 @@
+{
+    "homepage": "https://getcomposer.org/doc/04-schema.md#minimum-stability",
+    "value-contains-packages-and-version-constraints": {
+        "stability/00-dev-caret": "@dev ^1.6",
+        "stability/01-dev-caret-overlap": "@dev ^2.0",
+        "stability/02-alpha-caret": "@alpha ^1.6",
+        "stability/03-alpha-caret-overlap": "@alpha ^2.0",
+        "stability/04-beta-caret": "@beta ^1.6",
+        "stability/05-beta-caret-overlap": "@beta ^2.0",
+        "stability/06-RC-caret": "@RC ^1.6",
+        "stability/07-RC-caret-overlap": "@RC ^2.0",
+        "stability/08-stable-caret": "@stable ^1.6",
+        "stability/09-stable-caret-overlap": "@stable ^2.0",
+        "stability/10-dev-caret-dev-caret": "@dev ^3.4",
+        "stability/11-RC-caret-beta-caret": "@beta ^4.0 || ^5.0",
+        "stability/12-alpha-alone": "@alpha"
+    }
+}
