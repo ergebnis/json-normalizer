@@ -6,6 +6,9 @@
         "version-range-tilde-stable/03-major-minor-trimmed": "^1.2",
         "version-range-tilde-stable/04-major-minor-untrimmed": "^1.2",
         "version-range-tilde-stable/05-major-minor-patch-trimmed": "~1.2.3",
-        "version-range-tilde-stable/06-major-minor-patch-untrimmed": "~1.2.3"
+        "version-range-tilde-stable/06-major-minor-patch-untrimmed": "~1.2.3",
+        "version-range-tilde-stable/07-leading-zero-major": "^7",
+        "version-range-tilde-stable/08-leading-zero-minor": "^5.2",
+        "version-range-tilde-stable/09-leading-zero-patch": "~3.2.1"
     }
 }

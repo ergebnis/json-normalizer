@@ -156,11 +156,31 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function replaceTildeWithCaret(string $versionConstraint): string
     {
-        return self::applyRegularExpressionReplacementToVersionsInTurn(
+        // Remove any leading zeros from tilde version numbers. This simplifies the following steps.
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-            '{^~(\d+(?:\.\d+)?)$}',
+            '{^~0*(\d)}',
+            '~$1',
+        );
+
+        // ~0 and ^0 are equivalent.
+        // ~1 and ^1 are equivalent.
+        $versionConstraint = self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^~(\d+)$}',
             '^$1',
         );
+
+        // ~0.1 and ^0.1 are NOT equivalent.
+        // ~1.1 and ^1.1 are equivalent.
+        return self::applyRegularExpressionReplacementToVersionsInTurn(
+            $versionConstraint,
+            '{^~([1-9]\d*\.\d+)$}',
+            '^$1',
+        );
+
+        // ~0.1.2 and ^0.1.2 are equivalent. HOWEVER, the former is more clear regarding behaviour.
+        // ~1.2.3 and ^1.2.3 are NOT equivalent.
     }
 
     private static function removeDuplicateVersionConstraints(string $versionConstraint): string
