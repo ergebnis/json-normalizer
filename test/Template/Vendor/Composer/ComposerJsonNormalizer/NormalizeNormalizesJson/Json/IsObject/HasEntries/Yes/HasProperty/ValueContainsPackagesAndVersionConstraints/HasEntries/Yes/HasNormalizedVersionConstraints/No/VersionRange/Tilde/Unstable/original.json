@@ -6,6 +6,9 @@
     "version-range-tilde-unstable/03-major-minor-trimmed": " ~0.1 ",
     "version-range-tilde-unstable/04-major-minor-untrimmed": " ~0.1 ",
     "version-range-tilde-unstable/05-major-minor-patch-trimmed": "~0.1.2",
-    "version-range-tilde-unstable/06-major-minor-patch-untrimmed": " ~0.1.2 "
+    "version-range-tilde-unstable/06-major-minor-patch-untrimmed": " ~0.1.2 ",
+    "version-range-tilde-unstable/07-leading-zero-major": "~00",
+    "version-range-tilde-unstable/08-leading-zero-minor": "~00.1",
+    "version-range-tilde-unstable/09-leading-zero-patch": "~00.1.2"
   }
 }
