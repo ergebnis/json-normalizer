@@ -1,161 +1,307 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$json of method Ergebnis\\\\Json\\\\Printer\\\\PrinterInterface\\:\\:print\\(\\) expects string, string\\|false given\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\CallableNormalizer\:\:normalize\(\) should return Ergebnis\\Json\\Json but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/CallableNormalizer.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<Ergebnis\\Json\\Normalizer\\Normalizer\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/ChainNormalizer.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/Exception/InvalidIndentStyle.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/Exception/NormalizedInvalidAccordingToSchema.php
+
+		-
+			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
+			identifier: arrayValues.list
+			count: 1
+			path: src/Exception/OriginalInvalidAccordingToSchema.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Format/DefaultFormatter.php
+
+		-
+			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$hasFinalNewLine is assigned outside of the constructor\.$#'
+			identifier: property.readOnlyByPhpDocAssignNotInConstructor
+			count: 1
+			path: src/Format/Format.php
+
+		-
+			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$indent is assigned outside of the constructor\.$#'
+			identifier: property.readOnlyByPhpDocAssignNotInConstructor
+			count: 1
+			path: src/Format/Format.php
+
+		-
+			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$jsonEncodeOptions is assigned outside of the constructor\.$#'
+			identifier: property.readOnlyByPhpDocAssignNotInConstructor
+			count: 1
+			path: src/Format/Format.php
+
+		-
+			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$newLine is assigned outside of the constructor\.$#'
+			identifier: property.readOnlyByPhpDocAssignNotInConstructor
+			count: 1
+			path: src/Format/Format.php
+
+		-
+			message: '#^Parameter \#1 \$json of method Ergebnis\\Json\\Printer\\PrinterInterface\:\:print\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/FormatNormalizer.php
 
 		-
-			message: "#^Casting to string something that's already string\\.$#"
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/JsonEncodeNormalizer.php
+
+		-
+			message: '#^Method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:resolveSchema\(\) has parameter \$data with no type specified\.$#'
+			identifier: missingType.parameter
 			count: 1
 			path: src/SchemaNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:resolveSchema\\(\\) has parameter \\$data with no type specified\\.$#"
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(int, mixed, mixed\)\: mixed\)\|null, Closure\(int, mixed, object\)\: \(array\<int, mixed\>\|bool\|float\|int\|object\|string\|null\) given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/SchemaNormalizer.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method Ergebnis\\\\Json\\\\Normalizer\\\\SchemaNormalizer\\:\\:normalizeData\\(\\) expects array\\<int, mixed\\>\\|bool\\|float\\|int\\|object\\|string\\|null, mixed given\\.$#"
-			count: 3
+			message: '#^Parameter \#1 \$data of method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:normalizeData\(\) expects array\<int, mixed\>\|bool\|float\|int\|object\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 4
 			path: src/SchemaNormalizer.php
 
 		-
-			message: "#^Parameter \\#1 \\$encoded of static method Ergebnis\\\\Json\\\\Json\\:\\:fromString\\(\\) expects string, string\\|false given\\.$#"
+			message: '#^Parameter \#1 \$encoded of static method Ergebnis\\Json\\Json\:\:fromString\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 7
 			path: src/SchemaNormalizer.php
 
 		-
-			message: "#^Variable property access on object\\.$#"
-			count: 3
+			message: '#^Parameter \#2 \$schema of method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:normalizeData\(\) expects object, mixed given\.$#'
+			identifier: argument.type
+			count: 1
 			path: src/SchemaNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$conflict\\.$#"
+			message: '#^Parameter \#2 \$schema of method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:resolveSchema\(\) expects object, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/SchemaNormalizer.php
+
+		-
+			message: '#^Variable property access on object\.$#'
+			identifier: property.dynamicName
+			count: 2
+			path: src/SchemaNormalizer.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Vendor/Composer/BinNormalizer.php
+
+		-
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Vendor/Composer/ConfigHashNormalizer.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$conflict\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$provide\\.$#"
+			message: '#^Access to an undefined property object\:\:\$provide\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$replace\\.$#"
+			message: '#^Access to an undefined property object\:\:\$replace\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$require\\-dev\\.$#"
+			message: '#^Access to an undefined property object\:\:\$require\-dev\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$require\\.$#"
+			message: '#^Access to an undefined property object\:\:\$require\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$suggest\\.$#"
+			message: '#^Access to an undefined property object\:\:\$suggest\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Anonymous function should return string but returns string\\|null\\.$#"
+			message: '#^Anonymous function should return non\-falsy\-string but returns non\-falsy\-string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Variable property access on object\\.$#"
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
 			count: 1
 			path: src/Vendor/Composer/PackageHashNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$conflict\\.$#"
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
+			count: 1
+			path: src/Vendor/Composer/RepositoriesHashNormalizer.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$conflict\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$provide\\.$#"
+			message: '#^Access to an undefined property object\:\:\$provide\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$replace\\.$#"
+			message: '#^Access to an undefined property object\:\:\$replace\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$require\\-dev\\.$#"
+			message: '#^Access to an undefined property object\:\:\$require\-dev\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Access to an undefined property object\\:\\:\\$require\\.$#"
+			message: '#^Access to an undefined property object\:\:\$require\.$#'
+			identifier: property.notFound
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:removeExtraSpaces\\(\\) should return string but returns string\\|null\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:removeExtraSpaces\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:removeUselessInlineAliases\\(\\) should return string but returns string\\|null\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:removeUselessInlineAliases\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:splitIntoAndConstraints\\(\\) should return array\\<int, string\\> but returns array\\<int, string\\>\\|false\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:splitIntoAndConstraints\(\) should return list\<string\> but returns list\<string\>\|false\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\VersionConstraintNormalizer\\:\\:splitIntoOrConstraints\\(\\) should return array\\<int, string\\> but returns array\\<int, string\\>\\|false\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:splitIntoOrConstraints\(\) should return list\<string\> but returns list\<string\>\|false\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: string given\\.$#"
+			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
+			identifier: varTag.nativeType
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Variable property access on object\\.$#"
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: "#^Method Ergebnis\\\\Json\\\\Normalizer\\\\Vendor\\\\Composer\\\\WildcardSorter\\:\\:sortPropertyWithWildcard\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\WildcardSorter\:\:sortPropertyWithWildcard\(\) has parameter \$config with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Vendor/Composer/WildcardSorter.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Ergebnis\\\\\\\\Json\\\\\\\\Json' and Ergebnis\\\\Json\\\\Json will always evaluate to true\\.$#"
+			message: '#^@dataProvider \\Ergebnis\\DataProvider\\BoolProvider\:\:arbitrary\(\) related method not found\.$#'
+			identifier: phpunit.dataProviderMethod
 			count: 1
 			path: test/Unit/Format/DefaultFormatterTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$value of static method Ergebnis\\\\Json\\\\Normalizer\\\\Format\\\\NewLine\\:\\:fromString\\(\\) expects string, mixed given\\.$#"
+			message: '#^Binary operation "\." between "\{\\n    \\"status\\"\: …" and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: test/Unit/Format/DefaultFormatterTest.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\{space\\: ' ', tab\\: \"\\\\t\"\\} and array\\{space\\: ' ', tab\\: \"\\\\t\"\\} will always evaluate to true\\.$#"
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertInstanceOf\(\) with ''Ergebnis\\\\Json\\\\Json'' and Ergebnis\\Json\\Json will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: test/Unit/Format/DefaultFormatterTest.php
+
+		-
+			message: '#^Parameter \#1 \$value of static method Ergebnis\\Json\\Normalizer\\Format\\NewLine\:\:fromString\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: test/Unit/Format/DefaultFormatterTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with array\{space\: '' '', tab\: "\\t"\} and array\{space\: '' '', tab\: "\\t"\} will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
 			count: 1
 			path: test/Unit/Format/IndentTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$style of static method Ergebnis\\\\Json\\\\Normalizer\\\\Format\\\\Indent\\:\\:fromSizeAndStyle\\(\\) expects string, mixed given\\.$#"
+			message: '#^Parameter \#2 \$style of static method Ergebnis\\Json\\Normalizer\\Format\\Indent\:\:fromSizeAndStyle\(\) expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: test/Unit/Format/IndentTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$expected of static method Ergebnis\\\\Json\\\\Normalizer\\\\Test\\\\Unit\\\\JsonEncodeNormalizerTest\\:\\:assertJsonStringIdenticalToJsonString\\(\\) expects string, string\\|false given\\.$#"
+			message: '#^Yield can be used only with these return types\: Generator, Iterator, Traversable, iterable\.$#'
+			identifier: generator.returnType
+			count: 1
+			path: test/Unit/Format/JsonEncodeOptionsTest.php
+
+		-
+			message: '#^Parameter \#1 \$expected of static method Ergebnis\\Json\\Normalizer\\Test\\Unit\\JsonEncodeNormalizerTest\:\:assertJsonStringIdenticalToJsonString\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: test/Unit/JsonEncodeNormalizerTest.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between '' and non\\-empty\\-string will always evaluate to false\\.$#"
+			message: '#^Strict comparison using \=\=\= between '''' and non\-empty\-string will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
 			count: 1
 			path: test/Unit/bootstrap.php
