@@ -32,6 +32,11 @@ $ruleSet = PhpCsFixer\Config\RuleSet\Php74::create()
     ->withRules(PhpCsFixer\Config\Rules::fromArray([
         'mb_str_functions' => false,
         'no_unset_on_property' => false,
+        'php_unit_test_case_static_method_calls' => [
+            'call_type' => 'self',
+            'methods' => [],
+            'target' => '10.0',
+        ],
         'static_lambda' => false,
     ]));
 

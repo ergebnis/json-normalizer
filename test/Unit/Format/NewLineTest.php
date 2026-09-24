@@ -103,11 +103,9 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromFormatReturnsFormatWithNewLineSniffedFromArray(string $newLineString): void
     {
-        $json = Json::fromString(
-            <<<JSON
+        $json = Json::fromString(<<<JSON
 ["foo",{$newLineString}"bar"]
-JSON
-        );
+JSON);
 
         $newLine = Format\NewLine::fromJson($json);
 
@@ -119,11 +117,9 @@ JSON
      */
     public function testFromFormatReturnsFormatWithNewLineNewLineSniffedFromObject(string $newLineString): void
     {
-        $json = Json::fromString(
-            <<<JSON
+        $json = Json::fromString(<<<JSON
 {"foo": 9000,{$newLineString}"bar": 123}
-JSON
-        );
+JSON);
 
         $newLine = Format\NewLine::fromJson($json);
 

@@ -31,14 +31,12 @@ final class WithoutFinalNewLineNormalizerTest extends Framework\TestCase
      */
     public function testNormalizeRemovesAllWhitespaceFromEndOfJson(string $whitespace): void
     {
-        $json = Json::fromString(
-            <<<JSON
+        $json = Json::fromString(<<<JSON
 {
     "name": "Andreas Möller",
     "url": "https://localheinz.com"
 }{$whitespace}
-JSON
-        );
+JSON);
 
         $normalizer = new WithoutFinalNewLineNormalizer();
 

@@ -192,8 +192,7 @@ final class IndentTest extends Framework\TestCase
         string $actualIndent,
         string $sniffedIndent
     ): void {
-        $json = Json::fromString(
-            <<<JSON
+        $json = Json::fromString(<<<JSON
 [
 "foo",
 {$actualIndent}"bar",
@@ -201,8 +200,7 @@ final class IndentTest extends Framework\TestCase
         "qux": "quux"
     }
 ]
-JSON
-        );
+JSON);
 
         $indent = Format\Indent::fromJson($json);
 
@@ -217,8 +215,7 @@ JSON
         string $actualIndent,
         string $sniffedIndent
     ): void {
-        $json = Json::fromString(
-            <<<JSON
+        $json = Json::fromString(<<<JSON
 {
 "foo": 9000,
 {$actualIndent}"bar": 123,
@@ -226,12 +223,35 @@ JSON
         "qux": "quux"
     }
 }
-JSON
-        );
+JSON);
 
         $indent = Format\Indent::fromJson($json);
 
         self::assertSame($sniffedIndent, $indent->toString());
+    }
+
+    /**
+     * @return \Generator<string, array{0: string, 1: string}>
+     */
+    public static function provideMixedIndentAndSniffedIndent(): iterable
+    {
+        $mixedIndents = [
+            'space-and-tab' => [
+                " \t",
+                ' ',
+            ],
+            'tab-and-space' => [
+                "\t ",
+                "\t",
+            ],
+        ];
+
+        foreach ($mixedIndents as $key => [$mixedIndent, $sniffedIndent]) {
+            yield $key => [
+                $mixedIndent,
+                $sniffedIndent,
+            ];
+        }
     }
 
     /**
@@ -265,37 +285,11 @@ JSON
         }
     }
 
-    /**
-     * @return \Generator<string, array{0: string, 1: string}>
-     */
-    public static function provideMixedIndentAndSniffedIndent(): iterable
-    {
-        $mixedIndents = [
-            'space-and-tab' => [
-                " \t",
-                ' ',
-            ],
-            'tab-and-space' => [
-                "\t ",
-                "\t",
-            ],
-        ];
-
-        foreach ($mixedIndents as $key => [$mixedIndent, $sniffedIndent]) {
-            yield $key => [
-                $mixedIndent,
-                $sniffedIndent,
-            ];
-        }
-    }
-
     public function testFromJsonReturnsIndentWithDefaultsWhenIndentCouldNotBeSniffed(): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
+        $json = Json::fromString(<<<'JSON'
 {"foo":9000,"bar":123,"baz":{"qux":"quux"}}
-JSON
-        );
+JSON);
 
         $indent = Format\Indent::fromJson($json);
 
