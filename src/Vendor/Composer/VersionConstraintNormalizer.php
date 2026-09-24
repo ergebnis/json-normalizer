@@ -68,7 +68,7 @@ final class VersionConstraintNormalizer implements Normalizer
                     return $versionConstraint;
                 }
 
-                return $this->normalizeVersionConstraint($versionConstraint);
+                return self::normalizeVersionConstraint($versionConstraint);
             }, $packages);
         }
 
@@ -81,7 +81,7 @@ final class VersionConstraintNormalizer implements Normalizer
         return Json::fromString($encoded);
     }
 
-    private function normalizeVersionConstraint(string $versionConstraint): string
+    private static function normalizeVersionConstraint(string $versionConstraint): string
     {
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);

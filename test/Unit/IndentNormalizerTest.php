@@ -33,13 +33,11 @@ final class IndentNormalizerTest extends Framework\TestCase
     {
         $indent = Format\Indent::fromString('  ');
 
-        $json = Json::fromString(
-            <<<'JSON'
+        $json = Json::fromString(<<<'JSON'
 {
     "status": "original"
 }
-JSON
-        );
+JSON);
 
         $indented = <<<'JSON'
 {

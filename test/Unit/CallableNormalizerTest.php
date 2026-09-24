@@ -27,21 +27,17 @@ final class CallableNormalizerTest extends Framework\TestCase
 
     public function testNormalizePassesJsonThroughCallable(): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
+        $json = Json::fromString(<<<'JSON'
 {
     "status": "original"
 }
-JSON
-        );
+JSON);
 
-        $expected = Json::fromString(
-            <<<'JSON'
+        $expected = Json::fromString(<<<'JSON'
 {
     "status": "normalized"
 }
-JSON
-        );
+JSON);
 
         $callable = static function () use ($expected): Json {
             return $expected;

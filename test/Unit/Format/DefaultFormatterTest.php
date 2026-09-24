@@ -47,8 +47,7 @@ final class DefaultFormatterTest extends Framework\TestCase
             "\r",
         ]);
 
-        $json = Json::fromString(
-            <<<'JSON'
+        $json = Json::fromString(<<<'JSON'
 {
     "name": "Andreas M\u00f6ller",
     "url": "https:\/\/github.com\/localheinz\/json-normalizer",
@@ -57,8 +56,7 @@ final class DefaultFormatterTest extends Framework\TestCase
     "string-quote": "\"",
     "string-tag": "<p>"
 }
-JSON
-        );
+JSON);
 
         $encodedWithJsonEncodeOptions = \json_encode(
             $json->decoded(),

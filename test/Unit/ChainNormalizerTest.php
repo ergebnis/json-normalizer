@@ -28,22 +28,18 @@ final class ChainNormalizerTest extends Framework\TestCase
 
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
-        $json = Json::fromString(
-            <<<'JSON'
+        $json = Json::fromString(<<<'JSON'
 {
     "status": "original"
 }
-JSON
-        );
+JSON);
 
         $results = \array_map(static function (int $step): Json {
-            return Json::fromString(
-                <<<JSON
+            return Json::fromString(<<<JSON
 {
     "status": "normalized at step {$step}"
 }
-JSON
-            );
+JSON);
         }, \range(0, 4));
 
         $last = \end($results);
