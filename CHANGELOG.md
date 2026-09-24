@@ -12,6 +12,10 @@ For a full diff see [`4.10.1...main`][4.10.1...main].
 
 - Added support for PHP 8.5 ([#1228]), by [@localheinz]
 
+### Changed
+
+- Allowed installation on PHP 8.6 ([#1322]), by [@localheinz]
+
 ## [`4.10.1`][4.10.1]
 
 For a full diff see [`4.10.0...4.10.1`][4.10.0...4.10.1].
@@ -777,6 +781,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1225]: https://github.com/ergebnis/json-normalizer/pull/1225
 [#1226]: https://github.com/ergebnis/json-normalizer/pull/1226
 [#1228]: https://github.com/ergebnis/json-normalizer/pull/1228
+[#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea
