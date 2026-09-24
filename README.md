@@ -10,7 +10,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/ergebnis/json-normalizer/v/stable)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
-[![Monthly Downloads](http://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
+[![Monthly Downloads](https://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
 
 This project provides a [`composer`](https://getcomposer.org) package with generic and vendor-specific normalizers for normalizing [JSON documents](https://www.json.org).
 
