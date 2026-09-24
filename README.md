@@ -1,10 +1,10 @@
 # json-normalizer
 
-[![Integrate](https://github.com/ergebnis/json-normalizer/workflows/Integrate/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Merge](https://github.com/ergebnis/json-normalizer/workflows/Merge/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Release](https://github.com/ergebnis/json-normalizer/workflows/Release/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Renew](https://github.com/ergebnis/json-normalizer/workflows/Renew/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
-[![Update](https://github.com/ergebnis/json-normalizer/workflows/Update/badge.svg)](https://github.com/ergebnis/json-normalizer/actions)
+[![Integrate](https://github.com/ergebnis/json-normalizer/actions/workflows/integrate.yaml/badge.svg?branch=main)](https://github.com/ergebnis/json-normalizer/actions/workflows/integrate.yaml)
+[![Merge](https://github.com/ergebnis/json-normalizer/actions/workflows/merge.yaml/badge.svg)](https://github.com/ergebnis/json-normalizer/actions/workflows/merge.yaml)
+[![Release](https://github.com/ergebnis/json-normalizer/actions/workflows/release.yaml/badge.svg)](https://github.com/ergebnis/json-normalizer/actions/workflows/release.yaml)
+[![Renew](https://github.com/ergebnis/json-normalizer/actions/workflows/renew.yaml/badge.svg)](https://github.com/ergebnis/json-normalizer/actions/workflows/renew.yaml)
+[![Update](https://github.com/ergebnis/json-normalizer/actions/workflows/update.yaml/badge.svg)](https://github.com/ergebnis/json-normalizer/actions/workflows/update.yaml)
 
 [![Code Coverage](https://codecov.io/gh/ergebnis/json-normalizer/branch/main/graph/badge.svg)](https://codecov.io/gh/ergebnis/json-normalizer)
 
