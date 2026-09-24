@@ -33,7 +33,7 @@
     "composer/semver": "^3.4.4",
     "ergebnis/data-provider": "^3.3.0",
     "ergebnis/license": "^2.7.0",
-    "ergebnis/php-cs-fixer-config": "^6.37.0",
+    "ergebnis/php-cs-fixer-config": "^6.63.3",
     "ergebnis/phpunit-slow-test-detector": "^2.25.0",
     "ergebnis/rector-rules": "^1.18.4",
     "fakerphp/faker": "^1.24.1",
