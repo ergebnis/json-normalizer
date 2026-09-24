@@ -31,7 +31,6 @@
   },
   "require-dev": {
     "composer/semver": "^3.4.3",
-    "ergebnis/composer-normalize": "^2.53.0",
     "ergebnis/data-provider": "^3.3.0",
     "ergebnis/license": "^2.5.0",
     "ergebnis/php-cs-fixer-config": "^6.37.0",
@@ -63,7 +62,6 @@
   "config": {
     "allow-plugins": {
       "composer/package-versions-deprecated": true,
-      "ergebnis/composer-normalize": true,
       "infection/extension-installer": true,
       "phpstan/extension-installer": true
     },

@@ -143,8 +143,13 @@ jobs:
         with:
           dependencies: "${{ matrix.dependencies }}"
 
+      - name: "Install dependencies with phive"
+        uses: "ergebnis/.github/actions/phive/install@07ba5718eac189644381e5972cd671c80c135ae7" # 1.13.4
+        with:
+          trust-gpg-keys: "0x033E5F8D801A2F8D,0xC00543248C87FB13"
+
       - name: "Run ergebnis/composer-normalize"
-        run: "composer normalize --ansi --dry-run"
+        run: ".phive/composer-normalize --ansi --dry-run"
 
       - name: "Cache cache directory for friendsofphp/php-cs-fixer"
         uses: "actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9" # v6.1.0
@@ -217,7 +222,7 @@ jobs:
       - name: "Install dependencies with phive"
         uses: "ergebnis/.github/actions/phive/install@07ba5718eac189644381e5972cd671c80c135ae7" # 1.13.4
         with:
-          trust-gpg-keys: "0x033E5F8D801A2F8D"
+          trust-gpg-keys: "0x033E5F8D801A2F8D,0xC00543248C87FB13"
 
       - name: "Run maglnet/composer-require-checker"
         run: ".phive/composer-require-checker check --ansi --config-file=$(pwd)/composer-require-checker.json --verbose"
