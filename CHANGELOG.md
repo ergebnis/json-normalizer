@@ -206,7 +206,7 @@ For a full diff see [`2.2.0...3.0.0`][2.2.0...3.0.0].
 
 ### Fixed
 
-- Adjusted `ConfigHashNormalizer` to sort keys correctly ([#723]), by [@fredded]
+- Adjusted `ConfigHashNormalizer` to sort keys correctly ([#723]), by [@fredden]
 
 ## [`2.2.0`][2.2.0]
 
@@ -552,7 +552,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [0.8.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.8.0
 [0.9.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.9.0
 [0.10.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
-[0.10.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.0
+[0.10.1]: https://github.com/ergebnis/json-normalizer/releases/tag/0.10.1
 [0.11.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.11.0
 [0.12.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.12.0
 [0.13.0]: https://github.com/ergebnis/json-normalizer/releases/tag/0.13.0
@@ -720,6 +720,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#723]: https://github.com/ergebnis/json-normalizer/pull/723
 [#756]: https://github.com/ergebnis/json-normalizer/pull/756
 [#757]: https://github.com/ergebnis/json-normalizer/pull/757
+[#771]: https://github.com/ergebnis/json-normalizer/pull/771
 [#772]: https://github.com/ergebnis/json-normalizer/pull/772
 [#774]: https://github.com/ergebnis/json-normalizer/pull/774
 [#775]: https://github.com/ergebnis/json-normalizer/pull/775
@@ -736,6 +737,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#802]: https://github.com/ergebnis/json-normalizer/pull/802
 [#804]: https://github.com/ergebnis/json-normalizer/pull/804
 [#805]: https://github.com/ergebnis/json-normalizer/pull/805
+[#806]: https://github.com/ergebnis/json-normalizer/pull/806
 [#813]: https://github.com/ergebnis/json-normalizer/pull/813
 [#816]: https://github.com/ergebnis/json-normalizer/pull/816
 [#819]: https://github.com/ergebnis/json-normalizer/pull/819
