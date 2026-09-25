@@ -44,7 +44,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
      */
     public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario $scenario): void
     {
-        $json = $scenario->original();
+        $json = $scenario->input();
 
         $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
@@ -71,11 +71,11 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
                 continue;
             }
 
-            if ('original.json' !== $fileInfo->getBasename()) {
+            if ('input.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $originalFile = $fileInfo->getRealPath();
+            $inputFile = $fileInfo->getRealPath();
 
             $key = \substr(
                 $fileInfo->getPath(),
@@ -85,7 +85,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             yield $key => [
                 Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario::create(
                     $key,
-                    Json::fromFile($originalFile),
+                    Json::fromFile($inputFile),
                 ),
             ];
         }
@@ -96,7 +96,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
      */
     public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
-        $json = $scenario->original();
+        $json = $scenario->input();
 
         $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
@@ -105,7 +105,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->output()->encoded(), $normalized->encoded());
     }
 
     /**
@@ -123,29 +123,29 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
                 continue;
             }
 
-            if ('original.json' !== $fileInfo->getBasename()) {
+            if ('input.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $originalFile = $fileInfo->getRealPath();
+            $inputFile = $fileInfo->getRealPath();
 
-            $normalizedFile = \preg_replace(
-                '/original\.json$/',
-                'normalized.json',
-                $originalFile,
+            $outputFile = \preg_replace(
+                '/input\.json$/',
+                'output.json',
+                $inputFile,
             );
 
-            if (!\is_string($normalizedFile)) {
+            if (!\is_string($outputFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce output JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
-            if (!\file_exists($normalizedFile)) {
+            if (!\file_exists($outputFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
+                    $outputFile,
                 ));
             }
 
@@ -162,8 +162,8 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             yield $keyNotNormalized => [
                 Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $keyNotNormalized,
-                    Json::fromFile($originalFile),
-                    Json::fromFile($normalizedFile),
+                    Json::fromFile($inputFile),
+                    Json::fromFile($outputFile),
                 ),
             ];
 
@@ -175,8 +175,8 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             yield $keyAlreadyNormalized => [
                 Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $keyAlreadyNormalized,
-                    Json::fromFile($normalizedFile),
-                    Json::fromFile($normalizedFile),
+                    Json::fromFile($outputFile),
+                    Json::fromFile($outputFile),
                 ),
             ];
         }

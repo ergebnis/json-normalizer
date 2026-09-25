@@ -212,7 +212,7 @@ JSON;
      */
     public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
-        $json = $scenario->original();
+        $json = $scenario->input();
 
         $normalizer = new SchemaNormalizer(
             $scenario->schemaUri(),
@@ -223,7 +223,7 @@ JSON;
 
         $normalized = $normalizer->normalize($json);
 
-        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->output()->encoded(), $normalized->encoded());
     }
 
     /**
@@ -241,42 +241,42 @@ JSON;
                 continue;
             }
 
-            if ('original.json' !== $fileInfo->getBasename()) {
+            if ('input.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $originalFile = $fileInfo->getRealPath();
+            $inputFile = $fileInfo->getRealPath();
 
-            $normalizedFile = \preg_replace(
-                '/original\.json$/',
-                'normalized.json',
-                $originalFile,
+            $outputFile = \preg_replace(
+                '/input\.json$/',
+                'output.json',
+                $inputFile,
             );
 
-            if (!\is_string($normalizedFile)) {
+            if (!\is_string($outputFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce output JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
-            if (!\file_exists($normalizedFile)) {
+            if (!\file_exists($outputFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
+                    $outputFile,
                 ));
             }
 
             $schemaFile = \preg_replace(
-                '/original\.json$/',
+                '/input\.json$/',
                 'schema.json',
-                $originalFile,
+                $inputFile,
             );
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce schema JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce schema JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
@@ -288,15 +288,15 @@ JSON;
             }
 
             $jsonPointerSpecificationFile = \preg_replace(
-                '/original\.json$/',
+                '/input\.json$/',
                 'specification-for-pointer-to-data-that-should-not-be-sorted.php',
-                $originalFile,
+                $inputFile,
             );
 
             if (!\is_string($jsonPointerSpecificationFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce JSON pointer specification file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce JSON pointer specification file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
@@ -331,8 +331,8 @@ JSON;
                         $schemaFile,
                     ),
                     $specificationForPointerToDataThatShouldBeSorted,
-                    Json::fromFile($originalFile),
-                    Json::fromFile($normalizedFile),
+                    Json::fromFile($inputFile),
+                    Json::fromFile($outputFile),
                 ),
             ];
         }
@@ -353,42 +353,42 @@ JSON;
                 continue;
             }
 
-            if ('original.json' !== $fileInfo->getBasename()) {
+            if ('input.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $originalFile = $fileInfo->getRealPath();
+            $inputFile = $fileInfo->getRealPath();
 
-            $normalizedFile = \preg_replace(
-                '/original\.json$/',
-                'normalized.json',
-                $originalFile,
+            $outputFile = \preg_replace(
+                '/input\.json$/',
+                'output.json',
+                $inputFile,
             );
 
-            if (!\is_string($normalizedFile)) {
+            if (!\is_string($outputFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce output JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
-            if (!\file_exists($normalizedFile)) {
+            if (!\file_exists($outputFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
+                    $outputFile,
                 ));
             }
 
             $schemaFile = \preg_replace(
-                '/original\.json$/',
+                '/input\.json$/',
                 'schema.json',
-                $originalFile,
+                $inputFile,
             );
 
             if (!\is_string($schemaFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce schema JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce schema JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
@@ -412,8 +412,8 @@ JSON;
                         $schemaFile,
                     ),
                     Pointer\Specification::never(),
-                    Json::fromFile($originalFile),
-                    Json::fromFile($normalizedFile),
+                    Json::fromFile($inputFile),
+                    Json::fromFile($outputFile),
                 ),
             ];
         }

@@ -42,9 +42,9 @@ final class FormatNormalizerTest extends Framework\TestCase
             $scenario->format(),
         );
 
-        $normalized = $normalizer->normalize($scenario->original());
+        $normalized = $normalizer->normalize($scenario->input());
 
-        self::assertJsonStringIdenticalToJsonString($scenario->normalized()->encoded(), $normalized->encoded());
+        self::assertJsonStringIdenticalToJsonString($scenario->output()->encoded(), $normalized->encoded());
     }
 
     /**
@@ -62,42 +62,42 @@ final class FormatNormalizerTest extends Framework\TestCase
                 continue;
             }
 
-            if ('original.json' !== $fileInfo->getBasename()) {
+            if ('input.json' !== $fileInfo->getBasename()) {
                 continue;
             }
 
-            $originalFile = $fileInfo->getRealPath();
+            $inputFile = $fileInfo->getRealPath();
 
-            $normalizedFile = \preg_replace(
-                '/original\.json$/',
-                'normalized.json',
-                $originalFile,
+            $outputFile = \preg_replace(
+                '/input\.json$/',
+                'output.json',
+                $inputFile,
             );
 
-            if (!\is_string($normalizedFile)) {
+            if (!\is_string($outputFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce normalized JSON file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce output JSON file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
-            if (!\file_exists($normalizedFile)) {
+            if (!\file_exists($outputFile)) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to exist, but it does not.',
-                    $normalizedFile,
+                    $outputFile,
                 ));
             }
 
             $formatFile = \preg_replace(
-                '/original\.json$/',
+                '/input\.json$/',
                 'format.php',
-                $originalFile,
+                $inputFile,
             );
 
             if (!\is_string($formatFile)) {
                 throw new \RuntimeException(\sprintf(
-                    'Unable to deduce format file name from original JSON file name "%s".',
-                    $originalFile,
+                    'Unable to deduce format file name from input JSON file name "%s".',
+                    $inputFile,
                 ));
             }
 
@@ -128,8 +128,8 @@ final class FormatNormalizerTest extends Framework\TestCase
                 Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     $format,
-                    Json::fromFile($originalFile),
-                    Json::fromFile($normalizedFile),
+                    Json::fromFile($inputFile),
+                    Json::fromFile($outputFile),
                 ),
             ];
         }
