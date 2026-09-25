@@ -1,10 +1,9 @@
-[normalized.json]
-indent_size = 1
-indent_style = tab
-insert_final_newline = false
-
-[original.json]
+[input.json]
 indent_size = 2
 indent_style = space
 insert_final_newline = true
 
+[output.json]
+indent_size = 1
+indent_style = tab
+insert_final_newline = false

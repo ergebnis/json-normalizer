@@ -1,8 +1,7 @@
-[normalized.json]
-indent_size = 1
-indent_style = space
-
-[original.json]
+[input.json]
 indent_size = 2
 indent_style = space
 
+[output.json]
+indent_size = 1
+indent_style = space

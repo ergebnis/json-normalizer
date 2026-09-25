@@ -20,24 +20,24 @@ use Ergebnis\Json\Json;
  */
 final class Scenario
 {
-    private Json $original;
+    private Json $input;
     private string $key;
 
     private function __construct(
         string $key,
-        Json $original
+        Json $input
     ) {
         $this->key = $key;
-        $this->original = $original;
+        $this->input = $input;
     }
 
     public static function create(
         string $key,
-        Json $original
+        Json $input
     ): self {
         return new self(
             $key,
-            $original,
+            $input,
         );
     }
 
@@ -46,8 +46,8 @@ final class Scenario
         return $this->key;
     }
 
-    public function original(): Json
+    public function input(): Json
     {
-        return $this->original;
+        return $this->input;
     }
 }
