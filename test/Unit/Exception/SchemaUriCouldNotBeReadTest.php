@@ -24,25 +24,18 @@ final class SchemaUriCouldNotBeReadTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testDefaults(): void
+    public function testFromStringReturnsSchemaUriCouldNotBeRead(): void
     {
-        $exception = new Exception\SchemaUriCouldNotBeRead();
+        $value = self::faker()->url();
 
-        self::assertSame('', $exception->schemaUri());
-    }
-
-    public function testFromSchemaUriReturnsSchemaUriCouldNotBeReadException(): void
-    {
-        $schemaUri = self::faker()->url();
-
-        $exception = Exception\SchemaUriCouldNotBeRead::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriCouldNotBeRead::fromString($value);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document that could be read.',
-            $schemaUri,
+            $value,
         );
 
         self::assertSame($message, $exception->getMessage());
-        self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($value, $exception->value());
     }
 }

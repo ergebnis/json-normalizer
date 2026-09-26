@@ -26,93 +26,6 @@ use PHPUnit\Framework;
 final class ComposerJsonTest extends Framework\TestCase
 {
     /**
-     * @var list<string>
-     */
-    private const NOT_YET_PORTED = [
-        'Json/IsObject/HasEntries/Yes/HasProperty/RequireAndRequireDev',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unsorted',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Duplicate',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Unsorted',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Duplicate',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Unsorted',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Duplicate',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Overlapping',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Unsorted',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Mixed',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Duplicate',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Overlapping',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Unsorted',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Extension',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/InlineAlias',
-        'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unsorted',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Duplicate',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Unsorted',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Duplicate',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Unsorted',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Duplicate',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Overlapping',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Unsorted',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Mixed',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Duplicate',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Overlapping',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Unsorted',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Extension',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/InlineAlias',
-        'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unsorted',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Duplicate',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Unsorted',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Duplicate',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Unsorted',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Duplicate',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Overlapping',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Unsorted',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Mixed',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Duplicate',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Overlapping',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Unsorted',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Extension',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/InlineAlias',
-        'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unsorted',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Duplicate',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Unsorted',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Duplicate',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Unsorted',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Duplicate',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Overlapping',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Unsorted',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Mixed',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Duplicate',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Overlapping',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Unsorted',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Extension',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/InlineAlias',
-        'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unsorted',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Duplicate',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Space/ExactVersion/Unsorted',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Duplicate',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/ExactVersion/Unsorted',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Duplicate',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Overlapping',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Caret/Unsorted',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Mixed',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Duplicate',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Overlapping',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/Or/VersionRange/Tilde/Unsorted',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Extension',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/InlineAlias',
-        'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
-    ];
-
-    /**
      * @var array<string, string>
      */
     private const SECTIONS = [
@@ -127,7 +40,6 @@ final class ComposerJsonTest extends Framework\TestCase
      * @dataProvider provideCase
      */
     public function testNormalizeNormalizesInput(
-        string $key,
         string $input,
         string $output
     ): void {
@@ -135,30 +47,13 @@ final class ComposerJsonTest extends Framework\TestCase
 
         $runner = Runner::create(self::configuration());
 
-        if (\in_array($key, self::NOT_YET_PORTED, true)) {
-            try {
-                $result = $runner->normalize($raw);
-            } catch (\Exception $exception) {
-                $this->addToAssertionCount(1);
-
-                return;
-            }
-
-            self::assertNotSame($output, $result->output()->toString(), \sprintf(
-                'Case "%s" passes; remove it from NOT_YET_PORTED.',
-                $key,
-            ));
-
-            return;
-        }
-
         $result = $runner->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string, 2: string}>
+     * @return \Generator<string, array{0: string, 1: string}>
      */
     public static function provideCase(): iterable
     {
@@ -204,7 +99,6 @@ final class ComposerJsonTest extends Framework\TestCase
 
         foreach ($cases as $key => $case) {
             yield $key => [
-                $key,
                 $case['input'],
                 $case['output'],
             ];

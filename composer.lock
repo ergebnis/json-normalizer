@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c6fe42255c00d7faca76b293abee212",
+    "content-hash": "69be6fe2884f86d5c29fd0c362925e6b",
     "packages": [
         {
             "name": "composer/semver",
@@ -378,76 +378,6 @@
                 "source": "https://github.com/ergebnis/json-printer"
             },
             "time": "2025-09-06T09:59:26+00:00"
-        },
-        {
-            "name": "ergebnis/json-schema-validator",
-            "version": "4.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ergebnis/json-schema-validator.git",
-                "reference": "10ed514fdc3f9b71f8a92c567afea21a2f6fa1ef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/json-schema-validator/zipball/10ed514fdc3f9b71f8a92c567afea21a2f6fa1ef",
-                "reference": "10ed514fdc3f9b71f8a92c567afea21a2f6fa1ef",
-                "shasum": ""
-            },
-            "require": {
-                "ergebnis/json": "^1.2.0",
-                "ergebnis/json-pointer": "^3.4.0",
-                "ext-json": "*",
-                "justinrainbow/json-schema": "^5.2.12",
-                "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
-            },
-            "require-dev": {
-                "ergebnis/data-provider": "^3.2.0",
-                "ergebnis/license": "^2.4.0",
-                "ergebnis/php-cs-fixer-config": "^6.20.0",
-                "ergebnis/phpunit-slow-test-detector": "^2.9.0",
-                "fakerphp/faker": "^1.23.1",
-                "infection/infection": "~0.26.6",
-                "phpunit/phpunit": "^9.6.16",
-                "psalm/plugin-phpunit": "~0.18.4",
-                "rector/rector": "~0.19.2",
-                "vimeo/psalm": "^5.20.0"
-            },
-            "type": "library",
-            "extra": {
-                "composer-normalize": {
-                    "indent-size": 2,
-                    "indent-style": "space"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ergebnis\\Json\\SchemaValidator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Möller",
-                    "email": "am@localheinz.com",
-                    "homepage": "https://localheinz.com"
-                }
-            ],
-            "description": "Provides a JSON schema validator, building on top of justinrainbow/json-schema.",
-            "homepage": "https://github.com/ergebnis/json-schema-validator",
-            "keywords": [
-                "json",
-                "schema",
-                "validator"
-            ],
-            "support": {
-                "issues": "https://github.com/ergebnis/json-schema-validator/issues",
-                "security": "https://github.com/ergebnis/json-schema-validator/blob/main/.github/SECURITY.md",
-                "source": "https://github.com/ergebnis/json-schema-validator"
-            },
-            "time": "2024-01-29T16:50:15+00:00"
         },
         {
             "name": "justinrainbow/json-schema",

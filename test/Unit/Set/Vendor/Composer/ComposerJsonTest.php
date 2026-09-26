@@ -35,11 +35,15 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Constraints
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\MoveDevAffix
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\NormalizeSeparators
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveDuplicates
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveExtraSpaces
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveLeadingV
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveOverlapping
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveUselessInlineAliases
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceTildeWithCaret
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceWildcardWithTilde
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceXWithAsterisk
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Sort
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Trim
  * @uses \Ergebnis\Json\Normalizer\Set\Name
  * @uses \Ergebnis\Json\Normalizer\Skip
@@ -79,6 +83,10 @@ final class ComposerJsonTest extends Framework\TestCase
             'vendor/composer/version-constraint/replace-x-with-asterisk',
             'vendor/composer/version-constraint/replace-wildcard-with-tilde',
             'vendor/composer/version-constraint/replace-tilde-with-caret',
+            'vendor/composer/version-constraint/remove-duplicates',
+            'vendor/composer/version-constraint/remove-useless-inline-aliases',
+            'vendor/composer/version-constraint/sort',
+            'vendor/composer/version-constraint/remove-overlapping',
         ];
 
         self::assertSame($expected, $names);
