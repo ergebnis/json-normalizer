@@ -54,6 +54,10 @@ final class ComposerJson implements Set
             Rule\Vendor\Composer\VersionConstraint\ReplaceXWithAsterisk::create(),
             Rule\Vendor\Composer\VersionConstraint\ReplaceWildcardWithTilde::create(),
             Rule\Vendor\Composer\VersionConstraint\ReplaceTildeWithCaret::create(),
+            Rule\Vendor\Composer\VersionConstraint\RemoveDuplicates::create(),
+            Rule\Vendor\Composer\VersionConstraint\RemoveUselessInlineAliases::create(),
+            Rule\Vendor\Composer\VersionConstraint\Sort::create(),
+            Rule\Vendor\Composer\VersionConstraint\RemoveOverlapping::create(),
         ];
     }
 

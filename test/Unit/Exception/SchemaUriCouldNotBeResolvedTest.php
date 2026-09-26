@@ -24,25 +24,18 @@ final class SchemaUriCouldNotBeResolvedTest extends Framework\TestCase
 {
     use Test\Util\Helper;
 
-    public function testDefaults(): void
+    public function testFromStringReturnsSchemaUriCouldNotBeResolved(): void
     {
-        $exception = new Exception\SchemaUriCouldNotBeResolved();
+        $value = self::faker()->url();
 
-        self::assertSame('', $exception->schemaUri());
-    }
-
-    public function testFromSchemaUriReturnsSchemaUriCouldNotBeResolvedException(): void
-    {
-        $schemaUri = self::faker()->url();
-
-        $exception = Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriCouldNotBeResolved::fromString($value);
 
         $message = \sprintf(
             'Schema URI "%s" could not be resolved.',
-            $schemaUri,
+            $value,
         );
 
         self::assertSame($message, $exception->getMessage());
-        self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($value, $exception->value());
     }
 }

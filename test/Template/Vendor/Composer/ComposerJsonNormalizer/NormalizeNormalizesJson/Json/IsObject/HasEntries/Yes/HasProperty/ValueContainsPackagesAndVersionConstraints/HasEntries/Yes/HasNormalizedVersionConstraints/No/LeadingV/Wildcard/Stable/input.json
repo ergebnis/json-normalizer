@@ -1,9 +1,0 @@
-{
-  "homepage": "https://getcomposer.org/doc/articles/versions.md#wildcard-version-range-",
-  "value-contains-packages-and-version-constraints": {
-    "leading-v-wildcard-stable/01-major-minor-trimmed": "v1.*",
-    "leading-v-wildcard-stable/02-major-minor-untrimmed": " v1.* ",
-    "leading-v-wildcard-stable/03-major-minor-patch-trimmed": "v1.2.*",
-    "leading-v-wildcard-stable/04-major-minor-patch-untrimmed": " v1.2.* "
-  }
-}

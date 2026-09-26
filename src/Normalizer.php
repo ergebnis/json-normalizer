@@ -17,13 +17,5 @@ use Ergebnis\Json\Json;
 
 interface Normalizer
 {
-    /**
-     * @throws Exception\SchemaUriCouldNotBeResolved
-     * @throws Exception\SchemaUriCouldNotBeRead
-     * @throws Exception\SchemaUriReferencesDocumentWithInvalidMediaType
-     * @throws Exception\SchemaUriReferencesInvalidJsonDocument
-     * @throws Exception\OriginalInvalidAccordingToSchema
-     * @throws Exception\NormalizedInvalidAccordingToSchema
-     */
     public function normalize(Json $json): Json;
 }

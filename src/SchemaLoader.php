@@ -57,13 +57,13 @@ final class SchemaLoader
         try {
             $schema = $this->storage->getSchema($uri);
         } catch (UriResolverException $exception) {
-            throw Exception\SchemaUriCouldNotBeResolved::fromSchemaUri($uri);
+            throw Exception\SchemaUriCouldNotBeResolved::fromString($uri);
         } catch (ResourceNotFoundException $exception) {
-            throw Exception\SchemaUriCouldNotBeRead::fromSchemaUri($uri);
+            throw Exception\SchemaUriCouldNotBeRead::fromString($uri);
         } catch (InvalidSchemaMediaTypeException $exception) {
-            throw Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($uri);
+            throw Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromString($uri);
         } catch (JsonDecodingException $exception) {
-            throw Exception\SchemaUriReferencesInvalidJsonDocument::fromSchemaUri($uri);
+            throw Exception\SchemaUriReferencesInvalidJsonDocument::fromString($uri);
         }
 
         return Schema::fromObject($schema);
