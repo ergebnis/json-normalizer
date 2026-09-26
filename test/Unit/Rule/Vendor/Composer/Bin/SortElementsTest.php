@@ -24,6 +24,8 @@ use Ergebnis\Json\Normalizer\Test;
  * @uses \Ergebnis\Json\Normalizer\Context
  * @uses \Ergebnis\Json\Normalizer\Result
  * @uses \Ergebnis\Json\Normalizer\Rule\Action
+ * @uses \Ergebnis\Json\Normalizer\Rule\Definition
+ * @uses \Ergebnis\Json\Normalizer\Rule\Example
  * @uses \Ergebnis\Json\Normalizer\Rule\Name
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
  * @uses \Ergebnis\Json\Normalizer\RuleVisitor

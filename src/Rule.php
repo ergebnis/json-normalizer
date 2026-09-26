@@ -21,6 +21,8 @@ interface Rule
 
     public function target(): Rule\Target;
 
+    public function definition(): Rule\Definition;
+
     public function apply(
         Parser\Node\Node $node,
         Context $context

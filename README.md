@@ -639,6 +639,16 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+## Rules
+
+<!-- BEGIN RULES -->
+
+This project provides the following rules:
+
+- [`vendor/composer/bin/sort-elements`](doc/rules/Vendor/Composer/Bin/SortElements.md): Sorts the elements of `bin` by value.
+
+<!-- END RULES -->
+
 ## Changelog
 
 The maintainers of this project record notable changes to this project in a [changelog](CHANGELOG.md).
