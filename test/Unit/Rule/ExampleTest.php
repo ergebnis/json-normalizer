@@ -38,5 +38,27 @@ final class ExampleTest extends Framework\TestCase
 
         self::assertSame($input, $example->input());
         self::assertSame($output, $example->output());
+        self::assertNull($example->schema());
+    }
+
+    public function testWithSchemaReturnsExampleWithSchema(): void
+    {
+        $faker = self::faker();
+
+        $input = $faker->sentence();
+        $output = $faker->sentence();
+        $schema = $faker->sentence();
+
+        $example = Rule\Example::create(
+            $input,
+            $output,
+        );
+
+        $mutated = $example->withSchema($schema);
+
+        self::assertNotSame($example, $mutated);
+        self::assertSame($input, $mutated->input());
+        self::assertSame($output, $mutated->output());
+        self::assertSame($schema, $mutated->schema());
     }
 }

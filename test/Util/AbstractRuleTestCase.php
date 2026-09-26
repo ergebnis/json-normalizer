@@ -33,11 +33,12 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
      */
     final public function testApplyNormalizesInput(
         string $input,
-        string $output
+        string $output,
+        ?string $schemaUri
     ): void {
         $raw = Parser\Raw::fromString($input);
 
-        $result = self::runner()->normalize($raw);
+        $result = self::runner($schemaUri)->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
 
@@ -47,7 +48,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string}>
+     * @return \Generator<string, array{0: string, 1: string, 2: null|string}>
      */
     final public static function provideCase(): iterable
     {
@@ -55,6 +56,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
             yield $case => [
                 $files['input'],
                 $files['output'],
+                $files['schemaUri'],
             ];
         }
     }
@@ -62,18 +64,20 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
     /**
      * @dataProvider provideCaseWithOutput
      */
-    final public function testApplyKeepsOutput(string $output): void
-    {
+    final public function testApplyKeepsOutput(
+        string $output,
+        ?string $schemaUri
+    ): void {
         $raw = Parser\Raw::fromString($output);
 
-        $result = self::runner()->normalize($raw);
+        $result = self::runner($schemaUri)->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
         self::assertSame([], $result->changes());
     }
 
     /**
-     * @return \Generator<string, array{0: string}>
+     * @return \Generator<string, array{0: string, 1: null|string}>
      */
     final public static function provideCaseWithOutput(): iterable
     {
@@ -84,6 +88,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
 
             yield $case => [
                 $files['output'],
+                $files['schemaUri'],
             ];
         }
     }
@@ -93,7 +98,18 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
         foreach (static::rule()->definition()->examples() as $example) {
             $raw = Parser\Raw::fromString($example->input());
 
-            $result = self::runner()->normalize($raw);
+            $schemaUri = null;
+
+            $schema = $example->schema();
+
+            if (null !== $schema) {
+                $schemaUri = \sprintf(
+                    'data://application/json;base64,%s',
+                    \base64_encode($schema),
+                );
+            }
+
+            $result = self::runner($schemaUri)->normalize($raw);
 
             self::assertSame($example->output(), $result->output()->toString());
         }
@@ -101,13 +117,19 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
 
     abstract protected static function rule(): Rule;
 
-    private static function runner(): Runner
+    private static function runner(?string $schemaUri): Runner
     {
-        return Runner::create(Configuration::create()->withRules(KeepVerifyingRule::create(static::rule())));
+        $configuration = Configuration::create()->withRules(KeepVerifyingRule::create(static::rule()));
+
+        if (null !== $schemaUri) {
+            $configuration = $configuration->withSchema($schemaUri);
+        }
+
+        return Runner::create($configuration);
     }
 
     /**
-     * @return array<string, array{input: string, output: string}>
+     * @return array<string, array{input: string, output: string, schemaUri: null|string}>
      */
     private static function cases(): array
     {
@@ -147,9 +169,24 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
                 $output = (string) \file_get_contents($outputFile);
             }
 
+            $schemaUri = null;
+
+            $schemaFile = \sprintf(
+                '%s/schema.json',
+                $caseDirectory,
+            );
+
+            if (\is_file($schemaFile)) {
+                $schemaUri = \sprintf(
+                    'file://%s',
+                    \realpath($schemaFile),
+                );
+            }
+
             $cases[\basename($caseDirectory)] = [
                 'input' => $input,
                 'output' => $output,
+                'schemaUri' => $schemaUri,
             ];
         }
 

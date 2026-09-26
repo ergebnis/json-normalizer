@@ -14,8 +14,10 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Acceptance;
 
 use Ergebnis\Json\Normalizer\Configuration;
+use Ergebnis\Json\Normalizer\Rule;
 use Ergebnis\Json\Normalizer\Runner;
 use Ergebnis\Json\Parser;
+use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
@@ -27,25 +29,11 @@ final class SchemaTest extends Framework\TestCase
      * @var list<string>
      */
     private const NOT_YET_PORTED = [
-        'WithCustomJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithPropertyDefinitions',
-        'WithCustomJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithPropertyDefinitionsAndAdditionalProperties',
         'WithCustomJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithoutPropertyDefinitions',
         'WithCustomJsonPointerSpecification/Json/IsObject/Schema/IsEmpty',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasAnyOf/Direct',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasAnyOf/HasReference',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasOneOf/Direct',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasOneOf/HasReference',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasReference',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasType/IsArray/WithItemDefinition/IsTuple',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/HasType/IsScalar/WithItemDefinition/IsTuple',
         'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/IsEmpty',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasAnyOf',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasOneOf',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasReference',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsArray/WithPropertyDefinitions',
         'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsArray/WithPropertyDefinitionsAndAdditionalProperties',
         'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsArray/WithoutPropertyDefinitions',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithPropertyDefinitions',
         'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithPropertyDefinitionsAndAdditionalProperties',
         'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithoutPropertyDefinitions',
         'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/IsEmpty',
@@ -57,11 +45,16 @@ final class SchemaTest extends Framework\TestCase
     public function testNormalizeNormalizesInput(
         string $key,
         string $input,
-        string $output
+        string $output,
+        string $schemaUri,
+        ?Pointer\Specification $skip
     ): void {
         $raw = Parser\Raw::fromString($input);
 
-        $runner = Runner::create(self::configuration());
+        $runner = Runner::create(self::configuration(
+            $schemaUri,
+            $skip,
+        ));
 
         if (\in_array($key, self::NOT_YET_PORTED, true)) {
             try {
@@ -86,7 +79,7 @@ final class SchemaTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string, 2: string}>
+     * @return \Generator<string, array{0: string, 1: string, 2: string, 3: string, 4: null|Pointer\Specification}>
      */
     public static function provideCase(): iterable
     {
@@ -113,6 +106,18 @@ final class SchemaTest extends Framework\TestCase
                 \strlen($directory) + 1,
             );
 
+            $skip = null;
+
+            $skipFile = \sprintf(
+                '%s/skip.php',
+                $fileInfo->getPath(),
+            );
+
+            if (\is_file($skipFile)) {
+                /** @var Pointer\Specification $skip */
+                $skip = include $skipFile;
+            }
+
             $cases[$key] = [
                 $key,
                 (string) \file_get_contents($fileInfo->getPathname()),
@@ -120,6 +125,11 @@ final class SchemaTest extends Framework\TestCase
                     '%s/output.json',
                     $fileInfo->getPath(),
                 )),
+                \sprintf(
+                    'file://%s/schema.json',
+                    $fileInfo->getPath(),
+                ),
+                $skip,
             ];
         }
 
@@ -128,8 +138,23 @@ final class SchemaTest extends Framework\TestCase
         yield from $cases;
     }
 
-    private static function configuration(): Configuration
-    {
-        return Configuration::create();
+    private static function configuration(
+        string $schemaUri,
+        ?Pointer\Specification $skip
+    ): Configuration {
+        $rule = Rule\Sort\PropertiesBySchema::create();
+
+        $configuration = Configuration::create()
+            ->withRules($rule)
+            ->withSchema($schemaUri);
+
+        if ($skip instanceof Pointer\Specification) {
+            $configuration = $configuration->withSkip(
+                $rule->name(),
+                $skip,
+            );
+        }
+
+        return $configuration;
     }
 }
