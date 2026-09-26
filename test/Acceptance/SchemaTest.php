@@ -26,24 +26,9 @@ use PHPUnit\Framework;
 final class SchemaTest extends Framework\TestCase
 {
     /**
-     * @var list<string>
-     */
-    private const NOT_YET_PORTED = [
-        'WithCustomJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithoutPropertyDefinitions',
-        'WithCustomJsonPointerSpecification/Json/IsObject/Schema/IsEmpty',
-        'WithDefaultJsonPointerSpecification/Json/IsArray/Schema/IsEmpty',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsArray/WithPropertyDefinitionsAndAdditionalProperties',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsArray/WithoutPropertyDefinitions',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithPropertyDefinitionsAndAdditionalProperties',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/HasType/IsScalar/WithoutPropertyDefinitions',
-        'WithDefaultJsonPointerSpecification/Json/IsObject/Schema/IsEmpty',
-    ];
-
-    /**
      * @dataProvider provideCase
      */
     public function testNormalizeNormalizesInput(
-        string $key,
         string $input,
         string $output,
         string $schemaUri,
@@ -56,30 +41,13 @@ final class SchemaTest extends Framework\TestCase
             $skip,
         ));
 
-        if (\in_array($key, self::NOT_YET_PORTED, true)) {
-            try {
-                $result = $runner->normalize($raw);
-            } catch (\Exception $exception) {
-                $this->addToAssertionCount(1);
-
-                return;
-            }
-
-            self::assertNotSame($output, $result->output()->toString(), \sprintf(
-                'Case "%s" passes; remove it from NOT_YET_PORTED.',
-                $key,
-            ));
-
-            return;
-        }
-
         $result = $runner->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: string, 2: string, 3: string, 4: null|Pointer\Specification}>
+     * @return \Generator<string, array{0: string, 1: string, 2: string, 3: null|Pointer\Specification}>
      */
     public static function provideCase(): iterable
     {
@@ -119,7 +87,6 @@ final class SchemaTest extends Framework\TestCase
             }
 
             $cases[$key] = [
-                $key,
                 (string) \file_get_contents($fileInfo->getPathname()),
                 (string) \file_get_contents(\sprintf(
                     '%s/output.json',
@@ -142,13 +109,20 @@ final class SchemaTest extends Framework\TestCase
         string $schemaUri,
         ?Pointer\Specification $skip
     ): Configuration {
-        $rule = Rule\Sort\PropertiesBySchema::create();
+        $rules = [
+            Rule\Sort\PropertiesBySchema::create(),
+            Rule\Sort\PropertiesByName::create(),
+        ];
 
         $configuration = Configuration::create()
-            ->withRules($rule)
+            ->withRules(...$rules)
             ->withSchema($schemaUri);
 
-        if ($skip instanceof Pointer\Specification) {
+        if (!$skip instanceof Pointer\Specification) {
+            return $configuration;
+        }
+
+        foreach ($rules as $rule) {
             $configuration = $configuration->withSkip(
                 $rule->name(),
                 $skip,
