@@ -32,6 +32,8 @@ use PHPUnit\Framework;
  */
 final class ConfigurationTest extends Framework\TestCase
 {
+    use Test\Util\Helper;
+
     public function testCreateReturnsConfigurationWithoutRules(): void
     {
         $configuration = Configuration::create();
@@ -297,6 +299,22 @@ final class ConfigurationTest extends Framework\TestCase
         self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/extra/patches')));
         self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/repositories')));
         self::assertFalse($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/bin')));
+    }
+
+    public function testSchemaUriReturnsNullWhenNothingIsConfigured(): void
+    {
+        $configuration = Configuration::create();
+
+        self::assertNull($configuration->schemaUri());
+    }
+
+    public function testWithSchemaReturnsConfigurationWithSchemaUri(): void
+    {
+        $schemaUri = self::faker()->url();
+
+        $configuration = Configuration::create()->withSchema($schemaUri);
+
+        self::assertSame($schemaUri, $configuration->schemaUri());
     }
 
     public function testFormatReturnsDetectedFormatWhenNothingIsConfigured(): void

@@ -24,12 +24,14 @@ final class Runner
     private Configuration $configuration;
     private Parser\Parser $parser;
     private Parser\Printer $printer;
+    private SchemaLoader $schemaLoader;
 
     private function __construct(Configuration $configuration)
     {
         $this->configuration = $configuration;
         $this->parser = new Parser\Parser();
         $this->printer = new Parser\Printer();
+        $this->schemaLoader = SchemaLoader::create();
     }
 
     public static function create(Configuration $configuration): self
@@ -38,14 +40,36 @@ final class Runner
     }
 
     /**
+     * @throws Exception\InputInvalidAccordingToSchema
+     * @throws Exception\OutputInvalidAccordingToSchema
      * @throws Exception\RulesDidNotSettle
      */
     public function normalize(Parser\Raw $raw): Result
     {
+        $schemaUri = $this->configuration->schemaUri();
+
+        $schema = null;
+
+        if (null !== $schemaUri) {
+            $schema = $this->schemaLoader->load($schemaUri);
+        }
+
         $node = $this->parser->parse(
             $raw,
             Parser\MaximumDepth::default(),
         );
+
+        $inputErrors = $this->errors(
+            $schema,
+            $node,
+        );
+
+        if ([] !== $inputErrors) {
+            throw Exception\InputInvalidAccordingToSchema::withErrors(
+                (string) $schemaUri,
+                ...$inputErrors,
+            );
+        }
 
         $changes = [];
         $changesOfPass = [];
@@ -60,6 +84,18 @@ final class Runner
             $changesOfPass = $visitor->changes();
 
             if ([] === $changesOfPass) {
+                $outputErrors = $this->errors(
+                    $schema,
+                    $node,
+                );
+
+                if ([] !== $outputErrors) {
+                    throw Exception\OutputInvalidAccordingToSchema::withErrors(
+                        (string) $schemaUri,
+                        ...$outputErrors,
+                    );
+                }
+
                 return $this->result(
                     $raw,
                     $node,
@@ -75,6 +111,23 @@ final class Runner
         throw Exception\RulesDidNotSettle::after(
             self::MAXIMUM_PASSES,
             ...$changesOfPass,
+        );
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function errors(
+        ?Schema $schema,
+        Parser\Node\Node $node
+    ): array {
+        if (!$schema instanceof Schema) {
+            return [];
+        }
+
+        return $this->schemaLoader->errors(
+            $schema,
+            $node,
         );
     }
 

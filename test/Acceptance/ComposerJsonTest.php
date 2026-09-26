@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Acceptance;
 
 use Ergebnis\Json\Normalizer\Configuration;
+use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Rule;
 use Ergebnis\Json\Normalizer\Runner;
 use Ergebnis\Json\Parser;
@@ -501,6 +502,10 @@ final class ComposerJsonTest extends Framework\TestCase
         $cases = [];
 
         foreach (self::casesIn(self::directory()) as $key => $case) {
+            if (0 === \strpos($key, 'Rejects/')) {
+                continue;
+            }
+
             if (0 === \strpos($key, 'Template/')) {
                 continue;
             }
@@ -543,9 +548,53 @@ final class ComposerJsonTest extends Framework\TestCase
         }
     }
 
+    /**
+     * @dataProvider provideRejectedCase
+     */
+    public function testNormalizeThrowsInputInvalidAccordingToSchemaWhenInputIsInvalid(string $input): void
+    {
+        $raw = Parser\Raw::fromString($input);
+
+        $runner = Runner::create(self::configuration()->withSchema(self::schemaUri()));
+
+        $this->expectException(Exception\InputInvalidAccordingToSchema::class);
+
+        $runner->normalize($raw);
+    }
+
+    /**
+     * @return \Generator<string, array{0: string}>
+     */
+    public static function provideRejectedCase(): iterable
+    {
+        $cases = self::casesIn(\sprintf(
+            '%s/Rejects',
+            self::directory(),
+        ));
+
+        \ksort($cases);
+
+        foreach ($cases as $key => $case) {
+            yield $key => [
+                $case['input'],
+            ];
+        }
+    }
+
     private static function configuration(): Configuration
     {
         return Configuration::create()->withRules(Rule\Vendor\Composer\Bin\SortElements::create());
+    }
+
+    private static function schemaUri(): string
+    {
+        return \sprintf(
+            'file://%s',
+            \realpath(\sprintf(
+                '%s/../Fixture/Vendor/Composer/schema.json',
+                __DIR__,
+            )),
+        );
     }
 
     private static function directory(): string
@@ -579,12 +628,21 @@ final class ComposerJsonTest extends Framework\TestCase
                 \strlen($directory) + 1,
             );
 
+            $input = (string) \file_get_contents($fileInfo->getPathname());
+            $output = $input;
+
+            $outputFile = \sprintf(
+                '%s/output.json',
+                $fileInfo->getPath(),
+            );
+
+            if (\is_file($outputFile)) {
+                $output = (string) \file_get_contents($outputFile);
+            }
+
             $cases[$key] = [
-                'input' => (string) \file_get_contents($fileInfo->getPathname()),
-                'output' => (string) \file_get_contents(\sprintf(
-                    '%s/output.json',
-                    $fileInfo->getPath(),
-                )),
+                'input' => $input,
+                'output' => $output,
             ];
         }
 
