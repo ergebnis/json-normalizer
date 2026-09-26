@@ -16,8 +16,8 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Normalizer\Change;
 use Ergebnis\Json\Normalizer\Configuration;
 use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Rule;
-use Ergebnis\Json\Normalizer\Runner;
 use Ergebnis\Json\Normalizer\Schema;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Parser;
@@ -25,8 +25,8 @@ use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
 
 /**
+ * @covers \Ergebnis\Json\Normalizer\Normalizer
  * @covers \Ergebnis\Json\Normalizer\RuleVisitor
- * @covers \Ergebnis\Json\Normalizer\Runner
  *
  * @uses \Ergebnis\Json\Normalizer\Change
  * @uses \Ergebnis\Json\Normalizer\Configuration
@@ -42,24 +42,24 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\SchemaLoader
  * @uses \Ergebnis\Json\Normalizer\SchemaResolver
  */
-final class RunnerTest extends Framework\TestCase
+final class NormalizerTest extends Framework\TestCase
 {
     public function testNormalizeThrowsInvalidJsonWhenRawIsNotValidJson(): void
     {
         $raw = Parser\Raw::fromString('{"bin":');
 
-        $runner = Runner::create(Configuration::create());
+        $normalizer = Normalizer::create(Configuration::create());
 
         $this->expectException(Parser\InvalidJson::class);
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     public function testNormalizeThrowsRootNodeCanNotBeRemovedWhenRuleRemovesRoot(): void
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(Test\Double\Rule\RemovingRule::create(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(Test\Double\Rule\RemovingRule::create(
             Rule\Name::fromString('remove'),
             Rule\Target::create(
                 Pointer\Specification::equals(Pointer\JsonPointer::document()),
@@ -69,14 +69,14 @@ final class RunnerTest extends Framework\TestCase
 
         $this->expectException(Parser\Traverser\RootNodeCanNotBeRemoved::class);
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     public function testNormalizeThrowsRulesDidNotSettleWhenRuleChangesNodeInEveryPass(): void
     {
         $raw = Parser\Raw::fromString('{"bin":[]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(Test\Double\Rule\AppendingRule::create(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(Test\Double\Rule\AppendingRule::create(
             Rule\Name::fromString('append'),
             Rule\Target::create(
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
@@ -87,28 +87,28 @@ final class RunnerTest extends Framework\TestCase
         $this->expectException(Exception\RulesDidNotSettle::class);
         $this->expectExceptionMessage(\sprintf(
             'Rules did not settle after %d passes; the last pass changed "append" at "/bin".',
-            Runner::MAXIMUM_PASSES,
+            Normalizer::MAXIMUM_PASSES,
         ));
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     public function testNormalizeThrowsInputInvalidAccordingToSchemaWhenInputIsInvalid(): void
     {
         $raw = Parser\Raw::fromString('{"name":9000}');
 
-        $runner = Runner::create(Configuration::create()->withSchema(self::schemaUri()));
+        $normalizer = Normalizer::create(Configuration::create()->withSchema(self::schemaUri()));
 
         $this->expectException(Exception\InputInvalidAccordingToSchema::class);
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     public function testNormalizeThrowsOutputInvalidAccordingToSchemaWhenRuleMakesOutputInvalid(): void
     {
         $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer"}');
 
-        $runner = Runner::create(Configuration::create()
+        $normalizer = Normalizer::create(Configuration::create()
             ->withRules(Test\Double\Rule\ReplacingRule::create(
                 Rule\Name::fromString('replace'),
                 Rule\Target::create(
@@ -121,16 +121,16 @@ final class RunnerTest extends Framework\TestCase
 
         $this->expectException(Exception\OutputInvalidAccordingToSchema::class);
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     public function testNormalizeReturnsResultWhenInputAndOutputAreValidAccordingToSchema(): void
     {
         $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer"}');
 
-        $runner = Runner::create(Configuration::create()->withSchema(self::schemaUri()));
+        $normalizer = Normalizer::create(Configuration::create()->withSchema(self::schemaUri()));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame($raw->toString(), $result->output()->toString());
     }
@@ -141,9 +141,9 @@ final class RunnerTest extends Framework\TestCase
 
         $rule = Test\Double\Rule\SchemaRecordingRule::create();
 
-        $runner = Runner::create(Configuration::create()->withRules($rule));
+        $normalizer = Normalizer::create(Configuration::create()->withRules($rule));
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
 
         $expected = [
             '/name' => null,
@@ -159,11 +159,11 @@ final class RunnerTest extends Framework\TestCase
 
         $rule = Test\Double\Rule\SchemaRecordingRule::create();
 
-        $runner = Runner::create(Configuration::create()
+        $normalizer = Normalizer::create(Configuration::create()
             ->withRules($rule)
             ->withSchema(self::schemaUriOf('HasNestedProperties')));
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
 
         $schemas = \array_map(static function (?Schema $schema): ?string {
             if (!$schema instanceof Schema) {
@@ -215,9 +215,9 @@ final class RunnerTest extends Framework\TestCase
 
 JSON);
 
-        $runner = Runner::create(Configuration::create());
+        $normalizer = Normalizer::create(Configuration::create());
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame($raw, $result->input());
         self::assertSame($raw->toString(), $result->output()->toString());
@@ -229,7 +229,7 @@ JSON);
     {
         $raw = Parser\Raw::fromString("{\n\t\"bin\": [\n\t\t\"b\",\n\t\t\"a\"\n\t]\n}");
 
-        $runner = Runner::create(Configuration::create()->withRules(Test\Double\Rule\ReplacingRule::create(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(Test\Double\Rule\ReplacingRule::create(
             Rule\Name::fromString('replace'),
             Rule\Target::create(
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
@@ -241,7 +241,7 @@ JSON);
             ),
         )));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame("{\n\t\"bin\": [\n\t\t\"a\",\n\t\t\"b\"\n\t]\n}", $result->output()->toString());
     }
@@ -250,14 +250,14 @@ JSON);
     {
         $raw = Parser\Raw::fromString("{\n\t\"bin\": [\n\t\t\"b\",\n\t\t\"a\"\n\t]\n}");
 
-        $runner = Runner::create(Configuration::create()
+        $normalizer = Normalizer::create(Configuration::create()
             ->withFinalNewLine(Parser\FinalNewLine::present())
             ->withIndent(Parser\Indent::create(
                 Parser\IndentSize::fromInt(2),
                 Parser\IndentStyle::space(),
             )));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         $expected = <<<'JSON'
 {
@@ -278,7 +278,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(Test\Double\Rule\ReplacingRule::create(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(Test\Double\Rule\ReplacingRule::create(
             Rule\Name::fromString('replace'),
             Rule\Target::create(
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
@@ -290,7 +290,7 @@ JSON;
             ),
         )));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         $expected = [
             [
@@ -308,7 +308,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":[],"name":"foo/bar"}');
 
-        $runner = Runner::create(Configuration::create()->withRules(Test\Double\Rule\RemovingRule::create(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(Test\Double\Rule\RemovingRule::create(
             Rule\Name::fromString('remove'),
             Rule\Target::create(
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
@@ -316,7 +316,7 @@ JSON;
             ),
         )));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         $expected = [
             [
@@ -333,7 +333,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()
+        $normalizer = Normalizer::create(Configuration::create()
             ->withRules(Test\Double\Rule\RemovingRule::create(
                 Rule\Name::fromString('remove'),
                 Rule\Target::create(
@@ -346,7 +346,7 @@ JSON;
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
             ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame('{"bin":["b","a"]}', $result->output()->toString());
         self::assertSame([], $result->changes());
@@ -356,7 +356,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()
+        $normalizer = Normalizer::create(Configuration::create()
             ->withRules(
                 Test\Double\Rule\RemovingRule::create(
                     Rule\Name::fromString('remove'),
@@ -382,7 +382,7 @@ JSON;
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
             ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame('{"bin":["a","b"]}', $result->output()->toString());
     }
@@ -391,7 +391,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(
             Test\Double\Rule\KeepingRule::create(
                 Rule\Name::fromString('keep'),
                 Rule\Target::create(
@@ -412,7 +412,7 @@ JSON;
             ),
         ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame('{"bin":["a","b"]}', $result->output()->toString());
     }
@@ -421,7 +421,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(
             Test\Double\Rule\KeepingRule::create(
                 Rule\Name::fromString('keep'),
                 Rule\Target::create(
@@ -442,7 +442,7 @@ JSON;
             ),
         ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame('{"bin":["a","b"]}', $result->output()->toString());
     }
@@ -451,7 +451,7 @@ JSON;
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
 
-        $runner = Runner::create(Configuration::create()->withRules(
+        $normalizer = Normalizer::create(Configuration::create()->withRules(
             Test\Double\Rule\ReplacingRule::create(
                 Rule\Name::fromString('replace'),
                 Rule\Target::create(
@@ -469,7 +469,7 @@ JSON;
             ),
         ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         $expected = [
             [

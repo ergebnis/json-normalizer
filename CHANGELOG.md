@@ -8,6 +8,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.11.0...main`][4.11.0...main].
 
+### Added
+
+- Added `Normalizer` that applies documented rules and sets of rules configured with `Configuration`, with schema validation, skips, print options, and the set `@composer-json` for normalizing `composer.json` files, and the exceptions `InputInvalidAccordingToSchema` and `OutputInvalidAccordingToSchema` ([#1334]), by [@localheinz]
+
+### Changed
+
+- Changed normalizing `composer.json` files to keep the format of the input, including a missing final new line, to keep escape sequences, numbers, and duplicate property names as written, to sort names by byte order instead of with `ksort()`, to repeat rules until they no longer change the document, and changed the named constructors of the `SchemaUri*` exceptions to `fromString()` ([#1334]), by [@localheinz]
+
+### Removed
+
+- Removed `Normalizer` interface, `CallableNormalizer`, `ChainNormalizer`, `FormatNormalizer`, `IndentNormalizer`, `JsonEncodeNormalizer`, `SchemaNormalizer`, `WithFinalNewLineNormalizer`, `WithoutFinalNewLineNormalizer`, `Format\*`, `Vendor\Composer\*`, and the corresponding exceptions, including `OriginalInvalidAccordingToSchema` and `NormalizedInvalidAccordingToSchema` ([#1334]), by [@localheinz]
+
 ## [`4.11.0`][4.11.0]
 
 For a full diff see [`4.10.1...4.11.0`][4.10.1...4.11.0].
@@ -788,6 +800,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1226]: https://github.com/ergebnis/json-normalizer/pull/1226
 [#1228]: https://github.com/ergebnis/json-normalizer/pull/1228
 [#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
+[#1334]: https://github.com/ergebnis/json-normalizer/pull/1334
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

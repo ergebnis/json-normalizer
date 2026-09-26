@@ -3,8 +3,6 @@
     "array",
     "bool",
     "callable",
-    "Composer\\Semver\\Semver",
-    "Composer\\Semver\\VersionParser",
     "false",
     "int",
     "null",

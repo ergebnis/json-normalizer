@@ -15,7 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Acceptance;
 
 use Ergebnis\Json\Normalizer\Configuration;
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Runner;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Set;
 use Ergebnis\Json\Parser;
 use PHPUnit\Framework;
@@ -45,9 +45,9 @@ final class ComposerJsonTest extends Framework\TestCase
     ): void {
         $raw = Parser\Raw::fromString($input);
 
-        $runner = Runner::create(self::configuration());
+        $normalizer = Normalizer::create(self::configuration());
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
     }
@@ -112,11 +112,11 @@ final class ComposerJsonTest extends Framework\TestCase
     {
         $raw = Parser\Raw::fromString($input);
 
-        $runner = Runner::create(self::configuration());
+        $normalizer = Normalizer::create(self::configuration());
 
         $this->expectException(Exception\InputInvalidAccordingToSchema::class);
 
-        $runner->normalize($raw);
+        $normalizer->normalize($raw);
     }
 
     /**
