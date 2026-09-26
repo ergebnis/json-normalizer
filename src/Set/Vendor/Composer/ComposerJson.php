@@ -41,6 +41,8 @@ final class ComposerJson implements Set
             Rule\Sort\PropertiesByName::create(),
             Rule\Prune\EmptyOptionalProperties::create(),
             Rule\Vendor\Composer\Bin\SortElements::create(),
+            Rule\Vendor\Composer\Config\SortProperties::create(),
+            Rule\Vendor\Composer\Config\SortPropertiesWithWildcards::create(),
         ];
     }
 
