@@ -50,6 +50,10 @@ final class ComposerJson implements Set
             Rule\Vendor\Composer\VersionConstraint\RemoveExtraSpaces::create(),
             Rule\Vendor\Composer\VersionConstraint\NormalizeSeparators::create(),
             Rule\Vendor\Composer\VersionConstraint\RemoveLeadingV::create(),
+            Rule\Vendor\Composer\VersionConstraint\MoveDevAffix::create(),
+            Rule\Vendor\Composer\VersionConstraint\ReplaceXWithAsterisk::create(),
+            Rule\Vendor\Composer\VersionConstraint\ReplaceWildcardWithTilde::create(),
+            Rule\Vendor\Composer\VersionConstraint\ReplaceTildeWithCaret::create(),
         ];
     }
 

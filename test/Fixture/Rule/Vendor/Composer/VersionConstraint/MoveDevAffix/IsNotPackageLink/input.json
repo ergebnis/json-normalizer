@@ -1,0 +1,8 @@
+{
+    "suggest": {
+        "vendor/package": "main-dev"
+    },
+    "extra": {
+        "require": "main-dev"
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "require": {
+        "vendor/package-266": "x",
+        "vendor/package-267": "X",
+        "vendor/package-270": "1.x",
+        "vendor/package-271": "1.X",
+        "vendor/package-275": "1.x.x",
+        "vendor/package-276": "1.X.X",
+        "vendor/package-277": "1.x.X",
+        "vendor/package-278": "1.X.x",
+        "vendor/package-280": "0.x",
+        "vendor/package-281": "0.X",
+        "vendor/package-285": "0.x.x",
+        "vendor/package-286": "0.X.X",
+        "vendor/package-287": "0.x.X",
+        "vendor/package-288": "0.X.x"
+    }
+}

@@ -654,9 +654,13 @@ This project provides the following rules:
 - [`vendor/composer/packages/merge-duplicate-extensions`](doc/rules/Vendor/Composer/Packages/MergeDuplicateExtensions.md): Renames extensions in package links to lower case with spaces replaced by hyphens, and merges the version constraints of extensions that then have the same name.
 - [`vendor/composer/packages/sort-properties`](doc/rules/Vendor/Composer/Packages/SortProperties.md): Sorts package links with platform packages first, the way Composer sorts them.
 - [`vendor/composer/repositories/sort-filter-elements`](doc/rules/Vendor/Composer/Repositories/SortFilterElements.md): Sorts the elements of `exclude` and `only` of repositories by value, with a wildcard after every other character, unless a value has a wildcard other than at its end.
+- [`vendor/composer/version-constraint/move-dev-affix`](doc/rules/Vendor/Composer/VersionConstraint/MoveDevAffix.md): Moves `dev` to the end of numeric branch names and to the start of other branch names in version constraints.
 - [`vendor/composer/version-constraint/normalize-separators`](doc/rules/Vendor/Composer/VersionConstraint/NormalizeSeparators.md): Separates or-constraints with `||` and and-constraints with a space.
 - [`vendor/composer/version-constraint/remove-extra-spaces`](doc/rules/Vendor/Composer/VersionConstraint/RemoveExtraSpaces.md): Replaces consecutive spaces in version constraints with a single space.
 - [`vendor/composer/version-constraint/remove-leading-v`](doc/rules/Vendor/Composer/VersionConstraint/RemoveLeadingV.md): Removes the prefix `v` from versions in version constraints.
+- [`vendor/composer/version-constraint/replace-tilde-with-caret`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceTildeWithCaret.md): Replaces version ranges with a tilde with version ranges with a caret in version constraints where they are equivalent.
+- [`vendor/composer/version-constraint/replace-wildcard-with-tilde`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceWildcardWithTilde.md): Replaces version ranges with a wildcard with version ranges with a tilde in version constraints.
+- [`vendor/composer/version-constraint/replace-x-with-asterisk`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceXWithAsterisk.md): Replaces the wildcard `x` with `*` in version constraints.
 - [`vendor/composer/version-constraint/trim`](doc/rules/Vendor/Composer/VersionConstraint/Trim.md): Removes whitespace around version constraints.
 
 <!-- END RULES -->
