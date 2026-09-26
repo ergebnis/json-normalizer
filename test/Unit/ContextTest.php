@@ -14,20 +14,43 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Normalizer\Context;
+use Ergebnis\Json\Normalizer\Schema;
 use Ergebnis\Json\Parser;
 use PHPUnit\Framework;
 
 /**
  * @covers \Ergebnis\Json\Normalizer\Context
+ *
+ * @uses \Ergebnis\Json\Normalizer\Schema
  */
 final class ContextTest extends Framework\TestCase
 {
-    public function testCreateReturnsContext(): void
+    public function testCreateReturnsContextWhenNullableValuesAreNotNull(): void
+    {
+        $path = Parser\Traverser\Path::root();
+        $schema = Schema::fromObject((object) [
+            'type' => 'object',
+        ]);
+
+        $context = Context::create(
+            $path,
+            $schema,
+        );
+
+        self::assertSame($path, $context->path());
+        self::assertSame($schema, $context->schema());
+    }
+
+    public function testCreateReturnsContextWhenNullableValuesAreNull(): void
     {
         $path = Parser\Traverser\Path::root();
 
-        $context = Context::create($path);
+        $context = Context::create(
+            $path,
+            null,
+        );
 
         self::assertSame($path, $context->path());
+        self::assertNull($context->schema());
     }
 }

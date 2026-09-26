@@ -25,6 +25,7 @@ final class Runner
     private Parser\Parser $parser;
     private Parser\Printer $printer;
     private SchemaLoader $schemaLoader;
+    private SchemaResolver $schemaResolver;
 
     private function __construct(Configuration $configuration)
     {
@@ -32,6 +33,7 @@ final class Runner
         $this->parser = new Parser\Parser();
         $this->printer = new Parser\Printer();
         $this->schemaLoader = SchemaLoader::create();
+        $this->schemaResolver = SchemaResolver::create($this->schemaLoader);
     }
 
     public static function create(Configuration $configuration): self
@@ -75,7 +77,11 @@ final class Runner
         $changesOfPass = [];
 
         for ($pass = 1; self::MAXIMUM_PASSES >= $pass; ++$pass) {
-            $visitor = RuleVisitor::create($this->configuration);
+            $visitor = RuleVisitor::create(
+                $this->configuration,
+                $schema,
+                $this->schemaResolver,
+            );
 
             $traverser = new Parser\Traverser\Traverser($visitor);
 
