@@ -1,0 +1,14 @@
+{
+  "foo": {},
+  "thud": "xyzzy",
+  "bar": {
+    "baz": {
+      "qux":  "quux",
+      "quuz": "corge"
+    },
+    "grault": {
+      "fred":"plugh",
+      "garply": "waldo"
+    }
+  }
+}

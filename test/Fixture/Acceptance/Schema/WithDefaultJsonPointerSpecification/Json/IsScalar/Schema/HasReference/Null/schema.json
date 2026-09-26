@@ -1,0 +1,8 @@
+{
+  "$ref": "#/definitions/null",
+  "definitions": {
+    "null": {
+      "type": "null"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#tilde-version-range-",
+  "value-contains-packages-and-version-constraints": {
+    "leading-v-tilde-stable/01-major-trimmed": "~v1",
+    "leading-v-tilde-stable/02-major-untrimmed": " ~v1 ",
+    "leading-v-tilde-stable/03-major-minor-trimmed": " ~v1.2 ",
+    "leading-v-tilde-stable/04-major-minor-untrimmed": " ~v1.2 ",
+    "leading-v-tilde-stable/05-major-minor-patch-trimmed": "~v1.2.3",
+    "leading-v-tilde-stable/06-major-minor-patch-untrimmed": " ~v1.2.3 "
+  }
+}
