@@ -26,27 +26,51 @@ final class RuleVisitor implements Parser\Traverser\Visitor
      * @var list<Rule>
      */
     private array $rules;
+    private ?Schema $schema;
+    private SchemaResolver $resolver;
+
+    /**
+     * @var list<null|Schema>
+     */
+    private array $schemas = [];
 
     /**
      * @var list<Change>
      */
     private array $changes = [];
 
-    private function __construct(Configuration $configuration)
-    {
+    private function __construct(
+        Configuration $configuration,
+        ?Schema $schema,
+        SchemaResolver $resolver
+    ) {
         $this->configuration = $configuration;
         $this->rules = $configuration->rules();
+        $this->schema = $schema;
+        $this->resolver = $resolver;
     }
 
-    public static function create(Configuration $configuration): self
-    {
-        return new self($configuration);
+    public static function create(
+        Configuration $configuration,
+        ?Schema $schema,
+        SchemaResolver $resolver
+    ): self {
+        return new self(
+            $configuration,
+            $schema,
+            $resolver,
+        );
     }
 
     public function enter(
         Parser\Node\Node $node,
         Parser\Traverser\Path $path
     ): Parser\Traverser\EnterAction {
+        $this->schemas[] = $this->schemaFor(
+            $node,
+            $path,
+        );
+
         return Parser\Traverser\EnterAction::keep();
     }
 
@@ -54,6 +78,8 @@ final class RuleVisitor implements Parser\Traverser\Visitor
         Parser\Node\Node $node,
         Parser\Traverser\Path $path
     ): Parser\Traverser\LeaveAction {
+        $schema = \array_pop($this->schemas);
+
         $current = $node;
         $replaced = false;
 
@@ -68,7 +94,10 @@ final class RuleVisitor implements Parser\Traverser\Visitor
 
             $action = $rule->apply(
                 $current,
-                Context::create($path),
+                Context::create(
+                    $path,
+                    $schema,
+                ),
             );
 
             if ($action->isKeep()) {
@@ -105,5 +134,53 @@ final class RuleVisitor implements Parser\Traverser\Visitor
     public function changes(): array
     {
         return $this->changes;
+    }
+
+    private function schemaFor(
+        Parser\Node\Node $node,
+        Parser\Traverser\Path $path
+    ): ?Schema {
+        if (!$this->schema instanceof Schema) {
+            return null;
+        }
+
+        if ([] === $this->schemas) {
+            return $this->resolver->resolve(
+                $this->schema,
+                $node,
+            );
+        }
+
+        $parent = \end($this->schemas);
+
+        if (!$parent instanceof Schema) {
+            return null;
+        }
+
+        $name = $path->name();
+
+        if ($name instanceof Parser\Node\StringNode) {
+            return $this->resolver->resolve(
+                $this->resolver->property(
+                    $parent,
+                    $name->toString(),
+                ),
+                $node,
+            );
+        }
+
+        $index = $path->index();
+
+        if ($index instanceof Parser\Index) {
+            return $this->resolver->resolve(
+                $this->resolver->element(
+                    $parent,
+                    $index->toInt(),
+                ),
+                $node,
+            );
+        }
+
+        return null;
     }
 }

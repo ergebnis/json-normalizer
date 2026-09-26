@@ -21,19 +21,33 @@ use Ergebnis\Json\Parser;
 final class Context
 {
     private Parser\Traverser\Path $path;
+    private ?Schema $schema;
 
-    private function __construct(Parser\Traverser\Path $path)
-    {
+    private function __construct(
+        Parser\Traverser\Path $path,
+        ?Schema $schema
+    ) {
         $this->path = $path;
+        $this->schema = $schema;
     }
 
-    public static function create(Parser\Traverser\Path $path): self
-    {
-        return new self($path);
+    public static function create(
+        Parser\Traverser\Path $path,
+        ?Schema $schema
+    ): self {
+        return new self(
+            $path,
+            $schema,
+        );
     }
 
     public function path(): Parser\Traverser\Path
     {
         return $this->path;
+    }
+
+    public function schema(): ?Schema
+    {
+        return $this->schema;
     }
 }

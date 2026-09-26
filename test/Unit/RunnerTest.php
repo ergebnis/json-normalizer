@@ -18,6 +18,7 @@ use Ergebnis\Json\Normalizer\Configuration;
 use Ergebnis\Json\Normalizer\Exception;
 use Ergebnis\Json\Normalizer\Rule;
 use Ergebnis\Json\Normalizer\Runner;
+use Ergebnis\Json\Normalizer\Schema;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Parser;
 use Ergebnis\Json\Pointer;
@@ -39,6 +40,7 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
  * @uses \Ergebnis\Json\Normalizer\Schema
  * @uses \Ergebnis\Json\Normalizer\SchemaLoader
+ * @uses \Ergebnis\Json\Normalizer\SchemaResolver
  */
 final class RunnerTest extends Framework\TestCase
 {
@@ -131,6 +133,74 @@ final class RunnerTest extends Framework\TestCase
         $result = $runner->normalize($raw);
 
         self::assertSame($raw->toString(), $result->output()->toString());
+    }
+
+    public function testNormalizePassesNullAsSchemaToRuleWhenNoSchemaIsConfigured(): void
+    {
+        $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer"}');
+
+        $rule = Test\Double\Rule\SchemaRecordingRule::create();
+
+        $runner = Runner::create(Configuration::create()->withRules($rule));
+
+        $runner->normalize($raw);
+
+        $expected = [
+            '/name' => null,
+            '' => null,
+        ];
+
+        self::assertSame($expected, $rule->schemas());
+    }
+
+    public function testNormalizePassesSchemaOfNodeToRule(): void
+    {
+        $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer","authors":[{"name":"Andreas Möller"}],"license":"MIT"}');
+
+        $rule = Test\Double\Rule\SchemaRecordingRule::create();
+
+        $runner = Runner::create(Configuration::create()
+            ->withRules($rule)
+            ->withSchema(self::schemaUriOf('HasNestedProperties')));
+
+        $runner->normalize($raw);
+
+        $schemas = \array_map(static function (?Schema $schema): ?string {
+            if (!$schema instanceof Schema) {
+                return null;
+            }
+
+            $object = $schema->toObject();
+
+            $type = '';
+
+            if (
+                \property_exists($object, 'type')
+                && \is_string($object->type)
+            ) {
+                $type = $object->type;
+            }
+
+            return \sprintf(
+                '%s: %s',
+                $type,
+                \implode(
+                    ', ',
+                    $schema->propertyNames(),
+                ),
+            );
+        }, $rule->schemas());
+
+        $expected = [
+            '/name' => 'string: ',
+            '/authors/0/name' => 'string: ',
+            '/authors/0' => 'object: name',
+            '/authors' => 'array: ',
+            '/license' => ': ',
+            '' => 'object: name, authors',
+        ];
+
+        self::assertSame($expected, $schemas);
     }
 
     public function testNormalizeReturnsResultWithoutChangesWhenConfigurationHasNoRules(): void
@@ -431,11 +501,17 @@ JSON;
 
     private static function schemaUri(): string
     {
+        return self::schemaUriOf('NameIsRequiredString');
+    }
+
+    private static function schemaUriOf(string $name): string
+    {
         return \sprintf(
             'file://%s',
             \realpath(\sprintf(
-                '%s/../Fixture/Schema/NameIsRequiredString/schema.json',
+                '%s/../Fixture/Schema/%s/schema.json',
                 __DIR__,
+                $name,
             )),
         );
     }
