@@ -31,8 +31,6 @@ final class ComposerJsonTest extends Framework\TestCase
     private const NOT_YET_PORTED = [
         'Json/IsObject',
         'Json/IsObject/HasEntries/Yes/HasProperty/RequireAndRequireDev',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Suggest/HasEntries/Yes/IsSortedByKey/No',
-        'LargeComposerFile',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -108,7 +106,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
-        'Template/Conflict/HasEntries/Yes/IsSortedByPackage/No',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -184,7 +181,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
-        'Template/Provide/HasEntries/Yes/IsSortedByPackage/No',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -260,7 +256,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
-        'Template/Replace/HasEntries/Yes/IsSortedByPackage/No',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -336,7 +331,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
-        'Template/Require/HasEntries/Yes/IsSortedByPackage/No',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -412,7 +406,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Any',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
-        'Template/RequireDev/HasEntries/Yes/IsSortedByPackage/No',
     ];
 
     /**

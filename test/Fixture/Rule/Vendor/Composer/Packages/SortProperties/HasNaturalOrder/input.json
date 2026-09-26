@@ -1,0 +1,6 @@
+{
+    "require-dev": {
+        "vendor/package10": "*",
+        "vendor/package2": "*"
+    }
+}
