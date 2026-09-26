@@ -1,0 +1,11 @@
+{
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4.33"
+        },
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
+    }
+}

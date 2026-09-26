@@ -1,0 +1,9 @@
+{
+    "config": {
+        "allow-plugins": {
+            "bar/baz": true,
+            "foo/bar": false,
+            "foo/*": true
+        }
+    }
+}

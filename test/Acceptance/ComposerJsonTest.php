@@ -30,11 +30,6 @@ final class ComposerJsonTest extends Framework\TestCase
      */
     private const NOT_YET_PORTED = [
         'Json/IsObject',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/AllowPlugins/IsObject/HasEntries/Yes/KeyHasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/AllowPlugins/IsObject/HasEntries/Yes/KeyHasWildcard/Yes/WildcardIsAtEnd/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/PreferredInstall/IsObject/HasEntries/Yes/KeyHasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/PreferredInstall/IsObject/HasEntries/Yes/KeyHasWildcard/Yes/WildcardIsAtEnd/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/IsSortedByKey/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithExclude/HasWildcard/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithExclude/HasWildcard/Yes/WildcardIsAtEnd/Yes',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithOnly/HasWildcard/No',
