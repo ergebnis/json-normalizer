@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer;
 
+use Ergebnis\Json\Parser;
 use Ergebnis\Json\Pointer;
 
 final class Configuration
@@ -36,6 +37,9 @@ final class Configuration
      * @var array<string, list<Pointer\Specification>>
      */
     private array $skips;
+    private ?Parser\Indent $indent;
+    private ?Parser\NewLine $newLine;
+    private ?Parser\FinalNewLine $finalNewLine;
 
     /**
      * @param list<Set>                                  $sets
@@ -47,12 +51,18 @@ final class Configuration
         array $sets,
         array $rules,
         array $withoutRules,
-        array $skips
+        array $skips,
+        ?Parser\Indent $indent,
+        ?Parser\NewLine $newLine,
+        ?Parser\FinalNewLine $finalNewLine
     ) {
         $this->sets = $sets;
         $this->rules = $rules;
         $this->withoutRules = $withoutRules;
         $this->skips = $skips;
+        $this->indent = $indent;
+        $this->newLine = $newLine;
+        $this->finalNewLine = $finalNewLine;
     }
 
     public static function create(): self
@@ -62,6 +72,9 @@ final class Configuration
             [],
             [],
             [],
+            null,
+            null,
+            null,
         );
     }
 
@@ -83,6 +96,9 @@ final class Configuration
             $this->rules,
             $this->withoutRules,
             $skips,
+            $this->indent,
+            $this->newLine,
+            $this->finalNewLine,
         );
     }
 
@@ -96,6 +112,9 @@ final class Configuration
             ),
             $this->withoutRules,
             $this->skips,
+            $this->indent,
+            $this->newLine,
+            $this->finalNewLine,
         );
     }
 
@@ -109,6 +128,9 @@ final class Configuration
                 $names,
             ),
             $this->skips,
+            $this->indent,
+            $this->newLine,
+            $this->finalNewLine,
         );
     }
 
@@ -125,6 +147,48 @@ final class Configuration
             $this->rules,
             $this->withoutRules,
             $skips,
+            $this->indent,
+            $this->newLine,
+            $this->finalNewLine,
+        );
+    }
+
+    public function withIndent(Parser\Indent $indent): self
+    {
+        return new self(
+            $this->sets,
+            $this->rules,
+            $this->withoutRules,
+            $this->skips,
+            $indent,
+            $this->newLine,
+            $this->finalNewLine,
+        );
+    }
+
+    public function withNewLine(Parser\NewLine $newLine): self
+    {
+        return new self(
+            $this->sets,
+            $this->rules,
+            $this->withoutRules,
+            $this->skips,
+            $this->indent,
+            $newLine,
+            $this->finalNewLine,
+        );
+    }
+
+    public function withFinalNewLine(Parser\FinalNewLine $finalNewLine): self
+    {
+        return new self(
+            $this->sets,
+            $this->rules,
+            $this->withoutRules,
+            $this->skips,
+            $this->indent,
+            $this->newLine,
+            $finalNewLine,
         );
     }
 
@@ -166,5 +230,35 @@ final class Configuration
         }
 
         return Pointer\Specification::anyOf(...$specifications);
+    }
+
+    /**
+     * @throws Parser\InvalidFormat
+     */
+    public function format(Parser\Format $detected): Parser\Format
+    {
+        $indent = $detected->indent();
+
+        if ($this->indent instanceof Parser\Indent) {
+            $indent = $this->indent;
+        }
+
+        $newLine = $detected->newLine();
+
+        if ($this->newLine instanceof Parser\NewLine) {
+            $newLine = $this->newLine;
+        }
+
+        $finalNewLine = $detected->finalNewLine();
+
+        if ($this->finalNewLine instanceof Parser\FinalNewLine) {
+            $finalNewLine = $this->finalNewLine;
+        }
+
+        return Parser\Format::create(
+            $indent,
+            $newLine,
+            $finalNewLine,
+        );
     }
 }

@@ -299,6 +299,69 @@ final class ConfigurationTest extends Framework\TestCase
         self::assertFalse($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/bin')));
     }
 
+    public function testFormatReturnsDetectedFormatWhenNothingIsConfigured(): void
+    {
+        $detected = self::detectedFormat();
+
+        $configuration = Configuration::create();
+
+        self::assertEquals($detected, $configuration->format($detected));
+    }
+
+    public function testFormatReturnsFormatWithConfiguredIndent(): void
+    {
+        $detected = self::detectedFormat();
+
+        $indent = Parser\Indent::create(
+            Parser\IndentSize::fromInt(1),
+            Parser\IndentStyle::tab(),
+        );
+
+        $configuration = Configuration::create()->withIndent($indent);
+
+        $expected = Parser\Format::create(
+            $indent,
+            $detected->newLine(),
+            $detected->finalNewLine(),
+        );
+
+        self::assertEquals($expected, $configuration->format($detected));
+    }
+
+    public function testFormatReturnsFormatWithConfiguredNewLine(): void
+    {
+        $detected = self::detectedFormat();
+
+        $newLine = Parser\NewLine::crLf();
+
+        $configuration = Configuration::create()->withNewLine($newLine);
+
+        $expected = Parser\Format::create(
+            $detected->indent(),
+            $newLine,
+            $detected->finalNewLine(),
+        );
+
+        self::assertEquals($expected, $configuration->format($detected));
+    }
+
+    public function testFormatReturnsFormatWithConfiguredFinalNewLine(): void
+    {
+        $detected = self::detectedFormat();
+
+        $finalNewLine = Parser\FinalNewLine::none();
+
+        $configuration = Configuration::create()->withFinalNewLine($finalNewLine);
+
+        $expected = Parser\Format::create(
+            $detected->indent(),
+            $detected->newLine(),
+            $finalNewLine,
+        );
+
+        self::assertEquals($expected, $configuration->format($detected));
+    }
+
     private static function rule(string $name): Rule
     {
         return Test\Double\Rule\KeepingRule::create(
@@ -307,6 +370,18 @@ final class ConfigurationTest extends Framework\TestCase
                 Pointer\Specification::always(),
                 Parser\Node\ArrayNode::class,
             ),
+        );
+    }
+
+    private static function detectedFormat(): Parser\Format
+    {
+        return Parser\Format::create(
+            Parser\Indent::create(
+                Parser\IndentSize::fromInt(4),
+                Parser\IndentStyle::space(),
+            ),
+            Parser\NewLine::lf(),
+            Parser\FinalNewLine::present(),
         );
     }
 }
