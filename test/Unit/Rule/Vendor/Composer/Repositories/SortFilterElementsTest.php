@@ -22,6 +22,7 @@ use Ergebnis\Json\Normalizer\Test;
  * @uses \Ergebnis\Json\Normalizer\Change
  * @uses \Ergebnis\Json\Normalizer\Configuration
  * @uses \Ergebnis\Json\Normalizer\Context
+ * @uses \Ergebnis\Json\Normalizer\Normalizer
  * @uses \Ergebnis\Json\Normalizer\Result
  * @uses \Ergebnis\Json\Normalizer\Rule\Action
  * @uses \Ergebnis\Json\Normalizer\Rule\Definition
@@ -30,7 +31,6 @@ use Ergebnis\Json\Normalizer\Test;
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Wildcard
  * @uses \Ergebnis\Json\Normalizer\RuleVisitor
- * @uses \Ergebnis\Json\Normalizer\Runner
  * @uses \Ergebnis\Json\Normalizer\Schema
  * @uses \Ergebnis\Json\Normalizer\SchemaLoader
  * @uses \Ergebnis\Json\Normalizer\SchemaResolver

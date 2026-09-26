@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Acceptance;
 
 use Ergebnis\Json\Normalizer\Configuration;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Rule;
-use Ergebnis\Json\Normalizer\Runner;
 use Ergebnis\Json\Parser;
 use Ergebnis\Json\Pointer;
 use PHPUnit\Framework;
@@ -36,12 +36,12 @@ final class SchemaTest extends Framework\TestCase
     ): void {
         $raw = Parser\Raw::fromString($input);
 
-        $runner = Runner::create(self::configuration(
+        $normalizer = Normalizer::create(self::configuration(
             $schemaUri,
             $skip,
         ));
 
-        $result = $runner->normalize($raw);
+        $result = $normalizer->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
     }

@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Util;
 
 use Ergebnis\Json\Normalizer\Configuration;
+use Ergebnis\Json\Normalizer\Normalizer;
 use Ergebnis\Json\Normalizer\Rule;
-use Ergebnis\Json\Normalizer\Runner;
 use Ergebnis\Json\Parser;
 use PHPUnit\Framework;
 
@@ -38,7 +38,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
     ): void {
         $raw = Parser\Raw::fromString($input);
 
-        $result = self::runner($schemaUri)->normalize($raw);
+        $result = self::normalizer($schemaUri)->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
 
@@ -70,7 +70,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
     ): void {
         $raw = Parser\Raw::fromString($output);
 
-        $result = self::runner($schemaUri)->normalize($raw);
+        $result = self::normalizer($schemaUri)->normalize($raw);
 
         self::assertSame($output, $result->output()->toString());
         self::assertSame([], $result->changes());
@@ -109,7 +109,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
                 );
             }
 
-            $result = self::runner($schemaUri)->normalize($raw);
+            $result = self::normalizer($schemaUri)->normalize($raw);
 
             self::assertSame($example->output(), $result->output()->toString());
         }
@@ -117,7 +117,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
 
     abstract protected static function rule(): Rule;
 
-    private static function runner(?string $schemaUri): Runner
+    private static function normalizer(?string $schemaUri): Normalizer
     {
         $configuration = Configuration::create()->withRules(KeepVerifyingRule::create(static::rule()));
 
@@ -125,7 +125,7 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
             $configuration = $configuration->withSchema($schemaUri);
         }
 
-        return Runner::create($configuration);
+        return Normalizer::create($configuration);
     }
 
     /**
