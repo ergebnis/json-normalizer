@@ -16,6 +16,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 use Ergebnis\Json\Normalizer\Configuration;
 use Ergebnis\Json\Normalizer\Rule;
 use Ergebnis\Json\Normalizer\Set;
+use Ergebnis\Json\Normalizer\Skip;
 use Ergebnis\Json\Normalizer\Test;
 use Ergebnis\Json\Parser;
 use Ergebnis\Json\Pointer;
@@ -27,6 +28,7 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Name
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
  * @uses \Ergebnis\Json\Normalizer\Set\Name
+ * @uses \Ergebnis\Json\Normalizer\Skip
  */
 final class ConfigurationTest extends Framework\TestCase
 {
@@ -46,11 +48,13 @@ final class ConfigurationTest extends Framework\TestCase
         $configuration = Configuration::create()->withSets(
             Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@first'),
+                [],
                 $one,
                 $two,
             ),
             Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@second'),
+                [],
                 $three,
             ),
         );
@@ -72,10 +76,12 @@ final class ConfigurationTest extends Framework\TestCase
         $configuration = Configuration::create()
             ->withSets(Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@first'),
+                [],
                 $one,
             ))
             ->withSets(Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@second'),
+                [],
                 $two,
             ));
 
@@ -96,6 +102,7 @@ final class ConfigurationTest extends Framework\TestCase
             ->withRules($two)
             ->withSets(Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@first'),
+                [],
                 $one,
             ));
 
@@ -117,6 +124,7 @@ final class ConfigurationTest extends Framework\TestCase
             ->withRules($replacement)
             ->withSets(Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@first'),
+                [],
                 $one,
                 $two,
             ));
@@ -155,6 +163,7 @@ final class ConfigurationTest extends Framework\TestCase
             ->withoutRules(Rule\Name::fromString('one'))
             ->withSets(Test\Double\Set\ListedSet::create(
                 Set\Name::fromString('@first'),
+                [],
                 $one,
                 $two,
             ));
@@ -192,7 +201,10 @@ final class ConfigurationTest extends Framework\TestCase
     {
         $configuration = Configuration::create();
 
-        $mutated = $configuration->withSets(Test\Double\Set\ListedSet::create(Set\Name::fromString('@first')));
+        $mutated = $configuration->withSets(Test\Double\Set\ListedSet::create(
+            Set\Name::fromString('@first'),
+            [],
+        ));
 
         self::assertNotSame($configuration, $mutated);
     }
@@ -220,6 +232,64 @@ final class ConfigurationTest extends Framework\TestCase
             ->withSkip(
                 Rule\Name::fromString('two'),
                 Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
+            );
+
+        $specification = $configuration->skipFor(Rule\Name::fromString('one'));
+
+        self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/extra/patches')));
+        self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/repositories')));
+        self::assertFalse($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/bin')));
+    }
+
+    public function testWithSetsReturnsConfigurationWithSkipsOfSets(): void
+    {
+        $configuration = Configuration::create()->withSets(
+            Test\Double\Set\ListedSet::create(
+                Set\Name::fromString('@first'),
+                [
+                    Skip::create(
+                        Rule\Name::fromString('one'),
+                        Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/patches')),
+                    ),
+                ],
+            ),
+            Test\Double\Set\ListedSet::create(
+                Set\Name::fromString('@second'),
+                [
+                    Skip::create(
+                        Rule\Name::fromString('one'),
+                        Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/repositories')),
+                    ),
+                    Skip::create(
+                        Rule\Name::fromString('two'),
+                        Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/bin')),
+                    ),
+                ],
+            ),
+        );
+
+        $specification = $configuration->skipFor(Rule\Name::fromString('one'));
+
+        self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/extra/patches')));
+        self::assertTrue($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/repositories')));
+        self::assertFalse($specification->isSatisfiedBy(Pointer\JsonPointer::fromJsonString('/bin')));
+    }
+
+    public function testWithSetsAndWithSkipReturnsConfigurationWithSkipsOfBoth(): void
+    {
+        $configuration = Configuration::create()
+            ->withSets(Test\Double\Set\ListedSet::create(
+                Set\Name::fromString('@first'),
+                [
+                    Skip::create(
+                        Rule\Name::fromString('one'),
+                        Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra/patches')),
+                    ),
+                ],
+            ))
+            ->withSkip(
+                Rule\Name::fromString('one'),
+                Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/repositories')),
             );
 
         $specification = $configuration->skipFor(Rule\Name::fromString('one'));
