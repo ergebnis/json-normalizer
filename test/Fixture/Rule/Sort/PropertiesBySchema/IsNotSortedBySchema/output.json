@@ -1,0 +1,5 @@
+{
+    "name": "ergebnis/json-normalizer",
+    "description": "Normalizes JSON documents.",
+    "license": "MIT"
+}

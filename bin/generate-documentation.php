@@ -237,13 +237,37 @@ require_once __DIR__ . '/../vendor/autoload.php';
             $lines[] = '';
             $lines[] = 'use Ergebnis\\Json\\Normalizer;';
             $lines[] = '';
-            $lines[] = \sprintf(
-                '$configuration = Normalizer\\Configuration::create()->withRules(%s::create());',
-                $className,
-            );
+
+            $schema = $example->schema();
+
+            if (null === $schema) {
+                $lines[] = \sprintf(
+                    '$configuration = Normalizer\\Configuration::create()->withRules(%s::create());',
+                    $className,
+                );
+            } else {
+                $lines[] = '$configuration = Normalizer\\Configuration::create()';
+                $lines[] = \sprintf(
+                    '    ->withRules(%s::create())',
+                    $className,
+                );
+                $lines[] = '    ->withSchema(\\sprintf(';
+                $lines[] = "        'file://%s/schema.json',";
+                $lines[] = '        __DIR__,';
+                $lines[] = '    ));';
+            }
 
             $lines[] = '```';
             $lines[] = '';
+
+            if (null !== $schema) {
+                $lines[] = '#### Schema';
+                $lines[] = '';
+                $lines[] = '```json';
+                $lines[] = \rtrim($schema);
+                $lines[] = '```';
+                $lines[] = '';
+            }
 
             $lines[] = '#### Changes';
             $lines[] = '';

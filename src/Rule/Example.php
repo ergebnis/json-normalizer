@@ -20,13 +20,16 @@ final class Example
 {
     private string $input;
     private string $output;
+    private ?string $schema;
 
     private function __construct(
         string $input,
-        string $output
+        string $output,
+        ?string $schema
     ) {
         $this->input = $input;
         $this->output = $output;
+        $this->schema = $schema;
     }
 
     public static function create(
@@ -36,6 +39,16 @@ final class Example
         return new self(
             $input,
             $output,
+            null,
+        );
+    }
+
+    public function withSchema(string $schema): self
+    {
+        return new self(
+            $this->input,
+            $this->output,
+            $schema,
         );
     }
 
@@ -47,5 +60,10 @@ final class Example
     public function output(): string
     {
         return $this->output;
+    }
+
+    public function schema(): ?string
+    {
+        return $this->schema;
     }
 }
