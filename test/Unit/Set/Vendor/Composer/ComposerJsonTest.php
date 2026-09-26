@@ -33,9 +33,13 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Packages\SortProperties
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Repositories\SortFilterElements
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Constraints
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\MoveDevAffix
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\NormalizeSeparators
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveExtraSpaces
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveLeadingV
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceTildeWithCaret
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceWildcardWithTilde
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\ReplaceXWithAsterisk
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Trim
  * @uses \Ergebnis\Json\Normalizer\Set\Name
  * @uses \Ergebnis\Json\Normalizer\Skip
@@ -71,6 +75,10 @@ final class ComposerJsonTest extends Framework\TestCase
             'vendor/composer/version-constraint/remove-extra-spaces',
             'vendor/composer/version-constraint/normalize-separators',
             'vendor/composer/version-constraint/remove-leading-v',
+            'vendor/composer/version-constraint/move-dev-affix',
+            'vendor/composer/version-constraint/replace-x-with-asterisk',
+            'vendor/composer/version-constraint/replace-wildcard-with-tilde',
+            'vendor/composer/version-constraint/replace-tilde-with-caret',
         ];
 
         self::assertSame($expected, $names);

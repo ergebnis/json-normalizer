@@ -1,0 +1,13 @@
+{
+    "require": {
+        "vendor/package-3": "main-dev",
+        "vendor/package-6": "dev-1.x",
+        "vendor/package-7": "dev-1.2.x",
+        "vendor/package-10": "dev-1.X",
+        "vendor/package-11": "dev-1.2.X",
+        "vendor/package-14": "dev-v1.x",
+        "vendor/package-15": "dev-v1.2.x",
+        "vendor/package-18": "dev-v1.X",
+        "vendor/package-19": "dev-v1.2.X"
+    }
+}
