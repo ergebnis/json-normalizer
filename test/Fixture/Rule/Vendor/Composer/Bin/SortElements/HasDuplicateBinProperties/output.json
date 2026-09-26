@@ -1,0 +1,10 @@
+{
+    "bin": [
+        "bin/a",
+        "bin/b"
+    ],
+    "bin": [
+        "bin/c",
+        "bin/d"
+    ]
+}
