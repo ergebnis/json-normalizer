@@ -15,8 +15,8 @@ namespace Ergebnis\Json\Normalizer\Test\Acceptance;
 
 use Ergebnis\Json\Normalizer\Configuration;
 use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Rule;
 use Ergebnis\Json\Normalizer\Runner;
+use Ergebnis\Json\Normalizer\Set;
 use Ergebnis\Json\Parser;
 use PHPUnit\Framework;
 
@@ -30,39 +30,22 @@ final class ComposerJsonTest extends Framework\TestCase
      */
     private const NOT_YET_PORTED = [
         'Json/IsObject',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Bin/IsArray/HasEntries/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/AllowPlugins/IsObject/HasEntries/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/AllowPlugins/IsObject/HasEntries/Yes/KeyHasWildcard/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/AllowPlugins/IsObject/HasEntries/Yes/KeyHasWildcard/Yes/WildcardIsAtEnd/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/PreferredInstall/IsObject/HasEntries/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/PreferredInstall/IsObject/HasEntries/Yes/KeyHasWildcard/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/HasProperty/PreferredInstall/IsObject/HasEntries/Yes/KeyHasWildcard/Yes/WildcardIsAtEnd/Yes',
         'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/IsSortedByKey/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Config/HasEntries/Yes/IsSortedByKey/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Extra/HasEntries/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Extra/HasEntries/Yes/HasProperty/Patches/HasEntries/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithExclude/HasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithExclude/HasWildcard/Yes/WildcardIsAtEnd/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithExclude/HasWildcard/Yes/WildcardIsAtEnd/Yes',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithOnly/HasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithOnly/HasWildcard/Yes/WildcardIsAtEnd/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsArray/UsesFiltering/Yes/WithOnly/HasWildcard/Yes/WildcardIsAtEnd/Yes',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithExclude/HasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithExclude/HasWildcard/Yes/WildcardIsAtEnd/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithExclude/HasWildcard/Yes/WildcardIsAtEnd/Yes',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithOnly/HasWildcard/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithOnly/HasWildcard/Yes/WildcardIsAtEnd/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Repositories/HasEntries/Yes/IsObject/UsesFiltering/Yes/WithOnly/HasWildcard/Yes/WildcardIsAtEnd/Yes',
         'Json/IsObject/HasEntries/Yes/HasProperty/RequireAndRequireDev',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Scripts/HasEntries/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Suggest/HasEntries/No',
         'Json/IsObject/HasEntries/Yes/HasProperty/Suggest/HasEntries/Yes/IsSortedByKey/No',
-        'Json/IsObject/HasEntries/Yes/HasProperty/Suggest/HasEntries/Yes/IsSortedByKey/Yes',
-        'Template/Conflict/HasEntries/No',
+        'LargeComposerFile',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -139,7 +122,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Conflict/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
         'Template/Conflict/HasEntries/Yes/IsSortedByPackage/No',
-        'Template/Provide/HasEntries/No',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -216,7 +198,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Provide/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
         'Template/Provide/HasEntries/Yes/IsSortedByPackage/No',
-        'Template/Replace/HasEntries/No',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -293,7 +274,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Replace/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
         'Template/Replace/HasEntries/Yes/IsSortedByPackage/No',
-        'Template/Require/HasEntries/No',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -370,7 +350,6 @@ final class ComposerJsonTest extends Framework\TestCase
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Stable',
         'Template/Require/HasEntries/Yes/HasNormalizedVersionConstraints/No/VersionRange/Wildcard/Unstable',
         'Template/Require/HasEntries/Yes/IsSortedByPackage/No',
-        'Template/RequireDev/HasEntries/No',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Branch',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Duplicate',
         'Template/RequireDev/HasEntries/Yes/HasNormalizedVersionConstraints/No/Combination/And/Comma/ExactVersion/Unique',
@@ -555,7 +534,7 @@ final class ComposerJsonTest extends Framework\TestCase
     {
         $raw = Parser\Raw::fromString($input);
 
-        $runner = Runner::create(self::configuration()->withSchema(self::schemaUri()));
+        $runner = Runner::create(self::configuration());
 
         $this->expectException(Exception\InputInvalidAccordingToSchema::class);
 
@@ -583,7 +562,9 @@ final class ComposerJsonTest extends Framework\TestCase
 
     private static function configuration(): Configuration
     {
-        return Configuration::create()->withRules(Rule\Vendor\Composer\Bin\SortElements::create());
+        return Configuration::create()
+            ->withSchema(self::schemaUri())
+            ->withSets(Set\Vendor\Composer\ComposerJson::create());
     }
 
     private static function schemaUri(): string
