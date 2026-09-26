@@ -32,6 +32,11 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Packages\MergeDuplicateExtensions
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Packages\SortProperties
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Repositories\SortFilterElements
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Constraints
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\NormalizeSeparators
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveExtraSpaces
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\RemoveLeadingV
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\VersionConstraint\Trim
  * @uses \Ergebnis\Json\Normalizer\Set\Name
  * @uses \Ergebnis\Json\Normalizer\Skip
  */
@@ -62,6 +67,10 @@ final class ComposerJsonTest extends Framework\TestCase
             'vendor/composer/repositories/sort-filter-elements',
             'vendor/composer/packages/merge-duplicate-extensions',
             'vendor/composer/packages/sort-properties',
+            'vendor/composer/version-constraint/trim',
+            'vendor/composer/version-constraint/remove-extra-spaces',
+            'vendor/composer/version-constraint/normalize-separators',
+            'vendor/composer/version-constraint/remove-leading-v',
         ];
 
         self::assertSame($expected, $names);
