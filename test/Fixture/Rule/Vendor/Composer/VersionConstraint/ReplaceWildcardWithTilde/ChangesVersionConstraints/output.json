@@ -1,0 +1,26 @@
+{
+    "require": {
+        "vendor/package-72": "1.2.3 || ~1.0",
+        "vendor/package-73": "1.2.3 || ~1.2.0",
+        "vendor/package-75": "~1.2.0 || ^1.2",
+        "vendor/package-76": "~1.2.3 || ~1.2.0",
+        "vendor/package-77": "~1.2.3 || ~1.2.0 || ^1.2",
+        "vendor/package-79": "1.2.6 || ~1.2.0 || ^1.2",
+        "vendor/package-80": "1.2.6 || ~1.2.3 || ~1.2.0",
+        "vendor/package-81": "1.2.6 || ~1.2.3 || ~1.2.0 || ^1.2",
+        "vendor/package-99": "~1.0 || ~2.3.0",
+        "vendor/package-268": "1.2.3 || ~4.5.0 || ~6.0 || *",
+        "vendor/package-269": "~1.0",
+        "vendor/package-270": "~1.0",
+        "vendor/package-271": "~1.0",
+        "vendor/package-272": "~1.2.0",
+        "vendor/package-273": "~1.2.0",
+        "vendor/package-274": "~1.2.0",
+        "vendor/package-279": "~0.0",
+        "vendor/package-280": "~0.0",
+        "vendor/package-281": "~0.0",
+        "vendor/package-282": "~0.1.0",
+        "vendor/package-283": "~0.1.0",
+        "vendor/package-284": "~0.1.0"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "description": "Normalizes JSON documents.",
+    "zeta": "z",
+    "name": "ergebnis/json-normalizer",
+    "alpha": "a"
+}

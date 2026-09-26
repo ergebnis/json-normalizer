@@ -1,0 +1,9 @@
+{
+    "config": {
+        "preferred-install": {
+            "bar/*": "source",
+            "foo/bar": "source",
+            "*": "dist"
+        }
+    }
+}

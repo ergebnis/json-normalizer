@@ -1,0 +1,13 @@
+{
+  "homepage": "https://getcomposer.org/doc/04-schema.md#suggest",
+  "suggest": {
+    "php": "Nothing works without it",
+    "hhvm": "Okay",
+    "ext-foo": "Could be useful",
+    "lib-baz": "Maybe it helps.",
+    "composer-plugin-api": "Should be okay",
+    "acquia/drupal-environment-detector": "You might need it",
+    "ergebnis/php-cs-fixer-config": "Provides a configuration factory and multiple rule sets for friendsofphp/php-cs-fixer.",
+    "ergebnis/test-util": "Provides utilities for tests."
+  }
+}

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "vendor/package-121": "1.2.3 as 1.2.3"
+    }
+}

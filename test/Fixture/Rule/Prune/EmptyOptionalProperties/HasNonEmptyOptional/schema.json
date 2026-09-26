@@ -1,0 +1,20 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "keywords": {
+            "type": "array"
+        },
+        "extra": {
+            "type": ["object", "null"]
+        },
+        "support": {
+            "type": "object"
+        }
+    },
+    "required": [
+        "name"
+    ]
+}

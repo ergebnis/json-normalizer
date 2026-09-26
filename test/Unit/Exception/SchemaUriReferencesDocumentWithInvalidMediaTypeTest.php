@@ -24,25 +24,18 @@ final class SchemaUriReferencesDocumentWithInvalidMediaTypeTest extends Framewor
 {
     use Test\Util\Helper;
 
-    public function testDefaults(): void
+    public function testFromStringReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
     {
-        $exception = new Exception\SchemaUriReferencesDocumentWithInvalidMediaType();
+        $value = self::faker()->url();
 
-        self::assertSame('', $exception->schemaUri());
-    }
-
-    public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
-    {
-        $schemaUri = self::faker()->url();
-
-        $exception = Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriReferencesDocumentWithInvalidMediaType::fromString($value);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with media type "application/schema+json".',
-            $schemaUri,
+            $value,
         );
 
         self::assertSame($message, $exception->getMessage());
-        self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($value, $exception->value());
     }
 }

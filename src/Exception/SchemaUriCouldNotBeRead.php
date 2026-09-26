@@ -15,22 +15,22 @@ namespace Ergebnis\Json\Normalizer\Exception;
 
 final class SchemaUriCouldNotBeRead extends \RuntimeException implements Exception
 {
-    private string $schemaUri = '';
+    private string $value = '';
 
-    public static function fromSchemaUri(string $schemaUri): self
+    public static function fromString(string $value): self
     {
         $exception = new self(\sprintf(
             'Schema URI "%s" does not reference a document that could be read.',
-            $schemaUri,
+            $value,
         ));
 
-        $exception->schemaUri = $schemaUri;
+        $exception->value = $value;
 
         return $exception;
     }
 
-    public function schemaUri(): string
+    public function value(): string
     {
-        return $this->schemaUri;
+        return $this->value;
     }
 }

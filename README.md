@@ -12,7 +12,7 @@
 [![Total Downloads](https://poser.pugx.org/ergebnis/json-normalizer/downloads)](https://packagist.org/packages/ergebnis/json-normalizer)
 [![Monthly Downloads](https://poser.pugx.org/ergebnis/json-normalizer/d/monthly)](https://packagist.org/packages/ergebnis/json-normalizer)
 
-This project provides a [`composer`](https://getcomposer.org) package with generic and vendor-specific normalizers for normalizing [JSON documents](https://www.json.org).
+This project provides a [`composer`](https://getcomposer.org) package with a normalizer and generic and vendor-specific rules for normalizing [JSON documents](https://www.json.org).
 
 ## Installation
 
@@ -24,237 +24,7 @@ composer require ergebnis/json-normalizer
 
 ## Usage
 
-This project comes with
-
-- [generic normalizers](#generic-normalizers)
-- [vendor-specific normalizers](#vendor-specific-normalizers)
-
-### Generic normalizers
-
-This project comes with the following generic normalizers:
-
-- [`Ergebnis\Json\Normalizer\CallableNormalizer`](#callablenormalizer)
-- [`Ergebnis\Json\Normalizer\ChainNormalizer`](#chainnormalizer)
-- [`Ergebnis\Json\Normalizer\FormatNormalizer`](#formatnormalizer)
-- [`Ergebnis\Json\Normalizer\IndentNormalizer`](#indentnormalizer)
-- [`Ergebnis\Json\Normalizer\JsonEncodeNormalizer`](#jsonencodenormalizer)
-- [`Ergebnis\Json\Normalizer\SchemaNormalizer`](#schemanormalizer)
-- [`Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
-- [`Ergebnis\Json\Normalizer\WithoutFinalNewLineNormalizer`](#withoutfinalnewlinenormalizer)
-
-:bulb: All of these normalizers implement the `Ergebnis\Json\Normalizer\Normalizer`.
-
-#### `CallableNormalizer`
-
-When you want to normalize a JSON file with a `callable`, you can use the `CallableNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-$callable = function (Json $json): Json {
-    $decoded = $json->decoded();
-
-    foreach (get_object_vars($decoded) as $name => $value) {
-        if ('https://localheinz.com' !== $value) {
-            continue;
-        }
-
-        $decoded->{$name} .= '/open-source/';
-    }
-
-    return Json::fromString(json_encode($decoded));
-};
-
-$normalizer = new Normalizer\CallableNormalizer($callable);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now have the callable applied to it.
-
-#### `ChainNormalizer`
-
-When you want to apply multiple normalizers in a chain, you can use the `ChainNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-use Ergebnis\Json\Printer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-$indent = Normalizer\Format\Indent::fromString('  ');
-$jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-
-$normalizer = new Normalizer\ChainNormalizer(
-    new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions),
-    new Normalizer\IndentNormalizer(
-        $indent,
-        new Printer\Printer()
-    ),
-    new Normalizer\WithFinalNewLineNormalizer()
-);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now contain the result of applying all normalizers in a chain, one after another.
-
-:bulb: Be careful with the order of the normalizers, as one normalizer might override changes a previous normalizer applied.
-
-#### `FormatNormalizer`
-
-When you want to normalize a JSON file with a formatting, you can use the `FormatNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-use Ergebnis\Json\Printer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "emoji": "🤓",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-$format = Normalizer\Format\Format::create(
-    Normalizer\Format\Indent::fromString('  '),
-    Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-    Normalizer\Format\NewLine::fromString("\r\n")
-    true
-);
-
-$normalizer = new Normalizer\FormatNormalizer(
-    new Printer\Printer(),
-    $format,
-);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now have formatting applied according to `$format`.
-
-#### `IndentNormalizer`
-
-When you need to adjust the indentation of a JSON file, you can use the `IndentNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-use Ergebnis\Json\Printer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-$indent = Normalizer\Format\Indent::fromString('  ');
-
-$normalizer = new Normalizer\IndentNormalizer(
-    $indent,
-    new Printer\Printer()
-);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now be indented with 2 spaces.
-
-#### `JsonEncodeNormalizer`
-
-When you need to adjust the encoding of a JSON file, you can use the `JsonEncodeNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas M\u00f6ller",
-    "url": "https:\/\/localheinz.com"
-}
-JSON;
-
-$json = Json::fromString($encoded);
-
-$jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt(JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
-$normalizer = new Normalizer\JsonEncodeNormalizer($jsonEncodeOptions);
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now be encoded with `$jsonEncodeOptions`.
-
-:bulb: For reference, see [`json_encode()`](http://php.net/manual/en/function.json-encode.php) and the corresponding [JSON constants](http://php.net/manual/en/json.constants.php).
-
-#### `SchemaNormalizer`
-
-When you want to rebuild a JSON file according to a JSON schema, you can use the `SchemaNormalizer`.
-
-Let's assume the following schema
-
-```json
-{
-    "type": "object",
-    "additionalProperties": true,
-    "properties": {
-        "name" : {
-            "type" : "string"
-        },
-        "role" : {
-            "type" : "string"
-        }
-    }
-}
-```
-
-exists at `/schema/example.json`.
+Create a `Configuration` with the rules or sets of rules you want to apply, create a `Normalizer`, and normalize a JSON document:
 
 ```php
 <?php
@@ -262,382 +32,84 @@ exists at `/schema/example.json`.
 declare(strict_types=1);
 
 use Ergebnis\Json\Normalizer;
+use Ergebnis\Json\Parser;
 use Ergebnis\Json\Pointer;
-use Ergebnis\Json\SchemaValidator;
-use JsonSchema\SchemaStorage;
 
-$encoded = <<<'JSON'
-{
-    "url": "https://localheinz.com",
-    "name": "Andreas Möller",
-    "open-source-projects": {
-        "ergebnis/data-provider": {
-            "downloads": {
-                "total": 2,
-                "monthly": 1
-            }
-        },
-        "ergebnis/composer-normalize": {
-            "downloads": {
-                "total": 5,
-                "monthly": 2
-            }
-        }
-    }
-}
-JSON;
+$configuration = Normalizer\Configuration::create()
+    ->withIndent(Parser\Indent::create(
+        Parser\IndentSize::fromInt(4),
+        Parser\IndentStyle::space(),
+    ))
+    ->withoutRules(Normalizer\Rule\Name::fromString('vendor/composer/version-constraint/replace-tilde-with-caret'))
+    ->withSchema('https://getcomposer.org/schema.json')
+    ->withSets(Normalizer\Set\Vendor\Composer\ComposerJson::create())
+    ->withSkip(
+        Normalizer\Rule\Name::fromString('sort/properties-by-name'),
+        Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/extra')),
+    );
 
-$json = Json::fromString($encoded);
+$normalizer = Normalizer\Normalizer::create($configuration);
 
-$normalizer = new Normalizer\SchemaNormalizer(
-    'file:///schema/example.json',
-    new SchemaStorage(),
-    new SchemaValidator\SchemaValidator(),
-    Pointer\Specification::never()
+$file = \sprintf(
+    '%s/composer.json',
+    __DIR__,
 );
 
-$normalized = $normalizer->normalize($json);
-```
+$raw = Parser\Raw::fromString(\file_get_contents($file));
 
-The normalized version will now be structured according to the JSON schema (in this simple case, properties will be reordered as found in the schema and additional properties will be ordered by name). Internally, the `SchemaNormalizer` uses [`justinrainbow/json-schema`](https://github.com/justinrainbow/json-schema) to resolve schemas, as well as to ensure (before and after normalization) that the JSON document is valid.
+$result = $normalizer->normalize($raw);
 
-If you have properties that you do not want to be reordered, you can use a `Pointer\Specification` to specify which properties should not be reordered.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Normalizer;
-use Ergebnis\Json\Pointer;
-use Ergebnis\Json\SchemaValidator;
-use JsonSchema\SchemaStorage;
-
-$encoded = <<<'JSON'
-{
-    "url": "https://localheinz.com",
-    "name": "Andreas Möller",
-    "open-source-projects": {
-        "ergebnis/data-provider": {
-            "downloads": {
-                "total": 2,
-                "monthly": 1
-            }
-        },
-        "ergebnis/composer-normalize": {
-            "downloads": {
-                "total": 5,
-                "monthly": 2
-            }
-        }
+if ($result->isChanged()) {
+    foreach ($result->changes() as $change) {
+        echo \sprintf(
+            "Rule \"%s\" changed \"%s\".\n",
+            $change->rule()->toString(),
+            $change->path()->toJsonPointer()->toJsonString(),
+        );
     }
+
+    \file_put_contents(
+        $file,
+        $result->output()->toString(),
+    );
 }
-JSON;
-
-$json = Json::fromString($encoded);
-
-$normalizer = new Normalizer\SchemaNormalizer(
-    'file:///schema/example.json',
-    new SchemaStorage(),
-    new SchemaValidator\SchemaValidator(),
-    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/open-source-projects'))
-);
-
-$normalized = $normalizer->normalize($json);
 ```
 
-:bulb: For more information about JSON schema, visit [json-schema.org](http://json-schema.org).
-
-#### `WithFinalNewLineNormalizer`
-
-When you want to ensure that a JSON file has a single final new line, you can use the `WithFinalNewLineNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-
-
-JSON;
-
-$json = Json::fromString($encoded);
-
-$normalizer = new Normalizer\WithFinalNewLineNormalizer();
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now have a single final new line.
-
-#### `WithoutFinalNewLineNormalizer`
-
-When you want to ensure that a JSON file does not have a final new line, you can use the `WithoutFinalNewLineNormalizer`.
-
-```php
-<?php
-
-declare(strict_types=1);
-
-use Ergebnis\Json\Normalizer;
-
-$encoded = <<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-
-
-JSON;
-
-$json = Json::fromString($encoded);
-
-$normalizer = new Normalizer\WithoutFinalNewLineNormalizer();
-
-$normalized = $normalizer->normalize($json);
-```
-
-The normalized version will now not have a final new line or any whitespace at the end.
-
-### Vendor-specific normalizers
-
-This project comes with the following vendor-specific normalizers:
-
-- [`Ergebnis\Json\Normalizer\Vendor\Composer\JsonNormalizer`](#vendorcomposercomposerjsonnormalizer)
-
-#### `Vendor\Composer\ComposerJsonNormalizer`
-
-The `Vendor\Composer\ComposerJsonNormalizer` can be used to normalize a `composer.json` file according to its underlying JSON schema.
-
-It composes the following normalizers:
-
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\BinNormalizer`](#vendorcomposerbinnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\ConfigHashNormalizer`](#vendorcomposerconfighashnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\PackageHashNormalizer`](#vendorcomposerpackagehashnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\RepositoriesHashNormalizer`](#vendorcomposerrepositorieshashnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\Composer\VersionConstraintNormalizer`](#vendorcomposerversionconstraintnormalizer)
-- [`Ergebnis\Composer\Json\Normalizer\Vendor\WithFinalNewLineNormalizer`](#withfinalnewlinenormalizer)
-
-#### `Vendor\Composer\BinNormalizer`
-
-When `composer.json` contains an array of scripts in the [`bin`](https://getcomposer.org/doc/04-schema.md#bin) section, the `Vendor\Composer\BinNormalizer` will sort the elements of the `bin` section by value in ascending order.
-
-#### `Vendor\Composer\ConfigHashNormalizer`
-
-When `composer.json` contains configuration in the [`config`](https://getcomposer.org/doc/06-config.md#config) section, the `Vendor\Composer\ConfigHashNormalizer` will sort the content of these sections by key in ascending order.
-
-The [`allow-plugins`](https://getcomposer.org/doc/06-config.md#allow-plugins) and [`preferred-install`](https://getcomposer.org/doc/06-config.md#preferred-install) configuration options support keys with wildcards and require special handling.
-
-When these keys do not use wildcards, then these keys are sorted in ascending order. When these keys use wildcards, these keys are sorted when the wildcards are at the end of package names. Due to internal implementation details of the wildcard feature within `composer`, sorting keys with wildcards in the middle is not feasible.
-
-#### `Vendor\Composer\PackageHashNormalizer`
-
-When `composer.json` contains any configuration in the
-
-- [`conflict`](https://getcomposer.org/doc/04-schema.md#conflict)
-- [`provide`](https://getcomposer.org/doc/04-schema.md#provide)
-- [`replace`](https://getcomposer.org/doc/04-schema.md#replace)
-- [`require`](https://getcomposer.org/doc/04-schema.md#require)
-- [`require-dev`](https://getcomposer.org/doc/04-schema.md#require-dev)
-- [`suggest`](https://getcomposer.org/doc/04-schema.md#suggest)
-
-sections, the `Vendor\Composer\PackageHashNormalizer` will sort the packages in these sections.
-
-:bulb: This transfers the behaviour from using the [`--sort-packages`](https://getcomposer.org/doc/03-cli.md#require) or [`sort-packages`](https://getcomposer.org/doc/06-config.md#sort-packages) configuration flag in `require` and `require-dev` to other sections.
-
-#### `Vendor\Composer\RepositoriesHashNormalizer`
-
-When `composer.json` contains any configuration in the
-
-- [`repositories`](https://getcomposer.org/doc/04-schema.md#repositories)
-
-section, the `Vendor\Composer\RepositoriesHashNormalizer` will sort the repositories listed in the [`exclude` and `only` properties of repositories](https://getcomposer.org/doc/articles/repository-priorities.md#filtering-packages).
-
-#### `Vendor\Composer\VersionConstraintNormalizer`
-
-When `composer.json` contains version constraints in the
-
-- [`conflict`](https://getcomposer.org/doc/04-schema.md#conflict)
-- [`provide`](https://getcomposer.org/doc/04-schema.md#provide)
-- [`replace`](https://getcomposer.org/doc/04-schema.md#replace)
-- [`require`](https://getcomposer.org/doc/04-schema.md#require)
-- [`require-dev`](https://getcomposer.org/doc/04-schema.md#require-dev)
-
-sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
-
-- all version constraints are trimmed
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "php": " ^8.2 "
-  +    "php": "^8.2"
-   }
-  ```
-
-- version constraints separated by a space (` `) or comma (`,`) - treated as a logical and - are separated by a space (` `) instead
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "foo/bar": "1.2.3,2.3.4",
-  -    "foo/baz": "2.3.4   3.4.5"
-  +    "foo/bar": "1.2.3 2.3.4",
-  +    "foo/baz": "2.3.4 3.4.5"
-   }
-  ```
-
-- version constraints separated by a single- (`|`) or double-pipe (`||`) and any number of spaces before and after - treated as a logical or - are separated by a double pipe with a single space before and after (` || `)
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "php": "^8.1|^8.2",
-  -    "foo/bar": "^1.2.3  ||  ^2.3.4"
-  +    "php": "^8.1 || ^8.2",
-  +    "foo/bar": "^1.2.3 || ^2.3.4"
-   }
-  ```
-
-- [hyphenated version ranges](https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-) separated by dash (` - `) and any positive number of spaces before and after are separated by a dash with a single space before and after (` - `)
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-",
-     "require": {
-  -    "foo/bar": "1.2.3  -  2.3.4"
-  +    "foo/bar": "1.2.3 - 2.3.4"
-   }
-  ```
-
-- duplicate constraints are removed
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "foo/bar": "^1.0 || ^1.0 || ^2.0"
-  +    "foo/bar": "^1.0 || ^2.0"
-   }
-  ```
-
-- overlapping constraints are removed
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "foo/bar": "^1.0 || ^1.1 || ^2.0 || ~2.1.0 || 2.4.5"
-  +    "foo/bar": "^1.0 || ^2.0"
-   }
-  ```
-
-- [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-) are preferred over [wildcard (`*`) version ranges](https://getcomposer.org/doc/articles/versions.md#wildcard-version-range-)
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-       "foo/bar": "*",
-  -    "foo/baz": "1.0.*"
-  +    "foo/baz": "~1.0.0"
-   }
-  ```
-
-- [caret version ranges (`^`)](https://getcomposer.org/doc/articles/versions.md#caret-version-range-) are preferred over [tilde version ranges (`~`)](https://getcomposer.org/doc/articles/versions.md#tilde-version-range-)
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "foo/bar": "~1",
-  -    "foo/baz": "~1.3"
-  +    "foo/bar": "^1.0",
-  +    "foo/baz": "^1.3"
-   }
-  ```
-
-- version numbers are sorted in ascending order
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
-     "require": {
-  -    "foo/bar": "^2.0 || ^1.4"
-  +    "foo/bar": "^1.4 || ^2.0"
-   }
-  ```
-
-- extra spaces in [inline aliases](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias) are removed
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
-     "require": {
-  -    "foo/bar": "dev-2.x  as  2.0"
-  +    "foo/bar": "dev-2.x as 2.0"
-   }
-  ```
-
-- useless [inline aliases](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias) are removed
-
-  ```diff
-   {
-     "homepage": "https://getcomposer.org/doc/articles/aliases.md#require-inline-alias",
-     "require": {
-  -    "foo/bar": "2.0 as 2.0"
-  +    "foo/bar": "2.0"
-   }
-  ```
-
-- leading `v` prefixes in version constraints are removed
-
-  ```diff
-   {
-     "require": {
-  -    "foo/bar": "^v1.2",
-  -    "foo/baz": "v1.3.7"
-  +    "foo/bar": "^1.2",
-  +    "foo/baz": "1.3.7"
-   }
-  ```
-
-- use of `x` or `X` for wildcards is replaced with `*`
-
-  ```diff
-   {
-     "require": {
-  -    "foo/bar": "1.x",
-  -    "foo/baz": "2.3.X",
-  -    "foo/qux": "x"
-  +    "foo/bar": "^1.0",
-  +    "foo/baz": "~2.3.0",
-  +    "foo/qux": "*"
-   }
-  ```
-
-- empty sections (which are defined as optional in the schema) are automatically removed
-
-  ```diff
-   {
-      "require": {
-          "foo/bar": "^2.3.4"
-      }
-  -   "config": {
-  -       "preferred-install": {}
-  -   }
-   }
-  ```
+The `Normalizer` keeps the format of the input (indentation, new lines, and a final new line) unless you configure a different one with `Configuration::withIndent()`, `Configuration::withNewLine()`, or `Configuration::withFinalNewLine()`.
+
+When you configure a schema with `Configuration::withSchema()`, the `Normalizer` validates the input against the schema before applying rules and the output after applying them, and rules can use the schema of each node. The `Normalizer` throws `Exception\InputInvalidAccordingToSchema` when the input is not valid, and `Exception\OutputInvalidAccordingToSchema` when the rules produce output that is not valid.
+
+The set `@composer-json` (`Set\Vendor\Composer\ComposerJson`) contains the rules for normalizing `composer.json` files. It expects the schema for `composer.json` (`https://getcomposer.org/schema.json`) to be configured: without a schema, the generic rules sort every object by name.
+
+## Rules
+
+<!-- BEGIN RULES -->
+
+This project provides the following rules:
+
+- [`prune/empty-optional-properties`](doc/rules/Prune/EmptyOptionalProperties.md): Removes properties that the schema lists but does not require when their value is an empty array, an empty object, or null.
+- [`sort/properties-by-name`](doc/rules/Sort/PropertiesByName.md): Sorts the properties of objects that the schema does not list by name, after the properties that it lists.
+- [`sort/properties-by-schema`](doc/rules/Sort/PropertiesBySchema.md): Sorts the properties of objects in the order in which the schema lists them, and keeps properties that the schema does not list after them, in their order.
+- [`vendor/composer/bin/sort-elements`](doc/rules/Vendor/Composer/Bin/SortElements.md): Sorts the elements of `bin` by value.
+- [`vendor/composer/config/sort-properties`](doc/rules/Vendor/Composer/Config/SortProperties.md): Sorts the properties of `config` by name.
+- [`vendor/composer/config/sort-properties-with-wildcards`](doc/rules/Vendor/Composer/Config/SortPropertiesWithWildcards.md): Sorts the properties of `config.allow-plugins` and `config.preferred-install` by name, with a wildcard after every other character, unless a name has a wildcard other than at its end.
+- [`vendor/composer/packages/merge-duplicate-extensions`](doc/rules/Vendor/Composer/Packages/MergeDuplicateExtensions.md): Renames extensions in package links to lower case with spaces replaced by hyphens, and merges the version constraints of extensions that then have the same name.
+- [`vendor/composer/packages/sort-properties`](doc/rules/Vendor/Composer/Packages/SortProperties.md): Sorts package links with platform packages first, the way Composer sorts them.
+- [`vendor/composer/repositories/sort-filter-elements`](doc/rules/Vendor/Composer/Repositories/SortFilterElements.md): Sorts the elements of `exclude` and `only` of repositories by value, with a wildcard after every other character, unless a value has a wildcard other than at its end.
+- [`vendor/composer/version-constraint/move-dev-affix`](doc/rules/Vendor/Composer/VersionConstraint/MoveDevAffix.md): Moves `dev` to the end of numeric branch names and to the start of other branch names in version constraints.
+- [`vendor/composer/version-constraint/normalize-separators`](doc/rules/Vendor/Composer/VersionConstraint/NormalizeSeparators.md): Separates or-constraints with `||` and and-constraints with a space.
+- [`vendor/composer/version-constraint/remove-duplicates`](doc/rules/Vendor/Composer/VersionConstraint/RemoveDuplicates.md): Removes duplicate or-constraints and and-constraints from version constraints.
+- [`vendor/composer/version-constraint/remove-extra-spaces`](doc/rules/Vendor/Composer/VersionConstraint/RemoveExtraSpaces.md): Replaces consecutive spaces in version constraints with a single space.
+- [`vendor/composer/version-constraint/remove-leading-v`](doc/rules/Vendor/Composer/VersionConstraint/RemoveLeadingV.md): Removes the prefix `v` from versions in version constraints.
+- [`vendor/composer/version-constraint/remove-overlapping`](doc/rules/Vendor/Composer/VersionConstraint/RemoveOverlapping.md): Removes or-constraints that other or-constraints with a caret or a tilde already cover from version constraints.
+- [`vendor/composer/version-constraint/remove-useless-inline-aliases`](doc/rules/Vendor/Composer/VersionConstraint/RemoveUselessInlineAliases.md): Removes inline aliases that alias a version to itself from version constraints.
+- [`vendor/composer/version-constraint/replace-tilde-with-caret`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceTildeWithCaret.md): Replaces version ranges with a tilde with version ranges with a caret in version constraints where they are equivalent.
+- [`vendor/composer/version-constraint/replace-wildcard-with-tilde`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceWildcardWithTilde.md): Replaces version ranges with a wildcard with version ranges with a tilde in version constraints.
+- [`vendor/composer/version-constraint/replace-x-with-asterisk`](doc/rules/Vendor/Composer/VersionConstraint/ReplaceXWithAsterisk.md): Replaces the wildcard `x` with `*` in version constraints.
+- [`vendor/composer/version-constraint/sort`](doc/rules/Vendor/Composer/VersionConstraint/Sort.md): Sorts or-constraints and and-constraints in version constraints by version.
+- [`vendor/composer/version-constraint/trim`](doc/rules/Vendor/Composer/VersionConstraint/Trim.md): Removes whitespace around version constraints.
+
+<!-- END RULES -->
 
 ## Changelog
 

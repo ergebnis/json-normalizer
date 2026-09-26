@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "properties": {
+        "authors": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/author"
+            }
+        }
+    },
+    "definitions": {
+        "author": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

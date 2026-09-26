@@ -1,0 +1,7 @@
+{
+    "provide": {
+        "vendor/a": "1.0",
+        "vendor/b": "2.0",
+        "vendor/b": "1.0"
+    }
+}

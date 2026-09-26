@@ -1,0 +1,8 @@
+{
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "json"
+    ],
+    "name": "ergebnis/json-normalizer"
+}

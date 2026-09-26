@@ -1,0 +1,12 @@
+{
+    "require": {
+        "php": "^8.0",
+        "php-64bit": "*",
+        "hhvm": "*",
+        "ext-json": "*",
+        "lib-icu": "*",
+        "composer-plugin-api": "^2.0",
+        "ergebnis/json": "^1.0",
+        "ergebnis/json-parser": "^1.0"
+    }
+}

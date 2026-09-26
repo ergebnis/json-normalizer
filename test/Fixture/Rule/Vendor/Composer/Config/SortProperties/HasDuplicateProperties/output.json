@@ -1,0 +1,7 @@
+{
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "sort-packages": false
+    }
+}

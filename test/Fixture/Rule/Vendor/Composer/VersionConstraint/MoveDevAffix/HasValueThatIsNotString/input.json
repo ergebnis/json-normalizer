@@ -1,0 +1,7 @@
+{
+    "require": {
+        "vendor/package": [
+            "main-dev"
+        ]
+    }
+}

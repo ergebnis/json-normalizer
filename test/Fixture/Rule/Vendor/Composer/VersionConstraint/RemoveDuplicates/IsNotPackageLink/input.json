@@ -1,0 +1,8 @@
+{
+    "suggest": {
+        "vendor/package": "^1.2 || ^1.2"
+    },
+    "extra": {
+        "require": "^1.2 || ^1.2"
+    }
+}

@@ -24,25 +24,18 @@ final class SchemaUriReferencesInvalidJsonDocumentTest extends Framework\TestCas
 {
     use Test\Util\Helper;
 
-    public function testDefaults(): void
+    public function testFromStringReturnsSchemaUriReferencesInvalidJsonDocument(): void
     {
-        $exception = new Exception\SchemaUriReferencesInvalidJsonDocument();
+        $value = self::faker()->url();
 
-        self::assertSame('', $exception->schemaUri());
-    }
-
-    public function testFromSchemaUriReturnsSchemaUriReferencesDocumentWithInvalidMediaType(): void
-    {
-        $schemaUri = self::faker()->url();
-
-        $exception = Exception\SchemaUriReferencesInvalidJsonDocument::fromSchemaUri($schemaUri);
+        $exception = Exception\SchemaUriReferencesInvalidJsonDocument::fromString($value);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document with valid JSON syntax.',
-            $schemaUri,
+            $value,
         );
 
         self::assertSame($message, $exception->getMessage());
-        self::assertSame($schemaUri, $exception->schemaUri());
+        self::assertSame($value, $exception->value());
     }
 }
