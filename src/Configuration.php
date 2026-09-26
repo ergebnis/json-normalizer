@@ -21,6 +21,8 @@ use Ergebnis\Json\Pointer;
  */
 final class Configuration
 {
+    private ?string $schemaUri;
+
     /**
      * @var list<Set>
      */
@@ -51,6 +53,7 @@ final class Configuration
      * @param array<string, list<Pointer\Specification>> $skips
      */
     private function __construct(
+        ?string $schemaUri,
         array $sets,
         array $rules,
         array $withoutRules,
@@ -59,6 +62,7 @@ final class Configuration
         ?Parser\NewLine $newLine,
         ?Parser\FinalNewLine $finalNewLine
     ) {
+        $this->schemaUri = $schemaUri;
         $this->sets = $sets;
         $this->rules = $rules;
         $this->withoutRules = $withoutRules;
@@ -71,6 +75,7 @@ final class Configuration
     public static function create(): self
     {
         return new self(
+            null,
             [],
             [],
             [],
@@ -78,6 +83,20 @@ final class Configuration
             null,
             null,
             null,
+        );
+    }
+
+    public function withSchema(string $uri): self
+    {
+        return new self(
+            $uri,
+            $this->sets,
+            $this->rules,
+            $this->withoutRules,
+            $this->skips,
+            $this->indent,
+            $this->newLine,
+            $this->finalNewLine,
         );
     }
 
@@ -92,6 +111,7 @@ final class Configuration
         }
 
         return new self(
+            $this->schemaUri,
             \array_merge(
                 $this->sets,
                 $sets,
@@ -108,6 +128,7 @@ final class Configuration
     public function withRules(Rule ...$rules): self
     {
         return new self(
+            $this->schemaUri,
             $this->sets,
             \array_merge(
                 $this->rules,
@@ -124,6 +145,7 @@ final class Configuration
     public function withoutRules(Rule\Name ...$names): self
     {
         return new self(
+            $this->schemaUri,
             $this->sets,
             $this->rules,
             \array_merge(
@@ -146,6 +168,7 @@ final class Configuration
         $skips[$name->toString()][] = $specification;
 
         return new self(
+            $this->schemaUri,
             $this->sets,
             $this->rules,
             $this->withoutRules,
@@ -159,6 +182,7 @@ final class Configuration
     public function withIndent(Parser\Indent $indent): self
     {
         return new self(
+            $this->schemaUri,
             $this->sets,
             $this->rules,
             $this->withoutRules,
@@ -172,6 +196,7 @@ final class Configuration
     public function withNewLine(Parser\NewLine $newLine): self
     {
         return new self(
+            $this->schemaUri,
             $this->sets,
             $this->rules,
             $this->withoutRules,
@@ -185,6 +210,7 @@ final class Configuration
     public function withFinalNewLine(Parser\FinalNewLine $finalNewLine): self
     {
         return new self(
+            $this->schemaUri,
             $this->sets,
             $this->rules,
             $this->withoutRules,
@@ -193,6 +219,11 @@ final class Configuration
             $this->newLine,
             $finalNewLine,
         );
+    }
+
+    public function schemaUri(): ?string
+    {
+        return $this->schemaUri;
     }
 
     /**

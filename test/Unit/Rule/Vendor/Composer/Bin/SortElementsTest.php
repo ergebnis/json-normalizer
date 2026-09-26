@@ -30,6 +30,7 @@ use Ergebnis\Json\Normalizer\Test;
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
  * @uses \Ergebnis\Json\Normalizer\RuleVisitor
  * @uses \Ergebnis\Json\Normalizer\Runner
+ * @uses \Ergebnis\Json\Normalizer\SchemaLoader
  */
 final class SortElementsTest extends Test\Util\AbstractRuleTestCase
 {

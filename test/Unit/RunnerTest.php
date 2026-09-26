@@ -30,11 +30,15 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Change
  * @uses \Ergebnis\Json\Normalizer\Configuration
  * @uses \Ergebnis\Json\Normalizer\Context
+ * @uses \Ergebnis\Json\Normalizer\Exception\InputInvalidAccordingToSchema
+ * @uses \Ergebnis\Json\Normalizer\Exception\OutputInvalidAccordingToSchema
  * @uses \Ergebnis\Json\Normalizer\Exception\RulesDidNotSettle
  * @uses \Ergebnis\Json\Normalizer\Result
  * @uses \Ergebnis\Json\Normalizer\Rule\Action
  * @uses \Ergebnis\Json\Normalizer\Rule\Name
  * @uses \Ergebnis\Json\Normalizer\Rule\Target
+ * @uses \Ergebnis\Json\Normalizer\Schema
+ * @uses \Ergebnis\Json\Normalizer\SchemaLoader
  */
 final class RunnerTest extends Framework\TestCase
 {
@@ -85,6 +89,48 @@ final class RunnerTest extends Framework\TestCase
         ));
 
         $runner->normalize($raw);
+    }
+
+    public function testNormalizeThrowsInputInvalidAccordingToSchemaWhenInputIsInvalid(): void
+    {
+        $raw = Parser\Raw::fromString('{"name":9000}');
+
+        $runner = Runner::create(Configuration::create()->withSchema(self::schemaUri()));
+
+        $this->expectException(Exception\InputInvalidAccordingToSchema::class);
+
+        $runner->normalize($raw);
+    }
+
+    public function testNormalizeThrowsOutputInvalidAccordingToSchemaWhenRuleMakesOutputInvalid(): void
+    {
+        $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer"}');
+
+        $runner = Runner::create(Configuration::create()
+            ->withRules(Test\Double\Rule\ReplacingRule::create(
+                Rule\Name::fromString('replace'),
+                Rule\Target::create(
+                    Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/name')),
+                    Parser\Node\StringNode::class,
+                ),
+                Parser\Node\NumberNode::fromInt(9000),
+            ))
+            ->withSchema(self::schemaUri()));
+
+        $this->expectException(Exception\OutputInvalidAccordingToSchema::class);
+
+        $runner->normalize($raw);
+    }
+
+    public function testNormalizeReturnsResultWhenInputAndOutputAreValidAccordingToSchema(): void
+    {
+        $raw = Parser\Raw::fromString('{"name":"ergebnis/json-normalizer"}');
+
+        $runner = Runner::create(Configuration::create()->withSchema(self::schemaUri()));
+
+        $result = $runner->normalize($raw);
+
+        self::assertSame($raw->toString(), $result->output()->toString());
     }
 
     public function testNormalizeReturnsResultWithoutChangesWhenConfigurationHasNoRules(): void
@@ -381,5 +427,16 @@ JSON;
                 $change->path()->toJsonPointer()->toJsonString(),
             ];
         }, $changes);
+    }
+
+    private static function schemaUri(): string
+    {
+        return \sprintf(
+            'file://%s',
+            \realpath(\sprintf(
+                '%s/../Fixture/Schema/NameIsRequiredString/schema.json',
+                __DIR__,
+            )),
+        );
     }
 }
