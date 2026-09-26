@@ -1,0 +1,6 @@
+{
+    "require-dev": {
+        "php": "^8.0",
+        "ext-zend-opcache": "*"
+    }
+}
