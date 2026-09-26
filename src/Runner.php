@@ -88,7 +88,7 @@ final class Runner
     ): Result {
         $printed = $this->printer->print(
             $node,
-            Parser\Format::fromRaw($raw),
+            $this->configuration->format(Parser\Format::fromRaw($raw)),
         );
 
         return Result::create(

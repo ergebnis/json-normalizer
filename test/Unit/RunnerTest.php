@@ -130,6 +130,34 @@ JSON);
         self::assertSame("{\n\t\"bin\": [\n\t\t\"a\",\n\t\t\"b\"\n\t]\n}", $result->output()->toString());
     }
 
+    public function testNormalizePrintsWithConfiguredFormat(): void
+    {
+        $raw = Parser\Raw::fromString("{\n\t\"bin\": [\n\t\t\"b\",\n\t\t\"a\"\n\t]\n}");
+
+        $runner = Runner::create(Configuration::create()
+            ->withFinalNewLine(Parser\FinalNewLine::present())
+            ->withIndent(Parser\Indent::create(
+                Parser\IndentSize::fromInt(2),
+                Parser\IndentStyle::space(),
+            )));
+
+        $result = $runner->normalize($raw);
+
+        $expected = <<<'JSON'
+{
+  "bin": [
+    "b",
+    "a"
+  ]
+}
+
+JSON;
+
+        self::assertSame($expected, $result->output()->toString());
+        self::assertSame([], $result->changes());
+        self::assertTrue($result->isChanged());
+    }
+
     public function testNormalizeReturnsResultWithChangeWhenRuleReplacesNode(): void
     {
         $raw = Parser\Raw::fromString('{"bin":["b","a"]}');
