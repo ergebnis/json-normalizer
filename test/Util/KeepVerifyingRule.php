@@ -43,6 +43,11 @@ final class KeepVerifyingRule implements Rule
         return $this->rule->target();
     }
 
+    public function definition(): Rule\Definition
+    {
+        return $this->rule->definition();
+    }
+
     public function apply(
         Parser\Node\Node $node,
         Context $context

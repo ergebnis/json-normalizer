@@ -88,6 +88,17 @@ abstract class AbstractRuleTestCase extends Framework\TestCase
         }
     }
 
+    final public function testDefinitionExamplesAreNormalized(): void
+    {
+        foreach (static::rule()->definition()->examples() as $example) {
+            $raw = Parser\Raw::fromString($example->input());
+
+            $result = self::runner()->normalize($raw);
+
+            self::assertSame($example->output(), $result->output()->toString());
+        }
+    }
+
     abstract protected static function rule(): Rule;
 
     private static function runner(): Runner

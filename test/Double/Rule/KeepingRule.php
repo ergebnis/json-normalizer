@@ -50,6 +50,17 @@ final class KeepingRule implements Rule
         return $this->target;
     }
 
+    public function definition(): Rule\Definition
+    {
+        return Rule\Definition::create(
+            'Test double.',
+            Rule\Example::create(
+                '{}',
+                '{}',
+            ),
+        );
+    }
+
     public function apply(
         Parser\Node\Node $node,
         Context $context

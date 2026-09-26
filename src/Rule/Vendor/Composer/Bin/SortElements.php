@@ -42,6 +42,33 @@ final class SortElements implements Rule
         );
     }
 
+    public function definition(): Rule\Definition
+    {
+        return Rule\Definition::create(
+            'Sorts the elements of `bin` by value.',
+            Rule\Example::create(
+                <<<'JSON'
+{
+    "bin": [
+        "bin/b",
+        "bin/a"
+    ]
+}
+
+JSON,
+                <<<'JSON'
+{
+    "bin": [
+        "bin/a",
+        "bin/b"
+    ]
+}
+
+JSON,
+            ),
+        );
+    }
+
     public function apply(
         Parser\Node\Node $node,
         Context $context
