@@ -1,0 +1,10 @@
+{
+    "repositories": [
+        {
+            "only": [
+                "foo/bar",
+                9000
+            ]
+        }
+    ]
+}

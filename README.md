@@ -651,6 +651,7 @@ This project provides the following rules:
 - [`vendor/composer/bin/sort-elements`](doc/rules/Vendor/Composer/Bin/SortElements.md): Sorts the elements of `bin` by value.
 - [`vendor/composer/config/sort-properties`](doc/rules/Vendor/Composer/Config/SortProperties.md): Sorts the properties of `config` by name.
 - [`vendor/composer/config/sort-properties-with-wildcards`](doc/rules/Vendor/Composer/Config/SortPropertiesWithWildcards.md): Sorts the properties of `config.allow-plugins` and `config.preferred-install` by name, with a wildcard after every other character, unless a name has a wildcard other than at its end.
+- [`vendor/composer/repositories/sort-filter-elements`](doc/rules/Vendor/Composer/Repositories/SortFilterElements.md): Sorts the elements of `exclude` and `only` of repositories by value, with a wildcard after every other character, unless a value has a wildcard other than at its end.
 
 <!-- END RULES -->
 

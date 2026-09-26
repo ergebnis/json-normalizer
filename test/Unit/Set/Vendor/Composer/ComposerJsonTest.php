@@ -29,6 +29,7 @@ use PHPUnit\Framework;
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Bin\SortElements
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Config\SortProperties
  * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Config\SortPropertiesWithWildcards
+ * @uses \Ergebnis\Json\Normalizer\Rule\Vendor\Composer\Repositories\SortFilterElements
  * @uses \Ergebnis\Json\Normalizer\Set\Name
  * @uses \Ergebnis\Json\Normalizer\Skip
  */
@@ -56,6 +57,7 @@ final class ComposerJsonTest extends Framework\TestCase
             'vendor/composer/bin/sort-elements',
             'vendor/composer/config/sort-properties',
             'vendor/composer/config/sort-properties-with-wildcards',
+            'vendor/composer/repositories/sort-filter-elements',
         ];
 
         self::assertSame($expected, $names);
