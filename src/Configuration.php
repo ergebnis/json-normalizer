@@ -67,6 +67,14 @@ final class Configuration
 
     public function withSets(Set ...$sets): self
     {
+        $skips = $this->skips;
+
+        foreach ($sets as $set) {
+            foreach ($set->skips() as $skip) {
+                $skips[$skip->rule()->toString()][] = $skip->specification();
+            }
+        }
+
         return new self(
             \array_merge(
                 $this->sets,
@@ -74,7 +82,7 @@ final class Configuration
             ),
             $this->rules,
             $this->withoutRules,
-            $this->skips,
+            $skips,
         );
     }
 

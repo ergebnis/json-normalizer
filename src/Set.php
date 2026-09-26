@@ -21,4 +21,9 @@ interface Set
      * @return list<Rule>
      */
     public function rules(): array;
+
+    /**
+     * @return list<Skip>
+     */
+    public function skips(): array;
 }
