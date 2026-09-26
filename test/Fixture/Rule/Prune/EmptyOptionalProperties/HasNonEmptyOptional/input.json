@@ -1,0 +1,9 @@
+{
+    "name": "ergebnis/json-normalizer",
+    "keywords": [
+        "json"
+    ],
+    "support": {
+        "issues": "https://github.com/ergebnis/json-normalizer/issues"
+    }
+}

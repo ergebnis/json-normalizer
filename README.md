@@ -645,6 +645,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
 
 This project provides the following rules:
 
+- [`prune/empty-optional-properties`](doc/rules/Prune/EmptyOptionalProperties.md): Removes properties that the schema lists but does not require when their value is an empty array, an empty object, or null.
 - [`sort/properties-by-name`](doc/rules/Sort/PropertiesByName.md): Sorts the properties of objects that the schema does not list by name, after the properties that it lists.
 - [`sort/properties-by-schema`](doc/rules/Sort/PropertiesBySchema.md): Sorts the properties of objects in the order in which the schema lists them, and keeps properties that the schema does not list after them, in their order.
 - [`vendor/composer/bin/sort-elements`](doc/rules/Vendor/Composer/Bin/SortElements.md): Sorts the elements of `bin` by value.
