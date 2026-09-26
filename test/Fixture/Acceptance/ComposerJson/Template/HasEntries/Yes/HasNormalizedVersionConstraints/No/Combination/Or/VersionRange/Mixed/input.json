@@ -1,0 +1,38 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#version-range",
+  "value-contains-packages-and-version-constraints": {
+    "combination-or-version-range-mixed/01-fixed-and-caret": "1.2.3 || ^1",
+    "combination-or-version-range-mixed/02-fixed-and-caret": "1.2.3 || ^1.2",
+    "combination-or-version-range-mixed/03-fixed-and-caret-zero": "1.2.3 || ^1.2.0",
+    "combination-or-version-range-mixed/04-fixed-and-caret-non-zero": "1.2.3 || ^1.2.1",
+    "combination-or-version-range-mixed/05-fixed-and-caret-same": "1.2.3 || ^1.2.3",
+    "combination-or-version-range-mixed/06-fixed-and-caret-greater": "1.2.3 || ^1.2.5",
+
+    "combination-or-version-range-mixed/07-fixed-and-tilde": "1.2.3 || ~1",
+    "combination-or-version-range-mixed/08-fixed-and-tilde": "1.2.3 || ~1.2",
+    "combination-or-version-range-mixed/09-fixed-and-tilde-zero": "1.2.3 || ~1.2.0",
+    "combination-or-version-range-mixed/10-fixed-and-tilde-non-zero": "1.2.3 || ~1.2.2",
+    "combination-or-version-range-mixed/11-fixed-and-tilde-same": "1.2.3 || ~1.2.3",
+    "combination-or-version-range-mixed/12-fixed-and-tilde-greater": "1.2.3 || ~1.2.5",
+
+    "combination-or-version-range-mixed/13-fixed-and-wildcard": "1.2.3 || 1.*",
+    "combination-or-version-range-mixed/14-fixed-and-wildcard": "1.2.3 || 1.2.*",
+
+    "combination-or-version-range-mixed/15-tilde-and-caret": "~1.2.3 || ^1.2",
+    "combination-or-version-range-mixed/16-wildcard-and-caret": "1.2.* || ^1.2",
+    "combination-or-version-range-mixed/17-tilde-and-wildcard": "~1.2.3 || 1.2.*",
+    "combination-or-version-range-mixed/18-tilde-and-wildcard-and-caret": "~1.2.3 || 1.2.* || ^1.2",
+
+    "combination-or-version-range-mixed/19-fixed-and-tilde-and-caret": "1.2.6 || ~1.2.3 || ^1.2",
+    "combination-or-version-range-mixed/20-fixed-and-wildcard-and-caret": "1.2.6 || 1.2.* || ^1.2",
+    "combination-or-version-range-mixed/21-fixed-and-tilde-and-wildcard": "1.2.6 || ~1.2.3 || 1.2.*",
+    "combination-or-version-range-mixed/22-fixed-and-tilde-and-wildcard-and-caret": "1.2.6 || ~1.2.3 || 1.2.* || ^1.2",
+
+    "combination-or-version-range-mixed/23-fixed-and-tilde-and-caret": "1.2.3 || ~1.2.3 || ^1.2.3",
+    "combination-or-version-range-mixed/24-tilde-and-caret-and-fixed": "~1.2.3 || ^1.2.3 || 1.2.3",
+    "combination-or-version-range-mixed/25-caret-and-fixed-and-tilde": "^1.2.3 || 1.2.3 || ~1.2.3",
+    "combination-or-version-range-mixed/26-caret-and-tilde-and-fixed": "^1.2.3 || ~1.2.3 || 1.2.3",
+    "combination-or-version-range-mixed/27-tilde-and-fixed-and-caret": "~1.2.3 || 1.2.3 || ^1.2.3",
+    "combination-or-version-range-mixed/28-fixed-and-caret-and-tilde": "1.2.3 || ^1.2.3 || ~1.2.3"
+  }
+}

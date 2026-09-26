@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "foo": {
+      "type": "object"
+    },
+    "bar": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "baz": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "quuz": {
+              "type": "string"
+            },
+            "qux": {
+              "type": "string"
+            }
+          }
+        },
+        "grault": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fred": {
+              "type": "string"
+            },
+            "garply": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

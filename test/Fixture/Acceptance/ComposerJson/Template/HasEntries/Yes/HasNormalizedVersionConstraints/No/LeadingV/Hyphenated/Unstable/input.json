@@ -1,0 +1,13 @@
+{
+  "homepage": "https://getcomposer.org/doc/articles/versions.md#hyphenated-version-range-",
+  "value-contains-packages-and-version-constraints": {
+    "leading-v-hyphenated-unstable/01-major-minor-surrounded-by-space-single-trimmed": "v0.1 - v0.2",
+    "leading-v-hyphenated-unstable/02-major-minor-surrounded-by-space-single-untrimmed": " v0.1 - v0.2 ",
+    "leading-v-hyphenated-unstable/03-major-minor-surrounded-by-space-double-trimmed": "v0.1  -  v0.2",
+    "leading-v-hyphenated-unstable/04-major-minor-surrounded-by-space-double-untrimmed": " v0.1  -  v0.2 ",
+    "leading-v-hyphenated-unstable/05-major-minor-patch-surrounded-by-space-single-trimmed": "v0.1.2 - v0.2.3",
+    "leading-v-hyphenated-unstable/06-major-minor-patch-surrounded-by-space-single-untrimmed": " v0.1.2 - v0.2.3 ",
+    "leading-v-hyphenated-unstable/07-major-minor-patch-surrounded-by-space-double-trimmed": "v0.1.2  -  v0.2.3",
+    "leading-v-hyphenated-unstable/08-major-minor-patch-surrounded-by-space-double-untrimmed": " v0.1.2  -  v0.2.3 "
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "ergebnis/json-normalizer",
+  "description": "Provides generic and vendor-specific normalizers for normalizing JSON documents.",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "json",
+    "normalizer"
+  ],
+  "authors": [
+    {
+      "name": "Andreas Möller",
+      "email": "am@localheinz.com"
+    }
+  ],
+  "homepage": "https://getcomposer.org/doc/04-schema.md#repositories",
+  "repositories": {
+    "foo": {
+      "url": "http://packages.foo.com",
+      "exclude": ["vendor/two","vendor/one"],
+      "type": "composer"
+    }
+  }
+}
