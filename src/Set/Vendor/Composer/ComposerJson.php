@@ -46,6 +46,10 @@ final class ComposerJson implements Set
             Rule\Vendor\Composer\Repositories\SortFilterElements::create(),
             Rule\Vendor\Composer\Packages\MergeDuplicateExtensions::create(),
             Rule\Vendor\Composer\Packages\SortProperties::create(),
+            Rule\Vendor\Composer\VersionConstraint\Trim::create(),
+            Rule\Vendor\Composer\VersionConstraint\RemoveExtraSpaces::create(),
+            Rule\Vendor\Composer\VersionConstraint\NormalizeSeparators::create(),
+            Rule\Vendor\Composer\VersionConstraint\RemoveLeadingV::create(),
         ];
     }
 

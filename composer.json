@@ -23,6 +23,7 @@
   "require": {
     "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0",
     "ext-json": "*",
+    "composer/semver": "^3.4.4",
     "ergebnis/json": "^1.2.0",
     "ergebnis/json-parser": "^1.0.0@dev",
     "ergebnis/json-pointer": "^3.9.0",
@@ -31,7 +32,6 @@
     "justinrainbow/json-schema": "^5.2.12 || ^6.0.0"
   },
   "require-dev": {
-    "composer/semver": "^3.4.4",
     "ergebnis/data-provider": "^3.6.0",
     "ergebnis/license": "^2.7.0",
     "ergebnis/php-cs-fixer-config": "^6.63.3",
