@@ -1,0 +1,18 @@
+{
+    "extra": {
+        "only": [
+            "foo/bar",
+            "bar/baz"
+        ]
+    },
+    "repositories": [
+        {
+            "options": {
+                "only": [
+                    "foo/bar",
+                    "bar/baz"
+                ]
+            }
+        }
+    ]
+}

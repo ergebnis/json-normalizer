@@ -1,0 +1,13 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.example.org",
+            "only": [
+                "bar/baz",
+                "foo/bar",
+                "foo/bar"
+            ]
+        }
+    ]
+}
