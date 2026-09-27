@@ -1,0 +1,6 @@
+{
+    "suggest": {
+        "ext-intl": "For translations.",
+        "vendor/b": "For b."
+    }
+}

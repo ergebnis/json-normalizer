@@ -1,0 +1,6 @@
+{
+    "require": {
+        "php": "^8.0",
+        "ergebnis/json": "^1.0"
+    }
+}

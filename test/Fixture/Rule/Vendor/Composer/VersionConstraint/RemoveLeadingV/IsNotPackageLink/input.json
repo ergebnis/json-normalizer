@@ -1,0 +1,8 @@
+{
+    "suggest": {
+        "vendor/package": "v1.0"
+    },
+    "extra": {
+        "require": "v1.0"
+    }
+}

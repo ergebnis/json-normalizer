@@ -1,0 +1,12 @@
+{
+    "repositories": {
+        "example/packages": {
+            "type": "composer",
+            "url": "https://packages.example.org",
+            "exclude": [
+                "foo/bar",
+                "bar/baz"
+            ]
+        }
+    }
+}

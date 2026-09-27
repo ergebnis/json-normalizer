@@ -1,0 +1,18 @@
+{
+    "require": {
+        "vendor/package-266": "*",
+        "vendor/package-267": "*",
+        "vendor/package-270": "1.*",
+        "vendor/package-271": "1.*",
+        "vendor/package-275": "1.*",
+        "vendor/package-276": "1.*",
+        "vendor/package-277": "1.*",
+        "vendor/package-278": "1.*",
+        "vendor/package-280": "0.*",
+        "vendor/package-281": "0.*",
+        "vendor/package-285": "0.*",
+        "vendor/package-286": "0.*",
+        "vendor/package-287": "0.*",
+        "vendor/package-288": "0.*"
+    }
+}
