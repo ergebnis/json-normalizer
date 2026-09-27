@@ -16,9 +16,6 @@ namespace Ergebnis\Json\Normalizer\Format;
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Normalizer\Exception;
 
-/**
- * @psalm-immutable
- */
 final class NewLine
 {
     private string $value;
