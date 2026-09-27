@@ -16,9 +16,6 @@ namespace Ergebnis\Json\Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormal
 use Ergebnis\Json\Json;
 use Ergebnis\Json\Pointer;
 
-/**
- * @psalm-immutable
- */
 final class Scenario
 {
     private Json $input;

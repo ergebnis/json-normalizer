@@ -37,30 +37,6 @@ parameters:
 			path: src/Format/DefaultFormatter.php
 
 		-
-			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$hasFinalNewLine is assigned outside of the constructor\.$#'
-			identifier: property.readOnlyByPhpDocAssignNotInConstructor
-			count: 1
-			path: src/Format/Format.php
-
-		-
-			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$indent is assigned outside of the constructor\.$#'
-			identifier: property.readOnlyByPhpDocAssignNotInConstructor
-			count: 1
-			path: src/Format/Format.php
-
-		-
-			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$jsonEncodeOptions is assigned outside of the constructor\.$#'
-			identifier: property.readOnlyByPhpDocAssignNotInConstructor
-			count: 1
-			path: src/Format/Format.php
-
-		-
-			message: '#^@readonly property Ergebnis\\Json\\Normalizer\\Format\\Format\:\:\$newLine is assigned outside of the constructor\.$#'
-			identifier: property.readOnlyByPhpDocAssignNotInConstructor
-			count: 1
-			path: src/Format/Format.php
-
-		-
 			message: '#^Parameter \#1 \$json of method Ergebnis\\Json\\Printer\\PrinterInterface\:\:print\(\) expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1

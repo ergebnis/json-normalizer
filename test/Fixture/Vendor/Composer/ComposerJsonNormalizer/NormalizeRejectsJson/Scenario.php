@@ -15,9 +15,6 @@ namespace Ergebnis\Json\Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNorm
 
 use Ergebnis\Json\Json;
 
-/**
- * @psalm-immutable
- */
 final class Scenario
 {
     private Json $input;

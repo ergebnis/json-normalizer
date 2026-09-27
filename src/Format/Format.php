@@ -15,9 +15,6 @@ namespace Ergebnis\Json\Normalizer\Format;
 
 use Ergebnis\Json\Json;
 
-/**
- * @psalm-immutable
- */
 final class Format
 {
     private bool $hasFinalNewLine;
