@@ -49,6 +49,30 @@ parameters:
 			path: src/JsonEncodeNormalizer.php
 
 		-
+			message: '#^Access to an undefined property object\:\:\$additionalProperties\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$items\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$properties\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
+			message: '#^Access to an undefined property object\:\:\$required\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/SchemaNormalizer.php
+
+		-
 			message: '#^Method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:resolveSchema\(\) has parameter \$data with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -81,7 +105,7 @@ parameters:
 		-
 			message: '#^Parameter \#2 \$schema of method Ergebnis\\Json\\Normalizer\\SchemaNormalizer\:\:resolveSchema\(\) expects object, mixed given\.$#'
 			identifier: argument.type
-			count: 2
+			count: 3
 			path: src/SchemaNormalizer.php
 
 		-

@@ -1,0 +1,31 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "person": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "person": {
+          "properties": {
+            "email": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
