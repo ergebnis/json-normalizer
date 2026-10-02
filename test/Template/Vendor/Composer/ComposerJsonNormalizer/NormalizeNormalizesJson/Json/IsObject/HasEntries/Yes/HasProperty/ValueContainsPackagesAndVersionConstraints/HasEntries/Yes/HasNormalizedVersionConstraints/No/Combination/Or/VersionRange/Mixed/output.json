@@ -30,6 +30,13 @@
         "combination-or-version-range-mixed/27-tilde-and-fixed-and-caret": "^1.2.3",
         "combination-or-version-range-mixed/28-fixed-and-caret-and-tilde": "^1.2.3",
         "combination-or-version-range-mixed/29-tilde-and-caret-greater": "~1.2.3 || ^1.2.5",
-        "combination-or-version-range-mixed/30-caret-greater-and-tilde": "~1.2.3 || ^1.2.5"
+        "combination-or-version-range-mixed/30-caret-greater-and-tilde": "~1.2.3 || ^1.2.5",
+        "combination-or-version-range-mixed/31-tilde-and-caret-subset": "~0.2.0",
+        "combination-or-version-range-mixed/32-caret-subset-and-tilde": "~0.2.0",
+        "combination-or-version-range-mixed/33-tilde-and-caret-overlapping-and-fixed": "~1.2.0 || ^1.2.5",
+        "combination-or-version-range-mixed/34-tilde-and-caret-equal": "^0.2.0",
+        "combination-or-version-range-mixed/35-caret-and-tilde-equal": "^0.2.0",
+        "combination-or-version-range-mixed/36-caret-and-caret-equal": "^1",
+        "combination-or-version-range-mixed/37-fixed-and-fixed-equal": "1.2.3"
     }
 }

@@ -3,6 +3,7 @@
     "array",
     "bool",
     "callable",
+    "Composer\\Semver\\Intervals",
     "Composer\\Semver\\Semver",
     "Composer\\Semver\\VersionParser",
     "false",
