@@ -418,4 +418,78 @@ JSON;
             ];
         }
     }
+
+    public function testNormalizePrunesEmptyPropertiesWhenTheyAreNotRequiredByAnySchemaInAllOf(): void
+    {
+        $json = Json::fromString(<<<'JSON'
+{
+    "c": {},
+    "b": {},
+    "a": {}
+}
+JSON);
+
+        $schemaUri = self::faker()->url();
+
+        $schema = <<<'JSON'
+{
+    "allOf": [
+        {
+            "type": "object",
+            "properties": {
+                "a": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "a"
+            ]
+        },
+        {
+            "type": "object",
+            "properties": {
+                "b": {
+                    "type": "object"
+                },
+                "c": {
+                    "type": "object"
+                }
+            },
+            "required": [
+                "b"
+            ]
+        }
+    ]
+}
+JSON;
+
+        $schemaDecoded = \json_decode($schema);
+
+        $schemaStorage = $this->createMock(SchemaStorage::class);
+
+        $schemaStorage
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willReturn($schemaDecoded);
+
+        $normalizer = new SchemaNormalizer(
+            $schemaUri,
+            $schemaStorage,
+            new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
+            true,
+        );
+
+        $normalized = $normalizer->normalize($json);
+
+        $expected = <<<'JSON'
+{
+    "a": {},
+    "b": {}
+}
+JSON;
+
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
+    }
 }

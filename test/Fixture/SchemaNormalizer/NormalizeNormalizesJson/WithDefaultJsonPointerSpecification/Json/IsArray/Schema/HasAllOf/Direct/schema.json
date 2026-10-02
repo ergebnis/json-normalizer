@@ -1,0 +1,21 @@
+{
+  "allOf": [
+    {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "minItems": 1
+    }
+  ]
+}

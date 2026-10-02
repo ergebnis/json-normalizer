@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 For a full diff see [`4.11.0...main`][4.11.0...main].
 
+### Added
+
+- Added support for `allOf` to `SchemaNormalizer` ([#1346]), by [@localheinz]
+
 ## [`4.11.0`][4.11.0]
 
 For a full diff see [`4.10.1...4.11.0`][4.10.1...4.11.0].
@@ -788,6 +792,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1226]: https://github.com/ergebnis/json-normalizer/pull/1226
 [#1228]: https://github.com/ergebnis/json-normalizer/pull/1228
 [#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
+[#1346]: https://github.com/ergebnis/json-normalizer/pull/1346
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

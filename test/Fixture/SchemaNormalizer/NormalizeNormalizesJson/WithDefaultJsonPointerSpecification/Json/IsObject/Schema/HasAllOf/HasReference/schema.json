@@ -1,0 +1,33 @@
+{
+  "allOf": [
+    {
+      "$ref": "#/definitions/person"
+    },
+    {
+      "not": {
+        "required": [
+          "nickname"
+        ]
+      }
+    }
+  ],
+  "definitions": {
+    "person": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

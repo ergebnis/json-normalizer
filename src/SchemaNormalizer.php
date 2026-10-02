@@ -276,6 +276,35 @@ final class SchemaNormalizer implements Normalizer
         object $schema
     ): object {
         /**
+         * @see https://json-schema.org/understanding-json-schema/reference/combining.html#allof
+         */
+        if (
+            \property_exists($schema, 'allOf')
+            && \is_array($schema->allOf)
+        ) {
+            $allOfSchemas = $schema->allOf;
+
+            $mergedSchema = clone $schema;
+
+            unset($mergedSchema->allOf);
+
+            foreach ($allOfSchemas as $allOfSchema) {
+                $mergedSchema = self::mergeSchemas(
+                    $mergedSchema,
+                    $this->resolveSchema(
+                        $data,
+                        $allOfSchema,
+                    ),
+                );
+            }
+
+            return $this->resolveSchema(
+                $data,
+                $mergedSchema,
+            );
+        }
+
+        /**
          * @see https://json-schema.org/understanding-json-schema/reference/combining.html#anyof
          */
         if (
@@ -334,6 +363,77 @@ final class SchemaNormalizer implements Normalizer
                 $data,
                 $referenceSchema,
             );
+        }
+
+        return $schema;
+    }
+
+    private static function mergeSchemas(
+        object $schema,
+        object $otherSchema
+    ): object {
+        if (
+            \property_exists($otherSchema, 'properties')
+            && \is_object($otherSchema->properties)
+        ) {
+            $properties = [];
+
+            if (
+                \property_exists($schema, 'properties')
+                && \is_object($schema->properties)
+            ) {
+                $properties = \get_object_vars($schema->properties);
+            }
+
+            foreach (\get_object_vars($otherSchema->properties) as $name => $propertySchema) {
+                if (!\array_key_exists($name, $properties)) {
+                    $properties[$name] = $propertySchema;
+
+                    continue;
+                }
+
+                $properties[$name] = (object) [
+                    'allOf' => [
+                        $properties[$name],
+                        $propertySchema,
+                    ],
+                ];
+            }
+
+            $schema->properties = (object) $properties;
+        }
+
+        if (
+            \property_exists($otherSchema, 'required')
+            && \is_array($otherSchema->required)
+        ) {
+            $required = [];
+
+            if (
+                \property_exists($schema, 'required')
+                && \is_array($schema->required)
+            ) {
+                $required = $schema->required;
+            }
+
+            $schema->required = \array_merge(
+                $required,
+                $otherSchema->required,
+            );
+        }
+
+        $keywords = [
+            'additionalProperties',
+            'items',
+        ];
+
+        foreach ($keywords as $keyword) {
+            if (
+                \property_exists($otherSchema, $keyword)
+                && !\property_exists($schema, $keyword)
+            ) {
+                $schema->{$keyword} = $otherSchema->{$keyword};
+            }
         }
 
         return $schema;
