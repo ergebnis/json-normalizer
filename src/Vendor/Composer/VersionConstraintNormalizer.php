@@ -225,6 +225,8 @@ final class VersionConstraintNormalizer implements Normalizer
 
         $regex = '{^[~^]?\d+(?:\.\d+)*$}';
 
+        $versionParser = new Semver\VersionParser();
+
         $count = \count($orConstraints);
 
         for ($i = 0; $i < $count; ++$i) {
@@ -253,16 +255,36 @@ final class VersionConstraintNormalizer implements Normalizer
                     continue;
                 }
 
-                if (Semver\Semver::satisfies(\ltrim($a, '^~'), $b) || Semver\Semver::satisfies(\ltrim($b, '^~'), $a)) {
-                    if ('^' === $a[0]) {
-                        $orConstraints[$j] = null;
-                    } elseif ('^' === $b[0]) {
-                        $orConstraints[$i] = null;
-                    } elseif ('~' === $a[0]) {
-                        $orConstraints[$j] = null;
-                    } elseif ('~' === $b[0]) {
-                        $orConstraints[$i] = null;
-                    }
+                $constraintA = $versionParser->parseConstraints($a);
+                $constraintB = $versionParser->parseConstraints($b);
+
+                $aIsSubsetOfB = Semver\Intervals::isSubsetOf(
+                    $constraintA,
+                    $constraintB,
+                );
+                $bIsSubsetOfA = Semver\Intervals::isSubsetOf(
+                    $constraintB,
+                    $constraintA,
+                );
+
+                if (
+                    !$aIsSubsetOfB
+                    && !$bIsSubsetOfA
+                ) {
+                    continue;
+                }
+
+                if (!$bIsSubsetOfA) {
+                    $orConstraints[$i] = null;
+                } elseif (!$aIsSubsetOfB) {
+                    $orConstraints[$j] = null;
+                } elseif (
+                    '^' !== $a[0]
+                    && '^' === $b[0]
+                ) {
+                    $orConstraints[$i] = null;
+                } else {
+                    $orConstraints[$j] = null;
                 }
             }
         }
