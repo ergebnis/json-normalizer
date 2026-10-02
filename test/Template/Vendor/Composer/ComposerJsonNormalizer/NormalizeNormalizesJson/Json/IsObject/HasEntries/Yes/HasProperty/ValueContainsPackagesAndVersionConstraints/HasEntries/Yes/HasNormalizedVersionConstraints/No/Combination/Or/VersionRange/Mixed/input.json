@@ -33,6 +33,9 @@
     "combination-or-version-range-mixed/25-caret-and-fixed-and-tilde": "^1.2.3 || 1.2.3 || ~1.2.3",
     "combination-or-version-range-mixed/26-caret-and-tilde-and-fixed": "^1.2.3 || ~1.2.3 || 1.2.3",
     "combination-or-version-range-mixed/27-tilde-and-fixed-and-caret": "~1.2.3 || 1.2.3 || ^1.2.3",
-    "combination-or-version-range-mixed/28-fixed-and-caret-and-tilde": "1.2.3 || ^1.2.3 || ~1.2.3"
+    "combination-or-version-range-mixed/28-fixed-and-caret-and-tilde": "1.2.3 || ^1.2.3 || ~1.2.3",
+
+    "combination-or-version-range-mixed/29-tilde-and-caret-greater": "~1.2.3 || ^1.2.5",
+    "combination-or-version-range-mixed/30-caret-greater-and-tilde": "^1.2.5 || ~1.2.3"
   }
 }
