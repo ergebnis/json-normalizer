@@ -154,11 +154,24 @@ final class VersionConstraintNormalizer implements Normalizer
         );
     }
 
+    /**
+     * Replaces a tilde version range with a caret version range only where both are equivalent:
+     *
+     * - with a major version only, for example, ~0 and ^0, or ~1 and ^1
+     * - with a major version other than 0 and a minor version, for example, ~1.2 and ^1.2
+     *
+     * With a major version of 0 and a minor version, they are not equivalent: ~0.1 allows >=0.1 <1.0, while ^0.1 allows >=0.1 <0.2.
+     *
+     * With a patch version, they are either not equivalent (~1.2.3 and ^1.2.3), or the tilde version range is more explicit (~0.1.2 and ^0.1.2).
+     *
+     * @see https://getcomposer.org/doc/articles/versions.md#tilde-version-range-
+     * @see https://getcomposer.org/doc/articles/versions.md#caret-version-range-
+     */
     private static function replaceTildeWithCaret(string $versionConstraint): string
     {
         return self::applyRegularExpressionReplacementToVersionsInTurn(
             $versionConstraint,
-            '{^~(\d+(?:\.\d+)?)$}',
+            '{^~(\d+|[1-9]\d*\.\d+)$}',
             '^$1',
         );
     }

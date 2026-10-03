@@ -14,6 +14,7 @@ For a full diff see [`4.11.0...main`][4.11.0...main].
 
 ### Fixed
 
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to replace a tilde version range with a caret version range only where both are equivalent ([#1247]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove a version constraint only when it is a subset of another version constraint ([#1345]), by [@localheinz]
 
 ## [`4.11.0`][4.11.0]
@@ -795,6 +796,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1225]: https://github.com/ergebnis/json-normalizer/pull/1225
 [#1226]: https://github.com/ergebnis/json-normalizer/pull/1226
 [#1228]: https://github.com/ergebnis/json-normalizer/pull/1228
+[#1247]: https://github.com/ergebnis/json-normalizer/pull/1247
 [#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
 [#1345]: https://github.com/ergebnis/json-normalizer/pull/1345
 [#1346]: https://github.com/ergebnis/json-normalizer/pull/1346
