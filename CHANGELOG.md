@@ -12,6 +12,10 @@ For a full diff see [`4.11.0...main`][4.11.0...main].
 
 - Added support for `allOf` to `SchemaNormalizer` ([#1346]), by [@localheinz]
 
+### Changed
+
+- Adjusted `Vendor\Composer\VersionConstraintNormalizer` to keep only the least stable stability modifier and append it to the last version constraint ([#1243]), by [@fredden]
+
 ### Fixed
 
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to replace a tilde version range with a caret version range only where both are equivalent ([#1247]), by [@fredden]
@@ -796,6 +800,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1225]: https://github.com/ergebnis/json-normalizer/pull/1225
 [#1226]: https://github.com/ergebnis/json-normalizer/pull/1226
 [#1228]: https://github.com/ergebnis/json-normalizer/pull/1228
+[#1243]: https://github.com/ergebnis/json-normalizer/pull/1243
 [#1247]: https://github.com/ergebnis/json-normalizer/pull/1247
 [#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
 [#1345]: https://github.com/ergebnis/json-normalizer/pull/1345
