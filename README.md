@@ -562,7 +562,7 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
      "require": {
   -    "foo/bar": "~1",
   -    "foo/baz": "~1.3"
-  +    "foo/bar": "^1.0",
+  +    "foo/bar": "^1",
   +    "foo/baz": "^1.3"
    }
   ```
