@@ -105,7 +105,7 @@ make static-code-analysis-baseline
 
 to regenerate the baseline in [`../phpstan-baseline.neon`](../phpstan-baseline.neon).
 
-:exclamation: Ideally, the baseline should shrink over time.
+❗️ Ideally, the baseline should shrink over time.
 
 ## Tests
 
@@ -131,7 +131,7 @@ to automatically refactor code, enforce coding standards, run a static code anal
 
 ## Help
 
-:bulb: Run
+💡 Run
 
 ```sh
 make help
