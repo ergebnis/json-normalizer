@@ -217,6 +217,12 @@ parameters:
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
+			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:removeStabilityModifiers\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Vendor/Composer/VersionConstraintNormalizer.php
+
+		-
 			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\VersionConstraintNormalizer\:\:removeUselessInlineAliases\(\) should return string but returns string\|null\.$#'
 			identifier: return.type
 			count: 1
