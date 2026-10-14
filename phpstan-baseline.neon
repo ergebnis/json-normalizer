@@ -7,30 +7,6 @@ parameters:
 			path: src/CallableNormalizer.php
 
 		-
-			message: '#^Parameter \#1 \$array \(list\<Ergebnis\\Json\\Normalizer\\Normalizer\>\) of array_values is already a list, call has no effect\.$#'
-			identifier: arrayValues.list
-			count: 1
-			path: src/ChainNormalizer.php
-
-		-
-			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
-			identifier: arrayValues.list
-			count: 1
-			path: src/Exception/InvalidIndentStyle.php
-
-		-
-			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
-			identifier: arrayValues.list
-			count: 1
-			path: src/Exception/NormalizedInvalidAccordingToSchema.php
-
-		-
-			message: '#^Parameter \#1 \$array \(list\<string\>\) of array_values is already a list, call has no effect\.$#'
-			identifier: arrayValues.list
-			count: 1
-			path: src/Exception/OriginalInvalidAccordingToSchema.php
-
-		-
 			message: '#^PHPDoc tag @var with type string is not subtype of native type non\-empty\-string\|false\.$#'
 			identifier: varTag.nativeType
 			count: 1
