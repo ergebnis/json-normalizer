@@ -27,6 +27,18 @@ final class VersionConstraintNormalizer implements Normalizer
         'require',
         'require-dev',
     ];
+
+    /**
+     * Ordered from the most stable to the least stable stability modifier.
+     */
+    private const STABILITY_MODIFIERS = [
+        'stable',
+        'RC',
+        'beta',
+        'alpha',
+        'dev',
+    ];
+    private const STABILITY_MODIFIER_REGEX = '{@(stable|RC|beta|alpha|dev)(?=$|[\s,|])}i';
     private Semver\VersionParser $versionParser;
 
     public function __construct(Semver\VersionParser $versionParser)
@@ -83,6 +95,13 @@ final class VersionConstraintNormalizer implements Normalizer
 
     private static function normalizeVersionConstraint(string $versionConstraint): string
     {
+        $stabilityModifier = self::findLeastStableStabilityModifier($versionConstraint);
+
+        if ('' !== $stabilityModifier) {
+            $versionConstraint = self::removeStabilityModifiers($versionConstraint);
+        }
+
+        $versionConstraint = self::trim($versionConstraint);
         $versionConstraint = self::normalizeVersionConstraintSeparators($versionConstraint);
         $versionConstraint = self::removeLeadingVersionPrefix($versionConstraint);
         $versionConstraint = self::assertDevPrefixSuffixPosition($versionConstraint);
@@ -92,8 +111,82 @@ final class VersionConstraintNormalizer implements Normalizer
         $versionConstraint = self::removeDuplicateVersionConstraints($versionConstraint);
         $versionConstraint = self::removeUselessInlineAliases($versionConstraint);
         $versionConstraint = self::sortVersionConstraints($versionConstraint);
+        $versionConstraint = self::removeOverlappingVersionConstraints($versionConstraint);
 
-        return self::removeOverlappingVersionConstraints($versionConstraint);
+        return self::appendStabilityModifier(
+            self::trim($versionConstraint),
+            $stabilityModifier,
+        );
+    }
+
+    /**
+     * Appends the stability modifier to the last version constraint, as Composer documents stability modifiers as suffixes only.
+     *
+     * @see https://getcomposer.org/doc/04-schema.md#package-links
+     */
+    private static function appendStabilityModifier(
+        string $versionConstraint,
+        string $stabilityModifier
+    ): string {
+        if ('' === $versionConstraint) {
+            return $stabilityModifier;
+        }
+
+        $orConstraints = self::splitIntoOrConstraints($versionConstraint);
+
+        $orConstraints[\count($orConstraints) - 1] .= $stabilityModifier;
+
+        return self::joinOrConstraints(...$orConstraints);
+    }
+
+    /**
+     * Composer applies the least stable of the stability modifiers in a version constraint to the package, not to the version constraint it is attached to.
+     *
+     * Returns an empty string when the version constraint does not contain a stability modifier, or when its stability modifiers must not be moved: when it contains an inline alias, as moving a stability modifier would break the inline alias, or when it contains a stability modifier on its own as an alternative or anywhere but at the beginning, as Composer treats such a stability modifier as a version constraint matching any version.
+     *
+     * @see https://getcomposer.org/doc/04-schema.md#package-links
+     * @see https://github.com/composer/composer/blob/2.10.3/src/Composer/Package/Loader/RootPackageLoader.php#L245-L292
+     */
+    private static function findLeastStableStabilityModifier(string $versionConstraint): string
+    {
+        if (1 === \preg_match('{\s+as\s+}', $versionConstraint)) {
+            return '';
+        }
+
+        if (1 === \preg_match('{[\s,|]@}', $versionConstraint)) {
+            return '';
+        }
+
+        if (1 === \preg_match('{^@\w+\s*\|}', $versionConstraint)) {
+            return '';
+        }
+
+        \preg_match_all(
+            self::STABILITY_MODIFIER_REGEX,
+            $versionConstraint,
+            $matches,
+        );
+
+        $leastStableStabilityModifier = '';
+
+        foreach (self::STABILITY_MODIFIERS as $stabilityModifier) {
+            foreach ($matches[1] as $match) {
+                if (0 === \strcasecmp($stabilityModifier, $match)) {
+                    $leastStableStabilityModifier = '@' . $stabilityModifier;
+                }
+            }
+        }
+
+        return $leastStableStabilityModifier;
+    }
+
+    private static function removeStabilityModifiers(string $versionConstraint): string
+    {
+        return \preg_replace(
+            self::STABILITY_MODIFIER_REGEX,
+            '',
+            $versionConstraint,
+        );
     }
 
     private static function trim(string $versionConstraint): string
