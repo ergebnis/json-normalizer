@@ -16,6 +16,7 @@ For a full diff see [`4.11.0...main`][4.11.0...main].
 
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to replace a tilde version range with a caret version range only where both are equivalent ([#1247]), by [@fredden]
 - Adjusted `Vendor\Composer\VersionConstraintNormalizer` to remove a version constraint only when it is a subset of another version constraint ([#1345]), by [@localheinz]
+- Adjusted `SchemaNormalizer` and `Vendor\Composer\ComposerJsonNormalizer` to keep an empty `only-branches` list in a repository ([#1368]), by [@localheinz]
 
 ## [`4.11.0`][4.11.0]
 
@@ -800,6 +801,7 @@ For a full diff see [`5d8b3e2...0.1.0`][5d8b3e2...0.1.0].
 [#1322]: https://github.com/ergebnis/json-normalizer/pull/1322
 [#1345]: https://github.com/ergebnis/json-normalizer/pull/1345
 [#1346]: https://github.com/ergebnis/json-normalizer/pull/1346
+[#1368]: https://github.com/ergebnis/json-normalizer/pull/1368
 
 [@alexis-saransig-lullabot]: https://github.com/alexis-saransig-lullabot
 [@BackEndTea]: https://github.com/BackEndTea

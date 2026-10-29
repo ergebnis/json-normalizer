@@ -90,6 +90,15 @@ final class ComposerJsonNormalizer implements Normalizer\Normalizer
                     Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/scripts/auto-scripts')),
                 ),
                 true,
+                /**
+                 * An empty list of branches loads only the default branch, while an absent list loads all branches.
+                 *
+                 * @see https://github.com/composer/composer/pull/13086
+                 * @see https://github.com/composer/composer/blob/2.11.0/res/composer-schema.json#L1379-L1385
+                 */
+                Pointer\Specification::closure(static function (Pointer\JsonPointer $jsonPointer): bool {
+                    return 1 === \preg_match('{^/repositories/[^/]+/only-branches$}', $jsonPointer->toJsonString());
+                }),
             ),
             new BinNormalizer(),
             new ConfigHashNormalizer(),
