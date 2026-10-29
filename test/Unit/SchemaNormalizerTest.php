@@ -492,4 +492,80 @@ JSON;
 
         self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
+
+    public function testNormalizeDoesNotPruneEmptyPropertiesWhenPointerToDataSatisfiesSpecificationForPointerToDataThatShouldNotBePruned(): void
+    {
+        $json = Json::fromString(<<<'JSON'
+{
+    "c": [],
+    "b": {},
+    "a": {
+        "e": [],
+        "d": []
+    }
+}
+JSON);
+
+        $schemaUri = self::faker()->url();
+
+        $schema = <<<'JSON'
+{
+    "type": "object",
+    "properties": {
+        "a": {
+            "type": "object",
+            "properties": {
+                "d": {
+                    "type": "array"
+                },
+                "e": {
+                    "type": "array"
+                }
+            }
+        },
+        "b": {
+            "type": "object"
+        },
+        "c": {
+            "type": "array"
+        }
+    }
+}
+JSON;
+
+        $schemaDecoded = \json_decode($schema);
+
+        $schemaStorage = $this->createMock(SchemaStorage::class);
+
+        $schemaStorage
+            ->expects(self::once())
+            ->method('getSchema')
+            ->with(self::identicalTo($schemaUri))
+            ->willReturn($schemaDecoded);
+
+        $normalizer = new SchemaNormalizer(
+            $schemaUri,
+            $schemaStorage,
+            new SchemaValidator\SchemaValidator(),
+            Pointer\Specification::never(),
+            true,
+            Pointer\Specification::anyOf(
+                Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/a/d')),
+                Pointer\Specification::equals(Pointer\JsonPointer::fromJsonString('/c')),
+            ),
+        );
+
+        $normalized = $normalizer->normalize($json);
+
+        $expected = <<<'JSON'
+{
+    "a": {
+        "d": []
+    },
+    "c": []
+}
+JSON;
+
+        self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
+    }
 }

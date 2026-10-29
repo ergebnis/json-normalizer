@@ -29,19 +29,27 @@ final class SchemaNormalizer implements Normalizer
     private SchemaStorage $schemaStorage;
     private string $schemaUri;
     private bool $pruneEmpty;
+    private Pointer\Specification $specificationForPointerToDataThatShouldNotBePruned;
 
     public function __construct(
         string $schemaUri,
         SchemaStorage $schemaStorage,
         SchemaValidator\SchemaValidator $schemaValidator,
         Pointer\Specification $specificationForPointerToDataThatShouldNotBeSorted,
-        bool $pruneEmpty = false
+        bool $pruneEmpty = false,
+        ?Pointer\Specification $specificationForPointerToDataThatShouldNotBePruned = null
     ) {
         $this->schemaUri = $schemaUri;
         $this->schemaStorage = $schemaStorage;
         $this->schemaValidator = $schemaValidator;
         $this->specificationForPointerToDataThatShouldNotBeSorted = $specificationForPointerToDataThatShouldNotBeSorted;
         $this->pruneEmpty = $pruneEmpty;
+
+        if (!$specificationForPointerToDataThatShouldNotBePruned instanceof Pointer\Specification) {
+            $specificationForPointerToDataThatShouldNotBePruned = Pointer\Specification::never();
+        }
+
+        $this->specificationForPointerToDataThatShouldNotBePruned = $specificationForPointerToDataThatShouldNotBePruned;
     }
 
     public function normalize(Json $json): Json
@@ -220,16 +228,19 @@ final class SchemaNormalizer implements Normalizer
                     $valueSchema,
                 );
 
+                $pointerToValue = $pointerToData->append(Pointer\ReferenceToken::fromString($name));
+
                 $normalized->{$name} = $this->normalizeData(
                     $value,
                     $valueSchema,
-                    $pointerToData->append(Pointer\ReferenceToken::fromString($name)),
+                    $pointerToValue,
                 );
 
                 if (
                     $this->pruneEmpty
                     && [] === (array) $normalized->{$name}
                     && self::isKeyOptionalInSchema($schema, $name)
+                    && !$this->specificationForPointerToDataThatShouldNotBePruned->isSatisfiedBy($pointerToValue)
                 ) {
                     unset($normalized->{$name});
                 }
