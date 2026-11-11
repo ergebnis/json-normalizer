@@ -627,6 +627,18 @@ sections, the `Vendor\Composer\VersionConstraintNormalizer` will ensure that
    }
   ```
 
+- only the least stable [stability modifier](https://getcomposer.org/doc/04-schema.md#package-links) is kept and appended to the last version constraint, as Composer applies it to the package and not to a particular version constraint
+
+  ```diff
+   {
+     "require": {
+  -    "foo/bar": "^1.0@RC || ^2.0@beta",
+  -    "foo/baz": "^1.0 || ^2.3@RC || ^4.5"
+  +    "foo/bar": "^1.0 || ^2.0@beta",
+  +    "foo/baz": "^1.0 || ^2.3 || ^4.5@RC"
+   }
+  ```
+
 - empty sections (which are defined as optional in the schema) are automatically removed
 
   ```diff
