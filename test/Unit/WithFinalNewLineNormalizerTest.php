@@ -32,11 +32,11 @@ final class WithFinalNewLineNormalizerTest extends Framework\TestCase
     public function testNormalizeEnsuresSingleFinalNewLine(string $whitespace): void
     {
         $json = Json::fromString(<<<JSON
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}{$whitespace}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }{$whitespace}
+            JSON);
 
         $normalizer = new WithFinalNewLineNormalizer();
 

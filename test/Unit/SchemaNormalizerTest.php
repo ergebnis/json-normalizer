@@ -44,11 +44,11 @@ final class SchemaNormalizerTest extends Framework\TestCase
     public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
@@ -75,11 +75,11 @@ JSON);
     public function testNormalizeThrowsSchemaUriCouldNotBeReadExceptionWhenSchemaUriReferencesUnreadableResource(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
@@ -106,11 +106,11 @@ JSON);
     public function testNormalizeThrowsSchemaUriReferencesDocumentWithInvalidMediaTypeExceptionWhenSchemaUriReferencesResourceWithInvalidMediaType(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
@@ -137,11 +137,11 @@ JSON);
     public function testNormalizeThrowsRuntimeExceptionIfSchemaUriReferencesResourceWithInvalidJson(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
@@ -170,19 +170,19 @@ JSON);
         $faker = self::faker();
 
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas Möller",
-    "url": "https://localheinz.com"
-}
-JSON);
+            {
+                "name": "Andreas Möller",
+                "url": "https://localheinz.com"
+            }
+            JSON);
 
         $schemaUri = $faker->url();
 
         $schema = <<<'JSON'
-{
-    "type": "array"
-}
-JSON;
+            {
+                "type": "array"
+            }
+            JSON;
 
         $schemaDecoded = \json_decode($schema);
 
@@ -422,46 +422,46 @@ JSON;
     public function testNormalizePrunesEmptyPropertiesWhenTheyAreNotRequiredByAnySchemaInAllOf(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "c": {},
-    "b": {},
-    "a": {}
-}
-JSON);
+            {
+                "c": {},
+                "b": {},
+                "a": {}
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
         $schema = <<<'JSON'
-{
-    "allOf": [
-        {
-            "type": "object",
-            "properties": {
-                "a": {
-                    "type": "object"
-                }
-            },
-            "required": [
-                "a"
-            ]
-        },
-        {
-            "type": "object",
-            "properties": {
-                "b": {
-                    "type": "object"
-                },
-                "c": {
-                    "type": "object"
-                }
-            },
-            "required": [
-                "b"
-            ]
-        }
-    ]
-}
-JSON;
+            {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "a": {
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "a"
+                        ]
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "b": {
+                                "type": "object"
+                            },
+                            "c": {
+                                "type": "object"
+                            }
+                        },
+                        "required": [
+                            "b"
+                        ]
+                    }
+                ]
+            }
+            JSON;
 
         $schemaDecoded = \json_decode($schema);
 
@@ -484,11 +484,11 @@ JSON;
         $normalized = $normalizer->normalize($json);
 
         $expected = <<<'JSON'
-{
-    "a": {},
-    "b": {}
-}
-JSON;
+            {
+                "a": {},
+                "b": {}
+            }
+            JSON;
 
         self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }
@@ -496,42 +496,42 @@ JSON;
     public function testNormalizeDoesNotPruneEmptyPropertiesWhenPointerToDataSatisfiesSpecificationForPointerToDataThatShouldNotBePruned(): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "c": [],
-    "b": {},
-    "a": {
-        "e": [],
-        "d": []
-    }
-}
-JSON);
+            {
+                "c": [],
+                "b": {},
+                "a": {
+                    "e": [],
+                    "d": []
+                }
+            }
+            JSON);
 
         $schemaUri = self::faker()->url();
 
         $schema = <<<'JSON'
-{
-    "type": "object",
-    "properties": {
-        "a": {
-            "type": "object",
-            "properties": {
-                "d": {
-                    "type": "array"
-                },
-                "e": {
-                    "type": "array"
+            {
+                "type": "object",
+                "properties": {
+                    "a": {
+                        "type": "object",
+                        "properties": {
+                            "d": {
+                                "type": "array"
+                            },
+                            "e": {
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "b": {
+                        "type": "object"
+                    },
+                    "c": {
+                        "type": "array"
+                    }
                 }
             }
-        },
-        "b": {
-            "type": "object"
-        },
-        "c": {
-            "type": "array"
-        }
-    }
-}
-JSON;
+            JSON;
 
         $schemaDecoded = \json_decode($schema);
 
@@ -558,13 +558,13 @@ JSON;
         $normalized = $normalizer->normalize($json);
 
         $expected = <<<'JSON'
-{
-    "a": {
-        "d": []
-    },
-    "c": []
-}
-JSON;
+            {
+                "a": {
+                    "d": []
+                },
+                "c": []
+            }
+            JSON;
 
         self::assertJsonStringIdenticalToJsonString($expected, $normalized->encoded());
     }

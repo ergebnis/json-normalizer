@@ -114,38 +114,38 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
             [
                 0,
                 <<<'JSON'
-{
-  "name": "Andreas M\u00f6ller",
-  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}
-JSON,
+                    {
+                      "name": "Andreas M\u00f6ller",
+                      "url": "https:\/\/github.com\/localheinz\/json-normalizer"
+                    }
+                    JSON,
             ],
             [
                 \JSON_UNESCAPED_SLASHES,
                 <<<'JSON'
-{
-  "name": "Andreas M\u00F6ller",
-  "url": "https://github.com/ergebnis/json-normalizer"
-}
-JSON,
+                    {
+                      "name": "Andreas M\u00F6ller",
+                      "url": "https://github.com/ergebnis/json-normalizer"
+                    }
+                    JSON,
             ],
             [
                 \JSON_UNESCAPED_UNICODE,
                 <<<'JSON'
-{
-  "name": "Andreas Möller",
-  "url": "https:\/\/github.com\/localheinz\/json-normalizer"
-}
-JSON,
+                    {
+                      "name": "Andreas Möller",
+                      "url": "https:\/\/github.com\/localheinz\/json-normalizer"
+                    }
+                    JSON,
             ],
             [
                 \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
                 <<<'JSON'
-{
-  "name": "Andreas Möller",
-  "url": "https://github.com/ergebnis/json-normalizer"
-}
-JSON,
+                    {
+                      "name": "Andreas Möller",
+                      "url": "https://github.com/ergebnis/json-normalizer"
+                    }
+                    JSON,
             ],
         ];
     }

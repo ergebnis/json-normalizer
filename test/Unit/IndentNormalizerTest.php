@@ -34,17 +34,17 @@ final class IndentNormalizerTest extends Framework\TestCase
         $indent = Format\Indent::fromString('  ');
 
         $json = Json::fromString(<<<'JSON'
-{
-    "status": "original"
-}
-JSON);
+            {
+                "status": "original"
+            }
+            JSON);
 
         $indented = <<<'JSON'
-{
-    "name": "Andreas Möller (indented)",
-    "url": "https://localheinz.com"
-}
-JSON;
+            {
+                "name": "Andreas Möller (indented)",
+                "url": "https://localheinz.com"
+            }
+            JSON;
 
         $printer = $this->createMock(PrinterInterface::class);
 
