@@ -48,15 +48,15 @@ final class DefaultFormatterTest extends Framework\TestCase
         ]);
 
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas M\u00f6ller",
-    "url": "https:\/\/github.com\/localheinz\/json-normalizer",
-    "string-apostroph": "'",
-    "string-numeric": "9000",
-    "string-quote": "\"",
-    "string-tag": "<p>"
-}
-JSON);
+            {
+                "name": "Andreas M\u00f6ller",
+                "url": "https:\/\/github.com\/localheinz\/json-normalizer",
+                "string-apostroph": "'",
+                "string-numeric": "9000",
+                "string-quote": "\"",
+                "string-tag": "<p>"
+            }
+            JSON);
 
         $encodedWithJsonEncodeOptions = \json_encode(
             $json->decoded(),
@@ -64,10 +64,10 @@ JSON);
         );
 
         $printedWithIndentAndNewLine = <<<'JSON'
-{
-    "status": "printed with indent and new-line"
-}
-JSON;
+            {
+                "status": "printed with indent and new-line"
+            }
+            JSON;
 
         $format = Format\Format::create(
             Format\JsonEncodeOptions::fromInt($jsonEncodeOptions),

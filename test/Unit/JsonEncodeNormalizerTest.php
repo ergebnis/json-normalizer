@@ -34,15 +34,15 @@ final class JsonEncodeNormalizerTest extends Framework\TestCase
     public function testNormalizeDecodesAndEncodesJsonWithJsonEncodeOptions(int $jsonEncodeOptions): void
     {
         $json = Json::fromString(<<<'JSON'
-{
-    "name": "Andreas M\u00f6ller",
-    "url": "https:\/\/github.com\/localheinz\/json-normalizer",
-    "string-apostroph": "'",
-    "string-numeric": "9000",
-    "string-quote": "\"",
-    "string-tag": "<p>"
-}
-JSON);
+            {
+                "name": "Andreas M\u00f6ller",
+                "url": "https:\/\/github.com\/localheinz\/json-normalizer",
+                "string-apostroph": "'",
+                "string-numeric": "9000",
+                "string-quote": "\"",
+                "string-tag": "<p>"
+            }
+            JSON);
 
         $normalizer = new JsonEncodeNormalizer(Format\JsonEncodeOptions::fromInt($jsonEncodeOptions));
 

@@ -21,14 +21,14 @@ final class DependencyMissing extends \RuntimeException implements Exception
     ): self {
         return new self(\sprintf(
             <<<'TXT'
-To use "%s", the package "%s" is required.
+                To use "%s", the package "%s" is required.
 
-Run
+                Run
 
-composer require "%s"
+                composer require "%s"
 
-to install it.
-TXT,
+                to install it.
+                TXT,
             $className,
             $packageName,
             $packageName,

@@ -193,14 +193,14 @@ final class IndentTest extends Framework\TestCase
         string $sniffedIndent
     ): void {
         $json = Json::fromString(<<<JSON
-[
-"foo",
-{$actualIndent}"bar",
-    {
-        "qux": "quux"
-    }
-]
-JSON);
+            [
+            "foo",
+            {$actualIndent}"bar",
+                {
+                    "qux": "quux"
+                }
+            ]
+            JSON);
 
         $indent = Format\Indent::fromJson($json);
 
@@ -216,14 +216,14 @@ JSON);
         string $sniffedIndent
     ): void {
         $json = Json::fromString(<<<JSON
-{
-"foo": 9000,
-{$actualIndent}"bar": 123,
-    "baz": {
-        "qux": "quux"
-    }
-}
-JSON);
+            {
+            "foo": 9000,
+            {$actualIndent}"bar": 123,
+                "baz": {
+                    "qux": "quux"
+                }
+            }
+            JSON);
 
         $indent = Format\Indent::fromJson($json);
 
@@ -288,8 +288,8 @@ JSON);
     public function testFromJsonReturnsIndentWithDefaultsWhenIndentCouldNotBeSniffed(): void
     {
         $json = Json::fromString(<<<'JSON'
-{"foo":9000,"bar":123,"baz":{"qux":"quux"}}
-JSON);
+            {"foo":9000,"bar":123,"baz":{"qux":"quux"}}
+            JSON);
 
         $indent = Format\Indent::fromJson($json);
 
