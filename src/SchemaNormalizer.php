@@ -192,7 +192,7 @@ final class SchemaNormalizer implements Normalizer
         object $data,
         object $schema,
         Pointer\JsonPointer $pointerToData
-    ): object {
+    ): \stdClass {
         $schema = $this->resolveSchema(
             $data,
             $schema,

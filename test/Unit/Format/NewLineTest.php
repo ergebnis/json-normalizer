@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -30,10 +29,10 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidNewLineString(string $string): void
     {
-        $this->expectException(Exception\InvalidNewLineString::class);
+        $this->expectException(Normalizer\Exception\InvalidNewLineString::class);
         $this->expectExceptionMessage(\sprintf('"%s" is not a valid new-line character sequence.', $string));
 
-        Format\NewLine::fromString($string);
+        Normalizer\Format\NewLine::fromString($string);
     }
 
     /**
@@ -64,7 +63,7 @@ final class NewLineTest extends Framework\TestCase
      */
     public function testFromStringReturnsNewLine(string $string): void
     {
-        $newLine = Format\NewLine::fromString($string);
+        $newLine = Normalizer\Format\NewLine::fromString($string);
 
         self::assertSame($string, $newLine->toString());
     }
@@ -93,7 +92,7 @@ final class NewLineTest extends Framework\TestCase
 
         $json = Json::fromString($encoded);
 
-        $newLine = Format\NewLine::fromJson($json);
+        $newLine = Normalizer\Format\NewLine::fromJson($json);
 
         self::assertSame(\PHP_EOL, $newLine->toString());
     }
@@ -107,7 +106,7 @@ final class NewLineTest extends Framework\TestCase
             ["foo",{$newLineString}"bar"]
             JSON);
 
-        $newLine = Format\NewLine::fromJson($json);
+        $newLine = Normalizer\Format\NewLine::fromJson($json);
 
         self::assertSame($newLineString, $newLine->toString());
     }
@@ -121,7 +120,7 @@ final class NewLineTest extends Framework\TestCase
             {"foo": 9000,{$newLineString}"bar": 123}
             JSON);
 
-        $newLine = Format\NewLine::fromJson($json);
+        $newLine = Normalizer\Format\NewLine::fromJson($json);
 
         self::assertSame($newLineString, $newLine->toString());
     }

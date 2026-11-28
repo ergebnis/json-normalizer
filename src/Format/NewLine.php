@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer;
 
 final class NewLine
 {
@@ -26,12 +26,12 @@ final class NewLine
     }
 
     /**
-     * @throws Exception\InvalidNewLineString
+     * @throws Normalizer\Exception\InvalidNewLineString
      */
     public static function fromString(string $value): self
     {
         if ("\n" !== $value && "\r" !== $value && "\r\n" !== $value) {
-            throw Exception\InvalidNewLineString::fromString($value);
+            throw Normalizer\Exception\InvalidNewLineString::fromString($value);
         }
 
         return new self($value);

@@ -14,10 +14,9 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Normalizer;
+use Ergebnis\Json\Normalizer;
 
-final class PackageHashNormalizer implements Normalizer
+final class PackageHashNormalizer implements Normalizer\Normalizer
 {
     /**
      * @see https://github.com/composer/composer/blob/2.0.11/src/Composer/Repository/PlatformRepository.php#L33
@@ -64,7 +63,7 @@ final class PackageHashNormalizer implements Normalizer
         /** @var string $encoded */
         $encoded = \json_encode(
             $decoded,
-            Format\JsonEncodeOptions::default()->toInt(),
+            Normalizer\Format\JsonEncodeOptions::default()->toInt(),
         );
 
         return Json::fromString($encoded);
@@ -126,7 +125,7 @@ final class PackageHashNormalizer implements Normalizer
      *
      * @return array<string, string>
      */
-    private static function mergeDuplicateExtensions($packages): array
+    private static function mergeDuplicateExtensions(array $packages): array
     {
         foreach ($packages as $name => $value) {
             if (!isset($name[4]) || \strtolower(\substr($name, 0, 4)) !== 'ext-') {

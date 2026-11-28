@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\CallableNormalizer;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -23,7 +22,7 @@ use PHPUnit\Framework;
  */
 final class CallableNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testNormalizePassesJsonThroughCallable(): void
     {
@@ -43,7 +42,7 @@ final class CallableNormalizerTest extends Framework\TestCase
             return $expected;
         };
 
-        $normalizer = new CallableNormalizer($callable);
+        $normalizer = new Normalizer\CallableNormalizer($callable);
 
         $normalized = $normalizer->normalize($json);
 

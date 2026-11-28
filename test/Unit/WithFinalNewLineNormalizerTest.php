@@ -15,8 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\DataProvider;
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Test;
-use Ergebnis\Json\Normalizer\WithFinalNewLineNormalizer;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -24,7 +23,7 @@ use PHPUnit\Framework;
  */
 final class WithFinalNewLineNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\DataProvider\StringProvider::blank
@@ -38,7 +37,7 @@ final class WithFinalNewLineNormalizerTest extends Framework\TestCase
             }{$whitespace}
             JSON);
 
-        $normalizer = new WithFinalNewLineNormalizer();
+        $normalizer = new Normalizer\WithFinalNewLineNormalizer();
 
         $normalized = $normalizer->normalize($json);
 

@@ -26,6 +26,8 @@ final class WildcardSorter
      * @see https://github.com/composer/composer/blob/2.6.5/src/Composer/Plugin/PluginManager.php#L626-L646
      * @see https://github.com/composer/composer/blob/2.6.5/src/Composer/Package/BasePackage.php#L252-L257
      * @see https://github.com/composer/composer/blob/2.6.5/src/Composer/Plugin/PluginManager.php#L687-L691
+     *
+     * @param array<string, mixed> $config
      */
     public function sortPropertyWithWildcard(
         array &$config,

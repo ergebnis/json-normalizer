@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\JsonEncodeNormalizer;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -26,7 +24,7 @@ use PHPUnit\Framework;
  */
 final class JsonEncodeNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     /**
      * @dataProvider provideJsonEncodeOptions
@@ -44,7 +42,7 @@ final class JsonEncodeNormalizerTest extends Framework\TestCase
             }
             JSON);
 
-        $normalizer = new JsonEncodeNormalizer(Format\JsonEncodeOptions::fromInt($jsonEncodeOptions));
+        $normalizer = new Normalizer\JsonEncodeNormalizer(Normalizer\Format\JsonEncodeOptions::fromInt($jsonEncodeOptions));
 
         $normalized = $normalizer->normalize($json);
 

@@ -157,6 +157,12 @@ parameters:
 			path: src/Vendor/Composer/RepositoriesHashNormalizer.php
 
 		-
+			message: '#^Parameter \#1 \$config of method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\WildcardSorter\:\:sortPropertyWithWildcard\(\) expects array\<string, mixed\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Vendor/Composer/RepositoriesHashNormalizer.php
+
+		-
 			message: '#^Access to an undefined property object\:\:\$conflict\.$#'
 			identifier: property.notFound
 			count: 1
@@ -223,12 +229,6 @@ parameters:
 			path: src/Vendor/Composer/VersionConstraintNormalizer.php
 
 		-
-			message: '#^Method Ergebnis\\Json\\Normalizer\\Vendor\\Composer\\WildcardSorter\:\:sortPropertyWithWildcard\(\) has parameter \$config with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Vendor/Composer/WildcardSorter.php
-
-		-
 			message: '#^@dataProvider \\Ergebnis\\DataProvider\\BoolProvider\:\:arbitrary\(\) related method not found\.$#'
 			identifier: phpunit.dataProviderMethod
 			count: 1
@@ -265,9 +265,9 @@ parameters:
 			path: test/Unit/Format/IndentTest.php
 
 		-
-			message: '#^Yield can be used only with these return types\: Generator, Iterator, Traversable, iterable\.$#'
-			identifier: generator.returnType
-			count: 1
+			message: '#^Generator expects key type int\<0, max\>, int given\.$#'
+			identifier: generator.keyType
+			count: 4
 			path: test/Unit/Format/JsonEncodeOptionsTest.php
 
 		-

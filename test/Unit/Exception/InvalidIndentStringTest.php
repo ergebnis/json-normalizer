@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -22,11 +21,11 @@ use PHPUnit\Framework;
  */
 final class InvalidIndentStringTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testDefaults(): void
     {
-        $exception = new Exception\InvalidIndentString();
+        $exception = new Normalizer\Exception\InvalidIndentString();
 
         self::assertSame('', $exception->string());
     }
@@ -35,7 +34,7 @@ final class InvalidIndentStringTest extends Framework\TestCase
     {
         $string = self::faker()->word();
 
-        $exception = Exception\InvalidIndentString::fromString($string);
+        $exception = Normalizer\Exception\InvalidIndentString::fromString($string);
 
         $message = \sprintf(
             '"%s" is not a valid indent string',

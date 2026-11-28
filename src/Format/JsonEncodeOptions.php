@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer;
 
 final class JsonEncodeOptions
 {
@@ -31,12 +31,12 @@ final class JsonEncodeOptions
     }
 
     /**
-     * @throws Exception\InvalidJsonEncodeOptions
+     * @throws Normalizer\Exception\InvalidJsonEncodeOptions
      */
     public static function fromInt(int $value): self
     {
         if (0 > $value) {
-            throw Exception\InvalidJsonEncodeOptions::fromJsonEncodeOptions($value);
+            throw Normalizer\Exception\InvalidJsonEncodeOptions::fromJsonEncodeOptions($value);
         }
 
         return new self($value);

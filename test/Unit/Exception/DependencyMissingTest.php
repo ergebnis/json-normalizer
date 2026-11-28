@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -22,7 +21,7 @@ use PHPUnit\Framework;
  */
 final class DependencyMissingTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testForReturnsDependencyMissing(): void
     {
@@ -34,7 +33,7 @@ final class DependencyMissingTest extends Framework\TestCase
             $faker->slug(),
         );
 
-        $exception = Exception\DependencyMissing::for(
+        $exception = Normalizer\Exception\DependencyMissing::for(
             $className,
             $packageName,
         );

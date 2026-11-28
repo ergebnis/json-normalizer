@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\FormatNormalizer;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
@@ -30,14 +28,14 @@ use PHPUnit\Framework;
  */
 final class FormatNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     /**
      * @dataProvider provideScenario
      */
-    public function testNormalizeNormalizes(Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
+    public function testNormalizeNormalizes(Normalizer\Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
-        $normalizer = new FormatNormalizer(
+        $normalizer = new Normalizer\FormatNormalizer(
             new Printer\Printer(),
             $scenario->format(),
         );
@@ -48,7 +46,7 @@ final class FormatNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario}>
+     * @return \Generator<string, array{0: Normalizer\Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenario(): iterable
     {
@@ -110,11 +108,11 @@ final class FormatNormalizerTest extends Framework\TestCase
 
             $format = include $formatFile;
 
-            if (!$format instanceof Format\Format) {
+            if (!$format instanceof Normalizer\Format\Format) {
                 throw new \RuntimeException(\sprintf(
                     'Expected "%s" to return an instance of "%s", got "%s" instead.',
                     $formatFile,
-                    Format\Format::class,
+                    Normalizer\Format\Format::class,
                     \get_debug_type($format),
                 ));
             }
@@ -125,7 +123,7 @@ final class FormatNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario::create(
+                Normalizer\Test\Fixture\FormatNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     $format,
                     Json::fromFile($inputFile),

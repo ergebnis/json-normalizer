@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
+use Ergebnis\Json\Normalizer;
 
 final class Indent
 {
@@ -30,20 +30,20 @@ final class Indent
     }
 
     /**
-     * @throws Exception\InvalidIndentString
+     * @throws Normalizer\Exception\InvalidIndentString
      */
     public static function fromString(string $value): self
     {
         if (1 !== \preg_match('/^( *|\t+)$/', $value)) {
-            throw Exception\InvalidIndentString::fromString($value);
+            throw Normalizer\Exception\InvalidIndentString::fromString($value);
         }
 
         return new self($value);
     }
 
     /**
-     * @throws Exception\InvalidIndentSize
-     * @throws Exception\InvalidIndentStyle
+     * @throws Normalizer\Exception\InvalidIndentSize
+     * @throws Normalizer\Exception\InvalidIndentStyle
      */
     public static function fromSizeAndStyle(
         int $size,
@@ -52,14 +52,14 @@ final class Indent
         $minimumSize = 1;
 
         if ($minimumSize > $size) {
-            throw Exception\InvalidIndentSize::fromSizeAndMinimumSize(
+            throw Normalizer\Exception\InvalidIndentSize::fromSizeAndMinimumSize(
                 $size,
                 $minimumSize,
             );
         }
 
         if (!\array_key_exists($style, self::CHARACTERS)) {
-            throw Exception\InvalidIndentStyle::fromStyleAndAllowedStyles(
+            throw Normalizer\Exception\InvalidIndentStyle::fromStyleAndAllowedStyles(
                 $style,
                 ...\array_keys(self::CHARACTERS),
             );

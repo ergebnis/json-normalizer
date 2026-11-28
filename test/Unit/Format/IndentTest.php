@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -28,7 +26,7 @@ use PHPUnit\Framework;
  */
 final class IndentTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testConstants(): void
     {
@@ -37,7 +35,7 @@ final class IndentTest extends Framework\TestCase
             'tab' => "\t",
         ];
 
-        self::assertSame($characters, Format\Indent::CHARACTERS);
+        self::assertSame(Normalizer\Format\Indent::CHARACTERS, $characters);
     }
 
     /**
@@ -45,12 +43,12 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromSizeAndStyleRejectsInvalidSize(int $size): void
     {
-        $style = self::faker()->randomElement(\array_keys(Format\Indent::CHARACTERS));
+        $style = self::faker()->randomElement(\array_keys(Normalizer\Format\Indent::CHARACTERS));
 
-        $this->expectException(Exception\InvalidIndentSize::class);
+        $this->expectException(Normalizer\Exception\InvalidIndentSize::class);
         $this->expectExceptionMessage(\sprintf('Size needs to be greater than %d, but %d is not.', 0, $size));
 
-        Format\Indent::fromSizeAndStyle(
+        Normalizer\Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -62,9 +60,9 @@ final class IndentTest extends Framework\TestCase
     public static function provideInvalidSize(): iterable
     {
         $sizes = [
-            'int-zero' => 0,
-            'int-minus-one' => -1,
             'int-less-than-minus-one' => -1 * self::faker()->numberBetween(2),
+            'int-minus-one' => -1,
+            'int-zero' => 0,
         ];
 
         foreach ($sizes as $key => $size) {
@@ -81,10 +79,10 @@ final class IndentTest extends Framework\TestCase
         $size = $faker->numberBetween(1);
         $style = $faker->sentence();
 
-        $this->expectException(Exception\InvalidIndentStyle::class);
+        $this->expectException(Normalizer\Exception\InvalidIndentStyle::class);
         $this->expectExceptionMessage(\sprintf('Style needs to be one of "space", "tab", but "%s" is not.', $style));
 
-        Format\Indent::fromSizeAndStyle(
+        Normalizer\Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -98,7 +96,7 @@ final class IndentTest extends Framework\TestCase
         string $style,
         string $string
     ): void {
-        $indent = Format\Indent::fromSizeAndStyle(
+        $indent = Normalizer\Format\Indent::fromSizeAndStyle(
             $size,
             $style,
         );
@@ -111,8 +109,8 @@ final class IndentTest extends Framework\TestCase
      */
     public static function provideSizeStyleAndIndentString(): iterable
     {
-        foreach (self::sizes() as $key => $size) {
-            foreach (Format\Indent::CHARACTERS as $style => $character) {
+        foreach (self::sizes() as $size) {
+            foreach (Normalizer\Format\Indent::CHARACTERS as $style => $character) {
                 $string = \str_repeat(
                     $character,
                     $size,
@@ -132,9 +130,9 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromStringRejectsInvalidIndentString(string $string): void
     {
-        $this->expectException(Exception\InvalidIndentString::class);
+        $this->expectException(Normalizer\Exception\InvalidIndentString::class);
 
-        Format\Indent::fromString($string);
+        Normalizer\Format\Indent::fromString($string);
     }
 
     /**
@@ -143,9 +141,9 @@ final class IndentTest extends Framework\TestCase
     public static function provideInvalidIndentString(): iterable
     {
         $strings = [
-            'string-not-whitespace' => self::faker()->sentence(),
             'string-contains-line-feed' => " \n ",
             'string-mixed-space-and-tab' => " \t",
+            'string-not-whitespace' => self::faker()->sentence(),
         ];
 
         foreach ($strings as $key => $string) {
@@ -160,7 +158,7 @@ final class IndentTest extends Framework\TestCase
      */
     public function testFromStringReturnsIndent(string $string): void
     {
-        $indent = Format\Indent::fromString($string);
+        $indent = Normalizer\Format\Indent::fromString($string);
 
         self::assertSame($string, $indent->toString());
     }
@@ -170,8 +168,8 @@ final class IndentTest extends Framework\TestCase
      */
     public static function provideValidIndentString(): iterable
     {
-        foreach (self::sizes() as $key => $size) {
-            foreach (Format\Indent::CHARACTERS as $style => $character) {
+        foreach (self::sizes() as $size) {
+            foreach (Normalizer\Format\Indent::CHARACTERS as $character) {
                 $string = \str_repeat(
                     $character,
                     $size,
@@ -202,7 +200,7 @@ final class IndentTest extends Framework\TestCase
             ]
             JSON);
 
-        $indent = Format\Indent::fromJson($json);
+        $indent = Normalizer\Format\Indent::fromJson($json);
 
         self::assertSame($sniffedIndent, $indent->toString());
     }
@@ -225,7 +223,7 @@ final class IndentTest extends Framework\TestCase
             }
             JSON);
 
-        $indent = Format\Indent::fromJson($json);
+        $indent = Normalizer\Format\Indent::fromJson($json);
 
         self::assertSame($sniffedIndent, $indent->toString());
     }
@@ -264,7 +262,7 @@ final class IndentTest extends Framework\TestCase
             3,
         ];
 
-        foreach (Format\Indent::CHARACTERS as $style => $character) {
+        foreach (Normalizer\Format\Indent::CHARACTERS as $style => $character) {
             foreach ($sizes as $size) {
                 $key = \sprintf(
                     '%s-%d',
@@ -291,7 +289,7 @@ final class IndentTest extends Framework\TestCase
             {"foo":9000,"bar":123,"baz":{"qux":"quux"}}
             JSON);
 
-        $indent = Format\Indent::fromJson($json);
+        $indent = Normalizer\Format\Indent::fromJson($json);
 
         $default = \str_repeat(
             ' ',
@@ -307,8 +305,8 @@ final class IndentTest extends Framework\TestCase
     private static function sizes(): array
     {
         return [
-            'int-one' => 1,
             'int-greater-than-one' => self::faker()->numberBetween(2, 5),
+            'int-one' => 1,
         ];
     }
 }

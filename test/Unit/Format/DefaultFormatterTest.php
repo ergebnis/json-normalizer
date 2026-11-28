@@ -15,8 +15,7 @@ namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\DataProvider;
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Printer;
 use PHPUnit\Framework;
 
@@ -30,7 +29,7 @@ use PHPUnit\Framework;
  */
 final class DefaultFormatterTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     /**
      * @dataProvider \Ergebnis\DataProvider\BoolProvider::arbitrary()
@@ -69,10 +68,10 @@ final class DefaultFormatterTest extends Framework\TestCase
             }
             JSON;
 
-        $format = Format\Format::create(
-            Format\JsonEncodeOptions::fromInt($jsonEncodeOptions),
-            Format\Indent::fromString($indentString),
-            Format\NewLine::fromString($newLineString),
+        $format = Normalizer\Format\Format::create(
+            Normalizer\Format\JsonEncodeOptions::fromInt($jsonEncodeOptions),
+            Normalizer\Format\Indent::fromString($indentString),
+            Normalizer\Format\NewLine::fromString($newLineString),
             $hasFinalNewLine,
         );
 
@@ -88,7 +87,7 @@ final class DefaultFormatterTest extends Framework\TestCase
             )
             ->willReturn($printedWithIndentAndNewLine);
 
-        $formatter = new Format\DefaultFormatter($printer);
+        $formatter = new Normalizer\Format\DefaultFormatter($printer);
 
         $formatted = $formatter->format(
             $json,
