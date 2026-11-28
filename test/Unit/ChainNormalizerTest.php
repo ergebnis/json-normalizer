@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\ChainNormalizer;
-use Ergebnis\Json\Normalizer\Normalizer;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -24,7 +22,7 @@ use PHPUnit\Framework;
  */
 final class ChainNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testNormalizePassesJsonThroughNormalizers(): void
     {
@@ -44,14 +42,14 @@ final class ChainNormalizerTest extends Framework\TestCase
 
         $last = \end($results);
 
-        $normalizers = \array_map(function ($result) use ($json): Normalizer {
+        $normalizers = \array_map(function ($result) use ($json): Normalizer\Normalizer {
             static $previous = null;
 
             if (null === $previous) {
                 $previous = $json;
             }
 
-            $normalizer = $this->createMock(Normalizer::class);
+            $normalizer = $this->createMock(Normalizer\Normalizer::class);
 
             $normalizer
                 ->expects(self::once())
@@ -64,7 +62,7 @@ final class ChainNormalizerTest extends Framework\TestCase
             return $normalizer;
         }, $results);
 
-        $normalizer = new ChainNormalizer(...$normalizers);
+        $normalizer = new Normalizer\ChainNormalizer(...$normalizers);
 
         $normalized = $normalizer->normalize($json);
 

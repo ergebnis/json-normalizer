@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -22,11 +21,11 @@ use PHPUnit\Framework;
  */
 final class InvalidIndentSizeTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testDefaults(): void
     {
-        $exception = new Exception\InvalidIndentSize();
+        $exception = new Normalizer\Exception\InvalidIndentSize();
 
         self::assertSame(0, $exception->minimumSize());
         self::assertSame(0, $exception->size());
@@ -39,7 +38,7 @@ final class InvalidIndentSizeTest extends Framework\TestCase
         $size = $faker->numberBetween(1);
         $minimumSize = $faker->numberBetween(1);
 
-        $exception = Exception\InvalidIndentSize::fromSizeAndMinimumSize(
+        $exception = Normalizer\Exception\InvalidIndentSize::fromSizeAndMinimumSize(
             $size,
             $minimumSize,
         );

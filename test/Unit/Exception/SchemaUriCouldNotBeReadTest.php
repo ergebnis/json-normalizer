@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -22,11 +21,11 @@ use PHPUnit\Framework;
  */
 final class SchemaUriCouldNotBeReadTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testDefaults(): void
     {
-        $exception = new Exception\SchemaUriCouldNotBeRead();
+        $exception = new Normalizer\Exception\SchemaUriCouldNotBeRead();
 
         self::assertSame('', $exception->schemaUri());
     }
@@ -35,7 +34,7 @@ final class SchemaUriCouldNotBeReadTest extends Framework\TestCase
     {
         $schemaUri = self::faker()->url();
 
-        $exception = Exception\SchemaUriCouldNotBeRead::fromSchemaUri($schemaUri);
+        $exception = Normalizer\Exception\SchemaUriCouldNotBeRead::fromSchemaUri($schemaUri);
 
         $message = \sprintf(
             'Schema URI "%s" does not reference a document that could be read.',

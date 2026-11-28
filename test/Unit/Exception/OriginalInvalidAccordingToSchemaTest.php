@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace Ergebnis\Json\Normalizer\Test\Unit\Exception;
 
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -22,11 +21,11 @@ use PHPUnit\Framework;
  */
 final class OriginalInvalidAccordingToSchemaTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testDefaults(): void
     {
-        $exception = new Exception\OriginalInvalidAccordingToSchema();
+        $exception = new Normalizer\Exception\OriginalInvalidAccordingToSchema();
 
         self::assertSame([], $exception->errors());
         self::assertSame('', $exception->schemaUri());
@@ -44,7 +43,7 @@ final class OriginalInvalidAccordingToSchemaTest extends Framework\TestCase
             $faker->sentence(),
         ];
 
-        $exception = Exception\OriginalInvalidAccordingToSchema::fromSchemaUriAndErrors(
+        $exception = Normalizer\Exception\OriginalInvalidAccordingToSchema::fromSchemaUriAndErrors(
             $schemaUri,
             ...$errors,
         );

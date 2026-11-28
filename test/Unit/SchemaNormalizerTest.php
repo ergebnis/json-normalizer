@@ -14,15 +14,10 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\SchemaNormalizer;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use Ergebnis\Json\Pointer;
 use Ergebnis\Json\SchemaValidator;
-use JsonSchema\Exception\InvalidSchemaMediaTypeException;
-use JsonSchema\Exception\JsonDecodingException;
-use JsonSchema\Exception\ResourceNotFoundException;
-use JsonSchema\Exception\UriResolverException;
+use JsonSchema\Exception;
 use JsonSchema\SchemaStorage;
 use PHPUnit\Framework;
 
@@ -39,7 +34,7 @@ use PHPUnit\Framework;
  */
 final class SchemaNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testNormalizeThrowsSchemaUriCouldNotBeResolvedExceptionWhenSchemaUriCouldNotBeResolved(): void
     {
@@ -58,16 +53,16 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->expects(self::once())
             ->method('getSchema')
             ->with(self::identicalTo($schemaUri))
-            ->willThrowException(new UriResolverException());
+            ->willThrowException(new Exception\UriResolverException());
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
             Pointer\Specification::never(),
         );
 
-        $this->expectException(Exception\SchemaUriCouldNotBeResolved::class);
+        $this->expectException(Normalizer\Exception\SchemaUriCouldNotBeResolved::class);
 
         $normalizer->normalize($json);
     }
@@ -89,16 +84,16 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->expects(self::once())
             ->method('getSchema')
             ->with(self::identicalTo($schemaUri))
-            ->willThrowException(new ResourceNotFoundException());
+            ->willThrowException(new Exception\ResourceNotFoundException());
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
             Pointer\Specification::never(),
         );
 
-        $this->expectException(Exception\SchemaUriCouldNotBeRead::class);
+        $this->expectException(Normalizer\Exception\SchemaUriCouldNotBeRead::class);
 
         $normalizer->normalize($json);
     }
@@ -120,16 +115,16 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->expects(self::once())
             ->method('getSchema')
             ->with(self::identicalTo($schemaUri))
-            ->willThrowException(new InvalidSchemaMediaTypeException());
+            ->willThrowException(new Exception\InvalidSchemaMediaTypeException());
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
             Pointer\Specification::never(),
         );
 
-        $this->expectException(Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class);
+        $this->expectException(Normalizer\Exception\SchemaUriReferencesDocumentWithInvalidMediaType::class);
 
         $normalizer->normalize($json);
     }
@@ -151,16 +146,16 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->expects(self::once())
             ->method('getSchema')
             ->with(self::identicalTo($schemaUri))
-            ->willThrowException(new JsonDecodingException());
+            ->willThrowException(new Exception\JsonDecodingException());
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
             Pointer\Specification::never(),
         );
 
-        $this->expectException(Exception\SchemaUriReferencesInvalidJsonDocument::class);
+        $this->expectException(Normalizer\Exception\SchemaUriReferencesInvalidJsonDocument::class);
 
         $normalizer->normalize($json);
     }
@@ -194,14 +189,14 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->with(self::identicalTo($schemaUri))
             ->willReturn($schemaDecoded);
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
             Pointer\Specification::never(),
         );
 
-        $this->expectException(Exception\OriginalInvalidAccordingToSchema::class);
+        $this->expectException(Normalizer\Exception\OriginalInvalidAccordingToSchema::class);
 
         $normalizer->normalize($json);
     }
@@ -210,11 +205,11 @@ final class SchemaNormalizerTest extends Framework\TestCase
      * @dataProvider provideScenarioWithCustomJsonPointerSpecification
      * @dataProvider provideScenarioWithDefaultJsonPointerSpecification
      */
-    public function testNormalizeNormalizes(Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
+    public function testNormalizeNormalizes(Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->input();
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $scenario->schemaUri(),
             new SchemaStorage(),
             new SchemaValidator\SchemaValidator(),
@@ -227,7 +222,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
+     * @return \Generator<string, array{0: Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenarioWithCustomJsonPointerSpecification(): iterable
     {
@@ -324,7 +319,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
+                Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     \sprintf(
                         'file://%s',
@@ -339,7 +334,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
+     * @return \Generator<string, array{0: Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenarioWithDefaultJsonPointerSpecification(): iterable
     {
@@ -405,7 +400,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
+                Normalizer\Test\Fixture\SchemaNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $key,
                     \sprintf(
                         'file://%s',
@@ -473,7 +468,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->with(self::identicalTo($schemaUri))
             ->willReturn($schemaDecoded);
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),
@@ -543,7 +538,7 @@ final class SchemaNormalizerTest extends Framework\TestCase
             ->with(self::identicalTo($schemaUri))
             ->willReturn($schemaDecoded);
 
-        $normalizer = new SchemaNormalizer(
+        $normalizer = new Normalizer\SchemaNormalizer(
             $schemaUri,
             $schemaStorage,
             new SchemaValidator\SchemaValidator(),

@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Vendor\Composer;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Test;
-use Ergebnis\Json\Normalizer\Vendor;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -37,27 +35,27 @@ use PHPUnit\Framework;
  */
 final class ComposerJsonNormalizerTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     /**
      * @dataProvider provideScenarioWhereJsonIsInvalidAccordingToSchema
      */
-    public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario $scenario): void
+    public function testNormalizeRejectsJsonWhenItIsInvalidAccordingToSchema(Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario $scenario): void
     {
         $json = $scenario->input();
 
-        $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
+        $normalizer = new Normalizer\Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
             \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/schema.json'),
         ));
 
-        $this->expectException(Exception\OriginalInvalidAccordingToSchema::class);
+        $this->expectException(Normalizer\Exception\OriginalInvalidAccordingToSchema::class);
 
         $normalizer->normalize($json);
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario}>
+     * @return \Generator<string, array{0: Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario}>
      */
     public static function provideScenarioWhereJsonIsInvalidAccordingToSchema(): iterable
     {
@@ -83,7 +81,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             );
 
             yield $key => [
-                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario::create(
+                Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeRejectsJson\Scenario::create(
                     $key,
                     Json::fromFile($inputFile),
                 ),
@@ -94,11 +92,11 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     /**
      * @dataProvider provideScenarioWhereJsonIsValidAccordingToSchema
      */
-    public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
+    public function testNormalizeNormalizesJsonWhenItIsValidAccordingToSchema(Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario $scenario): void
     {
         $json = $scenario->input();
 
-        $normalizer = new Vendor\Composer\ComposerJsonNormalizer(\sprintf(
+        $normalizer = new Normalizer\Vendor\Composer\ComposerJsonNormalizer(\sprintf(
             'file://%s',
             \realpath(__DIR__ . '/../../../Fixture/Vendor/Composer/schema.json'),
         ));
@@ -109,7 +107,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario}>
+     * @return \Generator<string, array{0: Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario}>
      */
     public static function provideScenarioWhereJsonIsValidAccordingToSchema(): iterable
     {
@@ -160,7 +158,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             );
 
             yield $keyNotNormalized => [
-                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
+                Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $keyNotNormalized,
                     Json::fromFile($inputFile),
                     Json::fromFile($outputFile),
@@ -173,7 +171,7 @@ final class ComposerJsonNormalizerTest extends Framework\TestCase
             );
 
             yield $keyAlreadyNormalized => [
-                Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
+                Normalizer\Test\Fixture\Vendor\Composer\ComposerJsonNormalizer\NormalizeNormalizesJson\Scenario::create(
                     $keyAlreadyNormalized,
                     Json::fromFile($outputFile),
                     Json::fromFile($outputFile),

@@ -15,10 +15,9 @@ namespace Ergebnis\Json\Normalizer\Vendor\Composer;
 
 use Composer\Semver;
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Normalizer;
+use Ergebnis\Json\Normalizer;
 
-final class VersionConstraintNormalizer implements Normalizer
+final class VersionConstraintNormalizer implements Normalizer\Normalizer
 {
     private const PROPERTIES_THAT_SHOULD_BE_NORMALIZED = [
         'conflict',
@@ -64,7 +63,7 @@ final class VersionConstraintNormalizer implements Normalizer
 
                 try {
                     $this->versionParser->parseConstraints($versionConstraint);
-                } catch (\UnexpectedValueException $exception) {
+                } catch (\UnexpectedValueException $unexpectedValueException) {
                     return $versionConstraint;
                 }
 
@@ -75,7 +74,7 @@ final class VersionConstraintNormalizer implements Normalizer
         /** @var string $encoded */
         $encoded = \json_encode(
             $decoded,
-            Format\JsonEncodeOptions::default()->toInt(),
+            Normalizer\Format\JsonEncodeOptions::default()->toInt(),
         );
 
         return Json::fromString($encoded);

@@ -14,9 +14,7 @@ declare(strict_types=1);
 namespace Ergebnis\Json\Normalizer\Test\Unit\Format;
 
 use Ergebnis\Json\Json;
-use Ergebnis\Json\Normalizer\Exception;
-use Ergebnis\Json\Normalizer\Format;
-use Ergebnis\Json\Normalizer\Test;
+use Ergebnis\Json\Normalizer;
 use PHPUnit\Framework;
 
 /**
@@ -26,11 +24,11 @@ use PHPUnit\Framework;
  */
 final class JsonEncodeOptionsTest extends Framework\TestCase
 {
-    use Test\Util\Helper;
+    use Normalizer\Test\Util\Helper;
 
     public function testDefaultReturnsJsonEncodeOptions(): void
     {
-        $jsonEncodeOptions = Format\JsonEncodeOptions::default();
+        $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::default();
 
         $expected = \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE;
 
@@ -42,9 +40,9 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
      */
     public function testFromIntRejectsInvalidValue(int $value): void
     {
-        $this->expectException(Exception\InvalidJsonEncodeOptions::class);
+        $this->expectException(Normalizer\Exception\InvalidJsonEncodeOptions::class);
 
-        Format\JsonEncodeOptions::fromInt($value);
+        Normalizer\Format\JsonEncodeOptions::fromInt($value);
     }
 
     /**
@@ -53,8 +51,8 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     public static function provideInvalidValue(): iterable
     {
         $values = [
-            'int-minus-one' => -1,
             'int-less-than-minus-one' => -1 * self::faker()->numberBetween(2),
+            'int-minus-one' => -1,
         ];
 
         foreach ($values as $key => $value) {
@@ -69,7 +67,7 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
      */
     public function testFromIntReturnsJsonEncodeOptions(int $value): void
     {
-        $jsonEncodeOptions = Format\JsonEncodeOptions::fromInt($value);
+        $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromInt($value);
 
         self::assertSame($value, $jsonEncodeOptions->toInt());
     }
@@ -80,8 +78,8 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     public static function provideValidValue(): iterable
     {
         $values = [
-            'int-zero' => 0,
             'int-greater-than-zero' => self::faker()->numberBetween(1),
+            'int-zero' => 0,
         ];
 
         foreach ($values as $key => $string) {
@@ -100,53 +98,51 @@ final class JsonEncodeOptionsTest extends Framework\TestCase
     ): void {
         $json = Json::fromString($encoded);
 
-        $jsonEncodeOptions = Format\JsonEncodeOptions::fromJson($json);
+        $jsonEncodeOptions = Normalizer\Format\JsonEncodeOptions::fromJson($json);
 
         self::assertSame($value, $jsonEncodeOptions->toInt());
     }
 
     /**
-     * @return list<array{0: int, 1: string}>
+     * @return \Iterator<int<0, max>, array{int, string}>
      */
-    public static function provideJsonEncodeOptionsAndEncoded(): iterable
+    public static function provideJsonEncodeOptionsAndEncoded(): \Iterator
     {
-        yield from [
-            [
-                0,
-                <<<'JSON'
+        yield [
+            0,
+            <<<'JSON'
                     {
                       "name": "Andreas M\u00f6ller",
                       "url": "https:\/\/github.com\/localheinz\/json-normalizer"
                     }
                     JSON,
-            ],
-            [
-                \JSON_UNESCAPED_SLASHES,
-                <<<'JSON'
+        ];
+        yield [
+            \JSON_UNESCAPED_SLASHES,
+            <<<'JSON'
                     {
                       "name": "Andreas M\u00F6ller",
                       "url": "https://github.com/ergebnis/json-normalizer"
                     }
                     JSON,
-            ],
-            [
-                \JSON_UNESCAPED_UNICODE,
-                <<<'JSON'
+        ];
+        yield [
+            \JSON_UNESCAPED_UNICODE,
+            <<<'JSON'
                     {
                       "name": "Andreas Möller",
                       "url": "https:\/\/github.com\/localheinz\/json-normalizer"
                     }
                     JSON,
-            ],
-            [
-                \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
-                <<<'JSON'
+        ];
+        yield [
+            \JSON_UNESCAPED_SLASHES | \JSON_UNESCAPED_UNICODE,
+            <<<'JSON'
                     {
                       "name": "Andreas Möller",
                       "url": "https://github.com/ergebnis/json-normalizer"
                     }
                     JSON,
-            ],
         ];
     }
 }
